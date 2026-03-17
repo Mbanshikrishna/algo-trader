@@ -1,307 +1,280 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-# Algo Trader (Indian Intraday Bot)
+# Algo Trader
 
-This repository is a starter framework for an **intraday trading bot for the Indian market**.
-It is designed for:
-- **Broker API:** Zerodha (Kite)
-- **Deployment target:** AWS EC2
-- **Current mode:** Paper-trade friendly with pluggable live execution
+`algo-trader` is a modular intraday trading bot project for Indian equities. It is structured as a small pipeline where configuration is loaded, market data is fetched, a strategy decides whether a trade exists, risk rules size the trade, an order layer executes it, and supporting modules track positions, log trades, and send alerts.
 
-## Project structure
+The codebase is currently paper-trade friendly, with a stubbed Zerodha client that can later be replaced with a real `kiteconnect` integration.
 
-- `main.py` → orchestrates one intraday scan + order flow run
-- `Stock.py` → standalone stock scanner using the same momentum strategy
-- `config/settings.py` → environment-driven settings
-- `data/market_stream.py` → market OHLCV data fetcher
-- `strategy/momentum_strategy.py` → EMA + VWAP momentum logic
-- `risk/risk_manager.py` → risk-based position sizing
-- `execution/order_manager.py` → order placement abstraction
-- `broker/kite_client.py` → Zerodha API client wrapper (stub)
-- `db/trade_db.py` → SQLite trade logging
-- `monitor/position_tracker.py` → in-memory position state tracker
-- `utils/logger.py` → file + console logger setup
-- `utils/telegram_alert.py` → optional Telegram alert helper
+## End-to-End Workflow
 
-## Strategy (current)
+The core runtime flow of the project is:
 
-The momentum scan marks a **BUY** signal when:
-1. Price is above VWAP
-2. Price is above EMA20 and EMA50
-3. Current volume is above rolling average volume
-4. Price is near intraday high
+1. Config and environment loading
+2. Market data collection
+3. Strategy signal generation
+4. Risk-based position sizing
+5. Order creation and execution
+6. Monitoring, database logging, and alerts
 
-## Local setup
+This is orchestrated mainly from `main.py`.
 
-1. Create virtualenv and install dependencies:
+## How The Bot Runs
+
+When you run `python main.py`, the project follows this sequence:
+
+1. `config/settings.py` reads environment variables such as API credentials, capital, risk percentage, and whether paper trading is enabled.
+2. `utils/logger.py` creates a reusable logger for console and file output.
+3. `broker/kite_client.py` builds a broker client instance. Right now this is a placeholder wrapper that returns a mock successful order response.
+4. `execution/order_manager.py` receives trade instructions and either simulates a fill in paper mode or forwards the order to the broker client in live mode.
+5. `risk/risk_manager.py` calculates how many shares can be traded based on account capital, per-trade risk percentage, entry price, and stop-loss.
+6. `data/market_stream.py` downloads intraday OHLCV candle data using `yfinance`.
+7. `strategy/momentum_strategy.py` adds indicators like EMA, VWAP, average volume, and intraday high, then decides whether a symbol qualifies for a `BUY` signal.
+8. `db/trade_db.py` writes executed trades into a local SQLite database.
+9. `monitor/position_tracker.py` updates the in-memory view of currently open positions.
+10. `utils/telegram_alert.py` optionally sends a Telegram message after a signal is executed.
+
+## Codebase Structure
+
+### Entry Points
+
+- `main.py`
+  Runs one full trading cycle across the hardcoded watchlist. This is the main application entrypoint.
+- `Stock.py`
+  Runs only the scanning portion of the logic and prints symbols that currently match the momentum criteria.
+
+### Configuration Layer
+
+- `config/settings.py`
+  Defines the `Settings` dataclass and loads environment variables into a strongly structured runtime config object.
+
+This layer answers:
+- Are we paper trading or live trading?
+- What credentials should be used?
+- How much capital is available?
+- What percentage of capital can be risked per trade?
+
+### Market Data Layer
+
+- `data/market_stream.py`
+  Fetches intraday OHLCV data for a symbol using `yfinance`, then normalizes the returned columns into a plain pandas DataFrame.
+
+This layer answers:
+- What is the latest candle data for each stock?
+- Is there enough data to evaluate the strategy?
+
+### Strategy Layer
+
+- `strategy/momentum_strategy.py`
+  Applies the core trading idea. It calculates:
+  - Fast EMA
+  - Slow EMA
+  - VWAP
+  - Average rolling volume
+  - Running day high
+
+It then creates a `BUY` signal when the latest candle satisfies all of these conditions:
+
+1. Close is above VWAP
+2. Close is above the fast EMA
+3. Close is above the slow EMA
+4. Current volume is above recent average volume
+5. Close is very near the intraday high
+
+If the setup is valid, the strategy returns a signal payload containing:
+- `symbol`
+- `side`
+- `price`
+- `stop_loss`
+
+If not, it returns `None`.
+
+### Risk Layer
+
+- `risk/risk_manager.py`
+  Converts the strategy signal into a trade size.
+
+It does this by:
+
+1. Calculating risk per share as `entry_price - stop_loss`
+2. Calculating allowed total risk as:
+   `capital * (risk_per_trade_pct / 100)`
+3. Dividing total allowed risk by risk per share
+4. Returning a whole-share quantity
+
+If the stop-loss is invalid or risk per share is zero, it returns `0`, which prevents the trade from going forward.
+
+### Execution Layer
+
+- `execution/order_manager.py`
+  Builds the order payload used by the bot.
+
+Behavior:
+- In paper mode, it returns a local order dictionary with status `PAPER_FILLED`
+- In live mode, it passes the order to the broker client
+
+- `broker/kite_client.py`
+  Represents the broker integration layer. It currently acts as a placeholder and returns a fake successful order response. This lets the rest of the system run without requiring live Zerodha credentials or a production order flow.
+
+### Monitoring and Persistence
+
+- `monitor/position_tracker.py`
+  Maintains an in-memory snapshot of open positions during the current session.
+
+Main responsibilities:
+- Add a new position when a symbol is bought for the first time
+- Recalculate weighted average price if more quantity is added
+- Reduce or remove the position when shares are sold
+- Return a snapshot of current open positions
+
+- `db/trade_db.py`
+  Manages a local SQLite database and stores executed trades in the `trades` table.
+
+The table stores:
+- Symbol
+- Side
+- Quantity
+- Price
+- Status
+- Timestamp
+
+### Utilities
+
+- `utils/logger.py`
+  Configures logging to both console and a log file. This is useful for debugging, audit trails, and observing runtime behavior.
+
+- `utils/telegram_alert.py`
+  Sends Telegram notifications when `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` are configured in the environment.
+
+## Runtime Flow Inside `main.py`
+
+`main.py` wires the whole system together:
+
+1. Loads settings
+2. Sets up logging
+3. Validates live-trading credentials if paper mode is disabled
+4. Creates broker, order, risk, strategy, data, database, and monitoring objects
+5. Loops through each symbol in the watchlist
+6. Fetches OHLCV data
+7. Builds a signal
+8. Skips symbols with no valid signal
+9. Calculates position size
+10. Skips symbols with zero or invalid quantity
+11. Places the order
+12. Logs the trade to SQLite
+13. Updates the position tracker
+14. Logs and sends a Telegram notification
+15. Handles per-symbol exceptions so one failure does not stop the whole run
+16. Logs a final open-position snapshot
+
+## Runtime Flow Inside `Stock.py`
+
+`Stock.py` is a lighter read-only scanner:
+
+1. Creates a market stream
+2. Creates the momentum strategy
+3. Loops through the stock list
+4. Fetches market data for each symbol
+5. Builds a signal
+6. Collects matching stocks
+7. Prints the results as a pandas DataFrame
+
+This file is useful when you only want to inspect setups without placing or simulating orders.
+
+## Tests
+
+- `tests/test_core.py`
+  Contains lightweight unit tests for the core components:
+  - Risk sizing
+  - Paper order creation
+  - Position tracking
+  - Trade database logging
+  - Strategy signal structure
+
+Run tests with:
+
+```bash
+python -m unittest discover -s tests -p "test_*.py"
+```
+
+## Environment Variables
+
+The main runtime variables used by the project are:
+
+```env
+ZERODHA_API_KEY=your_api_key
+ZERODHA_API_SECRET=your_api_secret
+ZERODHA_ACCESS_TOKEN=your_access_token
+PAPER_TRADE=true
+CAPITAL=100000
+RISK_PER_TRADE_PCT=1.0
+TELEGRAM_BOT_TOKEN=your_bot_token
+TELEGRAM_CHAT_ID=your_chat_id
+```
+
+Notes:
+- `PAPER_TRADE=true` is the safe default for development.
+- If `PAPER_TRADE=false`, `main.py` requires Zerodha credentials to be present.
+- Telegram variables are optional.
+
+## Local Setup
+
+Create a virtual environment and install dependencies:
 
 ```bash
 python -m venv .venv
 source .venv/bin/activate
-pip install yfinance pandas ta
+pip install pandas yfinance ta
 ```
 
-2. Export environment variables:
+On Windows PowerShell:
 
-```bash
-export ZERODHA_API_KEY="your_api_key"
-export ZERODHA_API_SECRET="your_api_secret"
-export ZERODHA_ACCESS_TOKEN="your_access_token"
-export PAPER_TRADE="true"
-export CAPITAL="100000"
-export RISK_PER_TRADE_PCT="1"
+```powershell
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+pip install pandas yfinance ta
 ```
 
-Optional Telegram alerts:
-
-```bash
-export TELEGRAM_BOT_TOKEN="your_bot_token"
-export TELEGRAM_CHAT_ID="your_chat_id"
-```
-
-3. Run bot:
+Then run either:
 
 ```bash
 python main.py
 ```
 
-Run scanner only:
+or:
 
 ```bash
 python Stock.py
 ```
 
-## Tests
+## Current Design Notes
 
-```bash
-python -m unittest discover -s tests -p 'test_*.py'
-```
+What the project already does well:
 
-## EC2 deployment notes
+- Separates concerns cleanly by module
+- Keeps trading, risk, execution, monitoring, and storage logic isolated
+- Supports paper trading without requiring broker connectivity
+- Includes a basic automated test file
 
-- Use a systemd service or supervisor to keep the bot running.
-- Store API secrets in environment variables (or AWS SSM Parameter Store).
-- Start in `PAPER_TRADE=true` mode and switch to live only after validation.
+What is still intentionally simple:
 
-## Next improvements
+- Broker integration is stubbed
+- Watchlist is hardcoded
+- Only long-side `BUY` signals are implemented
+- Position tracking is in-memory for the current process only
+- There is no scheduler, market-hours guard, stop-loss execution, or target management yet
 
-- Integrate official `kiteconnect` SDK in `broker/kite_client.py`
-- Add stop-loss / target order management
-- Add trading time window & market holiday checks
-- Add backtesting and structured logs/alerts
-=======
-=======
->>>>>>> set-up-bot
-# algo-trader
+## Suggested Next Improvements
 
-Automated **intraday trading bot** for Indian markets using the **Zerodha Kite API**, with support for running continuously on an **AWS EC2** instance.
+Good next steps for evolving the project:
 
-## Project Overview
-
-This repository is structured as a modular event-driven trading bot:
-
-- `data/market_stream.py` – consumes live market ticks/candles.
-- `strategy/momentum_strategy.py` – generates buy/sell signals.
-- `execution/order_manager.py` – places and manages orders.
-- `risk/risk_manager.py` – enforces position sizing and limits.
-- `monitor/position_tracker.py` – tracks open positions/PnL.
-- `db/trade_db.py` – persists trade and bot state.
-- `utils/telegram_alert.py` – sends alerts/notifications.
-- `main.py` – application entrypoint.
-
-## Zerodha API Setup
-
-1. Create a Kite Connect app from your Zerodha developer account.
-2. Collect:
-   - `KITE_API_KEY`
-   - `KITE_API_SECRET`
-3. Implement a secure token flow:
-   - Generate `request_token` via login.
-   - Exchange for `access_token`.
-   - Store token securely (never commit secrets to git).
-4. Configure keys/tokens through environment variables or a secure secrets manager.
-
-## AWS EC2 Deployment (Recommended Baseline)
-
-### 1) Launch server
-
-- Use Ubuntu 22.04 LTS (or latest stable).
-- Instance type for small setups: `t3.small` / `t3.medium`.
-- Attach IAM role (if using AWS services like SSM/CloudWatch/Secrets Manager).
-
-### 2) Install dependencies
-
-```bash
-sudo apt update && sudo apt upgrade -y
-sudo apt install -y python3 python3-pip python3-venv git
-```
-
-### 3) Clone and configure
-
-```bash
-git clone <your-repo-url>
-cd algo-trader
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt  # if present
-```
-
-### 4) Configure environment
-
-Create a `.env` (or equivalent secure config):
-
-```env
-KITE_API_KEY=...
-KITE_API_SECRET=...
-KITE_ACCESS_TOKEN=...
-TELEGRAM_BOT_TOKEN=...
-TELEGRAM_CHAT_ID=...
-```
-
-### 5) Run bot as a service
-
-Use `systemd` so the bot auto-starts and restarts on failure.
-
-Example unit file `/etc/systemd/system/algo-trader.service`:
-
-```ini
-[Unit]
-Description=Algo Trader Bot
-After=network.target
-
-[Service]
-User=ubuntu
-WorkingDirectory=/home/ubuntu/algo-trader
-Environment="PATH=/home/ubuntu/algo-trader/.venv/bin"
-ExecStart=/home/ubuntu/algo-trader/.venv/bin/python main.py
-Restart=always
-RestartSec=5
-
-[Install]
-WantedBy=multi-user.target
-```
-
-Then:
-
-```bash
-sudo systemctl daemon-reload
-sudo systemctl enable algo-trader
-sudo systemctl start algo-trader
-sudo systemctl status algo-trader
-```
-
-## Production Safety Checklist
-
-- Add strict stop-loss and max daily loss guardrails.
-- Enforce max concurrent positions and exposure per symbol.
-- Handle API/network retries with cooldown.
-- Persist state so reboot does not lose positions/orders context.
-- Add market-hours checks and holiday calendar handling.
-- Send Telegram alerts for order failures and risk breaches.
-- Log every signal, order request/response, and risk decision.
-
-## Important Notes
-
-- Run in **paper/sandbox mode first** until strategy behavior is stable.
-- Keep AWS security groups restrictive (SSH only from trusted IP).
-- Rotate API tokens and secrets regularly.
-- Ensure compliance with broker/exchange rules and your local regulations.
+1. Replace the stubbed Kite client with real `kiteconnect` authentication and order APIs
+2. Add trading window checks and exchange holiday handling
+3. Move the watchlist into config or a database
+4. Add stop-loss and target exit handling
+5. Persist positions and order state across restarts
+6. Add retries and stronger error handling around data and network calls
+7. Add structured logs and richer Telegram alerts
+8. Add backtesting or paper-trade session reports
 
 ## Disclaimer
 
-This project is for educational purposes only and does not constitute financial advice. Live trading involves substantial risk.
-<<<<<<< HEAD
->>>>>>> codex/set-up-intraday-trading-bot-on-aws
-=======
-=======
-# Algo Trader (Indian Intraday Bot)
-
-This repository is a starter framework for an **intraday trading bot for the Indian market**.
-It is designed for:
-- **Broker API:** Zerodha (Kite)
-- **Deployment target:** AWS EC2
-- **Current mode:** Paper-trade friendly with pluggable live execution
-
-## Project structure
-
-- `main.py` → orchestrates one intraday scan + order flow run
-- `Stock.py` → standalone stock scanner using the same momentum strategy
-- `config/settings.py` → environment-driven settings
-- `data/market_stream.py` → market OHLCV data fetcher
-- `strategy/momentum_strategy.py` → EMA + VWAP momentum logic
-- `risk/risk_manager.py` → risk-based position sizing
-- `execution/order_manager.py` → order placement abstraction
-- `broker/kite_client.py` → Zerodha API client wrapper (stub)
-- `db/trade_db.py` → SQLite trade logging
-- `monitor/position_tracker.py` → in-memory position state tracker
-- `utils/logger.py` → file + console logger setup
-- `utils/telegram_alert.py` → optional Telegram alert helper
-
-## Strategy (current)
-
-The momentum scan marks a **BUY** signal when:
-1. Price is above VWAP
-2. Price is above EMA20 and EMA50
-3. Current volume is above rolling average volume
-4. Price is near intraday high
-
-## Local setup
-
-1. Create virtualenv and install dependencies:
-
-```bash
-python -m venv .venv
-source .venv/bin/activate
-pip install yfinance pandas ta
-```
-
-2. Export environment variables:
-
-```bash
-export ZERODHA_API_KEY="your_api_key"
-export ZERODHA_API_SECRET="your_api_secret"
-export ZERODHA_ACCESS_TOKEN="your_access_token"
-export PAPER_TRADE="true"
-export CAPITAL="100000"
-export RISK_PER_TRADE_PCT="1"
-```
-
-Optional Telegram alerts:
-
-```bash
-export TELEGRAM_BOT_TOKEN="your_bot_token"
-export TELEGRAM_CHAT_ID="your_chat_id"
-```
-
-3. Run bot:
-
-```bash
-python main.py
-```
-
-Run scanner only:
-
-```bash
-python Stock.py
-```
-
-## Tests
-
-```bash
-python -m unittest discover -s tests -p 'test_*.py'
-```
-
-## EC2 deployment notes
-
-- Use a systemd service or supervisor to keep the bot running.
-- Store API secrets in environment variables (or AWS SSM Parameter Store).
-- Start in `PAPER_TRADE=true` mode and switch to live only after validation.
-
-## Next improvements
-
-- Integrate official `kiteconnect` SDK in `broker/kite_client.py`
-- Add stop-loss / target order management
-- Add trading time window & market holiday checks
-- Add backtesting and structured logs/alerts
->>>>>>> origin/codex/setup-aws-ec2-for-trading-bot
->>>>>>> set-up-bot
+This project is for educational and development purposes only. It is not financial advice. Live trading involves real risk, and any production use should include stronger safeguards, broker-tested execution, and careful validation.
