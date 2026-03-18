@@ -222,7 +222,7 @@ Create a virtual environment and install dependencies:
 ```bash
 python -m venv .venv
 source .venv/bin/activate
-pip install pandas yfinance ta
+pip install -r requirements.txt
 ```
 
 On Windows PowerShell:
@@ -230,7 +230,7 @@ On Windows PowerShell:
 ```powershell
 python -m venv .venv
 .venv\Scripts\Activate.ps1
-pip install pandas yfinance ta
+pip install -r requirements.txt
 ```
 
 Then run either:
@@ -243,6 +243,50 @@ or:
 
 ```bash
 python Stock.py
+```
+
+## Deployment Files Included
+
+The repository now includes a few deployment-friendly files:
+
+- `requirements.txt`
+  Lists the Python packages needed to run the bot.
+- `.env.example`
+  Shows the environment variables you should define before running the app.
+- `deploy/algo-trader.service`
+  A ready-to-adapt `systemd` service file for running the bot on Linux servers such as AWS EC2.
+
+## Suggested EC2 Deployment Workflow
+
+If you want to deploy this application on an Ubuntu EC2 instance, use this order:
+
+1. Launch the server and connect through SSH
+2. Install Python, `venv`, and Git
+3. Clone this repository
+4. Create and activate `.venv`
+5. Run `pip install -r requirements.txt`
+6. Copy `.env.example` to `.env` and fill in real values
+7. Keep `PAPER_TRADE=true` for the first deployment
+8. Test the bot manually with `python main.py`
+9. Copy `deploy/algo-trader.service` into `/etc/systemd/system/`
+10. Enable and start the service with `systemctl`
+
+Example:
+
+```bash
+sudo apt update && sudo apt install -y python3 python3-venv python3-pip git
+git clone <your-repo-url>
+cd algo-trader
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env
+python main.py
+sudo cp deploy/algo-trader.service /etc/systemd/system/algo-trader.service
+sudo systemctl daemon-reload
+sudo systemctl enable algo-trader
+sudo systemctl start algo-trader
+sudo systemctl status algo-trader
 ```
 
 ## Current Design Notes

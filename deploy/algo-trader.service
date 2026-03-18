@@ -1,0 +1,15 @@
+[Unit]
+Description=Algo Trader Bot
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/algo-trader
+EnvironmentFile=/home/ubuntu/algo-trader/.env
+ExecStart=/home/ubuntu/algo-trader/.venv/bin/python main.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
