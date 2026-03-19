@@ -3,6 +3,7 @@ from __future__ import annotations  # Lets Python postpone evaluation of type hi
 import tempfile  # Imports temporary directory utilities for isolated database tests.
 import unittest  # Imports Python's built-in unit testing framework.
 
+from data.market_stream import MarketStream  # Imports the market data adapter for normalization tests.
 from db.trade_db import TradeDB  # Imports the database helper under test.
 from execution.order_manager import OrderManager  # Imports the order manager under test.
 from monitor.position_tracker import PositionTracker  # Imports the position tracker under test.
@@ -42,6 +43,25 @@ class CoreTests(unittest.TestCase):  # Groups core behavioral tests for the trad
         with tempfile.TemporaryDirectory() as tmpdir:  # Creates an isolated temporary directory for the test database.
             db = TradeDB(f"{tmpdir}/trades.db")  # Initializes the trade database in the temporary directory.
             db.log_trade("TCS.NS", "BUY", 1, 100.0, "PAPER_FILLED")  # Writes one sample trade to confirm inserts succeed.
+
+    @unittest.skipIf(pd is None, "pandas not installed in current environment")  # Skips the normalization test when pandas is unavailable.
+    def test_market_stream_normalizes_multiindex_columns(self) -> None:  # Verifies yfinance-style nested OHLCV columns are flattened correctly.
+        columns = pd.MultiIndex.from_product(  # Builds a two-level column index similar to yfinance output for one ticker.
+            [["Open", "High", "Low", "Close", "Volume"], ["RELIANCE.NS"]]
+        )
+        frame = pd.DataFrame(  # Creates a small synthetic market data set with MultiIndex columns.
+            [
+                [100.0, 101.0, 99.0, 100.5, 1000],
+                [101.0, 102.0, 100.0, 101.5, 1200],
+            ],
+            columns=columns,
+        )
+
+        normalized = MarketStream()._normalize_ohlcv(frame)  # Normalizes the nested OHLCV columns into plain Series columns.
+
+        self.assertEqual(list(normalized.columns), ["Open", "High", "Low", "Close", "Volume"])  # Confirms the normalized frame exposes only flat OHLCV columns.
+        self.assertEqual(normalized["Close"].ndim, 1)  # Confirms Close is a Series-compatible 1D column.
+        self.assertEqual(float(normalized.iloc[-1]["Close"]), 101.5)  # Confirms the expected close price survives normalization.
 
     @unittest.skipIf(pd is None or MomentumStrategy is None, "pandas/ta not installed in current environment")  # Skips the strategy test when optional dependencies are unavailable.
     def test_strategy_signal_shape(self) -> None:  # Verifies strategy output, when present, has the expected keys.
