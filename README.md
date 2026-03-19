@@ -2,7 +2,7 @@
 
 `algo-trader` is a modular intraday trading bot project for Indian equities. It is structured as a small pipeline where configuration is loaded, market data is fetched, a strategy decides whether a trade exists, risk rules size the trade, an order layer executes it, and supporting modules track positions, log trades, and send alerts.
 
-The codebase is currently paper-trade friendly, with a stubbed Zerodha client that can later be replaced with a real `kiteconnect` integration.
+The codebase is currently paper-trade friendly, with a stubbed Angel One client that can later be replaced with a real `SmartAPI` integration.
 
 ## End-to-End Workflow
 
@@ -23,7 +23,7 @@ When you run `python main.py`, the project follows this sequence:
 
 1. `config/settings.py` reads environment variables such as API credentials, capital, risk percentage, and whether paper trading is enabled.
 2. `utils/logger.py` creates a reusable logger for console and file output.
-3. `broker/kite_client.py` builds a broker client instance. Right now this is a placeholder wrapper that returns a mock successful order response.
+3. `broker/angelone_client.py` builds a broker client instance. Right now this is a placeholder wrapper that returns a mock successful order response.
 4. `execution/order_manager.py` receives trade instructions and either simulates a fill in paper mode or forwards the order to the broker client in live mode.
 5. `risk/risk_manager.py` calculates how many shares can be traded based on account capital, per-trade risk percentage, entry price, and stop-loss.
 6. `data/market_stream.py` downloads intraday OHLCV candle data using `yfinance`.
@@ -111,8 +111,8 @@ Behavior:
 - In paper mode, it returns a local order dictionary with status `PAPER_FILLED`
 - In live mode, it passes the order to the broker client
 
-- `broker/kite_client.py`
-  Represents the broker integration layer. It currently acts as a placeholder and returns a fake successful order response. This lets the rest of the system run without requiring live Zerodha credentials or a production order flow.
+- `broker/angelone_client.py`
+  Represents the broker integration layer. It currently acts as a placeholder and returns a fake successful order response. This lets the rest of the system run without requiring live Angel One credentials or a production order flow.
 
 ### Monitoring and Persistence
 
@@ -200,9 +200,9 @@ python -m unittest discover -s tests -p "test_*.py"
 The main runtime variables used by the project are:
 
 ```env
-ZERODHA_API_KEY=your_api_key
-ZERODHA_API_SECRET=your_api_secret
-ZERODHA_ACCESS_TOKEN=your_access_token
+ANGELONE_API_KEY=your_api_key
+ANGELONE_CLIENT_ID=your_client_id
+ANGELONE_ACCESS_TOKEN=your_access_token
 PAPER_TRADE=true
 CAPITAL=100000
 RISK_PER_TRADE_PCT=1.0
@@ -212,7 +212,7 @@ TELEGRAM_CHAT_ID=your_chat_id
 
 Notes:
 - `PAPER_TRADE=true` is the safe default for development.
-- If `PAPER_TRADE=false`, `main.py` requires Zerodha credentials to be present.
+- If `PAPER_TRADE=false`, `main.py` requires Angel One credentials to be present.
 - Telegram variables are optional.
 
 ## Local Setup
@@ -310,7 +310,7 @@ What is still intentionally simple:
 
 Good next steps for evolving the project:
 
-1. Replace the stubbed Kite client with real `kiteconnect` authentication and order APIs
+1. Replace the stubbed Angel One client with real `SmartAPI` authentication and order APIs
 2. Add trading window checks and exchange holiday handling
 3. Move the watchlist into config or a database
 4. Add stop-loss and target exit handling

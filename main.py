@@ -1,6 +1,6 @@
 from __future__ import annotations  # Lets Python treat type hints as postponed string annotations.
 
-from broker.kite_client import KiteClient  # Imports the Zerodha/Kite broker client wrapper.
+from broker.angelone_client import AngelOneClient  # Imports the Angel One broker client wrapper.
 from config.settings import load_settings  # Imports the function that reads app configuration values.
 from data.market_stream import MarketStream  # Imports the market data fetcher for OHLCV candles.
 from db.trade_db import TradeDB  # Imports the database helper used to store executed trades.
@@ -29,12 +29,12 @@ def run_once() -> None:  # Defines one full trading cycle across the watchlist.
     settings = load_settings()  # Loads runtime settings such as API keys and risk parameters.
     logger = setup_logger()  # Creates a configured logger for console/file logging.
 
-    if not settings.paper_trade and not (settings.api_key and settings.api_secret and settings.access_token):  # Validates credentials when live trading is enabled.
-        raise ValueError("Live trading requires ZERODHA_API_KEY, ZERODHA_API_SECRET, and ZERODHA_ACCESS_TOKEN")  # Stops execution if live credentials are missing.
+    if not settings.paper_trade and not (settings.api_key and settings.client_id and settings.access_token):  # Validates credentials when live trading is enabled.
+        raise ValueError("Live trading requires ANGELONE_API_KEY, ANGELONE_CLIENT_ID, and ANGELONE_ACCESS_TOKEN")  # Stops execution if live credentials are missing.
 
-    broker = KiteClient(  # Builds the broker client used to place real or simulated orders.
+    broker = AngelOneClient(  # Builds the broker client used to place real or simulated orders.
         api_key=settings.api_key,  # Passes the configured API key into the broker client.
-        api_secret=settings.api_secret,  # Passes the configured API secret into the broker client.
+        client_id=settings.client_id,  # Passes the configured client identifier into the broker client.
         access_token=settings.access_token,  # Passes the current access token into the broker client.
     )  # Finishes broker client initialization.
     order_manager = OrderManager(broker_client=broker, paper_trade=settings.paper_trade)  # Creates the order manager around the broker client.
