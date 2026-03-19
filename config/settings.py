@@ -2,6 +2,7 @@ from __future__ import annotations  # Lets Python postpone evaluation of type hi
 
 import os  # Imports access to environment variables.
 from dataclasses import dataclass  # Imports the dataclass decorator for compact settings storage.
+from pathlib import Path  # Imports Path for locating the project env file.
 
 
 @dataclass(frozen=True)  # Creates an immutable data container for runtime settings.
@@ -24,7 +25,24 @@ def _as_bool(value: str, default: bool = True) -> bool:  # Converts string-like 
     return value.strip().lower() in {"1", "true", "yes", "y", "on"}  # Treats common truthy strings as True.
 
 
+def _load_env_file(env_path: Path | None = None) -> None:  # Loads key-value pairs from a local .env file into the process environment.
+    if env_path is None:  # Handles the default project env-file location.
+        env_path = Path(__file__).resolve().parent.parent / ".env"  # Points to the repository-level .env file.
+    if not env_path.exists():  # Skips loading when no local env file is present.
+        return  # Leaves the current environment unchanged when the file is missing.
+
+    for raw_line in env_path.read_text(encoding="utf-8").splitlines():  # Reads the env file line by line.
+        line = raw_line.strip()  # Removes surrounding whitespace so parsing is predictable.
+        if not line or line.startswith("#") or "=" not in line:  # Ignores blank lines, comments, and malformed entries.
+            continue  # Moves to the next line when nothing usable is found.
+        key, value = line.split("=", 1)  # Splits only on the first equals sign to preserve the rest of the value.
+        key = key.strip()  # Normalizes surrounding whitespace on the environment key.
+        value = value.strip().strip("'\"")  # Normalizes whitespace and surrounding quotes on the environment value.
+        os.environ.setdefault(key, value)  # Preserves already-exported variables while backfilling from .env.
+
+
 def load_settings() -> Settings:  # Builds a Settings object from environment variables.
+    _load_env_file()  # Loads repository env variables before reading runtime settings.
     return Settings(  # Creates and returns the immutable settings snapshot.
         api_key=os.getenv("ANGELONE_API_KEY", ""),  # Reads the API key or defaults to an empty string.
         client_id=os.getenv("ANGELONE_CLIENT_ID", ""),  # Reads the client identifier or defaults to an empty string.
