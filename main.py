@@ -1,5 +1,7 @@
 from __future__ import annotations  # Lets Python treat type hints as postponed string annotations.
 
+import time  # Imports time utilities for repeated scan delays.
+
 from broker.angelone_client import AngelOneClient  # Imports the Angel One broker client wrapper.
 from config.settings import load_settings  # Imports the function that reads app configuration values.
 from data.market_stream import MarketStream  # Imports the market data fetcher for OHLCV candles.
@@ -25,7 +27,13 @@ WATCHLIST = [  # Defines the symbols the bot will scan in each run.
 ]  # Ends the list of tracked symbols.
 
 
-def run_once() -> None:  # Defines one full trading cycle across the watchlist.
+def _notify_status(message: str, logger: object, send_alert: bool) -> None:  # Logs a status update and optionally sends it to Telegram.
+    logger.info(message)  # Writes the status message to the logs.
+    if send_alert:  # Checks whether this status should also be sent to Telegram.
+        send_telegram_message(message)  # Sends the status message to Telegram when enabled.
+
+
+def run_once() -> None:  # Defines a repeated trading cycle across the watchlist.
     settings = load_settings()  # Loads runtime settings such as API keys and risk parameters.
     logger = setup_logger()  # Creates a configured logger for console/file logging.
 
@@ -44,29 +52,34 @@ def run_once() -> None:  # Defines one full trading cycle across the watchlist.
     trade_db = TradeDB()  # Opens the trade logging database helper.
     position_tracker = PositionTracker()  # Starts the in-memory tracker for current positions.
 
-    for symbol in WATCHLIST:  # Loops through each stock in the watchlist.
-        try:  # Wraps each symbol so one failure does not stop the whole scan.
-            df = stream.fetch_ohlcv(symbol)  # Downloads recent OHLCV data for the current symbol.
-            signal = strategy.build_signal(symbol, df)  # Generates a trading signal from the fetched data.
-            if not signal:  # Checks whether the strategy found a valid setup.
-                continue  # Skips this symbol when there is no trade signal.
+    while True:  # Keeps scanning the watchlist on a repeating interval.
+        for symbol in WATCHLIST:  # Loops through each stock in the watchlist.
+            try:  # Wraps each symbol so one failure does not stop the whole scan.
+                df = stream.fetch_ohlcv(symbol)  # Downloads recent OHLCV data for the current symbol.
+                signal = strategy.build_signal(symbol, df)  # Generates a trading signal from the fetched data.
+                if not signal:  # Checks whether the strategy found a valid setup.
+                    _notify_status(f"No trade executed for {symbol}: no valid signal.", logger, settings.alert_every_check)  # Reports skipped symbols as explicit status updates.
+                    time.sleep(settings.scan_interval_seconds)  # Waits before the next alert cycle.
+                    continue  # Skips this symbol when there is no trade signal.
 
-            qty = risk_manager.position_size(signal["price"], signal["stop_loss"])  # Calculates position size from entry and stop-loss.
-            if qty <= 0:  # Guards against invalid or zero quantity recommendations.
-                logger.info("Skipping %s due to non-positive quantity", symbol)  # Records why the trade was skipped.
-                continue  # Moves to the next symbol without placing an order.
+                qty = risk_manager.position_size(signal["price"], signal["stop_loss"])  # Calculates position size from entry and stop-loss.
+                if qty <= 0:  # Guards against invalid or zero quantity recommendations.
+                    _notify_status(f"No trade executed for {symbol}: calculated quantity was not positive.", logger, settings.alert_every_check)  # Reports invalid quantities as explicit status updates.
+                    time.sleep(settings.scan_interval_seconds)  # Waits before the next alert cycle.
+                    continue  # Moves to the next symbol without placing an order.
 
-            order = order_manager.place_market_order(symbol, signal["side"], qty)  # Sends the market order using the chosen side and quantity.
-            trade_db.log_trade(symbol, signal["side"], qty, signal["price"], order["status"])  # Stores the trade outcome in the database.
-            position_tracker.update_buy(symbol, qty, signal["price"])  # Updates the tracked position after execution.
+                order = order_manager.place_market_order(symbol, signal["side"], qty)  # Sends the market order using the chosen side and quantity.
+                trade_db.log_trade(symbol, signal["side"], qty, signal["price"], order["status"])  # Stores the trade outcome in the database.
+                position_tracker.update_buy(symbol, qty, signal["price"])  # Updates the tracked position after execution.
 
-            message = f"Signal executed: {order}"  # Builds a notification message describing the executed order.
-            logger.info(message)  # Writes the execution message to the logs.
-            send_telegram_message(message)  # Sends the same execution message to Telegram.
-        except Exception as exc:  # Catches any error raised while processing one symbol.
-            logger.exception("Error processing %s: %s", symbol, exc)  # Logs the symbol-level error with traceback details.
+                _notify_status(f"Signal executed: {order}", logger, True)  # Reports executed orders to both logs and Telegram.
+            except Exception as exc:  # Catches any error raised while processing one symbol.
+                logger.exception("Error processing %s: %s", symbol, exc)  # Logs the symbol-level error with traceback details.
+                if settings.alert_every_check:  # Checks whether errors should also be sent to Telegram.
+                    send_telegram_message(f"Error processing {symbol}: {exc}")  # Sends the symbol-level error summary to Telegram.
+            time.sleep(settings.scan_interval_seconds)  # Waits between symbol checks so alerts arrive at the requested interval.
 
-    logger.info("Open positions: %s", position_tracker.snapshot())  # Logs the final snapshot of tracked open positions.
+        _notify_status(f"Open positions: {position_tracker.snapshot()}", logger, settings.alert_every_check)  # Logs the latest open-position snapshot after each full watchlist cycle.
 
 
 if __name__ == "__main__":  # Runs the trading cycle only when this file is executed directly.

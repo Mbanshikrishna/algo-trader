@@ -14,6 +14,8 @@ class Settings:  # Defines the structure of all settings loaded from the environ
     paper_trade: bool  # Controls whether the bot simulates trades instead of sending live orders.
     risk_per_trade_pct: float  # Stores the percentage of capital to risk on each trade.
     capital: float  # Stores the total capital used for position sizing.
+    scan_interval_seconds: float  # Stores the delay between repeated scan cycles.
+    alert_every_check: bool  # Controls whether Telegram should receive non-trade status updates too.
 
 
 def _as_bool(value: str, default: bool = True) -> bool:  # Converts string-like environment values into booleans.
@@ -30,4 +32,6 @@ def load_settings() -> Settings:  # Builds a Settings object from environment va
         paper_trade=_as_bool(os.getenv("PAPER_TRADE", "true")),  # Reads the paper-trading flag and converts it to a boolean.
         risk_per_trade_pct=float(os.getenv("RISK_PER_TRADE_PCT", "1.0")),  # Reads the per-trade risk percentage and converts it to a float.
         capital=float(os.getenv("CAPITAL", "100000")),  # Reads the available capital and converts it to a float.
+        scan_interval_seconds=float(os.getenv("SCAN_INTERVAL_SECONDS", "2")),  # Reads the delay between repeated scans and converts it to a float.
+        alert_every_check=_as_bool(os.getenv("ALERT_EVERY_CHECK", "true")),  # Reads whether Telegram should receive updates even without trades.
     )  # Finishes constructing the settings object.
