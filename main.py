@@ -44,6 +44,7 @@ def run_once() -> None:  # Defines a repeated trading cycle across the watchlist
         api_key=settings.api_key,  # Passes the configured API key into the broker client.
         client_id=settings.client_id,  # Passes the configured client identifier into the broker client.
         access_token=settings.access_token,  # Passes the current access token into the broker client.
+        paper_trade=settings.paper_trade,  # Ensures client knows if paper trade mode is active.
     )  # Finishes broker client initialization.
     order_manager = OrderManager(broker_client=broker, paper_trade=settings.paper_trade)  # Creates the order manager around the broker client.
     risk_manager = RiskManager(capital=settings.capital, risk_per_trade_pct=settings.risk_per_trade_pct)  # Creates the risk manager with capital and risk settings.

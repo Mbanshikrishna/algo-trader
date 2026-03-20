@@ -29,3 +29,61 @@ class MarketStream:  # Defines a simple adapter for fetching intraday OHLCV mark
         if df.empty:  # Checks whether the download returned any rows.
             return df  # Returns the empty DataFrame immediately when no data is available.
         return self._normalize_ohlcv(df)  # Returns the normalized market data DataFrame.
+
+    def fetch_closing_prices(self, symbols: list[str], period: str = "2d") -> pd.DataFrame:
+        """Downloads the latest closing prices for symbol list and returns percentage changes."""
+        if not symbols:
+            return pd.DataFrame()
+
+        df = yf.download(
+            symbols,
+            interval="1d",
+            period=period,
+            progress=False,
+            threads=True,
+        )
+
+        if df.empty:
+            return pd.DataFrame()
+
+        close = df["Close"] if "Close" in df else df
+        if isinstance(close, pd.Series):
+            close = close.to_frame(name=symbols[0])
+
+        close = close.dropna(axis=1, how="all")
+        return close
+
+    def top_gainers(self, symbols: list[str], limit: int = 10, period: str = "2d") -> list[dict]:
+        """Returns top gainers by percentage change from previous close."""
+        close = self.fetch_closing_prices(symbols, period=period)
+        if close.empty or close.shape[0] < 2:
+            return []
+
+        latest = close.iloc[-1]
+        previous = close.iloc[-2]
+
+        changes = ((latest - previous) / previous) * 100
+        changes = changes.dropna()
+
+        gainers = (
+            changes.sort_values(ascending=False)
+            .head(limit)
+            .reset_index()
+            .rename(columns={"index": "symbol", 0: "pct_change"})
+        )
+
+        result = []
+        for _, row in gainers.iterrows():
+            symbol = row["symbol"]
+            if symbol not in latest or symbol not in previous:
+                continue
+            result.append(
+                {
+                    "symbol": symbol,
+                    "prev_close": float(previous[symbol]),
+                    "last_close": float(latest[symbol]),
+                    "pct_change": float(row[0]),
+                }
+            )
+        return result
+
