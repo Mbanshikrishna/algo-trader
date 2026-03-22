@@ -19,6 +19,10 @@ class AngelOneClient:  # Defines a lightweight wrapper around Angel One SmartAPI
     TRADE_BASE_URL = "https://apiconnect.angelbroking.com/rest/secure/angelbroking/trade/v1"  # Stores the SmartAPI trade endpoint base URL.
     HISTORICAL_BASE_URL = "https://apiconnect.angelbroking.com/rest/secure/angelbroking/historical/v1"  # Stores the SmartAPI historical-candle endpoint base URL.
     MARKET_BASE_URL = "https://apiconnect.angelbroking.com/rest/secure/angelbroking/market/v1"  # Stores the SmartAPI quote/search endpoint base URL.
+    SCRIP_MASTER_URLS = (  # Stores public Angel One scrip-master locations used as a fallback when searchScrip yields no match.
+        "https://margincalculator.angelbroking.com/OpenAPI_File/files/OpenAPIScripMaster.json",
+        "https://margincalculator.angelone.in/OpenAPI_File/files/OpenAPIScripMaster.json",
+    )
 
     def __init__(
         self,
@@ -37,6 +41,7 @@ class AngelOneClient:  # Defines a lightweight wrapper around Angel One SmartAPI
         self.client_local_ip = self._detect_local_ip()  # Stores the client-local IP in the header format used by the SmartAPI SDK.
         self.client_public_ip = "106.193.147.98"  # Uses the same fallback public IP placeholder the official SDK currently ships with.
         self.client_mac_address = ":".join(f"{uuid.getnode():012x}"[i : i + 2] for i in range(0, 12, 2))  # Formats the machine identifier like the official SDK's MAC header.
+        self._scrip_master_cache: list[dict[str, Any]] | None = None  # Caches the downloaded scrip master so symbol fallback resolution happens only once per process.
         self.session.headers.update(
             {
                 "Accept": "application/json",  # Requests JSON responses from SmartAPI.
@@ -139,6 +144,8 @@ class AngelOneClient:  # Defines a lightweight wrapper around Angel One SmartAPI
             exact = next((row for row in matches if str(row.get("tradingsymbol", "")).upper() == tradingsymbol.upper()), None)
 
         candidate = exact or (matches[0] if matches else None)  # Uses the exact match when possible and otherwise the first returned row.
+        if candidate is None:  # Falls back to the public scrip master when the search endpoint returns no usable result.
+            candidate = self._resolve_from_scrip_master(symbol=symbol, exchange=exchange, tradingsymbol=tradingsymbol)
         if candidate is None:  # Fails fast when SmartAPI cannot resolve the symbol.
             raise ValueError(f"Could not resolve Angel One instrument for {symbol}")
 
@@ -225,3 +232,39 @@ class AngelOneClient:  # Defines a lightweight wrapper around Angel One SmartAPI
             raise ValueError(
                 f"{method} {url} returned non-JSON response (status={response.status_code}, content_type={content_type}): {snippet or '<empty body>'}"
             ) from exc
+
+    def _resolve_from_scrip_master(self, symbol: str, exchange: str, tradingsymbol: str) -> dict[str, Any] | None:  # Resolves a symbol from Angel One's public instrument master as a fallback to searchScrip.
+        base_symbol = tradingsymbol.split("-", 1)[0]  # Extracts the root equity symbol used by the public master data.
+        for row in self._load_scrip_master():  # Scans the cached master data for an exact match on exchange and tradingsymbol.
+            row_exchange = str(row.get("exch_seg", "")).upper()
+            row_symbol = str(row.get("symbol", "")).upper()
+            row_name = str(row.get("name", "")).upper()
+            if row_exchange != exchange.upper():
+                continue
+            if row_symbol == tradingsymbol.upper() or (row_name == base_symbol.upper() and row_symbol.endswith("-EQ")):
+                return {
+                    "exchange": row_exchange,
+                    "tradingsymbol": row.get("symbol"),
+                    "symboltoken": row.get("token"),
+                }
+        return None
+
+    def _load_scrip_master(self) -> list[dict[str, Any]]:  # Loads and caches the public Angel One scrip master JSON for token-resolution fallback.
+        if self._scrip_master_cache is not None:
+            return self._scrip_master_cache
+
+        last_error: Exception | None = None
+        for url in self.SCRIP_MASTER_URLS:
+            try:
+                response = requests.get(url, timeout=self.timeout_seconds)
+                response.raise_for_status()
+                payload = response.json()
+                if isinstance(payload, list):
+                    self._scrip_master_cache = payload
+                    return payload
+            except Exception as exc:  # Tries the next known scrip-master URL if one host is unavailable.
+                last_error = exc
+
+        if last_error is not None:
+            raise ValueError(f"Unable to load Angel One scrip master: {last_error}") from last_error
+        raise ValueError("Unable to load Angel One scrip master")

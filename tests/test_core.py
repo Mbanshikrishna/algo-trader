@@ -114,6 +114,16 @@ class CoreTests(unittest.TestCase):  # Groups core behavioral tests for the trad
             AngelOneClient._parse_json_response(StubResponse(), "POST", "https://example.test/searchScrip")
         self.assertIn("non-JSON response", str(ctx.exception))  # Confirms the raised message explains the parsing failure clearly.
 
+    def test_angelone_client_resolves_from_scrip_master_fallback(self) -> None:  # Verifies instrument resolution can fall back to the public scrip master when searchScrip returns no usable rows.
+        client = AngelOneClient(api_key="key", client_id="client", access_token="token")  # Builds a client instance for exercising the fallback resolution path.
+        client.search_scrip = lambda exchange, search_text: []  # Simulates an empty searchScrip result from SmartAPI.
+        client._load_scrip_master = lambda: [  # Supplies a tiny in-memory scrip master sample for deterministic token resolution.
+            {"exch_seg": "NSE", "symbol": "RELIANCE-EQ", "name": "RELIANCE", "token": "2885"}
+        ]
+        instrument = client.resolve_instrument("RELIANCE.NS")  # Resolves the instrument using the scrip-master fallback path.
+        self.assertEqual(instrument.tradingsymbol, "RELIANCE-EQ")  # Confirms the fallback returns the expected Angel One tradingsymbol.
+        self.assertEqual(instrument.symboltoken, "2885")  # Confirms the fallback returns the expected Angel One token.
+
     def test_angel_tradingsymbol_for_nse_equity(self) -> None:  # Verifies Yahoo-style NSE symbols are translated into Angel One equity tradingsymbols.
         self.assertEqual(angel_tradingsymbol_for("SBIN.NS"), "SBIN-EQ")  # Confirms Angel One receives the expected equity tradingsymbol.
 
