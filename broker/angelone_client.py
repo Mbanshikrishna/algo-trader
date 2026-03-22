@@ -121,7 +121,7 @@ class AngelOneClient:  # Defines a lightweight wrapper around Angel One SmartAPI
     def search_scrip(self, exchange: str, search_text: str) -> list[dict[str, Any]]:  # Searches Angel One's instrument master for a tradingsymbol/token pair.
         payload = self._require_success(
             self._post(
-                self.MARKET_BASE_URL,
+                self.ORDER_BASE_URL,
                 "/searchScrip",
                 {"exchange": exchange, "searchscrip": search_text},
             ),
