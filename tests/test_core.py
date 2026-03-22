@@ -90,6 +90,16 @@ class CoreTests(unittest.TestCase):  # Groups core behavioral tests for the trad
         self.assertEqual(list(frame.columns), ["Open", "High", "Low", "Close", "Volume"])  # Confirms the converted frame exposes the expected OHLCV columns.
         self.assertEqual(float(frame.iloc[-1]["Close"]), 101.25)  # Confirms the close price survives the conversion correctly.
 
+    def test_market_stream_resolves_angel_instrument_in_paper_mode(self) -> None:  # Verifies paper trading still allows Angel One symbol resolution for market data.
+        class StubAngelClient:  # Provides a minimal stub for Angel One resolution without live network access.
+            def resolve_instrument(self, symbol: str, exchange: str = "NSE") -> Instrument:
+                return Instrument(symbol=symbol, exchange=exchange, tradingsymbol="RELIANCE-EQ", symboltoken="2885")
+
+        stream = MarketStream(data_provider="angelone", angel_client=StubAngelClient())  # Builds an Angel One stream with a stub broker client.
+        instrument = stream.resolve_instrument("RELIANCE.NS")  # Resolves a symbol through the stub broker client.
+        self.assertEqual(instrument.tradingsymbol, "RELIANCE-EQ")  # Confirms the instrument resolution works independently of live order mode.
+        self.assertEqual(instrument.symboltoken, "2885")  # Confirms the resolved token is cached on the instrument.
+
     def test_angel_tradingsymbol_for_nse_equity(self) -> None:  # Verifies Yahoo-style NSE symbols are translated into Angel One equity tradingsymbols.
         self.assertEqual(angel_tradingsymbol_for("SBIN.NS"), "SBIN-EQ")  # Confirms Angel One receives the expected equity tradingsymbol.
 

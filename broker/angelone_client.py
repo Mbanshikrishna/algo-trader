@@ -110,8 +110,6 @@ class AngelOneClient:  # Defines a lightweight wrapper around Angel One SmartAPI
         return self._require_success(self._get(self.TRADE_BASE_URL, "/getHistory", params=params), "fetch historical trades")
 
     def search_scrip(self, exchange: str, search_text: str) -> list[dict[str, Any]]:  # Searches Angel One's instrument master for a tradingsymbol/token pair.
-        if self.paper_trade:
-            return []
         payload = self._require_success(
             self._post(
                 self.MARKET_BASE_URL,
@@ -150,9 +148,6 @@ class AngelOneClient:  # Defines a lightweight wrapper around Angel One SmartAPI
         from_datetime: datetime | str,
         to_datetime: datetime | str,
     ) -> list[list[Any]]:  # Fetches historical candles in the SmartAPI array format.
-        if self.paper_trade:
-            return []
-
         payload = self._require_success(
             self._post(
                 self.HISTORICAL_BASE_URL,
@@ -170,8 +165,6 @@ class AngelOneClient:  # Defines a lightweight wrapper around Angel One SmartAPI
         return payload.get("data") or []
 
     def get_ltp_data(self, exchange: str, tradingsymbol: str, symboltoken: str) -> dict[str, Any]:  # Fetches the latest traded price snapshot for one symbol.
-        if self.paper_trade:
-            return {"ltp": None}
         payload = self._require_success(
             self._post(
                 self.MARKET_BASE_URL,
@@ -187,8 +180,6 @@ class AngelOneClient:  # Defines a lightweight wrapper around Angel One SmartAPI
         return payload.get("data") or {}
 
     def get_market_data(self, mode: str, exchange_tokens: dict[str, list[str]]) -> dict[str, Any]:  # Fetches snapshot quote data for one or more exchange/token groups.
-        if self.paper_trade:
-            return {"fetched": []}
         payload = self._require_success(
             self._post(
                 self.MARKET_BASE_URL,
