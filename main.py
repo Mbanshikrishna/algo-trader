@@ -3,6 +3,7 @@ from __future__ import annotations  # Lets Python treat type hints as postponed 
 import time  # Imports time utilities for repeated scan delays.
 
 from broker.angelone_client import AngelOneClient  # Imports the Angel One broker client wrapper.
+from config.instruments import default_watchlist  # Imports the default instrument watchlist.
 from config.settings import load_settings  # Imports the function that reads app configuration values.
 from data.market_stream import MarketStream  # Imports the market data fetcher for OHLCV candles.
 from db.trade_db import TradeDB  # Imports the database helper used to store executed trades.
@@ -13,18 +14,7 @@ from strategy.momentum_strategy import MomentumStrategy  # Imports the strategy 
 from utils.logger import setup_logger  # Imports the logger setup function.
 from utils.telegram_alert import send_telegram_message  # Imports the Telegram notifier.
 
-WATCHLIST = [  # Defines the symbols the bot will scan in each run.
-    "RELIANCE.NS",  # Adds Reliance to the watchlist.
-    "HDFCBANK.NS",  # Adds HDFC Bank to the watchlist.
-    "ICICIBANK.NS",  # Adds ICICI Bank to the watchlist.
-    "INFY.NS",  # Adds Infosys to the watchlist.
-    "TCS.NS",  # Adds Tata Consultancy Services to the watchlist.
-    "SBIN.NS",  # Adds State Bank of India to the watchlist.
-    "AXISBANK.NS",  # Adds Axis Bank to the watchlist.
-    "ITC.NS",  # Adds ITC to the watchlist.
-    "LT.NS",  # Adds Larsen & Toubro to the watchlist.
-    "JUBLFOOD.NS",  # Adds Jubilant FoodWorks to the watchlist.
-]  # Ends the list of tracked symbols.
+WATCHLIST = default_watchlist()  # Defines the instruments the bot will scan in each run.
 
 
 def _notify_status(message: str, logger: object, send_alert: bool) -> None:  # Logs a status update and optionally sends it to Telegram.
@@ -37,6 +27,8 @@ def run_once() -> None:  # Defines a repeated trading cycle across the watchlist
     settings = load_settings()  # Loads runtime settings such as API keys and risk parameters.
     logger = setup_logger()  # Creates a configured logger for console/file logging.
 
+    if settings.market_data_provider == "angelone" and not (settings.api_key and settings.client_id and settings.access_token):  # Validates credentials when broker-native market data is enabled.
+        raise ValueError("Angel One market data requires ANGELONE_API_KEY, ANGELONE_CLIENT_ID, and ANGELONE_ACCESS_TOKEN")
     if not settings.paper_trade and not (settings.api_key and settings.client_id and settings.access_token):  # Validates credentials when live trading is enabled.
         raise ValueError("Live trading requires ANGELONE_API_KEY, ANGELONE_CLIENT_ID, and ANGELONE_ACCESS_TOKEN")  # Stops execution if live credentials are missing.
 
@@ -46,38 +38,54 @@ def run_once() -> None:  # Defines a repeated trading cycle across the watchlist
         access_token=settings.access_token,  # Passes the current access token into the broker client.
         paper_trade=settings.paper_trade,  # Ensures client knows if paper trade mode is active.
     )  # Finishes broker client initialization.
-    order_manager = OrderManager(broker_client=broker, paper_trade=settings.paper_trade)  # Creates the order manager around the broker client.
+    order_manager = OrderManager(  # Creates the order manager around the broker client.
+        broker_client=broker,
+        paper_trade=settings.paper_trade,
+        product_type=settings.order_product_type,
+        variety=settings.order_variety,
+    )
     risk_manager = RiskManager(capital=settings.capital, risk_per_trade_pct=settings.risk_per_trade_pct)  # Creates the risk manager with capital and risk settings.
     strategy = MomentumStrategy()  # Instantiates the momentum-based signal generator.
-    stream = MarketStream(interval="5m", period="1d")  # Configures market data to use 5-minute candles from the last day.
+    stream = MarketStream(  # Configures market data to use the selected provider.
+        interval="5m",
+        period="1d",
+        data_provider=settings.market_data_provider,
+        angel_client=broker,
+    )
     trade_db = TradeDB()  # Opens the trade logging database helper.
     position_tracker = PositionTracker()  # Starts the in-memory tracker for current positions.
 
     while True:  # Keeps scanning the watchlist on a repeating interval.
-        for symbol in WATCHLIST:  # Loops through each stock in the watchlist.
+        for instrument in WATCHLIST:  # Loops through each stock instrument in the watchlist.
             try:  # Wraps each symbol so one failure does not stop the whole scan.
-                df = stream.fetch_ohlcv(symbol)  # Downloads recent OHLCV data for the current symbol.
-                signal = strategy.build_signal(symbol, df)  # Generates a trading signal from the fetched data.
+                resolved_instrument = stream.resolve_instrument(instrument) if settings.market_data_provider == "angelone" else instrument  # Resolves Angel One broker metadata when the strategy is running on broker-native data.
+                df = stream.fetch_ohlcv(resolved_instrument)  # Downloads recent OHLCV data for the current symbol.
+                signal = strategy.build_signal(instrument.symbol, df)  # Generates a trading signal from the fetched data.
                 if not signal:  # Checks whether the strategy found a valid setup.
-                    _notify_status(f"No trade executed for {symbol}: no valid signal.", logger, settings.alert_every_check)  # Reports skipped symbols as explicit status updates.
+                    _notify_status(f"No trade executed for {instrument.symbol}: no valid signal.", logger, settings.alert_every_check)  # Reports skipped symbols as explicit status updates.
                     time.sleep(settings.scan_interval_seconds)  # Waits before the next alert cycle.
                     continue  # Skips this symbol when there is no trade signal.
 
                 qty = risk_manager.position_size(signal["price"], signal["stop_loss"])  # Calculates position size from entry and stop-loss.
                 if qty <= 0:  # Guards against invalid or zero quantity recommendations.
-                    _notify_status(f"No trade executed for {symbol}: calculated quantity was not positive.", logger, settings.alert_every_check)  # Reports invalid quantities as explicit status updates.
+                    _notify_status(f"No trade executed for {instrument.symbol}: calculated quantity was not positive.", logger, settings.alert_every_check)  # Reports invalid quantities as explicit status updates.
                     time.sleep(settings.scan_interval_seconds)  # Waits before the next alert cycle.
                     continue  # Moves to the next symbol without placing an order.
 
-                order = order_manager.place_market_order(symbol, signal["side"], qty)  # Sends the market order using the chosen side and quantity.
-                trade_db.log_trade(symbol, signal["side"], qty, signal["price"], order["status"])  # Stores the trade outcome in the database.
-                position_tracker.update_buy(symbol, qty, signal["price"])  # Updates the tracked position after execution.
+                order = order_manager.place_market_order(  # Sends the market order using the chosen side and quantity.
+                    instrument.symbol,
+                    signal["side"],
+                    qty,
+                    instrument=resolved_instrument if hasattr(resolved_instrument, "tradingsymbol") else None,
+                )
+                trade_db.log_trade(instrument.symbol, signal["side"], qty, signal["price"], order["status"])  # Stores the trade outcome in the database.
+                position_tracker.update_buy(instrument.symbol, qty, signal["price"])  # Updates the tracked position after execution.
 
                 _notify_status(f"Signal executed: {order}", logger, True)  # Reports executed orders to both logs and Telegram.
             except Exception as exc:  # Catches any error raised while processing one symbol.
-                logger.exception("Error processing %s: %s", symbol, exc)  # Logs the symbol-level error with traceback details.
+                logger.exception("Error processing %s: %s", instrument.symbol, exc)  # Logs the symbol-level error with traceback details.
                 if settings.alert_every_check:  # Checks whether errors should also be sent to Telegram.
-                    send_telegram_message(f"Error processing {symbol}: {exc}")  # Sends the symbol-level error summary to Telegram.
+                    send_telegram_message(f"Error processing {instrument.symbol}: {exc}")  # Sends the symbol-level error summary to Telegram.
             time.sleep(settings.scan_interval_seconds)  # Waits between symbol checks so alerts arrive at the requested interval.
 
         _notify_status(f"Open positions: {position_tracker.snapshot()}", logger, settings.alert_every_check)  # Logs the latest open-position snapshot after each full watchlist cycle.
