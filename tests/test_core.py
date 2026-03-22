@@ -6,6 +6,7 @@ from pathlib import Path  # Imports Path for repository-local temporary test fil
 from uuid import uuid4  # Imports uuid4 for generating isolated test database names.
 
 from config.instruments import Instrument, angel_tradingsymbol_for  # Imports instrument helpers used by the Angel One integration.
+from broker.angelone_client import AngelOneClient  # Imports the broker client for SmartAPI response-parsing tests.
 from data.market_stream import MarketStream  # Imports the market data adapter for normalization tests.
 from db.trade_db import TradeDB  # Imports the database helper under test.
 from execution.order_manager import OrderManager  # Imports the order manager under test.
@@ -99,6 +100,19 @@ class CoreTests(unittest.TestCase):  # Groups core behavioral tests for the trad
         instrument = stream.resolve_instrument("RELIANCE.NS")  # Resolves a symbol through the stub broker client.
         self.assertEqual(instrument.tradingsymbol, "RELIANCE-EQ")  # Confirms the instrument resolution works independently of live order mode.
         self.assertEqual(instrument.symboltoken, "2885")  # Confirms the resolved token is cached on the instrument.
+
+    def test_angelone_client_reports_non_json_response(self) -> None:  # Verifies SmartAPI HTML/plaintext failures are surfaced with useful diagnostics.
+        class StubResponse:  # Provides the minimal response surface needed by the JSON parser helper.
+            status_code = 200
+            text = "<html>bad gateway</html>"
+            headers = {"Content-Type": "text/html"}
+
+            def json(self) -> dict:
+                raise ValueError("not json")
+
+        with self.assertRaises(ValueError) as ctx:  # Confirms the helper raises a descriptive value error on non-JSON content.
+            AngelOneClient._parse_json_response(StubResponse(), "POST", "https://example.test/searchScrip")
+        self.assertIn("non-JSON response", str(ctx.exception))  # Confirms the raised message explains the parsing failure clearly.
 
     def test_angel_tradingsymbol_for_nse_equity(self) -> None:  # Verifies Yahoo-style NSE symbols are translated into Angel One equity tradingsymbols.
         self.assertEqual(angel_tradingsymbol_for("SBIN.NS"), "SBIN-EQ")  # Confirms Angel One receives the expected equity tradingsymbol.

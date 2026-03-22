@@ -1,9 +1,12 @@
 from __future__ import annotations  # Lets Python postpone evaluation of type annotations.
 
 from datetime import datetime  # Imports datetime for historical candle request windows.
+import socket  # Imports socket for deriving the client-local IP used by SmartAPI headers.
 from typing import Any  # Imports Any for JSON-like response typing.
+import uuid  # Imports uuid for deriving a stable MAC-address style identifier used by SmartAPI headers.
 
 import requests  # Imports requests for SmartAPI HTTP calls.
+from requests.exceptions import JSONDecodeError as RequestsJSONDecodeError  # Imports requests' JSON decode error so non-JSON API responses can be reported clearly.
 
 from config.instruments import Instrument, angel_tradingsymbol_for  # Imports broker instrument helpers used by market data and order placement.
 
@@ -31,10 +34,16 @@ class AngelOneClient:  # Defines a lightweight wrapper around Angel One SmartAPI
         self.paper_trade = paper_trade  # Stores whether paper trade mode is active.
         self.timeout_seconds = timeout_seconds  # Stores a default timeout for SmartAPI requests.
         self.session = requests.Session()  # Reuses one HTTP session across requests.
+        self.client_local_ip = self._detect_local_ip()  # Stores the client-local IP in the header format used by the SmartAPI SDK.
+        self.client_public_ip = "106.193.147.98"  # Uses the same fallback public IP placeholder the official SDK currently ships with.
+        self.client_mac_address = ":".join(f"{uuid.getnode():012x}"[i : i + 2] for i in range(0, 12, 2))  # Formats the machine identifier like the official SDK's MAC header.
         self.session.headers.update(
             {
                 "Accept": "application/json",  # Requests JSON responses from SmartAPI.
                 "Content-Type": "application/json",  # Sends JSON payloads for POST requests.
+                "X-ClientLocalIP": self.client_local_ip,  # Provides the local IP header expected by the SmartAPI SDK.
+                "X-ClientPublicIP": self.client_public_ip,  # Provides the public IP header expected by the SmartAPI SDK.
+                "X-MACAddress": self.client_mac_address,  # Provides the MAC-address style header expected by the SmartAPI SDK.
                 "X-Client-Code": self.client_id,  # Provides the client code in the common SmartAPI header form.
                 "X-API-Key": self.api_key,  # Provides the API key in the header used by this project's existing implementation.
                 "X-PrivateKey": self.api_key,  # Provides the API key in the header used by SmartAPI SDK examples and forum traces.
@@ -48,13 +57,13 @@ class AngelOneClient:  # Defines a lightweight wrapper around Angel One SmartAPI
         url = f"{base_url}{path}"  # Builds the full request URL.
         response = self.session.get(url, params=params or {}, timeout=self.timeout_seconds)  # Sends the GET request using the shared session.
         response.raise_for_status()  # Raises a requests exception for non-success HTTP status codes.
-        return response.json()  # Returns the parsed JSON body to the caller.
+        return self._parse_json_response(response, "GET", url)  # Returns the parsed JSON body to the caller.
 
     def _post(self, base_url: str, path: str, body: dict[str, Any]) -> dict[str, Any]:  # Performs a POST request against one SmartAPI service group.
         url = f"{base_url}{path}"  # Builds the full request URL.
         response = self.session.post(url, json=body, timeout=self.timeout_seconds)  # Sends the JSON POST request using the shared session.
         response.raise_for_status()  # Raises a requests exception for non-success HTTP status codes.
-        return response.json()  # Returns the parsed JSON body to the caller.
+        return self._parse_json_response(response, "POST", url)  # Returns the parsed JSON body to the caller.
 
     @staticmethod
     def _require_success(payload: dict[str, Any], action: str) -> dict[str, Any]:  # Normalizes SmartAPI responses by rejecting explicit API-level failures.
@@ -198,3 +207,21 @@ class AngelOneClient:  # Defines a lightweight wrapper around Angel One SmartAPI
         if isinstance(value, datetime):
             return value.strftime("%Y-%m-%d %H:%M")
         return value
+
+    @staticmethod
+    def _detect_local_ip() -> str:  # Detects the machine's local IP address for SmartAPI headers and falls back safely when unavailable.
+        try:
+            return socket.gethostbyname(socket.gethostname())
+        except OSError:
+            return "127.0.0.1"
+
+    @staticmethod
+    def _parse_json_response(response: requests.Response, method: str, url: str) -> dict[str, Any]:  # Converts an HTTP response to JSON and reports non-JSON bodies with enough detail to debug SmartAPI routing/auth issues.
+        try:
+            return response.json()
+        except (RequestsJSONDecodeError, ValueError) as exc:
+            content_type = response.headers.get("Content-Type", "unknown")
+            snippet = response.text.strip().replace("\n", " ")[:200]
+            raise ValueError(
+                f"{method} {url} returned non-JSON response (status={response.status_code}, content_type={content_type}): {snippet or '<empty body>'}"
+            ) from exc
