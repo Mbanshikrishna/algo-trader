@@ -58,7 +58,7 @@ Right now algo-trader/broker/angelone_client.py is still a stub, so EC2 deployme
 
 # Algo Trader
 
-`algo-trader` is a modular intraday trading bot project for Indian equities. It is structured as a small pipeline where configuration is loaded, market data is fetched, a strategy decides whether a trade exists, risk rules size the trade, an order layer executes it, and supporting modules track positions, log trades, and send alerts.
+`algo-trader` is a modular intraday trading bot project for Indian equities. It is structured as a small pipeline where configuration is loaded, market data is fetched, a strategy decides whether a trade exists, risk rules size the trade, an order layer executes it, and supporting modules track positions, log activity, and send alerts.
 
 The codebase is currently paper-trade friendly, with a stubbed Angel One client that can later be replaced with a real `SmartAPI` integration.
 
@@ -71,7 +71,7 @@ The core runtime flow of the project is:
 3. Strategy signal generation
 4. Risk-based position sizing
 5. Order creation and execution
-6. Monitoring, database logging, and alerts
+6. Monitoring and alerts
 
 This is orchestrated mainly from `main.py`.
 
@@ -86,9 +86,8 @@ When you run `python main.py`, the project follows this sequence:
 5. `risk/risk_manager.py` calculates how many shares can be traded based on account capital, per-trade risk percentage, entry price, and stop-loss.
 6. `data/market_stream.py` downloads intraday OHLCV candle data using `yfinance`.
 7. `strategy/momentum_strategy.py` adds indicators like EMA, VWAP, average volume, and intraday high, then decides whether a symbol qualifies for a `BUY` signal.
-8. `db/trade_db.py` writes executed trades into a local SQLite database.
-9. `monitor/position_tracker.py` updates the in-memory view of currently open positions.
-10. `utils/telegram_alert.py` optionally sends a Telegram message after a signal is executed.
+8. `monitor/position_tracker.py` updates the in-memory view of currently open positions.
+9. `utils/telegram_alert.py` optionally sends a Telegram message after a signal is executed.
 
 ## Codebase Structure
 
@@ -172,7 +171,7 @@ Behavior:
 - `broker/angelone_client.py`
   Represents the broker integration layer. It currently acts as a placeholder and returns a fake successful order response. This lets the rest of the system run without requiring live Angel One credentials or a production order flow.
 
-### Monitoring and Persistence
+### Monitoring
 
 - `monitor/position_tracker.py`
   Maintains an in-memory snapshot of open positions during the current session.
@@ -182,17 +181,6 @@ Main responsibilities:
 - Recalculate weighted average price if more quantity is added
 - Reduce or remove the position when shares are sold
 - Return a snapshot of current open positions
-
-- `db/trade_db.py`
-  Manages a local SQLite database and stores executed trades in the `trades` table.
-
-The table stores:
-- Symbol
-- Side
-- Quantity
-- Price
-- Status
-- Timestamp
 
 ### Utilities
 
@@ -217,11 +205,10 @@ The table stores:
 9. Calculates position size
 10. Skips symbols with zero or invalid quantity
 11. Places the order
-12. Logs the trade to SQLite
-13. Updates the position tracker
-14. Logs and sends a Telegram notification
-15. Handles per-symbol exceptions so one failure does not stop the whole run
-16. Logs a final open-position snapshot
+12. Updates the position tracker
+13. Logs and sends a Telegram notification
+14. Handles per-symbol exceptions so one failure does not stop the whole run
+15. Logs a final open-position snapshot
 
 ## Runtime Flow Inside `Stock.py`
 
@@ -244,7 +231,6 @@ This file is useful when you only want to inspect setups without placing or simu
   - Risk sizing
   - Paper order creation
   - Position tracking
-  - Trade database logging
   - Strategy signal structure
 
 Run tests with:

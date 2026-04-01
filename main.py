@@ -6,7 +6,6 @@ from broker.angelone_client import AngelOneClient  # Imports the Angel One broke
 from config.instruments import default_watchlist  # Imports the default instrument watchlist.
 from config.settings import load_settings  # Imports the function that reads app configuration values.
 from data.market_stream import MarketStream  # Imports the market data fetcher for OHLCV candles.
-from db.trade_db import TradeDB  # Imports the database helper used to store executed trades.
 from execution.order_manager import OrderManager  # Imports the order execution layer.
 from monitor.position_tracker import PositionTracker  # Imports the tracker for open positions.
 from risk.risk_manager import RiskManager  # Imports the risk management component for sizing trades.
@@ -52,7 +51,6 @@ def run_once() -> None:  # Defines a repeated trading cycle across the watchlist
         data_provider=settings.market_data_provider,
         angel_client=broker,
     )
-    trade_db = TradeDB()  # Opens the trade logging database helper.
     position_tracker = PositionTracker()  # Starts the in-memory tracker for current positions.
 
     while True:  # Keeps scanning the watchlist on a repeating interval.
@@ -78,7 +76,6 @@ def run_once() -> None:  # Defines a repeated trading cycle across the watchlist
                     qty,
                     instrument=resolved_instrument if hasattr(resolved_instrument, "tradingsymbol") else None,
                 )
-                trade_db.log_trade(instrument.symbol, signal["side"], qty, signal["price"], order["status"])  # Stores the trade outcome in the database.
                 position_tracker.update_buy(instrument.symbol, qty, signal["price"])  # Updates the tracked position after execution.
 
                 _notify_status(f"Signal executed: {order}", logger, True)  # Reports executed orders to both logs and Telegram.

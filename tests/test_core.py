@@ -1,14 +1,10 @@
 from __future__ import annotations  # Lets Python postpone evaluation of type hints.
 
-from contextlib import suppress  # Imports suppress for best-effort Windows file cleanup.
 import unittest  # Imports Python's built-in unit testing framework.
-from pathlib import Path  # Imports Path for repository-local temporary test files.
-from uuid import uuid4  # Imports uuid4 for generating isolated test database names.
 
 from config.instruments import Instrument, angel_tradingsymbol_for  # Imports instrument helpers used by the Angel One integration.
 from broker.angelone_client import AngelOneClient  # Imports the broker client for SmartAPI response-parsing tests.
 from data.market_stream import MarketStream  # Imports the market data adapter for normalization tests.
-from db.trade_db import TradeDB  # Imports the database helper under test.
 from execution.order_manager import OrderManager  # Imports the order manager under test.
 from monitor.position_tracker import PositionTracker  # Imports the position tracker under test.
 from risk.risk_manager import RiskManager  # Imports the risk manager under test.
@@ -49,18 +45,6 @@ class CoreTests(unittest.TestCase):  # Groups core behavioral tests for the trad
 
         tracker.update_sell("INFY.NS", 5)  # Sells part of the position.
         self.assertEqual(tracker.snapshot()["INFY.NS"].quantity, 15)  # Confirms the remaining quantity is tracked correctly.
-
-    def test_trade_db_log(self) -> None:  # Verifies a trade can be written into the SQLite database.
-        temp_root = Path(__file__).resolve().parent.parent / ".tmp"  # Keeps test temp files inside the repository so local runs do not depend on OS temp permissions.
-        temp_root.mkdir(exist_ok=True)  # Ensures the repository-local temp directory exists before creating an isolated subdirectory.
-        db_path = temp_root / f"test_trades_{uuid4().hex}.db"  # Creates an isolated database filename without relying on OS-managed temp directories.
-        try:  # Ensures the test cleans up the temporary database file after the write succeeds.
-            db = TradeDB(str(db_path))  # Initializes the trade database in the temporary directory.
-            db.log_trade("TCS.NS", "BUY", 1, 100.0, "PAPER_FILLED")  # Writes one sample trade to confirm inserts succeed.
-        finally:  # Removes the temporary test database file even if the test fails midway.
-            if db_path.exists():  # Checks the file exists before attempting cleanup.
-                with suppress(PermissionError):  # Avoids a false-negative test failure if Windows briefly holds the SQLite file lock during teardown.
-                    db_path.unlink(missing_ok=True)  # Deletes the temporary SQLite database file when Windows has already released the handle.
 
     @unittest.skipIf(pd is None, "pandas not installed in current environment")  # Skips the normalization test when pandas is unavailable.
     def test_market_stream_normalizes_multiindex_columns(self) -> None:  # Verifies yfinance-style nested OHLCV columns are flattened correctly.
