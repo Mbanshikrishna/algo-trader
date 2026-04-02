@@ -26,20 +26,16 @@ def run_once() -> None:  # Defines a repeated trading cycle across the watchlist
     settings = load_settings()  # Loads runtime settings such as API keys and risk parameters.
     logger = setup_logger()  # Creates a configured logger for console/file logging.
 
-    if settings.market_data_provider == "angelone" and not (settings.api_key and settings.client_id and settings.access_token):  # Validates credentials when broker-native market data is enabled.
-        raise ValueError("Angel One market data requires ANGELONE_API_KEY, ANGELONE_CLIENT_ID, and ANGELONE_ACCESS_TOKEN")
-    if not settings.paper_trade and not (settings.api_key and settings.client_id and settings.access_token):  # Validates credentials when live trading is enabled.
+    if not (settings.api_key and settings.client_id and settings.access_token):  # Validates credentials before any live broker access begins.
         raise ValueError("Live trading requires ANGELONE_API_KEY, ANGELONE_CLIENT_ID, and ANGELONE_ACCESS_TOKEN")  # Stops execution if live credentials are missing.
 
-    broker = AngelOneClient(  # Builds the broker client used to place real or simulated orders.
+    broker = AngelOneClient(  # Builds the broker client used to place live orders.
         api_key=settings.api_key,  # Passes the configured API key into the broker client.
         client_id=settings.client_id,  # Passes the configured client identifier into the broker client.
         access_token=settings.access_token,  # Passes the current access token into the broker client.
-        paper_trade=settings.paper_trade,  # Ensures client knows if paper trade mode is active.
     )  # Finishes broker client initialization.
     order_manager = OrderManager(  # Creates the order manager around the broker client.
         broker_client=broker,
-        paper_trade=settings.paper_trade,
         product_type=settings.order_product_type,
         variety=settings.order_variety,
     )
@@ -56,8 +52,9 @@ def run_once() -> None:  # Defines a repeated trading cycle across the watchlist
     while True:  # Keeps scanning the watchlist on a repeating interval.
         for instrument in WATCHLIST:  # Loops through each stock instrument in the watchlist.
             try:  # Wraps each symbol so one failure does not stop the whole scan.
-                resolved_instrument = stream.resolve_instrument(instrument) if settings.market_data_provider == "angelone" else instrument  # Resolves Angel One broker metadata when the strategy is running on broker-native data.
-                df = stream.fetch_ohlcv(resolved_instrument)  # Downloads recent OHLCV data for the current symbol.
+                broker_instrument = stream.resolve_instrument(instrument)  # Resolves the live-trading instrument metadata needed for order placement.
+                market_data_instrument = broker_instrument if settings.market_data_provider == "angelone" else instrument  # Uses the resolved instrument only when broker-native market data is enabled.
+                df = stream.fetch_ohlcv(market_data_instrument)  # Downloads recent OHLCV data for the current symbol.
                 signal = strategy.build_signal(instrument.symbol, df)  # Generates a trading signal from the fetched data.
                 if not signal:  # Checks whether the strategy found a valid setup.
                     _notify_status(f"No trade executed for {instrument.symbol}: no valid signal.", logger, settings.alert_every_check)  # Reports skipped symbols as explicit status updates.
@@ -74,7 +71,7 @@ def run_once() -> None:  # Defines a repeated trading cycle across the watchlist
                     instrument.symbol,
                     signal["side"],
                     qty,
-                    instrument=resolved_instrument if hasattr(resolved_instrument, "tradingsymbol") else None,
+                    instrument=broker_instrument,
                 )
                 position_tracker.update_buy(instrument.symbol, qty, signal["price"])  # Updates the tracked position after execution.
 

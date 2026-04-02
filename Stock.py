@@ -17,7 +17,6 @@ def run_scanner() -> list[dict]:  # Defines a helper that scans stocks and retur
         api_key=settings.api_key,
         client_id=settings.client_id,
         access_token=settings.access_token,
-        paper_trade=settings.paper_trade,
     )
     stream = MarketStream(  # Configures the data stream for 5-minute candles over one day.
         interval="5m",

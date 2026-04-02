@@ -30,7 +30,6 @@ Fill in your values in .env.
 ANGELONE_API_KEY=your_api_key
 ANGELONE_CLIENT_ID=your_client_id
 ANGELONE_ACCESS_TOKEN=your_access_token
-PAPER_TRADE=true
 CAPITAL=100000
 RISK_PER_TRADE_PCT=1.0
 TELEGRAM_BOT_TOKEN=your_bot_token
@@ -53,14 +52,14 @@ journalctl -u algo-trader -f
 A couple of important notes:
 
 The service file assumes the repo is at /home/ubuntu/algo-trader and runs as user ubuntu. If you deploy somewhere else, edit /etc/systemd/system/algo-trader.service accordingly.
-Right now algo-trader/broker/angelone_client.py is still a stub, so EC2 deployment works, but real Angel One live trading is not wired up yet. Keep PAPER_TRADE=true unless we add real SmartAPI integration.
+The current broker client is wired for live SmartAPI requests, so make sure your Angel One credentials and access token are valid before starting the service.
 
 
 # Algo Trader
 
 `algo-trader` is a modular intraday trading bot project for Indian equities. It is structured as a small pipeline where configuration is loaded, market data is fetched, a strategy decides whether a trade exists, risk rules size the trade, an order layer executes it, and supporting modules track positions, log activity, and send alerts.
 
-The codebase is currently paper-trade friendly, with a stubbed Angel One client that can later be replaced with a real `SmartAPI` integration.
+The codebase is designed around live Angel One execution with SmartAPI-backed market data and order placement.
 
 ## End-to-End Workflow
 
@@ -79,10 +78,10 @@ This is orchestrated mainly from `main.py`.
 
 When you run `python main.py`, the project follows this sequence:
 
-1. `config/settings.py` reads environment variables such as API credentials, capital, risk percentage, and whether paper trading is enabled.
+1. `config/settings.py` reads environment variables such as API credentials, capital, risk percentage, and runtime options.
 2. `utils/logger.py` creates a reusable logger for console and file output.
-3. `broker/angelone_client.py` builds a broker client instance. Right now this is a placeholder wrapper that returns a mock successful order response.
-4. `execution/order_manager.py` receives trade instructions and either simulates a fill in paper mode or forwards the order to the broker client in live mode.
+3. `broker/angelone_client.py` builds a broker client instance for live Angel One SmartAPI requests.
+4. `execution/order_manager.py` receives trade instructions, builds the Angel One order payload, and forwards it to the broker client.
 5. `risk/risk_manager.py` calculates how many shares can be traded based on account capital, per-trade risk percentage, entry price, and stop-loss.
 6. `data/market_stream.py` downloads intraday OHLCV candle data using `yfinance`.
 7. `strategy/momentum_strategy.py` adds indicators like EMA, VWAP, average volume, and intraday high, then decides whether a symbol qualifies for a `BUY` signal.
@@ -104,7 +103,6 @@ When you run `python main.py`, the project follows this sequence:
   Defines the `Settings` dataclass and loads environment variables into a strongly structured runtime config object.
 
 This layer answers:
-- Are we paper trading or live trading?
 - What credentials should be used?
 - How much capital is available?
 - What percentage of capital can be risked per trade?
@@ -165,11 +163,11 @@ If the stop-loss is invalid or risk per share is zero, it returns `0`, which pre
   Builds the order payload used by the bot.
 
 Behavior:
-- In paper mode, it returns a local order dictionary with status `PAPER_FILLED`
-- In live mode, it passes the order to the broker client
+- It builds a live Angel One order payload
+- It passes the order to the broker client
 
 - `broker/angelone_client.py`
-  Represents the broker integration layer. It currently acts as a placeholder and returns a fake successful order response. This lets the rest of the system run without requiring live Angel One credentials or a production order flow.
+  Represents the broker integration layer used for live SmartAPI requests, including order placement, instrument lookup, and candle data retrieval.
 
 ### Monitoring
 
@@ -196,8 +194,8 @@ Main responsibilities:
 
 1. Loads settings
 2. Sets up logging
-3. Validates live-trading credentials if paper mode is disabled
-4. Creates broker, order, risk, strategy, data, database, and monitoring objects
+3. Validates the Angel One credentials needed for live trading
+4. Creates broker, order, risk, strategy, data, and monitoring objects
 5. Loops through each symbol in the watchlist
 6. Fetches OHLCV data
 7. Builds a signal
@@ -222,14 +220,14 @@ Main responsibilities:
 6. Collects matching stocks
 7. Prints the results as a pandas DataFrame
 
-This file is useful when you only want to inspect setups without placing or simulating orders.
+This file is useful when you only want to inspect setups without placing orders.
 
 ## Tests
 
 - `tests/test_core.py`
   Contains lightweight unit tests for the core components:
   - Risk sizing
-  - Paper order creation
+  - Live order payload creation
   - Position tracking
   - Strategy signal structure
 
@@ -247,7 +245,6 @@ The main runtime variables used by the project are:
 ANGELONE_API_KEY=your_api_key
 ANGELONE_CLIENT_ID=your_client_id
 ANGELONE_ACCESS_TOKEN=your_access_token
-PAPER_TRADE=true
 CAPITAL=100000
 RISK_PER_TRADE_PCT=1.0
 TELEGRAM_BOT_TOKEN=your_bot_token
@@ -255,8 +252,7 @@ TELEGRAM_CHAT_ID=your_chat_id
 ```
 
 Notes:
-- `PAPER_TRADE=true` is the safe default for development.
-- If `PAPER_TRADE=false`, `main.py` requires Angel One credentials to be present.
+- Angel One credentials are required for live trading.
 - Telegram variables are optional.
 
 ## Local Setup
@@ -310,10 +306,9 @@ If you want to deploy this application on an Ubuntu EC2 instance, use this order
 4. Create and activate `.venv`
 5. Run `pip install -r requirements.txt`
 6. Copy `.env.example` to `.env` and fill in real values
-7. Keep `PAPER_TRADE=true` for the first deployment
-8. Test the bot manually with `python main.py`
-9. Copy `deploy/algo-trader.service` into `/etc/systemd/system/`
-10. Enable and start the service with `systemctl`
+7. Test the bot manually with `python main.py`
+8. Copy `deploy/algo-trader.service` into `/etc/systemd/system/`
+9. Enable and start the service with `systemctl`
 
 Example:
 
@@ -339,7 +334,6 @@ What the project already does well:
 
 - Separates concerns cleanly by module
 - Keeps trading, risk, execution, monitoring, and storage logic isolated
-- Supports paper trading without requiring broker connectivity
 - Includes a basic automated test file
 
 What is still intentionally simple:
@@ -354,7 +348,7 @@ What is still intentionally simple:
 
 Good next steps for evolving the project:
 
-1. Replace the stubbed Angel One client with real `SmartAPI` authentication and order APIs
+1. Add session-login and token-refresh support for Angel One `SmartAPI`
 2. Add trading window checks and exchange holiday handling
 3. Move the watchlist into config or a database
 4. Add stop-loss and target exit handling

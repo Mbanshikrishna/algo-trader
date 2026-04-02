@@ -23,16 +23,25 @@ class CoreTests(unittest.TestCase):  # Groups core behavioral tests for the trad
         self.assertEqual(manager.position_size(entry_price=100, stop_loss=98), 500)  # Expects 500 shares when risking 2 currency units per share.
         self.assertEqual(manager.position_size(entry_price=100, stop_loss=100), 0)  # Expects zero shares when there is no risk distance.
 
-    def test_order_manager_paper_order(self) -> None:  # Verifies paper orders are marked as filled immediately.
-        order = OrderManager(paper_trade=True).place_market_order("RELIANCE.NS", "BUY", 10)  # Places a simulated market order.
-        self.assertEqual(order["status"], "PAPER_FILLED")  # Confirms paper mode returns the simulated fill status.
+    def test_order_manager_requires_resolved_instrument(self) -> None:  # Verifies live order placement rejects missing broker metadata.
+        class StubBrokerClient:
+            def place_order(self, order_payload: dict) -> dict:
+                return {"status": "PLACED", **order_payload}
+
+        with self.assertRaises(ValueError):
+            OrderManager(broker_client=StubBrokerClient()).place_market_order("RELIANCE.NS", "BUY", 10)
 
     def test_order_manager_angel_payload(self) -> None:  # Verifies Angel One order payloads include the broker fields needed for live execution.
+        class StubBrokerClient:
+            def place_order(self, order_payload: dict) -> dict:
+                return {"status": "PLACED", **order_payload}
+
         instrument = Instrument(symbol="SBIN.NS", exchange="NSE", tradingsymbol="SBIN-EQ", symboltoken="3045")  # Builds a resolved broker instrument for the order manager.
-        order = OrderManager(paper_trade=True).place_market_order("SBIN.NS", "BUY", 10, instrument=instrument)  # Places a simulated broker-shaped market order.
+        order = OrderManager(broker_client=StubBrokerClient()).place_market_order("SBIN.NS", "BUY", 10, instrument=instrument)  # Places a stubbed live broker-shaped market order.
         self.assertEqual(order["tradingsymbol"], "SBIN-EQ")  # Confirms the broker tradingsymbol is propagated into the order payload.
         self.assertEqual(order["symboltoken"], "3045")  # Confirms the broker symbol token is included for live compatibility.
         self.assertEqual(order["transactiontype"], "BUY")  # Confirms the transaction side matches Angel One's expected field.
+        self.assertEqual(order["status"], "PLACED")  # Confirms the order manager returns the broker-submitted status.
 
     def test_position_tracker(self) -> None:  # Verifies buys and sells update tracked positions correctly.
         tracker = PositionTracker()  # Creates a fresh position tracker.
@@ -75,7 +84,7 @@ class CoreTests(unittest.TestCase):  # Groups core behavioral tests for the trad
         self.assertEqual(list(frame.columns), ["Open", "High", "Low", "Close", "Volume"])  # Confirms the converted frame exposes the expected OHLCV columns.
         self.assertEqual(float(frame.iloc[-1]["Close"]), 101.25)  # Confirms the close price survives the conversion correctly.
 
-    def test_market_stream_resolves_angel_instrument_in_paper_mode(self) -> None:  # Verifies paper trading still allows Angel One symbol resolution for market data.
+    def test_market_stream_resolves_angel_instrument(self) -> None:  # Verifies Angel One symbol resolution works for live broker metadata lookup.
         class StubAngelClient:  # Provides a minimal stub for Angel One resolution without live network access.
             def resolve_instrument(self, symbol: str, exchange: str = "NSE") -> Instrument:
                 return Instrument(symbol=symbol, exchange=exchange, tradingsymbol="RELIANCE-EQ", symboltoken="2885")

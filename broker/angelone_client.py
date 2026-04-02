@@ -29,13 +29,11 @@ class AngelOneClient:  # Defines a lightweight wrapper around Angel One SmartAPI
         api_key: str,
         client_id: str,
         access_token: str,
-        paper_trade: bool = True,
         timeout_seconds: int = 10,
     ) -> None:  # Stores the broker credentials needed for API access.
         self.api_key = api_key  # Stores the configured API key for SmartAPI headers.
         self.client_id = client_id  # Stores the client code used by SmartAPI.
         self.access_token = access_token  # Stores the JWT access token used for authenticated requests.
-        self.paper_trade = paper_trade  # Stores whether paper trade mode is active.
         self.timeout_seconds = timeout_seconds  # Stores a default timeout for SmartAPI requests.
         self.session = requests.Session()  # Reuses one HTTP session across requests.
         self.client_local_ip = self._detect_local_ip()  # Stores the client-local IP in the header format used by the SmartAPI SDK.
@@ -77,32 +75,20 @@ class AngelOneClient:  # Defines a lightweight wrapper around Angel One SmartAPI
             raise ValueError(message)  # Raises a standard error so callers can handle SmartAPI failures consistently.
         return payload  # Returns the payload unchanged when SmartAPI reports success.
 
-    def place_order(self, order_payload: dict[str, Any]) -> dict[str, Any]:  # Places an order or simulates one in paper mode.
-        if self.paper_trade:  # Short-circuits live broker traffic when paper mode is enabled.
-            return {"broker": "angelone", "status": "PAPER_FILLED", **order_payload}
-
+    def place_order(self, order_payload: dict[str, Any]) -> dict[str, Any]:  # Places a live order through SmartAPI.
         payload = self._require_success(self._post(self.ORDER_BASE_URL, "/placeOrder", order_payload), "place order")  # Sends the live order payload to SmartAPI.
         return {"broker": "angelone", "status": "PLACED", "response": payload, **order_payload}  # Returns the broker payload alongside the local order fields.
 
     def get_order_book(self) -> dict[str, Any]:  # Fetches current active orders for the account.
-        if self.paper_trade:
-            return {"broker": "angelone", "orders": []}
         return self._require_success(self._get(self.ORDER_BASE_URL, "/getOrderBook"), "fetch order book")
 
     def get_trade_book(self) -> dict[str, Any]:  # Fetches executed trade history for the account.
-        if self.paper_trade:
-            return {"broker": "angelone", "trades": []}
         return self._require_success(self._get(self.TRADE_BASE_URL, "/getTradeBook"), "fetch trade book")
 
     def get_holdings(self) -> dict[str, Any]:  # Fetches current holdings from the account.
-        if self.paper_trade:
-            return {"broker": "angelone", "holdings": []}
         return self._require_success(self._get(self.PORTFOLIO_BASE_URL, "/getHolding"), "fetch holdings")
 
     def get_historical_orders(self, from_date: str = "", to_date: str = "") -> dict[str, Any]:  # Fetches historical orders between dates.
-        if self.paper_trade:
-            return {"broker": "angelone", "historical_orders": []}
-
         params: dict[str, str] = {}  # Builds the optional from/to query parameters.
         if from_date:
             params["fromDate"] = from_date
@@ -112,9 +98,6 @@ class AngelOneClient:  # Defines a lightweight wrapper around Angel One SmartAPI
         return self._require_success(self._get(self.ORDER_BASE_URL, "/getHistory", params=params), "fetch historical orders")
 
     def get_historical_trades(self, from_date: str = "", to_date: str = "") -> dict[str, Any]:  # Fetches historical trades between dates.
-        if self.paper_trade:
-            return {"broker": "angelone", "historical_trades": []}
-
         params: dict[str, str] = {}
         if from_date:
             params["fromDate"] = from_date
