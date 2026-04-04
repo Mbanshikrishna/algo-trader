@@ -1,6 +1,8 @@
 from __future__ import annotations  # Lets Python postpone evaluation of type hints.
 
 import unittest  # Imports Python's built-in unit testing framework.
+from pathlib import Path  # Imports Path for filesystem assertions in cache-configuration tests.
+from unittest.mock import patch  # Imports patch for isolating yfinance cache configuration behavior.
 
 from config.instruments import Instrument, angel_tradingsymbol_for  # Imports instrument helpers used by the Angel One integration.
 from broker.angelone_client import AngelOneClient  # Imports the broker client for SmartAPI response-parsing tests.
@@ -93,6 +95,23 @@ class CoreTests(unittest.TestCase):  # Groups core behavioral tests for the trad
         instrument = stream.resolve_instrument("RELIANCE.NS")  # Resolves a symbol through the stub broker client.
         self.assertEqual(instrument.tradingsymbol, "RELIANCE-EQ")  # Confirms the instrument resolution works independently of live order mode.
         self.assertEqual(instrument.symboltoken, "2885")  # Confirms the resolved token is cached on the instrument.
+
+    def test_market_stream_configures_repo_local_yfinance_cache(self) -> None:  # Verifies yfinance cache files are redirected into the repository workspace for local runs.
+        expected_cache_dir = Path(__file__).resolve().parent.parent / ".tmp" / "yfinance-cache"
+        with patch("data.market_stream.yf.set_tz_cache_location") as set_cache_location, patch(
+            "data.market_stream.Path.mkdir"
+        ) as mkdir:
+            import data.market_stream as market_stream
+
+            original_flag = market_stream._YFINANCE_CACHE_CONFIGURED
+            market_stream._YFINANCE_CACHE_CONFIGURED = False
+            try:
+                MarketStream(data_provider="yfinance")
+            finally:
+                market_stream._YFINANCE_CACHE_CONFIGURED = original_flag
+
+        mkdir.assert_called_once_with(parents=True, exist_ok=True)
+        set_cache_location.assert_called_once_with(str(expected_cache_dir))
 
     def test_angelone_client_reports_non_json_response(self) -> None:  # Verifies SmartAPI HTML/plaintext failures are surfaced with useful diagnostics.
         class StubResponse:  # Provides the minimal response surface needed by the JSON parser helper.

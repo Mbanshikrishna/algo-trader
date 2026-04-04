@@ -1,12 +1,27 @@
 from __future__ import annotations  # Lets Python postpone evaluation of type annotations.
 
 from datetime import datetime, timedelta  # Imports datetime helpers for historical candle windows.
+from pathlib import Path  # Imports Path for configuring a writable local cache directory.
 from zoneinfo import ZoneInfo  # Imports ZoneInfo for consistent Indian market timestamps.
 
 import pandas as pd  # Imports pandas for DataFrame handling.
 import yfinance as yf  # Imports yfinance for fallback market data downloads.
 
 from config.instruments import Instrument  # Imports the broker instrument record used by the Angel One path.
+
+
+_YFINANCE_CACHE_CONFIGURED = False  # Tracks whether the process has already redirected yfinance caches into the repo workspace.
+
+
+def _configure_yfinance_cache() -> None:  # Points yfinance caches at a writable repo-local directory to avoid Windows/AppData permission issues.
+    global _YFINANCE_CACHE_CONFIGURED
+    if _YFINANCE_CACHE_CONFIGURED:
+        return
+
+    cache_dir = Path(__file__).resolve().parent.parent / ".tmp" / "yfinance-cache"
+    cache_dir.mkdir(parents=True, exist_ok=True)
+    yf.set_tz_cache_location(str(cache_dir))
+    _YFINANCE_CACHE_CONFIGURED = True
 
 
 class MarketStream:  # Defines an adapter for fetching intraday OHLCV market data.
@@ -42,6 +57,8 @@ class MarketStream:  # Defines an adapter for fetching intraday OHLCV market dat
         self.data_provider = data_provider.strip().lower()  # Stores the configured market data provider.
         self.angel_client = angel_client  # Stores the optional Angel One client used for broker-native market data.
         self._instrument_cache: dict[str, Instrument] = {}  # Caches resolved Angel One instrument metadata by app symbol.
+        if self.data_provider == "yfinance":  # Redirects yfinance caches into the repository so local runs do not depend on OS cache permissions.
+            _configure_yfinance_cache()
 
     @staticmethod
     def _extract_series(df: pd.DataFrame, column: str) -> pd.Series:  # Converts a possibly nested OHLCV column into a plain Series.
