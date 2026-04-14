@@ -180,6 +180,24 @@ Run tests with:
 python -m unittest discover -s tests -p "test_*.py"
 ```
 
+## Angel One Data Check
+
+Before enabling live trading, run the read-only connectivity check:
+
+```bash
+python check_angelone_data.py --symbol RELIANCE.NS
+```
+
+What it verifies:
+
+- Credentials are present
+- The symbol resolves to an Angel One tradingsymbol and token
+- LTP data can be fetched
+- Batch quote data can be fetched
+- Historical candles can be fetched for the requested interval and period
+
+This command does not place any orders.
+
 ## Environment Variables
 
 The main runtime variables used by the project are:
