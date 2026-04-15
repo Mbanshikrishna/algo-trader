@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass  # Imports dataclass for compact immutable instrument records.
+import os  # Imports os for platform-specific path guidance.
 from pathlib import Path  # Imports Path for workbook-based watchlist loading.
 from zipfile import ZipFile  # Imports ZipFile for reading xlsx workbooks without extra dependencies.
 import xml.etree.ElementTree as ET  # Imports XML parsing for workbook sheet extraction.
@@ -99,8 +100,25 @@ def _cell_text(cell: ET.Element, shared_strings: list[str]) -> str:  # Converts 
     return raw
 
 
+def _resolve_workbook_path(workbook_path: str | Path) -> Path:  # Resolves and validates the workbook path before the xlsx is opened.
+    path = Path(workbook_path).expanduser()
+    if path.exists():
+        return path
+
+    path_text = str(workbook_path)
+    if os.name != "nt" and len(path_text) >= 2 and path_text[1] == ":":
+        raise FileNotFoundError(
+            f"Workbook not found: {workbook_path}. This looks like a Windows path, but the current machine is not Windows. "
+            "Copy the Excel file onto this server first and use its Linux path, for example /home/ubuntu/algo-trader/pnl-RX6263.xlsx."
+        )
+
+    raise FileNotFoundError(
+        f"Workbook not found: {workbook_path}. Make sure the file exists on this machine and pass the local path to it."
+    )
+
+
 def symbols_from_xlsx(workbook_path: str | Path, sheet_name: str = "Equity") -> list[str]:  # Loads symbol values from the Zerodha-style equity P&L workbook.
-    path = Path(workbook_path)
+    path = _resolve_workbook_path(workbook_path)
     with ZipFile(path) as workbook:
         shared_strings = _load_shared_strings(workbook)
         sheet_root = ET.fromstring(workbook.read(_sheet_target_for(workbook, sheet_name)))

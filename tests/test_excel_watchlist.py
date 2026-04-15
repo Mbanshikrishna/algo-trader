@@ -3,6 +3,7 @@ from __future__ import annotations
 import shutil
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 from zipfile import ZipFile
 
 from config.instruments import symbols_from_xlsx, watchlist_from_xlsx
@@ -89,6 +90,13 @@ class WorkbookWatchlistTests(unittest.TestCase):
 
         self.assertEqual([instrument.symbol for instrument in instruments], ["SBIN.NS", "INFY.NS"])
         self.assertEqual(instruments[0].tradingsymbol, "SBIN-EQ")
+
+    def test_symbols_from_xlsx_explains_windows_path_on_non_windows(self) -> None:
+        with patch("config.instruments.os.name", "posix"):
+            with self.assertRaises(FileNotFoundError) as ctx:
+                symbols_from_xlsx(r"c:\missing-folder\pnl-RX6263 (1).xlsx")
+
+        self.assertIn("looks like a Windows path", str(ctx.exception))
 
 
 if __name__ == "__main__":
