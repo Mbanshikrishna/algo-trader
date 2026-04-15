@@ -161,6 +161,26 @@ class CoreTests(unittest.TestCase):  # Groups core behavioral tests for the trad
         ):
             self.assertFalse(send_telegram_message("hello"))
 
+    def test_telegram_message_splits_large_payloads(self) -> None:  # Verifies long Telegram updates are split into multiple accepted API-sized messages.
+        class StubResponse:
+            status = 200
+
+            def __enter__(self) -> "StubResponse":
+                return self
+
+            def __exit__(self, exc_type, exc, tb) -> None:
+                return None
+
+        long_message = ("line 1\n" * 900) + "line 2"
+        with patch.dict(
+            "os.environ",
+            {"TELEGRAM_BOT_TOKEN": "real-token", "TELEGRAM_CHAT_ID": "12345"},
+            clear=False,
+        ), patch("utils.telegram_alert.urlopen", return_value=StubResponse()) as urlopen:
+            self.assertTrue(send_telegram_message(long_message))
+
+        self.assertGreater(urlopen.call_count, 1)
+
     @unittest.skipIf(pd is None or MomentumStrategy is None, "pandas/ta not installed in current environment")  # Skips the strategy test when optional dependencies are unavailable.
     def test_strategy_signal_shape(self) -> None:  # Verifies strategy output, when present, has the expected keys.
         strategy = MomentumStrategy()  # Creates the momentum strategy instance.
