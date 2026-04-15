@@ -13,6 +13,11 @@ class DailySummaryTests(unittest.TestCase):
         resolved = send_stock_updates.resolve_requested_symbols(["sbin", "INFY.NS", "SBIN", "tcs-eq"])
         self.assertEqual(resolved, ["SBIN.NS", "INFY.NS", "TCS.NS"])
 
+    def test_resolve_requested_symbols_can_load_from_excel_path(self) -> None:
+        with patch("send_stock_updates.symbols_from_xlsx", return_value=["SBIN.NS", "INFY.NS"]):
+            resolved = send_stock_updates.resolve_requested_symbols([], excel_path="holdings.xlsx")
+        self.assertEqual(resolved, ["SBIN.NS", "INFY.NS"])
+
     def test_collect_daily_snapshots_builds_summary_and_failures(self) -> None:
         class StubStream:
             def fetch_ohlcv(self, symbol: str) -> pd.DataFrame:

@@ -2,12 +2,13 @@ from __future__ import annotations
 
 import argparse
 import sys
+from pathlib import Path
 from typing import Sequence
 
 import pandas as pd
 
 from broker.angelone_client import AngelOneClient
-from config.instruments import default_watchlist
+from config.instruments import default_watchlist, project_symbol_for, symbols_from_xlsx
 from config.settings import Settings, load_settings
 from data.market_stream import MarketStream
 from utils.telegram_alert import send_telegram_message
@@ -33,6 +34,10 @@ def _parse_args(argv: Sequence[str]) -> argparse.Namespace:
         default="5d",
         help="History window used to compute the latest day and previous close.",
     )
+    parser.add_argument(
+        "--excel-path",
+        help="Optional xlsx file whose Equity sheet symbols should be used for the update.",
+    )
     return parser.parse_args(argv)
 
 
@@ -44,19 +49,20 @@ def _expand_symbol_tokens(raw_symbols: Sequence[str]) -> list[str]:
 
 
 def normalize_symbol(symbol: str) -> str:
-    normalized = symbol.strip().upper()
-    if not normalized:
-        raise ValueError("Stock symbol cannot be blank")
-    if normalized.endswith(".NS") or normalized.endswith(".BO"):
-        return normalized
-    if normalized.endswith("-EQ"):
-        normalized = normalized.removesuffix("-EQ")
-    return f"{normalized}.NS"
+    return project_symbol_for(symbol)
 
 
-def resolve_requested_symbols(raw_symbols: Sequence[str]) -> list[str]:
+def resolve_requested_symbols(
+    raw_symbols: Sequence[str],
+    excel_path: str | Path | None = None,
+) -> list[str]:
     tokens = _expand_symbol_tokens(raw_symbols)
-    symbols = tokens or [instrument.symbol for instrument in default_watchlist()]
+    if tokens:
+        symbols = tokens
+    elif excel_path:
+        symbols = symbols_from_xlsx(excel_path)
+    else:
+        symbols = [instrument.symbol for instrument in default_watchlist()]
 
     unique_symbols: list[str] = []
     seen: set[str] = set()
@@ -175,9 +181,10 @@ def send_market_update(
     raw_symbols: Sequence[str],
     provider: str = "yfinance",
     period: str = "5d",
+    excel_path: str | Path | None = None,
 ) -> tuple[bool, str]:
     settings = load_settings()
-    symbols = resolve_requested_symbols(raw_symbols)
+    symbols = resolve_requested_symbols(raw_symbols, excel_path=excel_path)
     stream = _build_market_stream(provider=provider, period=period, settings=settings)
     snapshots, failures = collect_daily_snapshots(stream=stream, symbols=symbols)
     if not snapshots:
@@ -195,6 +202,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             raw_symbols=args.symbols,
             provider=args.provider,
             period=args.period,
+            excel_path=args.excel_path,
         )
     except Exception as exc:
         print(f"Result: FAIL - {exc}", file=sys.stderr)

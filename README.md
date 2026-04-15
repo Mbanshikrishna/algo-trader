@@ -165,6 +165,12 @@ Main responsibilities:
 
 This file is useful when you only want to inspect setups without placing orders.
 
+You can also scan the symbols from an Excel workbook instead of the built-in watchlist:
+
+```bash
+python Stock.py --excel-path "C:\path\to\pnl.xlsx"
+```
+
 ## Tests
 
 - `tests/test_core.py`
@@ -204,6 +210,12 @@ To send a Telegram update with the latest daily data for specific stocks, run:
 
 ```bash
 python send_stock_updates.py SBIN INFY RELIANCE
+```
+
+To send the status for all symbols listed in an Excel P&L workbook, run:
+
+```bash
+python send_stock_updates.py --excel-path "C:\path\to\pnl.xlsx"
 ```
 
 This command:
