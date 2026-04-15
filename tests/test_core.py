@@ -2,6 +2,7 @@ from __future__ import annotations  # Lets Python postpone evaluation of type hi
 
 import unittest  # Imports Python's built-in unit testing framework.
 from pathlib import Path  # Imports Path for filesystem assertions in cache-configuration tests.
+from urllib.error import HTTPError  # Imports HTTPError for Telegram failure-handling tests.
 from unittest.mock import patch  # Imports patch for isolating yfinance cache configuration behavior.
 
 from config.instruments import Instrument, angel_tradingsymbol_for  # Imports instrument helpers used by the Angel One integration.
@@ -10,6 +11,7 @@ from data.market_stream import MarketStream  # Imports the market data adapter f
 from execution.order_manager import OrderManager  # Imports the order manager under test.
 from monitor.position_tracker import PositionTracker  # Imports the position tracker under test.
 from risk.risk_manager import RiskManager  # Imports the risk manager under test.
+from utils.telegram_alert import send_telegram_message  # Imports the Telegram helper for safe failure-handling tests.
 
 try:  # Tries to import optional strategy dependencies.
     import pandas as pd  # Imports pandas for building test DataFrames.
@@ -138,6 +140,26 @@ class CoreTests(unittest.TestCase):  # Groups core behavioral tests for the trad
 
     def test_angel_tradingsymbol_for_nse_equity(self) -> None:  # Verifies Yahoo-style NSE symbols are translated into Angel One equity tradingsymbols.
         self.assertEqual(angel_tradingsymbol_for("SBIN.NS"), "SBIN-EQ")  # Confirms Angel One receives the expected equity tradingsymbol.
+
+    def test_telegram_message_returns_false_for_placeholder_values(self) -> None:  # Verifies copied example env values do not trigger broken Telegram requests.
+        with patch.dict(
+            "os.environ",
+            {"TELEGRAM_BOT_TOKEN": "your_bot_token", "TELEGRAM_CHAT_ID": "your_chat_id"},
+            clear=False,
+        ), patch("utils.telegram_alert.urlopen") as urlopen:
+            self.assertFalse(send_telegram_message("hello"))
+        urlopen.assert_not_called()
+
+    def test_telegram_message_swallows_http_errors(self) -> None:  # Verifies Telegram delivery failures do not crash the bot loop.
+        with patch.dict(
+            "os.environ",
+            {"TELEGRAM_BOT_TOKEN": "real-token", "TELEGRAM_CHAT_ID": "12345"},
+            clear=False,
+        ), patch(
+            "utils.telegram_alert.urlopen",
+            side_effect=HTTPError("https://api.telegram.org", 404, "Not Found", hdrs=None, fp=None),
+        ):
+            self.assertFalse(send_telegram_message("hello"))
 
     @unittest.skipIf(pd is None or MomentumStrategy is None, "pandas/ta not installed in current environment")  # Skips the strategy test when optional dependencies are unavailable.
     def test_strategy_signal_shape(self) -> None:  # Verifies strategy output, when present, has the expected keys.

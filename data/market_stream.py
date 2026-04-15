@@ -186,7 +186,7 @@ class MarketStream:  # Defines an adapter for fetching intraday OHLCV market dat
                     "symbol": symbol,
                     "prev_close": float(previous[symbol]),
                     "last_close": float(latest[symbol]),
-                    "pct_change": float(row[0]),
+                    "pct_change": float(row["pct_change"]),
                 }
             )
         return result

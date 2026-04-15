@@ -198,6 +198,26 @@ What it verifies:
 
 This command does not place any orders.
 
+## Telegram Market Summary
+
+To send a Telegram update with the latest daily data for specific stocks, run:
+
+```bash
+python send_stock_updates.py SBIN INFY RELIANCE
+```
+
+This command:
+
+- normalizes symbols like `SBIN` into `SBIN.NS`
+- fetches the latest daily OHLCV snapshot plus percentage change versus the previous close
+- sends one formatted Telegram message using `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID`
+
+By default it uses `yfinance` so you can send read-only updates without Angel One credentials. To use Angel One data instead:
+
+```bash
+python send_stock_updates.py SBIN INFY --provider angelone
+```
+
 ## Environment Variables
 
 The main runtime variables used by the project are:
@@ -208,13 +228,13 @@ ANGELONE_CLIENT_ID=your_client_id
 ANGELONE_ACCESS_TOKEN=your_access_token
 CAPITAL=100000
 RISK_PER_TRADE_PCT=1.0
-TELEGRAM_BOT_TOKEN=your_bot_token
-TELEGRAM_CHAT_ID=your_chat_id
+TELEGRAM_BOT_TOKEN=
+TELEGRAM_CHAT_ID=
 ```
 
 Notes:
 - Angel One credentials are required for live trading.
-- Telegram variables are optional.
+- Telegram variables are optional; leave them blank if alerts are not configured yet.
 
 ## Local Setup
 
@@ -299,7 +319,7 @@ What the project already does well:
 
 What is still intentionally simple:
 
-- Broker integration is stubbed
+- Broker integration is lightweight and still needs stronger production hardening
 - Watchlist is hardcoded
 - Only long-side `BUY` signals are implemented
 - Position tracking is in-memory for the current process only
