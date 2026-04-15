@@ -239,6 +239,38 @@ def build_telegram_message(
     return "\n".join(lines)
 
 
+def _merge_snapshot_results(
+    requested_symbols: Sequence[str],
+    primary_snapshots: Sequence[dict[str, object]],
+    primary_failures: Sequence[tuple[str, str]],
+    fallback_snapshots: Sequence[dict[str, object]],
+    fallback_failures: Sequence[tuple[str, str]],
+) -> tuple[list[dict[str, object]], list[tuple[str, str]]]:  # Merges primary and fallback provider results while preserving the original symbol order.
+    snapshots_by_symbol = {
+        snapshot["symbol"]: snapshot for snapshot in [*primary_snapshots, *fallback_snapshots]
+    }
+    ordered_snapshots = [
+        snapshots_by_symbol[symbol] for symbol in requested_symbols if symbol in snapshots_by_symbol
+    ]
+
+    primary_failure_map = dict(primary_failures)
+    fallback_failure_map = dict(fallback_failures)
+    recovered_symbols = {snapshot["symbol"] for snapshot in fallback_snapshots}
+    final_failures: list[tuple[str, str]] = []
+    for symbol, reason in primary_failures:
+        if symbol in recovered_symbols:
+            continue
+        fallback_reason = fallback_failure_map.get(symbol)
+        if fallback_reason and fallback_reason != reason:
+            final_failures.append(
+                (symbol, f"Angel One: {reason}; yfinance fallback: {fallback_reason}")
+            )
+            continue
+        final_failures.append((symbol, fallback_reason or primary_failure_map[symbol]))
+
+    return ordered_snapshots, final_failures
+
+
 def send_market_update(
     raw_symbols: Sequence[str],
     provider: str = "yfinance",
@@ -249,6 +281,20 @@ def send_market_update(
     symbols = resolve_requested_symbols(raw_symbols, excel_path=excel_path)
     stream = _build_market_stream(provider=provider, period=period, settings=settings)
     snapshots, failures = collect_daily_snapshots(stream=stream, symbols=symbols)
+    if provider == "angelone" and failures:
+        fallback_stream = _build_market_stream(provider="yfinance", period=period, settings=settings)
+        fallback_symbols = [symbol for symbol, _ in failures]
+        fallback_snapshots, fallback_failures = collect_daily_snapshots(
+            stream=fallback_stream,
+            symbols=fallback_symbols,
+        )
+        snapshots, failures = _merge_snapshot_results(
+            requested_symbols=symbols,
+            primary_snapshots=snapshots,
+            primary_failures=failures,
+            fallback_snapshots=fallback_snapshots,
+            fallback_failures=fallback_failures,
+        )
     if not snapshots:
         failure_summary = ", ".join(f"{symbol}: {reason}" for symbol, reason in failures) or "unknown error"
         raise ValueError(f"No market data could be fetched. {failure_summary}")

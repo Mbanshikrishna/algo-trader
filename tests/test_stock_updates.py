@@ -122,6 +122,43 @@ class DailySummaryTests(unittest.TestCase):
         self.assertIn("INFY.NS: Close 1505.00 (+0.80%)", message)
         send_message.assert_called_once_with(message)
 
+    def test_send_market_update_falls_back_to_yfinance_when_angelone_fails(self) -> None:
+        angelone_stream = object()
+        yfinance_stream = object()
+        with patch(
+            "send_stock_updates._build_market_stream",
+            side_effect=[angelone_stream, yfinance_stream],
+        ), patch(
+            "send_stock_updates.collect_daily_snapshots",
+            side_effect=[
+                ([], [("SBIN.NS", "No market data returned")]),
+                (
+                    [
+                        {
+                            "symbol": "SBIN.NS",
+                            "as_of": "2026-04-15",
+                            "open": 810.0,
+                            "high": 825.5,
+                            "low": 808.0,
+                            "close": 820.25,
+                            "change_pct": 1.75,
+                            "volume": 1234567,
+                        }
+                    ],
+                    [],
+                ),
+            ],
+        ), patch("send_stock_updates.send_telegram_message", return_value=True) as send_message:
+            delivered, message = send_stock_updates.send_market_update(
+                ["sbin"],
+                provider="angelone",
+            )
+
+        self.assertTrue(delivered)
+        self.assertIn("SBIN.NS: Close 820.25 (+1.75%)", message)
+        self.assertNotIn("Skipped symbols:", message)
+        send_message.assert_called_once_with(message)
+
 
 if __name__ == "__main__":
     unittest.main()
