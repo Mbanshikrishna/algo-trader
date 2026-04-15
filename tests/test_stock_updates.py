@@ -20,6 +20,8 @@ class DailySummaryTests(unittest.TestCase):
 
     def test_collect_daily_snapshots_builds_summary_and_failures(self) -> None:
         class StubStream:
+            data_provider = "angelone"
+
             def fetch_ohlcv(self, symbol: str) -> pd.DataFrame:
                 if symbol == "BAD.NS":
                     return pd.DataFrame()
@@ -42,6 +44,32 @@ class DailySummaryTests(unittest.TestCase):
         self.assertEqual(len(snapshots), 1)
         self.assertEqual(snapshots[0]["symbol"], "SBIN.NS")
         self.assertAlmostEqual(float(snapshots[0]["change_pct"]), 5.0)
+        self.assertEqual(failures, [("BAD.NS", "No market data returned")])
+
+    def test_collect_daily_snapshots_uses_batched_yfinance_rows(self) -> None:
+        class StubStream:
+            data_provider = "yfinance"
+
+            def fetch_daily_rows(self, symbols: list[str]) -> pd.DataFrame:
+                columns = pd.MultiIndex.from_product(
+                    [["Open", "High", "Low", "Close", "Volume"], ["SBIN.NS", "BAD.NS"]]
+                )
+                return pd.DataFrame(
+                    [
+                        [100.0, None, 101.0, None, 99.0, None, 100.0, None, 1000.0, None],
+                        [102.0, None, 106.0, None, 101.0, None, 105.0, None, 2500.0, None],
+                    ],
+                    columns=columns,
+                    index=pd.to_datetime(["2026-04-14", "2026-04-15"]),
+                )
+
+        snapshots, failures = send_stock_updates.collect_daily_snapshots(
+            stream=StubStream(),
+            symbols=["SBIN.NS", "BAD.NS"],
+        )
+
+        self.assertEqual(len(snapshots), 1)
+        self.assertEqual(snapshots[0]["symbol"], "SBIN.NS")
         self.assertEqual(failures, [("BAD.NS", "No market data returned")])
 
     def test_build_telegram_message_formats_snapshot_details(self) -> None:

@@ -1,6 +1,8 @@
 from __future__ import annotations  # Lets Python postpone evaluation of type annotations.
 
+import contextlib  # Imports contextlib so noisy yfinance stderr/stdout can be suppressed during bulk downloads.
 from datetime import datetime, timedelta  # Imports datetime helpers for historical candle windows.
+import io  # Imports io for in-memory stdout/stderr suppression when yfinance reports failed symbols.
 from pathlib import Path  # Imports Path for configuring a writable local cache directory.
 from zoneinfo import ZoneInfo  # Imports ZoneInfo for consistent Indian market timestamps.
 
@@ -22,6 +24,11 @@ def _configure_yfinance_cache() -> None:  # Points yfinance caches at a writable
     cache_dir.mkdir(parents=True, exist_ok=True)
     yf.set_tz_cache_location(str(cache_dir))
     _YFINANCE_CACHE_CONFIGURED = True
+
+
+def _download_with_suppressed_output(symbols: str | list[str], interval: str, period: str) -> pd.DataFrame:  # Wraps yfinance downloads so invalid symbols do not flood the console.
+    with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
+        return yf.download(symbols, interval=interval, period=period, progress=False, threads=True)
 
 
 class MarketStream:  # Defines an adapter for fetching intraday OHLCV market data.
@@ -98,7 +105,7 @@ class MarketStream:  # Defines an adapter for fetching intraday OHLCV market dat
             return self._fetch_angelone_ohlcv(instrument)
 
         symbol = instrument_or_symbol.symbol if isinstance(instrument_or_symbol, Instrument) else instrument_or_symbol  # Extracts the yfinance symbol when the caller passed an Instrument.
-        df = yf.download(symbol, interval=self.interval, period=self.period, progress=False)  # Requests historical candles from yfinance.
+        df = _download_with_suppressed_output(symbol, interval=self.interval, period=self.period)  # Requests historical candles from yfinance while suppressing noisy failed-download logs.
         if df.empty:  # Checks whether the download returned any rows.
             return df  # Returns the empty DataFrame immediately when no data is available.
         return self._normalize_ohlcv(df)  # Returns the normalized market data DataFrame.
@@ -139,13 +146,7 @@ class MarketStream:  # Defines an adapter for fetching intraday OHLCV market dat
         if not symbols:
             return pd.DataFrame()
 
-        df = yf.download(
-            symbols,
-            interval="1d",
-            period=period,
-            progress=False,
-            threads=True,
-        )
+        df = _download_with_suppressed_output(symbols, interval="1d", period=period)
 
         if df.empty:
             return pd.DataFrame()
@@ -156,6 +157,17 @@ class MarketStream:  # Defines an adapter for fetching intraday OHLCV market dat
 
         close = close.dropna(axis=1, how="all")
         return close
+
+    def fetch_daily_rows(self, symbols: list[str], period: str | None = None) -> pd.DataFrame:  # Downloads daily OHLCV rows for multiple symbols in one yfinance request.
+        if not symbols:
+            return pd.DataFrame()
+        if self.data_provider != "yfinance":
+            raise ValueError("Batch daily rows are only available for the yfinance provider")
+
+        df = _download_with_suppressed_output(symbols, interval="1d", period=period or self.period)
+        if df.empty:
+            return pd.DataFrame()
+        return df
 
     def top_gainers(self, symbols: list[str], limit: int = 10, period: str = "2d") -> list[dict]:
         """Returns top gainers by percentage change from previous close."""

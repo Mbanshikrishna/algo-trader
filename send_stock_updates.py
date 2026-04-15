@@ -127,10 +127,72 @@ def _snapshot_from_frame(symbol: str, frame: pd.DataFrame) -> dict[str, object]:
     }
 
 
+def _snapshot_from_row(symbol: str, latest: pd.Series, previous_close: float | None, as_of: object) -> dict[str, object]:  # Builds one summary snapshot from already-extracted daily OHLCV row data.
+    close_price = float(latest["Close"])
+    change_pct = None
+    if previous_close not in (None, 0.0):
+        change_pct = ((close_price - previous_close) / previous_close) * 100
+
+    as_of_text = as_of.date().isoformat() if hasattr(as_of, "date") else str(as_of)
+    return {
+        "symbol": symbol,
+        "as_of": as_of_text,
+        "open": float(latest["Open"]),
+        "high": float(latest["High"]),
+        "low": float(latest["Low"]),
+        "close": close_price,
+        "previous_close": previous_close,
+        "change_pct": change_pct,
+        "volume": int(float(latest["Volume"])),
+    }
+
+
+def _extract_symbol_frame(batch: pd.DataFrame, symbol: str) -> pd.DataFrame:  # Extracts one symbol's OHLCV frame from a multi-symbol yfinance download result.
+    if isinstance(batch.columns, pd.MultiIndex):
+        if symbol not in batch.columns.get_level_values(-1):
+            return pd.DataFrame()
+        frame = batch.xs(symbol, axis=1, level=-1)
+    else:
+        frame = batch
+
+    required_columns = ["Open", "High", "Low", "Close", "Volume"]
+    missing_columns = [column for column in required_columns if column not in frame.columns]
+    if missing_columns:
+        return pd.DataFrame()
+    frame = frame[required_columns].dropna(how="all")
+    return frame.dropna(subset=["Close"])
+
+
+def _collect_yfinance_daily_snapshots(
+    stream: MarketStream,
+    symbols: Sequence[str],
+) -> tuple[list[dict[str, object]], list[tuple[str, str]]]:  # Downloads all daily snapshots in one yfinance batch so large workbooks finish quickly.
+    batch = stream.fetch_daily_rows(list(symbols))
+    if batch.empty:
+        return [], [(symbol, "No market data returned") for symbol in symbols]
+
+    snapshots: list[dict[str, object]] = []
+    failures: list[tuple[str, str]] = []
+    for symbol in symbols:
+        frame = _extract_symbol_frame(batch, symbol)
+        if frame.empty:
+            failures.append((symbol, "No market data returned"))
+            continue
+
+        latest = frame.iloc[-1]
+        previous_close = float(frame.iloc[-2]["Close"]) if len(frame) > 1 else None
+        snapshots.append(_snapshot_from_row(symbol, latest=latest, previous_close=previous_close, as_of=frame.index[-1]))
+
+    return snapshots, failures
+
+
 def collect_daily_snapshots(
     stream: MarketStream,
     symbols: Sequence[str],
 ) -> tuple[list[dict[str, object]], list[tuple[str, str]]]:
+    if getattr(stream, "data_provider", "") == "yfinance":
+        return _collect_yfinance_daily_snapshots(stream=stream, symbols=symbols)
+
     snapshots: list[dict[str, object]] = []
     failures: list[tuple[str, str]] = []
 

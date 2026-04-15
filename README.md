@@ -171,6 +171,12 @@ You can also scan the symbols from an Excel workbook instead of the built-in wat
 python Stock.py --excel-path "C:\path\to\pnl.xlsx"
 ```
 
+If the workbook includes older, renamed, or delisted symbols, use `yfinance` for a more forgiving read-only scan:
+
+```bash
+python Stock.py --excel-path "C:\path\to\pnl.xlsx" --provider yfinance
+```
+
 ## Tests
 
 - `tests/test_core.py`
