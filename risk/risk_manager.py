@@ -9,8 +9,8 @@ class RiskManager:  # Defines logic for sizing positions based on allowed trade 
         self.risk_per_trade_pct = risk_per_trade_pct  # Stores what percentage of capital can be risked on a single trade.
 
     def position_size(self, entry_price: float, stop_loss: float) -> int:  # Calculates the number of shares allowed for a trade.
-        risk_per_share = max(entry_price - stop_loss, 0)  # Calculates risk per share while preventing negative values.
-        if risk_per_share <= 0:  # Handles invalid setups where entry is not above stop-loss.
+        risk_per_share = abs(entry_price - stop_loss)  # Calculates risk per share using absolute distance so both long and short trades are sized correctly.
+        if risk_per_share <= 0:  # Handles invalid setups where entry equals stop-loss.
             return 0  # Returns zero so no trade is taken.
 
         risk_amount = self.capital * (self.risk_per_trade_pct / 100)  # Converts the configured risk percentage into a currency amount.
