@@ -359,3 +359,26 @@ Good next steps for evolving the project:
 ## Disclaimer
 
 This project is for educational and development purposes only. It is not financial advice. Live trading involves real risk, and any production use should include stronger safeguards, broker-tested execution, and careful validation.
+
+
+# Angel One credentials
+ANGELONE_API_KEY=hmKcguN0
+ANGELONE_CLIENT_ID=AACF854831
+ANGELONE_ACCESS_TOKEN=edd0c227-84b4-49c8-8528-96b17138ae84
+
+# Trading mode
+PAPER_TRADE=true
+SCAN_INTERVAL_SECONDS=300
+ALERT_EVERY_CHECK=false
+MARKET_DATA_PROVIDER=angelone
+ORDER_PRODUCT_TYPE=INTRADAY
+ORDER_VARIETY=NORMAL
+
+
+# Risk settings
+CAPITAL=100000
+RISK_PER_TRADE_PCT=1.0
+
+# Optional Telegram alerts
+TELEGRAM_BOT_TOKEN=8576620144:AAEIvJBmrT-ZGpE6GG-YyXJZW4FD3dTlgzo
+TELEGRAM_CHAT_ID=7695827910
