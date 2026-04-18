@@ -13,9 +13,19 @@ class MomentumStrategy:  # Defines an intraday long-bias strategy using trend an
         self.volume_window = volume_window  # Stores the rolling window used for average volume.
 
     @staticmethod
-    def _calculate_vwap(df: pd.DataFrame) -> pd.Series:  # Calculates VWAP from OHLCV data.
+    def _calculate_vwap(df: pd.DataFrame) -> pd.Series:  # Calculates VWAP from OHLCV data, resetting at each day boundary.
         typical_price = (df["High"] + df["Low"] + df["Close"]) / 3  # Computes the typical price for each candle.
-        return (typical_price * df["Volume"]).cumsum() / df["Volume"].cumsum()  # Returns cumulative volume-weighted average price.
+        tp_volume = typical_price * df["Volume"]  # Computes the volume-weighted typical price per candle.
+
+        if hasattr(df.index, "date"):  # Resets VWAP at day boundaries when the index carries date information.
+            day_groups = df.index.date  # Extracts the date component for grouping.
+            cum_tp_vol = tp_volume.groupby(day_groups).cumsum()  # Accumulates volume-weighted price within each day.
+            cum_vol = df["Volume"].groupby(day_groups).cumsum()  # Accumulates volume within each day.
+        else:  # Falls back to a single cumulative VWAP when no date info is available.
+            cum_tp_vol = tp_volume.cumsum()
+            cum_vol = df["Volume"].cumsum()
+
+        return cum_tp_vol / cum_vol  # Returns the per-day cumulative VWAP.
 
     def apply_indicators(self, df: pd.DataFrame) -> pd.DataFrame:  # Adds strategy indicators to a copy of the input DataFrame.
         out = df.copy()  # Copies the data so the original frame is not modified in place.

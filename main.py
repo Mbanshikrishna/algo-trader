@@ -22,7 +22,7 @@ def _notify_status(message: str, logger: object, send_alert: bool) -> None:  # L
         send_telegram_message(message)  # Sends the status message to Telegram when enabled.
 
 
-def run_once() -> None:  # Defines a repeated trading cycle across the watchlist.
+def run_loop() -> None:  # Runs the trading loop continuously across the watchlist.
     settings = load_settings()  # Loads runtime settings such as API keys and risk parameters.
     logger = setup_logger()  # Creates a configured logger for console/file logging.
 
@@ -58,13 +58,11 @@ def run_once() -> None:  # Defines a repeated trading cycle across the watchlist
                 signal = strategy.build_signal(instrument.symbol, df)  # Generates a trading signal from the fetched data.
                 if not signal:  # Checks whether the strategy found a valid setup.
                     _notify_status(f"No trade executed for {instrument.symbol}: no valid signal.", logger, settings.alert_every_check)  # Reports skipped symbols as explicit status updates.
-                    time.sleep(settings.scan_interval_seconds)  # Waits before the next alert cycle.
                     continue  # Skips this symbol when there is no trade signal.
 
                 qty = risk_manager.position_size(signal["price"], signal["stop_loss"])  # Calculates position size from entry and stop-loss.
                 if qty <= 0:  # Guards against invalid or zero quantity recommendations.
                     _notify_status(f"No trade executed for {instrument.symbol}: calculated quantity was not positive.", logger, settings.alert_every_check)  # Reports invalid quantities as explicit status updates.
-                    time.sleep(settings.scan_interval_seconds)  # Waits before the next alert cycle.
                     continue  # Moves to the next symbol without placing an order.
 
                 order = order_manager.place_market_order(  # Sends the market order using the chosen side and quantity.
@@ -73,7 +71,10 @@ def run_once() -> None:  # Defines a repeated trading cycle across the watchlist
                     qty,
                     instrument=broker_instrument,
                 )
-                position_tracker.update_buy(instrument.symbol, qty, signal["price"])  # Updates the tracked position after execution.
+                if signal["side"].upper() == "BUY":  # Updates the tracked position using the correct method for the signal direction.
+                    position_tracker.update_buy(instrument.symbol, qty, signal["price"])
+                else:
+                    position_tracker.update_sell(instrument.symbol, qty)
 
                 _notify_status(f"Signal executed: {order}", logger, True)  # Reports executed orders to both logs and Telegram.
             except Exception as exc:  # Catches any error raised while processing one symbol.
@@ -86,4 +87,4 @@ def run_once() -> None:  # Defines a repeated trading cycle across the watchlist
 
 
 if __name__ == "__main__":  # Runs the trading cycle only when this file is executed directly.
-    run_once()  # Starts one end-to-end pass through the watchlist.
+    run_loop()  # Starts the continuous trading loop.

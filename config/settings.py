@@ -21,8 +21,8 @@ class Settings:  # Defines the structure of all settings loaded from the environ
     order_variety: str  # Stores the Angel One order variety used for live orders.
 
 
-def _as_bool(value: str, default: bool = True) -> bool:  # Converts string-like environment values into booleans.
-    if value is None:  # Handles the case where the environment variable is missing entirely.
+def _as_bool(value: str | None, default: bool = True) -> bool:  # Converts string-like environment values into booleans.
+    if value is None or value.strip() == "":  # Handles missing or empty environment variables.
         return default  # Falls back to the provided default value.
     return value.strip().lower() in {"1", "true", "yes", "y", "on"}  # Treats common truthy strings as True.
 

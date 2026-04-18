@@ -34,8 +34,13 @@ class PositionTracker:  # Defines an in-memory tracker for open intraday positio
         if not existing:  # Handles the case where there is no position to reduce.
             return None  # Returns None because nothing can be updated.
 
+        if quantity > existing.quantity:  # Prevents selling more shares than currently held.
+            raise ValueError(
+                f"Cannot sell {quantity} shares of {symbol}: only {existing.quantity} held"
+            )
+
         existing.quantity -= quantity  # Reduces the held quantity by the sold amount.
-        if existing.quantity <= 0:  # Checks whether the position has been fully closed or over-reduced.
+        if existing.quantity == 0:  # Checks whether the position has been fully closed.
             del self._positions[symbol]  # Removes the position from the tracker once it is closed.
             return None  # Returns None because no open position remains.
         return existing  # Returns the updated remaining position.
