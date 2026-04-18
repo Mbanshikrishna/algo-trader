@@ -41,8 +41,8 @@ class ScannerTests(unittest.TestCase):
             return_value=StubStream(),
         ), patch("Stock.MomentumStrategy", return_value=StubStrategy()), patch(
             "Stock.load_settings",
-            return_value=type("Settings", (), {"api_key": "", "client_id": "", "access_token": "", "market_data_provider": "angelone"})(),
-        ):
+            return_value=type("Settings", (), {"api_key": "", "client_id": "", "pin": "", "totp_secret": "", "market_data_provider": "angelone"})(),
+        ), patch("Stock.AngelOneClient.login", return_value=object()):
             matches, failures = Stock.run_scanner(excel_path="holdings.xlsx")
 
         self.assertEqual(matches, [{"Stock": "SBIN.NS", "Price": 111.25, "StopLoss": 109.5}])

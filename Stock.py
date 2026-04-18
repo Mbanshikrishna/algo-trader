@@ -32,10 +32,11 @@ def run_scanner(
     settings = load_settings()  # Loads the runtime settings so the scanner can use the configured market data provider.
     stocks = watchlist_from_xlsx(excel_path) if excel_path else default_watchlist()  # Builds the stock list from the workbook when one is provided.
     data_provider = (provider or settings.market_data_provider).strip().lower()  # Lets one-off scans override the configured provider without editing .env.
-    broker = AngelOneClient(  # Builds the broker client for broker-native market data when enabled.
+    broker = AngelOneClient.login(  # Authenticates and builds the broker client with a fresh access token.
         api_key=settings.api_key,
         client_id=settings.client_id,
-        access_token=settings.access_token,
+        pin=settings.pin,
+        totp_secret=settings.totp_secret,
     )
     stream = MarketStream(  # Configures the data stream for 5-minute candles over one day.
         interval="5m",

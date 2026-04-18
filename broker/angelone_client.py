@@ -5,6 +5,7 @@ import socket  # Imports socket for deriving the client-local IP used by SmartAP
 from typing import Any  # Imports Any for JSON-like response typing.
 import uuid  # Imports uuid for deriving a stable MAC-address style identifier used by SmartAPI headers.
 
+import pyotp  # Imports pyotp for generating TOTP codes during auto-login.
 import requests  # Imports requests for SmartAPI HTTP calls.
 from requests.exceptions import JSONDecodeError as RequestsJSONDecodeError  # Imports requests' JSON decode error so non-JSON API responses can be reported clearly.
 
@@ -14,6 +15,7 @@ from config.instruments import Instrument, angel_tradingsymbol_for  # Imports br
 class AngelOneClient:  # Defines a lightweight wrapper around Angel One SmartAPI endpoints used by the bot.
     """Angel One SmartAPI integration for market data and order placement."""
 
+    AUTH_BASE_URL = "https://apiconnect.angelone.in/rest/auth/angelbroking/user/v1"  # Stores the SmartAPI authentication endpoint base URL.
     ORDER_BASE_URL = "https://apiconnect.angelbroking.com/rest/secure/angelbroking/order/v1"  # Stores the SmartAPI order endpoint base URL.
     PORTFOLIO_BASE_URL = "https://apiconnect.angelbroking.com/rest/secure/angelbroking/portfolio/v1"  # Stores the SmartAPI portfolio endpoint base URL.
     TRADE_BASE_URL = "https://apiconnect.angelbroking.com/rest/secure/angelbroking/trade/v1"  # Stores the SmartAPI trade endpoint base URL.
@@ -54,6 +56,56 @@ class AngelOneClient:  # Defines a lightweight wrapper around Angel One SmartAPI
                 "X-SourceID": "WEB",  # Uses the default SmartAPI web source identifier.
                 "Authorization": f"Bearer {self.access_token}",  # Authenticates requests with the JWT access token.
             }
+        )
+
+    @classmethod
+    def login(
+        cls,
+        api_key: str,
+        client_id: str,
+        pin: str,
+        totp_secret: str,
+        timeout_seconds: int = 10,
+    ) -> "AngelOneClient":  # Authenticates with Angel One and returns a client with a fresh access token.
+        """Generate a session token via SmartAPI login and return an initialized client."""
+        totp = pyotp.TOTP(totp_secret).now()  # Generates the current 6-digit TOTP code from the secret.
+
+        local_ip = cls._detect_local_ip()
+        mac_address = ":".join(f"{uuid.getnode():012x}"[i : i + 2] for i in range(0, 12, 2))
+
+        headers = {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "X-ClientLocalIP": local_ip,
+            "X-ClientPublicIP": "106.193.147.98",
+            "X-MACAddress": mac_address,
+            "X-PrivateKey": api_key,
+            "X-UserType": "USER",
+            "X-SourceID": "WEB",
+        }
+
+        response = requests.post(
+            f"{cls.AUTH_BASE_URL}/loginByPassword",
+            json={"clientcode": client_id, "password": pin, "totp": totp},
+            headers=headers,
+            timeout=timeout_seconds,
+        )
+        response.raise_for_status()
+        payload = cls._parse_json_response(response, "POST", f"{cls.AUTH_BASE_URL}/loginByPassword")
+
+        if not payload.get("status"):
+            raise ValueError(payload.get("message") or "Angel One login failed")
+
+        data = payload.get("data") or {}
+        access_token = data.get("jwtToken")
+        if not access_token:
+            raise ValueError("Angel One login succeeded but no jwtToken was returned")
+
+        return cls(
+            api_key=api_key,
+            client_id=client_id,
+            access_token=access_token,
+            timeout_seconds=timeout_seconds,
         )
 
     def _get(self, base_url: str, path: str, params: dict[str, Any] | None = None) -> dict[str, Any]:  # Performs a GET request against one SmartAPI service group.

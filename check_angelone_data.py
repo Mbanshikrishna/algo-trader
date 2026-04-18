@@ -42,14 +42,15 @@ def _parse_args(argv: Sequence[str]) -> argparse.Namespace:
     return parser.parse_args(argv)
 
 
-def _validate_settings() -> tuple[str, str, str]:
+def _validate_settings() -> tuple[str, str, str, str]:
     settings = load_settings()
     missing = [
         name
         for name, value in (
             ("ANGELONE_API_KEY", settings.api_key),
             ("ANGELONE_CLIENT_ID", settings.client_id),
-            ("ANGELONE_ACCESS_TOKEN", settings.access_token),
+            ("ANGELONE_PIN", settings.pin),
+            ("ANGELONE_TOTP_SECRET", settings.totp_secret),
         )
         if not value
     ]
@@ -58,15 +59,16 @@ def _validate_settings() -> tuple[str, str, str]:
         raise ValueError(
             f"Missing required Angel One settings: {missing_list}. Create a .env file or export the variables before running this check."
         )
-    return settings.api_key, settings.client_id, settings.access_token
+    return settings.api_key, settings.client_id, settings.pin, settings.totp_secret
 
 
 def _build_client() -> AngelOneClient:
-    api_key, client_id, access_token = _validate_settings()
-    return AngelOneClient(
+    api_key, client_id, pin, totp_secret = _validate_settings()
+    return AngelOneClient.login(
         api_key=api_key,
         client_id=client_id,
-        access_token=access_token,
+        pin=pin,
+        totp_secret=totp_secret,
     )
 
 

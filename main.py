@@ -26,14 +26,17 @@ def run_loop() -> None:  # Runs the trading loop continuously across the watchli
     settings = load_settings()  # Loads runtime settings such as API keys and risk parameters.
     logger = setup_logger()  # Creates a configured logger for console/file logging.
 
-    if not (settings.api_key and settings.client_id and settings.access_token):  # Validates credentials before any live broker access begins.
-        raise ValueError("Live trading requires ANGELONE_API_KEY, ANGELONE_CLIENT_ID, and ANGELONE_ACCESS_TOKEN")  # Stops execution if live credentials are missing.
+    if not (settings.api_key and settings.client_id and settings.pin and settings.totp_secret):  # Validates credentials before any live broker access begins.
+        raise ValueError("Live trading requires ANGELONE_API_KEY, ANGELONE_CLIENT_ID, ANGELONE_PIN, and ANGELONE_TOTP_SECRET")  # Stops execution if live credentials are missing.
 
-    broker = AngelOneClient(  # Builds the broker client used to place live orders.
-        api_key=settings.api_key,  # Passes the configured API key into the broker client.
-        client_id=settings.client_id,  # Passes the configured client identifier into the broker client.
-        access_token=settings.access_token,  # Passes the current access token into the broker client.
-    )  # Finishes broker client initialization.
+    logger.info("Logging in to Angel One...")  # Logs the login attempt.
+    broker = AngelOneClient.login(  # Authenticates and builds the broker client with a fresh access token.
+        api_key=settings.api_key,
+        client_id=settings.client_id,
+        pin=settings.pin,
+        totp_secret=settings.totp_secret,
+    )
+    logger.info("Angel One login successful.")  # Confirms the login succeeded.
     order_manager = OrderManager(  # Creates the order manager around the broker client.
         broker_client=broker,
         product_type=settings.order_product_type,

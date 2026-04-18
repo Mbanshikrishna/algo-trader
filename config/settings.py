@@ -11,7 +11,8 @@ class Settings:  # Defines the structure of all settings loaded from the environ
 
     api_key: str  # Stores the Angel One API key.
     client_id: str  # Stores the Angel One client identifier.
-    access_token: str  # Stores the Angel One session access token.
+    pin: str  # Stores the Angel One login PIN for auto-login.
+    totp_secret: str  # Stores the TOTP secret for generating login codes.
     risk_per_trade_pct: float  # Stores the percentage of capital to risk on each trade.
     capital: float  # Stores the total capital used for position sizing.
     scan_interval_seconds: float  # Stores the delay between repeated scan cycles.
@@ -48,7 +49,8 @@ def load_settings() -> Settings:  # Builds a Settings object from environment va
     return Settings(  # Creates and returns the immutable settings snapshot.
         api_key=os.getenv("ANGELONE_API_KEY", ""),  # Reads the API key or defaults to an empty string.
         client_id=os.getenv("ANGELONE_CLIENT_ID", ""),  # Reads the client identifier or defaults to an empty string.
-        access_token=os.getenv("ANGELONE_ACCESS_TOKEN", ""),  # Reads the access token or defaults to an empty string.
+        pin=os.getenv("ANGELONE_PIN", ""),  # Reads the login PIN or defaults to an empty string.
+        totp_secret=os.getenv("ANGELONE_TOTP_SECRET", ""),  # Reads the TOTP secret or defaults to an empty string.
         risk_per_trade_pct=float(os.getenv("RISK_PER_TRADE_PCT", "1.0")),  # Reads the per-trade risk percentage and converts it to a float.
         capital=float(os.getenv("CAPITAL", "100000")),  # Reads the available capital and converts it to a float.
         scan_interval_seconds=float(os.getenv("SCAN_INTERVAL_SECONDS", "2")),  # Reads the delay between repeated scans and converts it to a float.

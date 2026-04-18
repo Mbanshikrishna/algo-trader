@@ -82,7 +82,8 @@ def _build_market_stream(provider: str, period: str, settings: Settings) -> Mark
             for name, value in (
                 ("ANGELONE_API_KEY", settings.api_key),
                 ("ANGELONE_CLIENT_ID", settings.client_id),
-                ("ANGELONE_ACCESS_TOKEN", settings.access_token),
+                ("ANGELONE_PIN", settings.pin),
+                ("ANGELONE_TOTP_SECRET", settings.totp_secret),
             )
             if not value
         ]
@@ -94,10 +95,11 @@ def _build_market_stream(provider: str, period: str, settings: Settings) -> Mark
             interval="1d",
             period=period,
             data_provider="angelone",
-            angel_client=AngelOneClient(
+            angel_client=AngelOneClient.login(
                 api_key=settings.api_key,
                 client_id=settings.client_id,
-                access_token=settings.access_token,
+                pin=settings.pin,
+                totp_secret=settings.totp_secret,
             ),
         )
 
