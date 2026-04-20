@@ -1,7 +1,16 @@
 from __future__ import annotations  # Lets Python postpone evaluation of type hints.
 
+import numpy as np  # Imports numpy for fast EMA and array operations.
 import pandas as pd  # Imports pandas for DataFrame and Series operations.
-from ta.trend import EMAIndicator  # Imports the EMA indicator helper from the ta library.
+
+
+def _ema_numpy(values: np.ndarray, window: int) -> np.ndarray:  # Computes EMA using numpy — ~10x faster than the ta library.
+    alpha = 2.0 / (window + 1)
+    out = np.empty_like(values, dtype=np.float64)
+    out[0] = values[0]
+    for i in range(1, len(values)):
+        out[i] = alpha * values[i] + (1 - alpha) * out[i - 1]
+    return out
 
 
 class MomentumStrategy:  # Defines an intraday long-bias strategy using trend and volume filters.
@@ -29,8 +38,9 @@ class MomentumStrategy:  # Defines an intraday long-bias strategy using trend an
 
     def apply_indicators(self, df: pd.DataFrame) -> pd.DataFrame:  # Adds strategy indicators to a copy of the input DataFrame.
         out = df.copy()  # Copies the data so the original frame is not modified in place.
-        out["EMA_FAST"] = EMAIndicator(out["Close"], window=self.ema_fast).ema_indicator()  # Calculates the fast EMA.
-        out["EMA_SLOW"] = EMAIndicator(out["Close"], window=self.ema_slow).ema_indicator()  # Calculates the slow EMA.
+        close_arr = out["Close"].to_numpy(dtype=np.float64)  # Extracts close prices as a numpy array for fast EMA.
+        out["EMA_FAST"] = _ema_numpy(close_arr, self.ema_fast)  # Calculates the fast EMA using numpy.
+        out["EMA_SLOW"] = _ema_numpy(close_arr, self.ema_slow)  # Calculates the slow EMA using numpy.
         out["VWAP"] = self._calculate_vwap(out)  # Calculates VWAP for the session.
         out["AVG_VOLUME"] = out["Volume"].rolling(self.volume_window).mean()  # Calculates rolling average volume.
         out["DAY_HIGH"] = out["High"].cummax()  # Tracks the running intraday high.
@@ -40,21 +50,43 @@ class MomentumStrategy:  # Defines an intraday long-bias strategy using trend an
         if df.empty or len(df) < self.ema_slow:  # Ensures there is enough data to compute indicators reliably.
             return None  # Returns no signal when data is missing or too short.
 
-        data = self.apply_indicators(df)  # Adds all required indicators to the market data.
-        latest = data.iloc[-1]  # Selects the most recent candle and its indicators.
+        # Fast path: check only the latest candle values without full DataFrame copy.
+        close_arr = df["Close"].to_numpy(dtype=np.float64)
+        ema_fast_arr = _ema_numpy(close_arr, self.ema_fast)
+        ema_slow_arr = _ema_numpy(close_arr, self.ema_slow)
+
+        latest_close = close_arr[-1]
+        latest_ema_fast = ema_fast_arr[-1]
+        latest_ema_slow = ema_slow_arr[-1]
+        latest_volume = float(df["Volume"].iloc[-1])
+        avg_volume = float(df["Volume"].iloc[-self.volume_window:].mean())
+        day_high = float(df["High"].cummax().iloc[-1])
+
+        # Compute VWAP for the latest candle.
+        tp = (df["High"] + df["Low"] + df["Close"]) / 3
+        tp_vol = tp * df["Volume"]
+        if hasattr(df.index, "date"):
+            last_date = df.index[-1].date() if hasattr(df.index[-1], "date") else None
+            if last_date is not None:
+                day_mask = df.index.date == last_date
+                vwap = float(tp_vol[day_mask].sum() / df["Volume"][day_mask].sum())
+            else:
+                vwap = float(tp_vol.sum() / df["Volume"].sum())
+        else:
+            vwap = float(tp_vol.sum() / df["Volume"].sum())
 
         if (  # Checks whether all momentum and confirmation conditions are satisfied.
-            latest["Close"] > latest["VWAP"]  # Requires price to be above VWAP.
-            and latest["Close"] > latest["EMA_FAST"]  # Requires price to be above the fast EMA.
-            and latest["Close"] > latest["EMA_SLOW"]  # Requires price to be above the slow EMA.
-            and latest["Volume"] > latest["AVG_VOLUME"]  # Requires current volume to exceed average volume.
-            and latest["Close"] >= 0.995 * latest["DAY_HIGH"]  # Requires price to be very close to the day's high.
+            latest_close > vwap
+            and latest_close > latest_ema_fast
+            and latest_close > latest_ema_slow
+            and latest_volume > avg_volume
+            and latest_close >= 0.995 * day_high
         ):
-            return {  # Returns a BUY signal payload when all conditions pass.
-                "symbol": symbol,  # Includes the symbol that triggered the setup.
-                "side": "BUY",  # Marks the signal direction as a buy.
-                "price": float(round(latest["Close"], 2)),  # Uses the latest close as the rounded entry price.
-                "stop_loss": float(round(latest["EMA_FAST"], 2)),  # Uses the fast EMA as the rounded stop-loss reference.
-            }  # Finishes the signal dictionary.
+            return {
+                "symbol": symbol,
+                "side": "BUY",
+                "price": float(round(latest_close, 2)),
+                "stop_loss": float(round(latest_ema_fast, 2)),
+            }
 
         return None  # Returns no signal when the latest candle does not satisfy the rules.

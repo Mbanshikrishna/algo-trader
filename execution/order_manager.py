@@ -49,3 +49,11 @@ class OrderManager:  # Defines a helper responsible for constructing and submitt
             }
         )
         return self.broker_client.place_order(order)  # Delegates live order placement to the broker client.
+
+    def place_exit_order(
+        self,
+        symbol: str,
+        quantity: int,
+        instrument: Instrument | None = None,
+    ) -> dict:  # Places a SELL market order to exit an open position.
+        return self.place_market_order(symbol, "SELL", quantity, instrument=instrument)

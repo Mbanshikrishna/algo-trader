@@ -1,6 +1,7 @@
 from __future__ import annotations  # Lets Python postpone evaluation of type annotations.
 
 import contextlib  # Imports contextlib so noisy yfinance stderr/stdout can be suppressed during bulk downloads.
+from concurrent.futures import ThreadPoolExecutor, as_completed  # Imports thread pool for concurrent Angel One fetches.
 from datetime import datetime, timedelta  # Imports datetime helpers for historical candle windows.
 import io  # Imports io for in-memory stdout/stderr suppression when yfinance reports failed symbols.
 from pathlib import Path  # Imports Path for configuring a writable local cache directory.
@@ -168,6 +169,59 @@ class MarketStream:  # Defines an adapter for fetching intraday OHLCV market dat
         if df.empty:
             return pd.DataFrame()
         return df
+
+    def fetch_ohlcv_batch(self, instruments: list[Instrument]) -> dict[str, pd.DataFrame]:  # Fetches OHLCV data for all instruments concurrently.
+        if not instruments:
+            return {}
+
+        if self.data_provider == "yfinance":
+            return self._fetch_yfinance_batch(instruments)
+        return self._fetch_angelone_batch(instruments)
+
+    def _fetch_yfinance_batch(self, instruments: list[Instrument]) -> dict[str, pd.DataFrame]:  # Downloads all symbols in one yfinance call and splits the result per symbol.
+        symbols = [inst.symbol for inst in instruments]
+        df = _download_with_suppressed_output(symbols, interval=self.interval, period=self.period)
+        if df.empty:
+            return {s: pd.DataFrame() for s in symbols}
+
+        result: dict[str, pd.DataFrame] = {}
+        for symbol in symbols:
+            try:
+                if isinstance(df.columns, pd.MultiIndex):
+                    if symbol not in df.columns.get_level_values(-1):
+                        result[symbol] = pd.DataFrame()
+                        continue
+                    symbol_df = df.xs(symbol, axis=1, level=-1)
+                else:
+                    symbol_df = df  # Single symbol download has flat columns.
+
+                required = ["Open", "High", "Low", "Close", "Volume"]
+                if all(c in symbol_df.columns for c in required):
+                    symbol_df = symbol_df[required].dropna(subset=["Close"])
+                    result[symbol] = symbol_df
+                else:
+                    result[symbol] = pd.DataFrame()
+            except Exception:
+                result[symbol] = pd.DataFrame()
+        return result
+
+    def _fetch_angelone_batch(self, instruments: list[Instrument]) -> dict[str, pd.DataFrame]:  # Fetches Angel One candles concurrently using a thread pool.
+        result: dict[str, pd.DataFrame] = {}
+
+        def _fetch_one(inst: Instrument) -> tuple[str, pd.DataFrame]:
+            resolved = self.resolve_instrument(inst)
+            return inst.symbol, self._fetch_angelone_ohlcv(resolved)
+
+        with ThreadPoolExecutor(max_workers=min(len(instruments), 5)) as pool:
+            futures = {pool.submit(_fetch_one, inst): inst for inst in instruments}
+            for future in as_completed(futures):
+                inst = futures[future]
+                try:
+                    symbol, df = future.result()
+                    result[symbol] = df
+                except Exception:
+                    result[inst.symbol] = pd.DataFrame()
+        return result
 
     def top_gainers(self, symbols: list[str], limit: int = 10, period: str = "2d") -> list[dict]:
         """Returns top gainers by percentage change from previous close."""

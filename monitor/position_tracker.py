@@ -3,11 +3,25 @@ from __future__ import annotations  # Lets Python postpone evaluation of type hi
 from dataclasses import dataclass  # Imports the dataclass decorator for compact position objects.
 
 
+# Trailing stop configuration.
+DEFAULT_TRAIL_PCT = 0.02  # Default trailing stop: 2% below highest price.
+TIGHT_TRAIL_PCT = 0.015  # Tighter trailing stop: 1.5% after profit exceeds threshold.
+TIGHT_TRAIL_PROFIT_THRESHOLD = 0.05  # Tighten the trail once profit exceeds 5%.
+
+
 @dataclass  # Creates a simple mutable container for one tracked position.
 class Position:  # Represents one symbol's current position state.
     symbol: str  # Stores the stock symbol.
     quantity: int  # Stores the total number of shares currently held.
     average_price: float  # Stores the weighted average entry price.
+    highest_price: float = 0.0  # Tracks the highest price reached since entry.
+    stop_loss: float = 0.0  # Stores the current trailing stop-loss level.
+
+    def __post_init__(self) -> None:  # Sets initial highest_price and stop_loss from entry price when not provided.
+        if self.highest_price == 0.0:
+            self.highest_price = self.average_price
+        if self.stop_loss == 0.0:
+            self.stop_loss = round(self.highest_price * (1 - DEFAULT_TRAIL_PCT), 2)
 
 
 class PositionTracker:  # Defines an in-memory tracker for open intraday positions.
@@ -19,7 +33,7 @@ class PositionTracker:  # Defines an in-memory tracker for open intraday positio
     def update_buy(self, symbol: str, quantity: int, price: float) -> Position:  # Updates the tracked position after a buy.
         existing = self._positions.get(symbol)  # Looks up any existing position for the symbol.
         if not existing:  # Handles the case where this is the first buy for the symbol.
-            pos = Position(symbol=symbol, quantity=quantity, average_price=price)  # Creates a new position record.
+            pos = Position(symbol=symbol, quantity=quantity, average_price=price)  # Creates a new position with trailing stop initialized.
             self._positions[symbol] = pos  # Saves the new position in the tracker.
             return pos  # Returns the newly created position.
 
@@ -44,6 +58,32 @@ class PositionTracker:  # Defines an in-memory tracker for open intraday positio
             del self._positions[symbol]  # Removes the position from the tracker once it is closed.
             return None  # Returns None because no open position remains.
         return existing  # Returns the updated remaining position.
+
+    def update_trailing_stop(self, symbol: str, current_price: float) -> Position | None:  # Updates the trailing stop for an open position based on the current price.
+        existing = self._positions.get(symbol)
+        if not existing:
+            return None
+
+        # Update highest price (only moves up).
+        if current_price > existing.highest_price:
+            existing.highest_price = current_price
+
+        # Choose trail percentage: tighten after 5% profit.
+        profit_pct = (existing.highest_price - existing.average_price) / existing.average_price
+        trail_pct = TIGHT_TRAIL_PCT if profit_pct >= TIGHT_TRAIL_PROFIT_THRESHOLD else DEFAULT_TRAIL_PCT
+
+        # Compute new stop-loss; only allow upward movement.
+        new_stop = round(existing.highest_price * (1 - trail_pct), 2)
+        if new_stop > existing.stop_loss:
+            existing.stop_loss = new_stop
+
+        return existing
+
+    def should_exit(self, symbol: str, current_price: float) -> bool:  # Checks whether the current price has breached the trailing stop.
+        existing = self._positions.get(symbol)
+        if not existing:
+            return False
+        return current_price <= existing.stop_loss
 
     def snapshot(self) -> dict[str, Position]:  # Returns a copy of the current positions dictionary.
         return dict(self._positions)  # Creates a shallow copy so callers cannot replace the internal mapping directly.

@@ -38,6 +38,8 @@ class AngelOneClient:  # Defines a lightweight wrapper around Angel One SmartAPI
         self.access_token = access_token  # Stores the JWT access token used for authenticated requests.
         self.timeout_seconds = timeout_seconds  # Stores a default timeout for SmartAPI requests.
         self.session = requests.Session()  # Reuses one HTTP session across requests.
+        adapter = requests.adapters.HTTPAdapter(pool_connections=5, pool_maxsize=10)  # Increases connection pool for concurrent requests.
+        self.session.mount("https://", adapter)
         self.client_local_ip = self._detect_local_ip()  # Stores the client-local IP in the header format used by the SmartAPI SDK.
         self.client_public_ip = "106.193.147.98"  # Uses the same fallback public IP placeholder the official SDK currently ships with.
         self.client_mac_address = ":".join(f"{uuid.getnode():012x}"[i : i + 2] for i in range(0, 12, 2))  # Formats the machine identifier like the official SDK's MAC header.
