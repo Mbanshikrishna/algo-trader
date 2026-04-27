@@ -124,6 +124,19 @@ class CoreTests(unittest.TestCase):
             AngelOneClient._parse_json_response(StubResponse(), "POST", "https://example.test/searchScrip")
         self.assertIn("non-JSON response", str(ctx.exception))
 
+    def test_angelone_client_request_rejected_error_includes_hint(self) -> None:
+        class StubResponse:
+            status_code = 200
+            text = "<html><head><title>Request Rejected</title></head><body>Request Rejected</body></html>"
+            headers = {"Content-Type": "text/html"}
+
+            def json(self) -> dict:
+                raise ValueError("not json")
+
+        with self.assertRaises(ValueError) as ctx:
+            AngelOneClient._parse_json_response(StubResponse(), "POST", "https://example.test/getLtpData")
+        self.assertIn("Primary Static IP", str(ctx.exception))
+
     def test_angelone_client_resolves_from_scrip_master_fallback(self) -> None:
         client = AngelOneClient(api_key="key", client_id="client", access_token="token")
         client.search_scrip = lambda exchange, search_text: []
@@ -133,6 +146,22 @@ class CoreTests(unittest.TestCase):
         instrument = client.resolve_instrument("RELIANCE.NS")
         self.assertEqual(instrument.tradingsymbol, "RELIANCE-EQ")
         self.assertEqual(instrument.symboltoken, "2885")
+
+    def test_angelone_client_ltp_uses_order_service_endpoint(self) -> None:
+        client = AngelOneClient(api_key="key", client_id="client", access_token="token")
+
+        def stub_post(base_url: str, path: str, body: dict[str, object]) -> dict[str, object]:
+            self.assertEqual(base_url, client.ORDER_BASE_URL)
+            self.assertEqual(path, "/getLtpData")
+            self.assertEqual(
+                body,
+                {"exchange": "NSE", "tradingsymbol": "SBIN-EQ", "symboltoken": "3045"},
+            )
+            return {"status": True, "data": {"ltp": 800.0}}
+
+        client._post = stub_post  # type: ignore[method-assign]
+        payload = client.get_ltp_data("NSE", "SBIN-EQ", "3045")
+        self.assertEqual(payload["ltp"], 800.0)
 
     def test_angel_tradingsymbol_for_nse_equity(self) -> None:
         self.assertEqual(angel_tradingsymbol_for("SBIN.NS"), "SBIN-EQ")

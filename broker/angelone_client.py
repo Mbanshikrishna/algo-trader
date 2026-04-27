@@ -231,7 +231,7 @@ class AngelOneClient:  # Defines a lightweight wrapper around Angel One SmartAPI
     def get_ltp_data(self, exchange: str, tradingsymbol: str, symboltoken: str) -> dict[str, Any]:  # Fetches the latest traded price snapshot for one symbol.
         payload = self._require_success(
             self._post(
-                self.MARKET_BASE_URL,
+                self.ORDER_BASE_URL,
                 "/getLtpData",
                 {
                     "exchange": exchange,
@@ -277,8 +277,15 @@ class AngelOneClient:  # Defines a lightweight wrapper around Angel One SmartAPI
         except (RequestsJSONDecodeError, ValueError) as exc:
             content_type = response.headers.get("Content-Type", "unknown")
             snippet = response.text.strip().replace("\n", " ")[:200]
+            hint = ""
+            if "Request Rejected" in response.text:
+                hint = (
+                    " This usually means Angel One's gateway blocked the request."
+                    " Verify the SmartAPI app's Primary Static IP matches the machine's public IP,"
+                    " and confirm the request is using the documented endpoint for this API."
+                )
             raise ValueError(
-                f"{method} {url} returned non-JSON response (status={response.status_code}, content_type={content_type}): {snippet or '<empty body>'}"
+                f"{method} {url} returned non-JSON response (status={response.status_code}, content_type={content_type}): {snippet or '<empty body>'}{hint}"
             ) from exc
 
     def _resolve_from_scrip_master(self, symbol: str, exchange: str, tradingsymbol: str) -> dict[str, Any] | None:  # Resolves a symbol from Angel One's public instrument master as a fallback to searchScrip.
