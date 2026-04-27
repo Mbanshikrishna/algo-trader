@@ -81,6 +81,9 @@ def run_check(symbol: str, exchange: str, interval: str, period: str, quote_mode
     print("")
 
     client = _build_client()
+    print(f"Client public IP header: {client.client_public_ip}")
+    print(f"Client local IP header: {client.client_local_ip}")
+    print("")
     instrument = Instrument(symbol=symbol, exchange=exchange)
     stream = MarketStream(angel_client=client, interval=interval, period=period)
 

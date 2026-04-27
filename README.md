@@ -84,6 +84,9 @@ ANGELONE_API_KEY=your_api_key
 ANGELONE_CLIENT_ID=your_client_id
 ANGELONE_PIN=your_pin
 ANGELONE_TOTP_SECRET=your_totp_secret
+ANGELONE_CLIENT_PUBLIC_IP=
+ANGELONE_CLIENT_LOCAL_IP=
+ANGELONE_CLIENT_MAC_ADDRESS=
 
 # Runtime settings
 SCAN_INTERVAL_SECONDS=300
@@ -121,6 +124,8 @@ python3 main.py
    - **Redirect URL**: `http://localhost`
    - **Primary Static IP**: the public IP of the machine running the bot
 3. Copy the API key into `.env`
+
+If you are running on EC2 or another cloud VM, set `ANGELONE_CLIENT_PUBLIC_IP` to the instance's public or Elastic IP when the auto-detected header does not match the IP you whitelisted in SmartAPI. You can also override `ANGELONE_CLIENT_LOCAL_IP` and `ANGELONE_CLIENT_MAC_ADDRESS` if Angel One support asks you to align those headers with a known-good environment.
 
 The bot auto-generates access tokens at startup using your PIN and TOTP secret. No manual token refresh needed.
 

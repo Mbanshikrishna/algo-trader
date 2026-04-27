@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 import unittest
 from pathlib import Path
 from urllib.error import HTTPError
@@ -147,6 +148,20 @@ class CoreTests(unittest.TestCase):
         self.assertEqual(instrument.tradingsymbol, "RELIANCE-EQ")
         self.assertEqual(instrument.symboltoken, "2885")
 
+    def test_angelone_client_resolves_from_scrip_master_when_search_fails(self) -> None:
+        client = AngelOneClient(api_key="key", client_id="client", access_token="token")
+
+        def raising_search(exchange: str, search_text: str) -> list[dict[str, object]]:
+            raise ValueError("403 Client Error")
+
+        client.search_scrip = raising_search
+        client._load_scrip_master = lambda: [
+            {"exch_seg": "NSE", "symbol": "SBIN-EQ", "name": "SBIN", "token": "3045"}
+        ]
+        instrument = client.resolve_instrument("SBIN.NS")
+        self.assertEqual(instrument.tradingsymbol, "SBIN-EQ")
+        self.assertEqual(instrument.symboltoken, "3045")
+
     def test_angelone_client_ltp_uses_order_service_endpoint(self) -> None:
         client = AngelOneClient(api_key="key", client_id="client", access_token="token")
 
@@ -162,6 +177,30 @@ class CoreTests(unittest.TestCase):
         client._post = stub_post  # type: ignore[method-assign]
         payload = client.get_ltp_data("NSE", "SBIN-EQ", "3045")
         self.assertEqual(payload["ltp"], 800.0)
+
+    def test_angelone_client_secure_routes_use_angelone_host(self) -> None:
+        expected_prefix = "https://apiconnect.angelone.in/rest/secure/angelbroking/"
+        self.assertTrue(AngelOneClient.ORDER_BASE_URL.startswith(expected_prefix))
+        self.assertTrue(AngelOneClient.USER_BASE_URL.startswith(expected_prefix))
+        self.assertTrue(AngelOneClient.PORTFOLIO_BASE_URL.startswith(expected_prefix))
+        self.assertTrue(AngelOneClient.TRADE_BASE_URL.startswith(expected_prefix))
+        self.assertTrue(AngelOneClient.HISTORICAL_BASE_URL.startswith(expected_prefix))
+        self.assertTrue(AngelOneClient.MARKET_BASE_URL.startswith(expected_prefix))
+
+    def test_angelone_client_prefers_env_ip_overrides(self) -> None:
+        with patch.dict(
+            os.environ,
+            {
+                "ANGELONE_CLIENT_PUBLIC_IP": "1.2.3.4",
+                "ANGELONE_CLIENT_LOCAL_IP": "10.0.0.5",
+                "ANGELONE_CLIENT_MAC_ADDRESS": "aa:bb:cc:dd:ee:ff",
+            },
+            clear=False,
+        ):
+            client = AngelOneClient(api_key="key", client_id="client", access_token="token")
+        self.assertEqual(client.client_public_ip, "1.2.3.4")
+        self.assertEqual(client.client_local_ip, "10.0.0.5")
+        self.assertEqual(client.client_mac_address, "aa:bb:cc:dd:ee:ff")
 
     def test_angel_tradingsymbol_for_nse_equity(self) -> None:
         self.assertEqual(angel_tradingsymbol_for("SBIN.NS"), "SBIN-EQ")

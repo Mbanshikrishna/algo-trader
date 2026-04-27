@@ -1,12 +1,14 @@
 from __future__ import annotations  # Lets Python postpone evaluation of type annotations.
 
 from datetime import datetime  # Imports datetime for historical candle request windows.
+import os  # Imports os for optional SmartAPI header overrides from environment variables.
 import socket  # Imports socket for deriving the client-local IP used by SmartAPI headers.
 from typing import Any  # Imports Any for JSON-like response typing.
 import uuid  # Imports uuid for deriving a stable MAC-address style identifier used by SmartAPI headers.
 
 import pyotp  # Imports pyotp for generating TOTP codes during auto-login.
 import requests  # Imports requests for SmartAPI HTTP calls.
+from requests import HTTPError  # Imports HTTPError so request failures can include richer SmartAPI diagnostics.
 from requests.exceptions import JSONDecodeError as RequestsJSONDecodeError  # Imports requests' JSON decode error so non-JSON API responses can be reported clearly.
 
 from config.instruments import Instrument, angel_tradingsymbol_for  # Imports broker instrument helpers used by market data and order placement.
@@ -15,12 +17,13 @@ from config.instruments import Instrument, angel_tradingsymbol_for  # Imports br
 class AngelOneClient:  # Defines a lightweight wrapper around Angel One SmartAPI endpoints used by the bot.
     """Angel One SmartAPI integration for market data and order placement."""
 
+    API_ROOT_URL = "https://apiconnect.angelone.in"  # Stores the SmartAPI root URL used by the current official SDK.
     AUTH_BASE_URL = "https://apiconnect.angelone.in/rest/auth/angelbroking/user/v1"  # Stores the SmartAPI authentication endpoint base URL.
-    ORDER_BASE_URL = "https://apiconnect.angelbroking.com/rest/secure/angelbroking/order/v1"  # Stores the SmartAPI order endpoint base URL.
-    PORTFOLIO_BASE_URL = "https://apiconnect.angelbroking.com/rest/secure/angelbroking/portfolio/v1"  # Stores the SmartAPI portfolio endpoint base URL.
-    TRADE_BASE_URL = "https://apiconnect.angelbroking.com/rest/secure/angelbroking/trade/v1"  # Stores the SmartAPI trade endpoint base URL.
-    HISTORICAL_BASE_URL = "https://apiconnect.angelbroking.com/rest/secure/angelbroking/historical/v1"  # Stores the SmartAPI historical-candle endpoint base URL.
-    MARKET_BASE_URL = "https://apiconnect.angelbroking.com/rest/secure/angelbroking/market/v1"  # Stores the SmartAPI quote/search endpoint base URL.
+    ORDER_BASE_URL = f"{API_ROOT_URL}/rest/secure/angelbroking/order/v1"  # Stores the SmartAPI order endpoint base URL.
+    PORTFOLIO_BASE_URL = f"{API_ROOT_URL}/rest/secure/angelbroking/portfolio/v1"  # Stores the SmartAPI portfolio endpoint base URL.
+    TRADE_BASE_URL = f"{API_ROOT_URL}/rest/secure/angelbroking/trade/v1"  # Stores the SmartAPI trade endpoint base URL.
+    HISTORICAL_BASE_URL = f"{API_ROOT_URL}/rest/secure/angelbroking/historical/v1"  # Stores the SmartAPI historical-candle endpoint base URL.
+    MARKET_BASE_URL = f"{API_ROOT_URL}/rest/secure/angelbroking/market/v1"  # Stores the SmartAPI quote/search endpoint base URL.
     SCRIP_MASTER_URLS = (  # Stores public Angel One scrip-master locations used as a fallback when searchScrip yields no match.
         "https://margincalculator.angelbroking.com/OpenAPI_File/files/OpenAPIScripMaster.json",
         "https://margincalculator.angelone.in/OpenAPI_File/files/OpenAPIScripMaster.json",
@@ -40,9 +43,9 @@ class AngelOneClient:  # Defines a lightweight wrapper around Angel One SmartAPI
         self.session = requests.Session()  # Reuses one HTTP session across requests.
         adapter = requests.adapters.HTTPAdapter(pool_connections=5, pool_maxsize=10)  # Increases connection pool for concurrent requests.
         self.session.mount("https://", adapter)
-        self.client_local_ip = self._detect_local_ip()  # Stores the client-local IP in the header format used by the SmartAPI SDK.
-        self.client_public_ip = "106.193.147.98"  # Uses the same fallback public IP placeholder the official SDK currently ships with.
-        self.client_mac_address = ":".join(f"{uuid.getnode():012x}"[i : i + 2] for i in range(0, 12, 2))  # Formats the machine identifier like the official SDK's MAC header.
+        self.client_local_ip = self._resolve_local_ip()  # Stores the client-local IP in the header format used by the SmartAPI SDK.
+        self.client_public_ip = self._resolve_public_ip(timeout_seconds=self.timeout_seconds)  # Stores the public IP header value expected by SmartAPI's gateway.
+        self.client_mac_address = self._resolve_mac_address()  # Formats the machine identifier like the official SDK's MAC header.
         self._scrip_master_cache: list[dict[str, Any]] | None = None  # Caches the downloaded scrip master so symbol fallback resolution happens only once per process.
         self.session.headers.update(
             {
@@ -72,14 +75,15 @@ class AngelOneClient:  # Defines a lightweight wrapper around Angel One SmartAPI
         """Generate a session token via SmartAPI login and return an initialized client."""
         totp = pyotp.TOTP(totp_secret).now()  # Generates the current 6-digit TOTP code from the secret.
 
-        local_ip = cls._detect_local_ip()
-        mac_address = ":".join(f"{uuid.getnode():012x}"[i : i + 2] for i in range(0, 12, 2))
+        local_ip = cls._resolve_local_ip()
+        public_ip = cls._resolve_public_ip(timeout_seconds=timeout_seconds)
+        mac_address = cls._resolve_mac_address()
 
         headers = {
             "Content-Type": "application/json",
             "Accept": "application/json",
             "X-ClientLocalIP": local_ip,
-            "X-ClientPublicIP": "106.193.147.98",
+            "X-ClientPublicIP": public_ip,
             "X-MACAddress": mac_address,
             "X-PrivateKey": api_key,
             "X-UserType": "USER",
@@ -113,13 +117,13 @@ class AngelOneClient:  # Defines a lightweight wrapper around Angel One SmartAPI
     def _get(self, base_url: str, path: str, params: dict[str, Any] | None = None) -> dict[str, Any]:  # Performs a GET request against one SmartAPI service group.
         url = f"{base_url}{path}"  # Builds the full request URL.
         response = self.session.get(url, params=params or {}, timeout=self.timeout_seconds)  # Sends the GET request using the shared session.
-        response.raise_for_status()  # Raises a requests exception for non-success HTTP status codes.
+        self._raise_for_status(response, "GET", url)  # Raises a requests exception for non-success HTTP status codes with SmartAPI context.
         return self._parse_json_response(response, "GET", url)  # Returns the parsed JSON body to the caller.
 
     def _post(self, base_url: str, path: str, body: dict[str, Any]) -> dict[str, Any]:  # Performs a POST request against one SmartAPI service group.
         url = f"{base_url}{path}"  # Builds the full request URL.
         response = self.session.post(url, json=body, timeout=self.timeout_seconds)  # Sends the JSON POST request using the shared session.
-        response.raise_for_status()  # Raises a requests exception for non-success HTTP status codes.
+        self._raise_for_status(response, "POST", url)  # Raises a requests exception for non-success HTTP status codes with SmartAPI context.
         return self._parse_json_response(response, "POST", url)  # Returns the parsed JSON body to the caller.
 
     @staticmethod
@@ -133,7 +137,7 @@ class AngelOneClient:  # Defines a lightweight wrapper around Angel One SmartAPI
         payload = self._require_success(self._post(self.ORDER_BASE_URL, "/placeOrder", order_payload), "place order")  # Sends the live order payload to SmartAPI.
         return {"broker": "angelone", "status": "PLACED", "response": payload, **order_payload}  # Returns the broker payload alongside the local order fields.
 
-    USER_BASE_URL = "https://apiconnect.angelbroking.com/rest/secure/angelbroking/user/v1"  # Stores the SmartAPI user/RMS endpoint base URL.
+    USER_BASE_URL = f"{API_ROOT_URL}/rest/secure/angelbroking/user/v1"  # Stores the SmartAPI user/RMS endpoint base URL.
 
     def get_available_capital(self) -> float:  # Fetches available intraday capital from the account.
         payload = self._require_success(self._get(self.USER_BASE_URL, "/getRMS"), "fetch RMS")
@@ -184,11 +188,11 @@ class AngelOneClient:  # Defines a lightweight wrapper around Angel One SmartAPI
 
     def resolve_instrument(self, symbol: str, exchange: str = "NSE") -> Instrument:  # Resolves a project symbol into broker tradingsymbol and token details.
         tradingsymbol = angel_tradingsymbol_for(symbol)  # Converts the app symbol into the expected Angel One equity tradingsymbol.
-        matches = self.search_scrip(exchange, tradingsymbol)  # Searches SmartAPI for the exact tradingsymbol first.
+        matches = self._safe_search_scrip(exchange, tradingsymbol)  # Searches SmartAPI for the exact tradingsymbol first.
         exact = next((row for row in matches if str(row.get("tradingsymbol", "")).upper() == tradingsymbol.upper()), None)  # Prefers an exact tradingsymbol match when available.
         if exact is None and not matches:  # Falls back to the bare base symbol when the exact lookup returns nothing.
             base_symbol = tradingsymbol.split("-", 1)[0]
-            matches = self.search_scrip(exchange, base_symbol)
+            matches = self._safe_search_scrip(exchange, base_symbol)
             exact = next((row for row in matches if str(row.get("tradingsymbol", "")).upper() == tradingsymbol.upper()), None)
 
         candidate = exact or (matches[0] if matches else None)  # Uses the exact match when possible and otherwise the first returned row.
@@ -257,6 +261,12 @@ class AngelOneClient:  # Defines a lightweight wrapper around Angel One SmartAPI
         )
         return payload.get("data") or {}
 
+    def _safe_search_scrip(self, exchange: str, search_text: str) -> list[dict[str, Any]]:  # Treats transient SmartAPI search failures as a signal to rely on the public scrip-master fallback instead of aborting resolution.
+        try:
+            return self.search_scrip(exchange, search_text)
+        except Exception:
+            return []
+
     @staticmethod
     def _format_datetime(value: datetime | str) -> str:  # Formats SmartAPI candle timestamps as yyyy-mm-dd HH:MM.
         if isinstance(value, datetime):
@@ -269,6 +279,47 @@ class AngelOneClient:  # Defines a lightweight wrapper around Angel One SmartAPI
             return socket.gethostbyname(socket.gethostname())
         except OSError:
             return "127.0.0.1"
+
+    @classmethod
+    def _resolve_local_ip(cls) -> str:  # Resolves the local-IP header from env override first and otherwise falls back to auto-detection.
+        configured = os.getenv("ANGELONE_CLIENT_LOCAL_IP", "").strip()
+        if configured:
+            return configured
+        return cls._detect_local_ip()
+
+    @staticmethod
+    def _resolve_mac_address() -> str:  # Resolves the MAC-address header from env override first and otherwise derives it from the machine node id.
+        configured = os.getenv("ANGELONE_CLIENT_MAC_ADDRESS", "").strip()
+        if configured:
+            return configured
+        return ":".join(f"{uuid.getnode():012x}"[i : i + 2] for i in range(0, 12, 2))
+
+    @staticmethod
+    def _detect_public_ip(timeout_seconds: int = 10) -> str | None:  # Detects the public egress IP through a lightweight external echo service.
+        sources = (
+            "https://api.ipify.org",
+            "https://checkip.amazonaws.com",
+        )
+        for source in sources:
+            try:
+                response = requests.get(source, timeout=min(timeout_seconds, 5))
+                response.raise_for_status()
+                value = response.text.strip()
+                if value:
+                    return value
+            except Exception:
+                continue
+        return None
+
+    @classmethod
+    def _resolve_public_ip(cls, timeout_seconds: int = 10) -> str:  # Resolves the public-IP header from env override first and otherwise auto-detects it with a safe fallback.
+        configured = os.getenv("ANGELONE_CLIENT_PUBLIC_IP", "").strip()
+        if configured:
+            return configured
+        detected = cls._detect_public_ip(timeout_seconds=timeout_seconds)
+        if detected:
+            return detected
+        return "106.193.147.98"
 
     @staticmethod
     def _parse_json_response(response: requests.Response, method: str, url: str) -> dict[str, Any]:  # Converts an HTTP response to JSON and reports non-JSON bodies with enough detail to debug SmartAPI routing/auth issues.
@@ -286,6 +337,18 @@ class AngelOneClient:  # Defines a lightweight wrapper around Angel One SmartAPI
                 )
             raise ValueError(
                 f"{method} {url} returned non-JSON response (status={response.status_code}, content_type={content_type}): {snippet or '<empty body>'}{hint}"
+            ) from exc
+
+    def _raise_for_status(self, response: requests.Response, method: str, url: str) -> None:  # Re-raises HTTP errors with enough request context to debug SmartAPI gateway blocks on remote hosts.
+        try:
+            response.raise_for_status()
+        except HTTPError as exc:
+            content_type = response.headers.get("Content-Type", "unknown")
+            snippet = response.text.strip().replace("\n", " ")[:200]
+            raise HTTPError(
+                f"{method} {url} failed with status={response.status_code}, content_type={content_type}, "
+                f"client_public_ip={self.client_public_ip}, client_local_ip={self.client_local_ip}: "
+                f"{snippet or '<empty body>'}"
             ) from exc
 
     def _resolve_from_scrip_master(self, symbol: str, exchange: str, tradingsymbol: str) -> dict[str, Any] | None:  # Resolves a symbol from Angel One's public instrument master as a fallback to searchScrip.
