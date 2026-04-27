@@ -82,12 +82,7 @@ def run_check(symbol: str, exchange: str, interval: str, period: str, quote_mode
 
     client = _build_client()
     instrument = Instrument(symbol=symbol, exchange=exchange)
-    stream = MarketStream(
-        interval=interval,
-        period=period,
-        data_provider="angelone",
-        angel_client=client,
-    )
+    stream = MarketStream(angel_client=client, interval=interval, period=period)
 
     resolved = stream.resolve_instrument(instrument)
     print("Instrument resolution: OK")

@@ -24,12 +24,6 @@ def _parse_args(argv: Sequence[str]) -> argparse.Namespace:
         help="Stock symbols like SBIN, INFY.NS, or RELIANCE.NS. Defaults to the watchlist when omitted.",
     )
     parser.add_argument(
-        "--provider",
-        choices=("yfinance", "angelone"),
-        default="yfinance",
-        help="Market-data source to use for the summary. Defaults to yfinance for easy read-only usage.",
-    )
-    parser.add_argument(
         "--period",
         default="5d",
         help="History window used to compute the latest day and previous close.",
@@ -75,35 +69,31 @@ def resolve_requested_symbols(
     return unique_symbols
 
 
-def _build_market_stream(provider: str, period: str, settings: Settings) -> MarketStream:
-    if provider == "angelone":
-        missing = [
-            name
-            for name, value in (
-                ("ANGELONE_API_KEY", settings.api_key),
-                ("ANGELONE_CLIENT_ID", settings.client_id),
-                ("ANGELONE_PIN", settings.pin),
-                ("ANGELONE_TOTP_SECRET", settings.totp_secret),
-            )
-            if not value
-        ]
-        if missing:
-            raise ValueError(
-                "Angel One market data requires these settings: " + ", ".join(missing)
-            )
-        return MarketStream(
-            interval="1d",
-            period=period,
-            data_provider="angelone",
-            angel_client=AngelOneClient.login(
-                api_key=settings.api_key,
-                client_id=settings.client_id,
-                pin=settings.pin,
-                totp_secret=settings.totp_secret,
-            ),
+def _build_market_stream(period: str, settings: Settings) -> MarketStream:
+    missing = [
+        name
+        for name, value in (
+            ("ANGELONE_API_KEY", settings.api_key),
+            ("ANGELONE_CLIENT_ID", settings.client_id),
+            ("ANGELONE_PIN", settings.pin),
+            ("ANGELONE_TOTP_SECRET", settings.totp_secret),
         )
-
-    return MarketStream(interval="1d", period=period, data_provider="yfinance")
+        if not value
+    ]
+    if missing:
+        raise ValueError(
+            "Angel One market data requires these settings: " + ", ".join(missing)
+        )
+    return MarketStream(
+        angel_client=AngelOneClient.login(
+            api_key=settings.api_key,
+            client_id=settings.client_id,
+            pin=settings.pin,
+            totp_secret=settings.totp_secret,
+        ),
+        interval="1d",
+        period=period,
+    )
 
 
 def _snapshot_from_frame(symbol: str, frame: pd.DataFrame) -> dict[str, object]:
@@ -129,72 +119,10 @@ def _snapshot_from_frame(symbol: str, frame: pd.DataFrame) -> dict[str, object]:
     }
 
 
-def _snapshot_from_row(symbol: str, latest: pd.Series, previous_close: float | None, as_of: object) -> dict[str, object]:  # Builds one summary snapshot from already-extracted daily OHLCV row data.
-    close_price = float(latest["Close"])
-    change_pct = None
-    if previous_close not in (None, 0.0):
-        change_pct = ((close_price - previous_close) / previous_close) * 100
-
-    as_of_text = as_of.date().isoformat() if hasattr(as_of, "date") else str(as_of)
-    return {
-        "symbol": symbol,
-        "as_of": as_of_text,
-        "open": float(latest["Open"]),
-        "high": float(latest["High"]),
-        "low": float(latest["Low"]),
-        "close": close_price,
-        "previous_close": previous_close,
-        "change_pct": change_pct,
-        "volume": int(float(latest["Volume"])),
-    }
-
-
-def _extract_symbol_frame(batch: pd.DataFrame, symbol: str) -> pd.DataFrame:  # Extracts one symbol's OHLCV frame from a multi-symbol yfinance download result.
-    if isinstance(batch.columns, pd.MultiIndex):
-        if symbol not in batch.columns.get_level_values(-1):
-            return pd.DataFrame()
-        frame = batch.xs(symbol, axis=1, level=-1)
-    else:
-        frame = batch
-
-    required_columns = ["Open", "High", "Low", "Close", "Volume"]
-    missing_columns = [column for column in required_columns if column not in frame.columns]
-    if missing_columns:
-        return pd.DataFrame()
-    frame = frame[required_columns].dropna(how="all")
-    return frame.dropna(subset=["Close"])
-
-
-def _collect_yfinance_daily_snapshots(
-    stream: MarketStream,
-    symbols: Sequence[str],
-) -> tuple[list[dict[str, object]], list[tuple[str, str]]]:  # Downloads all daily snapshots in one yfinance batch so large workbooks finish quickly.
-    batch = stream.fetch_daily_rows(list(symbols))
-    if batch.empty:
-        return [], [(symbol, "No market data returned") for symbol in symbols]
-
-    snapshots: list[dict[str, object]] = []
-    failures: list[tuple[str, str]] = []
-    for symbol in symbols:
-        frame = _extract_symbol_frame(batch, symbol)
-        if frame.empty:
-            failures.append((symbol, "No market data returned"))
-            continue
-
-        latest = frame.iloc[-1]
-        previous_close = float(frame.iloc[-2]["Close"]) if len(frame) > 1 else None
-        snapshots.append(_snapshot_from_row(symbol, latest=latest, previous_close=previous_close, as_of=frame.index[-1]))
-
-    return snapshots, failures
-
-
 def collect_daily_snapshots(
     stream: MarketStream,
     symbols: Sequence[str],
 ) -> tuple[list[dict[str, object]], list[tuple[str, str]]]:
-    if getattr(stream, "data_provider", "") == "yfinance":
-        return _collect_yfinance_daily_snapshots(stream=stream, symbols=symbols)
-
     snapshots: list[dict[str, object]] = []
     failures: list[tuple[str, str]] = []
 
@@ -241,62 +169,16 @@ def build_telegram_message(
     return "\n".join(lines)
 
 
-def _merge_snapshot_results(
-    requested_symbols: Sequence[str],
-    primary_snapshots: Sequence[dict[str, object]],
-    primary_failures: Sequence[tuple[str, str]],
-    fallback_snapshots: Sequence[dict[str, object]],
-    fallback_failures: Sequence[tuple[str, str]],
-) -> tuple[list[dict[str, object]], list[tuple[str, str]]]:  # Merges primary and fallback provider results while preserving the original symbol order.
-    snapshots_by_symbol = {
-        snapshot["symbol"]: snapshot for snapshot in [*primary_snapshots, *fallback_snapshots]
-    }
-    ordered_snapshots = [
-        snapshots_by_symbol[symbol] for symbol in requested_symbols if symbol in snapshots_by_symbol
-    ]
-
-    primary_failure_map = dict(primary_failures)
-    fallback_failure_map = dict(fallback_failures)
-    recovered_symbols = {snapshot["symbol"] for snapshot in fallback_snapshots}
-    final_failures: list[tuple[str, str]] = []
-    for symbol, reason in primary_failures:
-        if symbol in recovered_symbols:
-            continue
-        fallback_reason = fallback_failure_map.get(symbol)
-        if fallback_reason and fallback_reason != reason:
-            final_failures.append(
-                (symbol, f"Angel One: {reason}; yfinance fallback: {fallback_reason}")
-            )
-            continue
-        final_failures.append((symbol, fallback_reason or primary_failure_map[symbol]))
-
-    return ordered_snapshots, final_failures
-
-
 def send_market_update(
     raw_symbols: Sequence[str],
-    provider: str = "yfinance",
     period: str = "5d",
     excel_path: str | Path | None = None,
 ) -> tuple[bool, str]:
     settings = load_settings()
     symbols = resolve_requested_symbols(raw_symbols, excel_path=excel_path)
-    stream = _build_market_stream(provider=provider, period=period, settings=settings)
+    stream = _build_market_stream(period=period, settings=settings)
     snapshots, failures = collect_daily_snapshots(stream=stream, symbols=symbols)
-    if provider == "angelone" and failures:
-        fallback_stream = _build_market_stream(provider="yfinance", period=period, settings=settings)
-        fallback_symbols = [symbol for symbol, _ in failures]
-        fallback_snapshots, fallback_failures = collect_daily_snapshots(
-            stream=fallback_stream,
-            symbols=fallback_symbols,
-        )
-        snapshots, failures = _merge_snapshot_results(
-            requested_symbols=symbols,
-            primary_snapshots=snapshots,
-            primary_failures=failures,
-            fallback_snapshots=fallback_snapshots,
-            fallback_failures=fallback_failures,
-        )
+
     if not snapshots:
         failure_summary = ", ".join(f"{symbol}: {reason}" for symbol, reason in failures) or "unknown error"
         raise ValueError(f"No market data could be fetched. {failure_summary}")
@@ -310,7 +192,6 @@ def main(argv: Sequence[str] | None = None) -> int:
     try:
         delivered, message = send_market_update(
             raw_symbols=args.symbols,
-            provider=args.provider,
             period=args.period,
             excel_path=args.excel_path,
         )

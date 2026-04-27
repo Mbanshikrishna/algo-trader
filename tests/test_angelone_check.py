@@ -18,9 +18,10 @@ class AngelOneCheckTests(unittest.TestCase):
             capital=100000.0,
             scan_interval_seconds=2.0,
             alert_every_check=True,
-            market_data_provider="angelone",
             order_product_type="INTRADAY",
             order_variety="NORMAL",
+            intraday_leverage=5.0,
+            max_consecutive_losses=2,
         )
         with patch("check_angelone_data.load_settings", return_value=settings):
             with self.assertRaises(ValueError) as ctx:

@@ -1,33 +1,33 @@
-from __future__ import annotations  # Lets Python postpone evaluation of type hints.
+from __future__ import annotations
 
-import unittest  # Imports Python's built-in unit testing framework.
-from pathlib import Path  # Imports Path for filesystem assertions in cache-configuration tests.
-from urllib.error import HTTPError  # Imports HTTPError for Telegram failure-handling tests.
-from unittest.mock import patch  # Imports patch for isolating yfinance cache configuration behavior.
+import unittest
+from pathlib import Path
+from urllib.error import HTTPError
+from unittest.mock import patch
 
-from config.instruments import Instrument, angel_tradingsymbol_for  # Imports instrument helpers used by the Angel One integration.
-from broker.angelone_client import AngelOneClient  # Imports the broker client for SmartAPI response-parsing tests.
-from data.market_stream import MarketStream  # Imports the market data adapter for normalization tests.
-from execution.order_manager import OrderManager  # Imports the order manager under test.
-from monitor.position_tracker import PositionTracker  # Imports the position tracker under test.
-from risk.risk_manager import RiskManager  # Imports the risk manager under test.
-from utils.telegram_alert import send_telegram_message  # Imports the Telegram helper for safe failure-handling tests.
+from config.instruments import Instrument, angel_tradingsymbol_for
+from broker.angelone_client import AngelOneClient
+from data.market_stream import MarketStream
+from execution.order_manager import OrderManager
+from monitor.position_tracker import PositionTracker
+from risk.risk_manager import RiskManager
+from utils.telegram_alert import send_telegram_message
 
-try:  # Tries to import optional strategy dependencies.
-    import pandas as pd  # Imports pandas for building test DataFrames.
-    from strategy.momentum_strategy import MomentumStrategy  # Imports the momentum strategy for signal tests.
-except ModuleNotFoundError:  # optional in minimal CI env
-    pd = None  # Falls back to None when pandas is not installed.
-    MomentumStrategy = None  # Falls back to None when the strategy dependencies are not installed.
+try:
+    import pandas as pd
+    from strategy.momentum_strategy import MomentumStrategy
+except ModuleNotFoundError:
+    pd = None
+    MomentumStrategy = None
 
 
-class CoreTests(unittest.TestCase):  # Groups core behavioral tests for the trading components.
-    def test_risk_position_size(self) -> None:  # Verifies the risk manager returns expected quantities.
-        manager = RiskManager(capital=100000, risk_per_trade_pct=1.0)  # Creates a risk manager with 1 percent risk on 100000 capital.
-        self.assertEqual(manager.position_size(entry_price=100, stop_loss=98), 500)  # Expects 500 shares when risking 2 currency units per share.
-        self.assertEqual(manager.position_size(entry_price=100, stop_loss=100), 0)  # Expects zero shares when there is no risk distance.
+class CoreTests(unittest.TestCase):
+    def test_risk_position_size(self) -> None:
+        manager = RiskManager(capital=100000, risk_per_trade_pct=1.0)
+        self.assertEqual(manager.position_size(entry_price=100, stop_loss=98), 500)
+        self.assertEqual(manager.position_size(entry_price=100, stop_loss=100), 0)
 
-    def test_order_manager_requires_resolved_instrument(self) -> None:  # Verifies live order placement rejects missing broker metadata.
+    def test_order_manager_requires_resolved_instrument(self) -> None:
         class StubBrokerClient:
             def place_order(self, order_payload: dict) -> dict:
                 return {"status": "PLACED", **order_payload}
@@ -35,120 +35,84 @@ class CoreTests(unittest.TestCase):  # Groups core behavioral tests for the trad
         with self.assertRaises(ValueError):
             OrderManager(broker_client=StubBrokerClient()).place_market_order("RELIANCE.NS", "BUY", 10)
 
-    def test_order_manager_angel_payload(self) -> None:  # Verifies Angel One order payloads include the broker fields needed for live execution.
+    def test_order_manager_angel_payload(self) -> None:
         class StubBrokerClient:
             def place_order(self, order_payload: dict) -> dict:
                 return {"status": "PLACED", **order_payload}
 
-        instrument = Instrument(symbol="SBIN.NS", exchange="NSE", tradingsymbol="SBIN-EQ", symboltoken="3045")  # Builds a resolved broker instrument for the order manager.
-        order = OrderManager(broker_client=StubBrokerClient()).place_market_order("SBIN.NS", "BUY", 10, instrument=instrument)  # Places a stubbed live broker-shaped market order.
-        self.assertEqual(order["tradingsymbol"], "SBIN-EQ")  # Confirms the broker tradingsymbol is propagated into the order payload.
-        self.assertEqual(order["symboltoken"], "3045")  # Confirms the broker symbol token is included for live compatibility.
-        self.assertEqual(order["transactiontype"], "BUY")  # Confirms the transaction side matches Angel One's expected field.
-        self.assertEqual(order["status"], "PLACED")  # Confirms the order manager returns the broker-submitted status.
+        instrument = Instrument(symbol="SBIN.NS", exchange="NSE", tradingsymbol="SBIN-EQ", symboltoken="3045")
+        order = OrderManager(broker_client=StubBrokerClient()).place_market_order("SBIN.NS", "BUY", 10, instrument=instrument)
+        self.assertEqual(order["tradingsymbol"], "SBIN-EQ")
+        self.assertEqual(order["symboltoken"], "3045")
+        self.assertEqual(order["transactiontype"], "BUY")
+        self.assertEqual(order["status"], "PLACED")
 
-    def test_position_tracker(self) -> None:  # Verifies buys and sells update tracked positions correctly.
-        tracker = PositionTracker()  # Creates a fresh position tracker.
-        pos = tracker.update_buy("INFY.NS", 10, 100)  # Adds an initial 10-share position at price 100.
-        self.assertEqual(pos.quantity, 10)  # Confirms the initial quantity is stored correctly.
+    def test_position_tracker(self) -> None:
+        tracker = PositionTracker()
+        pos = tracker.update_buy("INFY.NS", 10, 100)
+        self.assertEqual(pos.quantity, 10)
 
-        pos = tracker.update_buy("INFY.NS", 10, 110)  # Adds 10 more shares at a higher price.
-        self.assertEqual(pos.quantity, 20)  # Confirms the quantities were combined.
-        self.assertAlmostEqual(pos.average_price, 105)  # Confirms the weighted average price was recalculated correctly.
+        pos = tracker.update_buy("INFY.NS", 10, 110)
+        self.assertEqual(pos.quantity, 20)
+        self.assertAlmostEqual(pos.average_price, 105)
 
-        tracker.update_sell("INFY.NS", 5)  # Sells part of the position.
-        self.assertEqual(tracker.snapshot()["INFY.NS"].quantity, 15)  # Confirms the remaining quantity is tracked correctly.
+        tracker.update_sell("INFY.NS", 5)
+        self.assertEqual(tracker.snapshot()["INFY.NS"].quantity, 15)
 
-    def test_position_tracker_trailing_stop_only_moves_up(self) -> None:  # Verifies trailing stop follows new highs but does not loosen on pullbacks.
-        tracker = PositionTracker()  # Creates a fresh position tracker.
-        pos = tracker.update_buy("INFY.NS", 10, 100)  # Opens a position at 100.
-        self.assertEqual(pos.highest_price, 100)  # Confirms the entry initializes the high watermark.
-        self.assertEqual(pos.stop_loss, 98.0)  # Confirms the default 2 percent trail is created at entry.
+    def test_position_tracker_trailing_stop_only_moves_up(self) -> None:
+        tracker = PositionTracker()
+        pos = tracker.update_buy("INFY.NS", 10, 100)
+        self.assertEqual(pos.highest_price, 100)
+        self.assertEqual(pos.stop_loss, 98.0)
 
-        pos = tracker.update_trailing_stop("INFY.NS", 110)  # Moves the market to a new high.
+        pos = tracker.update_trailing_stop("INFY.NS", 110)
         assert pos is not None
-        self.assertEqual(pos.highest_price, 110)  # Confirms the high watermark increased.
-        self.assertEqual(pos.stop_loss, 108.35)  # Confirms profit above 5 percent tightens the trail to 1.5 percent below the new high.
+        self.assertEqual(pos.highest_price, 110)
+        self.assertEqual(pos.stop_loss, 108.35)
 
-        pos = tracker.update_trailing_stop("INFY.NS", 108)  # Simulates a pullback after the new high.
+        pos = tracker.update_trailing_stop("INFY.NS", 108)
         assert pos is not None
-        self.assertEqual(pos.highest_price, 110)  # Confirms the pullback does not reduce the recorded high.
-        self.assertEqual(pos.stop_loss, 108.35)  # Confirms the stop-loss stays unchanged on a price drop.
+        self.assertEqual(pos.highest_price, 110)
+        self.assertEqual(pos.stop_loss, 108.35)
 
-    def test_position_tracker_tightens_trail_after_five_percent_profit(self) -> None:  # Verifies profit above 5 percent switches the trail from 2 percent to 1.5 percent.
-        tracker = PositionTracker()  # Creates a fresh position tracker.
-        tracker.update_buy("ITC.NS", 10, 100)  # Opens a position at 100.
+    def test_position_tracker_tightens_trail_after_five_percent_profit(self) -> None:
+        tracker = PositionTracker()
+        tracker.update_buy("ITC.NS", 10, 100)
 
-        pos = tracker.update_trailing_stop("ITC.NS", 105)  # Moves the position to exactly 5 percent profit.
+        pos = tracker.update_trailing_stop("ITC.NS", 105)
         assert pos is not None
-        self.assertEqual(pos.stop_loss, 103.42)  # Confirms the tighter 1.5 percent trail is used once the threshold is reached.
+        self.assertEqual(pos.stop_loss, 103.42)
 
-    def test_position_tracker_should_exit_when_price_hits_stop_loss(self) -> None:  # Verifies the exit trigger fires once price falls to the trailing stop.
-        tracker = PositionTracker()  # Creates a fresh position tracker.
-        tracker.update_buy("HDFCBANK.NS", 10, 100)  # Opens a position at 100.
-        tracker.update_trailing_stop("HDFCBANK.NS", 110)  # Raises the trailing stop to 108.35 after the tighter trail activates.
+    def test_position_tracker_should_exit_when_price_hits_stop_loss(self) -> None:
+        tracker = PositionTracker()
+        tracker.update_buy("HDFCBANK.NS", 10, 100)
+        tracker.update_trailing_stop("HDFCBANK.NS", 110)
 
-        self.assertFalse(tracker.should_exit("HDFCBANK.NS", 108.4))  # Confirms prices above the stop do not exit.
-        self.assertTrue(tracker.should_exit("HDFCBANK.NS", 108.35))  # Confirms touching the stop triggers an exit.
+        self.assertFalse(tracker.should_exit("HDFCBANK.NS", 108.4))
+        self.assertTrue(tracker.should_exit("HDFCBANK.NS", 108.35))
 
-    @unittest.skipIf(pd is None, "pandas not installed in current environment")  # Skips the normalization test when pandas is unavailable.
-    def test_market_stream_normalizes_multiindex_columns(self) -> None:  # Verifies yfinance-style nested OHLCV columns are flattened correctly.
-        columns = pd.MultiIndex.from_product(  # Builds a two-level column index similar to yfinance output for one ticker.
-            [["Open", "High", "Low", "Close", "Volume"], ["RELIANCE.NS"]]
-        )
-        frame = pd.DataFrame(  # Creates a small synthetic market data set with MultiIndex columns.
-            [
-                [100.0, 101.0, 99.0, 100.5, 1000],
-                [101.0, 102.0, 100.0, 101.5, 1200],
-            ],
-            columns=columns,
-        )
-
-        normalized = MarketStream()._normalize_ohlcv(frame)  # Normalizes the nested OHLCV columns into plain Series columns.
-
-        self.assertEqual(list(normalized.columns), ["Open", "High", "Low", "Close", "Volume"])  # Confirms the normalized frame exposes only flat OHLCV columns.
-        self.assertEqual(normalized["Close"].ndim, 1)  # Confirms Close is a Series-compatible 1D column.
-        self.assertEqual(float(normalized.iloc[-1]["Close"]), 101.5)  # Confirms the expected close price survives normalization.
-
-    @unittest.skipIf(pd is None, "pandas not installed in current environment")  # Skips the candle-conversion test when pandas is unavailable.
-    def test_market_stream_converts_angel_candles(self) -> None:  # Verifies SmartAPI candle arrays are converted into the OHLCV frame expected by the strategy.
-        rows = [  # Builds two sample Angel One candle rows.
+    @unittest.skipIf(pd is None, "pandas not installed")
+    def test_market_stream_converts_angel_candles(self) -> None:
+        rows = [
             ["2026-03-23 09:15", "100", "101", "99", "100.5", "1000"],
             ["2026-03-23 09:20", "100.5", "102", "100", "101.25", "1200"],
         ]
-        frame = MarketStream._candle_rows_to_frame(rows)  # Converts the SmartAPI candle arrays into a DataFrame.
-        self.assertEqual(list(frame.columns), ["Open", "High", "Low", "Close", "Volume"])  # Confirms the converted frame exposes the expected OHLCV columns.
-        self.assertEqual(float(frame.iloc[-1]["Close"]), 101.25)  # Confirms the close price survives the conversion correctly.
+        frame = MarketStream._candle_rows_to_frame(rows)
+        self.assertEqual(list(frame.columns), ["Open", "High", "Low", "Close", "Volume"])
+        self.assertEqual(float(frame.iloc[-1]["Close"]), 101.25)
 
-    def test_market_stream_resolves_angel_instrument(self) -> None:  # Verifies Angel One symbol resolution works for live broker metadata lookup.
-        class StubAngelClient:  # Provides a minimal stub for Angel One resolution without live network access.
+    def test_market_stream_resolves_angel_instrument(self) -> None:
+        class StubAngelClient:
             def resolve_instrument(self, symbol: str, exchange: str = "NSE") -> Instrument:
                 return Instrument(symbol=symbol, exchange=exchange, tradingsymbol="RELIANCE-EQ", symboltoken="2885")
 
-        stream = MarketStream(data_provider="angelone", angel_client=StubAngelClient())  # Builds an Angel One stream with a stub broker client.
-        instrument = stream.resolve_instrument("RELIANCE.NS")  # Resolves a symbol through the stub broker client.
-        self.assertEqual(instrument.tradingsymbol, "RELIANCE-EQ")  # Confirms the instrument resolution works independently of live order mode.
-        self.assertEqual(instrument.symboltoken, "2885")  # Confirms the resolved token is cached on the instrument.
+        stream = MarketStream(angel_client=StubAngelClient())
+        instrument = stream.resolve_instrument("RELIANCE.NS")
+        self.assertEqual(instrument.tradingsymbol, "RELIANCE-EQ")
+        self.assertEqual(instrument.symboltoken, "2885")
 
-    def test_market_stream_configures_repo_local_yfinance_cache(self) -> None:  # Verifies yfinance cache files are redirected into the repository workspace for local runs.
-        expected_cache_dir = Path(__file__).resolve().parent.parent / ".tmp" / "yfinance-cache"
-        with patch("data.market_stream.yf.set_tz_cache_location") as set_cache_location, patch(
-            "data.market_stream.Path.mkdir"
-        ) as mkdir:
-            import data.market_stream as market_stream
-
-            original_flag = market_stream._YFINANCE_CACHE_CONFIGURED
-            market_stream._YFINANCE_CACHE_CONFIGURED = False
-            try:
-                MarketStream(data_provider="yfinance")
-            finally:
-                market_stream._YFINANCE_CACHE_CONFIGURED = original_flag
-
-        mkdir.assert_called_once_with(parents=True, exist_ok=True)
-        set_cache_location.assert_called_once_with(str(expected_cache_dir))
-
-    def test_angelone_client_reports_non_json_response(self) -> None:  # Verifies SmartAPI HTML/plaintext failures are surfaced with useful diagnostics.
-        class StubResponse:  # Provides the minimal response surface needed by the JSON parser helper.
+    def test_angelone_client_reports_non_json_response(self) -> None:
+        class StubResponse:
             status_code = 200
             text = "<html>bad gateway</html>"
             headers = {"Content-Type": "text/html"}
@@ -156,24 +120,24 @@ class CoreTests(unittest.TestCase):  # Groups core behavioral tests for the trad
             def json(self) -> dict:
                 raise ValueError("not json")
 
-        with self.assertRaises(ValueError) as ctx:  # Confirms the helper raises a descriptive value error on non-JSON content.
+        with self.assertRaises(ValueError) as ctx:
             AngelOneClient._parse_json_response(StubResponse(), "POST", "https://example.test/searchScrip")
-        self.assertIn("non-JSON response", str(ctx.exception))  # Confirms the raised message explains the parsing failure clearly.
+        self.assertIn("non-JSON response", str(ctx.exception))
 
-    def test_angelone_client_resolves_from_scrip_master_fallback(self) -> None:  # Verifies instrument resolution can fall back to the public scrip master when searchScrip returns no usable rows.
-        client = AngelOneClient(api_key="key", client_id="client", access_token="token")  # Builds a client instance for exercising the fallback resolution path.
-        client.search_scrip = lambda exchange, search_text: []  # Simulates an empty searchScrip result from SmartAPI.
-        client._load_scrip_master = lambda: [  # Supplies a tiny in-memory scrip master sample for deterministic token resolution.
+    def test_angelone_client_resolves_from_scrip_master_fallback(self) -> None:
+        client = AngelOneClient(api_key="key", client_id="client", access_token="token")
+        client.search_scrip = lambda exchange, search_text: []
+        client._load_scrip_master = lambda: [
             {"exch_seg": "NSE", "symbol": "RELIANCE-EQ", "name": "RELIANCE", "token": "2885"}
         ]
-        instrument = client.resolve_instrument("RELIANCE.NS")  # Resolves the instrument using the scrip-master fallback path.
-        self.assertEqual(instrument.tradingsymbol, "RELIANCE-EQ")  # Confirms the fallback returns the expected Angel One tradingsymbol.
-        self.assertEqual(instrument.symboltoken, "2885")  # Confirms the fallback returns the expected Angel One token.
+        instrument = client.resolve_instrument("RELIANCE.NS")
+        self.assertEqual(instrument.tradingsymbol, "RELIANCE-EQ")
+        self.assertEqual(instrument.symboltoken, "2885")
 
-    def test_angel_tradingsymbol_for_nse_equity(self) -> None:  # Verifies Yahoo-style NSE symbols are translated into Angel One equity tradingsymbols.
-        self.assertEqual(angel_tradingsymbol_for("SBIN.NS"), "SBIN-EQ")  # Confirms Angel One receives the expected equity tradingsymbol.
+    def test_angel_tradingsymbol_for_nse_equity(self) -> None:
+        self.assertEqual(angel_tradingsymbol_for("SBIN.NS"), "SBIN-EQ")
 
-    def test_telegram_message_returns_false_for_placeholder_values(self) -> None:  # Verifies copied example env values do not trigger broken Telegram requests.
+    def test_telegram_message_returns_false_for_placeholder_values(self) -> None:
         with patch.dict(
             "os.environ",
             {"TELEGRAM_BOT_TOKEN": "your_bot_token", "TELEGRAM_CHAT_ID": "your_chat_id"},
@@ -182,7 +146,7 @@ class CoreTests(unittest.TestCase):  # Groups core behavioral tests for the trad
             self.assertFalse(send_telegram_message("hello"))
         urlopen.assert_not_called()
 
-    def test_telegram_message_swallows_http_errors(self) -> None:  # Verifies Telegram delivery failures do not crash the bot loop.
+    def test_telegram_message_swallows_http_errors(self) -> None:
         with patch.dict(
             "os.environ",
             {"TELEGRAM_BOT_TOKEN": "real-token", "TELEGRAM_CHAT_ID": "12345"},
@@ -193,7 +157,7 @@ class CoreTests(unittest.TestCase):  # Groups core behavioral tests for the trad
         ):
             self.assertFalse(send_telegram_message("hello"))
 
-    def test_telegram_message_splits_large_payloads(self) -> None:  # Verifies long Telegram updates are split into multiple accepted API-sized messages.
+    def test_telegram_message_splits_large_payloads(self) -> None:
         class StubResponse:
             status = 200
 
@@ -213,24 +177,22 @@ class CoreTests(unittest.TestCase):  # Groups core behavioral tests for the trad
 
         self.assertGreater(urlopen.call_count, 1)
 
-    @unittest.skipIf(pd is None or MomentumStrategy is None, "pandas/ta not installed in current environment")  # Skips the strategy test when optional dependencies are unavailable.
-    def test_strategy_signal_shape(self) -> None:  # Verifies strategy output, when present, has the expected keys.
-        strategy = MomentumStrategy()  # Creates the momentum strategy instance.
-        rows = 60  # Defines enough rows to satisfy the slow EMA lookback.
-        frame = pd.DataFrame(  # Builds a steadily rising synthetic market data set.
-            {
-                "Open": [100 + i * 0.1 for i in range(rows)],  # Creates synthetic open prices.
-                "High": [101 + i * 0.1 for i in range(rows)],  # Creates synthetic high prices.
-                "Low": [99 + i * 0.1 for i in range(rows)],  # Creates synthetic low prices.
-                "Close": [100 + i * 0.2 for i in range(rows)],  # Creates synthetic close prices with a stronger upward trend.
-                "Volume": [1000 + i * 10 for i in range(rows)],  # Creates synthetic volumes that gradually increase.
-            }
-        )  # Finishes the synthetic DataFrame.
-        signal = strategy.build_signal("SBIN.NS", frame)  # Builds a trading signal from the synthetic data.
-        if signal is not None:  # Checks the signal only when the strategy actually returns one.
-            self.assertEqual(signal["side"], "BUY")  # Confirms the strategy returns a buy-side signal.
-            self.assertIn("stop_loss", signal)  # Confirms the signal includes a stop-loss field.
+    @unittest.skipIf(pd is None or MomentumStrategy is None, "pandas/numpy not installed")
+    def test_strategy_signal_shape(self) -> None:
+        strategy = MomentumStrategy()
+        rows = 60
+        frame = pd.DataFrame({
+            "Open": [100 + i * 0.1 for i in range(rows)],
+            "High": [101 + i * 0.1 for i in range(rows)],
+            "Low": [99 + i * 0.1 for i in range(rows)],
+            "Close": [100 + i * 0.2 for i in range(rows)],
+            "Volume": [1000 + i * 10 for i in range(rows)],
+        })
+        signal = strategy.build_signal("SBIN.NS", frame)
+        if signal is not None:
+            self.assertEqual(signal["side"], "BUY")
+            self.assertIn("stop_loss", signal)
 
 
-if __name__ == "__main__":  # Runs the test suite when this file is executed directly.
-    unittest.main()  # Starts the unittest test runner.
+if __name__ == "__main__":
+    unittest.main()

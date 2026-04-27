@@ -1,156 +1,309 @@
-from __future__ import annotations  # Lets Python treat type hints as postponed string annotations.
+from __future__ import annotations
 
-import time  # Imports time utilities for repeated scan delays.
+import time
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
-from broker.angelone_client import AngelOneClient  # Imports the Angel One broker client wrapper.
-from config.instruments import default_watchlist  # Imports the default instrument watchlist.
-from config.settings import load_settings  # Imports the function that reads app configuration values.
-from data.market_stream import MarketStream  # Imports the market data fetcher for OHLCV candles.
-from execution.order_manager import OrderManager  # Imports the order execution layer.
-from monitor.position_tracker import PositionTracker  # Imports the tracker for open positions.
-from risk.risk_manager import RiskManager  # Imports the risk management component for sizing trades.
-from strategy.momentum_strategy import MomentumStrategy  # Imports the strategy that creates buy/sell signals.
-from utils.logger import setup_logger  # Imports the logger setup function.
-from utils.telegram_alert import send_telegram_message  # Imports the Telegram notifier.
+from broker.angelone_client import AngelOneClient
+from config.instruments import Instrument
+from config.settings import load_settings
+from data.market_stream import MarketStream
+from execution.order_manager import OrderManager
+from monitor.position_tracker import PositionTracker
+from strategy.market_scanner import is_market_bullish, load_nse_equity_tokens, scan_top_gainers
+from utils.logger import setup_logger
+from utils.telegram_alert import send_telegram_message
 
-WATCHLIST = default_watchlist()  # Defines the instruments the bot will scan in each run.
+IST = ZoneInfo("Asia/Kolkata")
+
+# Market timing constants.
+MARKET_OPEN_HOUR, MARKET_OPEN_MIN = 9, 15
+SCAN_HOUR, SCAN_MIN = 10, 0  # Scan for top gainers at 10:00 AM IST.
+MARKET_CLOSE_HOUR, MARKET_CLOSE_MIN = 15, 15  # Exit all positions by 3:15 PM.
+TOP_N = 2  # Number of top gainers to trade.
 
 
-def _notify_status(message: str, logger: object, send_alert: bool) -> None:  # Logs a status update and optionally sends it to Telegram.
-    logger.info(message)  # Writes the status message to the logs.
-    if send_alert:  # Checks whether this status should also be sent to Telegram.
-        send_telegram_message(message)  # Sends the status message to Telegram when enabled.
+def _notify(message: str, logger, send_alert: bool) -> None:
+    logger.info(message)
+    if send_alert:
+        send_telegram_message(message)
 
 
-def run_loop() -> None:  # Runs the trading loop continuously across the watchlist.
-    settings = load_settings()  # Loads runtime settings such as API keys and risk parameters.
-    logger = setup_logger()  # Creates a configured logger for console/file logging.
+def _ist_now() -> datetime:
+    return datetime.now(IST)
 
-    if not (settings.api_key and settings.client_id and settings.pin and settings.totp_secret):  # Validates credentials before any live broker access begins.
-        raise ValueError("Live trading requires ANGELONE_API_KEY, ANGELONE_CLIENT_ID, ANGELONE_PIN, and ANGELONE_TOTP_SECRET")  # Stops execution if live credentials are missing.
 
-    logger.info("Logging in to Angel One...")  # Logs the login attempt.
-    broker = AngelOneClient.login(  # Authenticates and builds the broker client with a fresh access token.
+def _wait_until(hour: int, minute: int, logger) -> None:
+    """Sleep until the target IST time. Returns immediately if already past."""
+    while True:
+        now = _ist_now()
+        target = now.replace(hour=hour, minute=minute, second=0, microsecond=0)
+        remaining = (target - now).total_seconds()
+        if remaining <= 0:
+            return
+        logger.info("Waiting until %02d:%02d IST (%.0f seconds)...", hour, minute, remaining)
+        time.sleep(min(remaining, 30))  # Wake up every 30s to log progress.
+
+
+def _allocate_capital(broker: AngelOneClient, settings, logger) -> float:
+    """Fetch available capital from the broker account, fall back to config."""
+    try:
+        available = broker.get_available_capital()
+        if available > 0:
+            logger.info("Available capital from broker: %.2f", available)
+            return available
+    except Exception as exc:
+        logger.warning("Could not fetch capital from broker: %s", exc)
+
+    logger.info("Using configured capital: %.2f", settings.capital)
+    return settings.capital
+
+
+def run_loop() -> None:
+    settings = load_settings()
+    logger = setup_logger()
+
+    if not (settings.api_key and settings.client_id and settings.pin and settings.totp_secret):
+        raise ValueError(
+            "Live trading requires ANGELONE_API_KEY, ANGELONE_CLIENT_ID, ANGELONE_PIN, and ANGELONE_TOTP_SECRET"
+        )
+
+    logger.info("Logging in to Angel One...")
+    broker = AngelOneClient.login(
         api_key=settings.api_key,
         client_id=settings.client_id,
         pin=settings.pin,
         totp_secret=settings.totp_secret,
     )
-    logger.info("Angel One login successful.")  # Confirms the login succeeded.
-    order_manager = OrderManager(  # Creates the order manager around the broker client.
+    logger.info("Angel One login successful.")
+
+    order_manager = OrderManager(
         broker_client=broker,
         product_type=settings.order_product_type,
         variety=settings.order_variety,
     )
-    risk_manager = RiskManager(capital=settings.capital, risk_per_trade_pct=settings.risk_per_trade_pct)  # Creates the risk manager with capital and risk settings.
-    strategy = MomentumStrategy()  # Instantiates the momentum-based signal generator.
-    stream = MarketStream(  # Configures market data to use the selected provider.
-        interval="5m",
-        period="1d",
-        data_provider=settings.market_data_provider,
-        angel_client=broker,
-    )
-    position_tracker = PositionTracker()  # Starts the in-memory tracker for current positions.
+    position_tracker = PositionTracker()
 
-    # Cache resolved broker instruments so trailing-stop exits can reuse them.
-    resolved_instruments: dict[str, object] = {}
+    # Load all NSE equity tokens once at startup.
+    logger.info("Loading NSE equity scrip master...")
+    nse_stocks = load_nse_equity_tokens(broker)
+    logger.info("Loaded %d NSE equity stocks.", len(nse_stocks))
 
-    # Pre-resolve all instruments once at startup.
-    for instrument in WATCHLIST:
-        try:
-            resolved_instruments[instrument.symbol] = stream.resolve_instrument(instrument)
-        except Exception as exc:
-            logger.warning("Could not resolve %s at startup: %s", instrument.symbol, exc)
+    while True:
+        now = _ist_now()
 
-    while True:  # Keeps scanning the watchlist on a repeating interval.
-        scan_start = time.perf_counter()
-
-        # --- Batch fetch: download all symbols in one call ---
-        try:
-            ohlcv_batch = stream.fetch_ohlcv_batch(WATCHLIST)
-        except Exception as exc:
-            logger.exception("Batch fetch failed: %s", exc)
-            time.sleep(settings.scan_interval_seconds)
+        # Only run on weekdays.
+        if now.weekday() >= 5:
+            logger.info("Weekend — sleeping until Monday.")
+            time.sleep(3600)
             continue
 
-        for instrument in WATCHLIST:  # Loops through each stock instrument in the watchlist.
-            try:  # Wraps each symbol so one failure does not stop the whole scan.
-                broker_instrument = resolved_instruments.get(instrument.symbol)
-                if broker_instrument is None:
-                    broker_instrument = stream.resolve_instrument(instrument)
-                    resolved_instruments[instrument.symbol] = broker_instrument
+        # --- Phase 1: Wait for 10:00 AM scan window ---
+        _wait_until(SCAN_HOUR, SCAN_MIN, logger)
 
-                df = ohlcv_batch.get(instrument.symbol, None)
-                if df is None or df.empty:
+        now = _ist_now()
+        if now.hour >= MARKET_CLOSE_HOUR and now.minute >= MARKET_CLOSE_MIN:
+            logger.info("Market closed for today. Sleeping until tomorrow.")
+            time.sleep(3600)
+            continue
+
+        # --- Phase 2: Check if market is bullish ---
+        bullish, nifty_change = is_market_bullish(broker)
+        _notify(
+            f"Market check: Nifty 50 change = {nifty_change:+.2f}% — {'BULLISH' if bullish else 'BEARISH'}",
+            logger, True,
+        )
+
+        if not bullish:
+            _notify("Market is bearish. No trades today. Will retry tomorrow.", logger, True)
+            time.sleep(3600)
+            continue
+
+        # --- Phase 3: Scan all NSE stocks for top gainers ---
+        logger.info("Scanning %d stocks for top %d gainers...", len(nse_stocks), TOP_N)
+        scan_start = time.perf_counter()
+        top_gainers = scan_top_gainers(broker, nse_stocks, top_n=TOP_N)
+        scan_duration = time.perf_counter() - scan_start
+        logger.info("Scan completed in %.1f seconds. Found %d candidates.", scan_duration, len(top_gainers))
+
+        if not top_gainers:
+            _notify("No qualifying gainers found. Will retry tomorrow.", logger, True)
+            time.sleep(3600)
+            continue
+
+        gainers_msg = "Top gainers selected:\n" + "\n".join(
+            f"  {g['symbol']}: {g['pct_change']:+.2f}% @ {g['ltp']:.2f} (vol={g['volume']:,})"
+            for g in top_gainers
+        )
+        _notify(gainers_msg, logger, True)
+
+        # --- Phase 4: Allocate capital with intraday leverage and enter positions ---
+        total_capital = _allocate_capital(broker, settings, logger)
+        leveraged_capital = total_capital * settings.intraday_leverage
+        capital_per_stock = leveraged_capital / len(top_gainers)
+        logger.info(
+            "Capital: %.2f x %.1fx leverage = %.2f buying power (%.2f per stock)",
+            total_capital, settings.intraday_leverage, leveraged_capital, capital_per_stock,
+        )
+
+        consecutive_losses = 0  # Tracks consecutive losing trades for the day.
+
+        for gainer in top_gainers:
+            try:
+                instrument = Instrument(
+                    symbol=gainer["symbol"],
+                    exchange="NSE",
+                    tradingsymbol=gainer["symbol"],
+                    symboltoken=gainer["token"],
+                )
+
+                qty = int(capital_per_stock // gainer["ltp"])
+                if qty <= 0:
+                    _notify(
+                        f"Skipping {gainer['symbol']}: price {gainer['ltp']:.2f} exceeds "
+                        f"allocated capital {capital_per_stock:.2f}",
+                        logger, True,
+                    )
                     continue
 
-                current_price = float(df.iloc[-1]["Close"])  # Extracts the latest close price for trailing stop checks.
+                order = order_manager.place_market_order(
+                    gainer["symbol"], "BUY", qty, instrument=instrument,
+                )
+                position_tracker.update_buy(gainer["symbol"], qty, gainer["ltp"])
 
-                # --- Trailing stop: update and check exit for open positions ---
-                existing_position = position_tracker.snapshot().get(instrument.symbol)
-                previous_stop_loss = existing_position.stop_loss if existing_position is not None else None
-                position = position_tracker.update_trailing_stop(instrument.symbol, current_price)
-                if position is not None:
-                    if position_tracker.should_exit(instrument.symbol, current_price):
-                        logger.info(
-                            "TRAILING STOP EXIT %s: price=%.2f breached stop_loss=%.2f (entry=%.2f, high=%.2f)",
-                            instrument.symbol, current_price, position.stop_loss,
-                            position.average_price, position.highest_price,
-                        )
-                        exit_order = order_manager.place_exit_order(
-                            instrument.symbol, position.quantity, instrument=broker_instrument,
-                        )
-                        position_tracker.update_sell(instrument.symbol, position.quantity)
-                        _notify_status(
-                            f"Trailing stop exit: {instrument.symbol} @ {current_price:.2f} "
-                            f"(SL={position.stop_loss:.2f}, entry={position.average_price:.2f}, "
-                            f"high={position.highest_price:.2f}) | {exit_order}",
-                            logger, True,
-                        )
-                        continue  # Position closed; skip new entry for this symbol.
-                    elif previous_stop_loss is not None and position.stop_loss > previous_stop_loss:
+                _notify(
+                    f"ENTRY: {gainer['symbol']} — {qty} shares @ {gainer['ltp']:.2f} "
+                    f"(capital={capital_per_stock:.2f}, change={gainer['pct_change']:+.2f}%) | {order}",
+                    logger, True,
+                )
+            except Exception as exc:
+                logger.exception("Failed to enter %s: %s", gainer["symbol"], exc)
+                send_telegram_message(f"Entry failed for {gainer['symbol']}: {exc}")
+
+        # Build a token lookup for monitoring.
+        token_map: dict[str, str] = {g["symbol"]: g["token"] for g in top_gainers}
+
+        # --- Phase 5: Monitor positions with trailing stop until market close ---
+        logger.info("Monitoring %d positions with trailing stop...", len(position_tracker.snapshot()))
+
+        while True:
+            now = _ist_now()
+            if now.hour > MARKET_CLOSE_HOUR or (now.hour == MARKET_CLOSE_HOUR and now.minute >= MARKET_CLOSE_MIN):
+                break
+
+            # Stop trading after max consecutive losses.
+            if consecutive_losses >= settings.max_consecutive_losses:
+                _notify(
+                    f"Stopping: {consecutive_losses} consecutive losing trades. "
+                    f"Force-closing remaining positions.",
+                    logger, True,
+                )
+                break
+
+            positions = position_tracker.snapshot()
+            if not positions:
+                logger.info("All positions closed. Done for today.")
+                break
+
+            # Batch-fetch current prices for all open positions.
+            open_tokens = [token_map[s] for s in positions if s in token_map]
+            if not open_tokens:
+                break
+
+            try:
+                result = broker.get_market_data("LTP", {"NSE": open_tokens})
+                fetched = {str(q.get("symbolToken", "")): float(q.get("ltp", 0)) for q in result.get("fetched", [])}
+            except Exception as exc:
+                logger.warning("Price fetch failed: %s", exc)
+                time.sleep(settings.scan_interval_seconds)
+                continue
+
+            for symbol, pos in list(positions.items()):
+                token = token_map.get(symbol)
+                if not token:
+                    continue
+                current_price = fetched.get(token, 0)
+                if current_price <= 0:
+                    continue
+
+                try:
+                    old_sl = pos.stop_loss
+                    position_tracker.update_trailing_stop(symbol, current_price)
+
+                    if pos.stop_loss > old_sl:
                         logger.info(
                             "TRAILING STOP UPDATE %s: SL %.2f -> %.2f (price=%.2f, high=%.2f)",
-                            instrument.symbol, previous_stop_loss, position.stop_loss,
-                            current_price, position.highest_price,
+                            symbol, old_sl, pos.stop_loss, current_price, pos.highest_price,
                         )
 
-                # --- Entry logic: only enter if no open position for this symbol ---
-                if instrument.symbol in position_tracker.snapshot():
-                    continue  # Already holding this symbol; skip new entry.
+                    if position_tracker.should_exit(symbol, current_price):
+                        exit_reason = "HARD STOP (2% max loss)" if current_price <= pos.hard_stop else "TRAILING STOP"
+                        broker_instrument = Instrument(
+                            symbol=symbol, exchange="NSE",
+                            tradingsymbol=symbol, symboltoken=token,
+                        )
+                        exit_order = order_manager.place_exit_order(
+                            symbol, pos.quantity, instrument=broker_instrument,
+                        )
+                        pnl = (current_price - pos.average_price) * pos.quantity
+                        position_tracker.update_sell(symbol, pos.quantity)
 
-                signal = strategy.build_signal(instrument.symbol, df)  # Generates a trading signal from the fetched data.
-                if not signal:  # Checks whether the strategy found a valid setup.
-                    _notify_status(f"No trade executed for {instrument.symbol}: no valid signal.", logger, settings.alert_every_check)
-                    continue  # Skips this symbol when there is no trade signal.
+                        # Track consecutive losses.
+                        if pnl < 0:
+                            consecutive_losses += 1
+                        else:
+                            consecutive_losses = 0  # Reset on a winning trade.
 
-                qty = risk_manager.position_size(signal["price"], signal["stop_loss"])  # Calculates position size from entry and stop-loss.
-                if qty <= 0:  # Guards against invalid or zero quantity recommendations.
-                    _notify_status(f"No trade executed for {instrument.symbol}: calculated quantity was not positive.", logger, settings.alert_every_check)
-                    continue  # Moves to the next symbol without placing an order.
+                        _notify(
+                            f"{exit_reason} EXIT: {symbol} — {pos.quantity} shares @ {current_price:.2f} "
+                            f"(entry={pos.average_price:.2f}, high={pos.highest_price:.2f}, "
+                            f"SL={pos.stop_loss:.2f}, hard_stop={pos.hard_stop:.2f}, PnL={pnl:+.2f}, "
+                            f"consecutive_losses={consecutive_losses}/{settings.max_consecutive_losses}) | {exit_order}",
+                            logger, True,
+                        )
+                except Exception as exc:
+                    logger.exception("Error monitoring %s: %s", symbol, exc)
 
-                order = order_manager.place_market_order(  # Sends the market order using the chosen side and quantity.
-                    instrument.symbol,
-                    signal["side"],
-                    qty,
-                    instrument=broker_instrument,
-                )
-                if signal["side"].upper() == "BUY":  # Updates the tracked position using the correct method for the signal direction.
-                    position_tracker.update_buy(instrument.symbol, qty, signal["price"])
-                else:
-                    position_tracker.update_sell(instrument.symbol, qty)
+            time.sleep(settings.scan_interval_seconds)
 
-                _notify_status(f"Signal executed: {order}", logger, True)  # Reports executed orders to both logs and Telegram.
-            except Exception as exc:  # Catches any error raised while processing one symbol.
-                logger.exception("Error processing %s: %s", instrument.symbol, exc)  # Logs the symbol-level error with traceback details.
-                if settings.alert_every_check:  # Checks whether errors should also be sent to Telegram.
-                    send_telegram_message(f"Error processing {instrument.symbol}: {exc}")  # Sends the symbol-level error summary to Telegram.
+        # --- Phase 6: Force-close any remaining positions at market close ---
+        remaining = position_tracker.snapshot()
+        if remaining:
+            _notify(f"Market closing — force-exiting {len(remaining)} positions.", logger, True)
+            for symbol, pos in list(remaining.items()):
+                try:
+                    token = token_map.get(symbol)
+                    if not token:
+                        continue
 
-        scan_duration = time.perf_counter() - scan_start
-        logger.info("Scan completed in %.3f seconds", scan_duration)
-        _notify_status(f"Open positions: {position_tracker.snapshot()}", logger, settings.alert_every_check)  # Logs the latest open-position snapshot after each full watchlist cycle.
-        time.sleep(settings.scan_interval_seconds)  # Waits between full scan cycles.
+                    broker_instrument = Instrument(
+                        symbol=symbol, exchange="NSE",
+                        tradingsymbol=symbol, symboltoken=token,
+                    )
+                    exit_order = order_manager.place_exit_order(
+                        symbol, pos.quantity, instrument=broker_instrument,
+                    )
+
+                    try:
+                        result = broker.get_market_data("LTP", {"NSE": [token]})
+                        final_price = float(result.get("fetched", [{}])[0].get("ltp", pos.highest_price))
+                    except Exception:
+                        final_price = pos.highest_price
+
+                    pnl = (final_price - pos.average_price) * pos.quantity
+                    position_tracker.update_sell(symbol, pos.quantity)
+                    _notify(
+                        f"MARKET CLOSE EXIT: {symbol} — {pos.quantity} shares @ {final_price:.2f} "
+                        f"(entry={pos.average_price:.2f}, PnL={pnl:+.2f}) | {exit_order}",
+                        logger, True,
+                    )
+                except Exception as exc:
+                    logger.exception("Failed to close %s: %s", symbol, exc)
+                    send_telegram_message(f"URGENT: Failed to close {symbol}: {exc}")
+
+        _notify("Trading day complete. Sleeping until tomorrow.", logger, True)
+        time.sleep(3600)
 
 
-if __name__ == "__main__":  # Runs the trading cycle only when this file is executed directly.
-    run_loop()  # Starts the continuous trading loop.
+if __name__ == "__main__":
+    run_loop()

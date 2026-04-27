@@ -7,6 +7,7 @@ from dataclasses import dataclass  # Imports the dataclass decorator for compact
 DEFAULT_TRAIL_PCT = 0.02  # Default trailing stop: 2% below highest price.
 TIGHT_TRAIL_PCT = 0.015  # Tighter trailing stop: 1.5% after profit exceeds threshold.
 TIGHT_TRAIL_PROFIT_THRESHOLD = 0.05  # Tighten the trail once profit exceeds 5%.
+MAX_LOSS_PCT = 0.02  # Hard max loss per stock: 2% below entry price.
 
 
 @dataclass  # Creates a simple mutable container for one tracked position.
@@ -16,12 +17,15 @@ class Position:  # Represents one symbol's current position state.
     average_price: float  # Stores the weighted average entry price.
     highest_price: float = 0.0  # Tracks the highest price reached since entry.
     stop_loss: float = 0.0  # Stores the current trailing stop-loss level.
+    hard_stop: float = 0.0  # Absolute floor: max 2% loss from entry, never changes.
 
-    def __post_init__(self) -> None:  # Sets initial highest_price and stop_loss from entry price when not provided.
+    def __post_init__(self) -> None:  # Sets initial highest_price, stop_loss, and hard_stop from entry price.
         if self.highest_price == 0.0:
             self.highest_price = self.average_price
         if self.stop_loss == 0.0:
             self.stop_loss = round(self.highest_price * (1 - DEFAULT_TRAIL_PCT), 2)
+        if self.hard_stop == 0.0:
+            self.hard_stop = round(self.average_price * (1 - MAX_LOSS_PCT), 2)
 
 
 class PositionTracker:  # Defines an in-memory tracker for open intraday positions.
@@ -86,11 +90,11 @@ class PositionTracker:  # Defines an in-memory tracker for open intraday positio
 
         return existing
 
-    def should_exit(self, symbol: str, current_price: float) -> bool:  # Checks whether the current price has breached the trailing stop.
+    def should_exit(self, symbol: str, current_price: float) -> bool:  # Checks whether the current price has breached the trailing stop or the hard max-loss stop.
         existing = self._positions.get(symbol)
         if not existing:
             return False
-        return current_price <= existing.stop_loss
+        return current_price <= existing.stop_loss or current_price <= existing.hard_stop
 
     def snapshot(self) -> dict[str, Position]:  # Returns a copy of the current positions dictionary.
         return dict(self._positions)  # Creates a shallow copy so callers cannot replace the internal mapping directly.

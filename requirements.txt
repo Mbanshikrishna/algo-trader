@@ -1,5 +1,4 @@
 pandas
-yfinance
-ta
 requests
 pyotp
+numpy

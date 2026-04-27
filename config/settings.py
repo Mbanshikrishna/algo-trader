@@ -17,9 +17,10 @@ class Settings:  # Defines the structure of all settings loaded from the environ
     capital: float  # Stores the total capital used for position sizing.
     scan_interval_seconds: float  # Stores the delay between repeated scan cycles.
     alert_every_check: bool  # Controls whether Telegram should receive non-trade status updates too.
-    market_data_provider: str  # Stores whether market data should come from Angel One or yfinance.
     order_product_type: str  # Stores the Angel One product type used for live orders.
     order_variety: str  # Stores the Angel One order variety used for live orders.
+    intraday_leverage: float  # Intraday margin multiplier (e.g. 5.0 for 5x leverage).
+    max_consecutive_losses: int  # Stop trading for the day after this many consecutive losing trades.
 
 
 def _as_bool(value: str | None, default: bool = True) -> bool:  # Converts string-like environment values into booleans.
@@ -55,7 +56,8 @@ def load_settings() -> Settings:  # Builds a Settings object from environment va
         capital=float(os.getenv("CAPITAL", "100000")),  # Reads the available capital and converts it to a float.
         scan_interval_seconds=float(os.getenv("SCAN_INTERVAL_SECONDS", "2")),  # Reads the delay between repeated scans and converts it to a float.
         alert_every_check=_as_bool(os.getenv("ALERT_EVERY_CHECK", "true")),  # Reads whether Telegram should receive updates even without trades.
-        market_data_provider=os.getenv("MARKET_DATA_PROVIDER", "angelone").strip().lower(),  # Reads the configured market data provider and defaults to Angel One for broker-native trading.
         order_product_type=os.getenv("ORDER_PRODUCT_TYPE", "INTRADAY").strip().upper(),  # Reads the live-order product type used by Angel One.
         order_variety=os.getenv("ORDER_VARIETY", "NORMAL").strip().upper(),  # Reads the live-order variety used by Angel One.
+        intraday_leverage=float(os.getenv("INTRADAY_LEVERAGE", "5.0")),  # Reads the intraday margin multiplier.
+        max_consecutive_losses=int(os.getenv("MAX_CONSECUTIVE_LOSSES", "2")),  # Reads the max consecutive losses before stopping.
     )  # Finishes constructing the settings object.
