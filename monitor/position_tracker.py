@@ -41,6 +41,13 @@ class PositionTracker:  # Defines an in-memory tracker for open intraday positio
         weighted_avg = ((existing.average_price * existing.quantity) + (price * quantity)) / new_qty  # Recalculates the weighted average entry price.
         existing.quantity = new_qty  # Updates the stored quantity.
         existing.average_price = weighted_avg  # Updates the stored average price.
+        existing.highest_price = max(existing.highest_price, price)  # Keeps the tracked high aligned with the best price seen since the position was opened.
+
+        profit_pct = (existing.highest_price - existing.average_price) / existing.average_price  # Recomputes profit using the new blended entry price.
+        trail_pct = TIGHT_TRAIL_PCT if profit_pct >= TIGHT_TRAIL_PROFIT_THRESHOLD else DEFAULT_TRAIL_PCT  # Preserves the tighter trail only once the blended position is far enough in profit.
+        new_stop = round(existing.highest_price * (1 - trail_pct), 2)  # Rebuilds the trailing stop from the updated high.
+        if new_stop > existing.stop_loss:
+            existing.stop_loss = new_stop  # Never lets a scale-in lower the current stop-loss.
         return existing  # Returns the updated position.
 
     def update_sell(self, symbol: str, quantity: int) -> Position | None:  # Updates the tracked position after a sell.

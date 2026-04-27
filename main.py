@@ -87,9 +87,10 @@ def run_loop() -> None:  # Runs the trading loop continuously across the watchli
                 current_price = float(df.iloc[-1]["Close"])  # Extracts the latest close price for trailing stop checks.
 
                 # --- Trailing stop: update and check exit for open positions ---
+                existing_position = position_tracker.snapshot().get(instrument.symbol)
+                previous_stop_loss = existing_position.stop_loss if existing_position is not None else None
                 position = position_tracker.update_trailing_stop(instrument.symbol, current_price)
                 if position is not None:
-                    old_sl = position.stop_loss
                     if position_tracker.should_exit(instrument.symbol, current_price):
                         logger.info(
                             "TRAILING STOP EXIT %s: price=%.2f breached stop_loss=%.2f (entry=%.2f, high=%.2f)",
@@ -107,10 +108,10 @@ def run_loop() -> None:  # Runs the trading loop continuously across the watchli
                             logger, True,
                         )
                         continue  # Position closed; skip new entry for this symbol.
-                    elif position.stop_loss > old_sl:
+                    elif previous_stop_loss is not None and position.stop_loss > previous_stop_loss:
                         logger.info(
                             "TRAILING STOP UPDATE %s: SL %.2f -> %.2f (price=%.2f, high=%.2f)",
-                            instrument.symbol, old_sl, position.stop_loss,
+                            instrument.symbol, previous_stop_loss, position.stop_loss,
                             current_price, position.highest_price,
                         )
 

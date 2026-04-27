@@ -59,6 +59,38 @@ class CoreTests(unittest.TestCase):  # Groups core behavioral tests for the trad
         tracker.update_sell("INFY.NS", 5)  # Sells part of the position.
         self.assertEqual(tracker.snapshot()["INFY.NS"].quantity, 15)  # Confirms the remaining quantity is tracked correctly.
 
+    def test_position_tracker_trailing_stop_only_moves_up(self) -> None:  # Verifies trailing stop follows new highs but does not loosen on pullbacks.
+        tracker = PositionTracker()  # Creates a fresh position tracker.
+        pos = tracker.update_buy("INFY.NS", 10, 100)  # Opens a position at 100.
+        self.assertEqual(pos.highest_price, 100)  # Confirms the entry initializes the high watermark.
+        self.assertEqual(pos.stop_loss, 98.0)  # Confirms the default 2 percent trail is created at entry.
+
+        pos = tracker.update_trailing_stop("INFY.NS", 110)  # Moves the market to a new high.
+        assert pos is not None
+        self.assertEqual(pos.highest_price, 110)  # Confirms the high watermark increased.
+        self.assertEqual(pos.stop_loss, 108.35)  # Confirms profit above 5 percent tightens the trail to 1.5 percent below the new high.
+
+        pos = tracker.update_trailing_stop("INFY.NS", 108)  # Simulates a pullback after the new high.
+        assert pos is not None
+        self.assertEqual(pos.highest_price, 110)  # Confirms the pullback does not reduce the recorded high.
+        self.assertEqual(pos.stop_loss, 108.35)  # Confirms the stop-loss stays unchanged on a price drop.
+
+    def test_position_tracker_tightens_trail_after_five_percent_profit(self) -> None:  # Verifies profit above 5 percent switches the trail from 2 percent to 1.5 percent.
+        tracker = PositionTracker()  # Creates a fresh position tracker.
+        tracker.update_buy("ITC.NS", 10, 100)  # Opens a position at 100.
+
+        pos = tracker.update_trailing_stop("ITC.NS", 105)  # Moves the position to exactly 5 percent profit.
+        assert pos is not None
+        self.assertEqual(pos.stop_loss, 103.42)  # Confirms the tighter 1.5 percent trail is used once the threshold is reached.
+
+    def test_position_tracker_should_exit_when_price_hits_stop_loss(self) -> None:  # Verifies the exit trigger fires once price falls to the trailing stop.
+        tracker = PositionTracker()  # Creates a fresh position tracker.
+        tracker.update_buy("HDFCBANK.NS", 10, 100)  # Opens a position at 100.
+        tracker.update_trailing_stop("HDFCBANK.NS", 110)  # Raises the trailing stop to 108.35 after the tighter trail activates.
+
+        self.assertFalse(tracker.should_exit("HDFCBANK.NS", 108.4))  # Confirms prices above the stop do not exit.
+        self.assertTrue(tracker.should_exit("HDFCBANK.NS", 108.35))  # Confirms touching the stop triggers an exit.
+
     @unittest.skipIf(pd is None, "pandas not installed in current environment")  # Skips the normalization test when pandas is unavailable.
     def test_market_stream_normalizes_multiindex_columns(self) -> None:  # Verifies yfinance-style nested OHLCV columns are flattened correctly.
         columns = pd.MultiIndex.from_product(  # Builds a two-level column index similar to yfinance output for one ticker.
