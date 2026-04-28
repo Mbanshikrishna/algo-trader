@@ -131,8 +131,11 @@ def run_loop() -> None:
             time.sleep(3600)
             continue
 
-        gainers_msg = "Top gainers selected:\n" + "\n".join(
-            f"  {g['symbol']}: {g['pct_change']:+.2f}% @ {g['ltp']:.2f} (vol={g['volume']:,})"
+        gainers_msg = "Top stocks selected:\n" + "\n".join(
+            f"  {g['symbol']}: {g['pct_change']:+.2f}% @ {g['ltp']:.2f}\n"
+            f"    Score={g['composite_score']:.3f} | Vol={g['relative_volume']:.1f}x | "
+            f"Momentum={g['momentum_score']:.2f} | BuyPressure={g['buy_pressure']:.2f} | "
+            f"Stability={g['stability_score']:.2f} | PrevTrend={g['prev_day_score']:.2f}"
             for g in top_gainers
         )
         _notify(gainers_msg, logger, True)
