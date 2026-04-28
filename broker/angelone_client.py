@@ -137,6 +137,13 @@ class AngelOneClient:  # Defines a lightweight wrapper around Angel One SmartAPI
         payload = self._require_success(self._post(self.ORDER_BASE_URL, "/placeOrder", order_payload), "place order")  # Sends the live order payload to SmartAPI.
         return {"broker": "angelone", "status": "PLACED", "response": payload, **order_payload}  # Returns the broker payload alongside the local order fields.
 
+    def cancel_order(self, order_id: str, variety: str = "NORMAL") -> dict[str, Any]:  # Cancels a pending order by ID.
+        payload = self._require_success(
+            self._post(self.ORDER_BASE_URL, "/cancelOrder", {"variety": variety, "orderid": order_id}),
+            "cancel order",
+        )
+        return payload
+
     USER_BASE_URL = f"{API_ROOT_URL}/rest/secure/angelbroking/user/v1"  # Stores the SmartAPI user/RMS endpoint base URL.
 
     def get_available_capital(self) -> float:  # Fetches available intraday capital from the account.

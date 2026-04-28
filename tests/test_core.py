@@ -262,5 +262,69 @@ class CoreTests(unittest.TestCase):
             self.assertIn("stop_loss", signal)
 
 
+    def test_probe_tradability_accepts_when_order_succeeds(self) -> None:
+        from execution.tradability_filter import TradabilityFilter
+
+        class StubBroker:
+            def place_order(self, payload):
+                return {"response": {"data": {"orderid": "PROBE123"}}}
+
+            def cancel_order(self, order_id, variety):
+                pass
+
+        tf = TradabilityFilter(safe_mode=True)
+        ok, reason = tf.probe_tradability(StubBroker(), "SBIN-EQ", "3045")
+        self.assertTrue(ok)
+        self.assertEqual(reason, "")
+
+    def test_probe_tradability_rejects_cautionary_stock(self) -> None:
+        from execution.tradability_filter import TradabilityFilter
+
+        class StubBroker:
+            def place_order(self, payload):
+                raise ValueError(
+                    "The order cannot be processed as the token is categorised "
+                    "under cautionary listings by the exchange."
+                )
+
+        tf = TradabilityFilter(safe_mode=True)
+        ok, reason = tf.probe_tradability(StubBroker(), "IMFA-EQ", "1234")
+        self.assertFalse(ok)
+        self.assertIn("cautionary", reason.lower())
+        # Should also be blacklisted now.
+        self.assertIn("IMFA", tf.blacklist_summary)
+
+    def test_probe_candidates_filters_and_preserves_order(self) -> None:
+        from execution.tradability_filter import TradabilityFilter
+
+        call_count = {"n": 0}
+
+        class StubBroker:
+            def place_order(self, payload):
+                call_count["n"] += 1
+                sym = payload.get("tradingsymbol", "")
+                if sym == "BAD-EQ":
+                    raise ValueError("cautionary listings")
+                return {"response": {"data": {"orderid": f"P{call_count['n']}"}}}
+
+            def cancel_order(self, order_id, variety):
+                pass
+
+        candidates = [
+            {"symbol": "GOOD1-EQ", "token": "100", "composite_score": 0.9},
+            {"symbol": "BAD-EQ", "token": "200", "composite_score": 0.8},
+            {"symbol": "GOOD2-EQ", "token": "300", "composite_score": 0.7},
+        ]
+
+        tf = TradabilityFilter(safe_mode=True)
+        tradable, skipped = tf.probe_candidates(StubBroker(), candidates, max_workers=1)
+
+        self.assertEqual(len(tradable), 2)
+        self.assertEqual(tradable[0]["symbol"], "GOOD1-EQ")
+        self.assertEqual(tradable[1]["symbol"], "GOOD2-EQ")
+        self.assertEqual(len(skipped), 1)
+        self.assertEqual(skipped[0][0], "BAD-EQ")
+
+
 if __name__ == "__main__":
     unittest.main()

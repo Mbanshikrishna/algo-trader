@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import logging
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Any
 
 import requests
@@ -179,6 +180,109 @@ class TradabilityFilter:
                 self.add_to_blacklist(symbol, f"Broker rejected: {error_message}")
                 return True
         return False
+
+    def probe_tradability(
+        self,
+        broker_client: Any,
+        symbol: str,
+        token: str,
+        exchange: str = "NSE",
+    ) -> tuple[bool, str]:
+        """Place a tiny LIMIT order to test if the broker allows trading this stock.
+
+        Places a LIMIT BUY for 1 share at the minimum tick price (won't execute),
+        then cancels immediately if accepted. If the broker rejects with a
+        cautionary/restricted message, the stock is blacklisted.
+
+        Returns (is_tradable, reason_if_not).
+        """
+        clean = self._normalize_symbol(symbol)
+
+        # Skip if already blacklisted.
+        if clean in self._session_blacklist or symbol in self._session_blacklist:
+            reason = self._session_blacklist.get(clean) or self._session_blacklist.get(symbol, "")
+            return False, reason
+
+        probe_order = {
+            "variety": "NORMAL",
+            "tradingsymbol": symbol,
+            "symboltoken": str(token),
+            "transactiontype": "BUY",
+            "exchange": exchange,
+            "ordertype": "LIMIT",
+            "producttype": "INTRADAY",
+            "duration": "DAY",
+            "price": "1.00",  # Minimum viable price — won't execute for any real stock.
+            "quantity": "1",
+            "squareoff": "0",
+            "stoploss": "0",
+        }
+
+        try:
+            result = broker_client.place_order(probe_order)
+            # Order accepted — stock is tradable. Cancel immediately.
+            order_id = None
+            resp = result.get("response", {})
+            data = resp.get("data")
+            if isinstance(data, dict):
+                order_id = data.get("orderid")
+            elif isinstance(data, str):
+                order_id = data
+
+            if order_id:
+                try:
+                    broker_client.cancel_order(order_id, "NORMAL")
+                except Exception as cancel_exc:
+                    logger.warning("Failed to cancel probe order %s for %s: %s", order_id, symbol, cancel_exc)
+
+            return True, ""
+
+        except Exception as exc:
+            error_msg = str(exc)
+            if self.record_broker_rejection(symbol, error_msg):
+                return False, f"Broker rejected (probe): {error_msg}"
+            # Non-tradability error (e.g. network issue) — assume tradable.
+            logger.warning("Probe order error for %s (assuming tradable): %s", symbol, error_msg)
+            return True, ""
+
+    def probe_candidates(
+        self,
+        broker_client: Any,
+        candidates: list[dict[str, Any]],
+        max_workers: int = 4,
+    ) -> tuple[list[dict[str, Any]], list[tuple[str, str]]]:
+        """Probe a batch of candidates for tradability using test orders.
+
+        Runs probes concurrently. Returns (tradable, skipped_with_reasons).
+        """
+        tradable: list[dict[str, Any]] = []
+        skipped: list[tuple[str, str]] = []
+
+        def _probe_one(candidate: dict[str, Any]) -> tuple[dict[str, Any], bool, str]:
+            symbol = candidate.get("symbol", "")
+            token = candidate.get("token", "")
+            ok, reason = self.probe_tradability(broker_client, symbol, token)
+            return candidate, ok, reason
+
+        with ThreadPoolExecutor(max_workers=max_workers) as pool:
+            futures = {pool.submit(_probe_one, c): c for c in candidates}
+            for future in as_completed(futures):
+                try:
+                    candidate, ok, reason = future.result()
+                    if ok:
+                        tradable.append(candidate)
+                    else:
+                        skipped.append((candidate.get("symbol", ""), reason))
+                except Exception as exc:
+                    c = futures[future]
+                    logger.warning("Probe failed for %s: %s (assuming tradable)", c.get("symbol", ""), exc)
+                    tradable.append(c)
+
+        # Preserve original score ordering.
+        score_key = {c.get("symbol"): i for i, c in enumerate(candidates)}
+        tradable.sort(key=lambda c: score_key.get(c.get("symbol"), 999))
+
+        return tradable, skipped
 
     def filter_candidates(
         self,

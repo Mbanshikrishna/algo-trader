@@ -140,29 +140,57 @@ def run_loop() -> None:
             time.sleep(3600)
             continue
 
-        # --- Phase 3b: Filter for tradability ---
+        # --- Phase 3b: Filter for tradability (ASM/GSM/circuit limits) ---
         tradable, skipped = trad_filter.filter_candidates(
             raw_candidates, fno_only=settings.fno_only,
         )
 
         if skipped:
-            skip_msg = "Skipped untradable stocks:\n" + "\n".join(
+            skip_msg = "Skipped by ASM/GSM/circuit filter:\n" + "\n".join(
                 f"  {sym}: {reason}" for sym, reason in skipped
             )
             logger.info(skip_msg)
 
-        top_gainers = tradable[:TOP_N]
-
-        if not top_gainers:
+        if not tradable:
             _notify(
-                f"No tradable stocks found after filtering ({len(skipped)} skipped). "
+                f"No tradable stocks found after ASM/GSM filtering ({len(skipped)} skipped). "
                 f"Will retry tomorrow.",
                 logger, True,
             )
             time.sleep(3600)
             continue
 
-        gainers_msg = f"Top {len(top_gainers)} tradable stocks selected (from {len(raw_candidates)} scanned, {len(skipped)} filtered):\n" + "\n".join(
+        # --- Phase 3c: Probe broker tradability (catches Angel One cautionary list) ---
+        logger.info("Probing %d candidates for broker tradability...", len(tradable))
+        probe_start = time.perf_counter()
+        probed_tradable, probe_skipped = trad_filter.probe_candidates(
+            broker, tradable, max_workers=4,
+        )
+        probe_duration = time.perf_counter() - probe_start
+        logger.info(
+            "Probe completed in %.1f seconds: %d tradable, %d rejected.",
+            probe_duration, len(probed_tradable), len(probe_skipped),
+        )
+
+        if probe_skipped:
+            probe_msg = "Skipped by broker probe (cautionary):\n" + "\n".join(
+                f"  {sym}: {reason}" for sym, reason in probe_skipped
+            )
+            _notify(probe_msg, logger, True)
+
+        all_skipped = skipped + probe_skipped
+        top_gainers = probed_tradable[:TOP_N]
+
+        if not top_gainers:
+            _notify(
+                f"No tradable stocks found after filtering ({len(all_skipped)} skipped). "
+                f"Will retry tomorrow.",
+                logger, True,
+            )
+            time.sleep(3600)
+            continue
+
+        gainers_msg = f"Top {len(top_gainers)} tradable stocks selected (from {len(raw_candidates)} scanned, {len(all_skipped)} filtered):\n" + "\n".join(
             f"  {g['symbol']}: {g['pct_change']:+.2f}% @ {g['ltp']:.2f}\n"
             f"    Score={g['composite_score']:.3f} | Vol={g['relative_volume']:.1f}x | "
             f"Momentum={g['momentum_score']:.2f} | BuyPressure={g['buy_pressure']:.2f} | "
@@ -182,9 +210,9 @@ def run_loop() -> None:
 
         consecutive_losses = 0  # Tracks consecutive losing trades for the day.
 
-        # Build fallback queue: top_gainers first, then remaining tradable candidates.
+        # Build fallback queue: top_gainers first, then remaining probed candidates.
         fallback_queue = list(top_gainers)
-        for candidate in tradable[TOP_N:]:
+        for candidate in probed_tradable[TOP_N:]:
             if candidate not in fallback_queue:
                 fallback_queue.append(candidate)
 
