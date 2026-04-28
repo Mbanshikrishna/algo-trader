@@ -21,6 +21,8 @@ class Settings:  # Defines the structure of all settings loaded from the environ
     order_variety: str  # Stores the Angel One order variety used for live orders.
     intraday_leverage: float  # Intraday margin multiplier (e.g. 5.0 for 5x leverage).
     max_consecutive_losses: int  # Stop trading for the day after this many consecutive losing trades.
+    safe_mode: bool  # When True, applies ASM/GSM/T2T tradability filters.
+    fno_only: bool  # When True, restricts trading to F&O stocks only (very conservative).
 
 
 def _as_bool(value: str | None, default: bool = True) -> bool:  # Converts string-like environment values into booleans.
@@ -60,4 +62,6 @@ def load_settings() -> Settings:  # Builds a Settings object from environment va
         order_variety=os.getenv("ORDER_VARIETY", "NORMAL").strip().upper(),  # Reads the live-order variety used by Angel One.
         intraday_leverage=float(os.getenv("INTRADAY_LEVERAGE", "5.0")),  # Reads the intraday margin multiplier.
         max_consecutive_losses=int(os.getenv("MAX_CONSECUTIVE_LOSSES", "2")),  # Reads the max consecutive losses before stopping.
+        safe_mode=_as_bool(os.getenv("SAFE_MODE", "true")),  # Reads whether to apply tradability filters.
+        fno_only=_as_bool(os.getenv("FNO_ONLY", "false")),  # Reads whether to restrict to F&O stocks.
     )  # Finishes constructing the settings object.

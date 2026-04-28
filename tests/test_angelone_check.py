@@ -22,6 +22,8 @@ class AngelOneCheckTests(unittest.TestCase):
             order_variety="NORMAL",
             intraday_leverage=5.0,
             max_consecutive_losses=2,
+            safe_mode=True,
+            fno_only=False,
         )
         with patch("check_angelone_data.load_settings", return_value=settings):
             with self.assertRaises(ValueError) as ctx:

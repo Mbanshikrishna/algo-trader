@@ -8,7 +8,8 @@ from broker.angelone_client import AngelOneClient
 from config.instruments import Instrument
 from config.settings import load_settings
 from data.market_stream import MarketStream
-from execution.order_manager import OrderManager
+from execution.order_manager import OrderManager, OrderRejectedError
+from execution.tradability_filter import TradabilityFilter
 from monitor.position_tracker import PositionTracker
 from strategy.market_scanner import is_market_bullish, load_nse_equity_tokens, scan_top_gainers
 from utils.logger import setup_logger
@@ -77,10 +78,16 @@ def run_loop() -> None:
     )
     logger.info("Angel One login successful.")
 
+    # Initialize tradability filter and load restricted stock lists.
+    trad_filter = TradabilityFilter(safe_mode=settings.safe_mode)
+    logger.info("Loading ASM/GSM/F&O restricted lists from NSE...")
+    trad_filter.load_restricted_lists()
+
     order_manager = OrderManager(
         broker_client=broker,
         product_type=settings.order_product_type,
         variety=settings.order_variety,
+        tradability_filter=trad_filter,
     )
     position_tracker = PositionTracker()
 
@@ -120,18 +127,42 @@ def run_loop() -> None:
             continue
 
         # --- Phase 3: Scan all NSE stocks for top gainers ---
-        logger.info("Scanning %d stocks for top %d gainers...", len(nse_stocks), TOP_N)
+        # Request extra candidates so we have fallbacks after filtering.
+        scan_pool_size = TOP_N * 5
+        logger.info("Scanning %d stocks for top %d candidates (pool=%d)...", len(nse_stocks), TOP_N, scan_pool_size)
         scan_start = time.perf_counter()
-        top_gainers = scan_top_gainers(broker, nse_stocks, top_n=TOP_N)
+        raw_candidates = scan_top_gainers(broker, nse_stocks, top_n=scan_pool_size)
         scan_duration = time.perf_counter() - scan_start
-        logger.info("Scan completed in %.1f seconds. Found %d candidates.", scan_duration, len(top_gainers))
+        logger.info("Scan completed in %.1f seconds. Found %d raw candidates.", scan_duration, len(raw_candidates))
 
-        if not top_gainers:
+        if not raw_candidates:
             _notify("No qualifying gainers found. Will retry tomorrow.", logger, True)
             time.sleep(3600)
             continue
 
-        gainers_msg = "Top stocks selected:\n" + "\n".join(
+        # --- Phase 3b: Filter for tradability ---
+        tradable, skipped = trad_filter.filter_candidates(
+            raw_candidates, fno_only=settings.fno_only,
+        )
+
+        if skipped:
+            skip_msg = "Skipped untradable stocks:\n" + "\n".join(
+                f"  {sym}: {reason}" for sym, reason in skipped
+            )
+            logger.info(skip_msg)
+
+        top_gainers = tradable[:TOP_N]
+
+        if not top_gainers:
+            _notify(
+                f"No tradable stocks found after filtering ({len(skipped)} skipped). "
+                f"Will retry tomorrow.",
+                logger, True,
+            )
+            time.sleep(3600)
+            continue
+
+        gainers_msg = f"Top {len(top_gainers)} tradable stocks selected (from {len(raw_candidates)} scanned, {len(skipped)} filtered):\n" + "\n".join(
             f"  {g['symbol']}: {g['pct_change']:+.2f}% @ {g['ltp']:.2f}\n"
             f"    Score={g['composite_score']:.3f} | Vol={g['relative_volume']:.1f}x | "
             f"Momentum={g['momentum_score']:.2f} | BuyPressure={g['buy_pressure']:.2f} | "
@@ -151,40 +182,70 @@ def run_loop() -> None:
 
         consecutive_losses = 0  # Tracks consecutive losing trades for the day.
 
-        for gainer in top_gainers:
+        # Build fallback queue: top_gainers first, then remaining tradable candidates.
+        fallback_queue = list(top_gainers)
+        for candidate in tradable[TOP_N:]:
+            if candidate not in fallback_queue:
+                fallback_queue.append(candidate)
+
+        entered_symbols: list[str] = []
+        token_map: dict[str, str] = {}
+
+        for gainer in fallback_queue:
+            if len(entered_symbols) >= TOP_N:
+                break  # We have enough positions.
+
+            symbol = gainer["symbol"]
             try:
                 instrument = Instrument(
-                    symbol=gainer["symbol"],
+                    symbol=symbol,
                     exchange="NSE",
-                    tradingsymbol=gainer["symbol"],
+                    tradingsymbol=symbol,
                     symboltoken=gainer["token"],
                 )
 
                 qty = int(capital_per_stock // gainer["ltp"])
                 if qty <= 0:
                     _notify(
-                        f"Skipping {gainer['symbol']}: price {gainer['ltp']:.2f} exceeds "
+                        f"Skipping {symbol}: price {gainer['ltp']:.2f} exceeds "
                         f"allocated capital {capital_per_stock:.2f}",
                         logger, True,
                     )
                     continue
 
                 order = order_manager.place_market_order(
-                    gainer["symbol"], "BUY", qty, instrument=instrument,
+                    symbol, "BUY", qty, instrument=instrument,
+                    current_price=gainer["ltp"],
                 )
-                position_tracker.update_buy(gainer["symbol"], qty, gainer["ltp"])
+                position_tracker.update_buy(symbol, qty, gainer["ltp"])
+                entered_symbols.append(symbol)
+                token_map[symbol] = gainer["token"]
 
                 _notify(
-                    f"ENTRY: {gainer['symbol']} — {qty} shares @ {gainer['ltp']:.2f} "
-                    f"(capital={capital_per_stock:.2f}, change={gainer['pct_change']:+.2f}%) | {order}",
+                    f"ENTRY: {symbol} — {qty} shares @ {gainer['ltp']:.2f} "
+                    f"(capital={capital_per_stock:.2f}, change={gainer['pct_change']:+.2f}%, "
+                    f"score={gainer['composite_score']:.3f}) | {order}",
                     logger, True,
                 )
+            except OrderRejectedError as exc:
+                _notify(
+                    f"SKIPPED {symbol}: {exc.reason} — trying next candidate.",
+                    logger, True,
+                )
+                continue  # Try next candidate in fallback queue.
             except Exception as exc:
-                logger.exception("Failed to enter %s: %s", gainer["symbol"], exc)
-                send_telegram_message(f"Entry failed for {gainer['symbol']}: {exc}")
+                logger.exception("Failed to enter %s: %s", symbol, exc)
+                send_telegram_message(f"Entry failed for {symbol}: {exc}")
 
-        # Build a token lookup for monitoring.
-        token_map: dict[str, str] = {g["symbol"]: g["token"] for g in top_gainers}
+        if not entered_symbols:
+            _notify("No trades could be executed. All candidates rejected.", logger, True)
+            time.sleep(3600)
+            continue
+
+        # Add token mappings for any remaining top_gainers (for monitoring).
+        for g in top_gainers:
+            if g["symbol"] not in token_map:
+                token_map[g["symbol"]] = g["token"]
 
         # --- Phase 5: Monitor positions with trailing stop until market close ---
         logger.info("Monitoring %d positions with trailing stop...", len(position_tracker.snapshot()))
@@ -247,6 +308,7 @@ def run_loop() -> None:
                         )
                         exit_order = order_manager.place_exit_order(
                             symbol, pos.quantity, instrument=broker_instrument,
+                            current_price=current_price,
                         )
                         pnl = (current_price - pos.average_price) * pos.quantity
                         position_tracker.update_sell(symbol, pos.quantity)
@@ -279,19 +341,21 @@ def run_loop() -> None:
                     if not token:
                         continue
 
+                    # Get final price for exit order and PnL.
+                    try:
+                        result = broker.get_market_data("LTP", {"NSE": [token]})
+                        final_price = float(result.get("fetched", [{}])[0].get("ltp", pos.highest_price))
+                    except Exception:
+                        final_price = pos.highest_price
+
                     broker_instrument = Instrument(
                         symbol=symbol, exchange="NSE",
                         tradingsymbol=symbol, symboltoken=token,
                     )
                     exit_order = order_manager.place_exit_order(
                         symbol, pos.quantity, instrument=broker_instrument,
+                        current_price=final_price,
                     )
-
-                    try:
-                        result = broker.get_market_data("LTP", {"NSE": [token]})
-                        final_price = float(result.get("fetched", [{}])[0].get("ltp", pos.highest_price))
-                    except Exception:
-                        final_price = pos.highest_price
 
                     pnl = (final_price - pos.average_price) * pos.quantity
                     position_tracker.update_sell(symbol, pos.quantity)

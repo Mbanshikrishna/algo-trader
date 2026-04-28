@@ -218,6 +218,8 @@ def _compute_score(quote: dict[str, Any], daily_candles: list[list]) -> dict[str
         "stability_score": round(stability_score, 2),
         "prev_day_score": round(prev_day_score, 2),
         "composite_score": round(composite, 3),
+        "lower_circuit": float(quote.get("lowerCircuit", 0)),
+        "upper_circuit": float(quote.get("upperCircuit", 0)),
     }
 
 
