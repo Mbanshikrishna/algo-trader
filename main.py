@@ -212,7 +212,7 @@ def run_loop() -> None:
             continue
 
         consecutive_losses = 0  # Tracks consecutive losing trades across all rounds.
-        exited_symbols: set[str] = set()  # Stocks that hit stop-loss — don't re-enter.
+        traded_today: set[str] = set()  # All stocks traded today — never re-enter the same stock.
         reentry_round = 0
 
         # === Re-entry loop: scan → enter → monitor, up to MAX_REENTRY_ROUNDS ===
@@ -302,8 +302,8 @@ def run_loop() -> None:
                 _notify(probe_msg, logger, True)
 
             # Exclude stocks that already hit stop-loss today.
-            if exited_symbols:
-                probed_tradable = [c for c in probed_tradable if c["symbol"] not in exited_symbols]
+            if traded_today:
+                probed_tradable = [c for c in probed_tradable if c["symbol"] not in traded_today]
 
             all_skipped = skipped + probe_skipped
             top_gainers = probed_tradable[:TOP_N]
@@ -311,7 +311,7 @@ def run_loop() -> None:
             if not top_gainers:
                 _notify(
                     f"{round_label}No tradable stocks after filtering "
-                    f"({len(all_skipped)} skipped, {len(exited_symbols)} previously exited).",
+                    f"({len(all_skipped)} skipped, {len(traded_today)} already traded today).",
                     logger, True,
                 )
                 break
@@ -354,8 +354,8 @@ def run_loop() -> None:
                     break
 
                 symbol = gainer["symbol"]
-                if symbol in exited_symbols:
-                    continue  # Don't re-enter a stock that already hit stop-loss.
+                if symbol in traded_today:
+                    continue  # Never re-enter a stock already traded today.
 
                 try:
                     instrument = Instrument(
@@ -380,6 +380,7 @@ def run_loop() -> None:
                     )
                     pos = position_tracker.update_buy(symbol, qty, gainer["ltp"])
                     entered_symbols.append(symbol)
+                    traded_today.add(symbol)
                     token_map[symbol] = gainer["token"]
 
                     # Place server-side SL-M order at the hard stop as a safety net.
@@ -500,9 +501,6 @@ def run_loop() -> None:
                             )
                             pnl = (current_price - pos.average_price) * pos.quantity
                             position_tracker.update_sell(symbol, pos.quantity)
-
-                            # Track the exited symbol so we don't re-enter it.
-                            exited_symbols.add(symbol)
 
                             # Track consecutive losses.
                             if pnl < 0:
