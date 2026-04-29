@@ -21,6 +21,8 @@ MARKET_OPEN_HOUR, MARKET_OPEN_MIN = 9, 15
 SCAN_HOUR, SCAN_MIN = 10, 0  # Scan for top gainers at 10:00 AM IST.
 MARKET_CLOSE_HOUR, MARKET_CLOSE_MIN = 15, 15  # Exit all positions by 3:15 PM.
 TOP_N = 2  # Number of top gainers to trade.
+MAX_REENTRY_ROUNDS = 3  # Max times the bot can re-scan and re-enter after all positions close.
+REENTRY_COOLDOWN_MINUTES = 15  # Wait this long after last exit before re-scanning.
 
 
 def _notify(message: str, logger, send_alert: bool) -> None:
@@ -209,265 +211,333 @@ def run_loop() -> None:
             time.sleep(3600)
             continue
 
-        # --- Phase 3: Scan all NSE stocks for top gainers ---
-        # Request extra candidates so we have fallbacks after filtering.
-        scan_pool_size = TOP_N * 5
-        logger.info("Scanning %d stocks for top %d candidates (pool=%d)...", len(nse_stocks), TOP_N, scan_pool_size)
-        scan_start = time.perf_counter()
-        raw_candidates = scan_top_gainers(broker, nse_stocks, top_n=scan_pool_size)
-        scan_duration = time.perf_counter() - scan_start
-        logger.info("Scan completed in %.1f seconds. Found %d raw candidates.", scan_duration, len(raw_candidates))
+        consecutive_losses = 0  # Tracks consecutive losing trades across all rounds.
+        exited_symbols: set[str] = set()  # Stocks that hit stop-loss — don't re-enter.
+        reentry_round = 0
 
-        if not raw_candidates:
-            _notify("No qualifying gainers found. Will retry tomorrow.", logger, True)
-            time.sleep(3600)
-            continue
-
-        # --- Phase 3b: Filter for tradability (ASM/GSM/circuit limits) ---
-        tradable, skipped = trad_filter.filter_candidates(
-            raw_candidates, fno_only=settings.fno_only,
-        )
-
-        if skipped:
-            skip_msg = "Skipped by ASM/GSM/circuit filter:\n" + "\n".join(
-                f"  {sym}: {reason}" for sym, reason in skipped
-            )
-            logger.info(skip_msg)
-
-        if not tradable:
-            _notify(
-                f"No tradable stocks found after ASM/GSM filtering ({len(skipped)} skipped). "
-                f"Will retry tomorrow.",
-                logger, True,
-            )
-            time.sleep(3600)
-            continue
-
-        # --- Phase 3c: Probe broker tradability (catches Angel One cautionary list) ---
-        logger.info("Probing %d candidates for broker tradability...", len(tradable))
-        probe_start = time.perf_counter()
-        probed_tradable, probe_skipped = trad_filter.probe_candidates(
-            broker, tradable, max_workers=4,
-        )
-        probe_duration = time.perf_counter() - probe_start
-        logger.info(
-            "Probe completed in %.1f seconds: %d tradable, %d rejected.",
-            probe_duration, len(probed_tradable), len(probe_skipped),
-        )
-
-        if probe_skipped:
-            probe_msg = "Skipped by broker probe (cautionary):\n" + "\n".join(
-                f"  {sym}: {reason}" for sym, reason in probe_skipped
-            )
-            _notify(probe_msg, logger, True)
-
-        all_skipped = skipped + probe_skipped
-        top_gainers = probed_tradable[:TOP_N]
-
-        if not top_gainers:
-            _notify(
-                f"No tradable stocks found after filtering ({len(all_skipped)} skipped). "
-                f"Will retry tomorrow.",
-                logger, True,
-            )
-            time.sleep(3600)
-            continue
-
-        gainers_msg = f"Top {len(top_gainers)} tradable stocks selected (from {len(raw_candidates)} scanned, {len(all_skipped)} filtered):\n" + "\n".join(
-            f"  {g['symbol']}: {g['pct_change']:+.2f}% @ {g['ltp']:.2f}\n"
-            f"    Score={g['composite_score']:.3f} | Vol={g['relative_volume']:.1f}x | "
-            f"Momentum={g['momentum_score']:.2f} | BuyPressure={g['buy_pressure']:.2f} | "
-            f"Stability={g['stability_score']:.2f} | PrevTrend={g['prev_day_score']:.2f}"
-            for g in top_gainers
-        )
-        _notify(gainers_msg, logger, True)
-
-        # --- Phase 4: Allocate capital with intraday leverage and enter positions ---
-        total_capital = _allocate_capital(broker, settings, logger)
-        leveraged_capital = total_capital * settings.intraday_leverage
-        capital_per_stock = leveraged_capital / len(top_gainers)
-        logger.info(
-            "Capital: %.2f x %.1fx leverage = %.2f buying power (%.2f per stock)",
-            total_capital, settings.intraday_leverage, leveraged_capital, capital_per_stock,
-        )
-
-        consecutive_losses = 0  # Tracks consecutive losing trades for the day.
-
-        # Build fallback queue: top_gainers first, then remaining probed candidates.
-        fallback_queue = list(top_gainers)
-        for candidate in probed_tradable[TOP_N:]:
-            if candidate not in fallback_queue:
-                fallback_queue.append(candidate)
-
-        entered_symbols: list[str] = []
-        token_map: dict[str, str] = {}
-        slm_orders: dict[str, str] = {}  # symbol -> SL-M order ID
-        slm_triggers: dict[str, float] = {}  # symbol -> current SL-M trigger price
-
-        for gainer in fallback_queue:
-            if len(entered_symbols) >= TOP_N:
-                break  # We have enough positions.
-
-            symbol = gainer["symbol"]
-            try:
-                instrument = Instrument(
-                    symbol=symbol,
-                    exchange="NSE",
-                    tradingsymbol=symbol,
-                    symboltoken=gainer["token"],
-                )
-
-                qty = int(capital_per_stock // gainer["ltp"])
-                if qty <= 0:
-                    _notify(
-                        f"Skipping {symbol}: price {gainer['ltp']:.2f} exceeds "
-                        f"allocated capital {capital_per_stock:.2f}",
-                        logger, True,
-                    )
-                    continue
-
-                order = order_manager.place_market_order(
-                    symbol, "BUY", qty, instrument=instrument,
-                    current_price=gainer["ltp"],
-                )
-                pos = position_tracker.update_buy(symbol, qty, gainer["ltp"])
-                entered_symbols.append(symbol)
-                token_map[symbol] = gainer["token"]
-
-                # Place server-side SL-M order at the hard stop as a safety net.
-                slm_id = _place_slm_order(
-                    broker, symbol, gainer["token"], qty, pos.hard_stop, logger,
-                )
-                if slm_id:
-                    slm_orders[symbol] = slm_id
-                    slm_triggers[symbol] = pos.hard_stop
-
-                _notify(
-                    f"ENTRY: {symbol} — {qty} shares @ {gainer['ltp']:.2f} "
-                    f"(capital={capital_per_stock:.2f}, change={gainer['pct_change']:+.2f}%, "
-                    f"score={gainer['composite_score']:.3f}, SL-M={pos.hard_stop:.2f}) | {order}",
-                    logger, True,
-                )
-            except OrderRejectedError as exc:
-                _notify(
-                    f"SKIPPED {symbol}: {exc.reason} — trying next candidate.",
-                    logger, True,
-                )
-                continue  # Try next candidate in fallback queue.
-            except Exception as exc:
-                logger.exception("Failed to enter %s: %s", symbol, exc)
-                send_telegram_message(f"Entry failed for {symbol}: {exc}")
-
-        if not entered_symbols:
-            _notify("No trades could be executed. All candidates rejected.", logger, True)
-            time.sleep(3600)
-            continue
-
-        # Add token mappings for any remaining top_gainers (for monitoring).
-        for g in top_gainers:
-            if g["symbol"] not in token_map:
-                token_map[g["symbol"]] = g["token"]
-
-        # --- Phase 5: Monitor positions with trailing stop until market close ---
-        logger.info("Monitoring %d positions with trailing stop...", len(position_tracker.snapshot()))
-
-        while True:
+        # === Re-entry loop: scan → enter → monitor, up to MAX_REENTRY_ROUNDS ===
+        while reentry_round <= MAX_REENTRY_ROUNDS:
             now = _ist_now()
             if now.hour > MARKET_CLOSE_HOUR or (now.hour == MARKET_CLOSE_HOUR and now.minute >= MARKET_CLOSE_MIN):
                 break
-
-            # Stop trading after max consecutive losses.
             if consecutive_losses >= settings.max_consecutive_losses:
                 _notify(
-                    f"Stopping: {consecutive_losses} consecutive losing trades. "
-                    f"Force-closing remaining positions.",
+                    f"Stopping for the day: {consecutive_losses} consecutive losses.",
                     logger, True,
                 )
                 break
 
-            positions = position_tracker.snapshot()
-            if not positions:
-                logger.info("All positions closed. Done for today.")
+            if reentry_round > 0:
+                _notify(
+                    f"RE-ENTRY round {reentry_round}/{MAX_REENTRY_ROUNDS} — "
+                    f"cooling down {REENTRY_COOLDOWN_MINUTES} minutes before re-scanning...",
+                    logger, True,
+                )
+                time.sleep(REENTRY_COOLDOWN_MINUTES * 60)
+
+                # Check market is still open after cooldown.
+                now = _ist_now()
+                if now.hour > MARKET_CLOSE_HOUR or (now.hour == MARKET_CLOSE_HOUR and now.minute >= MARKET_CLOSE_MIN):
+                    break
+
+                # Re-check if market is still bullish.
+                bullish, nifty_change = is_market_bullish(broker)
+                _notify(
+                    f"Re-entry market check: Nifty 50 = {nifty_change:+.2f}% — "
+                    f"{'BULLISH' if bullish else 'BEARISH'}",
+                    logger, True,
+                )
+                if not bullish:
+                    _notify("Market turned bearish. No more re-entries today.", logger, True)
+                    break
+
+            # --- Phase 3: Scan all NSE stocks for top gainers ---
+            scan_pool_size = TOP_N * 5
+            round_label = f"[Round {reentry_round}] " if reentry_round > 0 else ""
+            logger.info("%sScanning %d stocks for top %d candidates (pool=%d)...",
+                        round_label, len(nse_stocks), TOP_N, scan_pool_size)
+            scan_start = time.perf_counter()
+            raw_candidates = scan_top_gainers(broker, nse_stocks, top_n=scan_pool_size)
+            scan_duration = time.perf_counter() - scan_start
+            logger.info("Scan completed in %.1f seconds. Found %d raw candidates.", scan_duration, len(raw_candidates))
+
+            if not raw_candidates:
+                _notify(f"{round_label}No qualifying gainers found.", logger, True)
                 break
 
-            # Batch-fetch current prices for all open positions.
-            open_tokens = [token_map[s] for s in positions if s in token_map]
-            if not open_tokens:
+            # --- Phase 3b: Filter for tradability (ASM/GSM/circuit limits) ---
+            tradable, skipped = trad_filter.filter_candidates(
+                raw_candidates, fno_only=settings.fno_only,
+            )
+
+            if skipped:
+                skip_msg = "Skipped by ASM/GSM/circuit filter:\n" + "\n".join(
+                    f"  {sym}: {reason}" for sym, reason in skipped
+                )
+                logger.info(skip_msg)
+
+            if not tradable:
+                _notify(
+                    f"{round_label}No tradable stocks after ASM/GSM filtering ({len(skipped)} skipped).",
+                    logger, True,
+                )
                 break
 
-            try:
-                result = broker.get_market_data("LTP", {"NSE": open_tokens})
-                fetched = {str(q.get("symbolToken", "")): float(q.get("ltp", 0)) for q in result.get("fetched", [])}
-            except Exception as exc:
-                logger.warning("Price fetch failed: %s", exc)
-                time.sleep(settings.monitor_interval_seconds)
-                continue
+            # --- Phase 3c: Probe broker tradability (catches Angel One cautionary list) ---
+            logger.info("Probing %d candidates for broker tradability...", len(tradable))
+            probe_start = time.perf_counter()
+            probed_tradable, probe_skipped = trad_filter.probe_candidates(
+                broker, tradable, max_workers=4,
+            )
+            probe_duration = time.perf_counter() - probe_start
+            logger.info(
+                "Probe completed in %.1f seconds: %d tradable, %d rejected.",
+                probe_duration, len(probed_tradable), len(probe_skipped),
+            )
 
-            for symbol, pos in list(positions.items()):
-                token = token_map.get(symbol)
-                if not token:
-                    continue
-                current_price = fetched.get(token, 0)
-                if current_price <= 0:
-                    continue
+            if probe_skipped:
+                probe_msg = "Skipped by broker probe (cautionary):\n" + "\n".join(
+                    f"  {sym}: {reason}" for sym, reason in probe_skipped
+                )
+                _notify(probe_msg, logger, True)
+
+            # Exclude stocks that already hit stop-loss today.
+            if exited_symbols:
+                probed_tradable = [c for c in probed_tradable if c["symbol"] not in exited_symbols]
+
+            all_skipped = skipped + probe_skipped
+            top_gainers = probed_tradable[:TOP_N]
+
+            if not top_gainers:
+                _notify(
+                    f"{round_label}No tradable stocks after filtering "
+                    f"({len(all_skipped)} skipped, {len(exited_symbols)} previously exited).",
+                    logger, True,
+                )
+                break
+
+            gainers_msg = (
+                f"{round_label}Top {len(top_gainers)} tradable stocks selected "
+                f"(from {len(raw_candidates)} scanned, {len(all_skipped)} filtered):\n"
+                + "\n".join(
+                    f"  {g['symbol']}: {g['pct_change']:+.2f}% @ {g['ltp']:.2f}\n"
+                    f"    Score={g['composite_score']:.3f} | Vol={g['relative_volume']:.1f}x | "
+                    f"Momentum={g['momentum_score']:.2f} | BuyPressure={g['buy_pressure']:.2f} | "
+                    f"Stability={g['stability_score']:.2f} | PrevTrend={g['prev_day_score']:.2f}"
+                    for g in top_gainers
+                )
+            )
+            _notify(gainers_msg, logger, True)
+
+            # --- Phase 4: Allocate capital with intraday leverage and enter positions ---
+            total_capital = _allocate_capital(broker, settings, logger)
+            leveraged_capital = total_capital * settings.intraday_leverage
+            capital_per_stock = leveraged_capital / len(top_gainers)
+            logger.info(
+                "Capital: %.2f x %.1fx leverage = %.2f buying power (%.2f per stock)",
+                total_capital, settings.intraday_leverage, leveraged_capital, capital_per_stock,
+            )
+
+            # Build fallback queue: top_gainers first, then remaining probed candidates.
+            fallback_queue = list(top_gainers)
+            for candidate in probed_tradable[TOP_N:]:
+                if candidate not in fallback_queue:
+                    fallback_queue.append(candidate)
+
+            entered_symbols: list[str] = []
+            token_map: dict[str, str] = {}
+            slm_orders: dict[str, str] = {}  # symbol -> SL-M order ID
+            slm_triggers: dict[str, float] = {}  # symbol -> current SL-M trigger price
+
+            for gainer in fallback_queue:
+                if len(entered_symbols) >= TOP_N:
+                    break
+
+                symbol = gainer["symbol"]
+                if symbol in exited_symbols:
+                    continue  # Don't re-enter a stock that already hit stop-loss.
 
                 try:
-                    old_sl = pos.stop_loss
-                    position_tracker.update_trailing_stop(symbol, current_price)
+                    instrument = Instrument(
+                        symbol=symbol,
+                        exchange="NSE",
+                        tradingsymbol=symbol,
+                        symboltoken=gainer["token"],
+                    )
 
-                    if pos.stop_loss > old_sl:
-                        logger.info(
-                            "TRAILING STOP UPDATE %s: SL %.2f -> %.2f (price=%.2f, high=%.2f)",
-                            symbol, old_sl, pos.stop_loss, current_price, pos.highest_price,
-                        )
-
-                        # Update the server-side SL-M trigger to match the new trailing stop.
-                        slm_id = slm_orders.get(symbol)
-                        if slm_id and pos.stop_loss > slm_triggers.get(symbol, 0):
-                            ok = _update_slm_trigger(
-                                broker, slm_id, symbol, token,
-                                pos.quantity, pos.stop_loss, logger,
-                            )
-                            if ok:
-                                slm_triggers[symbol] = pos.stop_loss
-
-                    if position_tracker.should_exit(symbol, current_price):
-                        exit_reason = "HARD STOP (2% max loss)" if current_price <= pos.hard_stop else "TRAILING STOP"
-
-                        # Cancel the server-side SL-M before placing software exit.
-                        slm_id = slm_orders.pop(symbol, None)
-                        if slm_id:
-                            _cancel_slm_order(broker, slm_id, symbol, logger)
-                        slm_triggers.pop(symbol, None)
-
-                        broker_instrument = Instrument(
-                            symbol=symbol, exchange="NSE",
-                            tradingsymbol=symbol, symboltoken=token,
-                        )
-                        exit_order = order_manager.place_exit_order(
-                            symbol, pos.quantity, instrument=broker_instrument,
-                            current_price=current_price,
-                        )
-                        pnl = (current_price - pos.average_price) * pos.quantity
-                        position_tracker.update_sell(symbol, pos.quantity)
-
-                        # Track consecutive losses.
-                        if pnl < 0:
-                            consecutive_losses += 1
-                        else:
-                            consecutive_losses = 0  # Reset on a winning trade.
-
+                    qty = int(capital_per_stock // gainer["ltp"])
+                    if qty <= 0:
                         _notify(
-                            f"{exit_reason} EXIT: {symbol} — {pos.quantity} shares @ {current_price:.2f} "
-                            f"(entry={pos.average_price:.2f}, high={pos.highest_price:.2f}, "
-                            f"SL={pos.stop_loss:.2f}, hard_stop={pos.hard_stop:.2f}, PnL={pnl:+.2f}, "
-                            f"consecutive_losses={consecutive_losses}/{settings.max_consecutive_losses}) | {exit_order}",
+                            f"Skipping {symbol}: price {gainer['ltp']:.2f} exceeds "
+                            f"allocated capital {capital_per_stock:.2f}",
                             logger, True,
                         )
-                except Exception as exc:
-                    logger.exception("Error monitoring %s: %s", symbol, exc)
+                        continue
 
-            time.sleep(settings.monitor_interval_seconds)
+                    order = order_manager.place_market_order(
+                        symbol, "BUY", qty, instrument=instrument,
+                        current_price=gainer["ltp"],
+                    )
+                    pos = position_tracker.update_buy(symbol, qty, gainer["ltp"])
+                    entered_symbols.append(symbol)
+                    token_map[symbol] = gainer["token"]
+
+                    # Place server-side SL-M order at the hard stop as a safety net.
+                    slm_id = _place_slm_order(
+                        broker, symbol, gainer["token"], qty, pos.hard_stop, logger,
+                    )
+                    if slm_id:
+                        slm_orders[symbol] = slm_id
+                        slm_triggers[symbol] = pos.hard_stop
+
+                    _notify(
+                        f"{round_label}ENTRY: {symbol} — {qty} shares @ {gainer['ltp']:.2f} "
+                        f"(capital={capital_per_stock:.2f}, change={gainer['pct_change']:+.2f}%, "
+                        f"score={gainer['composite_score']:.3f}, SL-M={pos.hard_stop:.2f}) | {order}",
+                        logger, True,
+                    )
+                except OrderRejectedError as exc:
+                    _notify(
+                        f"SKIPPED {symbol}: {exc.reason} — trying next candidate.",
+                        logger, True,
+                    )
+                    continue
+                except Exception as exc:
+                    logger.exception("Failed to enter %s: %s", symbol, exc)
+                    send_telegram_message(f"Entry failed for {symbol}: {exc}")
+
+            if not entered_symbols:
+                _notify(f"{round_label}No trades could be executed. All candidates rejected.", logger, True)
+                break
+
+            # Add token mappings for any remaining top_gainers (for monitoring).
+            for g in top_gainers:
+                if g["symbol"] not in token_map:
+                    token_map[g["symbol"]] = g["token"]
+
+            # --- Phase 5: Monitor positions with trailing stop until market close ---
+            logger.info("%sMonitoring %d positions with trailing stop...",
+                        round_label, len(position_tracker.snapshot()))
+
+            positions_closed_by_sl = False  # Track if monitoring ended due to all SL exits.
+
+            while True:
+                now = _ist_now()
+                if now.hour > MARKET_CLOSE_HOUR or (now.hour == MARKET_CLOSE_HOUR and now.minute >= MARKET_CLOSE_MIN):
+                    break
+
+                if consecutive_losses >= settings.max_consecutive_losses:
+                    _notify(
+                        f"Stopping: {consecutive_losses} consecutive losing trades. "
+                        f"Force-closing remaining positions.",
+                        logger, True,
+                    )
+                    break
+
+                positions = position_tracker.snapshot()
+                if not positions:
+                    positions_closed_by_sl = True
+                    logger.info("All positions closed by stop-loss.")
+                    break
+
+                # Batch-fetch current prices for all open positions.
+                open_tokens = [token_map[s] for s in positions if s in token_map]
+                if not open_tokens:
+                    break
+
+                try:
+                    result = broker.get_market_data("LTP", {"NSE": open_tokens})
+                    fetched = {str(q.get("symbolToken", "")): float(q.get("ltp", 0)) for q in result.get("fetched", [])}
+                except Exception as exc:
+                    logger.warning("Price fetch failed: %s", exc)
+                    time.sleep(settings.monitor_interval_seconds)
+                    continue
+
+                for symbol, pos in list(positions.items()):
+                    token = token_map.get(symbol)
+                    if not token:
+                        continue
+                    current_price = fetched.get(token, 0)
+                    if current_price <= 0:
+                        continue
+
+                    try:
+                        old_sl = pos.stop_loss
+                        position_tracker.update_trailing_stop(symbol, current_price)
+
+                        if pos.stop_loss > old_sl:
+                            logger.info(
+                                "TRAILING STOP UPDATE %s: SL %.2f -> %.2f (price=%.2f, high=%.2f)",
+                                symbol, old_sl, pos.stop_loss, current_price, pos.highest_price,
+                            )
+
+                            # Update the server-side SL-M trigger to match the new trailing stop.
+                            slm_id = slm_orders.get(symbol)
+                            if slm_id and pos.stop_loss > slm_triggers.get(symbol, 0):
+                                ok = _update_slm_trigger(
+                                    broker, slm_id, symbol, token,
+                                    pos.quantity, pos.stop_loss, logger,
+                                )
+                                if ok:
+                                    slm_triggers[symbol] = pos.stop_loss
+
+                        if position_tracker.should_exit(symbol, current_price):
+                            exit_reason = "HARD STOP (2% max loss)" if current_price <= pos.hard_stop else "TRAILING STOP"
+
+                            # Cancel the server-side SL-M before placing software exit.
+                            slm_id = slm_orders.pop(symbol, None)
+                            if slm_id:
+                                _cancel_slm_order(broker, slm_id, symbol, logger)
+                            slm_triggers.pop(symbol, None)
+
+                            broker_instrument = Instrument(
+                                symbol=symbol, exchange="NSE",
+                                tradingsymbol=symbol, symboltoken=token,
+                            )
+                            exit_order = order_manager.place_exit_order(
+                                symbol, pos.quantity, instrument=broker_instrument,
+                                current_price=current_price,
+                            )
+                            pnl = (current_price - pos.average_price) * pos.quantity
+                            position_tracker.update_sell(symbol, pos.quantity)
+
+                            # Track the exited symbol so we don't re-enter it.
+                            exited_symbols.add(symbol)
+
+                            # Track consecutive losses.
+                            if pnl < 0:
+                                consecutive_losses += 1
+                            else:
+                                consecutive_losses = 0  # Reset on a winning trade.
+
+                            _notify(
+                                f"{exit_reason} EXIT: {symbol} — {pos.quantity} shares @ {current_price:.2f} "
+                                f"(entry={pos.average_price:.2f}, high={pos.highest_price:.2f}, "
+                                f"SL={pos.stop_loss:.2f}, hard_stop={pos.hard_stop:.2f}, PnL={pnl:+.2f}, "
+                                f"consecutive_losses={consecutive_losses}/{settings.max_consecutive_losses}, "
+                                f"round={reentry_round}/{MAX_REENTRY_ROUNDS}) | {exit_order}",
+                                logger, True,
+                            )
+                    except Exception as exc:
+                        logger.exception("Error monitoring %s: %s", symbol, exc)
+
+                time.sleep(settings.monitor_interval_seconds)
+
+            # Check if we should re-enter or stop for the day.
+            if not positions_closed_by_sl:
+                break  # Market close or max losses — no re-entry.
+            if consecutive_losses >= settings.max_consecutive_losses:
+                break  # Too many losses — stop.
+
+            reentry_round += 1
+            if reentry_round > MAX_REENTRY_ROUNDS:
+                _notify(
+                    f"Max re-entry rounds ({MAX_REENTRY_ROUNDS}) reached. Done for today.",
+                    logger, True,
+                )
+                break
+
+            # Loop back to scan → enter → monitor.
 
         # --- Phase 6: Force-close any remaining positions at market close ---
         remaining = position_tracker.snapshot()
