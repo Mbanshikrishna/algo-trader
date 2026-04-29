@@ -7,6 +7,7 @@ from dataclasses import dataclass  # Imports the dataclass decorator for compact
 DEFAULT_TRAIL_PCT = 0.02  # Default trailing stop: 2% below highest price.
 TIGHT_TRAIL_PCT = 0.015  # Tighter trailing stop: 1.5% after profit exceeds threshold.
 TIGHT_TRAIL_PROFIT_THRESHOLD = 0.05  # Tighten the trail once profit exceeds 5%.
+LOCK_PROFIT_THRESHOLD = 0.15  # Lock stop-loss at +15% once gain crosses 15%.
 MAX_LOSS_PCT = 0.02  # Hard max loss per stock: 2% below entry price.
 
 
@@ -48,8 +49,11 @@ class PositionTracker:  # Defines an in-memory tracker for open intraday positio
         existing.highest_price = max(existing.highest_price, price)  # Keeps the tracked high aligned with the best price seen since the position was opened.
 
         profit_pct = (existing.highest_price - existing.average_price) / existing.average_price  # Recomputes profit using the new blended entry price.
-        trail_pct = TIGHT_TRAIL_PCT if profit_pct >= TIGHT_TRAIL_PROFIT_THRESHOLD else DEFAULT_TRAIL_PCT  # Preserves the tighter trail only once the blended position is far enough in profit.
-        new_stop = round(existing.highest_price * (1 - trail_pct), 2)  # Rebuilds the trailing stop from the updated high.
+        if profit_pct >= LOCK_PROFIT_THRESHOLD:
+            new_stop = round(existing.average_price * (1 + LOCK_PROFIT_THRESHOLD), 2)
+        else:
+            trail_pct = TIGHT_TRAIL_PCT if profit_pct >= TIGHT_TRAIL_PROFIT_THRESHOLD else DEFAULT_TRAIL_PCT
+            new_stop = round(existing.highest_price * (1 - trail_pct), 2)
         if new_stop > existing.stop_loss:
             existing.stop_loss = new_stop  # Never lets a scale-in lower the current stop-loss.
         return existing  # Returns the updated position.
@@ -79,12 +83,20 @@ class PositionTracker:  # Defines an in-memory tracker for open intraday positio
         if current_price > existing.highest_price:
             existing.highest_price = current_price
 
-        # Choose trail percentage: tighten after 5% profit.
+        # Choose trail percentage based on profit level.
         profit_pct = (existing.highest_price - existing.average_price) / existing.average_price
-        trail_pct = TIGHT_TRAIL_PCT if profit_pct >= TIGHT_TRAIL_PROFIT_THRESHOLD else DEFAULT_TRAIL_PCT
 
-        # Compute new stop-loss; only allow upward movement.
-        new_stop = round(existing.highest_price * (1 - trail_pct), 2)
+        if profit_pct >= LOCK_PROFIT_THRESHOLD:
+            # Lock stop-loss at exactly +15% gain — guarantees at least 15% profit.
+            new_stop = round(existing.average_price * (1 + LOCK_PROFIT_THRESHOLD), 2)
+        elif profit_pct >= TIGHT_TRAIL_PROFIT_THRESHOLD:
+            trail_pct = TIGHT_TRAIL_PCT
+            new_stop = round(existing.highest_price * (1 - trail_pct), 2)
+        else:
+            trail_pct = DEFAULT_TRAIL_PCT
+            new_stop = round(existing.highest_price * (1 - trail_pct), 2)
+
+        # Only allow upward movement.
         if new_stop > existing.stop_loss:
             existing.stop_loss = new_stop
 

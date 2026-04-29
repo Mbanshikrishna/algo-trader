@@ -84,6 +84,23 @@ class CoreTests(unittest.TestCase):
         assert pos is not None
         self.assertEqual(pos.stop_loss, 103.42)
 
+    def test_position_tracker_locks_stop_at_fifteen_percent_gain(self) -> None:
+        tracker = PositionTracker()
+        tracker.update_buy("TEST.NS", 10, 100)
+
+        # Push price to +15% (115.0) — stop should lock at exactly 115.0.
+        pos = tracker.update_trailing_stop("TEST.NS", 115)
+        assert pos is not None
+        self.assertEqual(pos.stop_loss, 115.0)
+
+        # Price goes higher to 120 — stop stays at 115.0 (locked, not trailing).
+        pos = tracker.update_trailing_stop("TEST.NS", 120)
+        assert pos is not None
+        self.assertEqual(pos.stop_loss, 115.0)
+
+        # Price drops to 115.0 — should trigger exit.
+        self.assertTrue(tracker.should_exit("TEST.NS", 115.0))
+
     def test_position_tracker_should_exit_when_price_hits_stop_loss(self) -> None:
         tracker = PositionTracker()
         tracker.update_buy("HDFCBANK.NS", 10, 100)

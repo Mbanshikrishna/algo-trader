@@ -144,6 +144,13 @@ class AngelOneClient:  # Defines a lightweight wrapper around Angel One SmartAPI
         )
         return payload
 
+    def modify_order(self, order_payload: dict[str, Any]) -> dict[str, Any]:  # Modifies a pending order (e.g. update trigger price on SL-M).
+        payload = self._require_success(
+            self._post(self.ORDER_BASE_URL, "/modifyOrder", order_payload),
+            "modify order",
+        )
+        return payload
+
     USER_BASE_URL = f"{API_ROOT_URL}/rest/secure/angelbroking/user/v1"  # Stores the SmartAPI user/RMS endpoint base URL.
 
     def get_available_capital(self) -> float:  # Fetches available intraday capital from the account.

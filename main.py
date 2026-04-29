@@ -30,6 +30,90 @@ def _notify(message: str, logger, send_alert: bool) -> None:
         send_telegram_message(message)
 
 
+def _place_slm_order(
+    broker: AngelOneClient,
+    symbol: str,
+    token: str,
+    quantity: int,
+    trigger_price: float,
+    logger,
+) -> str | None:
+    """Place a SL-M (Stop-Loss Market) SELL order on the exchange.
+
+    This order sits on the exchange and triggers automatically when the price
+    drops to the trigger level — no polling needed.
+    Returns the order ID, or None if placement fails.
+    """
+    payload = {
+        "variety": "STOPLOSS",
+        "tradingsymbol": symbol,
+        "symboltoken": str(token),
+        "transactiontype": "SELL",
+        "exchange": "NSE",
+        "ordertype": "STOPLOSS_MARKET",
+        "producttype": "INTRADAY",
+        "duration": "DAY",
+        "quantity": str(quantity),
+        "triggerprice": str(round(trigger_price, 2)),
+        "squareoff": "0",
+        "stoploss": "0",
+        "price": "0",
+    }
+    try:
+        result = broker.place_order(payload)
+        resp = result.get("response", {})
+        data = resp.get("data", {})
+        order_id = data.get("orderid") if isinstance(data, dict) else str(data) if data else None
+        if order_id:
+            logger.info("SL-M order placed for %s: trigger=%.2f, orderid=%s", symbol, trigger_price, order_id)
+        return order_id
+    except Exception as exc:
+        logger.warning("Failed to place SL-M order for %s: %s", symbol, exc)
+        return None
+
+
+def _update_slm_trigger(
+    broker: AngelOneClient,
+    order_id: str,
+    symbol: str,
+    token: str,
+    quantity: int,
+    new_trigger: float,
+    logger,
+) -> bool:
+    """Modify an existing SL-M order's trigger price (trail it up)."""
+    payload = {
+        "variety": "STOPLOSS",
+        "orderid": order_id,
+        "tradingsymbol": symbol,
+        "symboltoken": str(token),
+        "transactiontype": "SELL",
+        "exchange": "NSE",
+        "ordertype": "STOPLOSS_MARKET",
+        "producttype": "INTRADAY",
+        "duration": "DAY",
+        "quantity": str(quantity),
+        "triggerprice": str(round(new_trigger, 2)),
+        "price": "0",
+    }
+    try:
+        broker.modify_order(payload)
+        logger.info("SL-M trigger updated for %s: new trigger=%.2f", symbol, new_trigger)
+        return True
+    except Exception as exc:
+        logger.warning("Failed to update SL-M for %s: %s", symbol, exc)
+        return False
+
+
+def _cancel_slm_order(broker: AngelOneClient, order_id: str, symbol: str, logger) -> None:
+    """Cancel an existing SL-M order before placing a software exit."""
+    try:
+        broker.cancel_order(order_id, "STOPLOSS")
+        logger.info("SL-M order cancelled for %s: orderid=%s", symbol, order_id)
+    except Exception as exc:
+        logger.warning("Failed to cancel SL-M for %s (may have already triggered): %s", symbol, exc)
+
+
 def _ist_now() -> datetime:
     return datetime.now(IST)
 
@@ -218,6 +302,8 @@ def run_loop() -> None:
 
         entered_symbols: list[str] = []
         token_map: dict[str, str] = {}
+        slm_orders: dict[str, str] = {}  # symbol -> SL-M order ID
+        slm_triggers: dict[str, float] = {}  # symbol -> current SL-M trigger price
 
         for gainer in fallback_queue:
             if len(entered_symbols) >= TOP_N:
@@ -245,14 +331,22 @@ def run_loop() -> None:
                     symbol, "BUY", qty, instrument=instrument,
                     current_price=gainer["ltp"],
                 )
-                position_tracker.update_buy(symbol, qty, gainer["ltp"])
+                pos = position_tracker.update_buy(symbol, qty, gainer["ltp"])
                 entered_symbols.append(symbol)
                 token_map[symbol] = gainer["token"]
+
+                # Place server-side SL-M order at the hard stop as a safety net.
+                slm_id = _place_slm_order(
+                    broker, symbol, gainer["token"], qty, pos.hard_stop, logger,
+                )
+                if slm_id:
+                    slm_orders[symbol] = slm_id
+                    slm_triggers[symbol] = pos.hard_stop
 
                 _notify(
                     f"ENTRY: {symbol} — {qty} shares @ {gainer['ltp']:.2f} "
                     f"(capital={capital_per_stock:.2f}, change={gainer['pct_change']:+.2f}%, "
-                    f"score={gainer['composite_score']:.3f}) | {order}",
+                    f"score={gainer['composite_score']:.3f}, SL-M={pos.hard_stop:.2f}) | {order}",
                     logger, True,
                 )
             except OrderRejectedError as exc:
@@ -307,7 +401,7 @@ def run_loop() -> None:
                 fetched = {str(q.get("symbolToken", "")): float(q.get("ltp", 0)) for q in result.get("fetched", [])}
             except Exception as exc:
                 logger.warning("Price fetch failed: %s", exc)
-                time.sleep(settings.scan_interval_seconds)
+                time.sleep(settings.monitor_interval_seconds)
                 continue
 
             for symbol, pos in list(positions.items()):
@@ -328,8 +422,25 @@ def run_loop() -> None:
                             symbol, old_sl, pos.stop_loss, current_price, pos.highest_price,
                         )
 
+                        # Update the server-side SL-M trigger to match the new trailing stop.
+                        slm_id = slm_orders.get(symbol)
+                        if slm_id and pos.stop_loss > slm_triggers.get(symbol, 0):
+                            ok = _update_slm_trigger(
+                                broker, slm_id, symbol, token,
+                                pos.quantity, pos.stop_loss, logger,
+                            )
+                            if ok:
+                                slm_triggers[symbol] = pos.stop_loss
+
                     if position_tracker.should_exit(symbol, current_price):
                         exit_reason = "HARD STOP (2% max loss)" if current_price <= pos.hard_stop else "TRAILING STOP"
+
+                        # Cancel the server-side SL-M before placing software exit.
+                        slm_id = slm_orders.pop(symbol, None)
+                        if slm_id:
+                            _cancel_slm_order(broker, slm_id, symbol, logger)
+                        slm_triggers.pop(symbol, None)
+
                         broker_instrument = Instrument(
                             symbol=symbol, exchange="NSE",
                             tradingsymbol=symbol, symboltoken=token,
@@ -357,7 +468,7 @@ def run_loop() -> None:
                 except Exception as exc:
                     logger.exception("Error monitoring %s: %s", symbol, exc)
 
-            time.sleep(settings.scan_interval_seconds)
+            time.sleep(settings.monitor_interval_seconds)
 
         # --- Phase 6: Force-close any remaining positions at market close ---
         remaining = position_tracker.snapshot()
@@ -368,6 +479,12 @@ def run_loop() -> None:
                     token = token_map.get(symbol)
                     if not token:
                         continue
+
+                    # Cancel the server-side SL-M order before placing the exit.
+                    slm_id = slm_orders.pop(symbol, None)
+                    if slm_id:
+                        _cancel_slm_order(broker, slm_id, symbol, logger)
+                    slm_triggers.pop(symbol, None)
 
                     # Get final price for exit order and PnL.
                     try:

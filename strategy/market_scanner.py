@@ -31,22 +31,44 @@ MAX_PRICE = 5000.0    # Avoid very expensive stocks.
 MIN_VOLUME = 100_000  # Minimum intraday volume for liquidity.
 
 
-def is_market_bullish(client: AngelOneClient) -> tuple[bool, float]:
-    """Check if Nifty 50 is in a positive trend today."""
-    result = client.get_market_data("FULL", {"NSE": [NIFTY_50_TOKEN]})
-    fetched = result.get("fetched", [])
-    if not fetched:
-        return False, 0.0
+def is_market_bullish(client: AngelOneClient, retries: int = 3) -> tuple[bool, float]:
+    """Check if Nifty 50 is in a positive trend today.
 
-    nifty = fetched[0]
-    ltp = float(nifty.get("ltp", 0))
-    prev_close = float(nifty.get("close", 0))
+    Uses Angel One's pre-computed percentChange when available.
+    Retries on zero-change to handle stale data at market open.
+    """
+    for attempt in range(retries):
+        result = client.get_market_data("FULL", {"NSE": [NIFTY_50_TOKEN]})
+        fetched = result.get("fetched", [])
+        if not fetched:
+            if attempt < retries - 1:
+                time.sleep(5)
+                continue
+            return False, 0.0
 
-    if prev_close <= 0:
-        return False, 0.0
+        nifty = fetched[0]
 
-    change_pct = ((ltp - prev_close) / prev_close) * 100
-    return change_pct > 0, round(change_pct, 2)
+        # Prefer the broker's pre-computed field — avoids stale LTP issues.
+        pct_change = float(nifty.get("percentChange", 0))
+        if pct_change != 0:
+            return pct_change >= 0, round(pct_change, 2)
+
+        # Fallback: compute from LTP and previous close.
+        ltp = float(nifty.get("ltp", 0))
+        prev_close = float(nifty.get("close", 0))
+
+        if prev_close <= 0:
+            return False, 0.0
+
+        computed = ((ltp - prev_close) / prev_close) * 100
+        if computed != 0 or attempt >= retries - 1:
+            return computed >= 0, round(computed, 2)
+
+        # 0.00% at market open likely means stale data — retry after a short wait.
+        logger.info("Nifty change is 0.00%% — retrying in 5s (attempt %d/%d)...", attempt + 1, retries)
+        time.sleep(5)
+
+    return False, 0.0
 
 
 def load_nse_equity_tokens(client: AngelOneClient) -> list[dict[str, str]]:

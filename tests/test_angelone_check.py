@@ -17,6 +17,7 @@ class AngelOneCheckTests(unittest.TestCase):
             risk_per_trade_pct=1.0,
             capital=100000.0,
             scan_interval_seconds=2.0,
+            monitor_interval_seconds=10.0,
             alert_every_check=True,
             order_product_type="INTRADAY",
             order_variety="NORMAL",

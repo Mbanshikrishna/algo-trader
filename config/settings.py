@@ -16,6 +16,7 @@ class Settings:  # Defines the structure of all settings loaded from the environ
     risk_per_trade_pct: float  # Stores the percentage of capital to risk on each trade.
     capital: float  # Stores the total capital used for position sizing.
     scan_interval_seconds: float  # Stores the delay between repeated scan cycles.
+    monitor_interval_seconds: float  # Delay between price checks during position monitoring (should be short).
     alert_every_check: bool  # Controls whether Telegram should receive non-trade status updates too.
     order_product_type: str  # Stores the Angel One product type used for live orders.
     order_variety: str  # Stores the Angel One order variety used for live orders.
@@ -57,6 +58,7 @@ def load_settings() -> Settings:  # Builds a Settings object from environment va
         risk_per_trade_pct=float(os.getenv("RISK_PER_TRADE_PCT", "1.0")),  # Reads the per-trade risk percentage and converts it to a float.
         capital=float(os.getenv("CAPITAL", "100000")),  # Reads the available capital and converts it to a float.
         scan_interval_seconds=float(os.getenv("SCAN_INTERVAL_SECONDS", "2")),  # Reads the delay between repeated scans and converts it to a float.
+        monitor_interval_seconds=float(os.getenv("MONITOR_INTERVAL_SECONDS", "10")),  # Delay between price checks while monitoring positions.
         alert_every_check=_as_bool(os.getenv("ALERT_EVERY_CHECK", "true")),  # Reads whether Telegram should receive updates even without trades.
         order_product_type=os.getenv("ORDER_PRODUCT_TYPE", "INTRADAY").strip().upper(),  # Reads the live-order product type used by Angel One.
         order_variety=os.getenv("ORDER_VARIETY", "NORMAL").strip().upper(),  # Reads the live-order variety used by Angel One.
