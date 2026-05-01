@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import logging
 import time
+from dataclasses import dataclass, field
 from datetime import datetime, timedelta
 from typing import Any
 from zoneinfo import ZoneInfo
@@ -12,6 +13,31 @@ logger = logging.getLogger("algo_trader")
 
 # Nifty 50 index token on NSE.
 NIFTY_50_TOKEN = "99926000"
+# India VIX token on NSE.
+INDIA_VIX_TOKEN = "99926017"
+# NIFTYBEES ETF token (used for VWAP — Nifty index has no volume).
+NIFTYBEES_TOKEN = "10576"
+
+# Nifty 50 constituent tokens for breadth calculation.
+NIFTY_50_CONSTITUENTS: dict[str, str] = {
+    "ADANIENT": "25", "ADANIPORTS": "15083", "APOLLOHOSP": "157",
+    "ASIANPAINT": "236", "AXISBANK": "5900", "BAJAJ-AUTO": "16669",
+    "BAJAJFINSV": "16675", "BAJFINANCE": "317", "BEL": "383",
+    "BHARTIARTL": "10604", "CIPLA": "694", "COALINDIA": "20374",
+    "DRREDDY": "881", "EICHERMOT": "910", "ETERNAL": "5097",
+    "GRASIM": "1232", "HCLTECH": "7229", "HDFCBANK": "1333",
+    "HDFCLIFE": "467", "HINDALCO": "1363", "HINDUNILVR": "1394",
+    "ICICIBANK": "4963", "INDIGO": "11195", "INFY": "1594",
+    "ITC": "1660", "JIOFIN": "18143", "JSWSTEEL": "11723",
+    "KOTAKBANK": "1922", "LT": "11483", "M&M": "2031",
+    "MARUTI": "10999", "MAXHEALTH": "22377", "NESTLEIND": "17963",
+    "NTPC": "11630", "ONGC": "2475", "POWERGRID": "14977",
+    "RELIANCE": "2885", "SBILIFE": "21808", "SBIN": "3045",
+    "SHRIRAMFIN": "4306", "SUNPHARMA": "3351", "TATACONSUM": "3432",
+    "TATASTEEL": "3499", "TCS": "11536", "TECHM": "13538",
+    "TITAN": "3506", "TMPV": "3456", "TRENT": "1964",
+    "ULTRACEMCO": "11532", "WIPRO": "3787",
+}
 
 # Angel One batch quote limit.
 BATCH_SIZE = 50
@@ -31,57 +57,190 @@ MAX_PRICE = 5000.0    # Avoid very expensive stocks.
 MIN_VOLUME = 100_000  # Minimum intraday volume for liquidity.
 
 
-def is_market_bullish(client: AngelOneClient, retries: int = 3) -> tuple[bool, float]:
-    """Check if Nifty 50 is in a positive trend today.
+# ---------------------------------------------------------------------------
+# Multi-factor market bullishness model
+# ---------------------------------------------------------------------------
 
-    Uses Angel One's pre-computed percentChange when available.
-    Detects market holidays by checking tradeVolume and exchFeedTime.
-    Retries on zero-change to handle stale data at market open.
+@dataclass
+class MarketCheckResult:
+    """Result of the 4-factor market bullishness check."""
+
+    bullish: bool = False
+    score: int = 0
+
+    # Factor 1: Index Direction
+    nifty_pct: float = 0.0
+    index_pass: bool = False
+
+    # Factor 2: Market Breadth
+    advancing: int = 0
+    declining: int = 0
+    breadth_ratio: float = 0.0
+    breadth_pass: bool = False
+
+    # Factor 3: Intraday Strength
+    nifty_ltp: float = 0.0
+    nifty_open: float = 0.0
+    niftybees_ltp: float = 0.0
+    niftybees_vwap: float = 0.0
+    strength_pass: bool = False
+
+    # Factor 4: Volatility Filter
+    vix_pct: float = 0.0
+    volatility_pass: bool = False
+
+    # Holiday detection
+    is_holiday: bool = False
+
+    def format_report(self) -> str:
+        """Format a structured Telegram-friendly report."""
+        if self.is_holiday:
+            return "Market closed (holiday). Skipping."
+
+        lines = [
+            f"Market Check: {self.score}/4 — {'BULLISH' if self.bullish else 'NOT BULLISH'}",
+            "",
+            f"1. Index Direction: {'PASS ✅' if self.index_pass else 'FAIL ❌'}",
+            f"   Nifty 50: {self.nifty_pct:+.2f}% (need > 0%)",
+            "",
+            f"2. Market Breadth: {'PASS ✅' if self.breadth_pass else 'FAIL ❌'}",
+            f"   Advancers: {self.advancing}, Decliners: {self.declining}",
+            f"   Breadth ratio: {self.breadth_ratio:.2f} (need > 1.2)",
+            "",
+            f"3. Intraday Strength: {'PASS ✅' if self.strength_pass else 'FAIL ❌'}",
+            f"   Nifty LTP vs Open: {self.nifty_ltp:.2f} vs {self.nifty_open:.2f}",
+            f"   NIFTYBEES vs VWAP: {self.niftybees_ltp:.2f} vs {self.niftybees_vwap:.2f}",
+            "",
+            f"4. Volatility Filter: {'PASS ✅' if self.volatility_pass else 'FAIL ❌'}",
+            f"   India VIX change: {self.vix_pct:+.2f}% (reject if > +5%)",
+            "",
+        ]
+
+        if self.bullish:
+            lines.append(f"Decision: TRADE (score {self.score}/4 >= 3)")
+        else:
+            failed = []
+            if not self.index_pass:
+                failed.append("Index Direction")
+            if not self.breadth_pass:
+                failed.append("Market Breadth")
+            if not self.strength_pass:
+                failed.append("Intraday Strength")
+            if not self.volatility_pass:
+                failed.append("Volatility Filter")
+            lines.append(f"Decision: SKIP TRADING (score {self.score}/4 < 3)")
+            lines.append(f"Failed: {', '.join(failed)}")
+
+        return "\n".join(lines)
+
+
+def is_market_bullish(client: AngelOneClient) -> tuple[bool, MarketCheckResult]:
+    """4-factor market bullishness check with 3-out-of-4 decision rule.
+
+    Factors:
+      1. Index Direction  — Nifty 50 change > 0%
+      2. Market Breadth   — Nifty 50 advancers/decliners > 1.2
+      3. Intraday Strength — Nifty LTP > Open AND NIFTYBEES > VWAP
+      4. Volatility Filter — India VIX change < +5%
+
+    Returns (is_bullish, detailed_result).
     """
-    today_str = datetime.now(IST).strftime("%d-%b-%Y")  # e.g. "01-May-2026"
+    result = MarketCheckResult()
+    today_str = datetime.now(IST).strftime("%d-%b-%Y")
 
-    for attempt in range(retries):
-        result = client.get_market_data("FULL", {"NSE": [NIFTY_50_TOKEN]})
-        fetched = result.get("fetched", [])
-        if not fetched:
-            if attempt < retries - 1:
-                time.sleep(5)
-                continue
-            return False, 0.0
+    # --- Fetch Nifty 50 + India VIX + NIFTYBEES in one batch ---
+    try:
+        market_data = client.get_market_data(
+            "FULL", {"NSE": [NIFTY_50_TOKEN, INDIA_VIX_TOKEN, NIFTYBEES_TOKEN]},
+        )
+    except Exception as exc:
+        logger.warning("Failed to fetch market data: %s", exc)
+        return False, result
 
-        nifty = fetched[0]
+    fetched_map: dict[str, dict] = {}
+    for q in market_data.get("fetched", []):
+        fetched_map[str(q.get("symbolToken", ""))] = q
 
-        # Detect market holiday: no trades and feed time is not today.
-        trade_volume = int(float(nifty.get("tradeVolume", 0)))
-        feed_time = str(nifty.get("exchFeedTime", ""))
-        if trade_volume == 0 and today_str not in feed_time:
-            logger.info(
-                "Market appears closed (holiday). tradeVolume=0, exchFeedTime=%s",
-                feed_time,
-            )
-            return False, 0.0
+    nifty = fetched_map.get(NIFTY_50_TOKEN, {})
+    vix = fetched_map.get(INDIA_VIX_TOKEN, {})
+    bees = fetched_map.get(NIFTYBEES_TOKEN, {})
 
-        # Use the broker's pre-computed percentChange.
-        pct_change = float(nifty.get("percentChange", 0))
-        if pct_change != 0:
-            return pct_change > 0, round(pct_change, 2)
+    if not nifty:
+        logger.warning("No Nifty 50 data returned.")
+        return False, result
 
-        # Fallback: compute from LTP and previous close.
+    # --- Holiday detection ---
+    trade_volume = int(float(nifty.get("tradeVolume", 0)))
+    feed_time = str(nifty.get("exchFeedTime", ""))
+    if trade_volume == 0 and today_str not in feed_time:
+        logger.info("Market appears closed (holiday). tradeVolume=0, exchFeedTime=%s", feed_time)
+        result.is_holiday = True
+        return False, result
+
+    # --- Factor 1: Index Direction ---
+    result.nifty_pct = float(nifty.get("percentChange", 0))
+    if result.nifty_pct == 0:
+        # Fallback: compute from LTP and close.
         ltp = float(nifty.get("ltp", 0))
         prev_close = float(nifty.get("close", 0))
+        if prev_close > 0 and ltp > 0:
+            result.nifty_pct = round(((ltp - prev_close) / prev_close) * 100, 2)
+    result.index_pass = result.nifty_pct > 0
 
-        if prev_close <= 0:
-            return False, 0.0
+    # --- Factor 2: Market Breadth (Nifty 50 constituents) ---
+    try:
+        constituent_tokens = list(NIFTY_50_CONSTITUENTS.values())
+        breadth_data = client.get_market_data("FULL", {"NSE": constituent_tokens})
+        for q in breadth_data.get("fetched", []):
+            pct = float(q.get("percentChange", 0))
+            if pct == 0:
+                # Fallback: compute from ltp/close.
+                qltp = float(q.get("ltp", 0))
+                qclose = float(q.get("close", 0))
+                if qclose > 0 and qltp > 0:
+                    pct = ((qltp - qclose) / qclose) * 100
+            if pct > 0:
+                result.advancing += 1
+            elif pct < 0:
+                result.declining += 1
+    except Exception as exc:
+        logger.warning("Failed to fetch breadth data: %s", exc)
 
-        computed = ((ltp - prev_close) / prev_close) * 100
-        if computed != 0 or attempt >= retries - 1:
-            return computed > 0, round(computed, 2)
+    if result.declining > 0:
+        result.breadth_ratio = round(result.advancing / result.declining, 2)
+    elif result.advancing > 0:
+        result.breadth_ratio = 99.0  # All advancing, no decliners.
+    result.breadth_pass = result.breadth_ratio > 1.2
 
-        # 0.00% at market open likely means stale data — retry after a short wait.
-        logger.info("Nifty change is 0.00%% — retrying in 5s (attempt %d/%d)...", attempt + 1, retries)
-        time.sleep(5)
+    # --- Factor 3: Intraday Strength ---
+    result.nifty_ltp = float(nifty.get("ltp", 0))
+    result.nifty_open = float(nifty.get("open", 0))
+    result.niftybees_ltp = float(bees.get("ltp", 0))
+    # NIFTYBEES avgPrice is the exchange-computed VWAP.
+    result.niftybees_vwap = float(bees.get("avgPrice", 0))
 
-    return False, 0.0
+    ltp_above_open = result.nifty_ltp > result.nifty_open
+    bees_above_vwap = (
+        result.niftybees_ltp > result.niftybees_vwap
+        if result.niftybees_vwap > 0
+        else True  # If VWAP unavailable, don't penalize.
+    )
+    result.strength_pass = ltp_above_open and bees_above_vwap
+
+    # --- Factor 4: Volatility Filter ---
+    result.vix_pct = float(vix.get("percentChange", 0))
+    result.volatility_pass = result.vix_pct < 5.0
+
+    # --- Scoring: 3 out of 4 required ---
+    result.score = sum([
+        result.index_pass,
+        result.breadth_pass,
+        result.strength_pass,
+        result.volatility_pass,
+    ])
+    result.bullish = result.score >= 3
+
+    return result.bullish, result
 
 
 def load_nse_equity_tokens(client: AngelOneClient) -> list[dict[str, str]]:

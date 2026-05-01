@@ -199,15 +199,12 @@ def run_loop() -> None:
             time.sleep(3600)
             continue
 
-        # --- Phase 2: Check if market is bullish ---
-        bullish, nifty_change = is_market_bullish(broker)
-        _notify(
-            f"Market check: Nifty 50 change = {nifty_change:+.2f}% — {'BULLISH' if bullish else 'BEARISH'}",
-            logger, True,
-        )
+        # --- Phase 2: Check if market is bullish (4-factor model) ---
+        bullish, market_check = is_market_bullish(broker)
+        report = market_check.format_report()
+        _notify(report, logger, True)
 
         if not bullish:
-            _notify("Market is bearish. No trades today. Will retry tomorrow.", logger, True)
             time.sleep(3600)
             continue
 
@@ -240,15 +237,11 @@ def run_loop() -> None:
                 if now.hour > MARKET_CLOSE_HOUR or (now.hour == MARKET_CLOSE_HOUR and now.minute >= MARKET_CLOSE_MIN):
                     break
 
-                # Re-check if market is still bullish.
-                bullish, nifty_change = is_market_bullish(broker)
-                _notify(
-                    f"Re-entry market check: Nifty 50 = {nifty_change:+.2f}% — "
-                    f"{'BULLISH' if bullish else 'BEARISH'}",
-                    logger, True,
-                )
+                # Re-check if market is still bullish (full 4-factor model).
+                bullish, market_check = is_market_bullish(broker)
+                report = f"Re-entry {market_check.format_report()}"
+                _notify(report, logger, True)
                 if not bullish:
-                    _notify("Market turned bearish. No more re-entries today.", logger, True)
                     break
 
             # --- Phase 3: Scan all NSE stocks for top gainers ---
