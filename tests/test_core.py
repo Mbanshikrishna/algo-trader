@@ -343,5 +343,109 @@ class CoreTests(unittest.TestCase):
         self.assertEqual(skipped[0][0], "BAD-EQ")
 
 
+    def test_entry_validator_passes_all_checks(self) -> None:
+        from execution.entry_validator import validate_entry
+
+        class StubClient:
+            def get_market_data(self, mode, tokens):
+                return {"fetched": [{
+                    "symbolToken": "3045",
+                    "ltp": 840.0,       # +7.0% from close of 785.05
+                    "open": 800.0,
+                    "high": 845.0,
+                    "low": 790.0,
+                    "close": 785.05,    # prev close
+                    "tradeVolume": 500000,
+                    "depth": {
+                        "buy": [{"price": 839.90, "quantity": 100, "orders": 5}],
+                        "sell": [{"price": 840.10, "quantity": 100, "orders": 5}],
+                    },
+                }]}
+
+            def get_candle_data(self, exchange, token, interval, from_dt, to_dt):
+                if interval == "FIVE_MINUTE":
+                    return [
+                        ["2026-05-02T10:00:00+05:30", 830, 835, 828, 833, 10000],
+                        ["2026-05-02T10:05:00+05:30", 833, 838, 832, 837, 12000],
+                        ["2026-05-02T10:10:00+05:30", 837, 841, 836, 840, 11000],
+                    ]
+                elif interval == "ONE_MINUTE":
+                    return [
+                        ["2026-05-02T10:06:00+05:30", 833, 834, 832, 833, 2000],
+                        ["2026-05-02T10:07:00+05:30", 833, 835, 833, 835, 2200],
+                        ["2026-05-02T10:08:00+05:30", 835, 837, 834, 836, 2100],
+                        ["2026-05-02T10:09:00+05:30", 836, 838, 835, 837, 2300],
+                        ["2026-05-02T10:10:00+05:30", 837, 840, 837, 840, 3000],
+                    ]
+                return []
+
+        result = validate_entry("SBIN-EQ", "3045", StubClient())
+        self.assertTrue(result.valid)
+        self.assertAlmostEqual(result.live_price, 840.0)
+        self.assertTrue(result.breakout_ok)
+
+    def test_entry_validator_rejects_fading_momentum(self) -> None:
+        from execution.entry_validator import validate_entry
+
+        class StubClient:
+            def get_market_data(self, mode, tokens):
+                return {"fetched": [{
+                    "symbolToken": "3045",
+                    "ltp": 810.0,       # +3.2% — below 5% threshold
+                    "open": 800.0,
+                    "high": 845.0,
+                    "low": 790.0,
+                    "close": 785.05,
+                    "depth": {"buy": [{"price": 809.9}], "sell": [{"price": 810.1}]},
+                }]}
+
+            def get_candle_data(self, *a, **kw):
+                return []
+
+        result = validate_entry("SBIN-EQ", "3045", StubClient())
+        self.assertFalse(result.valid)
+        self.assertIn("outside", result.reason)
+
+    def test_entry_validator_rejects_wide_spread(self) -> None:
+        from execution.entry_validator import validate_entry
+
+        class StubClient:
+            def get_market_data(self, mode, tokens):
+                return {"fetched": [{
+                    "symbolToken": "100",
+                    "ltp": 200.0,       # +6.4%
+                    "open": 190.0,
+                    "high": 201.0,
+                    "low": 188.0,
+                    "close": 188.0,
+                    "depth": {
+                        "buy": [{"price": 199.0}],   # spread = 2.0 / 200 = 1.0%
+                        "sell": [{"price": 201.0}],
+                    },
+                }]}
+
+            def get_candle_data(self, exchange, token, interval, from_dt, to_dt):
+                if interval == "FIVE_MINUTE":
+                    return [
+                        ["2026-05-02T10:00:00+05:30", 195, 198, 194, 197, 5000],
+                        ["2026-05-02T10:05:00+05:30", 197, 199, 196, 199, 6000],
+                        ["2026-05-02T10:10:00+05:30", 199, 201, 198, 200, 5500],
+                    ]
+                elif interval == "ONE_MINUTE":
+                    # Volume increasing: avg of first 4 = 1000, last = 1500 → ratio 1.5
+                    return [
+                        ["2026-05-02T10:06:00+05:30", 197, 198, 197, 198, 1000],
+                        ["2026-05-02T10:07:00+05:30", 198, 199, 197, 198, 1000],
+                        ["2026-05-02T10:08:00+05:30", 198, 199, 198, 199, 1000],
+                        ["2026-05-02T10:09:00+05:30", 199, 200, 199, 200, 1000],
+                        ["2026-05-02T10:10:00+05:30", 200, 201, 199, 200, 1500],
+                    ]
+                return []
+
+        result = validate_entry("TEST-EQ", "100", StubClient())
+        self.assertFalse(result.valid)
+        self.assertIn("spread", result.reason.lower())
+
+
 if __name__ == "__main__":
     unittest.main()

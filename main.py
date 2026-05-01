@@ -7,6 +7,7 @@ from zoneinfo import ZoneInfo
 from broker.angelone_client import AngelOneClient
 from config.instruments import Instrument
 from config.settings import load_settings
+from execution.entry_validator import validate_entry
 from execution.order_manager import OrderManager, OrderRejectedError
 from execution.tradability_filter import TradabilityFilter
 from monitor.position_tracker import PositionTracker
@@ -322,33 +323,67 @@ def run_loop() -> None:
             )
             _notify(gainers_msg, logger, True)
 
-            # --- Phase 4: Allocate capital with intraday leverage and enter positions ---
-            total_capital = _allocate_capital(broker, settings, logger)
-            leveraged_capital = total_capital * settings.intraday_leverage
-            capital_per_stock = leveraged_capital / len(top_gainers)
-            logger.info(
-                "Capital: %.2f x %.1fx leverage = %.2f buying power (%.2f per stock)",
-                total_capital, settings.intraday_leverage, leveraged_capital, capital_per_stock,
-            )
-
+            # --- Phase 4: Validate entries in real-time and allocate capital ---
             # Build fallback queue: top_gainers first, then remaining probed candidates.
             fallback_queue = list(top_gainers)
             for candidate in probed_tradable[TOP_N:]:
                 if candidate not in fallback_queue:
                     fallback_queue.append(candidate)
 
-            entered_symbols: list[str] = []
-            token_map: dict[str, str] = {}
-            slm_orders: dict[str, str] = {}  # symbol -> SL-M order ID
-            slm_triggers: dict[str, float] = {}  # symbol -> current SL-M trigger price
-
+            # Step 4a: Validate candidates with live data — collect up to TOP_N valid ones.
+            validated: list[dict] = []  # Each dict is the original candidate + live_price.
             for gainer in fallback_queue:
-                if len(entered_symbols) >= TOP_N:
+                if len(validated) >= TOP_N:
                     break
 
                 symbol = gainer["symbol"]
                 if symbol in traded_today:
-                    continue  # Never re-enter a stock already traded today.
+                    continue
+
+                vr = validate_entry(symbol, gainer["token"], broker)
+                if vr.valid:
+                    gainer["live_price"] = vr.live_price  # Use real-time price for qty.
+                    validated.append(gainer)
+                else:
+                    _notify(
+                        f"{round_label}VALIDATION FAILED {symbol}: {vr.reason}",
+                        logger, True,
+                    )
+
+            if not validated:
+                _notify(
+                    f"{round_label}No candidates passed real-time validation. Skipping cycle.",
+                    logger, True,
+                )
+                break
+
+            # Step 4b: Flexible capital allocation.
+            total_capital = _allocate_capital(broker, settings, logger)
+            leveraged_capital = total_capital * settings.intraday_leverage
+
+            if len(validated) == 1:
+                # Single stock — use 50% of buying power (never 100% on one stock).
+                capital_per_stock = leveraged_capital * 0.5
+            else:
+                # 2 stocks — split equally.
+                capital_per_stock = leveraged_capital / len(validated)
+
+            logger.info(
+                "Capital: %.2f x %.1fx leverage = %.2f buying power | "
+                "%d validated stocks | %.2f per stock",
+                total_capital, settings.intraday_leverage, leveraged_capital,
+                len(validated), capital_per_stock,
+            )
+
+            # Step 4c: Execute entries using real-time validated prices.
+            entered_symbols: list[str] = []
+            token_map: dict[str, str] = {}
+            slm_orders: dict[str, str] = {}
+            slm_triggers: dict[str, float] = {}
+
+            for gainer in validated:
+                symbol = gainer["symbol"]
+                live_price = gainer["live_price"]
 
                 try:
                     instrument = Instrument(
@@ -358,10 +393,10 @@ def run_loop() -> None:
                         symboltoken=gainer["token"],
                     )
 
-                    qty = int(capital_per_stock // gainer["ltp"])
+                    qty = int(capital_per_stock // live_price)
                     if qty <= 0:
                         _notify(
-                            f"Skipping {symbol}: price {gainer['ltp']:.2f} exceeds "
+                            f"Skipping {symbol}: live price {live_price:.2f} exceeds "
                             f"allocated capital {capital_per_stock:.2f}",
                             logger, True,
                         )
@@ -369,14 +404,14 @@ def run_loop() -> None:
 
                     order = order_manager.place_market_order(
                         symbol, "BUY", qty, instrument=instrument,
-                        current_price=gainer["ltp"],
+                        current_price=live_price,
                     )
-                    pos = position_tracker.update_buy(symbol, qty, gainer["ltp"])
+                    pos = position_tracker.update_buy(symbol, qty, live_price)
                     entered_symbols.append(symbol)
                     traded_today.add(symbol)
                     token_map[symbol] = gainer["token"]
 
-                    # Place server-side SL-M order at the hard stop as a safety net.
+                    # Place server-side SL-M order at the hard stop.
                     slm_id = _place_slm_order(
                         broker, symbol, gainer["token"], qty, pos.hard_stop, logger,
                     )
@@ -385,8 +420,8 @@ def run_loop() -> None:
                         slm_triggers[symbol] = pos.hard_stop
 
                     _notify(
-                        f"{round_label}ENTRY: {symbol} — {qty} shares @ {gainer['ltp']:.2f} "
-                        f"(capital={capital_per_stock:.2f}, change={gainer['pct_change']:+.2f}%, "
+                        f"{round_label}ENTRY: {symbol} — {qty} shares @ {live_price:.2f} "
+                        f"(capital={capital_per_stock:.2f}, gain={gainer['pct_change']:+.2f}%, "
                         f"score={gainer['composite_score']:.3f}, SL-M={pos.hard_stop:.2f}) | {order}",
                         logger, True,
                     )
@@ -401,10 +436,10 @@ def run_loop() -> None:
                     send_telegram_message(f"Entry failed for {symbol}: {exc}")
 
             if not entered_symbols:
-                _notify(f"{round_label}No trades could be executed. All candidates rejected.", logger, True)
+                _notify(f"{round_label}No trades could be executed.", logger, True)
                 break
 
-            # Add token mappings for any remaining top_gainers (for monitoring).
+            # Add token mappings for monitoring.
             for g in top_gainers:
                 if g["symbol"] not in token_map:
                     token_map[g["symbol"]] = g["token"]
