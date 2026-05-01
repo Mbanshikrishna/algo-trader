@@ -7,7 +7,7 @@ from zoneinfo import ZoneInfo
 from broker.angelone_client import AngelOneClient
 from config.instruments import Instrument
 from config.settings import load_settings
-from execution.entry_validator import validate_entry
+from execution.entry_validator import validate_entries_batch
 from execution.order_manager import OrderManager, OrderRejectedError
 from execution.tradability_filter import TradabilityFilter
 from monitor.position_tracker import PositionTracker
@@ -330,26 +330,31 @@ def run_loop() -> None:
                 if candidate not in fallback_queue:
                     fallback_queue.append(candidate)
 
-            # Step 4a: Validate candidates with live data — collect up to TOP_N valid ones.
-            validated: list[dict] = []  # Each dict is the original candidate + live_price.
-            for gainer in fallback_queue:
-                if len(validated) >= TOP_N:
-                    break
+            # Step 4a: Validate candidates with live data in parallel.
+            # Filter out already-traded stocks before validation.
+            validation_queue = [g for g in fallback_queue if g["symbol"] not in traded_today]
 
-                symbol = gainer["symbol"]
-                if symbol in traded_today:
-                    continue
+            logger.info(
+                "%sValidating %d candidates in parallel...",
+                round_label, len(validation_queue),
+            )
+            validation_start = time.perf_counter()
+            validated_pairs = validate_entries_batch(
+                validation_queue, broker, max_valid=TOP_N, max_workers=4,
+            )
+            validation_duration = time.perf_counter() - validation_start
+            logger.info(
+                "Validation completed in %.1f seconds: %d/%d passed.",
+                validation_duration, len(validated_pairs), len(validation_queue),
+            )
 
-                vr = validate_entry(symbol, gainer["token"], broker)
-                if vr.valid:
-                    gainer["live_price"] = vr.live_price  # Use real-time price for qty.
-                    validated.append(gainer)
-                else:
-                    _notify(
-                        f"{round_label}VALIDATION FAILED {symbol}: {vr.reason}",
-                        logger, True,
-                    )
+            # Extract validated candidates with live prices.
+            validated: list[dict] = []
+            for gainer, vr in validated_pairs:
+                gainer["live_price"] = vr.live_price
+                validated.append(gainer)
 
+            # Notify rejections (from the validation log, not re-iterated here).
             if not validated:
                 _notify(
                     f"{round_label}No candidates passed real-time validation. Skipping cycle.",

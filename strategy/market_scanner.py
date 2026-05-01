@@ -266,29 +266,49 @@ def load_nse_equity_tokens(client: AngelOneClient) -> list[dict[str, str]]:
 def _fetch_all_quotes(
     client: AngelOneClient,
     stocks: list[dict[str, str]],
+    max_workers: int = 3,
 ) -> list[dict[str, Any]]:
-    """Fetch FULL quotes for all stocks in batches of 50."""
+    """Fetch FULL quotes for all stocks in parallel batches of 50.
+
+    Uses concurrent workers to fetch multiple batches simultaneously.
+    With 3 workers and 50 batches, reduces scan time from ~15s to ~5-6s.
+    """
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+
     all_tokens = [s["token"] for s in stocks]
     token_to_stock = {s["token"]: s for s in stocks}
 
-    all_quotes: list[dict[str, Any]] = []
-    for i in range(0, len(all_tokens), BATCH_SIZE):
-        batch = all_tokens[i : i + BATCH_SIZE]
+    # Split into batches of 50.
+    batches = [all_tokens[i : i + BATCH_SIZE] for i in range(0, len(all_tokens), BATCH_SIZE)]
+
+    def _fetch_batch(batch: list[str]) -> list[dict[str, Any]]:
         try:
             result = client.get_market_data("FULL", {"NSE": batch})
             fetched = result.get("fetched", [])
-            # Attach stock metadata to each quote.
             for q in fetched:
                 token = str(q.get("symbolToken", ""))
                 stock_info = token_to_stock.get(token, {})
                 q["_symbol"] = stock_info.get("symbol", q.get("tradingSymbol", ""))
                 q["_token"] = token
                 q["_name"] = stock_info.get("name", "")
-            all_quotes.extend(fetched)
+            return fetched
         except Exception:
-            pass
-        if i + BATCH_SIZE < len(all_tokens):
-            time.sleep(BATCH_DELAY)
+            return []
+
+    all_quotes: list[dict[str, Any]] = []
+    with ThreadPoolExecutor(max_workers=max_workers) as pool:
+        futures = {pool.submit(_fetch_batch, b): i for i, b in enumerate(batches)}
+        # Collect results in submission order to maintain deterministic output.
+        results_by_index: dict[int, list] = {}
+        for future in as_completed(futures):
+            idx = futures[future]
+            try:
+                results_by_index[idx] = future.result()
+            except Exception:
+                results_by_index[idx] = []
+
+        for idx in sorted(results_by_index):
+            all_quotes.extend(results_by_index[idx])
 
     return all_quotes
 
