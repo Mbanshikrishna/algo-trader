@@ -6,21 +6,62 @@ Automated intraday trading bot that scans the entire NSE equity market, selects 
 
 ```
 09:15  Market opens. Bot logs in via auto-TOTP.
-10:00  Phase 1 — Wait for the 10 AM scan window (lets the market settle).
-10:00  Phase 2 — Check if Nifty 50 is positive. If bearish → skip the day.
-10:00  Phase 3 — Scan all ~2500 NSE equity stocks:
-         3a. Fetch FULL quotes in batches of 50.
+09:45  Phase 1 — Scan window opens.
+09:45  Phase 2 — 4-factor market bullishness check (3-of-4 must pass):
+         • Index Direction — Nifty 50 change > 0%
+         • Market Breadth — Nifty 50 advancers/decliners > 1.2
+         • Intraday Strength — Nifty LTP > Open AND NIFTYBEES > VWAP
+         • Volatility Filter — India VIX change < +5%
+         If score < 3/4 → skip the day.
+09:45  Phase 3 — Scan all ~2500 NSE equity stocks:
+         3a. Fetch FULL quotes in parallel batches of 50 (3 concurrent workers).
          3b. Filter to 5–10% intraday gainers (price ₹50–₹5000, volume > 1 lakh).
          3c. Fetch 5-day candles for candidates. Score each on 5 factors.
          3d. Filter out ASM/GSM/T2T stocks (NSE lists + circuit heuristic).
          3e. Probe remaining candidates with test orders (catches Angel One cautionary list).
          3f. Exclude any stock already traded today.
-10:01  Phase 4 — Enter top 2 stocks with MARKET orders + server-side SL-M backup.
-10:01  Phase 5 — Monitor every 10 seconds. Trail stop-loss upward. Exit on SL hit.
-         If all positions close → 15 min cooldown → re-check Nifty → re-scan → re-enter.
+09:46  Phase 4 — Real-time entry validation (5 checks, batch + parallel):
+         4a. Batch-fetch FULL quotes for all candidates (1 API call).
+         4b. Check momentum (5–10%), range position (≥0.85), spread (<0.2%).
+         4c. Parallel candle checks: micro breakout + volume confirmation.
+         4d. If no candidates pass → wait 2 min → retry from Phase 3.
+         4e. Retry loop continues until valid entries found or 12:30 PM.
+~10:00 Phase 5 — Enter top 2 stocks with MARKET orders + server-side SL-M backup.
+         Capital allocation: 1 stock = 50% buying power, 2 stocks = 50% each.
+~10:00 Phase 6 — Monitor every 10 seconds. Trail stop-loss upward. Exit on SL hit.
+         If all positions close → 15 min cooldown → re-check market → re-scan → re-enter.
          Up to 3 re-entry rounds per day. Never re-enter the same stock.
-15:15  Phase 6 — Force-close any remaining positions (market close).
+15:15  Phase 7 — Force-close any remaining positions (market close).
 ```
+
+## Market Bullishness — 4-Factor Model
+
+Before scanning for stocks, the bot checks if the overall market is favorable. At least 3 of 4 factors must pass (same scoring approach as a quorum vote):
+
+| Factor | Condition | Data Source |
+|---|---|---|
+| Index Direction | Nifty 50 change > 0% | Nifty 50 index quote |
+| Market Breadth | Advancers/Decliners > 1.2 among Nifty 50 constituents | Batch quote of all 50 constituent tokens |
+| Intraday Strength | Nifty LTP > Open AND NIFTYBEES ETF > VWAP | Nifty index + NIFTYBEES (token 10576) avgPrice |
+| Volatility Filter | India VIX change < +5% | India VIX (token 99926017) |
+
+**Holiday detection**: If Nifty `tradeVolume == 0` and `exchFeedTime` is not today, the market is closed (holiday). The bot skips the day without placing any trades.
+
+## Entry Validation — 5 Real-Time Checks
+
+After the scanner picks candidates, each must pass 5 checks using live data fetched immediately before order placement. This prevents entering on stale scan-time prices.
+
+| Check | Condition | Purpose |
+|---|---|---|
+| 1. Momentum | Gain still 5–10% from prev close | Reject if momentum faded or overextended since scan |
+| 2. Range Position | LTP in top 15% of day's range (≥ 0.85) | Confirm price is near high, not retreating |
+| 3. Micro Breakout | LTP > last completed 5-min candle high | Confirm active upward movement |
+| 4. Volume | Current 1-min volume ≥ 1.2× avg of prior 5 mins | Confirm buying interest, not fading |
+| 5. Spread | Bid-ask spread < 0.2% of price | Ensure liquidity for clean entry |
+
+**Batch validation**: Checks 1, 2, 5 run from a single batch FULL quote fetch (1 API call for all candidates). Checks 3, 4 run in parallel threads (one per candidate). This reduces validation from ~15 seconds sequential to ~3-5 seconds.
+
+If no candidates pass all 5 checks, the bot waits 2 minutes and rescans. This retry loop continues until 12:30 PM.
 
 ## Stock Selection — Multi-Factor Scoring
 
@@ -106,10 +147,14 @@ Price drops to ₹115 → EXIT at ₹115.00 (PnL = +₹15 per share)
 ```
 Available capital (from broker RMS API)
   × Intraday leverage (default 5x)
-  ÷ Number of stocks (2)
-  = Capital per stock
+  = Total buying power
 
-Example: ₹1,010 × 5x = ₹5,050 → ₹2,525 per stock
+1 validated stock → 50% of buying power (never 100% on one stock)
+2 validated stocks → 50% each (split equally)
+
+Example: ₹1,00,000 × 5x = ₹5,00,000 buying power
+  1 stock → ₹2,50,000 allocated
+  2 stocks → ₹2,50,000 each
 ```
 
 ## Tradability Filter — 4 Layers
@@ -173,18 +218,19 @@ After all positions close via stop-loss:
 
 ```
 1. Wait 15 minutes (cooldown — avoids excessive trade charges)
-2. Re-check Nifty 50 — if market turned bearish → stop for the day
+2. Re-check market bullishness (full 4-factor model) — if < 3/4 → stop for the day
 3. Re-scan all NSE stocks for fresh top gainers
-4. Exclude all stocks already traded today
-5. Enter new positions and monitor again
-6. Repeat up to 3 times (MAX_REENTRY_ROUNDS)
+4. Validate entries with live data (5 checks)
+5. Exclude all stocks already traded today
+6. Enter new positions and monitor again
+7. Repeat up to 3 times (MAX_REENTRY_ROUNDS)
 ```
 
 **Stops re-entering when:**
 - Market closes (3:15 PM)
 - 2 consecutive losses reached
 - 3 re-entry rounds exhausted
-- Market turns bearish between rounds
+- Market turns bearish between rounds (4-factor check)
 - No new tradable candidates found
 
 ## Authentication
@@ -243,7 +289,9 @@ These are not configurable via `.env` — change them in the source files:
 
 | Constant | File | Value | Description |
 |---|---|---|---|
-| `SCAN_HOUR, SCAN_MIN` | `main.py` | 10:00 | When to scan for top gainers |
+| `SCAN_START_HOUR, SCAN_START_MIN` | `main.py` | 9:45 | Scan window opens |
+| `SCAN_END_HOUR, SCAN_END_MIN` | `main.py` | 12:30 | Scan window closes (stop retrying) |
+| `SCAN_RETRY_SECONDS` | `main.py` | 120 | Seconds between scan retry attempts |
 | `MARKET_CLOSE_HOUR, MARKET_CLOSE_MIN` | `main.py` | 15:15 | When to force-close all positions |
 | `TOP_N` | `main.py` | 2 | Number of stocks to trade simultaneously |
 | `MAX_REENTRY_ROUNDS` | `main.py` | 3 | Max re-scan rounds after stop-loss exits |
@@ -259,17 +307,21 @@ These are not configurable via `.env` — change them in the source files:
 | `MAX_PRICE` | `market_scanner.py` | ₹5,000 | Maximum stock price |
 | `MIN_VOLUME` | `market_scanner.py` | 1,00,000 | Minimum intraday volume |
 | `BATCH_SIZE` | `market_scanner.py` | 50 | Angel One quote batch limit |
-| `BATCH_DELAY` | `market_scanner.py` | 0.3s | Delay between batch requests |
+| `MIN_GAIN_PCT` | `entry_validator.py` | 5% | Minimum gain for entry validation |
+| `MAX_GAIN_PCT` | `entry_validator.py` | 10% | Maximum gain for entry validation |
+| `MIN_RANGE_POSITION` | `entry_validator.py` | 0.85 | Price must be in top 15% of day's range |
+| `MIN_VOLUME_RATIO` | `entry_validator.py` | 1.2 | Current volume ≥ 1.2× avg of prior candles |
+| `MAX_SPREAD_PCT` | `entry_validator.py` | 0.2% | Max bid-ask spread as % of price |
 
 ## Known Bottlenecks and Limitations
 
-### 1. Scan Speed (~15-20 seconds)
+### 1. Scan Speed (~5-6 seconds)
 
-The full NSE scan fetches quotes for ~2500 stocks in batches of 50 with 0.3s delay between batches. This takes ~15-20 seconds. During this time, prices can move.
+The full NSE scan fetches quotes for ~2500 stocks in parallel batches of 50 using 3 concurrent workers. This takes ~5-6 seconds. During this time, prices can move.
 
 **Impact**: The LTP used for scoring may be stale by the time the entry order is placed. A stock at +5.1% during scan could be at +4.8% (below threshold) or +10.5% (above threshold) by entry time.
 
-**Mitigation**: The bot fetches 5x more candidates than needed (pool of 10 for top 2), so even if some candidates move out of range, there are fallbacks.
+**Mitigation**: Real-time entry validation re-fetches live quotes immediately before order placement. The bot also fetches 5x more candidates than needed (pool of 10 for top 2), so even if some candidates move out of range, there are fallbacks.
 
 ### 2. 10-Second Polling Gap
 
@@ -313,9 +365,9 @@ The bot assumes orders are fully filled. If a MARKET order is partially filled, 
 
 ### 7. Weekend/Holiday Handling
 
-The bot checks `weekday >= 5` for weekends but does not check for market holidays (Republic Day, Diwali, etc.).
+The bot checks `weekday >= 5` for weekends. For holidays, it detects market closure by checking if Nifty 50 `tradeVolume == 0` and `exchFeedTime` is not today's date.
 
-**Impact**: On holidays, the bot will attempt to scan at 10 AM, get stale data (market closed), and likely find no gainers. It won't place trades but will waste API calls.
+**Impact**: On holidays, the bot detects the closure during the market bullishness check and skips the day without placing any trades or wasting API calls on scanning.
 
 ### 8. NSE API Rate Limits
 
@@ -327,7 +379,7 @@ The NSE website APIs (ASM/GSM/F&O lists) are rate-limited and may block requests
 
 ### 9. Re-Entry Round Timing
 
-Each re-entry round includes a 15-minute cooldown + ~20-second scan + ~5-second probe. If a stop-loss exit happens at 2:45 PM, the re-entry would start at ~3:01 PM — only 14 minutes before market close.
+Each re-entry round includes a 15-minute cooldown + ~6-second scan + ~5-second probe. If a stop-loss exit happens at 2:45 PM, the re-entry would start at ~3:01 PM — only 14 minutes before market close.
 
 **Impact**: Late re-entries have very little time for the trade to develop. The position will likely be force-closed at 3:15 PM regardless.
 
@@ -345,17 +397,19 @@ When the trailing stop moves up, the bot modifies the SL-M order. If the exchang
 
 ```
 algo-trader/
-├── main.py                      # Entry point — daily trading loop
+├── main.py                      # Entry point — daily trading loop (scan window + retry)
+├── backtest.py                  # Historical backtest using Angel One candle data
 ├── broker/
-│   └── angelone_client.py       # Angel One SmartAPI client (login, orders, market data)
+│   └── angelone_client.py       # Angel One SmartAPI client (login, orders, market data, candles)
 ├── config/
 │   ├── settings.py              # Environment variable loader
 │   └── instruments.py           # Instrument resolution and scrip master
 ├── strategy/
-│   ├── market_scanner.py        # Full NSE scan, Nifty check, multi-factor scoring
+│   ├── market_scanner.py        # Full NSE scan, 4-factor market check, multi-factor scoring
 │   └── momentum_strategy.py     # EMA-based signal generator (legacy, not used by main loop)
 ├── execution/
 │   ├── order_manager.py         # Order placement with retry and tradability checks
+│   ├── entry_validator.py       # 5-check real-time entry validation (batch + parallel)
 │   └── tradability_filter.py    # ASM/GSM/circuit/probe filtering
 ├── monitor/
 │   └── position_tracker.py      # Position state, trailing stop, profit lock
@@ -369,9 +423,10 @@ algo-trader/
 ├── deploy/
 │   └── algo-trader.service      # systemd service file for EC2
 ├── tests/
-│   ├── test_core.py             # Core logic tests (36 tests)
+│   ├── test_core.py             # Core logic tests (39 tests)
 │   ├── test_angelone_check.py   # Settings and data check tests
 │   ├── test_stock_scanner.py    # Scanner tests
+│   ├── test_excel_watchlist.py  # Excel watchlist tests
 │   └── test_stock_updates.py    # Alert utility tests
 ├── Stock.py                     # CLI: fetch and display stock data
 ├── send_stock_updates.py        # CLI: send stock alerts via Telegram

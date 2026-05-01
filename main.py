@@ -19,7 +19,9 @@ IST = ZoneInfo("Asia/Kolkata")
 
 # Market timing constants.
 MARKET_OPEN_HOUR, MARKET_OPEN_MIN = 9, 15
-SCAN_HOUR, SCAN_MIN = 10, 0  # Scan for top gainers at 10:00 AM IST.
+SCAN_START_HOUR, SCAN_START_MIN = 9, 45   # Start scanning at 9:45 AM IST.
+SCAN_END_HOUR, SCAN_END_MIN = 12, 30      # Stop scanning at 12:30 PM IST.
+SCAN_RETRY_SECONDS = 120                   # Wait 2 minutes between scan attempts.
 MARKET_CLOSE_HOUR, MARKET_CLOSE_MIN = 15, 15  # Exit all positions by 3:15 PM.
 TOP_N = 2  # Number of top gainers to trade.
 MAX_REENTRY_ROUNDS = 3  # Max times the bot can re-scan and re-enter after all positions close.
@@ -132,6 +134,14 @@ def _wait_until(hour: int, minute: int, logger) -> None:
         time.sleep(min(remaining, 30))  # Wake up every 30s to log progress.
 
 
+def _within_scan_window() -> bool:
+    """Return True if current time is within the scan window (9:45 AM - 12:30 PM)."""
+    now = _ist_now()
+    start = now.replace(hour=SCAN_START_HOUR, minute=SCAN_START_MIN, second=0)
+    end = now.replace(hour=SCAN_END_HOUR, minute=SCAN_END_MIN, second=0)
+    return start <= now <= end
+
+
 def _allocate_capital(broker: AngelOneClient, settings, logger) -> float:
     """Fetch available capital from the broker account, fall back to config."""
     try:
@@ -191,8 +201,8 @@ def run_loop() -> None:
             time.sleep(3600)
             continue
 
-        # --- Phase 1: Wait for 10:00 AM scan window ---
-        _wait_until(SCAN_HOUR, SCAN_MIN, logger)
+        # --- Phase 1: Wait for scan window (9:45 AM) ---
+        _wait_until(SCAN_START_HOUR, SCAN_START_MIN, logger)
 
         now = _ist_now()
         if now.hour >= MARKET_CLOSE_HOUR and now.minute >= MARKET_CLOSE_MIN:
@@ -245,119 +255,145 @@ def run_loop() -> None:
                 if not bullish:
                     break
 
-            # --- Phase 3: Scan all NSE stocks for top gainers ---
+            # --- Phase 3+4: Scan, filter, validate — retry within scan window ---
             scan_pool_size = TOP_N * 5
             round_label = f"[Round {reentry_round}] " if reentry_round > 0 else ""
-            logger.info("%sScanning %d stocks for top %d candidates (pool=%d)...",
-                        round_label, len(nse_stocks), TOP_N, scan_pool_size)
-            scan_start = time.perf_counter()
-            raw_candidates = scan_top_gainers(broker, nse_stocks, top_n=scan_pool_size)
-            scan_duration = time.perf_counter() - scan_start
-            logger.info("Scan completed in %.1f seconds. Found %d raw candidates.", scan_duration, len(raw_candidates))
-
-            if not raw_candidates:
-                _notify(f"{round_label}No qualifying gainers found.", logger, True)
-                break
-
-            # --- Phase 3b: Filter for tradability (ASM/GSM/circuit limits) ---
-            tradable, skipped = trad_filter.filter_candidates(
-                raw_candidates, fno_only=settings.fno_only,
-            )
-
-            if skipped:
-                skip_msg = "Skipped by ASM/GSM/circuit filter:\n" + "\n".join(
-                    f"  {sym}: {reason}" for sym, reason in skipped
-                )
-                logger.info(skip_msg)
-
-            if not tradable:
-                _notify(
-                    f"{round_label}No tradable stocks after ASM/GSM filtering ({len(skipped)} skipped).",
-                    logger, True,
-                )
-                break
-
-            # --- Phase 3c: Probe broker tradability (catches Angel One cautionary list) ---
-            logger.info("Probing %d candidates for broker tradability...", len(tradable))
-            probe_start = time.perf_counter()
-            probed_tradable, probe_skipped = trad_filter.probe_candidates(
-                broker, tradable, max_workers=4,
-            )
-            probe_duration = time.perf_counter() - probe_start
-            logger.info(
-                "Probe completed in %.1f seconds: %d tradable, %d rejected.",
-                probe_duration, len(probed_tradable), len(probe_skipped),
-            )
-
-            if probe_skipped:
-                probe_msg = "Skipped by broker probe (cautionary):\n" + "\n".join(
-                    f"  {sym}: {reason}" for sym, reason in probe_skipped
-                )
-                _notify(probe_msg, logger, True)
-
-            # Exclude stocks that already hit stop-loss today.
-            if traded_today:
-                probed_tradable = [c for c in probed_tradable if c["symbol"] not in traded_today]
-
-            all_skipped = skipped + probe_skipped
-            top_gainers = probed_tradable[:TOP_N]
-
-            if not top_gainers:
-                _notify(
-                    f"{round_label}No tradable stocks after filtering "
-                    f"({len(all_skipped)} skipped, {len(traded_today)} already traded today).",
-                    logger, True,
-                )
-                break
-
-            gainers_msg = (
-                f"{round_label}Top {len(top_gainers)} tradable stocks selected "
-                f"(from {len(raw_candidates)} scanned, {len(all_skipped)} filtered):\n"
-                + "\n".join(
-                    f"  {g['symbol']}: {g['pct_change']:+.2f}% @ {g['ltp']:.2f}\n"
-                    f"    Score={g['composite_score']:.3f} | Vol={g['relative_volume']:.1f}x | "
-                    f"Momentum={g['momentum_score']:.2f} | BuyPressure={g['buy_pressure']:.2f} | "
-                    f"Stability={g['stability_score']:.2f} | PrevTrend={g['prev_day_score']:.2f}"
-                    for g in top_gainers
-                )
-            )
-            _notify(gainers_msg, logger, True)
-
-            # --- Phase 4: Validate entries in real-time and allocate capital ---
-            # Build fallback queue: top_gainers first, then remaining probed candidates.
-            fallback_queue = list(top_gainers)
-            for candidate in probed_tradable[TOP_N:]:
-                if candidate not in fallback_queue:
-                    fallback_queue.append(candidate)
-
-            # Step 4a: Validate candidates with live data in parallel.
-            # Filter out already-traded stocks before validation.
-            validation_queue = [g for g in fallback_queue if g["symbol"] not in traded_today]
-
-            logger.info(
-                "%sValidating %d candidates in parallel...",
-                round_label, len(validation_queue),
-            )
-            validation_start = time.perf_counter()
-            validated_pairs = validate_entries_batch(
-                validation_queue, broker, max_valid=TOP_N, max_workers=4,
-            )
-            validation_duration = time.perf_counter() - validation_start
-            logger.info(
-                "Validation completed in %.1f seconds: %d/%d passed.",
-                validation_duration, len(validated_pairs), len(validation_queue),
-            )
-
-            # Extract validated candidates with live prices.
             validated: list[dict] = []
-            for gainer, vr in validated_pairs:
-                gainer["live_price"] = vr.live_price
-                validated.append(gainer)
+            scan_attempt = 0
 
-            # Notify rejections (from the validation log, not re-iterated here).
+            while not validated:
+                scan_attempt += 1
+
+                # Check scan window: round 0 retries until 12:30 PM,
+                # re-entry rounds get one attempt (they have their own cooldown).
+                if scan_attempt > 1:
+                    if reentry_round > 0 or not _within_scan_window():
+                        break
+                    now = _ist_now()
+                    logger.info(
+                        "%sScan attempt %d — retrying in %ds (window open until %02d:%02d)...",
+                        round_label, scan_attempt, SCAN_RETRY_SECONDS,
+                        SCAN_END_HOUR, SCAN_END_MIN,
+                    )
+                    time.sleep(SCAN_RETRY_SECONDS)
+                    if not _within_scan_window():
+                        break
+
+                logger.info("%sScanning %d stocks for top %d candidates (pool=%d)...",
+                            round_label, len(nse_stocks), TOP_N, scan_pool_size)
+                scan_start = time.perf_counter()
+                raw_candidates = scan_top_gainers(broker, nse_stocks, top_n=scan_pool_size)
+                scan_duration = time.perf_counter() - scan_start
+                logger.info("Scan completed in %.1f seconds. Found %d raw candidates.", scan_duration, len(raw_candidates))
+
+                if not raw_candidates:
+                    _notify(f"{round_label}No qualifying gainers found.", logger, True)
+                    continue
+
+                # --- Phase 3b: Filter for tradability (ASM/GSM/circuit limits) ---
+                tradable, skipped = trad_filter.filter_candidates(
+                    raw_candidates, fno_only=settings.fno_only,
+                )
+
+                if skipped:
+                    skip_msg = "Skipped by ASM/GSM/circuit filter:\n" + "\n".join(
+                        f"  {sym}: {reason}" for sym, reason in skipped
+                    )
+                    logger.info(skip_msg)
+
+                if not tradable:
+                    _notify(
+                        f"{round_label}No tradable stocks after ASM/GSM filtering ({len(skipped)} skipped).",
+                        logger, True,
+                    )
+                    continue
+
+                # --- Phase 3c: Probe broker tradability (catches Angel One cautionary list) ---
+                logger.info("Probing %d candidates for broker tradability...", len(tradable))
+                probe_start = time.perf_counter()
+                probed_tradable, probe_skipped = trad_filter.probe_candidates(
+                    broker, tradable, max_workers=4,
+                )
+                probe_duration = time.perf_counter() - probe_start
+                logger.info(
+                    "Probe completed in %.1f seconds: %d tradable, %d rejected.",
+                    probe_duration, len(probed_tradable), len(probe_skipped),
+                )
+
+                if probe_skipped:
+                    probe_msg = "Skipped by broker probe (cautionary):\n" + "\n".join(
+                        f"  {sym}: {reason}" for sym, reason in probe_skipped
+                    )
+                    _notify(probe_msg, logger, True)
+
+                # Exclude stocks that already hit stop-loss today.
+                if traded_today:
+                    probed_tradable = [c for c in probed_tradable if c["symbol"] not in traded_today]
+
+                all_skipped = skipped + probe_skipped
+                top_gainers = probed_tradable[:TOP_N]
+
+                if not top_gainers:
+                    _notify(
+                        f"{round_label}No tradable stocks after filtering "
+                        f"({len(all_skipped)} skipped, {len(traded_today)} already traded today).",
+                        logger, True,
+                    )
+                    continue
+
+                gainers_msg = (
+                    f"{round_label}Top {len(top_gainers)} tradable stocks selected "
+                    f"(from {len(raw_candidates)} scanned, {len(all_skipped)} filtered):\n"
+                    + "\n".join(
+                        f"  {g['symbol']}: {g['pct_change']:+.2f}% @ {g['ltp']:.2f}\n"
+                        f"    Score={g['composite_score']:.3f} | Vol={g['relative_volume']:.1f}x | "
+                        f"Momentum={g['momentum_score']:.2f} | BuyPressure={g['buy_pressure']:.2f} | "
+                        f"Stability={g['stability_score']:.2f} | PrevTrend={g['prev_day_score']:.2f}"
+                        for g in top_gainers
+                    )
+                )
+                _notify(gainers_msg, logger, True)
+
+                # --- Phase 4: Validate entries in real-time and allocate capital ---
+                # Build fallback queue: top_gainers first, then remaining probed candidates.
+                fallback_queue = list(top_gainers)
+                for candidate in probed_tradable[TOP_N:]:
+                    if candidate not in fallback_queue:
+                        fallback_queue.append(candidate)
+
+                # Step 4a: Validate candidates with live data in parallel.
+                validation_queue = [g for g in fallback_queue if g["symbol"] not in traded_today]
+
+                logger.info(
+                    "%sValidating %d candidates in parallel...",
+                    round_label, len(validation_queue),
+                )
+                validation_start = time.perf_counter()
+                validated_pairs = validate_entries_batch(
+                    validation_queue, broker, max_valid=TOP_N, max_workers=4,
+                )
+                validation_duration = time.perf_counter() - validation_start
+                logger.info(
+                    "Validation completed in %.1f seconds: %d/%d passed.",
+                    validation_duration, len(validated_pairs), len(validation_queue),
+                )
+
+                # Extract validated candidates with live prices.
+                for gainer, vr in validated_pairs:
+                    gainer["live_price"] = vr.live_price
+                    validated.append(gainer)
+
+                if not validated:
+                    _notify(
+                        f"{round_label}No candidates passed real-time validation.",
+                        logger, True,
+                    )
+                    continue  # Retry within scan window.
+
             if not validated:
                 _notify(
-                    f"{round_label}No candidates passed real-time validation. Skipping cycle.",
+                    f"{round_label}Scan window closed ({SCAN_START_HOUR:02d}:{SCAN_START_MIN:02d}"
+                    f"-{SCAN_END_HOUR:02d}:{SCAN_END_MIN:02d}) with no valid entries.",
                     logger, True,
                 )
                 break
