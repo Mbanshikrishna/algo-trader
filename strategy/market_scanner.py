@@ -313,29 +313,57 @@ def _fetch_all_quotes(
     return all_quotes
 
 
+# Session-level daily candle cache. Avoids re-fetching the same candles
+# when the scan retries within the 9:45-12:30 window. Daily candles don't
+# change intraday, so caching is safe for the entire session.
+_daily_candle_cache: dict[str, list[list]] = {}
+
+
+def clear_daily_candle_cache() -> None:
+    """Clear the daily candle cache. Call once at start of each trading day."""
+    _daily_candle_cache.clear()
+    logger.info("Daily candle cache cleared.")
+
+
 def _fetch_previous_day_candles(
     client: AngelOneClient,
     tokens: list[str],
     max_workers: int = 5,
 ) -> dict[str, list[list]]:
-    """Fetch last 5 daily candles for given tokens concurrently."""
+    """Fetch last 5 daily candles for given tokens concurrently.
+
+    Uses a session-level cache so repeated scans within the same day
+    don't re-fetch candles for tokens already seen.
+    """
     from concurrent.futures import ThreadPoolExecutor, as_completed
 
     now = datetime.now(IST)
     start = now - timedelta(days=10)
     result: dict[str, list[list]] = {}
 
+    # Separate cached vs uncached tokens.
+    uncached: list[str] = []
+    for token in tokens:
+        if token in _daily_candle_cache:
+            result[token] = _daily_candle_cache[token]
+        else:
+            uncached.append(token)
+
+    if not uncached:
+        return result
+
     def _fetch_one(token: str) -> tuple[str, list[list]]:
         candles = client.get_candle_data("NSE", token, "ONE_DAY", start, now)
         return token, candles
 
     with ThreadPoolExecutor(max_workers=max_workers) as pool:
-        futures = {pool.submit(_fetch_one, t): t for t in tokens}
+        futures = {pool.submit(_fetch_one, t): t for t in uncached}
         for future in as_completed(futures):
             token = futures[future]
             try:
                 t, candles = future.result()
                 result[t] = candles
+                _daily_candle_cache[t] = candles  # Cache for future scans.
             except Exception:
                 result[token] = []
 

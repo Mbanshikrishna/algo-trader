@@ -67,3 +67,51 @@ def send_telegram_message(message: str) -> bool:  # Sends a Telegram message whe
     except (HTTPError, URLError, OSError) as exc:  # Prevents alert-delivery problems from interrupting trading or scanning.
         LOGGER.warning("Telegram alert failed: %s", exc)
         return False
+
+
+# ---------------------------------------------------------------------------
+# Critical alert helpers — used by safety systems across the bot.
+# These retry delivery and prefix messages with severity markers.
+# ---------------------------------------------------------------------------
+
+_CRITICAL_PREFIX = "🚨 CRITICAL"
+_WARNING_PREFIX = "⚠️ WARNING"
+
+
+def send_critical_alert(message: str) -> bool:
+    """Send a high-priority alert. Retries up to 3 times on failure."""
+    full = f"{_CRITICAL_PREFIX}: {message}"
+    LOGGER.error("[critical_failure] %s", message)
+    for attempt in range(3):
+        if send_telegram_message(full):
+            return True
+        LOGGER.warning("Critical alert delivery attempt %d/3 failed, retrying...", attempt + 1)
+    return False
+
+
+def send_exit_failure_alert(symbol: str, quantity: int, reason: str) -> bool:
+    """Alert when an exit order cannot be placed after all retries."""
+    return send_critical_alert(
+        f"EXIT FAILED — MANUAL INTERVENTION REQUIRED\n"
+        f"Symbol: {symbol}\n"
+        f"Quantity: {quantity}\n"
+        f"Reason: {reason}\n"
+        f"Action: Sell {quantity} shares of {symbol} manually NOW."
+    )
+
+
+def send_daily_loss_alert(daily_pnl: float, limit: float) -> bool:
+    """Alert when daily P&L breaches the loss limit."""
+    return send_critical_alert(
+        f"DAILY LOSS LIMIT BREACHED\n"
+        f"Daily P&L: ₹{daily_pnl:,.2f}\n"
+        f"Limit: ₹{limit:,.2f}\n"
+        f"Action: No new trades will be placed. Existing positions still monitored."
+    )
+
+
+def send_warning_alert(message: str) -> bool:
+    """Send a warning-level alert (single attempt)."""
+    full = f"{_WARNING_PREFIX}: {message}"
+    LOGGER.warning("[warning] %s", message)
+    return send_telegram_message(full)

@@ -6,6 +6,10 @@ Automated intraday trading bot that scans the entire NSE equity market, selects 
 
 ```
 09:15  Market opens. Bot logs in via auto-TOTP.
+09:45  Phase 0 — Daily housekeeping:
+         • Clear daily candle cache (fresh data for new day).
+         • Refresh session if stale (auto re-login every 2 hours).
+         • Initialize daily P&L tracker (stops new trades if loss > 5% of capital).
 09:45  Phase 1 — Scan window opens.
 09:45  Phase 2 — 4-factor market bullishness check (3-of-4 must pass):
          • Index Direction — Nifty 50 change > 0%
@@ -16,22 +20,29 @@ Automated intraday trading bot that scans the entire NSE equity market, selects 
 09:45  Phase 3 — Scan all ~2500 NSE equity stocks:
          3a. Fetch FULL quotes in parallel batches of 50 (3 concurrent workers).
          3b. Filter to 5–10% intraday gainers (price ₹50–₹5000, volume > 1 lakh).
-         3c. Fetch 5-day candles for candidates. Score each on 5 factors.
+         3c. Fetch 5-day candles for candidates (cached across scan retries).
          3d. Filter out ASM/GSM/T2T stocks (NSE lists + circuit heuristic).
-         3e. Probe remaining candidates with test orders (catches Angel One cautionary list).
+         3e. Probe remaining candidates with test orders (cached per session).
          3f. Exclude any stock already traded today.
 09:46  Phase 4 — Real-time entry validation (5 checks, batch + parallel):
-         4a. Batch-fetch FULL quotes for all candidates (1 API call).
-         4b. Check momentum (5–10%), range position (≥0.85), spread (<0.2%).
-         4c. Parallel candle checks: micro breakout + volume confirmation.
-         4d. If no candidates pass → wait 2 min → retry from Phase 3.
-         4e. Retry loop continues until valid entries found or 12:30 PM.
+         4a. Check daily P&L limit — skip if loss > 5% of capital.
+         4b. Batch-fetch FULL quotes for all candidates (1 API call).
+         4c. Check momentum (5–10%), range position (≥0.85), spread (<0.2%).
+         4d. Parallel candle checks: micro breakout + volume confirmation.
+         4e. If no candidates pass → wait 2 min → retry from Phase 3.
+         4f. Retry loop continues until valid entries found or 12:30 PM.
 ~10:00 Phase 5 — Enter top 2 stocks with MARKET orders + server-side SL-M backup.
          Capital allocation: 1 stock = 50% buying power, 2 stocks = 50% each.
-~10:00 Phase 6 — Monitor every 10 seconds. Trail stop-loss upward. Exit on SL hit.
+~10:00 Phase 6 — Monitor every 10 seconds using FULL quotes (LTP + best bid).
+         • Trail stop-loss upward based on LTP.
+         • Compare best bid price against stop-loss for exit decisions.
+         • Before software exit: check if SL-M already executed (prevents double-sell).
+         • Exit orders use safe_exit() with 3× retry + Telegram escalation on failure.
+         • Refresh session every 2 hours during monitoring.
          If all positions close → 15 min cooldown → re-check market → re-scan → re-enter.
-         Up to 3 re-entry rounds per day. Never re-enter the same stock.
-15:15  Phase 7 — Force-close any remaining positions (market close).
+         Up to 3 re-entry rounds (3 scan attempts each). Never re-enter the same stock.
+15:15  Phase 7 — Force-close remaining positions (SL-M race check + safe_exit).
+         Daily P&L summary sent via Telegram.
 ```
 
 ## Market Bullishness — 4-Factor Model
@@ -136,6 +147,7 @@ Price drops to ₹115 → EXIT at ₹115.00 (PnL = +₹15 per share)
 
 | Control | Value | Behavior |
 |---|---|---|
+| Daily P&L limit | 5% of capital | If cumulative daily loss exceeds 5%, stop all new trades. Existing positions still monitored. Critical Telegram alert sent. |
 | Max consecutive losses | 2 | After 2 losing trades in a row, stop trading for the day |
 | Hard stop per stock | 2% | SL-M on exchange at entry × 0.98 — max loss per position |
 | Max re-entry rounds | 3 | After all positions close, can re-scan up to 3 more times |
@@ -177,9 +189,11 @@ Layer 3: Circuit Limit Heuristic
 Layer 4: Broker Probe (Angel One cautionary list)
   └─ Angel One maintains its own internal blocklist (broader than NSE)
   └─ No public API to check — only way is to test
-  └─ Bot places a LIMIT BUY for 1 share at ₹1.00 (won't execute)
-  └─ If accepted → cancel immediately → stock is tradable
+  └─ Bot places a LIMIT BUY for 1 share at ₹0.05 (below min tick — prevents accidental fills)
+  └─ If accepted → cancel immediately (3× retry on cancel failure) → stock is tradable
+  └─ If cancel fails after retries → critical Telegram alert sent
   └─ If rejected with "cautionary" → blacklist for the session
+  └─ Results cached per session — same stock is never probed twice
   └─ Runs concurrently (4 threads) — takes ~2-5 seconds for 10 candidates
 ```
 
@@ -197,9 +211,13 @@ Set `FNO_ONLY=true` to restrict trading to the ~213 stocks in NSE's F&O universe
 
 ### Exit Orders
 
+All exits go through `_safe_exit()` which guarantees delivery or escalation:
+
 1. **MARKET order** — must close position regardless of restrictions
 2. If MARKET fails → retry with **LIMIT order** at current price
-3. Exit orders skip tradability checks (you must be able to sell what you own)
+3. Retries up to 3 times with 1-second delay between attempts
+4. If all 3 attempts fail → sends critical Telegram alert: "EXIT FAILED — MANUAL INTERVENTION REQUIRED" with symbol, quantity, and action instructions
+5. Exit orders skip tradability checks (you must be able to sell what you own)
 
 ### Server-Side SL-M (Stop-Loss Market)
 
@@ -207,10 +225,10 @@ After each entry, the bot places a SL-M SELL order on the exchange:
 
 - **On entry**: SL-M at hard stop (entry × 0.98)
 - **As trailing stop moves up**: Modifies the SL-M trigger price to match
-- **On software exit**: Cancels the SL-M first, then places the exit order
-- **On market close**: Cancels remaining SL-M orders before force-closing
+- **On software exit**: Checks order book first — if SL-M is already `COMPLETE`/`TRIGGERED`, skips the software sell (prevents double-sell / accidental short). Otherwise cancels the SL-M, then places the exit via `_safe_exit()`.
+- **On market close**: Same SL-M race check before force-closing each position.
 
-This ensures the exchange enforces the stop-loss even if the bot crashes, loses network, or the polling interval misses a flash crash.
+This ensures the exchange enforces the stop-loss even if the bot crashes, loses network, or the polling interval misses a flash crash. The race condition check prevents the bot from selling shares that the exchange already sold.
 
 ## Re-Entry Logic
 
@@ -218,31 +236,37 @@ After all positions close via stop-loss:
 
 ```
 1. Wait 15 minutes (cooldown — avoids excessive trade charges)
-2. Re-check market bullishness (full 4-factor model) — if < 3/4 → stop for the day
-3. Re-scan all NSE stocks for fresh top gainers
-4. Validate entries with live data (5 checks)
-5. Exclude all stocks already traded today
-6. Enter new positions and monitor again
-7. Repeat up to 3 times (MAX_REENTRY_ROUNDS)
+2. Check daily P&L limit — if loss > 5% of capital → stop for the day
+3. Re-check market bullishness (full 4-factor model) — if < 3/4 → stop for the day
+4. Re-scan all NSE stocks for fresh top gainers
+5. Validate entries with live data (5 checks)
+6. If no valid entries → retry up to 3 times (60s apart) before giving up
+7. Exclude all stocks already traded today
+8. Enter new positions and monitor again
+9. Repeat up to 3 times (MAX_REENTRY_ROUNDS)
 ```
 
 **Stops re-entering when:**
 - Market closes (3:15 PM)
 - 2 consecutive losses reached
+- Daily P&L loss exceeds 5% of capital
 - 3 re-entry rounds exhausted
 - Market turns bearish between rounds (4-factor check)
-- No new tradable candidates found
+- No new tradable candidates found after 3 scan attempts
 
 ## Authentication
 
-Auto-login using PIN + TOTP (no daily manual token refresh):
+Auto-login using PIN + TOTP with automatic session management:
 
 ```
 1. Generate TOTP code from secret using pyotp
 2. POST to /rest/auth/angelone/user/v1/loginByPassword
-3. Receive JWT access token + refresh token
+3. Receive JWT access token
 4. Token used for all subsequent API calls
-5. Session persists until market close (no re-auth needed intraday)
+5. Session auto-refreshes every 2 hours (refresh_if_stale)
+6. On 401/403 errors: auto re-login and retry the failed request
+7. All API calls have 3× retry with exponential backoff
+8. Rate limited to ~8 requests/second to avoid Angel One throttling
 ```
 
 ## Configuration (.env)
@@ -296,6 +320,10 @@ These are not configurable via `.env` — change them in the source files:
 | `TOP_N` | `main.py` | 2 | Number of stocks to trade simultaneously |
 | `MAX_REENTRY_ROUNDS` | `main.py` | 3 | Max re-scan rounds after stop-loss exits |
 | `REENTRY_COOLDOWN_MINUTES` | `main.py` | 15 | Minutes to wait between re-entry rounds |
+| `REENTRY_SCAN_ATTEMPTS` | `main.py` | 3 | Scan+validate attempts per re-entry round |
+| `REENTRY_SCAN_DELAY` | `main.py` | 60s | Seconds between re-entry scan attempts |
+| `MAX_DAILY_LOSS_PCT` | `main.py` | 5% | Stop new trades if daily loss exceeds this |
+| `_EXIT_MAX_RETRIES` | `main.py` | 3 | Max retries for exit orders before alert |
 | `DEFAULT_TRAIL_PCT` | `position_tracker.py` | 2% | Default trailing stop distance |
 | `TIGHT_TRAIL_PCT` | `position_tracker.py` | 1.5% | Tighter trail after 5% profit |
 | `TIGHT_TRAIL_PROFIT_THRESHOLD` | `position_tracker.py` | 5% | Profit level to tighten trail |
@@ -347,13 +375,13 @@ Entry and exit orders use MARKET type for fastest fill. In volatile stocks (whic
 
 **Mitigation**: For entries, the bot calculates quantity based on LTP, so slight slippage is absorbed. For exits, the SL-M backup ensures the exchange handles it.
 
-### 5. Single Login Session
+### 5. Session Management
 
-The bot logs in once at startup and uses the same JWT token all day. Angel One tokens expire after ~24 hours.
+The bot auto-refreshes its JWT session every 2 hours via `refresh_if_stale()`. On 401/403 errors, it automatically re-authenticates and retries the failed request.
 
-**Impact**: If the bot runs continuously across days without restart, the token may expire.
+**Impact**: Session expiry is handled transparently. No manual intervention needed.
 
-**Mitigation**: The systemd service has `Restart=always`, so if the bot crashes due to auth failure, it restarts and re-authenticates.
+**Mitigation**: Login credentials (PIN + TOTP secret) are stored in memory for auto re-login. The systemd service has `Restart=always` as a final safety net.
 
 ### 6. No Partial Fill Handling
 
@@ -385,22 +413,22 @@ Each re-entry round includes a 15-minute cooldown + ~6-second scan + ~5-second p
 
 **Mitigation**: The bot checks if market is still open after cooldown. Consider adding a "no re-entry after 2:30 PM" cutoff.
 
-### 10. Concurrent SL-M Modification
+### 10. Concurrent SL-M Modification (Mitigated)
 
 When the trailing stop moves up, the bot modifies the SL-M order. If the exchange triggers the SL-M between the bot's price check and the modify call, the modify will fail.
 
-**Impact**: The bot logs a warning but continues. The position may already be closed by the exchange, but the bot's position tracker still shows it as open.
+**Impact**: The bot logs a warning but continues. Before any software exit, `_check_slm_executed()` checks the order book — if the SL-M is already `COMPLETE`/`TRIGGERED`, the software exit is skipped (prevents double-sell).
 
-**Mitigation**: The bot will attempt to place an exit order for an already-closed position, which will fail. The broker's auto-square-off at 3:15 PM ensures no orphan positions.
+**Mitigation**: The SL-M race condition check handles this case. If the order book check itself fails, the bot proceeds with the exit (safe default — better to risk a rejection than leave a position unmanaged).
 
 ## Project Structure
 
 ```
 algo-trader/
-├── main.py                      # Entry point — daily trading loop (scan window + retry)
+├── main.py                      # Entry point — daily trading loop (scan window + retry + safety)
 ├── backtest.py                  # Historical backtest using Angel One candle data
 ├── broker/
-│   └── angelone_client.py       # Angel One SmartAPI client (login, orders, market data, candles)
+│   └── angelone_client.py       # Angel One SmartAPI client (retry, rate limit, auto re-login)
 ├── config/
 │   ├── settings.py              # Environment variable loader
 │   └── instruments.py           # Instrument resolution and scrip master
@@ -444,7 +472,7 @@ git clone https://github.com/YOUR_USERNAME/algo-trader.git ~/algo-trader
 cd ~/algo-trader
 python3 -m venv .venv
 .venv/bin/pip install -r requirements.txt
-.venv/bin/pip install python-dotenv pyotp
+.venv/bin/pip install -r requirements.txt
 
 # Create .env (no inline comments!)
 nano .env
@@ -465,7 +493,8 @@ sudo systemctl status algo-trader
 ```
 pandas          # DataFrame operations for candle data
 requests        # HTTP client for Angel One API and NSE
-pyotp           # TOTP generation for auto-login
+pyotp           # TOTP generation for auto-login and session refresh
 numpy           # Fast EMA calculation in momentum strategy
-python-dotenv   # .env file loading
 ```
+
+Note: The scrip master (~30MB JSON) is cached to `data/.scrip_master_cache.json` with a 24-hour TTL. Delete this file to force a fresh download.

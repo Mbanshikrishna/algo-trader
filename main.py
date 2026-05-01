@@ -11,9 +11,14 @@ from execution.entry_validator import validate_entries_batch
 from execution.order_manager import OrderManager, OrderRejectedError
 from execution.tradability_filter import TradabilityFilter
 from monitor.position_tracker import PositionTracker
-from strategy.market_scanner import is_market_bullish, load_nse_equity_tokens, scan_top_gainers
+from strategy.market_scanner import (
+    clear_daily_candle_cache, is_market_bullish, load_nse_equity_tokens, scan_top_gainers,
+)
 from utils.logger import setup_logger
-from utils.telegram_alert import send_telegram_message
+from utils.telegram_alert import (
+    send_critical_alert, send_daily_loss_alert, send_exit_failure_alert,
+    send_telegram_message,
+)
 
 IST = ZoneInfo("Asia/Kolkata")
 
@@ -26,6 +31,11 @@ MARKET_CLOSE_HOUR, MARKET_CLOSE_MIN = 15, 15  # Exit all positions by 3:15 PM.
 TOP_N = 2  # Number of top gainers to trade.
 MAX_REENTRY_ROUNDS = 3  # Max times the bot can re-scan and re-enter after all positions close.
 REENTRY_COOLDOWN_MINUTES = 15  # Wait this long after last exit before re-scanning.
+REENTRY_SCAN_ATTEMPTS = 3  # Number of scan+validate attempts per re-entry round.
+REENTRY_SCAN_DELAY = 60  # Seconds between re-entry scan attempts.
+MAX_DAILY_LOSS_PCT = 0.05  # Stop new trades if daily loss exceeds 5% of capital.
+_EXIT_MAX_RETRIES = 3  # Max retries for exit orders.
+_EXIT_RETRY_DELAY = 1.0  # Seconds between exit retries.
 
 
 def _notify(message: str, logger, send_alert: bool) -> None:
@@ -118,6 +128,75 @@ def _cancel_slm_order(broker: AngelOneClient, order_id: str, symbol: str, logger
         logger.warning("Failed to cancel SL-M for %s (may have already triggered): %s", symbol, exc)
 
 
+def _check_slm_executed(broker: AngelOneClient, slm_order_id: str, symbol: str, logger) -> bool:
+    """Check if a SL-M order has already been executed by the exchange.
+
+    Returns True if the SL-M is COMPLETE/TRIGGERED (shares already sold).
+    Returns False if still pending or if the check fails (safe default).
+    """
+    try:
+        order_book = broker.get_order_book()
+        orders = order_book.get("data") or []
+        for order in orders:
+            if str(order.get("orderid", "")) == str(slm_order_id):
+                status = str(order.get("status", "")).upper()
+                if status in ("COMPLETE", "TRIGGERED", "EXECUTED"):
+                    logger.info(
+                        "[exit_attempt] SL-M %s for %s already %s — skipping software exit.",
+                        slm_order_id, symbol, status,
+                    )
+                    return True
+                return False
+    except Exception as exc:
+        logger.warning("Failed to check SL-M status for %s: %s — proceeding with software exit.", symbol, exc)
+    return False
+
+
+def _safe_exit(
+    broker: AngelOneClient,
+    order_manager: OrderManager,
+    symbol: str,
+    token: str,
+    quantity: int,
+    current_price: float,
+    logger,
+) -> dict | None:
+    """Place an exit order with retry and escalation.
+
+    Retries up to _EXIT_MAX_RETRIES times. If all fail, sends a critical
+    Telegram alert requiring manual intervention.
+    Returns the exit order result, or None if all attempts failed.
+    """
+    last_exc: Exception | None = None
+    broker_instrument = Instrument(
+        symbol=symbol, exchange="NSE", tradingsymbol=symbol, symboltoken=token,
+    )
+
+    for attempt in range(_EXIT_MAX_RETRIES):
+        try:
+            result = order_manager.place_exit_order(
+                symbol, quantity, instrument=broker_instrument, current_price=current_price,
+            )
+            logger.info(
+                "[exit_attempt] Exit order placed for %s: %d shares @ %.2f (attempt %d/%d)",
+                symbol, quantity, current_price, attempt + 1, _EXIT_MAX_RETRIES,
+            )
+            return result
+        except Exception as exc:
+            last_exc = exc
+            logger.error(
+                "[exit_attempt] Exit order FAILED for %s: %s (attempt %d/%d)",
+                symbol, exc, attempt + 1, _EXIT_MAX_RETRIES,
+            )
+            if attempt < _EXIT_MAX_RETRIES - 1:
+                time.sleep(_EXIT_RETRY_DELAY)
+
+    # All retries exhausted — send critical alert.
+    reason = str(last_exc) if last_exc else "Unknown error"
+    send_exit_failure_alert(symbol, quantity, reason)
+    return None
+
+
 def _ist_now() -> datetime:
     return datetime.now(IST)
 
@@ -201,6 +280,19 @@ def run_loop() -> None:
             time.sleep(3600)
             continue
 
+        # --- Phase 0: Daily housekeeping ---
+        clear_daily_candle_cache()  # Fresh candle data for each trading day.
+        daily_pnl = 0.0  # Track cumulative P&L for the day.
+        daily_loss_breached = False
+        total_capital = _allocate_capital(broker, settings, logger)
+        max_daily_loss = total_capital * MAX_DAILY_LOSS_PCT
+
+        # Refresh session if stale (every 2 hours).
+        try:
+            broker.refresh_if_stale(max_age_seconds=7200)
+        except Exception as exc:
+            logger.error("[auth_refresh] Periodic session refresh failed: %s", exc)
+
         # --- Phase 1: Wait for scan window (9:45 AM) ---
         _wait_until(SCAN_START_HOUR, SCAN_START_MIN, logger)
 
@@ -265,19 +357,27 @@ def run_loop() -> None:
                 scan_attempt += 1
 
                 # Check scan window: round 0 retries until 12:30 PM,
-                # re-entry rounds get one attempt (they have their own cooldown).
+                # re-entry rounds get up to REENTRY_SCAN_ATTEMPTS tries.
                 if scan_attempt > 1:
-                    if reentry_round > 0 or not _within_scan_window():
+                    if reentry_round > 0:
+                        if scan_attempt > REENTRY_SCAN_ATTEMPTS:
+                            break
+                        logger.info(
+                            "%sRe-entry scan attempt %d/%d — retrying in %ds...",
+                            round_label, scan_attempt, REENTRY_SCAN_ATTEMPTS, REENTRY_SCAN_DELAY,
+                        )
+                        time.sleep(REENTRY_SCAN_DELAY)
+                    elif not _within_scan_window():
                         break
-                    now = _ist_now()
-                    logger.info(
-                        "%sScan attempt %d — retrying in %ds (window open until %02d:%02d)...",
-                        round_label, scan_attempt, SCAN_RETRY_SECONDS,
-                        SCAN_END_HOUR, SCAN_END_MIN,
-                    )
-                    time.sleep(SCAN_RETRY_SECONDS)
-                    if not _within_scan_window():
-                        break
+                    else:
+                        logger.info(
+                            "%sScan attempt %d — retrying in %ds (window open until %02d:%02d)...",
+                            round_label, scan_attempt, SCAN_RETRY_SECONDS,
+                            SCAN_END_HOUR, SCAN_END_MIN,
+                        )
+                        time.sleep(SCAN_RETRY_SECONDS)
+                        if not _within_scan_window():
+                            break
 
                 logger.info("%sScanning %d stocks for top %d candidates (pool=%d)...",
                             round_label, len(nse_stocks), TOP_N, scan_pool_size)
@@ -398,6 +498,16 @@ def run_loop() -> None:
                 )
                 break
 
+            # Check daily P&L limit before entering new trades.
+            if daily_pnl <= -max_daily_loss:
+                daily_loss_breached = True
+                send_daily_loss_alert(daily_pnl, -max_daily_loss)
+                _notify(
+                    f"{round_label}Daily loss limit breached: ₹{daily_pnl:+,.2f}. No new trades.",
+                    logger, True,
+                )
+                break
+
             # Step 4b: Flexible capital allocation.
             total_capital = _allocate_capital(broker, settings, logger)
             leveraged_capital = total_capital * settings.intraday_leverage
@@ -510,35 +620,53 @@ def run_loop() -> None:
                     logger.info("All positions closed by stop-loss.")
                     break
 
-                # Batch-fetch current prices for all open positions.
+                # Batch-fetch FULL quotes for all open positions.
+                # FULL mode gives LTP + depth (best bid/ask) at the same API cost.
                 open_tokens = [token_map[s] for s in positions if s in token_map]
                 if not open_tokens:
                     break
 
                 try:
-                    result = broker.get_market_data("LTP", {"NSE": open_tokens})
-                    fetched = {str(q.get("symbolToken", "")): float(q.get("ltp", 0)) for q in result.get("fetched", [])}
+                    result = broker.get_market_data("FULL", {"NSE": open_tokens})
+                    fetched_quotes = {
+                        str(q.get("symbolToken", "")): q for q in result.get("fetched", [])
+                    }
                 except Exception as exc:
                     logger.warning("Price fetch failed: %s", exc)
                     time.sleep(settings.monitor_interval_seconds)
                     continue
 
+                # Refresh session periodically during monitoring.
+                try:
+                    broker.refresh_if_stale(max_age_seconds=7200)
+                except Exception as exc:
+                    logger.error("[auth_refresh] Session refresh during monitoring failed: %s", exc)
+
                 for symbol, pos in list(positions.items()):
                     token = token_map.get(symbol)
                     if not token:
                         continue
-                    current_price = fetched.get(token, 0)
-                    if current_price <= 0:
+                    quote = fetched_quotes.get(token, {})
+                    ltp = float(quote.get("ltp", 0))
+                    if ltp <= 0:
                         continue
+
+                    # Use best bid for stop-loss comparison (more conservative —
+                    # reflects the actual price we'd get on a market sell).
+                    depth = quote.get("depth", {})
+                    buy_depth = depth.get("buy", [{}])
+                    best_bid = float(buy_depth[0].get("price", 0)) if buy_depth else 0
+                    stop_check_price = best_bid if best_bid > 0 else ltp
 
                     try:
                         old_sl = pos.stop_loss
-                        position_tracker.update_trailing_stop(symbol, current_price)
+                        # Trail stop based on LTP (tracks the high).
+                        position_tracker.update_trailing_stop(symbol, ltp)
 
                         if pos.stop_loss > old_sl:
                             logger.info(
-                                "TRAILING STOP UPDATE %s: SL %.2f -> %.2f (price=%.2f, high=%.2f)",
-                                symbol, old_sl, pos.stop_loss, current_price, pos.highest_price,
+                                "TRAILING STOP UPDATE %s: SL %.2f -> %.2f (ltp=%.2f, bid=%.2f, high=%.2f)",
+                                symbol, old_sl, pos.stop_loss, ltp, best_bid, pos.highest_price,
                             )
 
                             # Update the server-side SL-M trigger to match the new trailing stop.
@@ -551,42 +679,62 @@ def run_loop() -> None:
                                 if ok:
                                     slm_triggers[symbol] = pos.stop_loss
 
-                        if position_tracker.should_exit(symbol, current_price):
-                            exit_reason = "HARD STOP (2% max loss)" if current_price <= pos.hard_stop else "TRAILING STOP"
+                        # Use best bid for exit decision (conservative).
+                        if position_tracker.should_exit(symbol, stop_check_price):
+                            exit_reason = "HARD STOP (2% max loss)" if stop_check_price <= pos.hard_stop else "TRAILING STOP"
+
+                            # SL-M race condition check: if the exchange already
+                            # executed our SL-M, skip the software exit.
+                            slm_id = slm_orders.get(symbol)
+                            if slm_id and _check_slm_executed(broker, slm_id, symbol, logger):
+                                # SL-M already sold the shares. Clean up tracking.
+                                slm_orders.pop(symbol, None)
+                                slm_triggers.pop(symbol, None)
+                                pnl = (stop_check_price - pos.average_price) * pos.quantity
+                                daily_pnl += pnl
+                                position_tracker.update_sell(symbol, pos.quantity)
+                                if pnl < 0:
+                                    consecutive_losses += 1
+                                else:
+                                    consecutive_losses = 0
+                                _notify(
+                                    f"{exit_reason} EXIT (SL-M executed): {symbol} — {pos.quantity} shares "
+                                    f"(entry={pos.average_price:.2f}, PnL={pnl:+.2f}, daily={daily_pnl:+.2f})",
+                                    logger, True,
+                                )
+                                continue
 
                             # Cancel the server-side SL-M before placing software exit.
-                            slm_id = slm_orders.pop(symbol, None)
                             if slm_id:
                                 _cancel_slm_order(broker, slm_id, symbol, logger)
+                            slm_orders.pop(symbol, None)
                             slm_triggers.pop(symbol, None)
 
-                            broker_instrument = Instrument(
-                                symbol=symbol, exchange="NSE",
-                                tradingsymbol=symbol, symboltoken=token,
+                            exit_order = _safe_exit(
+                                broker, order_manager, symbol, token,
+                                pos.quantity, stop_check_price, logger,
                             )
-                            exit_order = order_manager.place_exit_order(
-                                symbol, pos.quantity, instrument=broker_instrument,
-                                current_price=current_price,
-                            )
-                            pnl = (current_price - pos.average_price) * pos.quantity
+                            pnl = (stop_check_price - pos.average_price) * pos.quantity
+                            daily_pnl += pnl
                             position_tracker.update_sell(symbol, pos.quantity)
 
                             # Track consecutive losses.
                             if pnl < 0:
                                 consecutive_losses += 1
                             else:
-                                consecutive_losses = 0  # Reset on a winning trade.
+                                consecutive_losses = 0
 
                             _notify(
-                                f"{exit_reason} EXIT: {symbol} — {pos.quantity} shares @ {current_price:.2f} "
+                                f"{exit_reason} EXIT: {symbol} — {pos.quantity} shares @ {stop_check_price:.2f} "
                                 f"(entry={pos.average_price:.2f}, high={pos.highest_price:.2f}, "
                                 f"SL={pos.stop_loss:.2f}, hard_stop={pos.hard_stop:.2f}, PnL={pnl:+.2f}, "
+                                f"daily_pnl={daily_pnl:+.2f}, "
                                 f"consecutive_losses={consecutive_losses}/{settings.max_consecutive_losses}, "
                                 f"round={reentry_round}/{MAX_REENTRY_ROUNDS}) | {exit_order}",
                                 logger, True,
                             )
                     except Exception as exc:
-                        logger.exception("Error monitoring %s: %s", symbol, exc)
+                        logger.exception("[critical_failure] Error monitoring %s: %s", symbol, exc)
 
                 time.sleep(settings.monitor_interval_seconds)
 
@@ -595,6 +743,17 @@ def run_loop() -> None:
                 break  # Market close or max losses — no re-entry.
             if consecutive_losses >= settings.max_consecutive_losses:
                 break  # Too many losses — stop.
+
+            # Check daily P&L limit before re-entering.
+            if daily_pnl <= -max_daily_loss:
+                daily_loss_breached = True
+                send_daily_loss_alert(daily_pnl, -max_daily_loss)
+                _notify(
+                    f"Daily loss limit breached: ₹{daily_pnl:+,.2f} (limit ₹{-max_daily_loss:,.2f}). "
+                    f"No new trades.",
+                    logger, True,
+                )
+                break
 
             reentry_round += 1
             if reentry_round > MAX_REENTRY_ROUNDS:
@@ -616,40 +775,50 @@ def run_loop() -> None:
                     if not token:
                         continue
 
+                    # SL-M race check: if exchange already executed SL-M, skip.
+                    slm_id = slm_orders.get(symbol)
+                    if slm_id and _check_slm_executed(broker, slm_id, symbol, logger):
+                        slm_orders.pop(symbol, None)
+                        slm_triggers.pop(symbol, None)
+                        position_tracker.update_sell(symbol, pos.quantity)
+                        logger.info("SL-M already executed for %s — skipping force close.", symbol)
+                        continue
+
                     # Cancel the server-side SL-M order before placing the exit.
-                    slm_id = slm_orders.pop(symbol, None)
                     if slm_id:
                         _cancel_slm_order(broker, slm_id, symbol, logger)
+                    slm_orders.pop(symbol, None)
                     slm_triggers.pop(symbol, None)
 
                     # Get final price for exit order and PnL.
                     try:
-                        result = broker.get_market_data("LTP", {"NSE": [token]})
-                        final_price = float(result.get("fetched", [{}])[0].get("ltp", pos.highest_price))
+                        result = broker.get_market_data("FULL", {"NSE": [token]})
+                        fetched_list = result.get("fetched", [{}])
+                        final_price = float(fetched_list[0].get("ltp", pos.highest_price)) if fetched_list else pos.highest_price
                     except Exception:
                         final_price = pos.highest_price
 
-                    broker_instrument = Instrument(
-                        symbol=symbol, exchange="NSE",
-                        tradingsymbol=symbol, symboltoken=token,
-                    )
-                    exit_order = order_manager.place_exit_order(
-                        symbol, pos.quantity, instrument=broker_instrument,
-                        current_price=final_price,
+                    exit_order = _safe_exit(
+                        broker, order_manager, symbol, token,
+                        pos.quantity, final_price, logger,
                     )
 
                     pnl = (final_price - pos.average_price) * pos.quantity
+                    daily_pnl += pnl
                     position_tracker.update_sell(symbol, pos.quantity)
                     _notify(
                         f"MARKET CLOSE EXIT: {symbol} — {pos.quantity} shares @ {final_price:.2f} "
-                        f"(entry={pos.average_price:.2f}, PnL={pnl:+.2f}) | {exit_order}",
+                        f"(entry={pos.average_price:.2f}, PnL={pnl:+.2f}, daily={daily_pnl:+.2f}) | {exit_order}",
                         logger, True,
                     )
                 except Exception as exc:
-                    logger.exception("Failed to close %s: %s", symbol, exc)
-                    send_telegram_message(f"URGENT: Failed to close {symbol}: {exc}")
+                    logger.exception("[critical_failure] Failed to close %s: %s", symbol, exc)
+                    send_exit_failure_alert(symbol, pos.quantity, str(exc))
 
-        _notify("Trading day complete. Sleeping until tomorrow.", logger, True)
+        _notify(
+            f"Trading day complete. Daily P&L: ₹{daily_pnl:+,.2f}. Sleeping until tomorrow.",
+            logger, True,
+        )
         time.sleep(3600)
 
 

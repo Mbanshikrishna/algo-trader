@@ -7,7 +7,13 @@ from typing import Any
 
 import requests
 
+from utils.telegram_alert import send_critical_alert
+
 logger = logging.getLogger("algo_trader")
+
+# Probe cancel retry configuration.
+_CANCEL_MAX_RETRIES = 3
+_CANCEL_RETRY_DELAY = 0.5
 
 # Broker rejection messages that indicate untradable stocks.
 REJECTION_KEYWORDS = [
@@ -46,6 +52,7 @@ class TradabilityFilter:
         self._gsm_symbols: set[str] = set()
         self._fno_symbols: set[str] = set()
         self._session_blacklist: dict[str, str] = {}  # symbol -> reason
+        self._probe_cache: dict[str, bool] = {}  # symbol -> tradable (cached for the day)
         self._loaded = False
 
     def load_restricted_lists(self) -> None:
@@ -190,7 +197,7 @@ class TradabilityFilter:
     ) -> tuple[bool, str]:
         """Place a tiny LIMIT order to test if the broker allows trading this stock.
 
-        Places a LIMIT BUY for 1 share at the minimum tick price (won't execute),
+        Places a LIMIT BUY for 1 share at ₹0.05 (below minimum tick — won't execute),
         then cancels immediately if accepted. If the broker rejects with a
         cautionary/restricted message, the stock is blacklisted.
 
@@ -198,9 +205,17 @@ class TradabilityFilter:
         """
         clean = self._normalize_symbol(symbol)
 
+        # Return cached result if available (avoids redundant probe orders).
+        if clean in self._probe_cache:
+            if not self._probe_cache[clean]:
+                reason = self._session_blacklist.get(clean) or self._session_blacklist.get(symbol, "cached rejection")
+                return False, reason
+            return True, ""
+
         # Skip if already blacklisted.
         if clean in self._session_blacklist or symbol in self._session_blacklist:
             reason = self._session_blacklist.get(clean) or self._session_blacklist.get(symbol, "")
+            self._probe_cache[clean] = False
             return False, reason
 
         probe_order = {
@@ -212,7 +227,7 @@ class TradabilityFilter:
             "ordertype": "LIMIT",
             "producttype": "INTRADAY",
             "duration": "DAY",
-            "price": "1.00",  # Minimum viable price — won't execute for any real stock.
+            "price": "0.05",  # Below minimum tick for any real stock — prevents accidental fills.
             "quantity": "1",
             "squareoff": "0",
             "stoploss": "0",
@@ -220,7 +235,7 @@ class TradabilityFilter:
 
         try:
             result = broker_client.place_order(probe_order)
-            # Order accepted — stock is tradable. Cancel immediately.
+            # Order accepted — stock is tradable. Cancel immediately with retry.
             order_id = None
             resp = result.get("response", {})
             data = resp.get("data")
@@ -230,16 +245,33 @@ class TradabilityFilter:
                 order_id = data
 
             if order_id:
-                try:
-                    broker_client.cancel_order(order_id, "NORMAL")
-                except Exception as cancel_exc:
-                    logger.warning("Failed to cancel probe order %s for %s: %s", order_id, symbol, cancel_exc)
+                cancelled = False
+                for attempt in range(_CANCEL_MAX_RETRIES):
+                    try:
+                        broker_client.cancel_order(order_id, "NORMAL")
+                        cancelled = True
+                        break
+                    except Exception as cancel_exc:
+                        logger.warning(
+                            "Probe cancel attempt %d/%d failed for %s (order %s): %s",
+                            attempt + 1, _CANCEL_MAX_RETRIES, symbol, order_id, cancel_exc,
+                        )
+                        if attempt < _CANCEL_MAX_RETRIES - 1:
+                            time.sleep(_CANCEL_RETRY_DELAY)
 
+                if not cancelled:
+                    send_critical_alert(
+                        f"PROBE CANCEL FAILED — order {order_id} for {symbol} may still be open. "
+                        f"Manual cancellation required."
+                    )
+
+            self._probe_cache[clean] = True
             return True, ""
 
         except Exception as exc:
             error_msg = str(exc)
             if self.record_broker_rejection(symbol, error_msg):
+                self._probe_cache[clean] = False
                 return False, f"Broker rejected (probe): {error_msg}"
             # Non-tradability error (e.g. network issue) — assume tradable.
             logger.warning("Probe order error for %s (assuming tradable): %s", symbol, error_msg)
