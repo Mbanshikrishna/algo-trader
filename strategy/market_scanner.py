@@ -35,8 +35,11 @@ def is_market_bullish(client: AngelOneClient, retries: int = 3) -> tuple[bool, f
     """Check if Nifty 50 is in a positive trend today.
 
     Uses Angel One's pre-computed percentChange when available.
+    Detects market holidays by checking tradeVolume and exchFeedTime.
     Retries on zero-change to handle stale data at market open.
     """
+    today_str = datetime.now(IST).strftime("%d-%b-%Y")  # e.g. "01-May-2026"
+
     for attempt in range(retries):
         result = client.get_market_data("FULL", {"NSE": [NIFTY_50_TOKEN]})
         fetched = result.get("fetched", [])
@@ -48,10 +51,20 @@ def is_market_bullish(client: AngelOneClient, retries: int = 3) -> tuple[bool, f
 
         nifty = fetched[0]
 
-        # Prefer the broker's pre-computed field — avoids stale LTP issues.
+        # Detect market holiday: no trades and feed time is not today.
+        trade_volume = int(float(nifty.get("tradeVolume", 0)))
+        feed_time = str(nifty.get("exchFeedTime", ""))
+        if trade_volume == 0 and today_str not in feed_time:
+            logger.info(
+                "Market appears closed (holiday). tradeVolume=0, exchFeedTime=%s",
+                feed_time,
+            )
+            return False, 0.0
+
+        # Use the broker's pre-computed percentChange.
         pct_change = float(nifty.get("percentChange", 0))
         if pct_change != 0:
-            return pct_change >= 0, round(pct_change, 2)
+            return pct_change > 0, round(pct_change, 2)
 
         # Fallback: compute from LTP and previous close.
         ltp = float(nifty.get("ltp", 0))
@@ -62,7 +75,7 @@ def is_market_bullish(client: AngelOneClient, retries: int = 3) -> tuple[bool, f
 
         computed = ((ltp - prev_close) / prev_close) * 100
         if computed != 0 or attempt >= retries - 1:
-            return computed >= 0, round(computed, 2)
+            return computed > 0, round(computed, 2)
 
         # 0.00% at market open likely means stale data — retry after a short wait.
         logger.info("Nifty change is 0.00%% — retrying in 5s (attempt %d/%d)...", attempt + 1, retries)
