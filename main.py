@@ -14,6 +14,7 @@ from monitor.position_tracker import PositionTracker
 from strategy.market_scanner import (
     clear_daily_candle_cache, is_market_bullish, load_nse_equity_tokens, scan_top_gainers,
 )
+from utils.atr import fetch_entry_atr
 from utils.logger import setup_logger
 from utils.telegram_alert import (
     send_critical_alert, send_daily_loss_alert, send_exit_failure_alert,
@@ -557,7 +558,14 @@ def run_loop() -> None:
                         symbol, "BUY", qty, instrument=instrument,
                         current_price=live_price,
                     )
-                    pos = position_tracker.update_buy(symbol, qty, live_price)
+
+                    # Compute ATR from recent 5-min candles for adaptive stop sizing.
+                    entry_atr = fetch_entry_atr(broker, gainer["token"], live_price)
+
+                    prev_close = gainer.get("prev_close", live_price / (1 + gainer["pct_change"] / 100))
+                    pos = position_tracker.update_buy(
+                        symbol, qty, live_price, atr=entry_atr, prev_close=prev_close,
+                    )
                     entered_symbols.append(symbol)
                     traded_today.add(symbol)
                     token_map[symbol] = gainer["token"]
@@ -570,10 +578,12 @@ def run_loop() -> None:
                         slm_orders[symbol] = slm_id
                         slm_triggers[symbol] = pos.hard_stop
 
+                    atr_pct = (entry_atr / live_price) * 100
                     _notify(
                         f"{round_label}ENTRY: {symbol} — {qty} shares @ {live_price:.2f} "
                         f"(capital={capital_per_stock:.2f}, gain={gainer['pct_change']:+.2f}%, "
-                        f"score={gainer['composite_score']:.3f}, SL-M={pos.hard_stop:.2f}) | {order}",
+                        f"score={gainer['composite_score']:.3f}, ATR={entry_atr:.4f} ({atr_pct:.2f}%), "
+                        f"SL={pos.stop_loss:.2f}, hard_stop={pos.hard_stop:.2f}) | {order}",
                         logger, True,
                     )
                 except OrderRejectedError as exc:
@@ -664,9 +674,15 @@ def run_loop() -> None:
                         position_tracker.update_trailing_stop(symbol, ltp)
 
                         if pos.stop_loss > old_sl:
+                            profit_pct = (pos.highest_price - pos.average_price) / pos.average_price
+                            intraday_pct = pos.intraday_gain_pct(ltp) * 100
                             logger.info(
-                                "TRAILING STOP UPDATE %s: SL %.2f -> %.2f (ltp=%.2f, bid=%.2f, high=%.2f)",
-                                symbol, old_sl, pos.stop_loss, ltp, best_bid, pos.highest_price,
+                                "TRAILING STOP UPDATE %s: SL %.2f -> %.2f "
+                                "(ltp=%.2f, bid=%.2f, high=%.2f, profit=%.1f%%, "
+                                "intraday=%.1f%%, locked=%s, ATR=%.4f)",
+                                symbol, old_sl, pos.stop_loss, ltp, best_bid,
+                                pos.highest_price, profit_pct * 100,
+                                intraday_pct, pos.profit_locked, pos.atr,
                             )
 
                             # Update the server-side SL-M trigger to match the new trailing stop.
@@ -681,7 +697,7 @@ def run_loop() -> None:
 
                         # Use best bid for exit decision (conservative).
                         if position_tracker.should_exit(symbol, stop_check_price):
-                            exit_reason = "HARD STOP (2% max loss)" if stop_check_price <= pos.hard_stop else "TRAILING STOP"
+                            exit_reason = position_tracker.get_exit_reason(symbol, stop_check_price)
 
                             # SL-M race condition check: if the exchange already
                             # executed our SL-M, skip the software exit.
@@ -727,8 +743,8 @@ def run_loop() -> None:
                             _notify(
                                 f"{exit_reason} EXIT: {symbol} — {pos.quantity} shares @ {stop_check_price:.2f} "
                                 f"(entry={pos.average_price:.2f}, high={pos.highest_price:.2f}, "
-                                f"SL={pos.stop_loss:.2f}, hard_stop={pos.hard_stop:.2f}, PnL={pnl:+.2f}, "
-                                f"daily_pnl={daily_pnl:+.2f}, "
+                                f"SL={pos.stop_loss:.2f}, hard_stop={pos.hard_stop:.2f}, ATR={pos.atr:.4f}, "
+                                f"locked={pos.profit_locked}, PnL={pnl:+.2f}, daily_pnl={daily_pnl:+.2f}, "
                                 f"consecutive_losses={consecutive_losses}/{settings.max_consecutive_losses}, "
                                 f"round={reentry_round}/{MAX_REENTRY_ROUNDS}) | {exit_order}",
                                 logger, True,

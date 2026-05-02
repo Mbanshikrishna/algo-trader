@@ -31,10 +31,16 @@ Automated intraday trading bot that scans the entire NSE equity market, selects 
          4d. Parallel candle checks: micro breakout + volume confirmation.
          4e. If no candidates pass → wait 2 min → retry from Phase 3.
          4f. Retry loop continues until valid entries found or 12:30 PM.
-~10:00 Phase 5 — Enter top 2 stocks with MARKET orders + server-side SL-M backup.
-         Capital allocation: 1 stock = 50% buying power, 2 stocks = 50% each.
+~10:00 Phase 5 — Enter top 2 stocks with MARKET orders:
+         • Compute 5-min ATR from last 12 candles for each stock.
+         • Place MARKET BUY order.
+         • Place server-side SL-M at hard stop: max(entry - 3×ATR, entry × 0.97).
+         • Capital allocation: 1 stock = 50% buying power, 2 stocks = 50% each.
 ~10:00 Phase 6 — Monitor every 10 seconds using FULL quotes (LTP + best bid).
-         • Trail stop-loss upward based on LTP.
+         • Trail stop-loss upward using ATR-tiered multipliers.
+         • When stock's intraday gain hits +15% → lock stop at prev_close × 1.15,
+           trail at 1% of highest price (exits in 17–19% range).
+         • After 2:30 PM: all ATR multipliers reduced by 0.5 (tighter stops).
          • Compare best bid price against stop-loss for exit decisions.
          • Before software exit: check if SL-M already executed (prevents double-sell).
          • Exit orders use safe_exit() with 3× retry + Telegram escalation on failure.
@@ -107,41 +113,64 @@ This stock scored high on momentum (price near day high) and stability (no gap-u
 
 ## Risk Management
 
-### Three-Layer Stop-Loss System
+### ATR-Adaptive Stop-Loss System
+
+Stop distances are based on each stock's own 5-minute ATR (Average True Range), computed from the last 12 candles at entry time. Volatile stocks get wider stops; steady stocks get tighter ones.
 
 ```
 Layer 1: Hard Stop (exchange-enforced)
-  └─ SL-M order placed on the exchange at entry_price × 0.98
+  └─ SL-M order on exchange at max(entry - 3×ATR, entry × 0.97)
   └─ Triggers automatically — no polling needed
-  └─ Guarantees max 2% loss per stock
+  └─ Caps loss at 3% of entry or 3× ATR, whichever is tighter
 
-Layer 2: Trailing Stop (software, 10-second polling)
+Layer 2: ATR-Tiered Trailing Stop (software, 10-second polling)
   └─ Tracks highest price since entry
-  └─ Stop-loss = highest_price × (1 - trail_pct)
+  └─ Trail distance = ATR × multiplier (tightens as profit grows)
+  └─ Minimum distance floor: 0.5% of price (prevents instant stop-out)
   └─ Only moves UP, never down
 
-Layer 3: 15% Profit Lock
-  └─ Once gain crosses 15%, stop-loss locks at entry_price × 1.15
-  └─ Guarantees at least 15% profit regardless of subsequent price action
+Layer 3: Intraday Profit Lock (15% from previous close)
+  └─ When the stock's intraday gain reaches +15% from prev close → lock activates
+  └─ Stop jumps to prev_close × 1.15 (floor, never drops below this)
+  └─ Trail switches to 1% of highest price
+  └─ Position exits naturally in the 17–19% intraday gain range
+
+Layer 4: Late Session Tightening (after 2:30 PM IST)
+  └─ All ATR multipliers reduced by 0.5
+  └─ Tighter stops approaching market close to reduce risk
 ```
 
-### Trailing Stop Tightening
+### ATR Trail Tiers
 
-| Profit from entry | Trail % | Stop-loss level |
+| Profit from entry | ATR Multiplier | Effect |
 |---|---|---|
-| 0–5% | 2.0% | `highest_price × 0.98` |
-| 5–15% | 1.5% | `highest_price × 0.985` (tighter) |
-| 15%+ | Locked | `entry_price × 1.15` (fixed, guaranteed profit) |
+| < 3% | 2.5× ATR | Wide — let the trade breathe |
+| 3–6% | 2.0× ATR | Moderate — protect some gains |
+| 6–10% | 1.5× ATR | Tight — lock in most gains |
+| > 10% | 1.0× ATR | Very tight — ride the tail |
 
-### Example: Entry at ₹100
+### Example: TATAMOTORS entry at ₹735 (prev close ₹700, ATR = ₹2.80)
 
 ```
-Price rises to ₹103 → SL = ₹100.94 (2% trail)
-Price rises to ₹106 → SL = ₹104.41 (1.5% trail, tightened at 5% profit)
-Price rises to ₹115 → SL = ₹115.00 (LOCKED at +15%)
-Price rises to ₹125 → SL = ₹115.00 (still locked — guaranteed ₹15 profit)
-Price drops to ₹115 → EXIT at ₹115.00 (PnL = +₹15 per share)
+Entry:   SL = 735 - 3×2.80 = ₹726.60 (hard stop also at ₹726.60)
+₹740:    SL = 740 - 2.5×2.80 = ₹733.00  (profit <3%, default tier)
+₹757:    SL = 757 - 2.0×2.80 = ₹751.40  (profit 3%+, tightened)
+₹780:    SL = 780 - 1.5×2.80 = ₹775.80  (profit 6%+, tight)
+₹810:    Intraday gain = (810-700)/700 = 15.7% → LOCK activates
+         SL = max(700×1.15, 810×0.99) = max(805, 801.9) = ₹805.00
+₹830:    SL = max(805, 830×0.99) = ₹821.70  (1% trail inside lock)
+₹821:    Below ₹821.70 → EXIT (intraday gain at exit: +17.3%)
 ```
+
+### Why ATR-Based (Not Fixed %)
+
+Real data analysis of 5-10% gainers showed fixed percentage stops fail:
+
+| Stock Type | 5-min ATR | Fixed 2% trail | ATR-based trail |
+|---|---|---|---|
+| TATAMOTORS (₹900, large-cap) | ₹3.50 (0.39%) | Works fine | ~1.2% initial stop |
+| IRFC (₹11, penny stock) | ₹0.13 (1.21%) | Stopped on noise constantly | ~3.5% initial stop |
+| CIPLA (₹1500, large-cap) | ₹5.50 (0.37%) | Works fine | ~1.1% initial stop |
 
 ### Daily Loss Limits
 
@@ -149,7 +178,7 @@ Price drops to ₹115 → EXIT at ₹115.00 (PnL = +₹15 per share)
 |---|---|---|
 | Daily P&L limit | 5% of capital | If cumulative daily loss exceeds 5%, stop all new trades. Existing positions still monitored. Critical Telegram alert sent. |
 | Max consecutive losses | 2 | After 2 losing trades in a row, stop trading for the day |
-| Hard stop per stock | 2% | SL-M on exchange at entry × 0.98 — max loss per position |
+| Hard stop per stock | 3% or 3×ATR | SL-M on exchange — whichever is tighter |
 | Max re-entry rounds | 3 | After all positions close, can re-scan up to 3 more times |
 | Re-entry cooldown | 15 min | Wait 15 minutes between rounds to avoid churning |
 | No repeat stocks | — | Never re-enter a stock already traded today |
@@ -223,7 +252,7 @@ All exits go through `_safe_exit()` which guarantees delivery or escalation:
 
 After each entry, the bot places a SL-M SELL order on the exchange:
 
-- **On entry**: SL-M at hard stop (entry × 0.98)
+- **On entry**: SL-M at hard stop — `max(entry - 3×ATR, entry × 0.97)`
 - **As trailing stop moves up**: Modifies the SL-M trigger price to match
 - **On software exit**: Checks order book first — if SL-M is already `COMPLETE`/`TRIGGERED`, skips the software sell (prevents double-sell / accidental short). Otherwise cancels the SL-M, then places the exit via `_safe_exit()`.
 - **On market close**: Same SL-M race check before force-closing each position.
@@ -324,11 +353,17 @@ These are not configurable via `.env` — change them in the source files:
 | `REENTRY_SCAN_DELAY` | `main.py` | 60s | Seconds between re-entry scan attempts |
 | `MAX_DAILY_LOSS_PCT` | `main.py` | 5% | Stop new trades if daily loss exceeds this |
 | `_EXIT_MAX_RETRIES` | `main.py` | 3 | Max retries for exit orders before alert |
-| `DEFAULT_TRAIL_PCT` | `position_tracker.py` | 2% | Default trailing stop distance |
-| `TIGHT_TRAIL_PCT` | `position_tracker.py` | 1.5% | Tighter trail after 5% profit |
-| `TIGHT_TRAIL_PROFIT_THRESHOLD` | `position_tracker.py` | 5% | Profit level to tighten trail |
-| `LOCK_PROFIT_THRESHOLD` | `position_tracker.py` | 15% | Profit level to lock stop-loss |
-| `MAX_LOSS_PCT` | `position_tracker.py` | 2% | Hard max loss per stock |
+| `INITIAL_ATR_MULT` | `position_tracker.py` | 3.0 | Initial stop distance: 3× ATR below entry |
+| `HARD_MAX_LOSS_PCT` | `position_tracker.py` | 3% | Absolute max loss per stock |
+| `MIN_STOP_DISTANCE_PCT` | `position_tracker.py` | 0.5% | Stop never tighter than 0.5% of price |
+| `TRAIL_TIERS` | `position_tracker.py` | see below | ATR multipliers per profit tier |
+| `INTRADAY_LOCK_THRESHOLD` | `position_tracker.py` | 15% | Lock when stock's intraday gain ≥ 15% |
+| `INTRADAY_LOCK_FLOOR_PCT` | `position_tracker.py` | 15% | Stop floor: prev_close × 1.15 |
+| `INTRADAY_LOCK_TRAIL_PCT` | `position_tracker.py` | 1% | Trail at 1% of highest inside lock zone |
+| `LATE_SESSION_HOUR/MIN` | `position_tracker.py` | 14:30 | After 2:30 PM, tighten all multipliers |
+| `LATE_SESSION_MULT_REDUCTION` | `position_tracker.py` | 0.5 | Subtract from ATR multiplier after 2:30 PM |
+| `ATR_CANDLE_COUNT` | `atr.py` | 12 | Number of 5-min candles for ATR computation |
+| `FALLBACK_ATR_PCT` | `atr.py` | 0.5% | Fallback ATR if candle fetch fails |
 | `MIN_GAIN_PCT` | `market_scanner.py` | 5% | Minimum intraday gain to consider |
 | `MAX_GAIN_PCT` | `market_scanner.py` | 10% | Maximum intraday gain to consider |
 | `MIN_PRICE` | `market_scanner.py` | ₹50 | Minimum stock price |
@@ -340,6 +375,23 @@ These are not configurable via `.env` — change them in the source files:
 | `MIN_RANGE_POSITION` | `entry_validator.py` | 0.85 | Price must be in top 15% of day's range |
 | `MIN_VOLUME_RATIO` | `entry_validator.py` | 1.2 | Current volume ≥ 1.2× avg of prior candles |
 | `MAX_SPREAD_PCT` | `entry_validator.py` | 0.2% | Max bid-ask spread as % of price |
+
+## Backtesting
+
+Run the backtest to simulate the full workflow on historical data:
+
+```bash
+.venv/bin/python backtest.py
+```
+
+The backtest:
+1. Prefetches daily candles for 500 stocks (top of scrip master, ~3 min).
+2. For each trading day: scans for 5-10% gainers from daily data.
+3. Fetches 5-min candles for candidates and simulates entry validation.
+4. Simulates ATR trailing stop, profit lock, and hard stop on 5-min candles.
+5. Reports: P&L, win rate, exit reasons, max drawdown, and detailed trade log.
+
+**Caveats**: No slippage, no bid-ask spread, no market bullishness filter, uses current scrip master (survivorship bias).
 
 ## Known Bottlenecks and Limitations
 
@@ -440,18 +492,19 @@ algo-trader/
 │   ├── entry_validator.py       # 5-check real-time entry validation (batch + parallel)
 │   └── tradability_filter.py    # ASM/GSM/circuit/probe filtering
 ├── monitor/
-│   └── position_tracker.py      # Position state, trailing stop, profit lock
+│   └── position_tracker.py      # ATR-adaptive trailing stop with intraday profit lock
 ├── risk/
 │   └── risk_manager.py          # Position sizing (legacy, not used by main loop)
 ├── data/
 │   └── market_stream.py         # Historical candle fetcher (used by utility scripts)
 ├── utils/
+│   ├── atr.py                   # ATR computation from 5-min candles at entry time
 │   ├── logger.py                # File + console logging setup
 │   └── telegram_alert.py        # Telegram notification sender
 ├── deploy/
 │   └── algo-trader.service      # systemd service file for EC2
 ├── tests/
-│   ├── test_core.py             # Core logic tests (39 tests)
+│   ├── test_core.py             # Core logic tests (28 tests)
 │   ├── test_angelone_check.py   # Settings and data check tests
 │   ├── test_stock_scanner.py    # Scanner tests
 │   ├── test_excel_watchlist.py  # Excel watchlist tests

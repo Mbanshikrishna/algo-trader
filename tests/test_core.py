@@ -50,10 +50,10 @@ class CoreTests(unittest.TestCase):
 
     def test_position_tracker(self) -> None:
         tracker = PositionTracker()
-        pos = tracker.update_buy("INFY.NS", 10, 100)
+        pos = tracker.update_buy("INFY.NS", 10, 100, atr=0.5, prev_close=95.0)
         self.assertEqual(pos.quantity, 10)
 
-        pos = tracker.update_buy("INFY.NS", 10, 110)
+        pos = tracker.update_buy("INFY.NS", 10, 110, atr=0.5, prev_close=95.0)
         self.assertEqual(pos.quantity, 20)
         self.assertAlmostEqual(pos.average_price, 105)
 
@@ -62,52 +62,77 @@ class CoreTests(unittest.TestCase):
 
     def test_position_tracker_trailing_stop_only_moves_up(self) -> None:
         tracker = PositionTracker()
-        pos = tracker.update_buy("INFY.NS", 10, 100)
+        atr = 1.00
+        # prev_close=80 so intraday gain won't hit 15% lock until price ~92.
+        pos = tracker.update_buy("INFY.NS", 10, 100, atr=atr, prev_close=80.0)
         self.assertEqual(pos.highest_price, 100)
-        self.assertEqual(pos.stop_loss, 98.0)
+        self.assertAlmostEqual(pos.stop_loss, 97.0, places=2)
 
-        pos = tracker.update_trailing_stop("INFY.NS", 110)
-        assert pos is not None
-        self.assertEqual(pos.highest_price, 110)
-        self.assertEqual(pos.stop_loss, 108.35)
+        # Price rises to 110 (+10% profit → 1.0x ATR trail).
+        # Intraday gain = (110-80)/80 = 37.5% → lock activates.
+        # But we want to test normal trailing, so use high prev_close.
+        tracker2 = PositionTracker()
+        pos2 = tracker2.update_buy("INFY2.NS", 10, 100, atr=atr, prev_close=95.0)
 
-        pos = tracker.update_trailing_stop("INFY.NS", 108)
-        assert pos is not None
-        self.assertEqual(pos.highest_price, 110)
-        self.assertEqual(pos.stop_loss, 108.35)
+        pos2 = tracker2.update_trailing_stop("INFY2.NS", 108)
+        assert pos2 is not None
+        self.assertEqual(pos2.highest_price, 108)
+        # profit = 8%, intraday = (108-95)/95 = 13.7% (below 15% lock).
+        # 6-10% tier → 1.5x ATR → 108 - 1.5 = 106.5.
+        self.assertAlmostEqual(pos2.stop_loss, 106.5, places=2)
 
-    def test_position_tracker_tightens_trail_after_five_percent_profit(self) -> None:
+        # Price drops to 106 — stop must NOT move down.
+        pos2 = tracker2.update_trailing_stop("INFY2.NS", 106)
+        assert pos2 is not None
+        self.assertEqual(pos2.highest_price, 108)
+        self.assertAlmostEqual(pos2.stop_loss, 106.5, places=2)
+
+    def test_position_tracker_tightens_trail_at_profit_tiers(self) -> None:
         tracker = PositionTracker()
-        tracker.update_buy("ITC.NS", 10, 100)
+        atr = 1.00
+        tracker.update_buy("ITC.NS", 10, 100, atr=atr, prev_close=95.0)
 
+        # At +5% profit → 3-6% tier → 2.0x ATR trail.
         pos = tracker.update_trailing_stop("ITC.NS", 105)
         assert pos is not None
-        self.assertEqual(pos.stop_loss, 103.42)
+        self.assertAlmostEqual(pos.stop_loss, 103.0, places=2)
 
-    def test_position_tracker_locks_stop_at_fifteen_percent_gain(self) -> None:
+    def test_position_tracker_intraday_lock_at_15_pct(self) -> None:
         tracker = PositionTracker()
-        tracker.update_buy("TEST.NS", 10, 100)
+        atr = 1.00
+        # prev_close=100, enter at 105 (+5% intraday).
+        tracker.update_buy("TEST.NS", 10, 105, atr=atr, prev_close=100.0)
 
-        # Push price to +15% (115.0) — stop should lock at exactly 115.0.
+        # Price to 114 → intraday = 14% (below lock).
+        pos = tracker.update_trailing_stop("TEST.NS", 114)
+        assert pos is not None
+        self.assertFalse(pos.profit_locked)
+
+        # Price to 115 → intraday = 15% → lock activates.
+        # Stop = max(100*1.15, 115*0.99) = max(115.0, 113.85) = 115.0.
         pos = tracker.update_trailing_stop("TEST.NS", 115)
         assert pos is not None
-        self.assertEqual(pos.stop_loss, 115.0)
+        self.assertTrue(pos.profit_locked)
+        self.assertAlmostEqual(pos.stop_loss, 115.0, places=2)
 
-        # Price goes higher to 120 — stop stays at 115.0 (locked, not trailing).
-        pos = tracker.update_trailing_stop("TEST.NS", 120)
+        # Price rallies to 119 → stop trails at 1%.
+        # Stop = max(115.0, 119*0.99) = max(115.0, 117.81) = 117.81.
+        pos = tracker.update_trailing_stop("TEST.NS", 119)
         assert pos is not None
-        self.assertEqual(pos.stop_loss, 115.0)
+        self.assertAlmostEqual(pos.stop_loss, 117.81, places=2)
 
-        # Price drops to 115.0 — should trigger exit.
-        self.assertTrue(tracker.should_exit("TEST.NS", 115.0))
+        # Price drops to 117.81 — should trigger exit.
+        self.assertTrue(tracker.should_exit("TEST.NS", 117.81))
 
     def test_position_tracker_should_exit_when_price_hits_stop_loss(self) -> None:
         tracker = PositionTracker()
-        tracker.update_buy("HDFCBANK.NS", 10, 100)
-        tracker.update_trailing_stop("HDFCBANK.NS", 110)
+        atr = 1.00
+        tracker.update_buy("HDFCBANK.NS", 10, 100, atr=atr, prev_close=95.0)
+        # Price rises to 108 (intraday=13.7%, below lock). 6-10% tier → 1.5x ATR.
+        tracker.update_trailing_stop("HDFCBANK.NS", 108)
 
-        self.assertFalse(tracker.should_exit("HDFCBANK.NS", 108.4))
-        self.assertTrue(tracker.should_exit("HDFCBANK.NS", 108.35))
+        self.assertFalse(tracker.should_exit("HDFCBANK.NS", 106.60))
+        self.assertTrue(tracker.should_exit("HDFCBANK.NS", 106.50))
 
     @unittest.skipIf(pd is None, "pandas not installed")
     def test_market_stream_converts_angel_candles(self) -> None:
