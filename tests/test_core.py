@@ -60,24 +60,31 @@ class CoreTests(unittest.TestCase):
         tracker.update_sell("INFY.NS", 5)
         self.assertEqual(tracker.snapshot()["INFY.NS"].quantity, 15)
 
-    def test_position_tracker_trailing_stop_only_moves_up(self) -> None:
+    @patch("monitor.position_tracker.datetime")
+    def test_position_tracker_trailing_stop_only_moves_up(self, mock_dt) -> None:
+        from datetime import datetime as real_dt
+        from zoneinfo import ZoneInfo
+        mock_dt.now.return_value = real_dt(2025, 6, 1, 10, 0, tzinfo=ZoneInfo("Asia/Kolkata"))
+        mock_dt.side_effect = lambda *a, **kw: real_dt(*a, **kw)
+
         tracker = PositionTracker()
         atr = 1.00
-        # prev_close=80 so intraday gain won't hit 15% lock until price ~92.
+        # prev_close=80 so intraday gain won't hit 12% lock until price ~89.6.
         pos = tracker.update_buy("INFY.NS", 10, 100, atr=atr, prev_close=80.0)
         self.assertEqual(pos.highest_price, 100)
-        self.assertAlmostEqual(pos.stop_loss, 97.0, places=2)
+        self.assertAlmostEqual(pos.stop_loss, 98.0, places=2)
 
         # Price rises to 110 (+10% profit → 1.0x ATR trail).
         # Intraday gain = (110-80)/80 = 37.5% → lock activates.
-        # But we want to test normal trailing, so use high prev_close.
+        # But we want to test normal trailing, so use high prev_close
+        # where intraday gain stays below 12% lock threshold.
         tracker2 = PositionTracker()
-        pos2 = tracker2.update_buy("INFY2.NS", 10, 100, atr=atr, prev_close=95.0)
+        pos2 = tracker2.update_buy("INFY2.NS", 10, 100, atr=atr, prev_close=97.0)
 
         pos2 = tracker2.update_trailing_stop("INFY2.NS", 108)
         assert pos2 is not None
         self.assertEqual(pos2.highest_price, 108)
-        # profit = 8%, intraday = (108-95)/95 = 13.7% (below 15% lock).
+        # profit = 8%, intraday = (108-97)/97 = 11.3% (below 12% lock).
         # 6-10% tier → 1.5x ATR → 108 - 1.5 = 106.5.
         self.assertAlmostEqual(pos2.stop_loss, 106.5, places=2)
 
@@ -87,7 +94,13 @@ class CoreTests(unittest.TestCase):
         self.assertEqual(pos2.highest_price, 108)
         self.assertAlmostEqual(pos2.stop_loss, 106.5, places=2)
 
-    def test_position_tracker_tightens_trail_at_profit_tiers(self) -> None:
+    @patch("monitor.position_tracker.datetime")
+    def test_position_tracker_tightens_trail_at_profit_tiers(self, mock_dt) -> None:
+        from datetime import datetime as real_dt
+        from zoneinfo import ZoneInfo
+        mock_dt.now.return_value = real_dt(2025, 6, 1, 10, 0, tzinfo=ZoneInfo("Asia/Kolkata"))
+        mock_dt.side_effect = lambda *a, **kw: real_dt(*a, **kw)
+
         tracker = PositionTracker()
         atr = 1.00
         tracker.update_buy("ITC.NS", 10, 100, atr=atr, prev_close=95.0)
@@ -97,26 +110,32 @@ class CoreTests(unittest.TestCase):
         assert pos is not None
         self.assertAlmostEqual(pos.stop_loss, 103.0, places=2)
 
-    def test_position_tracker_intraday_lock_at_15_pct(self) -> None:
+    @patch("monitor.position_tracker.datetime")
+    def test_position_tracker_intraday_lock_at_12_pct(self, mock_dt) -> None:
+        from datetime import datetime as real_dt
+        from zoneinfo import ZoneInfo
+        mock_dt.now.return_value = real_dt(2025, 6, 1, 10, 0, tzinfo=ZoneInfo("Asia/Kolkata"))
+        mock_dt.side_effect = lambda *a, **kw: real_dt(*a, **kw)
+
         tracker = PositionTracker()
         atr = 1.00
         # prev_close=100, enter at 105 (+5% intraday).
         tracker.update_buy("TEST.NS", 10, 105, atr=atr, prev_close=100.0)
 
-        # Price to 114 → intraday = 14% (below lock).
-        pos = tracker.update_trailing_stop("TEST.NS", 114)
+        # Price to 111 → intraday = 11% (below 12% lock).
+        pos = tracker.update_trailing_stop("TEST.NS", 111)
         assert pos is not None
         self.assertFalse(pos.profit_locked)
 
-        # Price to 115 → intraday = 15% → lock activates.
-        # Stop = max(100*1.15, 115*0.99) = max(115.0, 113.85) = 115.0.
-        pos = tracker.update_trailing_stop("TEST.NS", 115)
+        # Price to 112 → intraday = 12% → lock activates.
+        # Stop = max(100*1.12, 112*0.99) = max(112.0, 110.88) = 112.0.
+        pos = tracker.update_trailing_stop("TEST.NS", 112)
         assert pos is not None
         self.assertTrue(pos.profit_locked)
-        self.assertAlmostEqual(pos.stop_loss, 115.0, places=2)
+        self.assertAlmostEqual(pos.stop_loss, 112.0, places=2)
 
         # Price rallies to 119 → stop trails at 1%.
-        # Stop = max(115.0, 119*0.99) = max(115.0, 117.81) = 117.81.
+        # Stop = max(112.0, 119*0.99) = max(112.0, 117.81) = 117.81.
         pos = tracker.update_trailing_stop("TEST.NS", 119)
         assert pos is not None
         self.assertAlmostEqual(pos.stop_loss, 117.81, places=2)
@@ -124,11 +143,17 @@ class CoreTests(unittest.TestCase):
         # Price drops to 117.81 — should trigger exit.
         self.assertTrue(tracker.should_exit("TEST.NS", 117.81))
 
-    def test_position_tracker_should_exit_when_price_hits_stop_loss(self) -> None:
+    @patch("monitor.position_tracker.datetime")
+    def test_position_tracker_should_exit_when_price_hits_stop_loss(self, mock_dt) -> None:
+        from datetime import datetime as real_dt
+        from zoneinfo import ZoneInfo
+        mock_dt.now.return_value = real_dt(2025, 6, 1, 10, 0, tzinfo=ZoneInfo("Asia/Kolkata"))
+        mock_dt.side_effect = lambda *a, **kw: real_dt(*a, **kw)
+
         tracker = PositionTracker()
         atr = 1.00
-        tracker.update_buy("HDFCBANK.NS", 10, 100, atr=atr, prev_close=95.0)
-        # Price rises to 108 (intraday=13.7%, below lock). 6-10% tier → 1.5x ATR.
+        tracker.update_buy("HDFCBANK.NS", 10, 100, atr=atr, prev_close=97.0)
+        # Price rises to 108 (intraday=(108-97)/97=11.3%, below 12% lock). 6-10% tier → 1.5x ATR.
         tracker.update_trailing_stop("HDFCBANK.NS", 108)
 
         self.assertFalse(tracker.should_exit("HDFCBANK.NS", 106.60))

@@ -15,7 +15,7 @@ IST = ZoneInfo("Asia/Kolkata")
 
 # --- ATR-based stop configuration ---
 INITIAL_ATR_MULT = 3.0       # Initial stop distance: 3x ATR below entry.
-HARD_MAX_LOSS_PCT = 0.03     # Absolute max loss per stock: 3% below entry.
+HARD_MAX_LOSS_PCT = 0.02     # Absolute max loss per stock: 2% below entry.
 MIN_STOP_DISTANCE_PCT = 0.005  # Stop never tighter than 0.5% (avoid instant stop-out).
 
 # Profit-tiered trail multipliers: as profit grows, trail tightens.
@@ -35,8 +35,8 @@ LATE_SESSION_MULT_REDUCTION = 0.5
 # --- Intraday gain-based profit lock ---
 # Triggered by the stock's gain from previous close, NOT profit from entry.
 # Example: enter at +5%, stock hits +15% for the day → lock activates.
-INTRADAY_LOCK_THRESHOLD = 0.15   # Lock when stock's intraday gain >= 15%.
-INTRADAY_LOCK_FLOOR_PCT = 0.15   # Stop never below prev_close * 1.15 once locked.
+INTRADAY_LOCK_THRESHOLD = 0.12   # Lock when stock's intraday gain >= 12%.
+INTRADAY_LOCK_FLOOR_PCT = 0.12   # Stop never below prev_close * 1.12 once locked.
 INTRADAY_LOCK_TRAIL_PCT = 0.01   # Trail at 1% of highest price inside lock zone.
 
 

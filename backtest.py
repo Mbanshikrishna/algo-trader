@@ -250,7 +250,7 @@ def check_market_bullish_historical(
     volatility_pass = vix_pct < 5.0
 
     score = sum([index_pass, breadth_pass, strength_pass, volatility_pass])
-    bullish = score >= 3
+    bullish = score >= 2
 
     reason = (
         f"Nifty={nifty_pct:+.1f}%({'Y' if index_pass else 'N'}) "
@@ -326,7 +326,7 @@ def try_entry_and_simulate(
         candle_by_time[c[0][11:16]] = idx
 
     scan_times = [
-        "09:45", "10:00", "10:15", "10:30", "10:45",
+        "10:00", "10:15", "10:30", "10:45",
         "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30",
     ]
 
@@ -413,7 +413,7 @@ def simulate_trade(
         c_low = float(candle[3])
         c_close = float(candle[4])
 
-        if candle_time >= "15:15":
+        if candle_time >= "15:05":
             trade.exit_price = c_close
             trade.exit_time = candle_time
             trade.exit_reason = "MARKET_CLOSE"
@@ -433,7 +433,7 @@ def simulate_trade(
             new_stop = round(max(lock_floor, lock_trail), 2)
         else:
             profit_pct = (highest - entry_price) / entry_price
-            mult = get_trail_mult(profit_pct)
+            mult = get_trail_mult(profit_pct, candle_time)
             trail_d = max(atr * mult, highest * MIN_STOP_DISTANCE_PCT)
             new_stop = round(highest - trail_d, 2)
 
@@ -464,11 +464,18 @@ def simulate_trade(
     return trade
 
 
-def get_trail_mult(profit_pct: float) -> float:
+def get_trail_mult(profit_pct: float, candle_time: str = "") -> float:
+    """Look up ATR multiplier, with late-session tightening after 14:30."""
+    late_session = candle_time >= "14:30" if candle_time else False
     for threshold, mult in TRAIL_TIERS:
         if profit_pct >= threshold:
+            if late_session:
+                mult = max(mult - 0.5, 0.5)
             return mult
-    return TRAIL_TIERS[-1][1]
+    base = TRAIL_TIERS[-1][1]
+    if late_session:
+        base = max(base - 0.5, 0.5)
+    return base
 
 
 # === DAY SIMULATION ===

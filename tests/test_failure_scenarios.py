@@ -515,17 +515,22 @@ class TestScenario12_ScripMasterCache(unittest.TestCase):
 class TestScenario13_TrailingStopProgression(unittest.TestCase):
     """Full ATR-adaptive trailing stop lifecycle with profit-lock zone."""
 
-    def test_full_stop_progression_on_rally(self):
+    @patch("monitor.position_tracker.datetime")
+    def test_full_stop_progression_on_rally(self, mock_dt):
         """Entry at 100, rally to 111 — stop tightens through ATR tiers."""
+        from datetime import datetime as real_dt
+        from zoneinfo import ZoneInfo
+        mock_dt.now.return_value = real_dt(2025, 6, 1, 10, 0, tzinfo=ZoneInfo("Asia/Kolkata"))
+        mock_dt.side_effect = lambda *a, **kw: real_dt(*a, **kw)
+
         tracker = PositionTracker()
         atr = 1.00
-        # prev_close=90 so intraday lock at 90*1.15=103.5 — but we test
-        # ATR tiers below that, so use prev_close=97 (lock at 111.55).
-        tracker.update_buy("RALLY-EQ", 100, 100.0, atr=atr, prev_close=97.0)
+        # prev_close=100 so intraday lock at 100*1.12=112 — above our test range.
+        tracker.update_buy("RALLY-EQ", 100, 100.0, atr=atr, prev_close=100.0)
         pos = tracker.snapshot()["RALLY-EQ"]
 
-        # Initial stop: entry - min(3*1.0, 3%*100) = 100 - 3.0 = 97.0.
-        self.assertAlmostEqual(pos.stop_loss, 97.0, places=2)
+        # Initial stop: entry - min(3*1.0, 2%*100) = 100 - 2.0 = 98.0.
+        self.assertAlmostEqual(pos.stop_loss, 98.0, places=2)
 
         # Phase 1: <3% profit → 2.5x ATR trail.
         tracker.update_trailing_stop("RALLY-EQ", 102.5)
@@ -543,7 +548,7 @@ class TestScenario13_TrailingStopProgression(unittest.TestCase):
         self.assertAlmostEqual(pos.stop_loss, 105.5, places=2)
 
         # Phase 4: >10% profit → 1.0x ATR trail (very tight).
-        # Intraday = (111-97)/97 = 14.4% — still below 15% lock.
+        # Intraday = (111-100)/100 = 11% — still below 12% lock.
         tracker.update_trailing_stop("RALLY-EQ", 111.0)
         pos = tracker.snapshot()["RALLY-EQ"]
         self.assertAlmostEqual(pos.stop_loss, 110.0, places=2)
@@ -557,33 +562,39 @@ class TestScenario13_TrailingStopProgression(unittest.TestCase):
         # Price at 110.0 → should exit (at stop level).
         self.assertTrue(tracker.should_exit("RALLY-EQ", 110.0))
 
-    def test_intraday_lock_activates_at_15_pct_from_prev_close(self):
+    @patch("monitor.position_tracker.datetime")
+    def test_intraday_lock_activates_at_12_pct_from_prev_close(self, mock_dt):
         """Lock triggers on stock's intraday gain from prev close, not entry profit."""
+        from datetime import datetime as real_dt
+        from zoneinfo import ZoneInfo
+        mock_dt.now.return_value = real_dt(2025, 6, 1, 10, 0, tzinfo=ZoneInfo("Asia/Kolkata"))
+        mock_dt.side_effect = lambda *a, **kw: real_dt(*a, **kw)
+
         tracker = PositionTracker()
         atr = 1.00
         # prev_close=100, enter at 105 (+5% intraday gain).
         tracker.update_buy("LOCK-EQ", 100, 105.0, atr=atr, prev_close=100.0)
 
-        # Price to 114 → intraday = (114-100)/100 = 14% — no lock.
-        tracker.update_trailing_stop("LOCK-EQ", 114.0)
+        # Price to 111 → intraday = (111-100)/100 = 11% — no lock.
+        tracker.update_trailing_stop("LOCK-EQ", 111.0)
         pos = tracker.snapshot()["LOCK-EQ"]
         self.assertFalse(pos.profit_locked)
 
-        # Price to 115 → intraday = (115-100)/100 = 15% → lock activates.
-        # Stop = max(100*1.15, 115*0.99) = max(115.0, 113.85) = 115.0.
-        tracker.update_trailing_stop("LOCK-EQ", 115.0)
+        # Price to 112 → intraday = (112-100)/100 = 12% → lock activates.
+        # Stop = max(100*1.12, 112*0.99) = max(112.0, 110.88) = 112.0.
+        tracker.update_trailing_stop("LOCK-EQ", 112.0)
         pos = tracker.snapshot()["LOCK-EQ"]
         self.assertTrue(pos.profit_locked)
-        self.assertAlmostEqual(pos.stop_loss, 115.0, places=2)
+        self.assertAlmostEqual(pos.stop_loss, 112.0, places=2)
 
         # Price rallies to 118 → stop trails at 1%.
-        # Stop = max(115.0, 118*0.99) = max(115.0, 116.82) = 116.82.
+        # Stop = max(112.0, 118*0.99) = max(112.0, 116.82) = 116.82.
         tracker.update_trailing_stop("LOCK-EQ", 118.0)
         pos = tracker.snapshot()["LOCK-EQ"]
         self.assertAlmostEqual(pos.stop_loss, 116.82, places=2)
 
         # Price rallies to 120 → stop trails at 1%.
-        # Stop = max(115.0, 120*0.99) = max(115.0, 118.80) = 118.80.
+        # Stop = max(112.0, 120*0.99) = max(112.0, 118.80) = 118.80.
         tracker.update_trailing_stop("LOCK-EQ", 120.0)
         pos = tracker.snapshot()["LOCK-EQ"]
         self.assertAlmostEqual(pos.stop_loss, 118.80, places=2)
@@ -596,28 +607,40 @@ class TestScenario13_TrailingStopProgression(unittest.TestCase):
         self.assertGreaterEqual(exit_intraday, 0.17)
         self.assertLessEqual(exit_intraday, 0.19)
 
-    def test_intraday_lock_floor_never_drops_below_15_pct(self):
-        """Once locked, stop never goes below prev_close * 1.15."""
+    @patch("monitor.position_tracker.datetime")
+    def test_intraday_lock_floor_never_drops_below_12_pct(self, mock_dt):
+        """Once locked, stop never goes below prev_close * 1.12."""
+        from datetime import datetime as real_dt
+        from zoneinfo import ZoneInfo
+        mock_dt.now.return_value = real_dt(2025, 6, 1, 10, 0, tzinfo=ZoneInfo("Asia/Kolkata"))
+        mock_dt.side_effect = lambda *a, **kw: real_dt(*a, **kw)
+
         tracker = PositionTracker()
         atr = 1.00
         # prev_close=100, enter at 105.
         tracker.update_buy("FLOOR-EQ", 100, 105.0, atr=atr, prev_close=100.0)
 
-        # Activate lock at 116 (intraday = 16%).
-        tracker.update_trailing_stop("FLOOR-EQ", 116.0)
+        # Activate lock at 113 (intraday = 13%).
+        tracker.update_trailing_stop("FLOOR-EQ", 113.0)
         pos = tracker.snapshot()["FLOOR-EQ"]
         self.assertTrue(pos.profit_locked)
-        # Stop = max(100*1.15, 116*0.99) = max(115.0, 114.84) = 115.0.
-        self.assertAlmostEqual(pos.stop_loss, 115.0, places=2)
+        # Stop = max(100*1.12, 113*0.99) = max(112.0, 111.87) = 112.0.
+        self.assertAlmostEqual(pos.stop_loss, 112.0, places=2)
 
-        # Price drops to 115.01 — should NOT exit.
-        self.assertFalse(tracker.should_exit("FLOOR-EQ", 115.01))
+        # Price drops to 112.01 — should NOT exit.
+        self.assertFalse(tracker.should_exit("FLOOR-EQ", 112.01))
 
-        # Price drops to 115.0 — should exit.
-        self.assertTrue(tracker.should_exit("FLOOR-EQ", 115.0))
+        # Price drops to 112.0 — should exit.
+        self.assertTrue(tracker.should_exit("FLOOR-EQ", 112.0))
 
-    def test_intraday_lock_exit_reason(self):
+    @patch("monitor.position_tracker.datetime")
+    def test_intraday_lock_exit_reason(self, mock_dt):
         """Exit reason reflects intraday profit-lock zone."""
+        from datetime import datetime as real_dt
+        from zoneinfo import ZoneInfo
+        mock_dt.now.return_value = real_dt(2025, 6, 1, 10, 0, tzinfo=ZoneInfo("Asia/Kolkata"))
+        mock_dt.side_effect = lambda *a, **kw: real_dt(*a, **kw)
+
         tracker = PositionTracker()
         atr = 1.00
         # prev_close=100, enter at 105.
@@ -631,18 +654,18 @@ class TestScenario13_TrailingStopProgression(unittest.TestCase):
         """Hard stop is the tighter of ATR-based and percentage-based."""
         tracker = PositionTracker()
 
-        # Low ATR stock: ATR-based stop is tighter than 3%.
+        # Low ATR stock: ATR-based stop is tighter than 2%.
         atr_low = 0.30
         tracker.update_buy("TIGHT-EQ", 100, 100.0, atr=atr_low, prev_close=95.0)
         pos = tracker.snapshot()["TIGHT-EQ"]
         self.assertAlmostEqual(pos.hard_stop, 99.10, places=2)
 
-        # High ATR stock: percentage cap kicks in.
+        # High ATR stock: percentage cap kicks in at 2%.
         tracker2 = PositionTracker()
         atr_high = 2.00
         tracker2.update_buy("WIDE-EQ", 100, 100.0, atr=atr_high, prev_close=95.0)
         pos2 = tracker2.snapshot()["WIDE-EQ"]
-        self.assertAlmostEqual(pos2.hard_stop, 97.00, places=2)
+        self.assertAlmostEqual(pos2.hard_stop, 98.00, places=2)
 
 
 if __name__ == "__main__":

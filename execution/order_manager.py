@@ -6,6 +6,7 @@ from typing import Any
 
 from config.instruments import Instrument
 from execution.tradability_filter import TradabilityFilter
+from utils.tick import tick_round
 
 logger = logging.getLogger("algo_trader")
 
@@ -45,10 +46,6 @@ class OrderManager:
         price: float = 0.0,
     ) -> dict[str, Any]:
         payload: dict[str, Any] = {
-            "symbol": symbol,
-            "side": side,
-            "quantity": quantity,
-            "order_type": order_type,
             "exchange": instrument.exchange,
             "tradingsymbol": instrument.tradingsymbol,
             "symboltoken": instrument.symboltoken,
@@ -58,11 +55,12 @@ class OrderManager:
             "producttype": self.product_type,
             "duration": "DAY",
             "quantity": str(quantity),
+            "price": "0",
             "squareoff": "0",
             "stoploss": "0",
         }
         if order_type == "LIMIT" and price > 0:
-            payload["price"] = str(round(price, 2))
+            payload["price"] = str(tick_round(price, "up" if side.upper() == "BUY" else "down"))
         return payload
 
     def place_market_order(
@@ -147,6 +145,46 @@ class OrderManager:
                 )
                 return self.broker_client.place_order(limit_order)
             raise
+
+
+    def verify_order_filled(self, order_result: dict, symbol: str, timeout: float = 5.0) -> bool:
+        """Check the order book to confirm an order was filled, not rejected.
+
+        Returns True if the order status is 'complete', False otherwise.
+        Polls up to ``timeout`` seconds for the order to reach a terminal state.
+        """
+        resp = order_result.get("response", {})
+        data = resp.get("data", {})
+        order_id = data.get("orderid") if isinstance(data, dict) else str(data) if data else None
+        if not order_id:
+            logger.warning("No order ID in result for %s — cannot verify", symbol)
+            return True  # Assume filled if we can't verify
+
+        deadline = time.monotonic() + timeout
+        while time.monotonic() < deadline:
+            try:
+                book = self.broker_client.get_order_book()
+                orders = book.get("data") or []
+                for entry in orders:
+                    if str(entry.get("orderid", "")) == str(order_id):
+                        status = str(entry.get("orderstatus", "")).lower()
+                        if status == "complete":
+                            return True
+                        if status in ("rejected", "cancelled"):
+                            reason = entry.get("text", "unknown reason")
+                            logger.warning(
+                                "Order %s for %s was %s: %s",
+                                order_id, symbol, status, reason,
+                            )
+                            return False
+                        # Still pending — wait and retry.
+                        break
+            except Exception as exc:
+                logger.warning("Order book check failed for %s: %s", symbol, exc)
+            time.sleep(0.5)
+
+        logger.warning("Order %s for %s: timed out waiting for fill confirmation", order_id, symbol)
+        return True  # Assume filled on timeout to avoid missing real positions
 
 
 class OrderRejectedError(Exception):

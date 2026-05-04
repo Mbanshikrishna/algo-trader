@@ -9,6 +9,7 @@ from config.instruments import Instrument
 from config.settings import load_settings
 from execution.entry_validator import validate_entries_batch
 from execution.order_manager import OrderManager, OrderRejectedError
+from utils.tick import tick_round
 from execution.tradability_filter import TradabilityFilter
 from monitor.position_tracker import PositionTracker
 from strategy.market_scanner import (
@@ -25,10 +26,10 @@ IST = ZoneInfo("Asia/Kolkata")
 
 # Market timing constants.
 MARKET_OPEN_HOUR, MARKET_OPEN_MIN = 9, 15
-SCAN_START_HOUR, SCAN_START_MIN = 9, 45   # Start scanning at 9:45 AM IST.
+SCAN_START_HOUR, SCAN_START_MIN = 10, 0   # Start scanning at 10:00 AM IST.
 SCAN_END_HOUR, SCAN_END_MIN = 12, 30      # Stop scanning at 12:30 PM IST.
 SCAN_RETRY_SECONDS = 120                   # Wait 2 minutes between scan attempts.
-MARKET_CLOSE_HOUR, MARKET_CLOSE_MIN = 15, 15  # Exit all positions by 3:15 PM.
+MARKET_CLOSE_HOUR, MARKET_CLOSE_MIN = 15, 5  # Exit all positions by 3:05 PM.
 TOP_N = 2  # Number of top gainers to trade.
 MAX_REENTRY_ROUNDS = 3  # Max times the bot can re-scan and re-enter after all positions close.
 REENTRY_COOLDOWN_MINUTES = 15  # Wait this long after last exit before re-scanning.
@@ -59,6 +60,8 @@ def _place_slm_order(
     drops to the trigger level — no polling needed.
     Returns the order ID, or None if placement fails.
     """
+    # Floor trigger to nearest tick — avoids rejection for non-tick-aligned prices.
+    aligned_trigger = tick_round(trigger_price, "down")
     payload = {
         "variety": "STOPLOSS",
         "tradingsymbol": symbol,
@@ -69,10 +72,10 @@ def _place_slm_order(
         "producttype": "INTRADAY",
         "duration": "DAY",
         "quantity": str(quantity),
-        "triggerprice": str(round(trigger_price, 2)),
+        "triggerprice": str(round(aligned_trigger, 2)),
+        "price": str(round(aligned_trigger, 2)),
         "squareoff": "0",
         "stoploss": "0",
-        "price": "0",
     }
     try:
         result = broker.place_order(payload)
@@ -97,6 +100,7 @@ def _update_slm_trigger(
     logger,
 ) -> bool:
     """Modify an existing SL-M order's trigger price (trail it up)."""
+    aligned_trigger = tick_round(new_trigger, "down")
     payload = {
         "variety": "STOPLOSS",
         "orderid": order_id,
@@ -108,8 +112,8 @@ def _update_slm_trigger(
         "producttype": "INTRADAY",
         "duration": "DAY",
         "quantity": str(quantity),
-        "triggerprice": str(round(new_trigger, 2)),
-        "price": "0",
+        "triggerprice": str(round(aligned_trigger, 2)),
+        "price": str(round(aligned_trigger, 2)),
     }
     try:
         broker.modify_order(payload)
@@ -340,7 +344,7 @@ def run_loop() -> None:
         _wait_until(SCAN_START_HOUR, SCAN_START_MIN, logger)
 
         now = _ist_now()
-        if now.hour >= MARKET_CLOSE_HOUR and now.minute >= MARKET_CLOSE_MIN:
+        if now.hour > MARKET_CLOSE_HOUR or (now.hour == MARKET_CLOSE_HOUR and now.minute >= MARKET_CLOSE_MIN):
             logger.info("Market closed for today. Sleeping until tomorrow.")
             time.sleep(3600)
             continue
@@ -580,6 +584,18 @@ def run_loop() -> None:
                 live_price = gainer["live_price"]
 
                 try:
+                    # Re-check available margin before each order to avoid
+                    # insufficient-funds rejections when placing multiple orders.
+                    try:
+                        current_margin = broker.get_available_capital()
+                        effective_capital = min(
+                            capital_per_stock,
+                            current_margin * settings.intraday_leverage,
+                        )
+                    except Exception as margin_exc:
+                        logger.warning("Margin check failed, using planned capital: %s", margin_exc)
+                        effective_capital = capital_per_stock
+
                     instrument = Instrument(
                         symbol=symbol,
                         exchange="NSE",
@@ -587,11 +603,12 @@ def run_loop() -> None:
                         symboltoken=gainer["token"],
                     )
 
-                    qty = int(capital_per_stock // live_price)
+                    qty = int(effective_capital // live_price)
                     if qty <= 0:
                         _notify(
                             f"Skipping {symbol}: live price {live_price:.2f} exceeds "
-                            f"allocated capital {capital_per_stock:.2f}",
+                            f"available capital {effective_capital:.2f} "
+                            f"(planned={capital_per_stock:.2f})",
                             logger, True,
                         )
                         continue
@@ -600,6 +617,14 @@ def run_loop() -> None:
                         symbol, "BUY", qty, instrument=instrument,
                         current_price=live_price,
                     )
+
+                    # Verify the order was actually filled before tracking.
+                    if not order_manager.verify_order_filled(order, symbol):
+                        _notify(
+                            f"SKIPPED {symbol}: order accepted but rejected by exchange.",
+                            logger, True,
+                        )
+                        continue
 
                     # Compute ATR from recent 5-min candles for adaptive stop sizing.
                     entry_atr = fetch_entry_atr(broker, gainer["token"], live_price)
@@ -854,6 +879,12 @@ def run_loop() -> None:
             # Loop back to scan → enter → monitor.
 
         # --- Phase 6: Force-close any remaining positions at market close ---
+        # Refresh session before force-close to avoid stale-token failures.
+        try:
+            broker.refresh_if_stale(max_age_seconds=300)
+        except Exception as exc:
+            logger.error("[force_close] Session refresh failed: %s", exc)
+
         remaining = position_tracker.snapshot()
         if remaining:
             _notify(f"Market closing — force-exiting {len(remaining)} positions.", logger, True)

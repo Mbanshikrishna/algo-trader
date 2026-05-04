@@ -117,7 +117,7 @@ class MarketCheckResult:
         ]
 
         if self.bullish:
-            lines.append(f"Decision: TRADE (score {self.score}/4 >= 3)")
+            lines.append(f"Decision: TRADE (score {self.score}/4 >= 2)")
         else:
             failed = []
             if not self.index_pass:
@@ -128,7 +128,7 @@ class MarketCheckResult:
                 failed.append("Intraday Strength")
             if not self.volatility_pass:
                 failed.append("Volatility Filter")
-            lines.append(f"Decision: SKIP TRADING (score {self.score}/4 < 3)")
+            lines.append(f"Decision: SKIP TRADING (score {self.score}/4 < 2)")
             lines.append(f"Failed: {', '.join(failed)}")
 
         return "\n".join(lines)
@@ -238,7 +238,7 @@ def is_market_bullish(client: AngelOneClient) -> tuple[bool, MarketCheckResult]:
         result.strength_pass,
         result.volatility_pass,
     ])
-    result.bullish = result.score >= 3
+    result.bullish = result.score >= 2
 
     return result.bullish, result
 

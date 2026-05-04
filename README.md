@@ -6,18 +6,18 @@ Automated intraday trading bot that scans the entire NSE equity market, selects 
 
 ```
 09:15  Market opens. Bot logs in via auto-TOTP.
-09:45  Phase 0 — Daily housekeeping:
+10:00  Phase 0 — Daily housekeeping:
          • Clear daily candle cache (fresh data for new day).
          • Refresh session if stale (auto re-login every 2 hours).
          • Initialize daily P&L tracker (stops new trades if loss > 5% of capital).
-09:45  Phase 1 — Scan window opens.
-09:45  Phase 2 — 4-factor market bullishness check (3-of-4 must pass):
+10:00  Phase 1 — Scan window opens.
+10:00  Phase 2 — 4-factor market bullishness check (2-of-4 must pass):
          • Index Direction — Nifty 50 change > 0%
          • Market Breadth — Nifty 50 advancers/decliners > 1.2
          • Intraday Strength — Nifty LTP > Open AND NIFTYBEES > VWAP
          • Volatility Filter — India VIX change < +5%
-         If score < 3/4 → skip the day.
-09:45  Phase 3 — Scan all ~2500 NSE equity stocks:
+         If score < 2/4 → skip the day.
+10:00  Phase 3 — Scan all ~2500 NSE equity stocks:
          3a. Fetch FULL quotes in parallel batches of 50 (3 concurrent workers).
          3b. Filter to 5–10% intraday gainers (price ₹50–₹5000, volume > 1 lakh).
          3c. Fetch 5-day candles for candidates (cached across scan retries).
@@ -32,13 +32,16 @@ Automated intraday trading bot that scans the entire NSE equity market, selects 
          4e. If no candidates pass → wait 2 min → retry from Phase 3.
          4f. Retry loop continues until valid entries found or 12:30 PM.
 ~10:00 Phase 5 — Enter top 2 stocks with MARKET orders:
+         • Re-check available margin before each order (prevents insufficient-funds rejection).
          • Compute 5-min ATR from last 12 candles for each stock.
          • Place MARKET BUY order.
-         • Place server-side SL-M at hard stop: max(entry - 3×ATR, entry × 0.97).
+         • Verify order was filled via order book (prevents ghost positions from async exchange rejections).
+         • Place server-side SL-M at hard stop: max(entry - 3×ATR, entry × 0.98).
+         • All prices tick-aligned to ₹0.05 (NSE requirement).
          • Capital allocation: 1 stock = 50% buying power, 2 stocks = 50% each.
 ~10:00 Phase 6 — Monitor every 10 seconds using FULL quotes (LTP + best bid).
          • Trail stop-loss upward using ATR-tiered multipliers.
-         • When stock's intraday gain hits +15% → lock stop at prev_close × 1.15,
+         • When stock's intraday gain hits +12% → lock stop at prev_close × 1.12,
            trail at 1% of highest price (exits in 17–19% range).
          • After 2:30 PM: all ATR multipliers reduced by 0.5 (tighter stops).
          • Compare best bid price against stop-loss for exit decisions.
@@ -47,13 +50,15 @@ Automated intraday trading bot that scans the entire NSE equity market, selects 
          • Refresh session every 2 hours during monitoring.
          If all positions close → 15 min cooldown → re-check market → re-scan → re-enter.
          Up to 3 re-entry rounds (3 scan attempts each). Never re-enter the same stock.
-15:15  Phase 7 — Force-close remaining positions (SL-M race check + safe_exit).
-         Daily P&L summary sent via Telegram.
+15:05  Phase 7 — Force-close remaining positions:
+         • Refresh broker session before force-close (prevents stale-token failures).
+         • SL-M race check + safe_exit for each position.
+         • Daily P&L summary sent via Telegram.
 ```
 
 ## Market Bullishness — 4-Factor Model
 
-Before scanning for stocks, the bot checks if the overall market is favorable. At least 3 of 4 factors must pass (same scoring approach as a quorum vote):
+Before scanning for stocks, the bot checks if the overall market is favorable. At least 2 of 4 factors must pass:
 
 | Factor | Condition | Data Source |
 |---|---|---|
@@ -119,9 +124,9 @@ Stop distances are based on each stock's own 5-minute ATR (Average True Range), 
 
 ```
 Layer 1: Hard Stop (exchange-enforced)
-  └─ SL-M order on exchange at max(entry - 3×ATR, entry × 0.97)
+  └─ SL-M order on exchange at max(entry - 3×ATR, entry × 0.98)
   └─ Triggers automatically — no polling needed
-  └─ Caps loss at 3% of entry or 3× ATR, whichever is tighter
+  └─ Caps loss at 2% of entry or 3× ATR, whichever is tighter
 
 Layer 2: ATR-Tiered Trailing Stop (software, 10-second polling)
   └─ Tracks highest price since entry
@@ -130,8 +135,8 @@ Layer 2: ATR-Tiered Trailing Stop (software, 10-second polling)
   └─ Only moves UP, never down
 
 Layer 3: Intraday Profit Lock (15% from previous close)
-  └─ When the stock's intraday gain reaches +15% from prev close → lock activates
-  └─ Stop jumps to prev_close × 1.15 (floor, never drops below this)
+  └─ When the stock's intraday gain reaches +12% from prev close → lock activates
+  └─ Stop jumps to prev_close × 1.12 (floor, never drops below this)
   └─ Trail switches to 1% of highest price
   └─ Position exits naturally in the 17–19% intraday gain range
 
@@ -152,13 +157,13 @@ Layer 4: Late Session Tightening (after 2:30 PM IST)
 ### Example: TATAMOTORS entry at ₹735 (prev close ₹700, ATR = ₹2.80)
 
 ```
-Entry:   SL = 735 - 3×2.80 = ₹726.60 (hard stop also at ₹726.60)
+Entry:   SL = 735 - min(3×2.80, 2%×735) = 735 - 14.70 = ₹720.30 (hard stop at ₹720.30)
 ₹740:    SL = 740 - 2.5×2.80 = ₹733.00  (profit <3%, default tier)
 ₹757:    SL = 757 - 2.0×2.80 = ₹751.40  (profit 3%+, tightened)
 ₹780:    SL = 780 - 1.5×2.80 = ₹775.80  (profit 6%+, tight)
-₹810:    Intraday gain = (810-700)/700 = 15.7% → LOCK activates
-         SL = max(700×1.15, 810×0.99) = max(805, 801.9) = ₹805.00
-₹830:    SL = max(805, 830×0.99) = ₹821.70  (1% trail inside lock)
+₹790:    Intraday gain = (790-700)/700 = 12.9% → LOCK activates
+         SL = max(700×1.12, 790×0.99) = max(784, 782.1) = ₹784.00
+₹830:    SL = max(784, 830×0.99) = ₹821.70  (1% trail inside lock)
 ₹821:    Below ₹821.70 → EXIT (intraday gain at exit: +17.3%)
 ```
 
@@ -178,7 +183,7 @@ Real data analysis of 5-10% gainers showed fixed percentage stops fail:
 |---|---|---|
 | Daily P&L limit | 5% of capital | If cumulative daily loss exceeds 5%, stop all new trades. Existing positions still monitored. Critical Telegram alert sent. |
 | Max consecutive losses | 2 | After 2 losing trades in a row, stop trading for the day |
-| Hard stop per stock | 3% or 3×ATR | SL-M on exchange — whichever is tighter |
+| Hard stop per stock | 2% or 3×ATR | SL-M on exchange — whichever is tighter |
 | Max re-entry rounds | 3 | After all positions close, can re-scan up to 3 more times |
 | Re-entry cooldown | 15 min | Wait 15 minutes between rounds to avoid churning |
 | No repeat stocks | — | Never re-enter a stock already traded today |
@@ -186,17 +191,22 @@ Real data analysis of 5-10% gainers showed fixed percentage stops fail:
 ### Capital Allocation
 
 ```
-Available capital (from broker RMS API)
+Available cash (from broker RMS API — availablecash + availableintradaypayin only)
   × Intraday leverage (default 5x)
   = Total buying power
 
 1 validated stock → 50% of buying power (never 100% on one stock)
 2 validated stocks → 50% each (split equally)
 
+Before each order: re-fetch available margin → cap to min(planned, actual × leverage)
+This prevents insufficient-funds rejections when placing the 2nd order.
+
 Example: ₹1,00,000 × 5x = ₹5,00,000 buying power
   1 stock → ₹2,50,000 allocated
   2 stocks → ₹2,50,000 each
 ```
+
+**Note**: `availablelimitmargin` from the RMS API is excluded because it already includes broker-side leverage. Including it would double-count leverage.
 
 ## Tradability Filter — 4 Layers
 
@@ -218,7 +228,7 @@ Layer 3: Circuit Limit Heuristic
 Layer 4: Broker Probe (Angel One cautionary list)
   └─ Angel One maintains its own internal blocklist (broader than NSE)
   └─ No public API to check — only way is to test
-  └─ Bot places a LIMIT BUY for 1 share at ₹0.05 (below min tick — prevents accidental fills)
+  └─ Bot places a LIMIT BUY for 1 share at LTP × 0.80 (tick-aligned, within circuit limits but far below market — prevents accidental fills)
   └─ If accepted → cancel immediately (3× retry on cancel failure) → stock is tradable
   └─ If cancel fails after retries → critical Telegram alert sent
   └─ If rejected with "cautionary" → blacklist for the session
@@ -235,8 +245,10 @@ Set `FNO_ONLY=true` to restrict trading to the ~213 stocks in NSE's F&O universe
 ### Entry Orders
 
 1. **MARKET order** (default) — fastest fill
-2. If MARKET is rejected (non-tradability reason) → retry with **LIMIT order** at current price
+2. If MARKET is rejected (non-tradability reason) → retry with **LIMIT order** at current price (tick-aligned)
 3. If rejected for tradability (cautionary/ASM/GSM) → raise `OrderRejectedError` → try next candidate from fallback queue
+4. After order accepted → verify fill via order book polling (up to 5s). If exchange rejected asynchronously → skip stock, don't track position.
+5. Before each order → re-check available margin from broker RMS API. Cap quantity to actual available funds.
 
 ### Exit Orders
 
@@ -252,10 +264,10 @@ All exits go through `_safe_exit()` which guarantees delivery or escalation:
 
 After each entry, the bot places a SL-M SELL order on the exchange:
 
-- **On entry**: SL-M at hard stop — `max(entry - 3×ATR, entry × 0.97)`
-- **As trailing stop moves up**: Modifies the SL-M trigger price to match
+- **On entry**: SL-M at hard stop — `max(entry - 3×ATR, entry × 0.98)`. Trigger and price both tick-aligned to ₹0.05.
+- **As trailing stop moves up**: Modifies the SL-M trigger price to match (tick-aligned).
 - **On software exit**: Checks order book first — if SL-M is already `COMPLETE`/`TRIGGERED`, skips the software sell (prevents double-sell / accidental short). Otherwise cancels the SL-M, then places the exit via `_safe_exit()`.
-- **On market close**: Same SL-M race check before force-closing each position.
+- **On market close**: Refreshes broker session first, then same SL-M race check before force-closing each position.
 
 This ensures the exchange enforces the stop-loss even if the bot crashes, loses network, or the polling interval misses a flash crash. The race condition check prevents the bot from selling shares that the exchange already sold.
 
@@ -266,7 +278,7 @@ After all positions close via stop-loss:
 ```
 1. Wait 15 minutes (cooldown — avoids excessive trade charges)
 2. Check daily P&L limit — if loss > 5% of capital → stop for the day
-3. Re-check market bullishness (full 4-factor model) — if < 3/4 → stop for the day
+3. Re-check market bullishness (full 4-factor model) — if < 2/4 → stop for the day
 4. Re-scan all NSE stocks for fresh top gainers
 5. Validate entries with live data (5 checks)
 6. If no valid entries → retry up to 3 times (60s apart) before giving up
@@ -276,7 +288,7 @@ After all positions close via stop-loss:
 ```
 
 **Stops re-entering when:**
-- Market closes (3:15 PM)
+- Market closes (3:05 PM)
 - 2 consecutive losses reached
 - Daily P&L loss exceeds 5% of capital
 - 3 re-entry rounds exhausted
@@ -326,7 +338,7 @@ TELEGRAM_CHAT_ID=your_chat_id
 | `ANGELONE_PIN` | — | 4-digit trading PIN |
 | `ANGELONE_TOTP_SECRET` | — | Base32 TOTP secret for auto-login |
 | `MONITOR_INTERVAL_SECONDS` | 10 | Seconds between price checks during monitoring |
-| `ORDER_PRODUCT_TYPE` | INTRADAY | MIS (auto square-off by broker at 3:15 PM) |
+| `ORDER_PRODUCT_TYPE` | INTRADAY | MIS (broker auto square-off at ~3:15 PM; bot exits at 3:05 PM before this) |
 | `ORDER_VARIETY` | NORMAL | Regular order variety |
 | `CAPITAL` | 100000 | Fallback capital if broker RMS API fails |
 | `INTRADAY_LEVERAGE` | 5.0 | Margin multiplier (5x = ₹1000 buys ₹5000 worth) |
@@ -342,10 +354,10 @@ These are not configurable via `.env` — change them in the source files:
 
 | Constant | File | Value | Description |
 |---|---|---|---|
-| `SCAN_START_HOUR, SCAN_START_MIN` | `main.py` | 9:45 | Scan window opens |
+| `SCAN_START_HOUR, SCAN_START_MIN` | `main.py` | 10:00 | Scan window opens |
 | `SCAN_END_HOUR, SCAN_END_MIN` | `main.py` | 12:30 | Scan window closes (stop retrying) |
 | `SCAN_RETRY_SECONDS` | `main.py` | 120 | Seconds between scan retry attempts |
-| `MARKET_CLOSE_HOUR, MARKET_CLOSE_MIN` | `main.py` | 15:15 | When to force-close all positions |
+| `MARKET_CLOSE_HOUR, MARKET_CLOSE_MIN` | `main.py` | 15:05 | When to force-close all positions |
 | `TOP_N` | `main.py` | 2 | Number of stocks to trade simultaneously |
 | `MAX_REENTRY_ROUNDS` | `main.py` | 3 | Max re-scan rounds after stop-loss exits |
 | `REENTRY_COOLDOWN_MINUTES` | `main.py` | 15 | Minutes to wait between re-entry rounds |
@@ -354,11 +366,11 @@ These are not configurable via `.env` — change them in the source files:
 | `MAX_DAILY_LOSS_PCT` | `main.py` | 5% | Stop new trades if daily loss exceeds this |
 | `_EXIT_MAX_RETRIES` | `main.py` | 3 | Max retries for exit orders before alert |
 | `INITIAL_ATR_MULT` | `position_tracker.py` | 3.0 | Initial stop distance: 3× ATR below entry |
-| `HARD_MAX_LOSS_PCT` | `position_tracker.py` | 3% | Absolute max loss per stock |
+| `HARD_MAX_LOSS_PCT` | `position_tracker.py` | 2% | Absolute max loss per stock |
 | `MIN_STOP_DISTANCE_PCT` | `position_tracker.py` | 0.5% | Stop never tighter than 0.5% of price |
 | `TRAIL_TIERS` | `position_tracker.py` | see below | ATR multipliers per profit tier |
-| `INTRADAY_LOCK_THRESHOLD` | `position_tracker.py` | 15% | Lock when stock's intraday gain ≥ 15% |
-| `INTRADAY_LOCK_FLOOR_PCT` | `position_tracker.py` | 15% | Stop floor: prev_close × 1.15 |
+| `INTRADAY_LOCK_THRESHOLD` | `position_tracker.py` | 12% | Lock when stock's intraday gain ≥ 12% |
+| `INTRADAY_LOCK_FLOOR_PCT` | `position_tracker.py` | 12% | Stop floor: prev_close × 1.12 |
 | `INTRADAY_LOCK_TRAIL_PCT` | `position_tracker.py` | 1% | Trail at 1% of highest inside lock zone |
 | `LATE_SESSION_HOUR/MIN` | `position_tracker.py` | 14:30 | After 2:30 PM, tighten all multipliers |
 | `LATE_SESSION_MULT_REDUCTION` | `position_tracker.py` | 0.5 | Subtract from ATR multiplier after 2:30 PM |
@@ -386,12 +398,33 @@ Run the backtest to simulate the full workflow on historical data:
 
 The backtest:
 1. Prefetches daily candles for 500 stocks (top of scrip master, ~3 min).
-2. For each trading day: scans for 5-10% gainers from daily data.
-3. Fetches 5-min candles for candidates and simulates entry validation.
-4. Simulates ATR trailing stop, profit lock, and hard stop on 5-min candles.
-5. Reports: P&L, win rate, exit reasons, max drawdown, and detailed trade log.
+2. For each trading day: checks 4-factor market bullishness from historical Nifty/VIX data.
+3. Scans for 5-10% gainers from daily data.
+4. Fetches 5-min candles for candidates and simulates entry validation (all 5 checks).
+5. Simulates ATR trailing stop (with late-session tightening after 2:30 PM), profit lock, and hard stop on 5-min candles.
+6. Force-closes at 15:05 (matches production).
+7. Reports: P&L, win rate, exit reasons, max drawdown, and detailed trade log.
 
-**Caveats**: No slippage, no bid-ask spread, no market bullishness filter, uses current scrip master (survivorship bias).
+### Latest Backtest Results (Apr 2025 – Apr 2026)
+
+```
+Period:             252 trading days
+Bullish days:       178 (71%) — traded on 143 of these
+Total trades:       199
+Win rate:           66.3%
+Total P&L:          Rs. +5,39,828
+Return on capital:  +539.8% (on Rs. 1,00,000 at 5x leverage)
+Profit factor:      4.26
+Max drawdown:       Rs. 14,985
+
+Exit reasons:
+  TRAILING_STOP:  131 trades  Rs. +1,95,291
+  PROFIT_LOCK:     43 trades  Rs. +3,93,135
+  MARKET_CLOSE:     9 trades  Rs.  +28,602
+  HARD_STOP:       16 trades  Rs.  -77,200
+```
+
+**Caveats**: No slippage, no bid-ask spread, uses current scrip master (survivorship bias). Actual live results will be lower due to slippage, order rejections, and execution delays.
 
 ## Known Bottlenecks and Limitations
 
@@ -461,7 +494,7 @@ The NSE website APIs (ASM/GSM/F&O lists) are rate-limited and may block requests
 
 Each re-entry round includes a 15-minute cooldown + ~6-second scan + ~5-second probe. If a stop-loss exit happens at 2:45 PM, the re-entry would start at ~3:01 PM — only 14 minutes before market close.
 
-**Impact**: Late re-entries have very little time for the trade to develop. The position will likely be force-closed at 3:15 PM regardless.
+**Impact**: Late re-entries have very little time for the trade to develop. The position will likely be force-closed at 3:05 PM regardless.
 
 **Mitigation**: The bot checks if market is still open after cooldown. Consider adding a "no re-entry after 2:30 PM" cutoff.
 

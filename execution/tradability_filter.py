@@ -194,12 +194,14 @@ class TradabilityFilter:
         symbol: str,
         token: str,
         exchange: str = "NSE",
+    ltp: float = 0.0,
     ) -> tuple[bool, str]:
         """Place a tiny LIMIT order to test if the broker allows trading this stock.
 
-        Places a LIMIT BUY for 1 share at ₹0.05 (below minimum tick — won't execute),
-        then cancels immediately if accepted. If the broker rejects with a
-        cautionary/restricted message, the stock is blacklisted.
+        Places a LIMIT BUY for 1 share at a price within circuit limits but
+        far enough below LTP to never fill, then cancels immediately if accepted.
+        If the broker rejects with a cautionary/restricted message, the stock
+        is blacklisted.
 
         Returns (is_tradable, reason_if_not).
         """
@@ -218,6 +220,14 @@ class TradabilityFilter:
             self._probe_cache[clean] = False
             return False, reason
 
+        # Use a price within circuit limits but far below LTP to avoid fills.
+        # 20% below LTP is safe — well within circuit range but won't execute.
+        from utils.tick import tick_round
+        if ltp > 0:
+            probe_price = max(tick_round(ltp * 0.80, "down"), 0.05)
+        else:
+            probe_price = 0.05
+
         probe_order = {
             "variety": "NORMAL",
             "tradingsymbol": symbol,
@@ -227,7 +237,7 @@ class TradabilityFilter:
             "ordertype": "LIMIT",
             "producttype": "INTRADAY",
             "duration": "DAY",
-            "price": "0.05",  # Below minimum tick for any real stock — prevents accidental fills.
+            "price": str(probe_price),
             "quantity": "1",
             "squareoff": "0",
             "stoploss": "0",
@@ -293,7 +303,8 @@ class TradabilityFilter:
         def _probe_one(candidate: dict[str, Any]) -> tuple[dict[str, Any], bool, str]:
             symbol = candidate.get("symbol", "")
             token = candidate.get("token", "")
-            ok, reason = self.probe_tradability(broker_client, symbol, token)
+            stock_ltp = float(candidate.get("ltp", 0))
+            ok, reason = self.probe_tradability(broker_client, symbol, token, ltp=stock_ltp)
             return candidate, ok, reason
 
         with ThreadPoolExecutor(max_workers=max_workers) as pool:

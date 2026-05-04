@@ -209,3 +209,6 @@ __marimo__/
 # Local project runtime artifacts
 .tmp/
 trades.db
+data/backtest_cache/
+data/.scrip_master_cache.json
+algo_trader.log

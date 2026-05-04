@@ -332,12 +332,18 @@ class AngelOneClient:
         return payload
 
     def get_available_capital(self) -> float:
+        """Return available *cash* (unleveraged) from the RMS API.
+
+        Only ``availablecash`` and ``availableintradaypayin`` are summed.
+        ``availablelimitmargin`` is excluded because it already reflects
+        broker-side intraday leverage and would cause double-counting when
+        the caller applies its own leverage multiplier.
+        """
         payload = self._require_success(self._get(self.USER_BASE_URL, "/getRMS"), "fetch RMS")
         data = payload.get("data") or {}
         cash = float(data.get("availablecash", 0))
         intraday = float(data.get("availableintradaypayin", 0))
-        margin = float(data.get("availablelimitmargin", 0))
-        return cash + intraday + margin
+        return cash + intraday
 
     def get_order_book(self) -> dict[str, Any]:
         return self._require_success(self._get(self.ORDER_BASE_URL, "/getOrderBook"), "fetch order book")
@@ -347,6 +353,10 @@ class AngelOneClient:
 
     def get_positions(self) -> dict[str, Any]:
         return self._require_success(self._get(self.PORTFOLIO_BASE_URL, "/getPosition"), "fetch positions")
+
+    def get_rms_limits(self) -> dict[str, Any]:
+        """Fetch available margin/funds from RMS limits API."""
+        return self._require_success(self._get(self.ORDER_BASE_URL, "/getRMS"), "fetch RMS limits")
 
     def get_holdings(self) -> dict[str, Any]:
         return self._require_success(self._get(self.PORTFOLIO_BASE_URL, "/getHolding"), "fetch holdings")
