@@ -345,6 +345,9 @@ class AngelOneClient:
     def get_trade_book(self) -> dict[str, Any]:
         return self._require_success(self._get(self.TRADE_BASE_URL, "/getTradeBook"), "fetch trade book")
 
+    def get_positions(self) -> dict[str, Any]:
+        return self._require_success(self._get(self.PORTFOLIO_BASE_URL, "/getPosition"), "fetch positions")
+
     def get_holdings(self) -> dict[str, Any]:
         return self._require_success(self._get(self.PORTFOLIO_BASE_URL, "/getHolding"), "fetch holdings")
 

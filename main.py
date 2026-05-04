@@ -153,6 +153,29 @@ def _check_slm_executed(broker: AngelOneClient, slm_order_id: str, symbol: str, 
     return False
 
 
+def _check_broker_position(broker: AngelOneClient, symbol: str, logger) -> int:
+    """Check the broker's position book for actual shares held.
+
+    Returns the net quantity held for the symbol, or -1 if the check fails.
+    A return of 0 means the position is already closed (e.g., SL-M executed).
+    """
+    try:
+        positions = broker.get_positions()
+        pos_list = positions.get("data") or []
+        for pos in pos_list:
+            ts = pos.get("tradingsymbol", "")
+            if ts == symbol:
+                net_qty = int(pos.get("netqty", 0))
+                logger.info("[position_check] %s: netqty=%d", symbol, net_qty)
+                return net_qty
+        # Symbol not in position book — no position.
+        logger.info("[position_check] %s: not found in position book (already closed)", symbol)
+        return 0
+    except Exception as exc:
+        logger.warning("[position_check] Failed to check position for %s: %s", symbol, exc)
+        return -1  # Unknown — proceed cautiously.
+
+
 def _safe_exit(
     broker: AngelOneClient,
     order_manager: OrderManager,
@@ -164,9 +187,10 @@ def _safe_exit(
 ) -> dict | None:
     """Place an exit order with retry and escalation.
 
-    Retries up to _EXIT_MAX_RETRIES times. If all fail, sends a critical
-    Telegram alert requiring manual intervention.
-    Returns the exit order result, or None if all attempts failed.
+    Before each retry, checks the broker's position book. If the position
+    is already closed (e.g., SL-M executed between retries), stops retrying.
+    Returns the exit order result, or None if all attempts failed or position
+    was already closed.
     """
     last_exc: Exception | None = None
     broker_instrument = Instrument(
@@ -174,6 +198,24 @@ def _safe_exit(
     )
 
     for attempt in range(_EXIT_MAX_RETRIES):
+        # Before retrying, verify we still hold the position.
+        if attempt > 0:
+            actual_qty = _check_broker_position(broker, symbol, logger)
+            if actual_qty == 0:
+                logger.info(
+                    "[exit_attempt] %s: position already closed (SL-M likely executed). "
+                    "Skipping retry %d/%d.",
+                    symbol, attempt + 1, _EXIT_MAX_RETRIES,
+                )
+                return None
+            if actual_qty > 0 and actual_qty != quantity:
+                logger.warning(
+                    "[exit_attempt] %s: broker shows %d shares but we expected %d. "
+                    "Using broker quantity.",
+                    symbol, actual_qty, quantity,
+                )
+                quantity = actual_qty
+
         try:
             result = order_manager.place_exit_order(
                 symbol, quantity, instrument=broker_instrument, current_price=current_price,
@@ -720,15 +762,45 @@ def run_loop() -> None:
                                 )
                                 continue
 
+                            # Double-check: verify we actually hold shares before selling.
+                            # This catches the case where SL-M executed but order book
+                            # status hasn't updated yet (race condition).
+                            actual_qty = _check_broker_position(broker, symbol, logger)
+                            if actual_qty == 0:
+                                logger.info(
+                                    "[exit_skip] %s: position already closed (SL-M executed). "
+                                    "Skipping software exit.",
+                                    symbol,
+                                )
+                                slm_orders.pop(symbol, None)
+                                slm_triggers.pop(symbol, None)
+                                pnl = (stop_check_price - pos.average_price) * pos.quantity
+                                daily_pnl += pnl
+                                position_tracker.update_sell(symbol, pos.quantity)
+                                if pnl < 0:
+                                    consecutive_losses += 1
+                                else:
+                                    consecutive_losses = 0
+                                _notify(
+                                    f"{exit_reason} EXIT (position already closed): {symbol} — "
+                                    f"{pos.quantity} shares (entry={pos.average_price:.2f}, "
+                                    f"PnL={pnl:+.2f}, daily={daily_pnl:+.2f})",
+                                    logger, True,
+                                )
+                                continue
+
                             # Cancel the server-side SL-M before placing software exit.
                             if slm_id:
                                 _cancel_slm_order(broker, slm_id, symbol, logger)
                             slm_orders.pop(symbol, None)
                             slm_triggers.pop(symbol, None)
 
+                            # Use actual broker quantity if it differs from our tracking.
+                            sell_qty = actual_qty if actual_qty > 0 else pos.quantity
+
                             exit_order = _safe_exit(
                                 broker, order_manager, symbol, token,
-                                pos.quantity, stop_check_price, logger,
+                                sell_qty, stop_check_price, logger,
                             )
                             pnl = (stop_check_price - pos.average_price) * pos.quantity
                             daily_pnl += pnl
@@ -800,6 +872,15 @@ def run_loop() -> None:
                         logger.info("SL-M already executed for %s — skipping force close.", symbol)
                         continue
 
+                    # Verify we actually hold shares before force-closing.
+                    actual_qty = _check_broker_position(broker, symbol, logger)
+                    if actual_qty == 0:
+                        logger.info("Position already closed for %s — skipping force close.", symbol)
+                        slm_orders.pop(symbol, None)
+                        slm_triggers.pop(symbol, None)
+                        position_tracker.update_sell(symbol, pos.quantity)
+                        continue
+
                     # Cancel the server-side SL-M order before placing the exit.
                     if slm_id:
                         _cancel_slm_order(broker, slm_id, symbol, logger)
@@ -814,9 +895,10 @@ def run_loop() -> None:
                     except Exception:
                         final_price = pos.highest_price
 
+                    sell_qty = actual_qty if actual_qty > 0 else pos.quantity
                     exit_order = _safe_exit(
                         broker, order_manager, symbol, token,
-                        pos.quantity, final_price, logger,
+                        sell_qty, final_price, logger,
                     )
 
                     pnl = (final_price - pos.average_price) * pos.quantity

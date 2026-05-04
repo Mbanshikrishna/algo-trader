@@ -113,6 +113,10 @@ class TestScenario2_ExitOrderFailure(unittest.TestCase):
         from main import _safe_exit
 
         broker = MagicMock()
+        # Position check returns shares held — so retries proceed.
+        broker.get_positions.return_value = {
+            "data": [{"tradingsymbol": "IRFC-EQ", "netqty": "100"}],
+        }
         om = MagicMock()
         om.place_exit_order.side_effect = Exception("Connection refused")
         logger = MagicMock()
@@ -132,6 +136,9 @@ class TestScenario2_ExitOrderFailure(unittest.TestCase):
         from main import _safe_exit
 
         broker = MagicMock()
+        broker.get_positions.return_value = {
+            "data": [{"tradingsymbol": "SBIN-EQ", "netqty": "50"}],
+        }
         om = MagicMock()
         om.place_exit_order.side_effect = [
             Exception("Timeout"),
@@ -144,6 +151,27 @@ class TestScenario2_ExitOrderFailure(unittest.TestCase):
         self.assertIsNotNone(result)
         self.assertEqual(om.place_exit_order.call_count, 2)
         mock_alert.assert_not_called()
+
+    @patch("main.send_exit_failure_alert")
+    def test_safe_exit_stops_retry_when_position_closed(self, mock_alert):
+        """_safe_exit stops retrying if position book shows 0 shares."""
+        from main import _safe_exit
+
+        broker = MagicMock()
+        # First attempt fails, then position check shows 0 (SL-M executed).
+        broker.get_positions.return_value = {
+            "data": [{"tradingsymbol": "RRKABEL-EQ", "netqty": "0"}],
+        }
+        om = MagicMock()
+        om.place_exit_order.side_effect = Exception("Rejected")
+        logger = MagicMock()
+
+        result = _safe_exit(broker, om, "RRKABEL-EQ", "18096", 14, 1636.0, logger)
+
+        # Should only attempt once — position check on retry shows 0.
+        self.assertIsNone(result)
+        self.assertEqual(om.place_exit_order.call_count, 1)
+        mock_alert.assert_not_called()  # No alert — position is safely closed.
 
 
 class TestScenario3_SLMRaceCondition(unittest.TestCase):
@@ -294,6 +322,9 @@ class TestScenario6_NetworkTimeoutDuringExit(unittest.TestCase):
         from main import _safe_exit
 
         broker = MagicMock()
+        broker.get_positions.return_value = {
+            "data": [{"tradingsymbol": "TATAPOWER-EQ", "netqty": "75"}],
+        }
         om = MagicMock()
         om.place_exit_order.side_effect = [
             ConnectionError("Connection timed out"),
@@ -432,6 +463,10 @@ class TestScenario10_CompoundFailure(unittest.TestCase):
         from main import _safe_exit
 
         broker = MagicMock()
+        # Position check shows shares held — so retries proceed.
+        broker.get_positions.return_value = {
+            "data": [{"tradingsymbol": "IRFC-EQ", "netqty": "200"}],
+        }
         om = MagicMock()
         # All exit attempts fail (simulating expired session + network issues).
         om.place_exit_order.side_effect = Exception("401 Unauthorized")
