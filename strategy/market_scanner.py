@@ -7,8 +7,6 @@ from datetime import datetime, timedelta
 from typing import Any
 from zoneinfo import ZoneInfo
 
-from broker.angelone_client import AngelOneClient
-
 logger = logging.getLogger("algo_trader")
 
 # Nifty 50 index token on NSE.
@@ -134,7 +132,7 @@ class MarketCheckResult:
         return "\n".join(lines)
 
 
-def is_market_bullish(client: AngelOneClient) -> tuple[bool, MarketCheckResult]:
+def is_market_bullish(client: Any) -> tuple[bool, MarketCheckResult]:
     """4-factor market bullishness check with 3-out-of-4 decision rule.
 
     Factors:
@@ -243,7 +241,7 @@ def is_market_bullish(client: AngelOneClient) -> tuple[bool, MarketCheckResult]:
     return result.bullish, result
 
 
-def load_nse_equity_tokens(client: AngelOneClient) -> list[dict[str, str]]:
+def load_nse_equity_tokens(client: Any) -> list[dict[str, str]]:
     """Load all NSE equity stock tokens from the scrip master."""
     master = client._load_scrip_master()
     stocks = []
@@ -264,7 +262,7 @@ def load_nse_equity_tokens(client: AngelOneClient) -> list[dict[str, str]]:
 
 
 def _fetch_all_quotes(
-    client: AngelOneClient,
+    client: Any,
     stocks: list[dict[str, str]],
     max_workers: int = 3,
 ) -> list[dict[str, Any]]:
@@ -326,7 +324,7 @@ def clear_daily_candle_cache() -> None:
 
 
 def _fetch_previous_day_candles(
-    client: AngelOneClient,
+    client: Any,
     tokens: list[str],
     max_workers: int = 5,
 ) -> dict[str, list[list]]:
@@ -466,7 +464,7 @@ def _compute_score(quote: dict[str, Any], daily_candles: list[list]) -> dict[str
 
 
 def scan_top_gainers(
-    client: AngelOneClient,
+    client: Any,
     stocks: list[dict[str, str]],
     top_n: int = 2,
 ) -> list[dict[str, Any]]:

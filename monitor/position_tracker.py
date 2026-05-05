@@ -49,6 +49,7 @@ class Position:
     average_price: float       # Our entry price.
     atr: float                 # 5-minute ATR at entry time (fixed for the trade).
     prev_close: float          # Stock's previous day close — used for intraday gain calc.
+    product_type: str = "INTRADAY"  # "INTRADAY" (MIS, 5x) or "DELIVERY" (CNC, 1x).
     highest_price: float = 0.0
     stop_loss: float = 0.0
     hard_stop: float = 0.0
@@ -92,7 +93,7 @@ class PositionTracker:
 
     def update_buy(
         self, symbol: str, quantity: int, price: float,
-        atr: float, prev_close: float,
+        atr: float, prev_close: float, product_type: str = "INTRADAY",
     ) -> Position:
         """Record a buy. ATR and prev_close are computed at entry time."""
         existing = self._positions.get(symbol)
@@ -100,6 +101,7 @@ class PositionTracker:
             pos = Position(
                 symbol=symbol, quantity=quantity,
                 average_price=price, atr=atr, prev_close=prev_close,
+                product_type=product_type,
             )
             self._positions[symbol] = pos
             return pos

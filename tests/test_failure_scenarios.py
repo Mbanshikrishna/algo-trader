@@ -393,9 +393,10 @@ class TestScenario8_ProbeCancelFailure(unittest.TestCase):
         # cancel_order fails every time.
         broker.cancel_order.side_effect = Exception("Cancel rejected")
 
-        tradable, reason = tf.probe_tradability(broker, "TESTSTOCK-EQ", "99999")
+        tradable, product_type, reason = tf.probe_tradability(broker, "TESTSTOCK-EQ", "99999")
 
         self.assertTrue(tradable)  # Stock IS tradable (order was accepted).
+        self.assertEqual(product_type, "INTRADAY")
         self.assertEqual(broker.cancel_order.call_count, 3)  # 3 cancel attempts.
         mock_alert.assert_called_once()
         alert_msg = mock_alert.call_args[0][0]
@@ -416,14 +417,16 @@ class TestScenario8_ProbeCancelFailure(unittest.TestCase):
         broker.cancel_order.return_value = {}
 
         # First probe — makes API calls.
-        t1, _ = tf.probe_tradability(broker, "CACHED-EQ", "88888")
+        t1, pt1, _ = tf.probe_tradability(broker, "CACHED-EQ", "88888")
         self.assertTrue(t1)
+        self.assertEqual(pt1, "INTRADAY")
         self.assertEqual(broker.place_order.call_count, 1)
 
         # Second probe — should use cache.
         broker.place_order.reset_mock()
-        t2, _ = tf.probe_tradability(broker, "CACHED-EQ", "88888")
+        t2, pt2, _ = tf.probe_tradability(broker, "CACHED-EQ", "88888")
         self.assertTrue(t2)
+        self.assertEqual(pt2, "INTRADAY")
         broker.place_order.assert_not_called()  # No new API call.
 
 

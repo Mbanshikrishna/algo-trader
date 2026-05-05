@@ -194,98 +194,128 @@ class TradabilityFilter:
         symbol: str,
         token: str,
         exchange: str = "NSE",
-    ltp: float = 0.0,
-    ) -> tuple[bool, str]:
-        """Place a tiny LIMIT order to test if the broker allows trading this stock.
+        ltp: float = 0.0,
+    ) -> tuple[bool, str, str]:
+        """Probe whether the broker allows trading this stock.
 
-        Places a LIMIT BUY for 1 share at a price within circuit limits but
-        far enough below LTP to never fill, then cancels immediately if accepted.
-        If the broker rejects with a cautionary/restricted message, the stock
-        is blacklisted.
+        Tries INTRADAY first. If rejected with a cautionary/restricted message,
+        retries with DELIVERY (CNC) product type as fallback.
 
-        Returns (is_tradable, reason_if_not).
+        Returns (is_tradable, product_type, reason_if_not).
+        product_type is "INTRADAY" or "DELIVERY".
         """
         clean = self._normalize_symbol(symbol)
 
-        # Return cached result if available (avoids redundant probe orders).
+        # Return cached result if available.
         if clean in self._probe_cache:
-            if not self._probe_cache[clean]:
+            cached = self._probe_cache[clean]
+            if cached is False:
                 reason = self._session_blacklist.get(clean) or self._session_blacklist.get(symbol, "cached rejection")
-                return False, reason
-            return True, ""
+                return False, "", reason
+            # cached is the product_type string
+            return True, cached, ""
 
         # Skip if already blacklisted.
         if clean in self._session_blacklist or symbol in self._session_blacklist:
             reason = self._session_blacklist.get(clean) or self._session_blacklist.get(symbol, "")
             self._probe_cache[clean] = False
-            return False, reason
+            return False, "", reason
 
-        # Use a price within circuit limits but far below LTP to avoid fills.
-        # 20% below LTP is safe — well within circuit range but won't execute.
         from utils.tick import tick_round
         if ltp > 0:
             probe_price = max(tick_round(ltp * 0.80, "down"), 0.05)
         else:
             probe_price = 0.05
 
-        probe_order = {
-            "variety": "NORMAL",
-            "tradingsymbol": symbol,
-            "symboltoken": str(token),
-            "transactiontype": "BUY",
-            "exchange": exchange,
-            "ordertype": "LIMIT",
-            "producttype": "INTRADAY",
-            "duration": "DAY",
-            "price": str(probe_price),
-            "quantity": "1",
-            "squareoff": "0",
-            "stoploss": "0",
-        }
+        # Try INTRADAY first, then DELIVERY as fallback.
+        for product_type in ("INTRADAY", "DELIVERY"):
+            probe_order = {
+                "variety": "NORMAL",
+                "tradingsymbol": symbol,
+                "symboltoken": str(token),
+                "transactiontype": "BUY",
+                "exchange": exchange,
+                "ordertype": "LIMIT",
+                "producttype": product_type,
+                "duration": "DAY",
+                "price": str(probe_price),
+                "quantity": "1",
+                "squareoff": "0",
+                "stoploss": "0",
+            }
 
-        try:
-            result = broker_client.place_order(probe_order)
-            # Order accepted — stock is tradable. Cancel immediately with retry.
-            order_id = None
-            resp = result.get("response", {})
-            data = resp.get("data")
-            if isinstance(data, dict):
-                order_id = data.get("orderid")
-            elif isinstance(data, str):
-                order_id = data
+            try:
+                result = broker_client.place_order(probe_order)
+                # Order accepted — cancel immediately.
+                order_id = self._extract_order_id(result)
+                if order_id:
+                    self._cancel_probe_order(broker_client, order_id, symbol)
 
-            if order_id:
-                cancelled = False
-                for attempt in range(_CANCEL_MAX_RETRIES):
-                    try:
-                        broker_client.cancel_order(order_id, "NORMAL")
-                        cancelled = True
-                        break
-                    except Exception as cancel_exc:
-                        logger.warning(
-                            "Probe cancel attempt %d/%d failed for %s (order %s): %s",
-                            attempt + 1, _CANCEL_MAX_RETRIES, symbol, order_id, cancel_exc,
-                        )
-                        if attempt < _CANCEL_MAX_RETRIES - 1:
-                            time.sleep(_CANCEL_RETRY_DELAY)
-
-                if not cancelled:
-                    send_critical_alert(
-                        f"PROBE CANCEL FAILED — order {order_id} for {symbol} may still be open. "
-                        f"Manual cancellation required."
+                self._probe_cache[clean] = product_type
+                if product_type == "DELIVERY":
+                    logger.info(
+                        "PROBE %s: INTRADAY rejected, DELIVERY accepted (CNC fallback)",
+                        symbol,
                     )
+                return True, product_type, ""
 
-            self._probe_cache[clean] = True
-            return True, ""
+            except Exception as exc:
+                error_msg = str(exc)
+                is_tradability = self._is_tradability_rejection(error_msg)
 
-        except Exception as exc:
-            error_msg = str(exc)
-            if self.record_broker_rejection(symbol, error_msg):
-                self._probe_cache[clean] = False
-                return False, f"Broker rejected (probe): {error_msg}"
-            # Non-tradability error (e.g. network issue) — assume tradable.
-            logger.warning("Probe order error for %s (assuming tradable): %s", symbol, error_msg)
-            return True, ""
+                if is_tradability and product_type == "INTRADAY":
+                    # INTRADAY rejected — try DELIVERY fallback.
+                    logger.info("PROBE %s: INTRADAY rejected (%s), trying DELIVERY...", symbol, error_msg)
+                    continue
+                elif is_tradability:
+                    # Both INTRADAY and DELIVERY rejected — truly untradable.
+                    self.add_to_blacklist(symbol, f"Broker rejected both INTRADAY and DELIVERY: {error_msg}")
+                    self._probe_cache[clean] = False
+                    return False, "", f"Broker rejected (probe): {error_msg}"
+                else:
+                    # Non-tradability error (network, etc.) — assume tradable with INTRADAY.
+                    logger.warning("Probe order error for %s (assuming tradable): %s", symbol, error_msg)
+                    self._probe_cache[clean] = "INTRADAY"
+                    return True, "INTRADAY", ""
+
+        # Should not reach here, but safety fallback.
+        self._probe_cache[clean] = False
+        return False, "", "Probe failed for unknown reason"
+
+    def _is_tradability_rejection(self, error_msg: str) -> bool:
+        """Check if an error message indicates a tradability restriction."""
+        error_lower = str(error_msg).lower()
+        return any(kw in error_lower for kw in REJECTION_KEYWORDS)
+
+    @staticmethod
+    def _extract_order_id(result: dict) -> str | None:
+        """Extract order ID from a place_order result."""
+        resp = result.get("response", {})
+        data = resp.get("data")
+        if isinstance(data, dict):
+            return data.get("orderid")
+        elif isinstance(data, str):
+            return data
+        return None
+
+    def _cancel_probe_order(self, broker_client: Any, order_id: str, symbol: str) -> None:
+        """Cancel a probe order with retries."""
+        for attempt in range(_CANCEL_MAX_RETRIES):
+            try:
+                broker_client.cancel_order(order_id, "NORMAL")
+                return
+            except Exception as cancel_exc:
+                logger.warning(
+                    "Probe cancel attempt %d/%d failed for %s (order %s): %s",
+                    attempt + 1, _CANCEL_MAX_RETRIES, symbol, order_id, cancel_exc,
+                )
+                if attempt < _CANCEL_MAX_RETRIES - 1:
+                    time.sleep(_CANCEL_RETRY_DELAY)
+
+        send_critical_alert(
+            f"PROBE CANCEL FAILED — order {order_id} for {symbol} may still be open. "
+            f"Manual cancellation required."
+        )
 
     def probe_candidates(
         self,
@@ -295,30 +325,38 @@ class TradabilityFilter:
     ) -> tuple[list[dict[str, Any]], list[tuple[str, str]]]:
         """Probe a batch of candidates for tradability using test orders.
 
-        Runs probes concurrently. Returns (tradable, skipped_with_reasons).
+        Runs probes concurrently. Each tradable candidate gets a
+        ``_product_type`` key ("INTRADAY" or "DELIVERY") indicating which
+        product type the broker accepted.
+
+        Returns (tradable, skipped_with_reasons).
         """
         tradable: list[dict[str, Any]] = []
         skipped: list[tuple[str, str]] = []
 
-        def _probe_one(candidate: dict[str, Any]) -> tuple[dict[str, Any], bool, str]:
+        def _probe_one(candidate: dict[str, Any]) -> tuple[dict[str, Any], bool, str, str]:
             symbol = candidate.get("symbol", "")
             token = candidate.get("token", "")
             stock_ltp = float(candidate.get("ltp", 0))
-            ok, reason = self.probe_tradability(broker_client, symbol, token, ltp=stock_ltp)
-            return candidate, ok, reason
+            ok, product_type, reason = self.probe_tradability(
+                broker_client, symbol, token, ltp=stock_ltp,
+            )
+            return candidate, ok, product_type, reason
 
         with ThreadPoolExecutor(max_workers=max_workers) as pool:
             futures = {pool.submit(_probe_one, c): c for c in candidates}
             for future in as_completed(futures):
                 try:
-                    candidate, ok, reason = future.result()
+                    candidate, ok, product_type, reason = future.result()
                     if ok:
+                        candidate["_product_type"] = product_type
                         tradable.append(candidate)
                     else:
                         skipped.append((candidate.get("symbol", ""), reason))
                 except Exception as exc:
                     c = futures[future]
                     logger.warning("Probe failed for %s: %s (assuming tradable)", c.get("symbol", ""), exc)
+                    c["_product_type"] = "INTRADAY"
                     tradable.append(c)
 
         # Preserve original score ordering.

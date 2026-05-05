@@ -340,8 +340,9 @@ class CoreTests(unittest.TestCase):
                 pass
 
         tf = TradabilityFilter(safe_mode=True)
-        ok, reason = tf.probe_tradability(StubBroker(), "SBIN-EQ", "3045")
+        ok, product_type, reason = tf.probe_tradability(StubBroker(), "SBIN-EQ", "3045")
         self.assertTrue(ok)
+        self.assertEqual(product_type, "INTRADAY")
         self.assertEqual(reason, "")
 
     def test_probe_tradability_rejects_cautionary_stock(self) -> None:
@@ -355,11 +356,30 @@ class CoreTests(unittest.TestCase):
                 )
 
         tf = TradabilityFilter(safe_mode=True)
-        ok, reason = tf.probe_tradability(StubBroker(), "IMFA-EQ", "1234")
+        ok, product_type, reason = tf.probe_tradability(StubBroker(), "IMFA-EQ", "1234")
         self.assertFalse(ok)
+        self.assertEqual(product_type, "")
         self.assertIn("cautionary", reason.lower())
         # Should also be blacklisted now.
         self.assertIn("IMFA", tf.blacklist_summary)
+
+    def test_probe_tradability_falls_back_to_delivery(self) -> None:
+        from execution.tradability_filter import TradabilityFilter
+
+        class StubBroker:
+            def place_order(self, payload):
+                if payload.get("producttype") == "INTRADAY":
+                    raise ValueError("cautionary listings by the exchange")
+                return {"response": {"data": {"orderid": "PROBE_CNC"}}}
+
+            def cancel_order(self, order_id, variety):
+                pass
+
+        tf = TradabilityFilter(safe_mode=True)
+        ok, product_type, reason = tf.probe_tradability(StubBroker(), "CAUTION-EQ", "9999")
+        self.assertTrue(ok)
+        self.assertEqual(product_type, "DELIVERY")
+        self.assertEqual(reason, "")
 
     def test_probe_candidates_filters_and_preserves_order(self) -> None:
         from execution.tradability_filter import TradabilityFilter
@@ -388,6 +408,7 @@ class CoreTests(unittest.TestCase):
 
         self.assertEqual(len(tradable), 2)
         self.assertEqual(tradable[0]["symbol"], "GOOD1-EQ")
+        self.assertEqual(tradable[0]["_product_type"], "INTRADAY")
         self.assertEqual(tradable[1]["symbol"], "GOOD2-EQ")
         self.assertEqual(len(skipped), 1)
         self.assertEqual(skipped[0][0], "BAD-EQ")

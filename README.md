@@ -1,6 +1,6 @@
 # Algo Trader — Intraday Trading Bot for Indian Stock Market
 
-Automated intraday trading bot that scans the entire NSE equity market, selects the best momentum stocks, and trades them with trailing stop-loss protection. Uses Angel One SmartAPI as the sole broker and data source.
+Automated intraday trading bot that scans the entire NSE equity market, selects the best momentum stocks, and trades them with trailing stop-loss protection. Supports **Angel One** and **Dhan** as brokers.
 
 ## How It Works (Daily Flow)
 
@@ -313,10 +313,19 @@ Auto-login using PIN + TOTP with automatic session management:
 ## Configuration (.env)
 
 ```env
+# Broker selection: "angelone" (default) or "dhan"
+BROKER=dhan
+
+# Angel One credentials (always required — used for market data at minimum)
 ANGELONE_API_KEY=your_api_key
 ANGELONE_CLIENT_ID=your_client_id
 ANGELONE_PIN=your_pin
 ANGELONE_TOTP_SECRET=your_totp_secret
+
+# Dhan credentials (required when BROKER=dhan)
+DHAN_CLIENT_ID=your_dhan_client_id
+DHAN_ACCESS_TOKEN=your_dhan_access_token
+
 MONITOR_INTERVAL_SECONDS=10
 ORDER_PRODUCT_TYPE=INTRADAY
 ORDER_VARIETY=NORMAL
@@ -333,10 +342,13 @@ TELEGRAM_CHAT_ID=your_chat_id
 
 | Variable | Default | Description |
 |---|---|---|
+| `BROKER` | angelone | Broker for order execution: `angelone` or `dhan` |
 | `ANGELONE_API_KEY` | — | SmartAPI app key from smartapi.angelone.in |
 | `ANGELONE_CLIENT_ID` | — | Angel One trading account ID |
 | `ANGELONE_PIN` | — | 4-digit trading PIN |
 | `ANGELONE_TOTP_SECRET` | — | Base32 TOTP secret for auto-login |
+| `DHAN_CLIENT_ID` | — | Dhan client ID (from web.dhan.co) |
+| `DHAN_ACCESS_TOKEN` | — | Dhan API access token (valid ~30 days) |
 | `MONITOR_INTERVAL_SECONDS` | 10 | Seconds between price checks during monitoring |
 | `ORDER_PRODUCT_TYPE` | INTRADAY | MIS (broker auto square-off at ~3:15 PM; bot exits at 3:05 PM before this) |
 | `ORDER_VARIETY` | NORMAL | Regular order variety |
@@ -347,6 +359,14 @@ TELEGRAM_CHAT_ID=your_chat_id
 | `FNO_ONLY` | false | Restrict to F&O universe only (~213 stocks) |
 | `TELEGRAM_BOT_TOKEN` | — | Telegram bot token for alerts |
 | `TELEGRAM_CHAT_ID` | — | Telegram chat ID for alerts |
+
+### Broker Modes
+
+**`BROKER=angelone`** (default) — Angel One handles everything: market data, orders, positions, capital.
+
+**`BROKER=dhan`** (hybrid) — Dhan handles orders, positions, and capital. Angel One provides market data (scanning, quotes, candles). This avoids Angel One's hidden cautionary list that silently rejects orders for certain stocks. Angel One credentials are still required for market data.
+
+Why hybrid? Dhan's market data API requires a separate subscription. Using Angel One for data and Dhan for execution gives the best of both: unrestricted order placement + free market data.
 
 ## Hardcoded Constants (in source code)
 
@@ -513,7 +533,8 @@ algo-trader/
 ├── main.py                      # Entry point — daily trading loop (scan window + retry + safety)
 ├── backtest.py                  # Historical backtest using Angel One candle data
 ├── broker/
-│   └── angelone_client.py       # Angel One SmartAPI client (retry, rate limit, auto re-login)
+│   ├── angelone_client.py       # Angel One SmartAPI client (retry, rate limit, auto re-login)
+│   └── dhan_client.py           # Dhan broker client (same interface, no cautionary list)
 ├── config/
 │   ├── settings.py              # Environment variable loader
 │   └── instruments.py           # Instrument resolution and scrip master
@@ -583,4 +604,4 @@ pyotp           # TOTP generation for auto-login and session refresh
 numpy           # Fast EMA calculation in momentum strategy
 ```
 
-Note: The scrip master (~30MB JSON) is cached to `data/.scrip_master_cache.json` with a 24-hour TTL. Delete this file to force a fresh download.
+Note: The Angel One scrip master (~30MB JSON) is cached to `data/.scrip_master_cache.json` with a 24-hour TTL. The Dhan scrip master (~29MB CSV, filtered to ~2,500 NSE equities) is cached to `data/.dhan_scrip_master.json`. Delete these files to force a fresh download.

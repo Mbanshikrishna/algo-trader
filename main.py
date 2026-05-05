@@ -5,8 +5,12 @@ from datetime import datetime
 from zoneinfo import ZoneInfo
 
 from broker.angelone_client import AngelOneClient
+from broker.dhan_client import DhanClient
 from config.instruments import Instrument
 from config.settings import load_settings
+
+# Union type for broker clients — both implement the same interface.
+BrokerClient = AngelOneClient | DhanClient
 from execution.entry_validator import validate_entries_batch
 from execution.order_manager import OrderManager, OrderRejectedError
 from utils.tick import tick_round
@@ -47,12 +51,13 @@ def _notify(message: str, logger, send_alert: bool) -> None:
 
 
 def _place_slm_order(
-    broker: AngelOneClient,
+    broker: BrokerClient,
     symbol: str,
     token: str,
     quantity: int,
     trigger_price: float,
     logger,
+    product_type: str = "INTRADAY",
 ) -> str | None:
     """Place a SL-M (Stop-Loss Market) SELL order on the exchange.
 
@@ -69,7 +74,7 @@ def _place_slm_order(
         "transactiontype": "SELL",
         "exchange": "NSE",
         "ordertype": "STOPLOSS_MARKET",
-        "producttype": "INTRADAY",
+        "producttype": product_type,
         "duration": "DAY",
         "quantity": str(quantity),
         "triggerprice": str(round(aligned_trigger, 2)),
@@ -91,13 +96,14 @@ def _place_slm_order(
 
 
 def _update_slm_trigger(
-    broker: AngelOneClient,
+    broker: BrokerClient,
     order_id: str,
     symbol: str,
     token: str,
     quantity: int,
     new_trigger: float,
     logger,
+    product_type: str = "INTRADAY",
 ) -> bool:
     """Modify an existing SL-M order's trigger price (trail it up)."""
     aligned_trigger = tick_round(new_trigger, "down")
@@ -109,7 +115,7 @@ def _update_slm_trigger(
         "transactiontype": "SELL",
         "exchange": "NSE",
         "ordertype": "STOPLOSS_MARKET",
-        "producttype": "INTRADAY",
+        "producttype": product_type,
         "duration": "DAY",
         "quantity": str(quantity),
         "triggerprice": str(round(aligned_trigger, 2)),
@@ -124,7 +130,7 @@ def _update_slm_trigger(
         return False
 
 
-def _cancel_slm_order(broker: AngelOneClient, order_id: str, symbol: str, logger) -> None:
+def _cancel_slm_order(broker: BrokerClient, order_id: str, symbol: str, logger) -> None:
     """Cancel an existing SL-M order before placing a software exit."""
     try:
         broker.cancel_order(order_id, "STOPLOSS")
@@ -133,7 +139,7 @@ def _cancel_slm_order(broker: AngelOneClient, order_id: str, symbol: str, logger
         logger.warning("Failed to cancel SL-M for %s (may have already triggered): %s", symbol, exc)
 
 
-def _check_slm_executed(broker: AngelOneClient, slm_order_id: str, symbol: str, logger) -> bool:
+def _check_slm_executed(broker: BrokerClient, slm_order_id: str, symbol: str, logger) -> bool:
     """Check if a SL-M order has already been executed by the exchange.
 
     Returns True if the SL-M is COMPLETE/TRIGGERED (shares already sold).
@@ -144,7 +150,8 @@ def _check_slm_executed(broker: AngelOneClient, slm_order_id: str, symbol: str, 
         orders = order_book.get("data") or []
         for order in orders:
             if str(order.get("orderid", "")) == str(slm_order_id):
-                status = str(order.get("status", "")).upper()
+                # Angel One uses "status", DhanClient normalizes to "orderstatus".
+                status = str(order.get("orderstatus") or order.get("status", "")).upper()
                 if status in ("COMPLETE", "TRIGGERED", "EXECUTED"):
                     logger.info(
                         "[exit_attempt] SL-M %s for %s already %s — skipping software exit.",
@@ -157,7 +164,7 @@ def _check_slm_executed(broker: AngelOneClient, slm_order_id: str, symbol: str, 
     return False
 
 
-def _check_broker_position(broker: AngelOneClient, symbol: str, logger) -> int:
+def _check_broker_position(broker: BrokerClient, symbol: str, logger) -> int:
     """Check the broker's position book for actual shares held.
 
     Returns the net quantity held for the symbol, or -1 if the check fails.
@@ -181,13 +188,14 @@ def _check_broker_position(broker: AngelOneClient, symbol: str, logger) -> int:
 
 
 def _safe_exit(
-    broker: AngelOneClient,
+    broker: BrokerClient,
     order_manager: OrderManager,
     symbol: str,
     token: str,
     quantity: int,
     current_price: float,
     logger,
+    product_type: str = "INTRADAY",
 ) -> dict | None:
     """Place an exit order with retry and escalation.
 
@@ -223,6 +231,7 @@ def _safe_exit(
         try:
             result = order_manager.place_exit_order(
                 symbol, quantity, instrument=broker_instrument, current_price=current_price,
+                product_type=product_type,
             )
             logger.info(
                 "[exit_attempt] Exit order placed for %s: %d shares @ %.2f (attempt %d/%d)",
@@ -268,7 +277,7 @@ def _within_scan_window() -> bool:
     return start <= now <= end
 
 
-def _allocate_capital(broker: AngelOneClient, settings, logger) -> float:
+def _allocate_capital(broker: BrokerClient, settings, logger) -> float:
     """Fetch available capital from the broker account, fall back to config."""
     try:
         available = broker.get_available_capital()
@@ -282,23 +291,59 @@ def _allocate_capital(broker: AngelOneClient, settings, logger) -> float:
     return settings.capital
 
 
-def run_loop() -> None:
-    settings = load_settings()
-    logger = setup_logger()
-
+def _login_angelone(settings, logger) -> AngelOneClient:
+    """Login to Angel One and return the client."""
     if not (settings.api_key and settings.client_id and settings.pin and settings.totp_secret):
         raise ValueError(
-            "Live trading requires ANGELONE_API_KEY, ANGELONE_CLIENT_ID, ANGELONE_PIN, and ANGELONE_TOTP_SECRET"
+            "Angel One requires ANGELONE_API_KEY, ANGELONE_CLIENT_ID, ANGELONE_PIN, and ANGELONE_TOTP_SECRET"
         )
-
     logger.info("Logging in to Angel One...")
-    broker = AngelOneClient.login(
+    client = AngelOneClient.login(
         api_key=settings.api_key,
         client_id=settings.client_id,
         pin=settings.pin,
         totp_secret=settings.totp_secret,
     )
     logger.info("Angel One login successful.")
+    return client
+
+
+def _login_dhan(settings, logger) -> DhanClient:
+    """Login to Dhan and return the client."""
+    if not (settings.dhan_client_id and settings.dhan_access_token):
+        raise ValueError("Dhan requires DHAN_CLIENT_ID and DHAN_ACCESS_TOKEN")
+    logger.info("Logging in to Dhan...")
+    client = DhanClient.login(
+        client_id=settings.dhan_client_id,
+        access_token=settings.dhan_access_token,
+    )
+    logger.info("Dhan login successful.")
+    return client
+
+
+def run_loop() -> None:
+    settings = load_settings()
+    logger = setup_logger()
+
+    # --- Broker setup ---
+    # When BROKER=dhan, Dhan handles orders/positions/capital.
+    # Angel One is always needed for market data (scanning, quotes, candles)
+    # because Dhan's market data API requires a separate subscription.
+    use_dhan = settings.broker == "dhan"
+
+    # Angel One is always required — for market data at minimum.
+    angelone = _login_angelone(settings, logger)
+
+    if use_dhan:
+        dhan = _login_dhan(settings, logger)
+        # Dhan for orders; Angel One for market data.
+        broker: BrokerClient = dhan
+        data_broker: BrokerClient = angelone
+        logger.info("Broker mode: DHAN (orders) + Angel One (market data)")
+    else:
+        broker = angelone
+        data_broker = angelone
+        logger.info("Broker mode: Angel One (all)")
 
     # Initialize tradability filter and load restricted stock lists.
     trad_filter = TradabilityFilter(safe_mode=settings.safe_mode)
@@ -313,10 +358,16 @@ def run_loop() -> None:
     )
     position_tracker = PositionTracker()
 
-    # Load all NSE equity tokens once at startup.
+    # Load scrip master from Angel One (canonical symbol/token source).
+    # When using Dhan, also load Dhan's scrip master for symbol→security_id mapping.
     logger.info("Loading NSE equity scrip master...")
-    nse_stocks = load_nse_equity_tokens(broker)
+    nse_stocks = load_nse_equity_tokens(angelone)
     logger.info("Loaded %d NSE equity stocks.", len(nse_stocks))
+
+    if use_dhan:
+        logger.info("Loading Dhan scrip master for symbol mapping...")
+        dhan.load_scrip_master()
+        logger.info("Dhan scrip master loaded.")
 
     while True:
         now = _ist_now()
@@ -334,9 +385,11 @@ def run_loop() -> None:
         total_capital = _allocate_capital(broker, settings, logger)
         max_daily_loss = total_capital * MAX_DAILY_LOSS_PCT
 
-        # Refresh session if stale (every 2 hours).
+        # Refresh sessions if stale (every 2 hours).
         try:
-            broker.refresh_if_stale(max_age_seconds=7200)
+            data_broker.refresh_if_stale(max_age_seconds=7200)
+            if use_dhan:
+                broker.refresh_if_stale(max_age_seconds=7200)
         except Exception as exc:
             logger.error("[auth_refresh] Periodic session refresh failed: %s", exc)
 
@@ -350,7 +403,7 @@ def run_loop() -> None:
             continue
 
         # --- Phase 2: Check if market is bullish (4-factor model) ---
-        bullish, market_check = is_market_bullish(broker)
+        bullish, market_check = is_market_bullish(data_broker)
         report = market_check.format_report()
         _notify(report, logger, True)
 
@@ -388,7 +441,7 @@ def run_loop() -> None:
                     break
 
                 # Re-check if market is still bullish (full 4-factor model).
-                bullish, market_check = is_market_bullish(broker)
+                bullish, market_check = is_market_bullish(data_broker)
                 report = f"Re-entry {market_check.format_report()}"
                 _notify(report, logger, True)
                 if not bullish:
@@ -429,7 +482,7 @@ def run_loop() -> None:
                 logger.info("%sScanning %d stocks for top %d candidates (pool=%d)...",
                             round_label, len(nse_stocks), TOP_N, scan_pool_size)
                 scan_start = time.perf_counter()
-                raw_candidates = scan_top_gainers(broker, nse_stocks, top_n=scan_pool_size)
+                raw_candidates = scan_top_gainers(data_broker, nse_stocks, top_n=scan_pool_size)
                 scan_duration = time.perf_counter() - scan_start
                 logger.info("Scan completed in %.1f seconds. Found %d raw candidates.", scan_duration, len(raw_candidates))
 
@@ -455,7 +508,7 @@ def run_loop() -> None:
                     )
                     continue
 
-                # --- Phase 3c: Probe broker tradability (catches Angel One cautionary list) ---
+                # --- Phase 3c: Probe broker tradability (catches cautionary list / other rejections) ---
                 logger.info("Probing %d candidates for broker tradability...", len(tradable))
                 probe_start = time.perf_counter()
                 probed_tradable, probe_skipped = trad_filter.probe_candidates(
@@ -517,7 +570,7 @@ def run_loop() -> None:
                 )
                 validation_start = time.perf_counter()
                 validated_pairs = validate_entries_batch(
-                    validation_queue, broker, max_valid=TOP_N, max_workers=4,
+                    validation_queue, data_broker, max_valid=TOP_N, max_workers=4,
                 )
                 validation_duration = time.perf_counter() - validation_start
                 logger.info(
@@ -576,25 +629,34 @@ def run_loop() -> None:
             # Step 4c: Execute entries using real-time validated prices.
             entered_symbols: list[str] = []
             token_map: dict[str, str] = {}
+            product_type_map: dict[str, str] = {}  # symbol → "INTRADAY" or "DELIVERY"
             slm_orders: dict[str, str] = {}
             slm_triggers: dict[str, float] = {}
 
             for gainer in validated:
                 symbol = gainer["symbol"]
                 live_price = gainer["live_price"]
+                stock_product_type = gainer.get("_product_type", "INTRADAY")
 
                 try:
                     # Re-check available margin before each order to avoid
                     # insufficient-funds rejections when placing multiple orders.
                     try:
                         current_margin = broker.get_available_capital()
-                        effective_capital = min(
-                            capital_per_stock,
-                            current_margin * settings.intraday_leverage,
-                        )
+                        if stock_product_type == "DELIVERY":
+                            # CNC: no leverage — use raw cash only.
+                            effective_capital = min(capital_per_stock / settings.intraday_leverage, current_margin)
+                        else:
+                            effective_capital = min(
+                                capital_per_stock,
+                                current_margin * settings.intraday_leverage,
+                            )
                     except Exception as margin_exc:
                         logger.warning("Margin check failed, using planned capital: %s", margin_exc)
-                        effective_capital = capital_per_stock
+                        if stock_product_type == "DELIVERY":
+                            effective_capital = capital_per_stock / settings.intraday_leverage
+                        else:
+                            effective_capital = capital_per_stock
 
                     instrument = Instrument(
                         symbol=symbol,
@@ -608,7 +670,7 @@ def run_loop() -> None:
                         _notify(
                             f"Skipping {symbol}: live price {live_price:.2f} exceeds "
                             f"available capital {effective_capital:.2f} "
-                            f"(planned={capital_per_stock:.2f})",
+                            f"(planned={capital_per_stock:.2f}, product={stock_product_type})",
                             logger, True,
                         )
                         continue
@@ -616,6 +678,7 @@ def run_loop() -> None:
                     order = order_manager.place_market_order(
                         symbol, "BUY", qty, instrument=instrument,
                         current_price=live_price,
+                        product_type=stock_product_type,
                     )
 
                     # Verify the order was actually filled before tracking.
@@ -627,28 +690,33 @@ def run_loop() -> None:
                         continue
 
                     # Compute ATR from recent 5-min candles for adaptive stop sizing.
-                    entry_atr = fetch_entry_atr(broker, gainer["token"], live_price)
+                    entry_atr = fetch_entry_atr(data_broker, gainer["token"], live_price)
 
                     prev_close = gainer.get("prev_close", live_price / (1 + gainer["pct_change"] / 100))
                     pos = position_tracker.update_buy(
                         symbol, qty, live_price, atr=entry_atr, prev_close=prev_close,
+                        product_type=stock_product_type,
                     )
                     entered_symbols.append(symbol)
                     traded_today.add(symbol)
                     token_map[symbol] = gainer["token"]
+                    product_type_map[symbol] = stock_product_type
 
                     # Place server-side SL-M order at the hard stop.
+                    # SL-M uses the same product type as the entry.
                     slm_id = _place_slm_order(
                         broker, symbol, gainer["token"], qty, pos.hard_stop, logger,
+                        product_type=stock_product_type,
                     )
                     if slm_id:
                         slm_orders[symbol] = slm_id
                         slm_triggers[symbol] = pos.hard_stop
 
                     atr_pct = (entry_atr / live_price) * 100
+                    pt_label = "CNC" if stock_product_type == "DELIVERY" else "MIS"
                     _notify(
-                        f"{round_label}ENTRY: {symbol} — {qty} shares @ {live_price:.2f} "
-                        f"(capital={capital_per_stock:.2f}, gain={gainer['pct_change']:+.2f}%, "
+                        f"{round_label}ENTRY: {symbol} [{pt_label}] — {qty} shares @ {live_price:.2f} "
+                        f"(capital={effective_capital:.2f}, gain={gainer['pct_change']:+.2f}%, "
                         f"score={gainer['composite_score']:.3f}, ATR={entry_atr:.4f} ({atr_pct:.2f}%), "
                         f"SL={pos.stop_loss:.2f}, hard_stop={pos.hard_stop:.2f}) | {order}",
                         logger, True,
@@ -704,7 +772,7 @@ def run_loop() -> None:
                     break
 
                 try:
-                    result = broker.get_market_data("FULL", {"NSE": open_tokens})
+                    result = data_broker.get_market_data("FULL", {"NSE": open_tokens})
                     fetched_quotes = {
                         str(q.get("symbolToken", "")): q for q in result.get("fetched", [])
                     }
@@ -715,7 +783,9 @@ def run_loop() -> None:
 
                 # Refresh session periodically during monitoring.
                 try:
-                    broker.refresh_if_stale(max_age_seconds=7200)
+                    data_broker.refresh_if_stale(max_age_seconds=7200)
+                    if use_dhan:
+                        broker.refresh_if_stale(max_age_seconds=7200)
                 except Exception as exc:
                     logger.error("[auth_refresh] Session refresh during monitoring failed: %s", exc)
 
@@ -758,6 +828,7 @@ def run_loop() -> None:
                                 ok = _update_slm_trigger(
                                     broker, slm_id, symbol, token,
                                     pos.quantity, pos.stop_loss, logger,
+                                    product_type=product_type_map.get(symbol, "INTRADAY"),
                                 )
                                 if ok:
                                     slm_triggers[symbol] = pos.stop_loss
@@ -826,6 +897,7 @@ def run_loop() -> None:
                             exit_order = _safe_exit(
                                 broker, order_manager, symbol, token,
                                 sell_qty, stop_check_price, logger,
+                                product_type=product_type_map.get(symbol, "INTRADAY"),
                             )
                             pnl = (stop_check_price - pos.average_price) * pos.quantity
                             daily_pnl += pnl
@@ -879,9 +951,11 @@ def run_loop() -> None:
             # Loop back to scan → enter → monitor.
 
         # --- Phase 6: Force-close any remaining positions at market close ---
-        # Refresh session before force-close to avoid stale-token failures.
+        # Refresh sessions before force-close to avoid stale-token failures.
         try:
-            broker.refresh_if_stale(max_age_seconds=300)
+            data_broker.refresh_if_stale(max_age_seconds=300)
+            if use_dhan:
+                broker.refresh_if_stale(max_age_seconds=300)
         except Exception as exc:
             logger.error("[force_close] Session refresh failed: %s", exc)
 
@@ -920,7 +994,7 @@ def run_loop() -> None:
 
                     # Get final price for exit order and PnL.
                     try:
-                        result = broker.get_market_data("FULL", {"NSE": [token]})
+                        result = data_broker.get_market_data("FULL", {"NSE": [token]})
                         fetched_list = result.get("fetched", [{}])
                         final_price = float(fetched_list[0].get("ltp", pos.highest_price)) if fetched_list else pos.highest_price
                     except Exception:
@@ -930,13 +1004,15 @@ def run_loop() -> None:
                     exit_order = _safe_exit(
                         broker, order_manager, symbol, token,
                         sell_qty, final_price, logger,
+                        product_type=pos.product_type,
                     )
 
                     pnl = (final_price - pos.average_price) * pos.quantity
                     daily_pnl += pnl
                     position_tracker.update_sell(symbol, pos.quantity)
+                    pt_label = "CNC" if pos.product_type == "DELIVERY" else "MIS"
                     _notify(
-                        f"MARKET CLOSE EXIT: {symbol} — {pos.quantity} shares @ {final_price:.2f} "
+                        f"MARKET CLOSE EXIT [{pt_label}]: {symbol} — {pos.quantity} shares @ {final_price:.2f} "
                         f"(entry={pos.average_price:.2f}, PnL={pnl:+.2f}, daily={daily_pnl:+.2f}) | {exit_order}",
                         logger, True,
                     )

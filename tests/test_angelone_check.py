@@ -10,10 +10,13 @@ from config.settings import Settings
 class AngelOneCheckTests(unittest.TestCase):
     def test_validate_settings_rejects_missing_credentials(self) -> None:
         settings = Settings(
+            broker="angelone",
             api_key="",
             client_id="client",
             pin="",
             totp_secret="",
+            dhan_client_id="",
+            dhan_access_token="",
             risk_per_trade_pct=1.0,
             capital=100000.0,
             scan_interval_seconds=2.0,

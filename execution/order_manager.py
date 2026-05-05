@@ -44,6 +44,7 @@ class OrderManager:
         instrument: Instrument,
         order_type: str = "MARKET",
         price: float = 0.0,
+        product_type: str | None = None,
     ) -> dict[str, Any]:
         payload: dict[str, Any] = {
             "exchange": instrument.exchange,
@@ -52,7 +53,7 @@ class OrderManager:
             "variety": self.variety,
             "transactiontype": side.upper(),
             "ordertype": order_type,
-            "producttype": self.product_type,
+            "producttype": product_type or self.product_type,
             "duration": "DAY",
             "quantity": str(quantity),
             "price": "0",
@@ -70,12 +71,14 @@ class OrderManager:
         quantity: int,
         instrument: Instrument | None = None,
         current_price: float = 0.0,
+        product_type: str | None = None,
     ) -> dict:
         """Place a market order with execution safety.
 
         If the market order is rejected due to exchange restrictions,
         the stock is blacklisted and the error is raised.
         If rejected for other reasons, retries once with a LIMIT order.
+        ``product_type`` overrides the default ("INTRADAY" or "DELIVERY").
         """
         if instrument is None:
             raise ValueError("Live order placement requires a resolved broker instrument")
@@ -87,10 +90,12 @@ class OrderManager:
                 raise OrderRejectedError(symbol, reason)
 
         # Attempt 1: MARKET order.
-        order = self._build_order_payload(symbol, side, quantity, instrument, "MARKET")
+        order = self._build_order_payload(
+            symbol, side, quantity, instrument, "MARKET", product_type=product_type,
+        )
         try:
             result = self.broker_client.place_order(order)
-            logger.info("MARKET order placed: %s %s %d %s", side, symbol, quantity, result)
+            logger.info("MARKET order placed: %s %s %d [%s] %s", side, symbol, quantity, product_type or self.product_type, result)
             return result
         except Exception as exc:
             error_msg = str(exc)
@@ -106,6 +111,7 @@ class OrderManager:
                 time.sleep(RETRY_DELAY)
                 limit_order = self._build_order_payload(
                     symbol, side, quantity, instrument, "LIMIT", price=current_price,
+                    product_type=product_type,
                 )
                 try:
                     result = self.broker_client.place_order(limit_order)
@@ -126,13 +132,20 @@ class OrderManager:
         quantity: int,
         instrument: Instrument | None = None,
         current_price: float = 0.0,
+        product_type: str | None = None,
     ) -> dict:
-        """Place a SELL order to exit a position. Skips tradability check for exits."""
+        """Place a SELL order to exit a position. Skips tradability check for exits.
+
+        ``product_type`` must match the product type used for the entry order
+        (INTRADAY or DELIVERY).
+        """
         if instrument is None:
             raise ValueError("Live order placement requires a resolved broker instrument")
 
         # Exits skip the tradability pre-check — we must close the position regardless.
-        order = self._build_order_payload(symbol, "SELL", quantity, instrument, "MARKET")
+        order = self._build_order_payload(
+            symbol, "SELL", quantity, instrument, "MARKET", product_type=product_type,
+        )
         try:
             return self.broker_client.place_order(order)
         except Exception as exc:
@@ -142,6 +155,7 @@ class OrderManager:
                 time.sleep(RETRY_DELAY)
                 limit_order = self._build_order_payload(
                     symbol, "SELL", quantity, instrument, "LIMIT", price=current_price,
+                    product_type=product_type,
                 )
                 return self.broker_client.place_order(limit_order)
             raise
