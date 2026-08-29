@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install --upgrade pip
+      - run: python -m pip install -r requirements.txt
+      - run: python -m compileall -q .
+      - run: python -m unittest discover -s tests -v
+      - name: Detect committed credentials
+        run: |
+          if git grep -n -E '(API_KEY|ACCESS_TOKEN|TOTP_SECRET|BOT_TOKEN|PIN)=[^[:space:]]+' -- ':!*.example' ':!*.yml'; then
+            echo 'Potential committed credential detected.' >&2
+            exit 1
+          fi
