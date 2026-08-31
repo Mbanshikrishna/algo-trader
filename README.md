@@ -37,6 +37,78 @@ The bot follows a "fewer trades, bigger gains" approach:
 15:05  Force-close remaining positions. Daily P&L summary via Telegram.
 ```
 
+## Previous System vs Current System
+
+The current system keeps the momentum strategy's broad scan, entry window,
+profit target, and trailing-stop model, but replaces the unsafe execution and
+state assumptions used by the previous production version.
+
+| Area | Previous production system (`070e650`) | Current system (`08aff58`) |
+|---|---|---|
+| Default mode | Missing `PAPER_TRADE` defaulted to live execution | Paper mode is the default; live trading requires three explicit settings |
+| Startup | Began a new in-memory trading cycle | Loads persistent state, reconciles positions and orders with the broker, and restores missing protection before scanning |
+| Tradability | Submitted and cancelled active limit orders to probe whether a stock was tradable | Uses read-only ASM/GSM/F&O and circuit data; safe mode blocks entries when required lists are incomplete |
+| Position sizing | Could allocate up to 95% of leveraged buying power to one stock | Sizes quantity from capital at risk and the actual initial-stop distance, capped by available buying power |
+| Entry confirmation | Could assume an order filled when confirmation timed out | Requires broker-confirmed fills; adopts and protects only the confirmed part of a partial fill |
+| Position tracking | Positions existed only in process memory | Position, fill, token, product type, stop, and protective-order state persist across restarts |
+| Exit handling | An accepted exit request could be treated as a completed exit | Keeps the position tracked until the broker confirms closure or reconciliation proves it is already closed |
+| Stop replacement | Local state could advance before the replacement exit was proven | Keeps exchange protection until the replacement exit is broker-confirmed, then cancels the redundant stop |
+| Daily risk | Daily P&L and loss counters could be lost on restart | Realized P&L, traded symbols, and consecutive losses persist for the trading date |
+| Rate limits | Broker errors had limited retry handling | Uses bounded retry and backoff for rate limits and transient broker failures |
+| Observability | Primarily human-readable logs | Adds structured decision snapshots, dated universe snapshots, fill records, replay comparison, and slippage calibration |
+| Strategy changes | Production behavior was difficult to compare with proposed rules | Strict range, completed-volume, persistence/retest, and staged-stop ideas run in shadow mode without changing orders |
+| Backtesting | Legacy engine was not directly comparable with production | Point-in-time engine models production timing, risk sizing, fees, slippage, entry delay, and adverse intrabar ordering |
+| Verification | Failure scenarios were mainly checked from production logs | CI runs tests for partial fills, failed exits, restarts, reconciliation, stop races, snapshots, and backtesting |
+
+### Current Production Workflow
+
+1. Load configuration and refuse live execution unless every live-trading gate
+   is explicitly enabled.
+2. Authenticate with Angel One for market data and select either the paper,
+   Angel One, or Dhan execution client.
+3. Load read-only exchange restriction data. With `SAFE_MODE=true`, incomplete
+   restriction data fails closed and prevents new entries.
+4. Load persisted daily-risk and position state, reconcile it against the
+   broker, and restore broker-side protection before permitting a new entry.
+5. At the scan window, evaluate the market gate, capture the dated universe,
+   rank candidates, apply restriction filters, and run active entry validation.
+6. Record the stricter observation-derived entry policy as a shadow decision;
+   it cannot approve or reject a production order.
+7. Calculate quantity from the configured capital risk and initial stop,
+   submit the entry, and wait for a broker-confirmed full or partial fill.
+8. Track only confirmed quantity and place exchange-side stop protection.
+9. Monitor the confirmed position, active production stop, and shadow staged
+   stop. Shadow results are telemetry only and cannot modify the active stop.
+10. On an exit signal, retain the position and its existing protection until
+    the replacement exit is confirmed. Reconcile uncertain or partial exits.
+11. Persist position and daily-risk changes, write decision snapshots, export
+    the dated universe, compare captured decisions with replay, and update
+    confirmed-fill slippage calibration.
+
+### EC2 Migration and Log Preservation
+
+The `08aff58` deployment was installed beside the previous checkout and then
+swapped into `/home/ubuntu/algo-trader`. The migration copied the ignored
+`.env`, `data/`, and `logs/` directories before starting the new service. The
+previous checkout remains available at:
+
+```text
+/home/ubuntu/algo-trader-backup-before-08aff58
+```
+
+Historical application logs are available under
+`/home/ubuntu/algo-trader/logs/`. Persistent runtime state and decision data
+are under `/home/ubuntu/algo-trader/data/`. The host's systemd journal is stored
+outside the repository and remains available with:
+
+```bash
+sudo journalctl -u algo-trader
+```
+
+These EC2 files are not automatically committed to GitHub. Retain the backup
+until the new paper deployment has completed several successful trading days,
+and use an encrypted EC2/EBS backup policy for long-term retention.
+
 ## Architecture
 
 ```
