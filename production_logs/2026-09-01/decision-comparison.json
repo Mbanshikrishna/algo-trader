@@ -1,0 +1,20 @@
+[
+  {
+    "detail": "four-factor market gate",
+    "event_type": "market_gate",
+    "matched": "True",
+    "recorded_decision": "skip",
+    "replayed_decision": "skip",
+    "sequence": "275",
+    "symbol": ""
+  },
+  {
+    "detail": "four-factor market gate",
+    "event_type": "market_gate",
+    "matched": "True",
+    "recorded_decision": "skip",
+    "replayed_decision": "skip",
+    "sequence": "276",
+    "symbol": ""
+  }
+]
