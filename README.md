@@ -220,10 +220,17 @@ Once locked, trail tightens to 2% of highest price.
 - Failed or uncertain exits remain tracked. Exchange protection is retained
   until a replacement exit is confirmed.
 - Tradability checks use downloaded restriction lists and circuit data; they do
-  not place one-share probe orders.
-- Rate-limited requests use bounded retry/backoff behavior.
+  not place one-share probe orders. ASM/GSM data is always required in safe
+  mode, while F&O data is required only when `FNO_ONLY=true`; missing required
+  lists are retried before another full scan.
+- HTTP 429 rate limits and transient HTTP 403 broker responses are reported
+  separately and use bounded retry/backoff. Historical candle requests use a
+  lower request rate than general market-data calls.
 - Decision snapshots record market gates, quotes, candles, rankings, sizing,
   order states, fills, position decisions, and both shadow strategy outcomes.
+- Large decision payloads are compressed transparently in SQLite, and replay
+  processes events incrementally so a full trading day does not need to fit in
+  memory. Post-close replay runs once before sleeping to the next weekday scan.
 
 The shadow staged-stop policy records floors at entry -1.25% after +1% MFE,
 entry -0.35% after +2%, and entry +1% after +3%. It does not modify the live or

@@ -316,6 +316,32 @@ class TestScenario5_RateLimitDuringScan(unittest.TestCase):
         self.assertEqual(result["data"]["key"], "value")
         self.assertEqual(mock_post.call_count, 2)
 
+    @patch("broker.angelone_client.time.sleep", return_value=None)
+    def test_retry_on_transient_403_is_bounded(self, _sleep):
+        """A non-auth 403 retries without being treated as a token expiry."""
+        from broker.angelone_client import AngelOneClient
+
+        resp_403 = MagicMock(status_code=403, text="Access denied temporarily")
+        resp_403.headers = {}
+        resp_200 = MagicMock(status_code=200)
+        resp_200.json.return_value = {"status": True, "data": {"key": "value"}}
+        resp_200.raise_for_status = MagicMock()
+        resp_200.headers = {"Content-Type": "application/json"}
+
+        client = AngelOneClient.__new__(AngelOneClient)
+        client.session = MagicMock()
+        client.session.post.side_effect = [resp_403, resp_200]
+        client.timeout_seconds = 5
+        client._pin = ""
+        client._totp_secret = ""
+
+        result = client._request_with_retry(
+            "POST", "https://api.test", "/getCandleData", body={"x": 1}
+        )
+
+        self.assertEqual(result["data"]["key"], "value")
+        self.assertEqual(client.session.post.call_count, 2)
+
 
 class TestScenario6_NetworkTimeoutDuringExit(unittest.TestCase):
     """Network timeout during exit — retry succeeds on attempt 2."""
@@ -416,6 +442,41 @@ class TestScenario8_ReadOnlyTradability(unittest.TestCase):
         self.assertEqual(product_type, "INTRADAY")
         broker.place_order.assert_not_called()
         broker.cancel_order.assert_not_called()
+
+    @patch("execution.tradability_filter.requests.Session")
+    def test_fno_failure_does_not_block_when_fno_only_is_disabled(self, session_cls):
+        from execution.tradability_filter import TradabilityFilter
+
+        homepage = MagicMock(status_code=200)
+        asm = MagicMock(status_code=200)
+        asm.json.return_value = {"longterm": {"data": []}, "shortterm": {"data": []}}
+        gsm = MagicMock(status_code=200)
+        gsm.json.return_value = []
+        fno = MagicMock(status_code=403)
+        session_cls.return_value.get.side_effect = [homepage, asm, gsm, fno]
+
+        tf = TradabilityFilter(safe_mode=True, fno_required=False)
+        tf.load_restricted_lists()
+
+        self.assertTrue(tf.ready)
+        self.assertTrue(tf.probe_tradability(MagicMock(), "TEST-EQ", "1")[0])
+
+    @patch("execution.tradability_filter.requests.Session")
+    def test_fno_failure_blocks_when_fno_only_is_enabled(self, session_cls):
+        from execution.tradability_filter import TradabilityFilter
+
+        homepage = MagicMock(status_code=200)
+        asm = MagicMock(status_code=200)
+        asm.json.return_value = {"longterm": {"data": []}, "shortterm": {"data": []}}
+        gsm = MagicMock(status_code=200)
+        gsm.json.return_value = []
+        fno = MagicMock(status_code=403)
+        session_cls.return_value.get.side_effect = [homepage, asm, gsm, fno]
+
+        tf = TradabilityFilter(safe_mode=True, fno_required=True)
+        tf.load_restricted_lists()
+
+        self.assertFalse(tf.ready)
 
 
 class TestScenario9_WhipsawStopLoss(unittest.TestCase):

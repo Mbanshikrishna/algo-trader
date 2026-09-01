@@ -3,8 +3,10 @@ from __future__ import annotations
 import os
 import tempfile
 import unittest
+from datetime import datetime
 from pathlib import Path
 from unittest.mock import MagicMock, patch
+from zoneinfo import ZoneInfo
 
 from backtest import simulate_trade
 from config.settings import load_settings
@@ -130,6 +132,19 @@ class TestBacktestExecutionAssumptions(unittest.TestCase):
         self.assertIn(trade.exit_reason, {"HARD_STOP", "TRAILING_STOP"})
         self.assertGreater(trade.fees, 0)
         self.assertLess(trade.pnl, trade.gross_pnl)
+
+
+class TestRuntimeScheduling(unittest.TestCase):
+    def test_post_close_sleep_skips_weekend(self):
+        from main import _seconds_until_next_scan
+
+        friday = datetime(2026, 9, 4, 16, 0, tzinfo=ZoneInfo("Asia/Kolkata"))
+        seconds = _seconds_until_next_scan(friday)
+        monday = friday.timestamp() + seconds
+
+        wake = datetime.fromtimestamp(monday, tz=ZoneInfo("Asia/Kolkata"))
+        self.assertEqual(wake.weekday(), 0)
+        self.assertEqual((wake.hour, wake.minute), (10, 0))
 
 
 if __name__ == "__main__":

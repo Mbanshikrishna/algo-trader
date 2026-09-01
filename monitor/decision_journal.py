@@ -8,6 +8,8 @@ parallel.
 
 from __future__ import annotations
 
+import base64
+import gzip
 import hashlib
 import json
 import logging
@@ -37,6 +39,9 @@ _SECRET_KEYS = {
     "totp",
     "totp_secret",
 }
+
+_COMPRESSED_PAYLOAD_PREFIX = "gzip+base64:"
+_PAYLOAD_COMPRESSION_THRESHOLD = 64 * 1024
 
 
 def _utc_now() -> str:
@@ -96,6 +101,24 @@ def stable_hash(value: Any) -> str:
         default=_json_default,
     ).encode("utf-8")
     return hashlib.sha256(encoded).hexdigest()
+
+
+def encode_payload(payload_json: str) -> str:
+    """Compress large JSON payloads while keeping the SQLite schema compatible."""
+    encoded = payload_json.encode("utf-8")
+    if len(encoded) < _PAYLOAD_COMPRESSION_THRESHOLD:
+        return payload_json
+    compressed = gzip.compress(encoded, compresslevel=6, mtime=0)
+    return _COMPRESSED_PAYLOAD_PREFIX + base64.b64encode(compressed).decode("ascii")
+
+
+def decode_payload(stored_payload: str) -> Any:
+    """Decode either legacy plain JSON or the compressed payload format."""
+    if stored_payload.startswith(_COMPRESSED_PAYLOAD_PREFIX):
+        encoded = stored_payload[len(_COMPRESSED_PAYLOAD_PREFIX):]
+        raw = gzip.decompress(base64.b64decode(encoded)).decode("utf-8")
+        return json.loads(raw)
+    return json.loads(stored_payload)
 
 
 def current_git_revision(root: str | Path | None = None) -> str:
@@ -251,6 +274,7 @@ class DecisionJournal:
             separators=(",", ":"),
             default=_json_default,
         )
+        stored_payload = encode_payload(payload_json)
         with self._lock:
             self._connection.execute(
                 """
@@ -271,7 +295,7 @@ class DecisionJournal:
                     token,
                     decision,
                     reason,
-                    payload_json,
+                    stored_payload,
                     hashlib.sha256(payload_json.encode("utf-8")).hexdigest(),
                 ),
             )
@@ -365,7 +389,7 @@ class DecisionJournal:
                 "token": row[7],
                 "decision": row[8],
                 "reason": row[9],
-                "payload": json.loads(row[10]),
+                "payload": decode_payload(row[10]),
             }
             for row in rows
         ]

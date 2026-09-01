@@ -483,6 +483,20 @@ def _within_scan_window(end_hour: int = SCAN_END_HOUR, end_min: int = SCAN_END_M
     return start <= now <= end
 
 
+def _seconds_until_next_scan(now: datetime | None = None) -> float:
+    """Return a bounded sleep until the next weekday scan window."""
+    current = now or _ist_now()
+    target = (current + timedelta(days=1)).replace(
+        hour=SCAN_START_HOUR,
+        minute=SCAN_START_MIN,
+        second=0,
+        microsecond=0,
+    )
+    while target.weekday() >= 5:
+        target += timedelta(days=1)
+    return max((target - current).total_seconds(), 60)
+
+
 def _allocate_capital(broker: BrokerClient, settings, logger) -> float:
     """Fetch available capital from the broker account, fall back to config."""
     try:
@@ -573,7 +587,10 @@ def run_loop() -> None:
         logger.info("Broker mode: Angel One (all)")
 
     # Initialize tradability filter and load restricted stock lists.
-    trad_filter = TradabilityFilter(safe_mode=settings.safe_mode)
+    trad_filter = TradabilityFilter(
+        safe_mode=settings.safe_mode,
+        fno_required=settings.fno_only,
+    )
     logger.info("Loading ASM/GSM/F&O restricted lists from NSE...")
     trad_filter.load_restricted_lists()
 
@@ -692,9 +709,32 @@ def run_loop() -> None:
         now = _ist_now()
         if now.hour > MARKET_CLOSE_HOUR or (now.hour == MARKET_CLOSE_HOUR and now.minute >= MARKET_CLOSE_MIN):
             _write_replay_reports(logger)
-            logger.info("Market closed for today. Sleeping until tomorrow.")
-            time.sleep(3600)
+            sleep_secs = _seconds_until_next_scan(now)
+            logger.info(
+                "Market closed for today. Sleeping %.1fh until the next scan window.",
+                sleep_secs / 3600,
+            )
+            time.sleep(sleep_secs)
             continue
+
+        # Restriction downloads can fail transiently at startup. Retry before
+        # doing an expensive full-universe scan, but never bypass safe mode.
+        if not trad_filter.ready:
+            logger.warning(
+                "Tradability data is not ready; refreshing restriction lists before scanning."
+            )
+            trad_filter.load_restricted_lists()
+            if not trad_filter.ready:
+                logger.error(
+                    "Required tradability data is still unavailable; retrying in %ds.",
+                    SCAN_RETRY_SECONDS,
+                )
+                time.sleep(SCAN_RETRY_SECONDS)
+                continue
+            if _decision_journal is not None:
+                _decision_journal.snapshot_universe(
+                    trading_date, trad_filter.annotate_universe(nse_stocks)
+                )
 
         # Refresh sessions right before market check — not earlier, because
         # Angel One tokens expire in ~1-2 hours and the wait above can be 3+ hours.
@@ -1637,10 +1677,7 @@ def run_loop() -> None:
         # This prevents the outer loop from restarting while the market is
         # still open (which caused double trading cycles).
         now_end = _ist_now()
-        tomorrow_scan = (now_end + timedelta(days=1)).replace(
-            hour=SCAN_START_HOUR, minute=SCAN_START_MIN, second=0, microsecond=0,
-        )
-        sleep_secs = max((tomorrow_scan - now_end).total_seconds(), 60)
+        sleep_secs = _seconds_until_next_scan(now_end)
         _notify(
             f"Trading day complete. Daily P&L: ₹{daily_pnl:+,.2f}. "
             f"Sleeping {sleep_secs/3600:.1f}h until tomorrow.",

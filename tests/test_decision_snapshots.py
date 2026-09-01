@@ -15,7 +15,7 @@ from execution.entry_validator import (
     validate_entries_batch,
 )
 from execution.order_manager import OrderManager, OrderState
-from monitor.decision_journal import DecisionJournal
+from monitor.decision_journal import DecisionJournal, decode_payload
 from production_replay import (
     calibrate_slippage,
     compare_run,
@@ -32,6 +32,28 @@ from strategy.market_scanner import (
 
 
 class TestDecisionJournal(unittest.TestCase):
+    def test_large_payload_is_compressed_and_round_trips(self):
+        with tempfile.TemporaryDirectory() as directory:
+            database = Path(directory) / "journal.sqlite3"
+            journal = DecisionJournal(database, snapshot_dir=Path(directory) / "u")
+            payload = {"quotes": [{"symbol": "TEST", "value": "x" * 1000}] * 100}
+            journal.record("scan_completed", payload=payload)
+            event = journal.events("scan_completed")[0]
+            journal.close()
+
+            connection = sqlite3.connect(database)
+            stored = connection.execute(
+                "SELECT payload_json FROM decision_events"
+            ).fetchone()[0]
+            connection.close()
+
+            self.assertTrue(stored.startswith("gzip+base64:"))
+            self.assertEqual(decode_payload(stored), payload)
+            self.assertEqual(event["payload"], payload)
+            replay_run, comparisons = compare_run(database)
+            self.assertEqual(replay_run, journal.run_id)
+            self.assertEqual(len(comparisons), 1)
+
     def test_shadow_entry_policy_uses_only_completed_minute_candles(self):
         candles = [
             ["2026-08-21T10:00:00+05:30", 105.8, 106.0, 105.7, 105.9, 100],

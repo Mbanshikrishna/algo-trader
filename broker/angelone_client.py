@@ -42,14 +42,18 @@ class _RateLimiter:
             self._last = time.monotonic()
 
 
-# Module-level rate limiter shared by all client instances.
+# Module-level limiters shared by all client instances. Historical candle
+# requests use a lower rate because that endpoint throttles before the general
+# market-data APIs do.
 _rate_limiter = _RateLimiter(max_per_second=8.0)
+_historical_rate_limiter = _RateLimiter(max_per_second=2.5)
 
 # Retry configuration.
 _MAX_RETRIES = 3
 _BACKOFF_BASE = 1.0  # seconds; doubles each retry.
 _AUTH_FAIL_CODES = {401}
-_RETRYABLE_CODES = {403, 429, 500, 502, 503, 504}
+_RETRYABLE_CODES = {429, 500, 502, 503, 504}
+_TRANSIENT_FORBIDDEN_CODE = 403
 
 # Scrip master disk cache.
 _SCRIP_CACHE_DIR = Path(__file__).resolve().parent.parent / "data"
@@ -261,7 +265,12 @@ class AngelOneClient:
         last_exc: Exception | None = None
 
         for attempt in range(_MAX_RETRIES):
-            _rate_limiter.acquire()
+            limiter = (
+                _historical_rate_limiter
+                if path == "/getCandleData"
+                else _rate_limiter
+            )
+            limiter.acquire()
 
             try:
                 if method == "GET":
@@ -288,6 +297,21 @@ class AngelOneClient:
                         except Exception as login_exc:
                             logger.error("[auth_refresh] Re-login failed: %s", login_exc)
                         backoff = _BACKOFF_BASE * (2 ** attempt)
+                        time.sleep(backoff)
+                        continue
+                    self._raise_for_status(response, method, url)
+
+                # Angel One also returns 403 for transient historical-data
+                # throttling. Keep the retry bounded, but do not misreport it
+                # as an HTTP 429 rate-limit response.
+                if response.status_code == _TRANSIENT_FORBIDDEN_CODE:
+                    if attempt < _MAX_RETRIES - 1:
+                        backoff = _BACKOFF_BASE * (2 ** attempt)
+                        logger.warning(
+                            "[broker_forbidden] %s %s returned 403, retrying in %.1fs "
+                            "(attempt %d/%d)...",
+                            method, path, backoff, attempt + 1, _MAX_RETRIES,
+                        )
                         time.sleep(backoff)
                         continue
                     self._raise_for_status(response, method, url)

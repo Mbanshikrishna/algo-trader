@@ -9,6 +9,7 @@ import math
 import sqlite3
 from dataclasses import asdict, dataclass
 from pathlib import Path
+from collections.abc import Iterator
 from typing import Any
 
 from execution.entry_validator import (
@@ -17,6 +18,7 @@ from execution.entry_validator import (
     _check_quote,
 )
 from monitor.risk_state import calculate_position_size
+from monitor.decision_journal import decode_payload
 from strategy.market_scanner import (
     INDIA_VIX_TOKEN,
     NIFTY_50_TOKEN,
@@ -36,7 +38,8 @@ class ReplayComparison:
     detail: str = ""
 
 
-def _rows(connection: sqlite3.Connection, run_id: str) -> list[dict[str, Any]]:
+def _rows(connection: sqlite3.Connection, run_id: str) -> Iterator[dict[str, Any]]:
+    """Yield decoded events one at a time to bound replay memory usage."""
     rows = connection.execute(
         """
         SELECT sequence, recorded_at_utc, event_type, symbol, decision,
@@ -46,19 +49,17 @@ def _rows(connection: sqlite3.Connection, run_id: str) -> list[dict[str, Any]]:
         ORDER BY sequence
         """,
         (run_id,),
-    ).fetchall()
-    return [
-        {
+    )
+    for row in rows:
+        yield {
             "sequence": row[0],
             "recorded_at_utc": row[1],
             "event_type": row[2],
             "symbol": row[3],
             "decision": row[4],
             "reason": row[5],
-            "payload": json.loads(row[6]),
+            "payload": decode_payload(row[6]),
         }
-        for row in rows
-    ]
 
 
 def latest_run_id(connection: sqlite3.Connection) -> str:
@@ -268,6 +269,7 @@ def calibrate_slippage(
     run_id: str | None = None,
 ) -> dict[str, Any]:
     """Measure adverse slippage using only live broker-confirmed fills."""
+    observations: list[dict[str, Any]] = []
     connection = sqlite3.connect(database)
     try:
         selected_run = run_id or latest_run_id(connection)
@@ -275,36 +277,39 @@ def calibrate_slippage(
             "SELECT mode FROM runs WHERE run_id = ?", (selected_run,)
         ).fetchone()
         mode = str(mode_row[0]).lower() if mode_row else "unknown"
-        events = _rows(connection, selected_run) if mode == "live" else []
+        if mode == "live":
+            for event in _rows(connection, selected_run):
+                if event["event_type"] != "confirmed_fill":
+                    continue
+                payload = event["payload"]
+                reference = float(payload.get("reference_price", 0) or 0)
+                fill = float(payload.get("fill_price", 0) or 0)
+                quantity = int(payload.get("filled_quantity", 0) or 0)
+                side = str(payload.get("side", "")).upper()
+                if (
+                    reference <= 0
+                    or fill <= 0
+                    or quantity <= 0
+                    or side not in {"BUY", "SELL"}
+                ):
+                    continue
+                adverse_bps = (
+                    (fill - reference) / reference * 10_000
+                    if side == "BUY"
+                    else (reference - fill) / reference * 10_000
+                )
+                observations.append(
+                    {
+                        "symbol": event["symbol"],
+                        "side": side,
+                        "quantity": quantity,
+                        "reference_price": reference,
+                        "fill_price": fill,
+                        "adverse_bps": round(adverse_bps, 4),
+                    }
+                )
     finally:
         connection.close()
-
-    observations: list[dict[str, Any]] = []
-    for event in events:
-        if event["event_type"] != "confirmed_fill":
-            continue
-        payload = event["payload"]
-        reference = float(payload.get("reference_price", 0) or 0)
-        fill = float(payload.get("fill_price", 0) or 0)
-        quantity = int(payload.get("filled_quantity", 0) or 0)
-        side = str(payload.get("side", "")).upper()
-        if reference <= 0 or fill <= 0 or quantity <= 0 or side not in {"BUY", "SELL"}:
-            continue
-        adverse_bps = (
-            (fill - reference) / reference * 10_000
-            if side == "BUY"
-            else (reference - fill) / reference * 10_000
-        )
-        observations.append(
-            {
-                "symbol": event["symbol"],
-                "side": side,
-                "quantity": quantity,
-                "reference_price": reference,
-                "fill_price": fill,
-                "adverse_bps": round(adverse_bps, 4),
-            }
-        )
 
     values = [row["adverse_bps"] for row in observations]
     weighted_denominator = sum(row["quantity"] for row in observations)

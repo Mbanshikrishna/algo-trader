@@ -38,14 +38,20 @@ class TradabilityFilter:
     3. Runtime blacklist (caches broker rejections during the session)
     """
 
-    def __init__(self, safe_mode: bool = True) -> None:
+    def __init__(self, safe_mode: bool = True, fno_required: bool = False) -> None:
         self.safe_mode = safe_mode
+        self.fno_required = fno_required
         self._asm_symbols: set[str] = set()
         self._gsm_symbols: set[str] = set()
         self._fno_symbols: set[str] = set()
         self._session_blacklist: dict[str, str] = {}  # symbol -> reason
         self._probe_cache: dict[str, bool] = {}  # symbol -> tradable (cached for the day)
         self._loaded = False
+
+    @property
+    def ready(self) -> bool:
+        """Whether the configured read-only restriction checks can run safely."""
+        return not self.safe_mode or self._loaded
 
     def load_restricted_lists(self) -> None:
         """Fetch ASM, GSM, and F&O lists from NSE. Safe to call multiple times."""
@@ -78,6 +84,8 @@ class TradabilityFilter:
                 }
                 logger.info("Loaded %d ASM stocks from NSE.", len(self._asm_symbols))
                 asm_loaded = True
+            else:
+                logger.warning("Failed to fetch ASM list: HTTP %d", resp.status_code)
         except Exception as exc:
             logger.warning("Failed to fetch ASM list: %s", exc)
 
@@ -90,6 +98,8 @@ class TradabilityFilter:
                     self._gsm_symbols = {s["symbol"] for s in data if "symbol" in s}
                 logger.info("Loaded %d GSM stocks from NSE.", len(self._gsm_symbols))
                 gsm_loaded = True
+            else:
+                logger.warning("Failed to fetch GSM list: HTTP %d", resp.status_code)
         except Exception as exc:
             logger.warning("Failed to fetch GSM list: %s", exc)
 
@@ -102,13 +112,21 @@ class TradabilityFilter:
                 self._fno_symbols = {s["symbol"] for s in fno_data if "symbol" in s}
                 logger.info("Loaded %d F&O stocks from NSE.", len(self._fno_symbols))
                 fno_loaded = True
+            else:
+                logger.warning("Failed to fetch F&O list: HTTP %d", resp.status_code)
         except Exception as exc:
             logger.warning("Failed to fetch F&O list: %s", exc)
 
         session.close()
-        self._loaded = asm_loaded and gsm_loaded and fno_loaded
+        self._loaded = asm_loaded and gsm_loaded and (
+            fno_loaded or not self.fno_required
+        )
         if self.safe_mode and not self._loaded:
-            logger.error("Tradability lists incomplete; safe mode will block new entries.")
+            required = "ASM/GSM/F&O" if self.fno_required else "ASM/GSM"
+            logger.error(
+                "Required tradability lists incomplete (%s); safe mode will block new entries.",
+                required,
+            )
 
     def _normalize_symbol(self, symbol: str) -> str:
         """Strip -EQ suffix to match NSE list format."""
