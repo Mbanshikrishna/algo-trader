@@ -1,0 +1,151 @@
+2026-09-04T04:30:00.680733+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:30:00,680 | INFO | algo_trader | Daily candle cache cleared.
+2026-09-04T04:30:00.690464+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:30:00,681 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-09-04T04:30:00.690464+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:30:00,681 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-09-04T04:30:00.739976+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:30:00,739 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-09-04T04:30:00.741235+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:30:00,741 | INFO | algo_trader | [auth_refresh] Angel One session refreshed.
+2026-09-04T04:30:00.939151+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:30:00,938 | INFO | algo_trader | Market Check: 4/4 — BULLISH
+2026-09-04T04:30:00.939151+00:00 ip-[REDACTED] python[363706]: 1. Index Direction: PASS ✅
+2026-09-04T04:30:00.939151+00:00 ip-[REDACTED] python[363706]:    Nifty 50: +0.32% (need > 0%)
+2026-09-04T04:30:00.939151+00:00 ip-[REDACTED] python[363706]: 2. Market Breadth: PASS ✅
+2026-09-04T04:30:00.939151+00:00 ip-[REDACTED] python[363706]:    Advancers: 31, Decliners: 19
+2026-09-04T04:30:00.939151+00:00 ip-[REDACTED] python[363706]:    Breadth ratio: 1.63 (need > 1.2)
+2026-09-04T04:30:00.939151+00:00 ip-[REDACTED] python[363706]: 3. Intraday Strength: PASS ✅
+2026-09-04T04:30:00.939151+00:00 ip-[REDACTED] python[363706]:    Nifty LTP vs Open: 23948.75 vs 23910.90
+2026-09-04T04:30:00.939151+00:00 ip-[REDACTED] python[363706]:    NIFTYBEES vs VWAP: 273.40 vs 273.12
+2026-09-04T04:30:00.939151+00:00 ip-[REDACTED] python[363706]: 4. Volatility Filter: PASS ✅
+2026-09-04T04:30:00.939151+00:00 ip-[REDACTED] python[363706]:    India VIX change: -2.56% (reject if > +5%)
+2026-09-04T04:30:00.939151+00:00 ip-[REDACTED] python[363706]: Decision: TRADE (score 4/4 >= 3)
+2026-09-04T04:30:01.550099+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:30:01,549 | INFO | algo_trader | Scanning 2672 stocks for top 1 candidates (pool=5)...
+2026-09-04T04:30:01.550288+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:30:01,550 | INFO | algo_trader | Fetching quotes for 2672 stocks...
+2026-09-04T04:30:08.217292+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:30:08,217 | INFO | algo_trader | Received 2655 quotes.
+2026-09-04T04:30:08.220742+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:30:08,219 | INFO | algo_trader | Candidates in 5-8% gain range: 17
+2026-09-04T04:30:08.220742+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:30:08,219 | INFO | algo_trader | Fetching daily candles for 17 candidates...
+2026-09-04T04:30:09.840639+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:30:09,840 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 1.0s (attempt 1/3)...
+2026-09-04T04:30:10.241491+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:30:10,241 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 1.0s (attempt 1/3)...
+2026-09-04T04:30:11.039870+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:30:11,039 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 1.0s (attempt 1/3)...
+2026-09-04T04:30:11.840691+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:30:11,840 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 1.0s (attempt 1/3)...
+2026-09-04T04:30:16.245762+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:30:16,245 | INFO | algo_trader | Rank #1: GMMPFAUDLR-EQ — gain=+5.73%, score=0.708 (vol=0.7x, momentum=0.98, buy_pressure=0.52, stability=1.00, prev_trend=0.83)
+2026-09-04T04:30:16.246381+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:30:16,245 | INFO | algo_trader | Rank #2: SANATHAN-EQ — gain=+6.67%, score=0.681 (vol=6.0x, momentum=0.62, buy_pressure=0.78, stability=0.63, prev_trend=0.17)
+2026-09-04T04:30:16.246381+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:30:16,245 | INFO | algo_trader | Rank #3: TEJASNET-EQ — gain=+7.08%, score=0.673 (vol=0.5x, momentum=0.96, buy_pressure=0.55, stability=0.91, prev_trend=0.83)
+2026-09-04T04:30:16.246381+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:30:16,245 | INFO | algo_trader | Rank #4: HBLENGINE-EQ — gain=+7.47%, score=0.631 (vol=1.0x, momentum=0.93, buy_pressure=0.68, stability=0.91, prev_trend=0.00)
+2026-09-04T04:30:16.246381+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:30:16,246 | INFO | algo_trader | Rank #5: RATNAVEER-EQ — gain=+6.08%, score=0.627 (vol=0.2x, momentum=0.92, buy_pressure=0.86, stability=0.80, prev_trend=0.50)
+2026-09-04T04:30:16.520567+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:30:16,520 | INFO | algo_trader | Scan completed in 15.0 seconds. Found 5 raw candidates.
+2026-09-04T04:30:16.524451+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:30:16,524 | INFO | algo_trader | Skipped by ASM/GSM/circuit filter:
+2026-09-04T04:30:16.524451+00:00 ip-[REDACTED] python[363706]:   RATNAVEER-EQ: ASM listed (Additional Surveillance Measure)
+2026-09-04T04:30:16.524731+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:30:16,524 | INFO | algo_trader | Probing 4 candidates for broker tradability...
+2026-09-04T04:30:16.530441+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:30:16,530 | INFO | algo_trader | Probe completed in 0.0 seconds: 4 tradable, 0 rejected.
+2026-09-04T04:30:16.530634+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:30:16,530 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 1 filtered):
+2026-09-04T04:30:16.530634+00:00 ip-[REDACTED] python[363706]:   GMMPFAUDLR-EQ: +5.73% @ 1135.00
+2026-09-04T04:30:16.530634+00:00 ip-[REDACTED] python[363706]:     Score=0.708 | Vol=0.7x | Momentum=0.98 | BuyPressure=0.52 | Stability=1.00 | PrevTrend=0.83
+2026-09-04T04:30:17.121754+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:30:17,121 | INFO | algo_trader | Validating 4 candidates in parallel...
+2026-09-04T04:30:17.147913+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:30:17,147 | INFO | algo_trader | ENTRY REJECTED SANATHAN-EQ: Range position 0.617 < 0.85 (price retreating from high)
+2026-09-04T04:30:17.150550+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:30:17,150 | INFO | algo_trader | Near-breakout skip for GMMPFAUDLR-EQ: range=0.975, gain=5.7% — skipping breakout check
+2026-09-04T04:30:17.175738+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:30:17,175 | INFO | algo_trader | ENTRY REJECTED TEJASNET-EQ: No micro breakout: LTP 607.85 < last 5min high 609.40
+2026-09-04T04:30:17.586113+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:30:17,585 | INFO | algo_trader | ENTRY REJECTED HBLENGINE-EQ: No micro breakout: LTP 715.50 < last 5min high 716.95
+2026-09-04T04:30:17.978494+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:30:17,978 | INFO | algo_trader | ENTRY REJECTED GMMPFAUDLR-EQ: Volume fading: current 330 vs avg 3356 (ratio 0.10 < 1.2)
+2026-09-04T04:30:17.980670+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:30:17,980 | INFO | algo_trader | Validation completed in 0.9 seconds: 0/4 passed.
+2026-09-04T04:30:17.980828+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:30:17,980 | INFO | algo_trader | No candidates passed real-time validation.
+2026-09-04T04:30:18.581716+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:30:18,581 | INFO | algo_trader | Scan attempt 2 — retrying in 120s (window open until 14:00)...
+2026-09-04T04:32:18.582065+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:18,581 | INFO | algo_trader | Scanning 2672 stocks for top 1 candidates (pool=5)...
+2026-09-04T04:32:18.582843+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:18,582 | INFO | algo_trader | Fetching quotes for 2672 stocks...
+2026-09-04T04:32:25.276830+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:25,276 | INFO | algo_trader | Received 2655 quotes.
+2026-09-04T04:32:25.279252+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:25,279 | INFO | algo_trader | Candidates in 5-8% gain range: 22
+2026-09-04T04:32:25.279395+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:25,279 | INFO | algo_trader | Fetching daily candles for 22 candidates...
+2026-09-04T04:32:25.303250+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:25,303 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 1.0s (attempt 1/3)...
+2026-09-04T04:32:26.100271+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:26,100 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 1.0s (attempt 1/3)...
+2026-09-04T04:32:26.896388+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:26,896 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 1.0s (attempt 1/3)...
+2026-09-04T04:32:27.296154+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:27,295 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 1.0s (attempt 1/3)...
+2026-09-04T04:32:27.697359+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:27,697 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 2.0s (attempt 2/3)...
+2026-09-04T04:32:28.096663+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:28,096 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 1.0s (attempt 1/3)...
+2026-09-04T04:32:29.698834+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:29,698 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 1.0s (attempt 1/3)...
+2026-09-04T04:32:30.504160+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:30,503 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 2.0s (attempt 2/3)...
+2026-09-04T04:32:30.898977+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:30,898 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 1.0s (attempt 1/3)...
+2026-09-04T04:32:32.100323+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:32,100 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 2.0s (attempt 2/3)...
+2026-09-04T04:32:32.498208+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:32,498 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 1.0s (attempt 1/3)...
+2026-09-04T04:32:34.100852+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:34,100 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 2.0s (attempt 2/3)...
+2026-09-04T04:32:36.127015+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:36,126 | INFO | algo_trader | Rank #1: HBLENGINE-EQ — gain=+7.78%, score=0.865 (vol=7.0x, momentum=0.97, buy_pressure=0.67, stability=0.91, prev_trend=0.67)
+2026-09-04T04:32:36.128264+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:36,127 | INFO | algo_trader | Rank #2: GMMPFAUDLR-EQ — gain=+6.33%, score=0.729 (vol=0.7x, momentum=1.00, buy_pressure=0.56, stability=1.00, prev_trend=0.83)
+2026-09-04T04:32:36.128264+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:36,127 | INFO | algo_trader | Rank #3: SANATHAN-EQ — gain=+6.56%, score=0.677 (vol=6.0x, momentum=0.60, buy_pressure=0.79, stability=0.63, prev_trend=0.17)
+2026-09-04T04:32:36.128264+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:36,127 | INFO | algo_trader | Rank #4: TEJASNET-EQ — gain=+6.53%, score=0.659 (vol=0.6x, momentum=0.87, buy_pressure=0.55, stability=0.91, prev_trend=0.83)
+2026-09-04T04:32:36.128264+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:36,127 | INFO | algo_trader | Rank #5: PARACABLES-EQ — gain=+5.93%, score=0.635 (vol=0.8x, momentum=0.83, buy_pressure=0.42, stability=0.94, prev_trend=0.67)
+2026-09-04T04:32:36.379172+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:36,378 | INFO | algo_trader | Scan completed in 17.8 seconds. Found 5 raw candidates.
+2026-09-04T04:32:36.382126+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:36,382 | INFO | algo_trader | Skipped by ASM/GSM/circuit filter:
+2026-09-04T04:32:36.382126+00:00 ip-[REDACTED] python[363706]:   PARACABLES-EQ: ASM listed (Additional Surveillance Measure)
+2026-09-04T04:32:36.382493+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:36,382 | INFO | algo_trader | Probing 4 candidates for broker tradability...
+2026-09-04T04:32:36.384131+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:36,384 | INFO | algo_trader | Probe completed in 0.0 seconds: 4 tradable, 0 rejected.
+2026-09-04T04:32:36.385266+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:36,384 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 1 filtered):
+2026-09-04T04:32:36.385266+00:00 ip-[REDACTED] python[363706]:   HBLENGINE-EQ: +7.78% @ 717.30
+2026-09-04T04:32:36.385266+00:00 ip-[REDACTED] python[363706]:     Score=0.865 | Vol=7.0x | Momentum=0.97 | BuyPressure=0.67 | Stability=0.91 | PrevTrend=0.67
+2026-09-04T04:32:36.984865+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:36,984 | INFO | algo_trader | Validating 4 candidates in parallel...
+2026-09-04T04:32:37.006801+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:37,006 | INFO | algo_trader | ENTRY REJECTED SANATHAN-EQ: Range position 0.605 < 0.85 (price retreating from high)
+2026-09-04T04:32:37.010873+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:37,010 | INFO | algo_trader | Near-breakout skip for GMMPFAUDLR-EQ: range=0.986, gain=6.5% — skipping breakout check
+2026-09-04T04:32:37.011498+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:37,011 | INFO | algo_trader | Near-breakout skip for TEJASNET-EQ: range=0.866, gain=6.5% — skipping breakout check
+2026-09-04T04:32:37.428893+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:37,428 | INFO | algo_trader | ENTRY VALIDATED GMMPFAUDLR-EQ: price=1142.70, gain=+6.45%, range=0.986, breakout=True, vol_ratio=2.78, spread=0.1050%
+2026-09-04T04:32:37.828604+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:37,828 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 1.0s (attempt 1/3)...
+2026-09-04T04:32:38.224619+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:38,224 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 1.0s (attempt 1/3)...
+2026-09-04T04:32:38.849282+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:38,849 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 2.0s (attempt 2/3)...
+2026-09-04T04:32:39.246728+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:39,246 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 2.0s (attempt 2/3)...
+2026-09-04T04:32:40.871811+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:40,871 | INFO | algo_trader | ENTRY REJECTED TEJASNET-EQ: Volume fading: current 126846 vs avg 186065 (ratio 0.68 < 1.2)
+2026-09-04T04:32:41.268237+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:41,268 | WARNING | algo_trader | 1-min candle fetch failed for HBLENGINE-EQ volume check: POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=[REDACTED_IP], client_local_ip=[REDACTED_IP]: Access denied because of exceeding access rate — rejecting
+2026-09-04T04:32:41.268422+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:41,268 | INFO | algo_trader | ENTRY REJECTED HBLENGINE-EQ: Volume check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=[REDACTED_IP], client_local_ip=[REDACTED_IP]: Access denied because of exceeding access rate)
+2026-09-04T04:32:41.270483+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:41,270 | INFO | algo_trader | Validation completed in 4.3 seconds: 1/4 passed.
+2026-09-04T04:32:41.270721+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:41,270 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-09-04T04:32:41.270721+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:41,270 | INFO | algo_trader | Capital: 100000.00 x 5.0x leverage = 500000.00 buying power | 1 validated stocks | 475000.00 per stock
+2026-09-04T04:32:41.666157+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:41,666 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 1.0s (attempt 1/3)...
+2026-09-04T04:32:42.688830+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:42,688 | INFO | algo_trader | ATR computed for token 1570: 11.8111 (from 10 candles, price=1142.70, ATR%=1.03%)
+2026-09-04T04:32:42.713598+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:42,713 | INFO | algo_trader | [PAPER] MARKET order filled: BUY GMMPFAUDLR-EQ 43 @ 1142.80 id=94f15e5d
+2026-09-04T04:32:42.715113+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:42,715 | INFO | algo_trader | MARKET order placed: BUY GMMPFAUDLR-EQ 43 [INTRADAY] {'response': {'data': {'orderid': '94f15e5d'}}}
+2026-09-04T04:32:42.719729+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:42,719 | INFO | algo_trader | [PAPER] SL-M order placed: SELL GMMPFAUDLR-EQ 43 trigger=1119.90 id=bbb4aab4
+2026-09-04T04:32:42.748463+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:42,748 | INFO | algo_trader | SL-M order placed for GMMPFAUDLR-EQ: trigger=1119.94, orderid=bbb4aab4
+2026-09-04T04:32:42.754115+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:42,754 | INFO | algo_trader | ENTRY: GMMPFAUDLR-EQ [MIS] — 43 shares @ 1142.80 (capital=475000.00, gain=+6.33%, score=0.729, ATR=11.8111 (1.03%), SL=1119.94, hard_stop=1119.94) | {'response': {'data': {'orderid': '94f15e5d'}}}
+2026-09-04T04:32:43.346923+00:00 ip-[REDACTED] python[363706]: 2026-09-04 04:32:43,346 | INFO | algo_trader | Monitoring 1 positions with trailing stop...
+2026-09-04T06:30:01.244167+00:00 ip-[REDACTED] python[363706]: 2026-09-04 06:30:01,243 | INFO | algo_trader | [auth_refresh] Session age 7201s >= 7200s, refreshing...
+2026-09-04T06:30:01.244167+00:00 ip-[REDACTED] python[363706]: 2026-09-04 06:30:01,244 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-09-04T06:30:01.338212+00:00 ip-[REDACTED] python[363706]: 2026-09-04 06:30:01,337 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-09-04T07:21:29.031241+00:00 ip-[REDACTED] python[363706]: 2026-09-04 07:21:29,031 | WARNING | algo_trader | [retry] POST /quote network error: HTTPSConnectionPool(host='apiconnect.angelone.in', port=443): Read timed out. (read timeout=10), retrying in 1.0s (attempt 1/3)...
+2026-09-04T08:29:59.668670+00:00 ip-[REDACTED] python[363706]: 2026-09-04 08:29:59,668 | INFO | algo_trader | TRAILING STOP UPDATE GMMPFAUDLR-EQ: SL 1119.94 -> 1135.77 (ltp=1170.90, bid=1168.00, high=1170.90, profit=2.5%, intraday=9.1%, locked=False, ATR=11.8111)
+2026-09-04T08:29:59.672414+00:00 ip-[REDACTED] python[363706]: 2026-09-04 08:29:59,668 | INFO | algo_trader | [PAPER] SL-M modified: GMMPFAUDLR-EQ trigger 1119.90 → 1135.75 id=bbb4aab4
+2026-09-04T08:29:59.672414+00:00 ip-[REDACTED] python[363706]: 2026-09-04 08:29:59,670 | INFO | algo_trader | SL-M trigger updated for GMMPFAUDLR-EQ: new trigger=1135.77
+2026-09-04T08:30:09.691712+00:00 ip-[REDACTED] python[363706]: 2026-09-04 08:30:09,691 | INFO | algo_trader | [auth_refresh] Session age 7208s >= 7200s, refreshing...
+2026-09-04T08:30:09.692359+00:00 ip-[REDACTED] python[363706]: 2026-09-04 08:30:09,691 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-09-04T08:30:09.735601+00:00 ip-[REDACTED] python[363706]: 2026-09-04 08:30:09,735 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-09-04T08:30:09.737091+00:00 ip-[REDACTED] python[363706]: 2026-09-04 08:30:09,737 | INFO | algo_trader | TRAILING STOP UPDATE GMMPFAUDLR-EQ: SL 1135.77 -> 1136.16 (ltp=1171.30, bid=1171.30, high=1171.30, profit=2.5%, intraday=9.1%, locked=False, ATR=11.8111)
+2026-09-04T08:30:09.737266+00:00 ip-[REDACTED] python[363706]: 2026-09-04 08:30:09,737 | INFO | algo_trader | [PAPER] SL-M modified: GMMPFAUDLR-EQ trigger 1135.75 → 1136.15 id=bbb4aab4
+2026-09-04T08:30:09.738684+00:00 ip-[REDACTED] python[363706]: 2026-09-04 08:30:09,738 | INFO | algo_trader | SL-M trigger updated for GMMPFAUDLR-EQ: new trigger=1136.16
+2026-09-04T08:30:29.794207+00:00 ip-[REDACTED] python[363706]: 2026-09-04 08:30:29,794 | INFO | algo_trader | TRAILING STOP UPDATE GMMPFAUDLR-EQ: SL 1136.16 -> 1136.65 (ltp=1171.80, bid=1170.50, high=1171.80, profit=2.5%, intraday=9.2%, locked=False, ATR=11.8111)
+2026-09-04T08:30:29.794880+00:00 ip-[REDACTED] python[363706]: 2026-09-04 08:30:29,794 | INFO | algo_trader | [PAPER] SL-M modified: GMMPFAUDLR-EQ trigger 1136.15 → 1136.65 id=bbb4aab4
+2026-09-04T08:30:29.796089+00:00 ip-[REDACTED] python[363706]: 2026-09-04 08:30:29,796 | INFO | algo_trader | SL-M trigger updated for GMMPFAUDLR-EQ: new trigger=1136.65
+2026-09-04T08:31:19.915723+00:00 ip-[REDACTED] python[363706]: 2026-09-04 08:31:19,915 | INFO | algo_trader | TRAILING STOP UPDATE GMMPFAUDLR-EQ: SL 1136.65 -> 1137.23 (ltp=1172.40, bid=1172.70, high=1172.40, profit=2.6%, intraday=9.2%, locked=False, ATR=11.8111)
+2026-09-04T08:31:19.916411+00:00 ip-[REDACTED] python[363706]: 2026-09-04 08:31:19,915 | INFO | algo_trader | [PAPER] SL-M modified: GMMPFAUDLR-EQ trigger 1136.65 → 1137.20 id=bbb4aab4
+2026-09-04T08:31:19.917405+00:00 ip-[REDACTED] python[363706]: 2026-09-04 08:31:19,917 | INFO | algo_trader | SL-M trigger updated for GMMPFAUDLR-EQ: new trigger=1137.23
+2026-09-04T08:31:29.943680+00:00 ip-[REDACTED] python[363706]: 2026-09-04 08:31:29,943 | INFO | algo_trader | TRAILING STOP UPDATE GMMPFAUDLR-EQ: SL 1137.23 -> 1137.71 (ltp=1172.90, bid=1171.30, high=1172.90, profit=2.6%, intraday=9.3%, locked=False, ATR=11.8111)
+2026-09-04T08:31:29.944264+00:00 ip-[REDACTED] python[363706]: 2026-09-04 08:31:29,943 | INFO | algo_trader | [PAPER] SL-M modified: GMMPFAUDLR-EQ trigger 1137.20 → 1137.70 id=bbb4aab4
+2026-09-04T08:31:29.945348+00:00 ip-[REDACTED] python[363706]: 2026-09-04 08:31:29,945 | INFO | algo_trader | SL-M trigger updated for GMMPFAUDLR-EQ: new trigger=1137.71
+2026-09-04T09:00:03.975080+00:00 ip-[REDACTED] python[363706]: 2026-09-04 09:00:03,974 | INFO | algo_trader | TRAILING STOP UPDATE GMMPFAUDLR-EQ: SL 1137.71 -> 1143.58 (ltp=1150.90, bid=1150.90, high=1172.90, profit=2.6%, intraday=7.2%, locked=False, ATR=11.8111)
+2026-09-04T09:00:03.975080+00:00 ip-[REDACTED] python[363706]: 2026-09-04 09:00:03,975 | INFO | algo_trader | [PAPER] SL-M modified: GMMPFAUDLR-EQ trigger 1137.70 → 1143.55 id=bbb4aab4
+2026-09-04T09:00:03.980766+00:00 ip-[REDACTED] python[363706]: 2026-09-04 09:00:03,976 | INFO | algo_trader | SL-M trigger updated for GMMPFAUDLR-EQ: new trigger=1143.58
+2026-09-04T09:35:08.843003+00:00 ip-[REDACTED] python[363706]: 2026-09-04 09:35:08,842 | INFO | algo_trader | [auth_refresh] Session age 3899s >= 300s, refreshing...
+2026-09-04T09:35:08.846809+00:00 ip-[REDACTED] python[363706]: 2026-09-04 09:35:08,843 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-09-04T09:35:08.883879+00:00 ip-[REDACTED] python[363706]: 2026-09-04 09:35:08,883 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-09-04T09:35:08.885051+00:00 ip-[REDACTED] python[363706]: 2026-09-04 09:35:08,884 | INFO | algo_trader | Market closing — force-exiting 1 positions.
+2026-09-04T09:35:09.478308+00:00 ip-[REDACTED] python[363706]: 2026-09-04 09:35:09,478 | INFO | algo_trader | [position_check] GMMPFAUDLR-EQ: netqty=43
+2026-09-04T09:35:09.499144+00:00 ip-[REDACTED] python[363706]: 2026-09-04 09:35:09,499 | INFO | algo_trader | [position_check] GMMPFAUDLR-EQ: netqty=43
+2026-09-04T09:35:09.624125+00:00 ip-[REDACTED] python[363706]: 2026-09-04 09:35:09,624 | INFO | algo_trader | [PAPER] MARKET order filled: SELL GMMPFAUDLR-EQ 43 @ 1148.50 id=fa0b8779
+2026-09-04T09:35:09.628624+00:00 ip-[REDACTED] python[363706]: 2026-09-04 09:35:09,628 | INFO | algo_trader | [exit_attempt] Exit confirmed for GMMPFAUDLR-EQ: 43 shares @ 1148.50
+2026-09-04T09:35:09.628832+00:00 ip-[REDACTED] python[363706]: 2026-09-04 09:35:09,628 | INFO | algo_trader | [PAPER] Order cancelled: GMMPFAUDLR-EQ id=bbb4aab4
+2026-09-04T09:35:09.629995+00:00 ip-[REDACTED] python[363706]: 2026-09-04 09:35:09,629 | INFO | algo_trader | SL-M order confirmed CANCELLED for GMMPFAUDLR-EQ: bbb4aab4
+2026-09-04T09:35:09.630834+00:00 ip-[REDACTED] python[363706]: 2026-09-04 09:35:09,630 | INFO | algo_trader | MARKET CLOSE EXIT [MIS]: GMMPFAUDLR-EQ — 0 shares @ 1148.50 (entry=1142.80, PnL=+245.10, daily=+245.10) | ExitOutcome(state=<ExitState.CLOSED: 'closed'>, execution=OrderExecution(order_id='fa0b8779', state=<OrderState.FILLED: 'filled'>, requested_quantity=43, filled_quantity=43, average_price=1148.5, reason='', raw_order={'orderid': 'fa0b8779', 'tradingsymbol': 'GMMPFAUDLR-EQ', 'transactiontype': 'SELL', 'quantity': '43', 'price': '1148.5', 'filledshares': '43', 'averageprice': '1148.5', 'triggerprice': '0.0', 'orderstatus': 'COMPLETE', 'status': 'COMPLETE', 'ordertype': 'MARKET', 'producttype': 'INTRADAY'}), reason='')
+2026-09-04T09:35:10.235173+00:00 ip-[REDACTED] python[363706]: 2026-09-04 09:35:10,235 | INFO | algo_trader |
+2026-09-04T09:35:10.235173+00:00 ip-[REDACTED] python[363706]: ============================================================
+2026-09-04T09:35:10.235173+00:00 ip-[REDACTED] python[363706]: PAPER TRADING SUMMARY
+2026-09-04T09:35:10.235173+00:00 ip-[REDACTED] python[363706]: ============================================================
+2026-09-04T09:35:10.235173+00:00 ip-[REDACTED] python[363706]: Total trades: 2
+2026-09-04T09:35:10.235173+00:00 ip-[REDACTED] python[363706]: Buys: 1, Sells: 1
+2026-09-04T09:35:10.235173+00:00 ip-[REDACTED] python[363706]:   10:02:42 BUY  GMMPFAUDLR-EQ x43 @ 1142.80
+2026-09-04T09:35:10.235173+00:00 ip-[REDACTED] python[363706]:   15:05:09 SELL GMMPFAUDLR-EQ x43 @ 1148.50 P&L: Rs.+245.10
+2026-09-04T09:35:10.235173+00:00 ip-[REDACTED] python[363706]: Daily P&L: Rs.+245.10
+2026-09-04T09:35:10.235173+00:00 ip-[REDACTED] python[363706]: Capital: Rs.100,000.00 → Rs.100,245.10
+2026-09-04T09:35:10.235173+00:00 ip-[REDACTED] python[363706]: All positions closed.
+2026-09-04T09:35:10.235173+00:00 ip-[REDACTED] python[363706]: ============================================================
+2026-09-04T09:35:11.787240+00:00 ip-[REDACTED] python[363706]: 2026-09-04 09:35:11,787 | INFO | algo_trader | Replay comparison complete: 5095/5095 decisions matched; recommended slippage=0 bps; report=/home/ubuntu/algo-trader/data/replay_reports/2026-09-04/summary.json; universe=data/universe_snapshots.json
+2026-09-04T09:35:11.789151+00:00 ip-[REDACTED] python[363706]: 2026-09-04 09:35:11,789 | INFO | algo_trader | Trading day complete. Daily P&L: ₹+245.10. Sleeping 66.9h until tomorrow.

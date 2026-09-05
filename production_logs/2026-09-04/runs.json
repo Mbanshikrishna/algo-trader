@@ -1,0 +1,36 @@
+[
+  {
+    "broker": "dhan",
+    "config": {
+      "alert_every_check": true,
+      "api_key": "[REDACTED]",
+      "broker": "dhan",
+      "capital": 100000.0,
+      "client_id": "[REDACTED]",
+      "daily_risk_state_path": "data/daily_risk_state.json",
+      "dhan_access_token": "[REDACTED]",
+      "dhan_client_id": "[REDACTED]",
+      "fno_only": false,
+      "intraday_leverage": 5.0,
+      "live_trading_confirmation": "",
+      "live_trading_enabled": false,
+      "max_consecutive_losses": 2,
+      "max_daily_loss_pct": 2.0,
+      "monitor_interval_seconds": 10.0,
+      "order_product_type": "INTRADAY",
+      "order_variety": "NORMAL",
+      "paper_trade": true,
+      "pin": "[REDACTED]",
+      "risk_per_trade_pct": 1.0,
+      "runtime_state_path": "data/runtime_state.json",
+      "safe_mode": true,
+      "scan_interval_seconds": 2.0,
+      "totp_secret": "[REDACTED]"
+    },
+    "config_hash": "863818d364eaf65a0ba2d32eccd0d6c0600fb7af5d67260de9fa4dbb7d23abfc",
+    "git_revision": "2f71452ca3fd55af5a36e5042ea932bffced8c0f",
+    "mode": "paper",
+    "run_id": "f0bd27f30d9e4c4e8ef4c9084775ac5d",
+    "started_at_utc": "2026-09-01T17:06:58.270+00:00"
+  }
+]
