@@ -5,8 +5,8 @@ Automated intraday trading bot for the Indian stock market. Scans all NSE equity
 > **Current operating recommendation:** keep the bot in paper mode. Production
 > paper logs were positive before costs but approximately break-even/negative
 > after modeled fees and slippage, while the broader production-equivalent
-> backtest remained negative. Strategy experiments are recorded in shadow mode
-> and do not change orders.
+> backtest remained negative. The stricter entry policy therefore remains in
+> shadow mode; staged protection is active in paper mode for validation.
 
 ## Strategy
 
@@ -14,7 +14,7 @@ The bot follows a "fewer trades, bigger gains" approach:
 
 1. **Enter** stocks already up 5–8% on the day with confirmed momentum
 2. **Hold** through normal pullbacks using wide fixed-percentage trailing stops
-3. **Exit** at 15% profit target, or via profit lock when stock hits 12%+ intraday gain
+3. **Exit** when the stock reaches 15% above its previous close, or via protected trailing exits
 4. **Re-enter** only after PROFIT_LOCK exit, before 12:30 PM
 
 ## Daily Flow
@@ -30,8 +30,8 @@ The bot follows a "fewer trades, bigger gains" approach:
          • Real-time entry validation (5 checks).
          • Enter with MARKET order, place SL-M at hard stop.
 10:00  Monitor every 10 seconds.
-  –      • Wide fixed-percentage trailing stops (4%/3.5%/3%/2.5%).
-14:00    • Target exit at 15% profit from entry.
+  –      • Wide trailing stop plus staged protection after +1%, +2%, and +3% MFE.
+  –      • Target exit when the stock reaches +15% from its previous close.
          • Profit lock at 12% intraday gain (14% for 8–10% entry stocks).
          • Smart re-entry after PROFIT_LOCK exits (up to 2 rounds).
 15:05  Force-close remaining positions. Daily P&L summary via Telegram.
@@ -43,7 +43,7 @@ The current system keeps the momentum strategy's broad scan, entry window,
 profit target, and trailing-stop model, but replaces the unsafe execution and
 state assumptions used by the previous production version.
 
-| Area | Previous production system (`070e650`) | Current system (`08aff58`) |
+| Area | Previous production system (`070e650`) | Current system (`2f71452` and later) |
 |---|---|---|
 | Default mode | Missing `PAPER_TRADE` defaulted to live execution | Paper mode is the default; live trading requires three explicit settings |
 | Startup | Began a new in-memory trading cycle | Loads persistent state, reconciles positions and orders with the broker, and restores missing protection before scanning |
@@ -56,7 +56,7 @@ state assumptions used by the previous production version.
 | Daily risk | Daily P&L and loss counters could be lost on restart | Realized P&L, traded symbols, and consecutive losses persist for the trading date |
 | Rate limits | Broker errors had limited retry handling | Uses bounded retry and backoff for rate limits and transient broker failures |
 | Observability | Primarily human-readable logs | Adds structured decision snapshots, dated universe snapshots, fill records, replay comparison, and slippage calibration |
-| Strategy changes | Production behavior was difficult to compare with proposed rules | Strict range, completed-volume, persistence/retest, and staged-stop ideas run in shadow mode without changing orders |
+| Strategy changes | Production behavior was difficult to compare with proposed rules | Strict entries remain measurable and configurable in shadow mode; validated staged protection is active and cost-aware |
 | Backtesting | Legacy engine was not directly comparable with production | Point-in-time engine models production timing, risk sizing, fees, slippage, entry delay, and adverse intrabar ordering |
 | Verification | Failure scenarios were mainly checked from production logs | CI runs tests for partial fills, failed exits, restarts, reconciliation, stop races, snapshots, and backtesting |
 
@@ -72,18 +72,19 @@ state assumptions used by the previous production version.
    broker, and restore broker-side protection before permitting a new entry.
 5. At the scan window, evaluate the market gate, capture the dated universe,
    rank candidates, apply restriction filters, and run active entry validation.
-6. Record the stricter observation-derived entry policy as a shadow decision;
-   it cannot approve or reject a production order.
+6. Record the stricter observation-derived entry policy as a shadow decision.
+   It becomes an order gate only when `STRICT_ENTRY_POLICY_ENABLED=true`.
 7. Calculate quantity from the configured capital risk and initial stop,
    submit the entry, and wait for a broker-confirmed full or partial fill.
 8. Track only confirmed quantity and place exchange-side stop protection.
-9. Monitor the confirmed position, active production stop, and shadow staged
-   stop. Shadow results are telemetry only and cannot modify the active stop.
+9. Monitor the confirmed position and tighten its protected floor after +1%,
+   +2%, and +3% confirmed maximum favourable excursion (MFE).
 10. On an exit signal, retain the position and its existing protection until
     the replacement exit is confirmed. Reconcile uncertain or partial exits.
 11. Persist position and daily-risk changes, write decision snapshots, export
-    the dated universe, compare captured decisions with replay, and update
-    confirmed-fill slippage calibration.
+    the dated universe, compare captured decisions with replay, update
+    confirmed-fill slippage calibration, and generate daily plus cumulative
+    performance evidence reports.
 
 ### EC2 Migration and Log Preservation
 
@@ -165,11 +166,11 @@ At least 2 of 4 factors must pass. Score=2 triggers contra-momentum mode.
 | Volume | Active production: newest one-minute value ≥ 1.2× prior average |
 | Spread | Bid-ask spread ≤ 0.2% of price |
 
-The shadow policy additionally evaluates range position ≥0.95, completed-minute
+The strict policy additionally evaluates range position ≥0.95, completed-minute
 volume, and either two completed closes above the breakout level or a successful
-retest. Its result is stored with each validation snapshot but cannot approve or
-reject an actual order. This separation is intentional: historical coverage is
-not yet sufficient to deploy the stricter entry policy.
+retest. Its result is always stored with each validation snapshot. It remains a
+shadow result by default; set `STRICT_ENTRY_POLICY_ENABLED=true` only after the
+cumulative evidence report contains a representative sample.
 
 ## Risk Management
 
@@ -203,7 +204,7 @@ Once locked, trail tightens to 2% of highest price.
 ### Limits
 
 - **Hard stop**: 2% per stock (or 3×ATR, whichever is tighter)
-- **Target exit**: 15% profit from entry
+- **Target exit**: stock price reaches 15% above the previous close
 - **Position size**: 1% capital risk at the hard stop, capped by available buying power
 - **Maximum realized daily loss**: 2% of capital, persisted across restarts
 - **Max re-entry rounds**: 2
@@ -224,18 +225,24 @@ Once locked, trail tightens to 2% of highest price.
   mode, while F&O data is required only when `FNO_ONLY=true`; missing required
   lists are retried before another full scan.
 - HTTP 429 rate limits and transient HTTP 403 broker responses are reported
-  separately and use bounded retry/backoff. Historical candle requests use a
-  lower request rate than general market-data calls.
+  separately and use bounded retry/backoff. Historical candle requests default
+  to one request per second, and a 403 applies a shared cooldown to prevent a
+  concurrent retry storm.
 - Decision snapshots record market gates, quotes, candles, rankings, sizing,
   order states, fills, position decisions, and both shadow strategy outcomes.
 - Large decision payloads are compressed transparently in SQLite, and replay
   processes events incrementally so a full trading day does not need to fit in
   memory. Post-close replay runs once before sleeping to the next weekday scan.
 
-The shadow staged-stop policy records floors at entry -1.25% after +1% MFE,
-entry -0.35% after +2%, and entry +1% after +3%. It does not modify the live or
-paper stop. Immediate break-even-plus-cost after +2% is not enabled because it
-reduced historical net P&L.
+Staged protection is active by default. After confirmed MFE of +1%, +2%, and
++3%, the stop floor becomes entry -0.5%, entry plus the configured cost buffer,
+and entry +1%, respectively. A floor only tightens an existing stop. Position
+state, including MFE and MAE, is persisted across restarts.
+
+Paper fills include adverse slippage and fees on both sides by default, and all
+risk-limit P&L uses the same net-of-cost model. These are configurable via
+`PAPER_SLIPPAGE_BPS`, `EXECUTION_FEES_BPS_PER_SIDE`, and
+`PROTECTION_COST_BUFFER_PCT`.
 
 ## Historical Backtest Results (Legacy — Not Comparable)
 
@@ -310,12 +317,11 @@ using today's scrip master; such results have survivorship bias. Leave
 comparison with historical production logs that allocated 95% of leveraged
 buying power, use `BACKTEST_SIZING_MODE=logged_production_notional`.
 
-`BACKTEST_STAGED_STOPS=true` enables the observation-derived stop experiment:
-after confirmed MFE of +1%, +2%, and +3%, the stop floors become entry -1.25%,
-entry -0.35%, and entry +1.0%, respectively. A floor earned from a candle's
+`BACKTEST_STAGED_STOPS=true` mirrors production staged protection: after
+confirmed MFE of +1%, +2%, and +3%, the stop floors become entry -0.5%, entry
+plus modeled costs, and entry +1.0%, respectively. A floor earned from a candle's
 high applies only to later candles, so an ambiguous same-candle high/low is
-handled adversely. The experiment is disabled by default and does not alter
-production execution.
+handled adversely. This is enabled by default.
 
 The command-line backtest now evaluates the stricter observation entry policy:
 `BACKTEST_ENTRY_RANGE_POSITION_MIN=0.95`, completed one-minute volume, and
@@ -328,10 +334,9 @@ silently substituting partial or lower-resolution volume.
 
 For an explicit old-validator baseline, set the range threshold to `0.85`, set
 `BACKTEST_COMPLETED_MINUTE_VOLUME=false`, and use breakout mode `production`.
-Test `BACKTEST_BREAK_EVEN_PLUS_COST=true` separately from staged protection; it
-raises the stop after +2% confirmed MFE to the price required to cover modeled
-fees and adverse exit slippage. Neither protection experiment changes live
-execution.
+`BACKTEST_BREAK_EVEN_PLUS_COST=true` raises the staged +2% floor to the price
+required to cover modeled fees and adverse exit slippage. It is enabled by
+default to match production.
 
 Historical OHLCV does not contain live order-book buy pressure or bid/ask
 spread. The report discloses a neutral buy-pressure input and the configured
@@ -375,12 +380,17 @@ Run the comparison manually at any time with:
 ```bash
 python production_replay.py \
   --db data/decision_journal.sqlite3 \
+  --trading-date 2026-09-04 \
   --output-dir data/replay_reports/manual
 ```
 
 The generated `summary.json` contains the decision match rate. The slippage
 report recommends `BACKTEST_SLIPPAGE_BPS` from the 75th percentile of adverse
 broker-confirmed fills; it never treats submitted or timed-out orders as fills.
+`performance_summary.json` contains that trading day's net P&L, win rate,
+profit factor, MFE, and MAE. `cumulative_performance_summary.json` aggregates all
+runs and marks `evidence_ready=true` after 50 confirmed closed trades; that is a
+minimum sample threshold, not proof that live trading will be profitable.
 Set `BACKTEST_POINT_IN_TIME_UNIVERSE=data/universe_snapshots.json` for subsequent
 production-equivalent backtests.
 
@@ -407,6 +417,15 @@ DHAN_TOTP_SECRET=
 # Capital
 CAPITAL=100000
 INTRADAY_LEVERAGE=5.0
+
+# Production-equivalent strategy and execution assumptions
+INTRADAY_TARGET_PCT=15.0
+STAGED_PROTECTION_ENABLED=true
+PROTECTION_COST_BUFFER_PCT=0.25
+STRICT_ENTRY_POLICY_ENABLED=false
+PAPER_SLIPPAGE_BPS=5
+EXECUTION_FEES_BPS_PER_SIDE=10
+ANGELONE_HISTORICAL_REQUESTS_PER_SECOND=1.0
 
 # Telegram alerts
 TELEGRAM_BOT_TOKEN=

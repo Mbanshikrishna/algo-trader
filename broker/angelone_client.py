@@ -29,24 +29,39 @@ class _RateLimiter:
     """Token-bucket rate limiter. Thread-safe."""
 
     def __init__(self, max_per_second: float = 8.0) -> None:
+        if max_per_second <= 0:
+            raise ValueError("max_per_second must be positive")
         self._interval = 1.0 / max_per_second
         self._lock = threading.Lock()
         self._last = 0.0
+        self._blocked_until = 0.0
 
     def acquire(self) -> None:
         with self._lock:
             now = time.monotonic()
-            wait = self._interval - (now - self._last)
+            wait = max(
+                self._interval - (now - self._last),
+                self._blocked_until - now,
+            )
             if wait > 0:
                 time.sleep(wait)
             self._last = time.monotonic()
+
+    def penalize(self, seconds: float) -> None:
+        """Delay every thread after the broker reports a shared quota breach."""
+        with self._lock:
+            self._blocked_until = max(
+                self._blocked_until, time.monotonic() + max(seconds, 0.0)
+            )
 
 
 # Module-level limiters shared by all client instances. Historical candle
 # requests use a lower rate because that endpoint throttles before the general
 # market-data APIs do.
 _rate_limiter = _RateLimiter(max_per_second=8.0)
-_historical_rate_limiter = _RateLimiter(max_per_second=2.5)
+_historical_rate_limiter = _RateLimiter(
+    max_per_second=float(os.getenv("ANGELONE_HISTORICAL_REQUESTS_PER_SECOND", "1.0"))
+)
 
 # Retry configuration.
 _MAX_RETRIES = 3
@@ -306,7 +321,16 @@ class AngelOneClient:
                 # as an HTTP 429 rate-limit response.
                 if response.status_code == _TRANSIENT_FORBIDDEN_CODE:
                     if attempt < _MAX_RETRIES - 1:
-                        backoff = _BACKOFF_BASE * (2 ** attempt)
+                        # Historical 403 responses commonly mean a rolling
+                        # account-wide quota, so pause all candle workers rather
+                        # than allowing each thread to retry independently.
+                        backoff = (
+                            5.0 * (2 ** attempt)
+                            if path == "/getCandleData"
+                            else _BACKOFF_BASE * (2 ** attempt)
+                        )
+                        if path == "/getCandleData":
+                            _historical_rate_limiter.penalize(backoff)
                         logger.warning(
                             "[broker_forbidden] %s %s returned 403, retrying in %.1fs "
                             "(attempt %d/%d)...",

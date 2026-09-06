@@ -9,9 +9,8 @@ Usage: set PAPER_TRADE=true in .env to activate.
 from __future__ import annotations
 
 import logging
-import time
 import uuid
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from datetime import datetime
 from typing import Any
 from zoneinfo import ZoneInfo
@@ -35,6 +34,8 @@ class PaperOrder:
     product_type: str
     status: str  # COMPLETE, CANCELLED, PENDING
     trigger_price: float = 0.0
+    reference_price: float = 0.0
+    fees: float = 0.0
     timestamp: str = ""
 
     def __post_init__(self) -> None:
@@ -51,6 +52,7 @@ class PaperPosition:
     quantity: int
     average_price: float
     product_type: str
+    entry_fees: float = 0.0
 
 
 class PaperBrokerClient:
@@ -60,15 +62,30 @@ class PaperBrokerClient:
     All order/position calls are simulated in memory.
     """
 
-    def __init__(self, data_broker: Any, capital: float = 100_000) -> None:
+    def __init__(
+        self,
+        data_broker: Any,
+        capital: float = 100_000,
+        *,
+        slippage_bps: float = 5.0,
+        fees_bps_per_side: float = 10.0,
+    ) -> None:
+        if slippage_bps < 0 or fees_bps_per_side < 0:
+            raise ValueError("paper execution costs cannot be negative")
         self._data = data_broker
         self._capital = capital
+        self._slippage_bps = slippage_bps
+        self._fees_bps_per_side = fees_bps_per_side
         self._available = capital
         self._orders: dict[str, PaperOrder] = {}
         self._positions: dict[str, PaperPosition] = {}
         self._trade_log: list[dict] = []
         self._daily_pnl = 0.0
-        logger.info("[PAPER] Paper trading mode active. Capital: %.2f", capital)
+        logger.info(
+            "[PAPER] Paper trading mode active. Capital: %.2f, slippage=%.1f "
+            "bps/side, fees=%.1f bps/side",
+            capital, slippage_bps, fees_bps_per_side,
+        )
 
     # --- Market data: forwarded to real broker ---
 
@@ -102,14 +119,6 @@ class PaperBrokerClient:
         product_type = payload.get("producttype", "INTRADAY")
         trigger_price = float(payload.get("triggerprice", 0))
 
-        # Detect probe orders (qty=1, LIMIT).
-        # These are tradability test orders — accept but don't fill or track.
-        limit_price = float(payload.get("price", 0))
-        if order_type == "LIMIT" and quantity == 1:
-            order_id = str(uuid.uuid4())[:8]
-            logger.debug("[PAPER] Probe order accepted (not filled): %s id=%s", symbol, order_id)
-            return {"response": {"data": {"orderid": order_id}}}
-
         # For SL-M orders, keep them pending until triggered
         if order_type == "STOPLOSS_MARKET":
             order = PaperOrder(
@@ -126,28 +135,36 @@ class PaperBrokerClient:
             return {"response": {"data": {"orderid": order_id}}}
 
         # Market/Limit orders: fetch LTP and fill immediately
-        fill_price = self._get_ltp_for(symbol, token)
-        if fill_price <= 0:
-            fill_price = float(payload.get("price", 0))
+        reference_price = self._get_ltp_for(symbol, token)
+        if reference_price <= 0:
+            reference_price = float(payload.get("price", 0))
+        fill_price = self._adverse_fill(reference_price, side)
+        fee = self._fee(fill_price, quantity)
 
         order = PaperOrder(
             order_id=order_id, symbol=symbol, token=token,
             side=side, quantity=quantity, price=fill_price,
             order_type=order_type, product_type=product_type,
             status="COMPLETE",
+            reference_price=reference_price,
+            fees=fee,
         )
         self._orders[order_id] = order
 
         # Update positions
         if side == "BUY":
-            self._apply_buy(symbol, token, quantity, fill_price, product_type)
+            self._apply_buy(
+                symbol, token, quantity, fill_price, product_type, fee
+            )
         else:
-            pnl = self._apply_sell(symbol, quantity, fill_price)
+            pnl = self._apply_sell(symbol, quantity, fill_price, fee)
             self._daily_pnl += pnl
 
         logger.info(
-            "[PAPER] %s order filled: %s %s %d @ %.2f id=%s",
-            order_type, side, symbol, quantity, fill_price, order_id,
+            "[PAPER] %s order filled: %s %s %d @ %.2f "
+            "(reference=%.2f, fee=%.2f) id=%s",
+            order_type, side, symbol, quantity, fill_price,
+            reference_price, fee, order_id,
         )
         return {"response": {"data": {"orderid": order_id}}}
 
@@ -189,6 +206,8 @@ class PaperBrokerClient:
                 "status": o.status,
                 "ordertype": o.order_type,
                 "producttype": o.product_type,
+                "referenceprice": str(o.reference_price),
+                "fees": str(o.fees),
             })
         return {"data": orders}
 
@@ -233,8 +252,22 @@ class PaperBrokerClient:
             logger.warning("[PAPER] LTP fetch failed for %s: %s", symbol, exc)
         return 0.0
 
-    def _apply_buy(self, symbol: str, token: str, qty: int, price: float,
-                   product_type: str) -> None:
+    def _adverse_fill(self, reference_price: float, side: str) -> float:
+        if reference_price <= 0:
+            return 0.0
+        rate = self._slippage_bps / 10_000
+        multiplier = 1 + rate if side == "BUY" else 1 - rate
+        return round(reference_price * multiplier, 2)
+
+    def _fee(self, price: float, quantity: int) -> float:
+        return round(
+            price * quantity * self._fees_bps_per_side / 10_000, 2
+        )
+
+    def _apply_buy(
+        self, symbol: str, token: str, qty: int, price: float,
+        product_type: str, fee: float,
+    ) -> None:
         """Add to simulated position."""
         existing = self._positions.get(symbol)
         if existing:
@@ -243,36 +276,53 @@ class PaperBrokerClient:
                 (existing.average_price * existing.quantity) + (price * qty)
             ) / total_qty
             existing.quantity = total_qty
+            existing.entry_fees += fee
         else:
             self._positions[symbol] = PaperPosition(
                 symbol=symbol, token=token, quantity=qty,
                 average_price=price, product_type=product_type,
+                entry_fees=fee,
             )
         cost = price * qty
-        self._available -= cost
+        self._available -= cost + fee
         self._trade_log.append({
             "time": datetime.now(IST).strftime("%H:%M:%S"),
             "side": "BUY", "symbol": symbol, "qty": qty,
-            "price": price, "cost": cost,
+            "price": price, "cost": cost, "fees": fee,
         })
 
-    def _apply_sell(self, symbol: str, qty: int, price: float) -> float:
-        """Remove from simulated position, return realized P&L."""
+    def _apply_sell(self, symbol: str, qty: int, price: float, fee: float) -> float:
+        """Remove from simulated position and return net realized P&L."""
         existing = self._positions.get(symbol)
-        pnl = 0.0
+        net_pnl = 0.0
         if existing:
-            pnl = (price - existing.average_price) * qty
+            if qty > existing.quantity:
+                raise ValueError(
+                    f"Cannot paper-sell {qty} {symbol}; held={existing.quantity}"
+                )
+            held_before = existing.quantity
+            allocated_entry_fees = round(
+                existing.entry_fees * qty / held_before, 2
+            )
+            gross_pnl = (price - existing.average_price) * qty
+            net_pnl = gross_pnl - allocated_entry_fees - fee
             existing.quantity -= qty
+            existing.entry_fees = max(
+                existing.entry_fees - allocated_entry_fees, 0.0
+            )
             if existing.quantity <= 0:
                 del self._positions[symbol]
             revenue = price * qty
-            self._available += revenue
+            self._available += revenue - fee
             self._trade_log.append({
                 "time": datetime.now(IST).strftime("%H:%M:%S"),
                 "side": "SELL", "symbol": symbol, "qty": qty,
-                "price": price, "pnl": round(pnl, 2),
+                "price": price,
+                "gross_pnl": round(gross_pnl, 2),
+                "fees": round(allocated_entry_fees + fee, 2),
+                "pnl": round(net_pnl, 2),
             })
-        return pnl
+        return net_pnl
 
     def print_summary(self) -> str:
         """Generate end-of-day paper trading summary."""
@@ -294,18 +344,20 @@ class PaperBrokerClient:
             for t in self._trade_log:
                 if t["side"] == "BUY":
                     lines.append(
-                        f"  {t['time']} BUY  {t['symbol']} x{t['qty']} @ {t['price']:.2f}"
+                        f"  {t['time']} BUY  {t['symbol']} x{t['qty']} @ {t['price']:.2f} "
+                        f"fees: Rs.{t['fees']:.2f}"
                     )
                 else:
                     lines.append(
                         f"  {t['time']} SELL {t['symbol']} x{t['qty']} @ {t['price']:.2f} "
-                        f"P&L: Rs.{t['pnl']:+,.2f}"
+                        f"gross: Rs.{t['gross_pnl']:+,.2f}, fees: Rs.{t['fees']:.2f}, "
+                        f"net P&L: Rs.{t['pnl']:+,.2f}"
                     )
         else:
             lines.append("No trades executed today.")
 
         lines.append("")
-        lines.append(f"Daily P&L: Rs.{self._daily_pnl:+,.2f}")
+        lines.append(f"Daily net P&L: Rs.{self._daily_pnl:+,.2f}")
         lines.append(f"Capital: Rs.{self._capital:,.2f} → Rs.{self._available:,.2f}")
         lines.append("")
 

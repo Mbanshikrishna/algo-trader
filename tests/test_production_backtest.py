@@ -192,15 +192,15 @@ class TestPointInTimeInputs(unittest.TestCase):
         self.assertTrue(breakout_persisted_or_retested(retest, level))
         self.assertFalse(breakout_persisted_or_retested(failed, level))
 
-    def test_observation_stages_are_disabled_by_default(self):
-        self.assertIsNone(staged_stop_floor(100, 110, BacktestConfig()))
+    def test_production_stages_are_enabled_by_default(self):
+        self.assertEqual(staged_stop_floor(100, 110, BacktestConfig()), 101.0)
 
     def test_observation_stages_progress_without_loosening(self):
         config = BacktestConfig(staged_stops_enabled=True)
 
         self.assertIsNone(staged_stop_floor(100, 100.99, config))
-        self.assertEqual(staged_stop_floor(100, 101, config), 98.75)
-        self.assertEqual(staged_stop_floor(100, 102, config), 99.65)
+        self.assertEqual(staged_stop_floor(100, 101, config), 99.5)
+        self.assertEqual(staged_stop_floor(100, 102, config), 99.5)
         self.assertEqual(staged_stop_floor(100, 103, config), 101.0)
         self.assertEqual(staged_stop_floor(100, 110, config), 101.0)
 
@@ -223,11 +223,12 @@ class TestPointInTimeInputs(unittest.TestCase):
                 fees_bps_per_side=0,
                 entry_delay_minutes=0,
                 staged_stops_enabled=True,
+                break_even_plus_cost_enabled=False,
             ),
         )
 
         self.assertEqual(trade.exit_reason, "STAGED_STOP")
-        self.assertEqual(trade.exit_price, 99.65)
+        self.assertEqual(trade.exit_price, 99.5)
 
     def test_staged_floor_does_not_use_same_candle_high(self):
         item = stock(

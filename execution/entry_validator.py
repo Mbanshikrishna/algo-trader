@@ -321,6 +321,7 @@ def validate_entry(
     client: Any,
     exchange: str = "NSE",
     event_sink: Callable[..., Any] | None = None,
+    strict_policy_enabled: bool = False,
 ) -> ValidationResult:
     """Fetch live data and validate all 5 entry conditions (single stock).
 
@@ -373,14 +374,26 @@ def validate_entry(
         gain_pct=result.gain_pct, range_position=result.range_position,
         capture=captured_candles,
     )
-    captured_candles["shadow_entry_policy"] = evaluate_shadow_entry_policy(
+    shadow_policy = evaluate_shadow_entry_policy(
         result, captured_candles
     )
+    captured_candles["shadow_entry_policy"] = shadow_policy
+    captured_candles["strict_policy_enabled"] = strict_policy_enabled
     result.volume_ratio = vol_ratio
     result.breakout_ok = passed
     if not passed:
         result.valid = False
         result.reason = reason
+    elif strict_policy_enabled and shadow_policy["decision"] != "accepted":
+        result.valid = False
+        result.reason = (
+            "Strict entry policy rejected: "
+            f"range_pass={shadow_policy['range_pass']}, "
+            f"completed_volume_pass={shadow_policy['completed_volume_pass']}, "
+            f"breakout_pass={shadow_policy['breakout_pass']} "
+            f"({shadow_policy['breakout_path']})"
+        )
+    if not result.valid:
         logger.info("ENTRY REJECTED %s: %s", symbol, result.reason)
         if event_sink is not None:
             event_sink(
@@ -429,6 +442,7 @@ def validate_entries_batch(
     max_workers: int = 4,
     exchange: str = "NSE",
     event_sink: Callable[..., Any] | None = None,
+    strict_policy_enabled: bool = False,
 ) -> list[tuple[dict, ValidationResult]]:
     """Validate multiple candidates in parallel.
 
@@ -521,15 +535,27 @@ def validate_entries_batch(
             gain_pct=vr.gain_pct, range_position=vr.range_position,
             capture=captured_candles,
         )
-        captured_candles["shadow_entry_policy"] = evaluate_shadow_entry_policy(
+        shadow_policy = evaluate_shadow_entry_policy(
             vr, captured_candles
         )
+        captured_candles["shadow_entry_policy"] = shadow_policy
+        captured_candles["strict_policy_enabled"] = strict_policy_enabled
         vr.volume_ratio = vol_ratio
         vr.breakout_ok = passed
         if not passed:
             vr.valid = False
             vr.reason = reason
             logger.info("ENTRY REJECTED %s: %s", symbol, reason)
+        elif strict_policy_enabled and shadow_policy["decision"] != "accepted":
+            vr.valid = False
+            vr.reason = (
+                "Strict entry policy rejected: "
+                f"range_pass={shadow_policy['range_pass']}, "
+                f"completed_volume_pass={shadow_policy['completed_volume_pass']}, "
+                f"breakout_pass={shadow_policy['breakout_pass']} "
+                f"({shadow_policy['breakout_path']})"
+            )
+            logger.info("ENTRY REJECTED %s: %s", symbol, vr.reason)
         else:
             vr.reason = "All checks passed"
             logger.info(

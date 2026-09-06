@@ -20,6 +20,7 @@ from production_replay import (
     calibrate_slippage,
     compare_run,
     export_universe_snapshots,
+    summarize_performance,
 )
 from strategy.market_scanner import (
     INDIA_VIX_TOKEN,
@@ -32,6 +33,70 @@ from strategy.market_scanner import (
 
 
 class TestDecisionJournal(unittest.TestCase):
+    def test_daily_performance_summary_uses_confirmed_closed_positions(self):
+        with tempfile.TemporaryDirectory() as directory:
+            database = Path(directory) / "journal.sqlite3"
+            journal = DecisionJournal(database, snapshot_dir=Path(directory) / "u")
+            journal.record(
+                "position_closed",
+                symbol="TEST-EQ",
+                decision="closed",
+                reason="market close",
+                payload={
+                    "quantity": 10,
+                    "entry_price": 100,
+                    "exit_price": 102,
+                    "pnl": 17.98,
+                    "position": {
+                        "highest_price": 103,
+                        "lowest_price": 99,
+                    },
+                },
+            )
+            run_id = journal.run_id
+            journal.close()
+            day = datetime.now(ZoneInfo("Asia/Kolkata")).date().isoformat()
+
+            summary = summarize_performance(database, run_id, day)
+
+            self.assertEqual(summary["closed_trades"], 1)
+            self.assertEqual(summary["wins"], 1)
+            self.assertEqual(summary["net_pnl"], 17.98)
+            self.assertEqual(summary["average_mfe_pct"], 3.0)
+            self.assertEqual(summary["average_mae_pct"], -1.0)
+            self.assertFalse(summary["evidence_ready"])
+            self.assertEqual(summary["minimum_evidence_trades"], 50)
+
+            second_run = DecisionJournal(
+                database, snapshot_dir=Path(directory) / "u2"
+            )
+            second_run.record(
+                "position_closed",
+                symbol="SECOND-EQ",
+                decision="closed",
+                reason="target",
+                payload={
+                    "quantity": 1,
+                    "entry_price": 100,
+                    "exit_price": 101,
+                    "pnl": 0.79,
+                    "position": {
+                        "highest_price": 101,
+                        "lowest_price": 100,
+                    },
+                },
+            )
+            second_run.close()
+
+            cumulative = summarize_performance(database, all_runs=True)
+            self.assertEqual(cumulative["run_id"], "all")
+            self.assertEqual(cumulative["closed_trades"], 2)
+            self.assertEqual(cumulative["net_pnl"], 18.77)
+            daily_all_runs = summarize_performance(
+                database, trading_date=day, all_runs=True
+            )
+            self.assertEqual(daily_all_runs["closed_trades"], 2)
+
     def test_large_payload_is_compressed_and_round_trips(self):
         with tempfile.TemporaryDirectory() as directory:
             database = Path(directory) / "journal.sqlite3"

@@ -8,9 +8,11 @@ import json
 import math
 import sqlite3
 from dataclasses import asdict, dataclass
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from collections.abc import Iterator
 from typing import Any
+from zoneinfo import ZoneInfo
 
 from execution.entry_validator import (
     MIN_RANGE_POSITION,
@@ -38,18 +40,44 @@ class ReplayComparison:
     detail: str = ""
 
 
-def _rows(connection: sqlite3.Connection, run_id: str) -> Iterator[dict[str, Any]]:
+IST = ZoneInfo("Asia/Kolkata")
+
+
+def _utc_bounds(trading_date: str | None) -> tuple[str | None, str | None]:
+    if not trading_date:
+        return None, None
+    start = datetime.strptime(trading_date, "%Y-%m-%d").replace(
+        tzinfo=IST
+    ).astimezone(timezone.utc)
+    end = start + timedelta(days=1)
+    return (
+        start.isoformat(timespec="milliseconds"),
+        end.isoformat(timespec="milliseconds"),
+    )
+
+
+def _rows(
+    connection: sqlite3.Connection,
+    run_id: str | None,
+    trading_date: str | None = None,
+) -> Iterator[dict[str, Any]]:
     """Yield decoded events one at a time to bound replay memory usage."""
-    rows = connection.execute(
-        """
+    start, end = _utc_bounds(trading_date)
+    query = """
         SELECT sequence, recorded_at_utc, event_type, symbol, decision,
                reason, payload_json
         FROM decision_events
-        WHERE run_id = ?
-        ORDER BY sequence
-        """,
-        (run_id,),
-    )
+        WHERE 1 = 1
+    """
+    parameters: list[Any] = []
+    if run_id is not None:
+        query += " AND run_id = ?"
+        parameters.append(run_id)
+    if start and end:
+        query += " AND recorded_at_utc >= ? AND recorded_at_utc < ?"
+        parameters.extend((start, end))
+    query += " ORDER BY sequence"
+    rows = connection.execute(query, parameters)
     for row in rows:
         yield {
             "sequence": row[0],
@@ -162,19 +190,25 @@ def _replay_validation(payload: dict[str, Any], symbol: str) -> str:
     prior = [float(candle[5]) for candle in volume[:-1]]
     average = sum(prior) / len(prior) if prior else 0.0
     ratio = float(volume[-1][5]) / average if average > 0 else 0.0
-    return "accepted" if ratio >= MIN_VOLUME_RATIO else "rejected"
+    if ratio < MIN_VOLUME_RATIO:
+        return "rejected"
+    if captured.get("strict_policy_enabled"):
+        shadow = captured.get("shadow_entry_policy", {})
+        return "accepted" if shadow.get("decision") == "accepted" else "rejected"
+    return "accepted"
 
 
 def compare_run(
     database: str | Path,
     run_id: str | None = None,
+    trading_date: str | None = None,
 ) -> tuple[str, list[ReplayComparison]]:
     """Recompute deterministic decisions from recorded production inputs."""
     connection = sqlite3.connect(database)
     try:
         selected_run = run_id or latest_run_id(connection)
         comparisons: list[ReplayComparison] = []
-        for event in _rows(connection, selected_run):
+        for event in _rows(connection, selected_run, trading_date):
             event_type = event["event_type"]
             recorded = event["decision"]
             replayed = "recorded_only"
@@ -222,11 +256,15 @@ def compare_run(
             elif event_type == "position_evaluated":
                 position = event["payload"].get("position_after", {})
                 price = float(event["payload"].get("stop_check_price", 0) or 0)
-                average = float(position.get("average_price", 0) or 0)
+                previous_close = float(position.get("prev_close", 0) or 0)
                 stop = float(position.get("stop_loss", 0) or 0)
                 hard_stop = float(position.get("hard_stop", 0) or 0)
+                target_pct = float(
+                    event["payload"].get("intraday_target_pct", 0.15) or 0.15
+                )
                 target_hit = (
-                    average > 0 and (price - average) / average >= 0.15
+                    previous_close > 0
+                    and (price - previous_close) / previous_close >= target_pct
                 )
                 replayed = (
                     "exit"
@@ -267,6 +305,7 @@ def _percentile(values: list[float], percentile: float) -> float:
 def calibrate_slippage(
     database: str | Path,
     run_id: str | None = None,
+    trading_date: str | None = None,
 ) -> dict[str, Any]:
     """Measure adverse slippage using only live broker-confirmed fills."""
     observations: list[dict[str, Any]] = []
@@ -278,7 +317,7 @@ def calibrate_slippage(
         ).fetchone()
         mode = str(mode_row[0]).lower() if mode_row else "unknown"
         if mode == "live":
-            for event in _rows(connection, selected_run):
+            for event in _rows(connection, selected_run, trading_date):
                 if event["event_type"] != "confirmed_fill":
                     continue
                 payload = event["payload"]
@@ -333,6 +372,75 @@ def calibrate_slippage(
     }
 
 
+def summarize_performance(
+    database: str | Path,
+    run_id: str | None = None,
+    trading_date: str | None = None,
+    *,
+    all_runs: bool = False,
+) -> dict[str, Any]:
+    """Summarize confirmed closed trades, including captured MFE and MAE."""
+    connection = sqlite3.connect(database)
+    trades: list[dict[str, Any]] = []
+    try:
+        selected_run = "all" if all_runs else (run_id or latest_run_id(connection))
+        event_run_id = None if all_runs else selected_run
+        for event in _rows(connection, event_run_id, trading_date):
+            if event["event_type"] != "position_closed":
+                continue
+            payload = event["payload"]
+            position = payload.get("position", {})
+            entry = float(payload.get("entry_price", 0) or 0)
+            exit_price = float(
+                payload.get("exit_price", payload.get("estimated_exit_price", 0)) or 0
+            )
+            quantity = int(payload.get("quantity", 0) or 0)
+            pnl = float(payload.get("pnl", 0) or 0)
+            high = float(position.get("highest_price", entry) or entry)
+            low = float(position.get("lowest_price", entry) or entry)
+            trades.append({
+                "sequence": event["sequence"],
+                "symbol": event["symbol"],
+                "reason": event["reason"],
+                "quantity": quantity,
+                "entry_price": entry,
+                "exit_price": exit_price,
+                "net_pnl": round(pnl, 2),
+                "mfe_pct": round((high / entry - 1) * 100, 4) if entry > 0 else 0.0,
+                "mae_pct": round((low / entry - 1) * 100, 4) if entry > 0 else 0.0,
+            })
+    finally:
+        connection.close()
+    wins = [trade for trade in trades if trade["net_pnl"] > 0]
+    losses = [trade for trade in trades if trade["net_pnl"] < 0]
+    gross_profit = sum(trade["net_pnl"] for trade in wins)
+    gross_loss = -sum(trade["net_pnl"] for trade in losses)
+    net_pnl = sum(trade["net_pnl"] for trade in trades)
+    minimum_evidence_trades = 50
+    return {
+        "run_id": selected_run,
+        "trading_date": trading_date or "all",
+        "closed_trades": len(trades),
+        "wins": len(wins),
+        "losses": len(losses),
+        "win_rate_pct": round(len(wins) / len(trades) * 100, 2) if trades else 0.0,
+        "net_pnl": round(net_pnl, 2),
+        "profit_factor": (
+            round(gross_profit / gross_loss, 4)
+            if gross_loss > 0 else None
+        ),
+        "average_mfe_pct": round(
+            sum(trade["mfe_pct"] for trade in trades) / len(trades), 4
+        ) if trades else 0.0,
+        "average_mae_pct": round(
+            sum(trade["mae_pct"] for trade in trades) / len(trades), 4
+        ) if trades else 0.0,
+        "minimum_evidence_trades": minimum_evidence_trades,
+        "evidence_ready": len(trades) >= minimum_evidence_trades,
+        "trades": trades,
+    }
+
+
 def export_universe_snapshots(database: str | Path, output: str | Path) -> Path:
     """Export dated universes in the format consumed by production_backtest.py."""
     connection = sqlite3.connect(database)
@@ -362,6 +470,8 @@ def write_replay_report(
     run_id: str,
     comparisons: list[ReplayComparison],
     slippage: dict[str, Any],
+    performance: dict[str, Any] | None = None,
+    cumulative_performance: dict[str, Any] | None = None,
 ) -> dict[str, Path]:
     directory = Path(output_dir)
     directory.mkdir(parents=True, exist_ok=True)
@@ -374,6 +484,15 @@ def write_replay_report(
     slippage_path = directory / "slippage_calibration.json"
     slippage_path.write_text(json.dumps(slippage, indent=2) + "\n", encoding="utf-8")
     summary_path = directory / "summary.json"
+    performance_path = directory / "performance_summary.json"
+    performance_path.write_text(
+        json.dumps(performance or {}, indent=2) + "\n", encoding="utf-8"
+    )
+    cumulative_performance_path = directory / "cumulative_performance_summary.json"
+    cumulative_performance_path.write_text(
+        json.dumps(cumulative_performance or performance or {}, indent=2) + "\n",
+        encoding="utf-8",
+    )
     matched = sum(comparison.matched for comparison in comparisons)
     summary_path.write_text(
         json.dumps(
@@ -397,6 +516,8 @@ def write_replay_report(
         "comparison": comparison_path.resolve(),
         "slippage": slippage_path.resolve(),
         "summary": summary_path.resolve(),
+        "performance": performance_path.resolve(),
+        "cumulative_performance": cumulative_performance_path.resolve(),
     }
 
 
@@ -404,13 +525,28 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--db", default="data/decision_journal.sqlite3")
     parser.add_argument("--run-id")
+    parser.add_argument("--trading-date")
     parser.add_argument("--output-dir", default="data/replay_reports/latest")
     parser.add_argument("--export-universe", default="data/universe_snapshots.json")
     args = parser.parse_args()
 
-    run_id, comparisons = compare_run(args.db, args.run_id)
-    slippage = calibrate_slippage(args.db, run_id)
-    paths = write_replay_report(args.output_dir, run_id, comparisons, slippage)
+    run_id, comparisons = compare_run(args.db, args.run_id, args.trading_date)
+    slippage = calibrate_slippage(args.db, run_id, args.trading_date)
+    performance = summarize_performance(
+        args.db,
+        run_id if args.run_id else None,
+        args.trading_date,
+        all_runs=args.run_id is None,
+    )
+    cumulative_performance = summarize_performance(args.db, all_runs=True)
+    paths = write_replay_report(
+        args.output_dir,
+        run_id,
+        comparisons,
+        slippage,
+        performance,
+        cumulative_performance,
+    )
     universe = export_universe_snapshots(args.db, args.export_universe)
     matched = sum(comparison.matched for comparison in comparisons)
     print(f"Run: {run_id}")

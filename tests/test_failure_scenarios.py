@@ -692,7 +692,9 @@ class TestScenario13_TrailingStopProgression(unittest.TestCase):
         mock_dt.now.return_value = real_dt(2025, 6, 1, 10, 0, tzinfo=ZoneInfo("Asia/Kolkata"))
         mock_dt.side_effect = lambda *a, **kw: real_dt(*a, **kw)
 
-        tracker = PositionTracker()
+        # Raise the separate intraday target so this test isolates the lower
+        # 12% profit-lock behavior.
+        tracker = PositionTracker(intraday_target_pct=0.30)
         atr = 1.00
         # prev_close=100, enter at 105.
         tracker.update_buy("REASON-EQ", 100, 105.0, atr=atr, prev_close=100.0)
@@ -721,8 +723,8 @@ class TestScenario13_TrailingStopProgression(unittest.TestCase):
         self.assertAlmostEqual(pos2.hard_stop, 98.00, places=2)
 
     @patch("monitor.position_tracker.datetime")
-    def test_target_exit_at_15_pct_profit(self, mock_dt):
-        """Target exit triggers when price reaches 15% profit from entry."""
+    def test_target_exit_at_15_pct_intraday_gain(self, mock_dt):
+        """Target exit is measured from previous close, not entry."""
         from datetime import datetime as real_dt
         from zoneinfo import ZoneInfo
         mock_dt.now.return_value = real_dt(2025, 6, 1, 10, 0, tzinfo=ZoneInfo("Asia/Kolkata"))
@@ -730,17 +732,18 @@ class TestScenario13_TrailingStopProgression(unittest.TestCase):
 
         tracker = PositionTracker()
         atr = 1.00
-        tracker.update_buy("TARGET-EQ", 100, 100.0, atr=atr, prev_close=95.0)
+        tracker.update_buy("TARGET-EQ", 100, 105.0, atr=atr, prev_close=100.0)
 
-        # At 14% profit — should NOT exit via target.
+        # Stock at +14% for the day — should NOT exit via target.
         self.assertFalse(tracker.should_exit("TARGET-EQ", 114.0))
 
-        # At 15% profit — should exit via target.
+        # Stock at +15% for the day — should exit even though the trade itself
+        # gained only about 9.5% after the +5% entry.
         self.assertTrue(tracker.should_exit("TARGET-EQ", 115.0))
         reason = tracker.get_exit_reason("TARGET-EQ", 115.0)
         self.assertIn("TARGET HIT", reason)
 
-        # At 18% profit — also exits via target.
+        # At +18% intraday — also exits via target.
         self.assertTrue(tracker.should_exit("TARGET-EQ", 118.0))
         reason = tracker.get_exit_reason("TARGET-EQ", 118.0)
         self.assertIn("TARGET HIT", reason)

@@ -79,18 +79,33 @@ def _write_replay_reports(logger) -> None:
             calibrate_slippage,
             compare_run,
             export_universe_snapshots,
+            summarize_performance,
             write_replay_report,
         )
 
+        trading_date = _ist_now().date().isoformat()
         run_id, comparisons = compare_run(
-            _decision_journal.path, _decision_journal.run_id
+            _decision_journal.path, _decision_journal.run_id, trading_date
         )
-        slippage = calibrate_slippage(_decision_journal.path, run_id)
+        slippage = calibrate_slippage(
+            _decision_journal.path, run_id, trading_date
+        )
+        performance = summarize_performance(
+            _decision_journal.path, trading_date=trading_date, all_runs=True
+        )
+        cumulative_performance = summarize_performance(
+            _decision_journal.path, all_runs=True
+        )
         report_root = Path(
             os.getenv("REPLAY_REPORT_DIR", "data/replay_reports")
-        ) / _ist_now().date().isoformat()
+        ) / trading_date
         paths = write_replay_report(
-            report_root, run_id, comparisons, slippage
+            report_root,
+            run_id,
+            comparisons,
+            slippage,
+            performance,
+            cumulative_performance,
         )
         universe_path = export_universe_snapshots(
             _decision_journal.path,
@@ -511,6 +526,23 @@ def _allocate_capital(broker: BrokerClient, settings, logger) -> float:
     return settings.capital
 
 
+def _modeled_net_pnl(
+    entry_price: float,
+    exit_price: float,
+    quantity: int,
+    fees_bps_per_side: float,
+) -> float:
+    """Return realized P&L after configurable charges on both order sides."""
+    gross = (exit_price - entry_price) * quantity
+    fees = (
+        (entry_price + exit_price)
+        * quantity
+        * fees_bps_per_side
+        / 10_000
+    )
+    return round(gross - fees, 2)
+
+
 def _login_angelone(settings, logger) -> AngelOneClient:
     """Login to Angel One and return the client."""
     if not (settings.api_key and settings.client_id and settings.pin and settings.totp_secret):
@@ -571,7 +603,12 @@ def run_loop() -> None:
 
     if settings.paper_trade:
         # Paper trading: simulate orders, use Angel One for market data.
-        paper = PaperBrokerClient(data_broker=angelone, capital=settings.capital)
+        paper = PaperBrokerClient(
+            data_broker=angelone,
+            capital=settings.capital,
+            slippage_bps=settings.paper_slippage_bps,
+            fees_bps_per_side=settings.execution_fees_bps_per_side,
+        )
         broker: BrokerClient = paper
         data_broker: BrokerClient = angelone
         logger.info("Broker mode: PAPER TRADING (simulated orders) + Angel One (market data)")
@@ -601,7 +638,12 @@ def run_loop() -> None:
         tradability_filter=trad_filter,
         event_sink=_record_decision,
     )
-    position_tracker = PositionTracker(settings.runtime_state_path)
+    position_tracker = PositionTracker(
+        settings.runtime_state_path,
+        intraday_target_pct=settings.intraday_target_pct / 100,
+        staged_protection_enabled=settings.staged_protection_enabled,
+        protection_cost_buffer_pct=settings.protection_cost_buffer_pct / 100,
+    )
     risk_state = DailyRiskState.load(settings.daily_risk_state_path)
 
     # Load scrip master from Angel One (canonical symbol/token source).
@@ -890,8 +932,8 @@ def run_loop() -> None:
                     )
                     continue
 
-                # --- Phase 3c: Probe broker tradability (catches cautionary list / other rejections) ---
-                logger.info("Probing %d candidates for broker tradability...", len(tradable))
+                # --- Phase 3c: Apply read-only tradability restrictions. ---
+                logger.info("Checking read-only restrictions for %d candidates...", len(tradable))
                 probe_start = time.perf_counter()
                 probed_tradable, probe_skipped = trad_filter.probe_candidates(
                     broker, tradable, max_workers=4,
@@ -907,12 +949,12 @@ def run_loop() -> None:
                 )
                 probe_duration = time.perf_counter() - probe_start
                 logger.info(
-                    "Probe completed in %.1f seconds: %d tradable, %d rejected.",
+                    "Restriction check completed in %.1f seconds: %d tradable, %d rejected.",
                     probe_duration, len(probed_tradable), len(probe_skipped),
                 )
 
                 if probe_skipped:
-                    probe_msg = "Skipped by broker probe (cautionary):\n" + "\n".join(
+                    probe_msg = "Skipped by read-only restriction check:\n" + "\n".join(
                         f"  {sym}: {reason}" for sym, reason in probe_skipped
                     )
                     _notify(probe_msg, logger, True)
@@ -966,6 +1008,7 @@ def run_loop() -> None:
                     max_valid=TOP_N,
                     max_workers=4,
                     event_sink=_record_decision,
+                    strict_policy_enabled=settings.strict_entry_policy_enabled,
                 )
                 validation_duration = time.perf_counter() - validation_start
                 logger.info(
@@ -1288,16 +1331,18 @@ def run_loop() -> None:
                                 intraday_pct, pos.profit_locked, pos.atr,
                             )
 
-                            # Update the server-side SL-M trigger to match the new trailing stop.
-                            slm_id = slm_orders.get(symbol)
-                            if slm_id and pos.stop_loss > slm_triggers.get(symbol, 0):
-                                ok = _update_slm_trigger(
-                                    broker, slm_id, symbol, token,
-                                    pos.quantity, pos.stop_loss, logger,
-                                    product_type=product_type_map.get(symbol, "INTRADAY"),
-                                )
-                                if ok:
-                                    slm_triggers[symbol] = pos.stop_loss
+                        # Retry a failed broker-side modification on every monitor
+                        # cycle until the exchange protection catches up with the
+                        # persisted local floor.
+                        slm_id = slm_orders.get(symbol)
+                        if slm_id and pos.stop_loss > slm_triggers.get(symbol, 0):
+                            ok = _update_slm_trigger(
+                                broker, slm_id, symbol, token,
+                                pos.quantity, pos.stop_loss, logger,
+                                product_type=product_type_map.get(symbol, "INTRADAY"),
+                            )
+                            if ok:
+                                slm_triggers[symbol] = pos.stop_loss
 
                         # Use best bid for exit decision (conservative).
                         should_exit = position_tracker.should_exit(
@@ -1308,7 +1353,9 @@ def run_loop() -> None:
                             if should_exit
                             else ""
                         )
-                        shadow_stop = position_tracker.shadow_staged_stop(pos)
+                        staged_floor = position_tracker.staged_protection_stop(
+                            pos, settings.protection_cost_buffer_pct / 100
+                        )
                         _record_decision(
                             "position_evaluated",
                             symbol=symbol,
@@ -1319,18 +1366,20 @@ def run_loop() -> None:
                             payload={
                                 "quote": quote,
                                 "stop_check_price": stop_check_price,
+                                "intraday_target_pct": settings.intraday_target_pct / 100,
                                 "position_before": position_before,
                                 "position_after": asdict(pos),
-                                "shadow_staged_protection": {
+                                "staged_protection": {
                                     "policy": "mfe_1_2_3_v1",
-                                    "stop": shadow_stop,
+                                    "stop": staged_floor,
+                                    "enabled": settings.staged_protection_enabled,
                                     "decision": (
                                         "exit"
-                                        if shadow_stop is not None
-                                        and stop_check_price <= shadow_stop
+                                        if staged_floor is not None
+                                        and stop_check_price <= staged_floor
                                         else "hold"
                                     ),
-                                    "active": shadow_stop is not None,
+                                    "floor_earned": staged_floor is not None,
                                 },
                             },
                         )
@@ -1347,7 +1396,12 @@ def run_loop() -> None:
                                 exit_price = slm_execution.average_price or stop_check_price
                                 slm_orders.pop(symbol, None)
                                 slm_triggers.pop(symbol, None)
-                                pnl = (exit_price - pos.average_price) * pos.quantity
+                                pnl = _modeled_net_pnl(
+                                    pos.average_price,
+                                    exit_price,
+                                    pos.quantity,
+                                    settings.execution_fees_bps_per_side,
+                                )
                                 _record_decision(
                                     "confirmed_fill",
                                     symbol=symbol,
@@ -1379,6 +1433,7 @@ def run_loop() -> None:
                                         "exit_price": exit_price,
                                         "pnl": pnl,
                                         "order_id": slm_id,
+                                        "position": asdict(pos),
                                     },
                                 )
                                 consecutive_losses = risk_state.consecutive_losses
@@ -1401,7 +1456,12 @@ def run_loop() -> None:
                                 )
                                 slm_orders.pop(symbol, None)
                                 slm_triggers.pop(symbol, None)
-                                pnl = (stop_check_price - pos.average_price) * pos.quantity
+                                pnl = _modeled_net_pnl(
+                                    pos.average_price,
+                                    stop_check_price,
+                                    pos.quantity,
+                                    settings.execution_fees_bps_per_side,
+                                )
                                 risk_state.record_exit(pnl)
                                 daily_pnl = risk_state.realized_pnl
                                 round_pnl += pnl
@@ -1418,6 +1478,7 @@ def run_loop() -> None:
                                         "entry_price": pos.average_price,
                                         "estimated_exit_price": stop_check_price,
                                         "pnl": pnl,
+                                        "position": asdict(pos),
                                     },
                                 )
                                 consecutive_losses = risk_state.consecutive_losses
@@ -1458,7 +1519,12 @@ def run_loop() -> None:
                                 if exit_outcome.execution and exit_outcome.execution.average_price > 0
                                 else stop_check_price
                             )
-                            pnl = (exit_price - pos.average_price) * pos.quantity
+                            pnl = _modeled_net_pnl(
+                                pos.average_price,
+                                exit_price,
+                                pos.quantity,
+                                settings.execution_fees_bps_per_side,
+                            )
                             risk_state.record_exit(pnl)
                             daily_pnl = risk_state.realized_pnl
                             round_pnl += pnl
@@ -1475,6 +1541,7 @@ def run_loop() -> None:
                                     "entry_price": pos.average_price,
                                     "exit_price": exit_price,
                                     "pnl": pnl,
+                                    "position": asdict(pos),
                                     "execution": (
                                         asdict(exit_outcome.execution)
                                         if exit_outcome.execution
@@ -1583,7 +1650,12 @@ def run_loop() -> None:
                             {"orderid": slm_id}, symbol, pos.quantity, timeout=2.0,
                         )
                         slm_exit_price = slm_execution.average_price or pos.stop_loss
-                        pnl = (slm_exit_price - pos.average_price) * pos.quantity
+                        pnl = _modeled_net_pnl(
+                            pos.average_price,
+                            slm_exit_price,
+                            pos.quantity,
+                            settings.execution_fees_bps_per_side,
+                        )
                         _record_decision(
                             "confirmed_fill",
                             symbol=symbol,
@@ -1603,6 +1675,21 @@ def run_loop() -> None:
                         slm_orders.pop(symbol, None)
                         slm_triggers.pop(symbol, None)
                         position_tracker.update_sell(symbol, pos.quantity)
+                        _record_decision(
+                            "position_closed",
+                            symbol=symbol,
+                            token=str(token),
+                            decision="closed",
+                            reason="market close: protective order filled",
+                            payload={
+                                "quantity": pos.quantity,
+                                "entry_price": pos.average_price,
+                                "exit_price": slm_exit_price,
+                                "pnl": pnl,
+                                "order_id": slm_id,
+                                "position": asdict(pos),
+                            },
+                        )
                         logger.info(
                             "SL-M already executed for %s @ %.2f; P&L %.2f",
                             symbol, slm_exit_price, pnl,
@@ -1651,10 +1738,34 @@ def run_loop() -> None:
                         if exit_outcome.execution and exit_outcome.execution.average_price > 0
                         else final_price
                     )
-                    pnl = (exit_price - pos.average_price) * pos.quantity
+                    pnl = _modeled_net_pnl(
+                        pos.average_price,
+                        exit_price,
+                        pos.quantity,
+                        settings.execution_fees_bps_per_side,
+                    )
                     risk_state.record_exit(pnl)
                     daily_pnl = risk_state.realized_pnl
                     position_tracker.update_sell(symbol, pos.quantity)
+                    _record_decision(
+                        "position_closed",
+                        symbol=symbol,
+                        token=str(token),
+                        decision="closed",
+                        reason="market close",
+                        payload={
+                            "quantity": pos.quantity,
+                            "entry_price": pos.average_price,
+                            "exit_price": exit_price,
+                            "pnl": pnl,
+                            "position": asdict(pos),
+                            "execution": (
+                                asdict(exit_outcome.execution)
+                                if exit_outcome.execution
+                                else None
+                            ),
+                        },
+                    )
                     pt_label = "CNC" if pos.product_type == "DELIVERY" else "MIS"
                     _notify(
                         f"MARKET CLOSE EXIT [{pt_label}]: {symbol} — {pos.quantity} shares @ {exit_price:.2f} "

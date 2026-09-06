@@ -24,7 +24,7 @@ from strategy.market_scanner import (
 from monitor.position_tracker import (
     INITIAL_ATR_MULT, HARD_MAX_LOSS_PCT, MIN_STOP_DISTANCE_PCT,
     TRAIL_TIERS, INTRADAY_LOCK_THRESHOLD, INTRADAY_LOCK_TRAIL_PCT,
-    INTRADAY_LOCK_FLOOR_PCT, TARGET_PROFIT_PCT,
+    INTRADAY_LOCK_FLOOR_PCT, INTRADAY_TARGET_PCT,
 )
 from utils.atr import compute_atr_from_candles
 from monitor.risk_state import calculate_position_size
@@ -406,7 +406,7 @@ def simulate_trade(
         entry_fill - (atr * INITIAL_ATR_MULT),
         entry_fill * (1 - HARD_MAX_LOSS_PCT),
     ), 2)
-    target_price = entry_fill * (1 + TARGET_PROFIT_PCT)
+    target_price = prev_close * (1 + INTRADAY_TARGET_PCT)
     highest = entry_fill
     profit_locked = False
     exit_price = 0.0

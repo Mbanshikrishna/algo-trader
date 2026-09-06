@@ -32,8 +32,12 @@ TRAIL_TIERS = [
     (0.00, 0.040),  # <2% profit: trail 4% below high — very wide, give room.
 ]
 
-# Target exit: take profit at this level (from entry price).
-TARGET_PROFIT_PCT = 0.15     # Exit at 15% profit from entry.
+# Target exit is measured from previous close so it matches the strategy thesis:
+# identify a stock near +5% and ride its total intraday move toward +15%.
+INTRADAY_TARGET_PCT = 0.15
+# Kept as a compatibility alias for older imports. New execution code uses the
+# explicitly named intraday target above.
+TARGET_PROFIT_PCT = INTRADAY_TARGET_PCT
 
 # Time-based tightening: after this hour (IST), reduce trail distances.
 LATE_SESSION_HOUR = 14
@@ -47,13 +51,14 @@ INTRADAY_LOCK_THRESHOLD = 0.12   # Lock when stock's intraday gain >= 12%.
 INTRADAY_LOCK_FLOOR_PCT = 0.10   # Stop never below prev_close * 1.10 once locked.
 INTRADAY_LOCK_TRAIL_PCT = 0.02   # Trail at 2% of highest price inside lock zone.
 
-# Shadow-only observation fixture. It is recorded for later replay comparison
-# and never replaces the active production stop.
-SHADOW_STAGED_STOP_FLOORS = (
-    (0.01, -0.0125),
-    (0.02, -0.0035),
-    (0.03, 0.01),
-)
+# Progressive protection floors. They reduce risk only after favorable movement
+# has actually been observed and can never loosen an existing stop.
+STAGED_RISK_REDUCTION_TRIGGER = 0.01
+STAGED_RISK_REDUCTION_FLOOR = -0.005
+STAGED_BREAK_EVEN_TRIGGER = 0.02
+STAGED_PROFIT_LOCK_TRIGGER = 0.03
+STAGED_PROFIT_LOCK_FLOOR = 0.01
+DEFAULT_COST_BUFFER_PCT = 0.0025
 
 
 @dataclass
@@ -67,6 +72,7 @@ class Position:
     prev_close: float          # Stock's previous day close — used for intraday gain calc.
     product_type: str = "INTRADAY"  # "INTRADAY" (MIS, 5x) or "DELIVERY" (CNC, 1x).
     highest_price: float = 0.0
+    lowest_price: float = 0.0
     stop_loss: float = 0.0
     hard_stop: float = 0.0
     profit_locked: bool = False  # True once intraday gain crosses lock_threshold.
@@ -78,6 +84,8 @@ class Position:
     def __post_init__(self) -> None:
         if self.highest_price == 0.0:
             self.highest_price = self.average_price
+        if self.lowest_price == 0.0:
+            self.lowest_price = self.average_price
         if self.stop_loss == 0.0:
             self._set_initial_stop()
         if self.hard_stop == 0.0:
@@ -108,9 +116,19 @@ class Position:
 class PositionTracker:
     """Persistent position tracker reconciled against the broker at startup."""
 
-    def __init__(self, state_path: str | Path | None = None) -> None:
+    def __init__(
+        self,
+        state_path: str | Path | None = None,
+        *,
+        intraday_target_pct: float = INTRADAY_TARGET_PCT,
+        staged_protection_enabled: bool = False,
+        protection_cost_buffer_pct: float = DEFAULT_COST_BUFFER_PCT,
+    ) -> None:
         self._positions: dict[str, Position] = {}
         self._state_path = Path(state_path) if state_path else None
+        self._intraday_target_pct = intraday_target_pct
+        self._staged_protection_enabled = staged_protection_enabled
+        self._protection_cost_buffer_pct = protection_cost_buffer_pct
         self._load()
 
     def _load(self) -> None:
@@ -169,6 +187,7 @@ class PositionTracker:
         existing.quantity = new_qty
         existing.average_price = weighted_avg
         existing.highest_price = max(existing.highest_price, price)
+        existing.lowest_price = min(existing.lowest_price, price)
 
         new_stop = self._compute_trail_stop(existing)
         if new_stop > existing.stop_loss:
@@ -211,8 +230,16 @@ class PositionTracker:
 
         if current_price > existing.highest_price:
             existing.highest_price = current_price
+        if current_price < existing.lowest_price:
+            existing.lowest_price = current_price
 
         new_stop = self._compute_trail_stop(existing)
+        if self._staged_protection_enabled:
+            staged_stop = self.staged_protection_stop(
+                existing, self._protection_cost_buffer_pct
+            )
+            if staged_stop is not None:
+                new_stop = max(new_stop, staged_stop)
         if new_stop > existing.stop_loss:
             existing.stop_loss = new_stop
 
@@ -224,9 +251,7 @@ class PositionTracker:
         existing = self._positions.get(symbol)
         if not existing:
             return False
-        # Target exit: take profit at TARGET_PROFIT_PCT from entry.
-        profit_pct = (current_price - existing.average_price) / existing.average_price
-        if profit_pct >= TARGET_PROFIT_PCT:
+        if existing.intraday_gain_pct(current_price) >= self._intraday_target_pct:
             return True
         return current_price <= existing.stop_loss or current_price <= existing.hard_stop
 
@@ -235,10 +260,16 @@ class PositionTracker:
         existing = self._positions.get(symbol)
         if not existing:
             return "NO_POSITION"
-        # Check target first.
-        profit_pct = (current_price - existing.average_price) / existing.average_price
-        if profit_pct >= TARGET_PROFIT_PCT:
-            return f"TARGET HIT ({profit_pct * 100:.1f}% profit)"
+        intraday_pct = existing.intraday_gain_pct(current_price)
+        if intraday_pct >= self._intraday_target_pct:
+            entry_profit = (
+                (current_price - existing.average_price) / existing.average_price
+                if existing.average_price > 0 else 0.0
+            )
+            return (
+                f"INTRADAY TARGET HIT ({intraday_pct * 100:.1f}% from previous "
+                f"close, {entry_profit * 100:.1f}% from entry)"
+            )
         if current_price <= existing.hard_stop:
             return "HARD STOP (max loss)"
         if current_price <= existing.stop_loss:
@@ -251,18 +282,32 @@ class PositionTracker:
         return "NO_EXIT"
 
     @staticmethod
-    def shadow_staged_stop(position: Position) -> float | None:
-        """Return the observation stop without mutating production state."""
+    def staged_protection_stop(
+        position: Position,
+        cost_buffer_pct: float = DEFAULT_COST_BUFFER_PCT,
+    ) -> float | None:
+        """Return the strongest floor earned from confirmed favorable movement."""
         if position.average_price <= 0:
             return None
         mfe = (
             position.highest_price - position.average_price
         ) / position.average_price
-        floor = None
-        for trigger, relative_floor in SHADOW_STAGED_STOP_FLOORS:
-            if mfe >= trigger:
-                floor = position.average_price * (1 + relative_floor)
-        return round(floor, 2) if floor is not None else None
+        if mfe >= STAGED_PROFIT_LOCK_TRIGGER:
+            return round(
+                position.average_price * (1 + STAGED_PROFIT_LOCK_FLOOR), 2
+            )
+        if mfe >= STAGED_BREAK_EVEN_TRIGGER:
+            return round(position.average_price * (1 + cost_buffer_pct), 2)
+        if mfe >= STAGED_RISK_REDUCTION_TRIGGER:
+            return round(
+                position.average_price * (1 + STAGED_RISK_REDUCTION_FLOOR), 2
+            )
+        return None
+
+    @staticmethod
+    def shadow_staged_stop(position: Position) -> float | None:
+        """Return the default staged floor without mutating production state."""
+        return PositionTracker.staged_protection_stop(position)
 
     def snapshot(self) -> dict[str, Position]:
         return dict(self._positions)

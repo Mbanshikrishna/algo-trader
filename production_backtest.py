@@ -40,9 +40,9 @@ from monitor.position_tracker import (
     INTRADAY_LOCK_FLOOR_PCT,
     INTRADAY_LOCK_THRESHOLD,
     INTRADAY_LOCK_TRAIL_PCT,
+    INTRADAY_TARGET_PCT,
     LATE_SESSION_TRAIL_REDUCTION,
     MIN_STOP_DISTANCE_PCT,
-    TARGET_PROFIT_PCT,
     TRAIL_TIERS,
 )
 from monitor.risk_state import calculate_position_size
@@ -95,16 +95,15 @@ class BacktestConfig:
     breakout_confirmation: str = "production"
     breakout_persistence_bars: int = 2
     breakout_retest_tolerance_pct: float = 0.002
-    # Observation-derived stop experiment. Disabled by default so historical
-    # baseline reports remain reproducible. Tuples are
+    intraday_target_pct: float = INTRADAY_TARGET_PCT
+    # Production-equivalent progressive protection. Tuples are
     # (confirmed MFE from entry, stop floor relative to entry).
-    staged_stops_enabled: bool = False
+    staged_stops_enabled: bool = True
     staged_stop_floors: tuple[tuple[float, float], ...] = (
-        (0.01, -0.0125),
-        (0.02, -0.0035),
+        (0.01, -0.005),
         (0.03, 0.01),
     )
-    break_even_plus_cost_enabled: bool = False
+    break_even_plus_cost_enabled: bool = True
     break_even_plus_cost_trigger: float = 0.02
 
 
@@ -630,7 +629,7 @@ def simulate_trade(
     hard_stop = round(
         max(entry - atr * INITIAL_ATR_MULT, entry * (1 - HARD_MAX_LOSS_PCT)), 2
     )
-    target = entry * (1 + TARGET_PROFIT_PCT)
+    target = stock.previous_close * (1 + config.intraday_target_pct)
     highest = entry
     profit_locked = False
     staged_floor = None
@@ -1145,11 +1144,14 @@ def run_production_backtest() -> tuple[list[BacktestTrade], list[BacktestDay]]:
         breakout_retest_tolerance_pct=float(
             os.getenv("BACKTEST_BREAKOUT_RETEST_TOLERANCE_PCT", "0.002")
         ),
+        intraday_target_pct=float(
+            os.getenv("BACKTEST_INTRADAY_TARGET_PCT", "0.15")
+        ),
         staged_stops_enabled=os.getenv(
-            "BACKTEST_STAGED_STOPS", "false"
+            "BACKTEST_STAGED_STOPS", "true"
         ).strip().lower() in {"1", "true", "yes", "on"},
         break_even_plus_cost_enabled=os.getenv(
-            "BACKTEST_BREAK_EVEN_PLUS_COST", "false"
+            "BACKTEST_BREAK_EVEN_PLUS_COST", "true"
         ).strip().lower() in {"1", "true", "yes", "on"},
         break_even_plus_cost_trigger=float(
             os.getenv("BACKTEST_BREAK_EVEN_TRIGGER_PCT", "0.02")
@@ -1582,6 +1584,10 @@ def print_report(
         "Protection experiment: "
         f"staged={config.staged_stops_enabled}, "
         f"break-even-plus-cost={config.break_even_plus_cost_enabled}"
+    )
+    print(
+        f"Exit target: stock reaches +{config.intraday_target_pct * 100:.1f}% "
+        "from previous close"
     )
     print("Data assumptions:")
     if config.intraday_interval == "ONE_MINUTE":

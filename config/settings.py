@@ -33,6 +33,12 @@ class Settings:  # Defines the structure of all settings loaded from the environ
     live_trading_enabled: bool  # Independent live-order kill switch.
     live_trading_confirmation: str  # Deliberate acknowledgement required for live orders.
     max_daily_loss_pct: float  # Maximum realized daily loss as a percentage of capital.
+    intraday_target_pct: float  # Exit target measured from previous close, not entry.
+    staged_protection_enabled: bool  # Enable progressive stop floors after favorable movement.
+    strict_entry_policy_enabled: bool  # Promote completed-volume/persistence shadow checks.
+    protection_cost_buffer_pct: float  # Profit above entry locked after +2% MFE.
+    paper_slippage_bps: float  # Adverse simulated fill movement per order side.
+    execution_fees_bps_per_side: float  # Modeled charges used by paper P&L and risk state.
     runtime_state_path: str  # Persistent position/order state file.
     daily_risk_state_path: str  # Persistent daily P&L and symbol state file.
 
@@ -73,6 +79,14 @@ def _validate(settings: Settings) -> Settings:
         raise ValueError("MAX_DAILY_LOSS_PCT must be in the range (0, 10]")
     if not 1 <= settings.intraday_leverage <= 10:
         raise ValueError("INTRADAY_LEVERAGE must be in the range [1, 10]")
+    if not 5 <= settings.intraday_target_pct <= 30:
+        raise ValueError("INTRADAY_TARGET_PCT must be in the range [5, 30]")
+    if not 0 <= settings.protection_cost_buffer_pct <= 2:
+        raise ValueError("PROTECTION_COST_BUFFER_PCT must be in the range [0, 2]")
+    if not 0 <= settings.paper_slippage_bps <= 100:
+        raise ValueError("PAPER_SLIPPAGE_BPS must be in the range [0, 100]")
+    if not 0 <= settings.execution_fees_bps_per_side <= 100:
+        raise ValueError("EXECUTION_FEES_BPS_PER_SIDE must be in the range [0, 100]")
     if not settings.paper_trade and (
         not settings.live_trading_enabled
         or settings.live_trading_confirmation != LIVE_TRADING_CONFIRMATION
@@ -109,6 +123,20 @@ def load_settings() -> Settings:  # Builds a Settings object from environment va
         live_trading_enabled=_as_bool(os.getenv("LIVE_TRADING_ENABLED", "false"), default=False),
         live_trading_confirmation=os.getenv("LIVE_TRADING_CONFIRMATION", "").strip(),
         max_daily_loss_pct=float(os.getenv("MAX_DAILY_LOSS_PCT", "2.0")),
+        intraday_target_pct=float(os.getenv("INTRADAY_TARGET_PCT", "15.0")),
+        staged_protection_enabled=_as_bool(
+            os.getenv("STAGED_PROTECTION_ENABLED", "true"), default=True
+        ),
+        strict_entry_policy_enabled=_as_bool(
+            os.getenv("STRICT_ENTRY_POLICY_ENABLED", "false"), default=False
+        ),
+        protection_cost_buffer_pct=float(
+            os.getenv("PROTECTION_COST_BUFFER_PCT", "0.25")
+        ),
+        paper_slippage_bps=float(os.getenv("PAPER_SLIPPAGE_BPS", "5")),
+        execution_fees_bps_per_side=float(
+            os.getenv("EXECUTION_FEES_BPS_PER_SIDE", "10")
+        ),
         runtime_state_path=os.getenv("RUNTIME_STATE_PATH", "data/runtime_state.json").strip(),
         daily_risk_state_path=os.getenv("DAILY_RISK_STATE_PATH", "data/daily_risk_state.json").strip(),
     )

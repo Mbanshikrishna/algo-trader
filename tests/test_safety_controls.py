@@ -11,6 +11,7 @@ from zoneinfo import ZoneInfo
 from backtest import simulate_trade
 from config.settings import load_settings
 from execution.order_manager import OrderManager, OrderState
+from broker.paper_client import PaperBrokerClient
 from monitor.position_tracker import Position, PositionTracker
 from monitor.risk_state import DailyRiskState, calculate_position_size
 
@@ -55,6 +56,34 @@ class TestPersistentReconciliation(unittest.TestCase):
 
         self.assertEqual(shadow_stop, 101.0)
         self.assertEqual(position.stop_loss, active_stop)
+
+    def test_active_staged_protection_reduces_risk_then_covers_costs(self):
+        tracker = PositionTracker(
+            staged_protection_enabled=True,
+            protection_cost_buffer_pct=0.0025,
+        )
+        tracker.update_buy("TEST-EQ", 10, 100, 1, 95)
+
+        tracker.update_trailing_stop("TEST-EQ", 101)
+        self.assertGreaterEqual(tracker.snapshot()["TEST-EQ"].stop_loss, 99.5)
+
+        tracker.update_trailing_stop("TEST-EQ", 102)
+        self.assertGreaterEqual(tracker.snapshot()["TEST-EQ"].stop_loss, 100.25)
+
+        tracker.update_trailing_stop("TEST-EQ", 103)
+        self.assertGreaterEqual(tracker.snapshot()["TEST-EQ"].stop_loss, 101.0)
+
+    def test_excursions_persist_across_restart(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "positions.json"
+            tracker = PositionTracker(path)
+            tracker.update_buy("TEST-EQ", 10, 100, 1, 95)
+            tracker.update_trailing_stop("TEST-EQ", 103)
+            tracker.update_trailing_stop("TEST-EQ", 98)
+
+            position = PositionTracker(path).snapshot()["TEST-EQ"]
+            self.assertEqual(position.highest_price, 103)
+            self.assertEqual(position.lowest_price, 98)
 
     def test_positions_survive_restart_and_reconcile_quantity(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -132,6 +161,33 @@ class TestBacktestExecutionAssumptions(unittest.TestCase):
         self.assertIn(trade.exit_reason, {"HARD_STOP", "TRAILING_STOP"})
         self.assertGreater(trade.fees, 0)
         self.assertLess(trade.pnl, trade.gross_pnl)
+
+
+class TestPaperExecutionCosts(unittest.TestCase):
+    class DataBroker:
+        prices = iter((100.0, 102.0))
+
+        def get_market_data(self, _mode, _tokens):
+            return {"fetched": [{"ltp": next(self.prices)}]}
+
+    def test_paper_pnl_deducts_adverse_slippage_and_both_fee_sides(self):
+        broker = PaperBrokerClient(
+            self.DataBroker(), capital=100_000,
+            slippage_bps=5, fees_bps_per_side=10,
+        )
+        base = {
+            "tradingsymbol": "TEST-EQ", "symboltoken": "1",
+            "quantity": 10, "ordertype": "MARKET",
+            "producttype": "INTRADAY",
+        }
+        broker.place_order({**base, "transactiontype": "BUY"})
+        broker.place_order({**base, "transactiontype": "SELL"})
+
+        sell = broker._trade_log[-1]
+        self.assertEqual(sell["price"], 101.95)
+        self.assertGreater(sell["fees"], 0)
+        self.assertLess(sell["pnl"], sell["gross_pnl"])
+        self.assertAlmostEqual(broker._daily_pnl, sell["pnl"], places=2)
 
 
 class TestRuntimeScheduling(unittest.TestCase):
