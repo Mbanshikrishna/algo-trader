@@ -1,0 +1,7 @@
+sequence,event_type,symbol,recorded_decision,replayed_decision,matched,detail
+5436,market_gate,,skip,skip,True,four-factor market gate
+5437,market_gate,,skip,skip,True,four-factor market gate
+5438,market_gate,,skip,skip,True,four-factor market gate
+5439,market_gate,,skip,skip,True,four-factor market gate
+5440,market_gate,,skip,skip,True,four-factor market gate
+5441,market_gate,,skip,skip,True,four-factor market gate
