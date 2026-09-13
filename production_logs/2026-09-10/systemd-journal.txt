@@ -1,0 +1,120 @@
+2026-09-10T04:30:00.733609+00:00 ip-[REDACTED] python[396235]: 2026-09-10 04:30:00,733 | INFO | algo_trader | Daily candle cache cleared.
+2026-09-10T04:30:00.740688+00:00 ip-[REDACTED] python[396235]: 2026-09-10 04:30:00,734 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-09-10T04:30:00.740688+00:00 ip-[REDACTED] python[396235]: 2026-09-10 04:30:00,734 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-09-10T04:30:00.802355+00:00 ip-[REDACTED] python[396235]: 2026-09-10 04:30:00,802 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-09-10T04:30:00.803634+00:00 ip-[REDACTED] python[396235]: 2026-09-10 04:30:00,803 | INFO | algo_trader | [auth_refresh] Angel One session refreshed.
+2026-09-10T04:30:01.088493+00:00 ip-[REDACTED] python[396235]: 2026-09-10 04:30:01,088 | INFO | algo_trader | Market Check: 1/4 — NOT BULLISH
+2026-09-10T04:30:01.088493+00:00 ip-[REDACTED] python[396235]: 1. Index Direction: FAIL ❌
+2026-09-10T04:30:01.088493+00:00 ip-[REDACTED] python[396235]:    Nifty 50: -0.01% (need > 0%)
+2026-09-10T04:30:01.088493+00:00 ip-[REDACTED] python[396235]: 2. Market Breadth: FAIL ❌
+2026-09-10T04:30:01.088493+00:00 ip-[REDACTED] python[396235]:    Advancers: 21, Decliners: 26
+2026-09-10T04:30:01.088493+00:00 ip-[REDACTED] python[396235]:    Breadth ratio: 0.81 (need > 1.2)
+2026-09-10T04:30:01.088493+00:00 ip-[REDACTED] python[396235]: 3. Intraday Strength: FAIL ❌
+2026-09-10T04:30:01.088493+00:00 ip-[REDACTED] python[396235]:    Nifty LTP vs Open: 23429.25 vs 23446.60
+2026-09-10T04:30:01.088493+00:00 ip-[REDACTED] python[396235]:    NIFTYBEES vs VWAP: 267.60 vs 267.81
+2026-09-10T04:30:01.088493+00:00 ip-[REDACTED] python[396235]: 4. Volatility Filter: PASS ✅
+2026-09-10T04:30:01.088493+00:00 ip-[REDACTED] python[396235]:    India VIX change: -0.59% (reject if > +5%)
+2026-09-10T04:30:01.088493+00:00 ip-[REDACTED] python[396235]: Decision: SKIP TRADING (score 1/4 < 2)
+2026-09-10T04:30:01.088493+00:00 ip-[REDACTED] python[396235]: Failed: Index Direction, Market Breadth, Intraday Strength
+2026-09-10T05:30:01.713193+00:00 ip-[REDACTED] python[396235]: 2026-09-10 05:30:01,712 | INFO | algo_trader | Daily candle cache cleared.
+2026-09-10T05:30:01.723389+00:00 ip-[REDACTED] python[396235]: 2026-09-10 05:30:01,713 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-09-10T05:30:01.723389+00:00 ip-[REDACTED] python[396235]: 2026-09-10 05:30:01,714 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-09-10T05:30:01.853257+00:00 ip-[REDACTED] python[396235]: 2026-09-10 05:30:01,853 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-09-10T05:30:01.870388+00:00 ip-[REDACTED] python[396235]: 2026-09-10 05:30:01,860 | INFO | algo_trader | [auth_refresh] Angel One session refreshed.
+2026-09-10T05:30:02.064118+00:00 ip-[REDACTED] python[396235]: 2026-09-10 05:30:02,063 | INFO | algo_trader | Market Check: 1/4 — NOT BULLISH
+2026-09-10T05:30:02.064118+00:00 ip-[REDACTED] python[396235]: 1. Index Direction: FAIL ❌
+2026-09-10T05:30:02.064118+00:00 ip-[REDACTED] python[396235]:    Nifty 50: -0.08% (need > 0%)
+2026-09-10T05:30:02.064118+00:00 ip-[REDACTED] python[396235]: 2. Market Breadth: FAIL ❌
+2026-09-10T05:30:02.064118+00:00 ip-[REDACTED] python[396235]:    Advancers: 18, Decliners: 32
+2026-09-10T05:30:02.064118+00:00 ip-[REDACTED] python[396235]:    Breadth ratio: 0.56 (need > 1.2)
+2026-09-10T05:30:02.064118+00:00 ip-[REDACTED] python[396235]: 3. Intraday Strength: FAIL ❌
+2026-09-10T05:30:02.064118+00:00 ip-[REDACTED] python[396235]:    Nifty LTP vs Open: 23411.60 vs 23446.60
+2026-09-10T05:30:02.064118+00:00 ip-[REDACTED] python[396235]:    NIFTYBEES vs VWAP: 267.45 vs 267.72
+2026-09-10T05:30:02.064118+00:00 ip-[REDACTED] python[396235]: 4. Volatility Filter: PASS ✅
+2026-09-10T05:30:02.064118+00:00 ip-[REDACTED] python[396235]:    India VIX change: -0.67% (reject if > +5%)
+2026-09-10T05:30:02.064118+00:00 ip-[REDACTED] python[396235]: Decision: SKIP TRADING (score 1/4 < 2)
+2026-09-10T05:30:02.064118+00:00 ip-[REDACTED] python[396235]: Failed: Index Direction, Market Breadth, Intraday Strength
+2026-09-10T06:30:02.758035+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:30:02,757 | INFO | algo_trader | Daily candle cache cleared.
+2026-09-10T06:30:02.773330+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:30:02,758 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-09-10T06:30:02.773330+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:30:02,758 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-09-10T06:30:03.346879+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:30:03,346 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-09-10T06:30:03.348464+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:30:03,348 | INFO | algo_trader | [auth_refresh] Angel One session refreshed.
+2026-09-10T06:30:03.533536+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:30:03,533 | INFO | algo_trader | Market Check: 2/4 — BULLISH
+2026-09-10T06:30:03.533536+00:00 ip-[REDACTED] python[396235]: 1. Index Direction: PASS ✅
+2026-09-10T06:30:03.533536+00:00 ip-[REDACTED] python[396235]:    Nifty 50: +0.04% (need > 0%)
+2026-09-10T06:30:03.533536+00:00 ip-[REDACTED] python[396235]: 2. Market Breadth: FAIL ❌
+2026-09-10T06:30:03.533536+00:00 ip-[REDACTED] python[396235]:    Advancers: 21, Decliners: 29
+2026-09-10T06:30:03.533536+00:00 ip-[REDACTED] python[396235]:    Breadth ratio: 0.72 (need > 1.2)
+2026-09-10T06:30:03.533536+00:00 ip-[REDACTED] python[396235]: 3. Intraday Strength: FAIL ❌
+2026-09-10T06:30:03.533536+00:00 ip-[REDACTED] python[396235]:    Nifty LTP vs Open: 23439.85 vs 23446.60
+2026-09-10T06:30:03.533536+00:00 ip-[REDACTED] python[396235]:    NIFTYBEES vs VWAP: 267.73 vs 267.68
+2026-09-10T06:30:03.533536+00:00 ip-[REDACTED] python[396235]: 4. Volatility Filter: PASS ✅
+2026-09-10T06:30:03.533536+00:00 ip-[REDACTED] python[396235]:    India VIX change: -1.34% (reject if > +5%)
+2026-09-10T06:30:03.533536+00:00 ip-[REDACTED] python[396235]: Decision: CONTRA-MOMENTUM MODE (score 2/4)
+2026-09-10T06:30:03.533536+00:00 ip-[REDACTED] python[396235]: Rules: entry before 12:00 only, no re-entry
+2026-09-10T06:30:03.533536+00:00 ip-[REDACTED] python[396235]: ⚡ CONTRA-MOMENTUM MODE: Score=2 — entry before 12:00 only, no re-entry.
+2026-09-10T06:30:04.134096+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:30:04,133 | INFO | algo_trader | Scanning 2670 stocks for top 1 candidates (pool=5)...
+2026-09-10T06:30:04.136698+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:30:04,134 | INFO | algo_trader | Fetching quotes for 2670 stocks...
+2026-09-10T06:30:10.793120+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:30:10,792 | INFO | algo_trader | Received 2665 quotes.
+2026-09-10T06:30:10.795501+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:30:10,795 | INFO | algo_trader | Candidates in 5-8% gain range: 25
+2026-09-10T06:30:10.795693+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:30:10,795 | INFO | algo_trader | Fetching daily candles for 25 candidates...
+2026-09-10T06:30:14.797903+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:30:14,797 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-10T06:30:14.798401+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:30:14,797 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-10T06:30:14.798785+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:30:14,798 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-10T06:30:14.798919+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:30:14,798 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-10T06:30:14.811677+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:30:14,811 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-10T06:30:25.812820+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:30:25,812 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-09-10T06:30:25.814334+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:30:25,814 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-09-10T06:30:40.815187+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:30:40,815 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-10T06:30:40.816805+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:30:40,816 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-10T06:30:46.817340+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:30:46,817 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-10T06:30:55.818383+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:30:55,818 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-09-10T06:30:55.819797+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:30:55,819 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-09-10T06:30:55.820148+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:30:55,819 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-10T06:30:55.820148+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:30:55,820 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-10T06:30:55.833014+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:30:55,832 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-09-10T06:31:10.834126+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:31:10,833 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-09-10T06:31:22.834650+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:31:22,834 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-10T06:31:28.835084+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:31:28,834 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-10T06:31:28.838043+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:31:28,836 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-10T06:31:37.837621+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:31:37,837 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-09-10T06:31:37.838744+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:31:37,838 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-10T06:31:37.839387+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:31:37,839 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-10T06:31:37.840493+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:31:37,839 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-09-10T06:31:37.852239+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:31:37,852 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-09-10T06:31:52.853249+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:31:52,853 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-09-10T06:32:03.853775+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:32:03,853 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-10T06:32:09.879278+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:32:09,879 | INFO | algo_trader | Rank #1: KROSS-EQ — gain=+6.47%, score=0.880 (vol=15.9x, momentum=0.93, buy_pressure=0.81, stability=0.90, prev_trend=0.67)
+2026-09-10T06:32:09.880799+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:32:09,879 | INFO | algo_trader | Rank #2: ACUTAAS-EQ — gain=+6.33%, score=0.824 (vol=2.7x, momentum=0.99, buy_pressure=0.38, stability=1.00, prev_trend=0.67)
+2026-09-10T06:32:09.880799+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:32:09,879 | INFO | algo_trader | Rank #3: KABRAEXTRU-EQ — gain=+7.69%, score=0.812 (vol=1.5x, momentum=0.98, buy_pressure=0.56, stability=0.91, prev_trend=0.83)
+2026-09-10T06:32:09.880799+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:32:09,879 | INFO | algo_trader | Rank #4: KSL-EQ — gain=+7.59%, score=0.799 (vol=3.6x, momentum=0.85, buy_pressure=0.51, stability=0.90, prev_trend=0.67)
+2026-09-10T06:32:09.880799+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:32:09,879 | INFO | algo_trader | Rank #5: NOCIL-EQ — gain=+5.24%, score=0.786 (vol=2.3x, momentum=0.82, buy_pressure=0.27, stability=1.00, prev_trend=0.83)
+2026-09-10T06:32:10.223235+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:32:10,223 | INFO | algo_trader | Scan completed in 126.1 seconds. Found 5 raw candidates.
+2026-09-10T06:32:10.228819+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:32:10,228 | INFO | algo_trader | Skipped by ASM/GSM/circuit filter:
+2026-09-10T06:32:10.228819+00:00 ip-[REDACTED] python[396235]:   ACUTAAS-EQ: ASM listed (Additional Surveillance Measure)
+2026-09-10T06:32:10.228819+00:00 ip-[REDACTED] python[396235]:   KABRAEXTRU-EQ: ASM listed (Additional Surveillance Measure)
+2026-09-10T06:32:10.229264+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:32:10,228 | INFO | algo_trader | Checking read-only restrictions for 3 candidates...
+2026-09-10T06:32:10.235600+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:32:10,235 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 3 tradable, 0 rejected.
+2026-09-10T06:32:10.236600+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:32:10,235 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 2 filtered):
+2026-09-10T06:32:10.236600+00:00 ip-[REDACTED] python[396235]:   KROSS-EQ: +6.47% @ 233.89
+2026-09-10T06:32:10.236600+00:00 ip-[REDACTED] python[396235]:     Score=0.880 | Vol=15.9x | Momentum=0.93 | BuyPressure=0.81 | Stability=0.90 | PrevTrend=0.67
+2026-09-10T06:32:10.855232+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:32:10,855 | INFO | algo_trader | Validating 3 candidates in parallel...
+2026-09-10T06:32:10.875234+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:32:10,875 | INFO | algo_trader | ENTRY REJECTED NOCIL-EQ: Range position 0.824 < 0.85 (price retreating from high)
+2026-09-10T06:32:10.881980+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:32:10,881 | INFO | algo_trader | Near-breakout skip for KROSS-EQ: range=0.885, gain=6.2% — skipping breakout check
+2026-09-10T06:32:10.902186+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:32:10,902 | INFO | algo_trader | ENTRY REJECTED KSL-EQ: No micro breakout: LTP 982.15 < last 5min high 985.20
+2026-09-10T06:32:11.895847+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:32:11,895 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-10T06:32:16.917916+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:32:16,917 | INFO | algo_trader | ENTRY REJECTED KROSS-EQ: Volume fading: current 3857 vs avg 12046 (ratio 0.32 < 1.2)
+2026-09-10T06:32:16.925318+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:32:16,925 | INFO | algo_trader | Validation completed in 6.1 seconds: 0/3 passed.
+2026-09-10T06:32:16.925459+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:32:16,925 | INFO | algo_trader | No candidates passed real-time validation.
+2026-09-10T06:32:17.518726+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:32:17,518 | INFO | algo_trader | Scan window closed (10:00-12:00) [CONTRA] with no valid entries.
+2026-09-10T06:32:18.133189+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:32:18,133 | INFO | algo_trader |
+2026-09-10T06:32:18.133189+00:00 ip-[REDACTED] python[396235]: ============================================================
+2026-09-10T06:32:18.133189+00:00 ip-[REDACTED] python[396235]: PAPER TRADING SUMMARY
+2026-09-10T06:32:18.133189+00:00 ip-[REDACTED] python[396235]: ============================================================
+2026-09-10T06:32:18.133189+00:00 ip-[REDACTED] python[396235]: No trades executed today.
+2026-09-10T06:32:18.133189+00:00 ip-[REDACTED] python[396235]: Daily net P&L: Rs.+0.00
+2026-09-10T06:32:18.133189+00:00 ip-[REDACTED] python[396235]: Capital: Rs.100,000.00 → Rs.100,000.00
+2026-09-10T06:32:18.133189+00:00 ip-[REDACTED] python[396235]: All positions closed.
+2026-09-10T06:32:18.133189+00:00 ip-[REDACTED] python[396235]: ============================================================
+2026-09-10T06:32:25.528111+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:32:25,527 | INFO | algo_trader | Replay comparison complete: 9/9 decisions matched; recommended slippage=0 bps; report=/home/ubuntu/algo-trader/data/replay_reports/2026-09-10/summary.json; universe=data/universe_snapshots.json
+2026-09-10T06:32:25.528758+00:00 ip-[REDACTED] python[396235]: 2026-09-10 06:32:25,528 | INFO | algo_trader | Trading day complete. Daily P&L: ₹+0.00. Sleeping 22.0h until tomorrow.

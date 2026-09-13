@@ -1,0 +1,10 @@
+sequence,event_type,symbol,recorded_decision,replayed_decision,matched,detail
+5645,market_gate,,skip,skip,True,four-factor market gate
+5646,market_gate,,skip,skip,True,four-factor market gate
+5647,market_gate,,trade,trade,True,four-factor market gate
+5648,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['KROSS-EQ', 'ACUTAAS-EQ', 'KABRAEXTRU-EQ', 'KSL-EQ', 'NOCIL-EQ']; replayed=['KROSS-EQ', 'ACUTAAS-EQ', 'KABRAEXTRU-EQ', 'KSL-EQ', 'NOCIL-EQ']"
+5649,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+5650,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+5651,candidate_validation,NOCIL-EQ,rejected,rejected,True,Range position 0.824 < 0.85 (price retreating from high)
+5652,candidate_validation,KSL-EQ,rejected,rejected,True,No micro breakout: LTP 982.15 < last 5min high 985.20
+5653,candidate_validation,KROSS-EQ,rejected,rejected,True,Volume fading: current 3857 vs avg 12046 (ratio 0.32 < 1.2)

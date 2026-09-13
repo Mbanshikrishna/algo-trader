@@ -1,0 +1,16 @@
+{
+  "run_id": "a0367b4ae1b84001a34fa3fd97443593",
+  "replayable_decisions": 9,
+  "matched_decisions": 9,
+  "match_rate_pct": 100.0,
+  "slippage": {
+    "run_id": "a0367b4ae1b84001a34fa3fd97443593",
+    "mode": "paper",
+    "confirmed_fills": 0,
+    "weighted_mean_adverse_bps": 0.0,
+    "median_adverse_bps": 0.0,
+    "p75_adverse_bps": 0.0,
+    "p90_adverse_bps": 0.0,
+    "recommended_backtest_slippage_bps": 0
+  }
+}
