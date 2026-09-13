@@ -1,0 +1,11 @@
+sequence,event_type,symbol,recorded_decision,replayed_decision,matched,detail
+5634,market_gate,,skip,skip,True,four-factor market gate
+5635,market_gate,,trade,trade,True,four-factor market gate
+5636,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['MRPL-EQ', 'AGIIL-EQ', 'AASTHA-EQ', 'ADANIENT-EQ', 'RPSGVENT-EQ']; replayed=['MRPL-EQ', 'AGIIL-EQ', 'AASTHA-EQ', 'ADANIENT-EQ', 'RPSGVENT-EQ']"
+5637,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+5638,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+5639,candidate_validation,AGIIL-EQ,rejected,rejected,True,Range position 0.720 < 0.85 (price retreating from high)
+5640,candidate_validation,AASTHA-EQ,rejected,rejected,True,Range position 0.685 < 0.85 (price retreating from high)
+5641,candidate_validation,ADANIENT-EQ,rejected,rejected,True,Range position 0.812 < 0.85 (price retreating from high)
+5642,candidate_validation,RPSGVENT-EQ,rejected,rejected,True,Range position 0.841 < 0.85 (price retreating from high)
+5643,candidate_validation,MRPL-EQ,rejected,rejected,True,"Breakout check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=13.126.199.100, client_local_ip=172.31.33.249: Access denied because of exceeding access rate)"
