@@ -1,0 +1,166 @@
+2026-09-11T04:30:00.723161+00:00 ip-[REDACTED] python[396235]: 2026-09-11 04:30:00,722 | INFO | algo_trader | Daily candle cache cleared.
+2026-09-11T04:30:00.730673+00:00 ip-[REDACTED] python[396235]: 2026-09-11 04:30:00,725 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-09-11T04:30:00.730673+00:00 ip-[REDACTED] python[396235]: 2026-09-11 04:30:00,725 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-09-11T04:30:00.779751+00:00 ip-[REDACTED] python[396235]: 2026-09-11 04:30:00,779 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-09-11T04:30:00.781253+00:00 ip-[REDACTED] python[396235]: 2026-09-11 04:30:00,781 | INFO | algo_trader | [auth_refresh] Angel One session refreshed.
+2026-09-11T04:30:00.966310+00:00 ip-[REDACTED] python[396235]: 2026-09-11 04:30:00,966 | INFO | algo_trader | Market Check: 0/4 — NOT BULLISH
+2026-09-11T04:30:00.966310+00:00 ip-[REDACTED] python[396235]: 1. Index Direction: FAIL ❌
+2026-09-11T04:30:00.966310+00:00 ip-[REDACTED] python[396235]:    Nifty 50: -0.93% (need > 0%)
+2026-09-11T04:30:00.966310+00:00 ip-[REDACTED] python[396235]: 2. Market Breadth: FAIL ❌
+2026-09-11T04:30:00.966310+00:00 ip-[REDACTED] python[396235]:    Advancers: 9, Decliners: 41
+2026-09-11T04:30:00.966310+00:00 ip-[REDACTED] python[396235]:    Breadth ratio: 0.22 (need > 1.2)
+2026-09-11T04:30:00.966310+00:00 ip-[REDACTED] python[396235]: 3. Intraday Strength: FAIL ❌
+2026-09-11T04:30:00.966310+00:00 ip-[REDACTED] python[396235]:    Nifty LTP vs Open: 23259.50 vs 23270.30
+2026-09-11T04:30:00.966310+00:00 ip-[REDACTED] python[396235]:    NIFTYBEES vs VWAP: 265.70 vs 265.63
+2026-09-11T04:30:00.966310+00:00 ip-[REDACTED] python[396235]: 4. Volatility Filter: FAIL ❌
+2026-09-11T04:30:00.966310+00:00 ip-[REDACTED] python[396235]:    India VIX change: +6.02% (reject if > +5%)
+2026-09-11T04:30:00.966310+00:00 ip-[REDACTED] python[396235]: Decision: SKIP TRADING (score 0/4 < 2)
+2026-09-11T04:30:00.966310+00:00 ip-[REDACTED] python[396235]: Failed: Index Direction, Market Breadth, Intraday Strength, Volatility Filter
+2026-09-11T05:30:02.120341+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:30:02,120 | INFO | algo_trader | Daily candle cache cleared.
+2026-09-11T05:30:02.127127+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:30:02,120 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-09-11T05:30:02.127127+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:30:02,120 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-09-11T05:30:02.201116+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:30:02,200 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-09-11T05:30:02.202450+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:30:02,202 | INFO | algo_trader | [auth_refresh] Angel One session refreshed.
+2026-09-11T05:30:02.445394+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:30:02,445 | INFO | algo_trader | Market Check: 2/4 — BULLISH
+2026-09-11T05:30:02.445394+00:00 ip-[REDACTED] python[396235]: 1. Index Direction: FAIL ❌
+2026-09-11T05:30:02.445394+00:00 ip-[REDACTED] python[396235]:    Nifty 50: -0.85% (need > 0%)
+2026-09-11T05:30:02.445394+00:00 ip-[REDACTED] python[396235]: 2. Market Breadth: FAIL ❌
+2026-09-11T05:30:02.445394+00:00 ip-[REDACTED] python[396235]:    Advancers: 9, Decliners: 41
+2026-09-11T05:30:02.445394+00:00 ip-[REDACTED] python[396235]:    Breadth ratio: 0.22 (need > 1.2)
+2026-09-11T05:30:02.445394+00:00 ip-[REDACTED] python[396235]: 3. Intraday Strength: PASS ✅
+2026-09-11T05:30:02.445394+00:00 ip-[REDACTED] python[396235]:    Nifty LTP vs Open: 23279.05 vs 23270.30
+2026-09-11T05:30:02.445394+00:00 ip-[REDACTED] python[396235]:    NIFTYBEES vs VWAP: 265.97 vs 265.76
+2026-09-11T05:30:02.445394+00:00 ip-[REDACTED] python[396235]: 4. Volatility Filter: PASS ✅
+2026-09-11T05:30:02.445394+00:00 ip-[REDACTED] python[396235]:    India VIX change: +4.41% (reject if > +5%)
+2026-09-11T05:30:02.445394+00:00 ip-[REDACTED] python[396235]: Decision: CONTRA-MOMENTUM MODE (score 2/4)
+2026-09-11T05:30:02.445394+00:00 ip-[REDACTED] python[396235]: Rules: entry before 12:00 only, no re-entry
+2026-09-11T05:30:02.445394+00:00 ip-[REDACTED] python[396235]: ⚡ CONTRA-MOMENTUM MODE: Score=2 — entry before 12:00 only, no re-entry.
+2026-09-11T05:30:03.092838+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:30:03,092 | INFO | algo_trader | Scanning 2670 stocks for top 1 candidates (pool=5)...
+2026-09-11T05:30:03.093049+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:30:03,092 | INFO | algo_trader | Fetching quotes for 2670 stocks...
+2026-09-11T05:30:09.755615+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:30:09,755 | INFO | algo_trader | Received 2663 quotes.
+2026-09-11T05:30:09.758126+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:30:09,758 | INFO | algo_trader | Candidates in 5-8% gain range: 8
+2026-09-11T05:30:09.759136+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:30:09,758 | INFO | algo_trader | Fetching daily candles for 8 candidates...
+2026-09-11T05:30:14.759573+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:30:14,759 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-11T05:30:19.760006+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:30:19,759 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-11T05:30:19.761393+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:30:19,761 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-11T05:30:19.761629+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:30:19,761 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-11T05:30:24.762890+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:30:24,762 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-11T05:30:31.763481+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:30:31,763 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-09-11T05:30:42.763983+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:30:42,763 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-09-11T05:30:42.765548+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:30:42,765 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-09-11T05:30:52.765672+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:30:52,765 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-09-11T05:30:52.767136+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:30:52,767 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-11T05:31:05.786968+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:31:05,786 | INFO | algo_trader | Rank #1: SMSPHARMA-EQ — gain=+5.40%, score=0.795 (vol=6.4x, momentum=0.49, buy_pressure=0.63, stability=0.98, prev_trend=1.00)
+2026-09-11T05:31:05.787624+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:31:05,787 | INFO | algo_trader | Rank #2: SIKA-EQ — gain=+6.79%, score=0.761 (vol=11.2x, momentum=0.86, buy_pressure=0.43, stability=0.90, prev_trend=0.50)
+2026-09-11T05:31:05.787624+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:31:05,787 | INFO | algo_trader | Rank #3: PINELABS-EQ — gain=+7.84%, score=0.705 (vol=3.4x, momentum=0.76, buy_pressure=0.39, stability=0.75, prev_trend=0.50)
+2026-09-11T05:31:05.787624+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:31:05,787 | INFO | algo_trader | Rank #4: MOLBIO-EQ — gain=+6.76%, score=0.699 (vol=2.9x, momentum=0.49, buy_pressure=0.74, stability=0.53, prev_trend=0.67)
+2026-09-11T05:31:05.787624+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:31:05,787 | INFO | algo_trader | Rank #5: BALPHARMA-EQ — gain=+6.96%, score=0.656 (vol=0.6x, momentum=0.96, buy_pressure=0.41, stability=0.89, prev_trend=0.83)
+2026-09-11T05:31:06.126194+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:31:06,126 | INFO | algo_trader | Scan completed in 63.0 seconds. Found 5 raw candidates.
+2026-09-11T05:31:06.134325+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:31:06,134 | INFO | algo_trader | Checking read-only restrictions for 5 candidates...
+2026-09-11T05:31:06.141173+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:31:06,141 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 5 tradable, 0 rejected.
+2026-09-11T05:31:06.141400+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:31:06,141 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 0 filtered):
+2026-09-11T05:31:06.141400+00:00 ip-[REDACTED] python[396235]:   SMSPHARMA-EQ: +5.40% @ 440.00
+2026-09-11T05:31:06.141400+00:00 ip-[REDACTED] python[396235]:     Score=0.795 | Vol=6.4x | Momentum=0.49 | BuyPressure=0.63 | Stability=0.98 | PrevTrend=1.00
+2026-09-11T05:31:06.790194+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:31:06,790 | INFO | algo_trader | Validating 5 candidates in parallel...
+2026-09-11T05:31:06.816194+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:31:06,816 | INFO | algo_trader | ENTRY REJECTED SMSPHARMA-EQ: Range position 0.525 < 0.85 (price retreating from high)
+2026-09-11T05:31:06.822145+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:31:06,822 | INFO | algo_trader | ENTRY REJECTED PINELABS-EQ: Range position 0.762 < 0.85 (price retreating from high)
+2026-09-11T05:31:06.832895+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:31:06,832 | INFO | algo_trader | ENTRY REJECTED MOLBIO-EQ: Range position 0.452 < 0.85 (price retreating from high)
+2026-09-11T05:31:06.839785+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:31:06,839 | INFO | algo_trader | ENTRY REJECTED BALPHARMA-EQ: Wide spread: 0.34 (0.299% > 0.2%)
+2026-09-11T05:31:07.860294+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:31:07,860 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-11T05:31:12.879034+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:31:12,878 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-09-11T05:31:22.901689+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:31:22,901 | INFO | algo_trader | ENTRY REJECTED SIKA-EQ: Volume fading: current 1022 vs avg 1547 (ratio 0.66 < 1.2)
+2026-09-11T05:31:22.912175+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:31:22,912 | INFO | algo_trader | Validation completed in 16.1 seconds: 0/5 passed.
+2026-09-11T05:31:22.912315+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:31:22,912 | INFO | algo_trader | No candidates passed real-time validation.
+2026-09-11T05:31:23.540737+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:31:23,540 | INFO | algo_trader | Scan attempt 2 — retrying in 120s (window open until 12:00)...
+2026-09-11T05:33:23.541119+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:33:23,540 | INFO | algo_trader | Scanning 2670 stocks for top 1 candidates (pool=5)...
+2026-09-11T05:33:23.541844+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:33:23,541 | INFO | algo_trader | Fetching quotes for 2670 stocks...
+2026-09-11T05:33:30.197066+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:33:30,196 | INFO | algo_trader | Received 2663 quotes.
+2026-09-11T05:33:30.199421+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:33:30,199 | INFO | algo_trader | Candidates in 5-8% gain range: 7
+2026-09-11T05:33:30.199636+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:33:30,199 | INFO | algo_trader | Fetching daily candles for 7 candidates...
+2026-09-11T05:33:31.217991+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:33:31,217 | INFO | algo_trader | Rank #1: SMSPHARMA-EQ — gain=+6.31%, score=0.814 (vol=6.5x, momentum=0.56, buy_pressure=0.64, stability=0.98, prev_trend=1.00)
+2026-09-11T05:33:31.218658+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:33:31,218 | INFO | algo_trader | Rank #2: SIKA-EQ — gain=+7.24%, score=0.774 (vol=11.5x, momentum=0.90, buy_pressure=0.45, stability=0.90, prev_trend=0.50)
+2026-09-11T05:33:31.218658+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:33:31,218 | INFO | algo_trader | Rank #3: FILATEX-EQ — gain=+7.44%, score=0.725 (vol=5.0x, momentum=0.76, buy_pressure=0.35, stability=0.93, prev_trend=0.50)
+2026-09-11T05:33:31.218658+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:33:31,218 | INFO | algo_trader | Rank #4: MOLBIO-EQ — gain=+5.95%, score=0.696 (vol=3.0x, momentum=0.40, buy_pressure=0.83, stability=0.53, prev_trend=0.67)
+2026-09-11T05:33:31.218658+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:33:31,218 | INFO | algo_trader | Rank #5: BALPHARMA-EQ — gain=+6.38%, score=0.644 (vol=0.6x, momentum=0.90, buy_pressure=0.41, stability=0.89, prev_trend=0.83)
+2026-09-11T05:33:31.560341+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:33:31,560 | INFO | algo_trader | Scan completed in 8.0 seconds. Found 5 raw candidates.
+2026-09-11T05:33:31.569765+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:33:31,569 | INFO | algo_trader | Skipped by ASM/GSM/circuit filter:
+2026-09-11T05:33:31.569765+00:00 ip-[REDACTED] python[396235]:   FILATEX-EQ: ASM listed (Additional Surveillance Measure)
+2026-09-11T05:33:31.570052+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:33:31,569 | INFO | algo_trader | Checking read-only restrictions for 4 candidates...
+2026-09-11T05:33:31.576481+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:33:31,576 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 4 tradable, 0 rejected.
+2026-09-11T05:33:31.576674+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:33:31,576 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 1 filtered):
+2026-09-11T05:33:31.576674+00:00 ip-[REDACTED] python[396235]:   SMSPHARMA-EQ: +6.31% @ 443.80
+2026-09-11T05:33:31.576674+00:00 ip-[REDACTED] python[396235]:     Score=0.814 | Vol=6.5x | Momentum=0.56 | BuyPressure=0.64 | Stability=0.98 | PrevTrend=1.00
+2026-09-11T05:33:32.298126+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:33:32,298 | INFO | algo_trader | Validating 4 candidates in parallel...
+2026-09-11T05:33:32.320886+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:33:32,320 | INFO | algo_trader | ENTRY REJECTED SMSPHARMA-EQ: Range position 0.556 < 0.85 (price retreating from high)
+2026-09-11T05:33:32.327707+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:33:32,327 | INFO | algo_trader | ENTRY REJECTED MOLBIO-EQ: Range position 0.404 < 0.85 (price retreating from high)
+2026-09-11T05:33:32.333089+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:33:32,332 | INFO | algo_trader | ENTRY REJECTED BALPHARMA-EQ: Wide spread: 0.55 (0.485% > 0.2%)
+2026-09-11T05:33:33.356134+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:33:33,356 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-11T05:33:38.370708+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:33:38,370 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-09-11T05:33:48.384677+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:33:48,384 | WARNING | algo_trader | 1-min candle fetch failed for SIKA-EQ volume check: POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=[REDACTED_IP], client_local_ip=[REDACTED_IP]: Access denied because of exceeding access rate — rejecting
+2026-09-11T05:33:48.385332+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:33:48,384 | INFO | algo_trader | ENTRY REJECTED SIKA-EQ: Volume check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=[REDACTED_IP], client_local_ip=[REDACTED_IP]: Access denied because of exceeding access rate)
+2026-09-11T05:33:48.394473+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:33:48,394 | INFO | algo_trader | Validation completed in 16.1 seconds: 0/4 passed.
+2026-09-11T05:33:48.394629+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:33:48,394 | INFO | algo_trader | No candidates passed real-time validation.
+2026-09-11T05:33:49.028729+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:33:49,028 | INFO | algo_trader | Scan attempt 3 — retrying in 120s (window open until 12:00)...
+2026-09-11T05:35:49.029168+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:35:49,028 | INFO | algo_trader | Scanning 2670 stocks for top 1 candidates (pool=5)...
+2026-09-11T05:35:49.032938+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:35:49,029 | INFO | algo_trader | Fetching quotes for 2670 stocks...
+2026-09-11T05:35:55.690308+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:35:55,690 | INFO | algo_trader | Received 2663 quotes.
+2026-09-11T05:35:55.692872+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:35:55,692 | INFO | algo_trader | Candidates in 5-8% gain range: 9
+2026-09-11T05:35:55.693031+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:35:55,692 | INFO | algo_trader | Fetching daily candles for 9 candidates...
+2026-09-11T05:35:55.712831+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:35:55,712 | INFO | algo_trader | Rank #1: SMSPHARMA-EQ — gain=+6.18%, score=0.811 (vol=6.5x, momentum=0.55, buy_pressure=0.63, stability=0.98, prev_trend=1.00)
+2026-09-11T05:35:55.713017+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:35:55,712 | INFO | algo_trader | Rank #2: SIKA-EQ — gain=+7.92%, score=0.795 (vol=12.0x, momentum=0.96, buy_pressure=0.48, stability=0.90, prev_trend=0.50)
+2026-09-11T05:35:55.713017+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:35:55,712 | INFO | algo_trader | Rank #3: SUNTV-EQ — gain=+5.09%, score=0.767 (vol=4.8x, momentum=0.87, buy_pressure=0.41, stability=0.78, prev_trend=0.67)
+2026-09-11T05:35:55.713248+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:35:55,713 | INFO | algo_trader | Rank #4: FILATEX-EQ — gain=+7.82%, score=0.734 (vol=5.1x, momentum=0.79, buy_pressure=0.36, stability=0.93, prev_trend=0.50)
+2026-09-11T05:35:55.713248+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:35:55,713 | INFO | algo_trader | Rank #5: PINELABS-EQ — gain=+7.93%, score=0.709 (vol=3.4x, momentum=0.76, buy_pressure=0.40, stability=0.75, prev_trend=0.50)
+2026-09-11T05:35:56.060274+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:35:56,060 | INFO | algo_trader | Scan completed in 7.0 seconds. Found 5 raw candidates.
+2026-09-11T05:35:56.069010+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:35:56,068 | INFO | algo_trader | Skipped by ASM/GSM/circuit filter:
+2026-09-11T05:35:56.069010+00:00 ip-[REDACTED] python[396235]:   FILATEX-EQ: ASM listed (Additional Surveillance Measure)
+2026-09-11T05:35:56.069295+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:35:56,069 | INFO | algo_trader | Checking read-only restrictions for 4 candidates...
+2026-09-11T05:35:56.075175+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:35:56,075 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 4 tradable, 0 rejected.
+2026-09-11T05:35:56.076236+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:35:56,075 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 1 filtered):
+2026-09-11T05:35:56.076236+00:00 ip-[REDACTED] python[396235]:   SMSPHARMA-EQ: +6.18% @ 443.25
+2026-09-11T05:35:56.076236+00:00 ip-[REDACTED] python[396235]:     Score=0.811 | Vol=6.5x | Momentum=0.55 | BuyPressure=0.63 | Stability=0.98 | PrevTrend=1.00
+2026-09-11T05:35:56.707465+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:35:56,707 | INFO | algo_trader | Validating 4 candidates in parallel...
+2026-09-11T05:35:56.729298+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:35:56,729 | INFO | algo_trader | ENTRY REJECTED SMSPHARMA-EQ: Range position 0.550 < 0.85 (price retreating from high)
+2026-09-11T05:35:56.736006+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:35:56,735 | INFO | algo_trader | ENTRY REJECTED PINELABS-EQ: Range position 0.767 < 0.85 (price retreating from high)
+2026-09-11T05:35:56.742468+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:35:56,742 | INFO | algo_trader | Near-breakout skip for SUNTV-EQ: range=0.878, gain=5.1% — skipping breakout check
+2026-09-11T05:35:57.762710+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:35:57,762 | INFO | algo_trader | ENTRY VALIDATED SUNTV-EQ: price=478.90, gain=+5.13%, range=0.878, breakout=True, vol_ratio=1.36, spread=0.0630%
+2026-09-11T05:35:58.756769+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:35:58,756 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-11T05:36:03.780389+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:36:03,780 | INFO | algo_trader | ENTRY VALIDATED SIKA-EQ: price=1104.00, gain=+7.72%, range=0.940, breakout=True, vol_ratio=6.55, spread=0.0320%
+2026-09-11T05:36:03.786965+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:36:03,786 | INFO | algo_trader | Validation completed in 7.1 seconds: 1/4 passed.
+2026-09-11T05:36:03.787205+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:36:03,787 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-09-11T05:36:03.787205+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:36:03,787 | INFO | algo_trader | Capital: 100000.00 x 5.0x leverage = 500000.00 buying power | 1 validated stocks | 475000.00 per stock
+2026-09-11T05:36:04.773189+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:36:04,773 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-11T05:36:09.789104+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:36:09,788 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-09-11T05:36:19.809280+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:36:19,809 | INFO | algo_trader | ATR computed for token 762914: 12.4154 (from 14 candles, price=1104.00, ATR%=1.12%)
+2026-09-11T05:36:19.844137+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:36:19,844 | INFO | algo_trader | [PAPER] MARKET order filled: BUY SIKA-EQ 45 @ 1105.55 (reference=1105.00, fee=49.75) id=d8c79e45
+2026-09-11T05:36:19.848802+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:36:19,848 | INFO | algo_trader | MARKET order placed: BUY SIKA-EQ 45 [INTRADAY] {'response': {'data': {'orderid': 'd8c79e45'}}}
+2026-09-11T05:36:19.892601+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:36:19,892 | INFO | algo_trader | [PAPER] SL-M order placed: SELL SIKA-EQ 45 trigger=1083.40 id=b88f2392
+2026-09-11T05:36:19.899292+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:36:19,899 | INFO | algo_trader | SL-M order placed for SIKA-EQ: trigger=1083.44, orderid=b88f2392
+2026-09-11T05:36:19.902161+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:36:19,902 | INFO | algo_trader | ENTRY: SIKA-EQ [MIS] — 45 shares @ 1105.55 (capital=475000.00, gain=+7.92%, score=0.795, ATR=12.4154 (1.12%), SL=1083.44, hard_stop=1083.44) | {'response': {'data': {'orderid': 'd8c79e45'}}}
+2026-09-11T05:36:20.530480+00:00 ip-[REDACTED] python[396235]: 2026-09-11 05:36:20,530 | INFO | algo_trader | Monitoring 1 positions with trailing stop...
+2026-09-11T06:18:36.995913+00:00 ip-[REDACTED] python[396235]: 2026-09-11 06:18:36,995 | INFO | algo_trader | [position_check] SIKA-EQ: netqty=45
+2026-09-11T06:18:36.999569+00:00 ip-[REDACTED] python[396235]: 2026-09-11 06:18:36,998 | INFO | algo_trader | [position_check] SIKA-EQ: netqty=45
+2026-09-11T06:18:37.115387+00:00 ip-[REDACTED] python[396235]: 2026-09-11 06:18:37,115 | INFO | algo_trader | [PAPER] MARKET order filled: SELL SIKA-EQ 45 @ 1075.61 (reference=1076.15, fee=48.40) id=cb9a5359
+2026-09-11T06:18:37.120076+00:00 ip-[REDACTED] python[396235]: 2026-09-11 06:18:37,119 | INFO | algo_trader | [exit_attempt] Exit confirmed for SIKA-EQ: 45 shares @ 1075.61
+2026-09-11T06:18:37.120334+00:00 ip-[REDACTED] python[396235]: 2026-09-11 06:18:37,120 | INFO | algo_trader | [PAPER] Order cancelled: SIKA-EQ id=b88f2392
+2026-09-11T06:18:37.121496+00:00 ip-[REDACTED] python[396235]: 2026-09-11 06:18:37,121 | INFO | algo_trader | SL-M order confirmed CANCELLED for SIKA-EQ: b88f2392
+2026-09-11T06:18:37.123590+00:00 ip-[REDACTED] python[396235]: 2026-09-11 06:18:37,123 | INFO | algo_trader | HARD STOP (max loss) EXIT: SIKA-EQ — 0 shares @ 1075.61 (entry=1105.55, high=1105.55, SL=1083.44, hard_stop=1083.44, ATR=12.4154, locked=False, PnL=-1445.45, daily_pnl=-1445.45, consecutive_losses=1/2, round=0/0) | ExitOutcome(state=<ExitState.CLOSED: 'closed'>, execution=OrderExecution(order_id='cb9a5359', state=<OrderState.FILLED: 'filled'>, requested_quantity=45, filled_quantity=45, average_price=1075.61, reason='', raw_order={'orderid': 'cb9a5359', 'tradingsymbol': 'SIKA-EQ', 'transactiontype': 'SELL', 'quantity': '45', 'price': '1075.61', 'filledshares': '45', 'averageprice': '1075.61', 'triggerprice': '0.0', 'orderstatus': 'COMPLETE', 'status': 'COMPLETE', 'ordertype': 'MARKET', 'producttype': 'INTRADAY', 'referenceprice': '1076.15', 'fees': '48.4'}), reason='')
+2026-09-11T06:18:47.736297+00:00 ip-[REDACTED] python[396235]: 2026-09-11 06:18:47,736 | INFO | algo_trader | All positions closed by stop-loss.
+2026-09-11T06:18:47.736982+00:00 ip-[REDACTED] python[396235]: 2026-09-11 06:18:47,736 | INFO | algo_trader | Smart gate: last exit was HARD STOP — skipping re-entry.
+2026-09-11T06:18:48.352848+00:00 ip-[REDACTED] python[396235]: 2026-09-11 06:18:48,352 | INFO | algo_trader | [auth_refresh] Session age 2926s >= 300s, refreshing...
+2026-09-11T06:18:48.353000+00:00 ip-[REDACTED] python[396235]: 2026-09-11 06:18:48,352 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-09-11T06:18:48.398437+00:00 ip-[REDACTED] python[396235]: 2026-09-11 06:18:48,398 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-09-11T06:18:48.399710+00:00 ip-[REDACTED] python[396235]: 2026-09-11 06:18:48,399 | INFO | algo_trader |
+2026-09-11T06:18:48.399710+00:00 ip-[REDACTED] python[396235]: ============================================================
+2026-09-11T06:18:48.399710+00:00 ip-[REDACTED] python[396235]: PAPER TRADING SUMMARY
+2026-09-11T06:18:48.399710+00:00 ip-[REDACTED] python[396235]: ============================================================
+2026-09-11T06:18:48.399710+00:00 ip-[REDACTED] python[396235]: Total trades: 2
+2026-09-11T06:18:48.399710+00:00 ip-[REDACTED] python[396235]: Buys: 1, Sells: 1
+2026-09-11T06:18:48.399710+00:00 ip-[REDACTED] python[396235]:   11:06:19 BUY  SIKA-EQ x45 @ 1105.55 fees: Rs.49.75
+2026-09-11T06:18:48.399710+00:00 ip-[REDACTED] python[396235]:   11:48:37 SELL SIKA-EQ x45 @ 1075.61 gross: Rs.-1,347.30, fees: Rs.98.15, net P&L: Rs.-1,445.45
+2026-09-11T06:18:48.399710+00:00 ip-[REDACTED] python[396235]: Daily net P&L: Rs.-1,445.45
+2026-09-11T06:18:48.399710+00:00 ip-[REDACTED] python[396235]: Capital: Rs.100,000.00 → Rs.98,554.55
+2026-09-11T06:18:48.399710+00:00 ip-[REDACTED] python[396235]: All positions closed.
+2026-09-11T06:18:48.399710+00:00 ip-[REDACTED] python[396235]: ============================================================
+2026-09-11T06:18:56.341848+00:00 ip-[REDACTED] python[396235]: 2026-09-11 06:18:56,341 | INFO | algo_trader | Replay comparison complete: 279/279 decisions matched; recommended slippage=0 bps; report=/home/ubuntu/algo-trader/data/replay_reports/2026-09-11/summary.json; universe=data/universe_snapshots.json
+2026-09-11T06:18:56.342565+00:00 ip-[REDACTED] python[396235]: 2026-09-11 06:18:56,342 | INFO | algo_trader | Trading day complete. Daily P&L: ₹-1,445.45. Sleeping 70.2h until tomorrow.
