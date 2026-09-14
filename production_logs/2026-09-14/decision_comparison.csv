@@ -1,0 +1,418 @@
+sequence,event_type,symbol,recorded_decision,replayed_decision,matched,detail
+5950,market_gate,,trade,trade,True,four-factor market gate
+5951,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+5952,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+5953,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+5954,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+5955,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+5956,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+5957,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+5958,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+5959,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+5960,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+5961,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+5962,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+5963,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+5964,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+5965,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+5966,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+5967,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+5968,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+5969,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+5970,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+5971,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+5972,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+5973,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+5974,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+5975,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+5976,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+5977,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+5978,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+5979,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+5980,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+5981,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+5982,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+5983,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+5984,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+5985,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+5986,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+5987,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+5988,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+5989,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+5990,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+5991,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+5992,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+5993,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+5994,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+5995,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+5996,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+5997,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+5998,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+5999,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+6000,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+6001,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+6002,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+6003,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+6004,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6005,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6006,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6007,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+6008,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+6009,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+6010,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+6011,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+6012,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6013,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6014,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6015,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+6016,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+6017,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+6018,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+6019,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+6020,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6021,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6022,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6023,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+6024,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+6025,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+6026,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+6027,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+6028,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6029,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6030,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6031,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+6032,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+6033,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+6034,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+6035,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+6036,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6037,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6038,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6039,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+6040,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+6041,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+6042,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+6043,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+6044,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6045,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6046,candidate_validation,BBOX-EQ,rejected,rejected,True,"Breakout check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=13.126.199.100, client_local_ip=172.31.33.249: Access denied because of exceeding access rate)"
+6047,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+6048,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+6049,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+6050,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+6051,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+6052,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6053,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6054,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6055,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+6056,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+6057,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+6058,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+6059,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+6060,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6061,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6062,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6063,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+6064,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+6065,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+6066,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+6067,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+6068,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6069,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6070,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6071,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+6072,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+6073,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+6074,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+6075,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+6076,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6077,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6078,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6079,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+6080,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+6081,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+6082,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+6083,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+6084,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6085,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6086,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6087,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+6088,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+6089,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+6090,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+6091,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+6092,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6093,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6094,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6095,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+6096,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+6097,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+6098,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+6099,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+6100,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6101,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6102,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6103,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+6104,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+6105,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+6106,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+6107,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+6108,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6109,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6110,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6111,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+6112,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+6113,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+6114,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+6115,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+6116,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6117,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6118,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6119,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+6120,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+6121,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+6122,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+6123,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+6124,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6125,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6126,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6127,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+6128,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+6129,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+6130,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+6131,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+6132,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6133,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6134,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6135,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+6136,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+6137,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+6138,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+6139,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+6140,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6141,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6142,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6143,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+6144,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+6145,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+6146,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+6147,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+6148,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6149,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6150,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6151,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+6152,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+6153,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+6154,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+6155,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+6156,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6157,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6158,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6159,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+6160,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+6161,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+6162,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+6163,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+6164,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6165,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6166,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6167,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+6168,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+6169,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+6170,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+6171,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+6172,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6173,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6174,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6175,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+6176,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+6177,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+6178,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+6179,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+6180,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6181,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6182,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6183,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+6184,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+6185,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+6186,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+6187,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+6188,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6189,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6190,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6191,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+6192,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+6193,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+6194,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+6195,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+6196,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6197,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6198,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6199,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+6200,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+6201,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+6202,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+6203,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+6204,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6205,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6206,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6207,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+6208,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+6209,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+6210,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+6211,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+6212,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6213,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6214,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6215,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+6216,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+6217,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+6218,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+6219,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+6220,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6221,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6222,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6223,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+6224,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+6225,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+6226,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+6227,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+6228,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6229,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6230,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6231,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+6232,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+6233,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+6234,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+6235,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+6236,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6237,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6238,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6239,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+6240,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+6241,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+6242,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+6243,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+6244,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6245,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6246,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6247,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+6248,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+6249,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+6250,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+6251,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+6252,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6253,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6254,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6255,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+6256,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+6257,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+6258,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+6259,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+6260,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6261,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6262,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6263,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+6264,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+6265,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+6266,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+6267,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+6268,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6269,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6270,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6271,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+6272,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+6273,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+6274,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+6275,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+6276,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6277,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6278,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=13.126.199.100, client_local_ip=172.31.33.249: Access denied because of exceeding access rate)"
+6279,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+6280,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+6281,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+6282,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+6283,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+6284,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6285,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6286,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6287,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+6288,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+6289,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+6290,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+6291,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+6292,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6293,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6294,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6295,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+6296,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+6297,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+6298,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+6299,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+6300,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6301,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6302,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6303,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+6304,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+6305,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+6306,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+6307,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+6308,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6309,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6310,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6311,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+6312,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+6313,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+6314,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+6315,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+6316,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6317,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6318,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6319,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+6320,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+6321,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+6322,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+6323,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+6324,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6325,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6326,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6327,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+6328,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+6329,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+6330,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+6331,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+6332,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6333,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6334,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6335,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+6336,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+6337,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+6338,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+6339,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+6340,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6341,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6342,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6343,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+6344,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+6345,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+6346,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+6347,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+6348,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6349,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6350,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6351,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+6352,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+6353,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+6354,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+6355,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+6356,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6357,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6358,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6359,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']; replayed=['TDPOWERSYS-EQ', 'SIKA-EQ', 'BLACKBUCK-EQ', 'ALLTIME-EQ', 'BBOX-EQ']"
+6360,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+6361,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+6362,candidate_validation,SIKA-EQ,rejected,rejected,True,Range position 0.783 < 0.85 (price retreating from high)
+6363,candidate_validation,ALLTIME-EQ,rejected,rejected,True,Range position 0.821 < 0.85 (price retreating from high)
+6364,candidate_validation,BLACKBUCK-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6365,candidate_validation,TDPOWERSYS-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
+6366,candidate_validation,BBOX-EQ,rejected,rejected,True,"Volume check failed: need >=3 candles, got 0"
