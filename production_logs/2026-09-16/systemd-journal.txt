@@ -1,0 +1,90 @@
+2026-09-16T04:30:09.737635+00:00 ip-[REDACTED] python[396235]: 2026-09-16 04:30:09,737 | INFO | algo_trader | Daily candle cache cleared.
+2026-09-16T04:30:09.741918+00:00 ip-[REDACTED] python[396235]: 2026-09-16 04:30:09,738 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-09-16T04:30:09.741918+00:00 ip-[REDACTED] python[396235]: 2026-09-16 04:30:09,738 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-09-16T04:30:09.794500+00:00 ip-[REDACTED] python[396235]: 2026-09-16 04:30:09,794 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-09-16T04:30:09.795856+00:00 ip-[REDACTED] python[396235]: 2026-09-16 04:30:09,795 | INFO | algo_trader | [auth_refresh] Angel One session refreshed.
+2026-09-16T04:30:09.969964+00:00 ip-[REDACTED] python[396235]: 2026-09-16 04:30:09,969 | INFO | algo_trader | Market Check: 4/4 — BULLISH
+2026-09-16T04:30:09.969964+00:00 ip-[REDACTED] python[396235]: 1. Index Direction: PASS ✅
+2026-09-16T04:30:09.969964+00:00 ip-[REDACTED] python[396235]:    Nifty 50: +0.44% (need > 0%)
+2026-09-16T04:30:09.969964+00:00 ip-[REDACTED] python[396235]: 2. Market Breadth: PASS ✅
+2026-09-16T04:30:09.969964+00:00 ip-[REDACTED] python[396235]:    Advancers: 35, Decliners: 15
+2026-09-16T04:30:09.969964+00:00 ip-[REDACTED] python[396235]:    Breadth ratio: 2.33 (need > 1.2)
+2026-09-16T04:30:09.969964+00:00 ip-[REDACTED] python[396235]: 3. Intraday Strength: PASS ✅
+2026-09-16T04:30:09.969964+00:00 ip-[REDACTED] python[396235]:    Nifty LTP vs Open: 23220.30 vs 23201.60
+2026-09-16T04:30:09.969964+00:00 ip-[REDACTED] python[396235]:    NIFTYBEES vs VWAP: 265.25 vs 264.78
+2026-09-16T04:30:09.969964+00:00 ip-[REDACTED] python[396235]: 4. Volatility Filter: PASS ✅
+2026-09-16T04:30:09.969964+00:00 ip-[REDACTED] python[396235]:    India VIX change: -0.74% (reject if > +5%)
+2026-09-16T04:30:09.969964+00:00 ip-[REDACTED] python[396235]: Decision: TRADE (score 4/4 >= 3)
+2026-09-16T04:30:10.568529+00:00 ip-[REDACTED] python[396235]: 2026-09-16 04:30:10,568 | INFO | algo_trader | Scanning 2670 stocks for top 1 candidates (pool=5)...
+2026-09-16T04:30:10.569569+00:00 ip-[REDACTED] python[396235]: 2026-09-16 04:30:10,568 | INFO | algo_trader | Fetching quotes for 2670 stocks...
+2026-09-16T04:30:22.079044+00:00 ip-[REDACTED] python[396235]: 2026-09-16 04:30:22,078 | WARNING | algo_trader | [retry] POST /quote network error: HTTPSConnectionPool(host='apiconnect.angelone.in', port=443): Read timed out. (read timeout=10), retrying in 1.0s (attempt 1/3)...
+2026-09-16T04:30:22.458866+00:00 ip-[REDACTED] python[396235]: 2026-09-16 04:30:22,458 | WARNING | algo_trader | [retry] POST /quote network error: HTTPSConnectionPool(host='apiconnect.angelone.in', port=443): Read timed out. (read timeout=10), retrying in 1.0s (attempt 1/3)...
+2026-09-16T04:30:27.213840+00:00 ip-[REDACTED] python[396235]: 2026-09-16 04:30:27,213 | WARNING | algo_trader | [retry] POST /quote network error: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer')), retrying in 1.0s (attempt 1/3)...
+2026-09-16T04:30:27.841040+00:00 ip-[REDACTED] python[396235]: 2026-09-16 04:30:27,840 | WARNING | algo_trader | [retry] POST /quote network error: ('Connection aborted.', ConnectionResetError(104, 'Connection reset by peer')), retrying in 1.0s (attempt 1/3)...
+2026-09-16T04:30:33.034663+00:00 ip-[REDACTED] python[396235]: 2026-09-16 04:30:33,034 | INFO | algo_trader | Received 2658 quotes.
+2026-09-16T04:30:33.037233+00:00 ip-[REDACTED] python[396235]: 2026-09-16 04:30:33,037 | INFO | algo_trader | Candidates in 5-8% gain range: 3
+2026-09-16T04:30:33.038331+00:00 ip-[REDACTED] python[396235]: 2026-09-16 04:30:33,037 | INFO | algo_trader | Fetching daily candles for 3 candidates...
+2026-09-16T04:30:35.055686+00:00 ip-[REDACTED] python[396235]: 2026-09-16 04:30:35,055 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-16T04:30:40.073414+00:00 ip-[REDACTED] python[396235]: 2026-09-16 04:30:40,073 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-09-16T04:30:50.088780+00:00 ip-[REDACTED] python[396235]: 2026-09-16 04:30:50,088 | INFO | algo_trader | Rank #1: HLEGLAS-EQ — gain=+6.22%, score=0.584 (vol=0.5x, momentum=0.94, buy_pressure=0.51, stability=0.80, prev_trend=0.40)
+2026-09-16T04:30:50.089537+00:00 ip-[REDACTED] python[396235]: 2026-09-16 04:30:50,088 | INFO | algo_trader | Rank #2: MONQ50-EQ — gain=+5.19%, score=0.474 (vol=0.3x, momentum=0.74, buy_pressure=0.36, stability=0.40, prev_trend=0.80)
+2026-09-16T04:30:50.089537+00:00 ip-[REDACTED] python[396235]: 2026-09-16 04:30:50,088 | INFO | algo_trader | Rank #3: SAATVIKGL-EQ — gain=+5.22%, score=0.258 (vol=1.0x, momentum=0.19, buy_pressure=0.43, stability=0.00, prev_trend=0.00)
+2026-09-16T04:30:50.341459+00:00 ip-[REDACTED] python[396235]: 2026-09-16 04:30:50,341 | INFO | algo_trader | Scan completed in 39.8 seconds. Found 3 raw candidates.
+2026-09-16T04:30:50.342698+00:00 ip-[REDACTED] python[396235]: 2026-09-16 04:30:50,342 | INFO | algo_trader | Checking read-only restrictions for 3 candidates...
+2026-09-16T04:30:50.345086+00:00 ip-[REDACTED] python[396235]: 2026-09-16 04:30:50,345 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 3 tradable, 0 rejected.
+2026-09-16T04:30:50.345967+00:00 ip-[REDACTED] python[396235]: 2026-09-16 04:30:50,345 | INFO | algo_trader | Top 1 tradable stocks selected (from 3 scanned, 0 filtered):
+2026-09-16T04:30:50.345967+00:00 ip-[REDACTED] python[396235]:   HLEGLAS-EQ: +6.22% @ 420.00
+2026-09-16T04:30:50.345967+00:00 ip-[REDACTED] python[396235]:     Score=0.584 | Vol=0.5x | Momentum=0.94 | BuyPressure=0.51 | Stability=0.80 | PrevTrend=0.40
+2026-09-16T04:30:50.973294+00:00 ip-[REDACTED] python[396235]: 2026-09-16 04:30:50,973 | INFO | algo_trader | Validating 3 candidates in parallel...
+2026-09-16T04:30:50.995210+00:00 ip-[REDACTED] python[396235]: 2026-09-16 04:30:50,995 | INFO | algo_trader | ENTRY REJECTED MONQ50-EQ: Range position 0.806 < 0.85 (price retreating from high)
+2026-09-16T04:30:50.997860+00:00 ip-[REDACTED] python[396235]: 2026-09-16 04:30:50,997 | INFO | algo_trader | ENTRY REJECTED SAATVIKGL-EQ: Range position 0.194 < 0.85 (price retreating from high)
+2026-09-16T04:30:50.999755+00:00 ip-[REDACTED] python[396235]: 2026-09-16 04:30:50,999 | INFO | algo_trader | Near-breakout skip for HLEGLAS-EQ: range=0.934, gain=6.2% — skipping breakout check
+2026-09-16T04:30:51.089529+00:00 ip-[REDACTED] python[396235]: 2026-09-16 04:30:51,089 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-16T04:30:56.103342+00:00 ip-[REDACTED] python[396235]: 2026-09-16 04:30:56,103 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-09-16T04:31:06.122949+00:00 ip-[REDACTED] python[396235]: 2026-09-16 04:31:06,122 | INFO | algo_trader | ENTRY VALIDATED HLEGLAS-EQ: price=419.75, gain=+6.16%, range=0.934, breakout=True, vol_ratio=1.51, spread=0.1190%
+2026-09-16T04:31:06.125180+00:00 ip-[REDACTED] python[396235]: 2026-09-16 04:31:06,125 | INFO | algo_trader | Validation completed in 15.2 seconds: 1/3 passed.
+2026-09-16T04:31:06.126291+00:00 ip-[REDACTED] python[396235]: 2026-09-16 04:31:06,125 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-09-16T04:31:06.126291+00:00 ip-[REDACTED] python[396235]: 2026-09-16 04:31:06,125 | INFO | algo_trader | Capital: 100000.00 x 5.0x leverage = 500000.00 buying power | 1 validated stocks | 475000.00 per stock
+2026-09-16T04:31:16.266834+00:00 ip-[REDACTED] python[396235]: 2026-09-16 04:31:16,266 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-16T04:31:21.290255+00:00 ip-[REDACTED] python[396235]: 2026-09-16 04:31:21,290 | INFO | algo_trader | ATR computed for token 2289: 7.6056 (from 10 candles, price=419.75, ATR%=1.81%)
+2026-09-16T04:31:21.312546+00:00 ip-[REDACTED] python[396235]: 2026-09-16 04:31:21,312 | INFO | algo_trader | [PAPER] MARKET order filled: BUY HLEGLAS-EQ 119 @ 419.26 (reference=419.05, fee=49.89) id=8066b806
+2026-09-16T04:31:21.316405+00:00 ip-[REDACTED] python[396235]: 2026-09-16 04:31:21,316 | INFO | algo_trader | MARKET order placed: BUY HLEGLAS-EQ 119 [INTRADAY] {'response': {'data': {'orderid': '8066b806'}}}
+2026-09-16T04:31:21.321876+00:00 ip-[REDACTED] python[396235]: 2026-09-16 04:31:21,321 | INFO | algo_trader | [PAPER] SL-M order placed: SELL HLEGLAS-EQ 119 trigger=410.85 id=13699524
+2026-09-16T04:31:21.324023+00:00 ip-[REDACTED] python[396235]: 2026-09-16 04:31:21,323 | INFO | algo_trader | SL-M order placed for HLEGLAS-EQ: trigger=410.87, orderid=13699524
+2026-09-16T04:31:21.326842+00:00 ip-[REDACTED] python[396235]: 2026-09-16 04:31:21,326 | INFO | algo_trader | ENTRY: HLEGLAS-EQ [MIS] — 119 shares @ 419.26 (capital=475000.00, gain=+6.22%, score=0.584, ATR=7.6056 (1.81%), SL=410.87, hard_stop=410.87) | {'response': {'data': {'orderid': '8066b806'}}}
+2026-09-16T04:31:21.926452+00:00 ip-[REDACTED] python[396235]: 2026-09-16 04:31:21,926 | INFO | algo_trader | Monitoring 1 positions with trailing stop...
+2026-09-16T04:48:24.494934+00:00 ip-[REDACTED] python[396235]: 2026-09-16 04:48:24,494 | INFO | algo_trader | TRAILING STOP UPDATE HLEGLAS-EQ: SL 410.87 -> 417.16 (ltp=425.15, bid=424.30, high=425.15, profit=1.4%, intraday=7.5%, locked=False, ATR=7.6056)
+2026-09-16T04:48:24.499353+00:00 ip-[REDACTED] python[396235]: 2026-09-16 04:48:24,494 | INFO | algo_trader | [PAPER] SL-M modified: HLEGLAS-EQ trigger 410.85 → 417.15 id=13699524
+2026-09-16T04:48:24.499353+00:00 ip-[REDACTED] python[396235]: 2026-09-16 04:48:24,496 | INFO | algo_trader | SL-M trigger updated for HLEGLAS-EQ: new trigger=417.16
+2026-09-16T04:51:54.984392+00:00 ip-[REDACTED] python[396235]: 2026-09-16 04:51:54,984 | INFO | algo_trader | TRAILING STOP UPDATE HLEGLAS-EQ: SL 417.16 -> 420.31 (ltp=429.00, bid=429.50, high=429.00, profit=2.3%, intraday=8.5%, locked=False, ATR=7.6056)
+2026-09-16T04:51:54.985875+00:00 ip-[REDACTED] python[396235]: 2026-09-16 04:51:54,984 | INFO | algo_trader | [PAPER] SL-M modified: HLEGLAS-EQ trigger 417.15 → 420.30 id=13699524
+2026-09-16T04:51:54.987769+00:00 ip-[REDACTED] python[396235]: 2026-09-16 04:51:54,986 | INFO | algo_trader | SL-M trigger updated for HLEGLAS-EQ: new trigger=420.31
+2026-09-16T06:30:19.305053+00:00 ip-[REDACTED] python[396235]: 2026-09-16 06:30:19,304 | INFO | algo_trader | [auth_refresh] Session age 7210s >= 7200s, refreshing...
+2026-09-16T06:30:19.308920+00:00 ip-[REDACTED] python[396235]: 2026-09-16 06:30:19,305 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-09-16T06:30:19.345024+00:00 ip-[REDACTED] python[396235]: 2026-09-16 06:30:19,344 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-09-16T07:06:24.656012+00:00 ip-[REDACTED] python[396235]: 2026-09-16 07:06:24,655 | INFO | algo_trader | [position_check] HLEGLAS-EQ: netqty=119
+2026-09-16T07:06:24.686025+00:00 ip-[REDACTED] python[396235]: 2026-09-16 07:06:24,659 | INFO | algo_trader | [position_check] HLEGLAS-EQ: netqty=119
+2026-09-16T07:06:24.775481+00:00 ip-[REDACTED] python[396235]: 2026-09-16 07:06:24,775 | INFO | algo_trader | [PAPER] MARKET order filled: SELL HLEGLAS-EQ 119 @ 418.09 (reference=418.30, fee=49.75) id=382dcb33
+2026-09-16T07:06:24.780426+00:00 ip-[REDACTED] python[396235]: 2026-09-16 07:06:24,780 | INFO | algo_trader | [exit_attempt] Exit confirmed for HLEGLAS-EQ: 119 shares @ 418.09
+2026-09-16T07:06:24.781730+00:00 ip-[REDACTED] python[396235]: 2026-09-16 07:06:24,780 | INFO | algo_trader | [PAPER] Order cancelled: HLEGLAS-EQ id=13699524
+2026-09-16T07:06:24.781982+00:00 ip-[REDACTED] python[396235]: 2026-09-16 07:06:24,781 | INFO | algo_trader | SL-M order confirmed CANCELLED for HLEGLAS-EQ: 13699524
+2026-09-16T07:06:24.784039+00:00 ip-[REDACTED] python[396235]: 2026-09-16 07:06:24,783 | INFO | algo_trader | TRAILING STOP (3% trail, 2-3% profit) EXIT: HLEGLAS-EQ — 0 shares @ 418.09 (entry=419.26, high=431.05, SL=420.31, hard_stop=410.87, ATR=7.6056, locked=False, PnL=-238.87, daily_pnl=-238.87, consecutive_losses=1/2, round=0/2) | ExitOutcome(state=<ExitState.CLOSED: 'closed'>, execution=OrderExecution(order_id='382dcb33', state=<OrderState.FILLED: 'filled'>, requested_quantity=119, filled_quantity=119, average_price=418.09, reason='', raw_order={'orderid': '382dcb33', 'tradingsymbol': 'HLEGLAS-EQ', 'transactiontype': 'SELL', 'quantity': '119', 'price': '418.09', 'filledshares': '119', 'averageprice': '418.09', 'triggerprice': '0.0', 'orderstatus': 'COMPLETE', 'status': 'COMPLETE', 'ordertype': 'MARKET', 'producttype': 'INTRADAY', 'referenceprice': '418.3', 'fees': '49.75'}), reason='')
+2026-09-16T07:06:35.396534+00:00 ip-[REDACTED] python[396235]: 2026-09-16 07:06:35,396 | INFO | algo_trader | All positions closed by stop-loss.
+2026-09-16T07:06:35.397097+00:00 ip-[REDACTED] python[396235]: 2026-09-16 07:06:35,396 | INFO | algo_trader | Smart gate: round P&L was ₹-238.87 — skipping re-entry.
+2026-09-16T07:06:35.999649+00:00 ip-[REDACTED] python[396235]: 2026-09-16 07:06:35,999 | INFO | algo_trader | [auth_refresh] Session age 2177s >= 300s, refreshing...
+2026-09-16T07:06:35.999880+00:00 ip-[REDACTED] python[396235]: 2026-09-16 07:06:35,999 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-09-16T07:06:36.042222+00:00 ip-[REDACTED] python[396235]: 2026-09-16 07:06:36,042 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-09-16T07:06:36.043635+00:00 ip-[REDACTED] python[396235]: 2026-09-16 07:06:36,043 | INFO | algo_trader |
+2026-09-16T07:06:36.043635+00:00 ip-[REDACTED] python[396235]: ============================================================
+2026-09-16T07:06:36.043635+00:00 ip-[REDACTED] python[396235]: PAPER TRADING SUMMARY
+2026-09-16T07:06:36.043635+00:00 ip-[REDACTED] python[396235]: ============================================================
+2026-09-16T07:06:36.043635+00:00 ip-[REDACTED] python[396235]: Total trades: 2
+2026-09-16T07:06:36.043635+00:00 ip-[REDACTED] python[396235]: Buys: 1, Sells: 1
+2026-09-16T07:06:36.043635+00:00 ip-[REDACTED] python[396235]:   10:01:21 BUY  HLEGLAS-EQ x119 @ 419.26 fees: Rs.49.89
+2026-09-16T07:06:36.043635+00:00 ip-[REDACTED] python[396235]:   12:36:24 SELL HLEGLAS-EQ x119 @ 418.09 gross: Rs.-139.23, fees: Rs.99.64, net P&L: Rs.-238.87
+2026-09-16T07:06:36.043635+00:00 ip-[REDACTED] python[396235]: Daily net P&L: Rs.-238.87
+2026-09-16T07:06:36.043635+00:00 ip-[REDACTED] python[396235]: Capital: Rs.100,000.00 → Rs.99,761.13
+2026-09-16T07:06:36.043635+00:00 ip-[REDACTED] python[396235]: All positions closed.
+2026-09-16T07:06:36.043635+00:00 ip-[REDACTED] python[396235]: ============================================================
+2026-09-16T07:06:47.117415+00:00 ip-[REDACTED] python[396235]: 2026-09-16 07:06:47,117 | INFO | algo_trader | Replay comparison complete: 937/937 decisions matched; recommended slippage=0 bps; report=/home/ubuntu/algo-trader/data/replay_reports/2026-09-16/summary.json; universe=data/universe_snapshots.json
+2026-09-16T07:06:47.118101+00:00 ip-[REDACTED] python[396235]: 2026-09-16 07:06:47,117 | INFO | algo_trader | Trading day complete. Daily P&L: ₹-238.87. Sleeping 21.4h until tomorrow.
