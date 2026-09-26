@@ -1,0 +1,202 @@
+sequence,event_type,symbol,recorded_decision,replayed_decision,matched,detail
+8773,market_gate,,trade,trade,True,four-factor market gate
+8774,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TRANSRAILL-EQ', 'PROTEAN-EQ', 'BHARATSE-EQ', 'KPIGREEN-EQ', 'RPTECH-EQ']; replayed=['TRANSRAILL-EQ', 'PROTEAN-EQ', 'BHARATSE-EQ', 'KPIGREEN-EQ', 'RPTECH-EQ']"
+8775,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+8776,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+8777,candidate_validation,PROTEAN-EQ,rejected,rejected,True,Range position 0.835 < 0.85 (price retreating from high)
+8778,candidate_validation,BHARATSE-EQ,rejected,rejected,True,Range position 0.715 < 0.85 (price retreating from high)
+8779,candidate_validation,KPIGREEN-EQ,rejected,rejected,True,Volume fading: current 43032 vs avg 102950 (ratio 0.42 < 1.2)
+8780,candidate_validation,TRANSRAILL-EQ,rejected,rejected,True,Volume fading: current 3805 vs avg 18091 (ratio 0.21 < 1.2)
+8781,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['SUNDROP-EQ', 'TRANSRAILL-EQ', 'JAINREC-EQ', 'PROTEAN-EQ', 'BHARATSE-EQ']; replayed=['SUNDROP-EQ', 'TRANSRAILL-EQ', 'JAINREC-EQ', 'PROTEAN-EQ', 'BHARATSE-EQ']"
+8782,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+8783,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+8784,candidate_validation,TRANSRAILL-EQ,rejected,rejected,True,Range position 0.818 < 0.85 (price retreating from high)
+8785,candidate_validation,JAINREC-EQ,rejected,rejected,True,Range position 0.794 < 0.85 (price retreating from high)
+8786,candidate_validation,PROTEAN-EQ,rejected,rejected,True,Range position 0.822 < 0.85 (price retreating from high)
+8787,candidate_validation,BHARATSE-EQ,rejected,rejected,True,Range position 0.720 < 0.85 (price retreating from high)
+8788,candidate_validation,SUNDROP-EQ,rejected,rejected,True,Volume fading: current 69 vs avg 1528 (ratio 0.05 < 1.2)
+8789,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['SUNDROP-EQ', 'PROTEAN-EQ', 'TRANSRAILL-EQ', 'ITDC-EQ', 'KPIGREEN-EQ']; replayed=['SUNDROP-EQ', 'PROTEAN-EQ', 'TRANSRAILL-EQ', 'ITDC-EQ', 'KPIGREEN-EQ']"
+8790,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+8791,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+8792,candidate_validation,SUNDROP-EQ,rejected,rejected,True,Range position 0.838 < 0.85 (price retreating from high)
+8793,candidate_validation,PROTEAN-EQ,rejected,rejected,True,Range position 0.810 < 0.85 (price retreating from high)
+8794,candidate_validation,TRANSRAILL-EQ,rejected,rejected,True,Range position 0.781 < 0.85 (price retreating from high)
+8795,candidate_validation,ITDC-EQ,rejected,rejected,True,Range position 0.770 < 0.85 (price retreating from high)
+8796,candidate_validation,KPIGREEN-EQ,rejected,rejected,True,Volume fading: current 77613 vs avg 75553 (ratio 1.03 < 1.2)
+8797,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['SUNDROP-EQ', 'TRANSRAILL-EQ', 'JAINREC-EQ', 'PROTEAN-EQ', 'KPIGREEN-EQ']; replayed=['SUNDROP-EQ', 'TRANSRAILL-EQ', 'JAINREC-EQ', 'PROTEAN-EQ', 'KPIGREEN-EQ']"
+8798,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+8799,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+8800,candidate_validation,JAINREC-EQ,rejected,rejected,True,Range position 0.737 < 0.85 (price retreating from high)
+8801,candidate_validation,PROTEAN-EQ,rejected,rejected,True,Range position 0.807 < 0.85 (price retreating from high)
+8802,candidate_validation,KPIGREEN-EQ,rejected,rejected,True,Range position 0.819 < 0.85 (price retreating from high)
+8803,candidate_validation,SUNDROP-EQ,rejected,rejected,True,Volume fading: current 50 vs avg 2336 (ratio 0.02 < 1.2)
+8804,candidate_validation,TRANSRAILL-EQ,rejected,rejected,True,Volume fading: current 4344 vs avg 19060 (ratio 0.23 < 1.2)
+8805,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['TRANSRAILL-EQ', 'SUNDROP-EQ', 'PROTEAN-EQ', 'ITDC-EQ', 'ORCHPHARMA-EQ']; replayed=['TRANSRAILL-EQ', 'SUNDROP-EQ', 'PROTEAN-EQ', 'ITDC-EQ', 'ORCHPHARMA-EQ']"
+8806,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+8807,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+8808,candidate_validation,SUNDROP-EQ,rejected,rejected,True,Range position 0.828 < 0.85 (price retreating from high)
+8809,candidate_validation,PROTEAN-EQ,rejected,rejected,True,Range position 0.843 < 0.85 (price retreating from high)
+8810,candidate_validation,ITDC-EQ,rejected,rejected,True,Range position 0.741 < 0.85 (price retreating from high)
+8811,candidate_validation,TRANSRAILL-EQ,accepted,accepted,True,All checks passed
+8812,position_sized,TRANSRAILL-EQ,111,111,True,risk-based position sizing
+8820,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8821,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8822,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8823,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8824,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8825,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8826,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8827,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8828,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8829,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8830,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8831,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8832,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8833,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8834,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8835,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8836,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8837,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8838,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8839,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8840,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8841,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8842,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8843,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8844,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8845,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8846,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8847,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8848,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8849,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8850,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8851,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8852,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8853,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8854,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8855,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8856,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8857,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8858,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8859,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8860,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8861,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8862,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8863,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8864,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8865,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8866,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8867,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8868,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8869,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8870,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8871,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8872,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8873,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8874,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8875,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8876,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8877,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8878,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8879,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8880,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8881,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8882,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8883,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8884,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8885,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8886,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8887,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8888,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8889,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8890,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8891,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8892,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8893,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8894,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8895,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8896,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8897,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8898,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8899,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8900,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8901,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8902,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8903,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8904,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8905,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8906,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8907,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8908,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8909,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8910,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8911,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8912,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8913,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8914,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8915,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8916,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8917,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8918,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8919,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8920,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8921,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8922,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8923,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8924,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8925,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8926,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8927,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8928,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8929,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8930,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8931,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8932,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8933,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8934,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8935,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8936,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8937,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8938,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8939,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8940,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8941,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8943,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8944,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8945,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8946,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8947,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8948,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8949,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8950,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8951,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8952,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8953,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8954,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8955,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8956,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8957,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8958,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8959,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8960,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8961,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8962,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8963,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8964,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8965,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8966,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8967,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8968,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8969,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8970,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8971,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8972,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8973,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8974,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8975,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8976,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8977,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8978,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8979,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8980,position_evaluated,TRANSRAILL-EQ,hold,hold,True,target and post-trail stop decision
+8981,position_evaluated,TRANSRAILL-EQ,exit,exit,True,target and post-trail stop decision

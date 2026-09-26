@@ -1,0 +1,210 @@
+2026-09-22T04:30:00.717249+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:30:00,717 | INFO | algo_trader | Daily candle cache cleared.
+2026-09-22T04:30:00.724497+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:30:00,718 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-09-22T04:30:00.724497+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:30:00,719 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-09-22T04:30:00.811284+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:30:00,811 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-09-22T04:30:00.812931+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:30:00,812 | INFO | algo_trader | [auth_refresh] Angel One session refreshed.
+2026-09-22T04:30:01.002354+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:30:01,002 | INFO | algo_trader | Market Check: 2/4 — BULLISH
+2026-09-22T04:30:01.002354+00:00 ip-[REDACTED] python[424449]: 1. Index Direction: PASS ✅
+2026-09-22T04:30:01.002354+00:00 ip-[REDACTED] python[424449]:    Nifty 50: +0.18% (need > 0%)
+2026-09-22T04:30:01.002354+00:00 ip-[REDACTED] python[424449]: 2. Market Breadth: FAIL ❌
+2026-09-22T04:30:01.002354+00:00 ip-[REDACTED] python[424449]:    Advancers: 27, Decliners: 23
+2026-09-22T04:30:01.002354+00:00 ip-[REDACTED] python[424449]:    Breadth ratio: 1.17 (need > 1.2)
+2026-09-22T04:30:01.002354+00:00 ip-[REDACTED] python[424449]: 3. Intraday Strength: FAIL ❌
+2026-09-22T04:30:01.002354+00:00 ip-[REDACTED] python[424449]:    Nifty LTP vs Open: 23456.90 vs 23454.05
+2026-09-22T04:30:01.002354+00:00 ip-[REDACTED] python[424449]:    NIFTYBEES vs VWAP: 267.60 vs 267.61
+2026-09-22T04:30:01.002354+00:00 ip-[REDACTED] python[424449]: 4. Volatility Filter: PASS ✅
+2026-09-22T04:30:01.002354+00:00 ip-[REDACTED] python[424449]:    India VIX change: -2.67% (reject if > +5%)
+2026-09-22T04:30:01.002354+00:00 ip-[REDACTED] python[424449]: Decision: CONTRA-MOMENTUM MODE (score 2/4)
+2026-09-22T04:30:01.002354+00:00 ip-[REDACTED] python[424449]: Rules: entry before 12:00 only, no re-entry
+2026-09-22T04:30:01.002354+00:00 ip-[REDACTED] python[424449]: ⚡ CONTRA-MOMENTUM MODE: Score=2 — entry before 12:00 only, no re-entry.
+2026-09-22T04:30:01.654035+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:30:01,653 | INFO | algo_trader | Scanning 2681 stocks for top 1 candidates (pool=5)...
+2026-09-22T04:30:01.654199+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:30:01,654 | INFO | algo_trader | Fetching quotes for 2681 stocks...
+2026-09-22T04:30:08.338329+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:30:08,338 | INFO | algo_trader | Received 2672 quotes.
+2026-09-22T04:30:08.340957+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:30:08,340 | INFO | algo_trader | Candidates in 5-8% gain range: 18
+2026-09-22T04:30:08.341967+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:30:08,341 | INFO | algo_trader | Fetching daily candles for 18 candidates...
+2026-09-22T04:30:12.342314+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:30:12,342 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-22T04:30:18.342799+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:30:18,342 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-22T04:30:24.343256+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:30:24,343 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-22T04:30:31.343823+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:30:31,343 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-09-22T04:30:42.344286+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:30:42,344 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-09-22T04:30:42.345782+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:30:42,345 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-22T04:30:52.344628+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:30:52,344 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-09-22T04:30:52.346146+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:30:52,346 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-22T04:31:12.346336+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:31:12,346 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-22T04:31:12.347505+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:31:12,347 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-22T04:31:12.348061+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:31:12,347 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-22T04:31:19.348964+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:31:19,348 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-09-22T04:31:29.376889+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:31:29,376 | INFO | algo_trader | Rank #1: TRANSRAILL-EQ — gain=+5.99%, score=0.762 (vol=3.3x, momentum=0.84, buy_pressure=0.41, stability=0.72, prev_trend=0.75)
+2026-09-22T04:31:29.377548+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:31:29,376 | INFO | algo_trader | Rank #2: PROTEAN-EQ — gain=+7.15%, score=0.748 (vol=2.7x, momentum=0.82, buy_pressure=0.49, stability=0.55, prev_trend=0.75)
+2026-09-22T04:31:29.377548+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:31:29,377 | INFO | algo_trader | Rank #3: BHARATSE-EQ — gain=+6.60%, score=0.709 (vol=3.8x, momentum=0.80, buy_pressure=0.33, stability=0.78, prev_trend=0.50)
+2026-09-22T04:31:29.377548+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:31:29,377 | INFO | algo_trader | Rank #4: KPIGREEN-EQ — gain=+6.33%, score=0.695 (vol=1.0x, momentum=0.92, buy_pressure=0.38, stability=1.00, prev_trend=0.75)
+2026-09-22T04:31:29.377548+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:31:29,377 | INFO | algo_trader | Rank #5: RPTECH-EQ — gain=+6.51%, score=0.653 (vol=1.0x, momentum=0.84, buy_pressure=0.46, stability=1.00, prev_trend=0.50)
+2026-09-22T04:31:29.714551+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:31:29,714 | INFO | algo_trader | Scan completed in 88.1 seconds. Found 5 raw candidates.
+2026-09-22T04:31:29.718282+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:31:29,718 | INFO | algo_trader | Skipped by ASM/GSM/circuit filter:
+2026-09-22T04:31:29.718282+00:00 ip-[REDACTED] python[424449]:   RPTECH-EQ: ASM listed (Additional Surveillance Measure)
+2026-09-22T04:31:29.718594+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:31:29,718 | INFO | algo_trader | Checking read-only restrictions for 4 candidates...
+2026-09-22T04:31:29.724498+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:31:29,724 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 4 tradable, 0 rejected.
+2026-09-22T04:31:29.724705+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:31:29,724 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 1 filtered):
+2026-09-22T04:31:29.724705+00:00 ip-[REDACTED] python[424449]:   TRANSRAILL-EQ: +5.99% @ 439.00
+2026-09-22T04:31:29.724705+00:00 ip-[REDACTED] python[424449]:     Score=0.762 | Vol=3.3x | Momentum=0.84 | BuyPressure=0.41 | Stability=0.72 | PrevTrend=0.75
+2026-09-22T04:31:30.342152+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:31:30,342 | INFO | algo_trader | Validating 4 candidates in parallel...
+2026-09-22T04:31:30.365653+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:31:30,365 | INFO | algo_trader | ENTRY REJECTED PROTEAN-EQ: Range position 0.835 < 0.85 (price retreating from high)
+2026-09-22T04:31:30.370385+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:31:30,370 | INFO | algo_trader | ENTRY REJECTED BHARATSE-EQ: Range position 0.715 < 0.85 (price retreating from high)
+2026-09-22T04:31:30.377279+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:31:30,377 | INFO | algo_trader | Near-breakout skip for TRANSRAILL-EQ: range=0.850, gain=6.1% — skipping breakout check
+2026-09-22T04:31:30.378824+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:31:30,378 | INFO | algo_trader | Near-breakout skip for KPIGREEN-EQ: range=0.955, gain=6.6% — skipping breakout check
+2026-09-22T04:31:31.378772+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:31:31,378 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-22T04:31:31.623828+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:31:31,623 | INFO | algo_trader | ENTRY REJECTED KPIGREEN-EQ: Volume fading: current 43032 vs avg 102950 (ratio 0.42 < 1.2)
+2026-09-22T04:31:36.400537+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:31:36,400 | INFO | algo_trader | ENTRY REJECTED TRANSRAILL-EQ: Volume fading: current 3805 vs avg 18091 (ratio 0.21 < 1.2)
+2026-09-22T04:31:36.407817+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:31:36,407 | INFO | algo_trader | Validation completed in 6.1 seconds: 0/4 passed.
+2026-09-22T04:31:36.408049+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:31:36,407 | INFO | algo_trader | No candidates passed real-time validation.
+2026-09-22T04:31:36.986201+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:31:36,986 | INFO | algo_trader | Scan attempt 2 — retrying in 120s (window open until 12:00)...
+2026-09-22T04:33:36.986560+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:33:36,986 | INFO | algo_trader | Scanning 2681 stocks for top 1 candidates (pool=5)...
+2026-09-22T04:33:36.987396+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:33:36,986 | INFO | algo_trader | Fetching quotes for 2681 stocks...
+2026-09-22T04:33:48.152194+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:33:48,152 | INFO | algo_trader | Received 2672 quotes.
+2026-09-22T04:33:48.154713+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:33:48,154 | INFO | algo_trader | Candidates in 5-8% gain range: 25
+2026-09-22T04:33:48.154894+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:33:48,154 | INFO | algo_trader | Fetching daily candles for 25 candidates...
+2026-09-22T04:33:52.156569+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:33:52,155 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-22T04:34:01.176387+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:34:01,176 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-09-22T04:34:11.193864+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:34:11,193 | INFO | algo_trader | Rank #1: SUNDROP-EQ — gain=+6.05%, score=0.804 (vol=2.5x, momentum=0.88, buy_pressure=0.59, stability=0.69, prev_trend=0.75)
+2026-09-22T04:34:11.194561+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:34:11,193 | INFO | algo_trader | Rank #2: TRANSRAILL-EQ — gain=+6.45%, score=0.784 (vol=3.6x, momentum=0.92, buy_pressure=0.42, stability=0.72, prev_trend=0.75)
+2026-09-22T04:34:11.194561+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:34:11,193 | INFO | algo_trader | Rank #3: JAINREC-EQ — gain=+7.74%, score=0.776 (vol=12.0x, momentum=0.76, buy_pressure=0.67, stability=0.84, prev_trend=0.50)
+2026-09-22T04:34:11.194561+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:34:11,193 | INFO | algo_trader | Rank #4: PROTEAN-EQ — gain=+7.42%, score=0.755 (vol=2.8x, momentum=0.84, buy_pressure=0.50, stability=0.55, prev_trend=0.75)
+2026-09-22T04:34:11.194561+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:34:11,194 | INFO | algo_trader | Rank #5: BHARATSE-EQ — gain=+6.06%, score=0.683 (vol=4.3x, momentum=0.73, buy_pressure=0.29, stability=0.78, prev_trend=0.50)
+2026-09-22T04:34:11.525903+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:34:11,525 | INFO | algo_trader | Scan completed in 34.5 seconds. Found 5 raw candidates.
+2026-09-22T04:34:11.531270+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:34:11,531 | INFO | algo_trader | Checking read-only restrictions for 5 candidates...
+2026-09-22T04:34:11.540223+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:34:11,540 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 5 tradable, 0 rejected.
+2026-09-22T04:34:11.540485+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:34:11,540 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 0 filtered):
+2026-09-22T04:34:11.540485+00:00 ip-[REDACTED] python[424449]:   SUNDROP-EQ: +6.05% @ 750.75
+2026-09-22T04:34:11.540485+00:00 ip-[REDACTED] python[424449]:     Score=0.804 | Vol=2.5x | Momentum=0.88 | BuyPressure=0.59 | Stability=0.69 | PrevTrend=0.75
+2026-09-22T04:34:12.145180+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:34:12,145 | INFO | algo_trader | Validating 5 candidates in parallel...
+2026-09-22T04:34:12.166876+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:34:12,166 | INFO | algo_trader | ENTRY REJECTED TRANSRAILL-EQ: Range position 0.818 < 0.85 (price retreating from high)
+2026-09-22T04:34:12.176271+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:34:12,176 | INFO | algo_trader | ENTRY REJECTED JAINREC-EQ: Range position 0.794 < 0.85 (price retreating from high)
+2026-09-22T04:34:12.179043+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:34:12,178 | INFO | algo_trader | ENTRY REJECTED PROTEAN-EQ: Range position 0.822 < 0.85 (price retreating from high)
+2026-09-22T04:34:12.187072+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:34:12,186 | INFO | algo_trader | ENTRY REJECTED BHARATSE-EQ: Range position 0.720 < 0.85 (price retreating from high)
+2026-09-22T04:34:12.192232+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:34:12,192 | INFO | algo_trader | Near-breakout skip for SUNDROP-EQ: range=0.978, gain=6.6% — skipping breakout check
+2026-09-22T04:34:12.206386+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:34:12,206 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-22T04:34:17.221227+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:34:17,221 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-09-22T04:34:27.240639+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:34:27,240 | INFO | algo_trader | ENTRY REJECTED SUNDROP-EQ: Volume fading: current 69 vs avg 1528 (ratio 0.05 < 1.2)
+2026-09-22T04:34:27.249533+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:34:27,249 | INFO | algo_trader | Validation completed in 15.1 seconds: 0/5 passed.
+2026-09-22T04:34:27.249673+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:34:27,249 | INFO | algo_trader | No candidates passed real-time validation.
+2026-09-22T04:34:27.893688+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:34:27,893 | INFO | algo_trader | Scan attempt 3 — retrying in 120s (window open until 12:00)...
+2026-09-22T04:36:27.894053+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:36:27,893 | INFO | algo_trader | Scanning 2681 stocks for top 1 candidates (pool=5)...
+2026-09-22T04:36:27.898463+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:36:27,894 | INFO | algo_trader | Fetching quotes for 2681 stocks...
+2026-09-22T04:36:34.555832+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:36:34,555 | INFO | algo_trader | Received 2672 quotes.
+2026-09-22T04:36:34.558254+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:36:34,558 | INFO | algo_trader | Candidates in 5-8% gain range: 23
+2026-09-22T04:36:34.558421+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:36:34,558 | INFO | algo_trader | Fetching daily candles for 23 candidates...
+2026-09-22T04:36:36.559569+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:36:36,559 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-22T04:36:36.580281+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:36:36,580 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-22T04:36:42.606087+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:36:42,605 | INFO | algo_trader | Rank #1: SUNDROP-EQ — gain=+7.07%, score=0.826 (vol=2.7x, momentum=0.97, buy_pressure=0.59, stability=0.69, prev_trend=0.75)
+2026-09-22T04:36:42.606701+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:36:42,606 | INFO | algo_trader | Rank #2: PROTEAN-EQ — gain=+7.05%, score=0.760 (vol=2.9x, momentum=0.81, buy_pressure=0.56, stability=0.55, prev_trend=0.75)
+2026-09-22T04:36:42.606701+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:36:42,606 | INFO | algo_trader | Rank #3: TRANSRAILL-EQ — gain=+5.78%, score=0.751 (vol=3.8x, momentum=0.80, buy_pressure=0.41, stability=0.72, prev_trend=0.75)
+2026-09-22T04:36:42.606701+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:36:42,606 | INFO | algo_trader | Rank #4: ITDC-EQ — gain=+7.73%, score=0.712 (vol=8.6x, momentum=0.76, buy_pressure=0.23, stability=1.00, prev_trend=0.50)
+2026-09-22T04:36:42.606701+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:36:42,606 | INFO | algo_trader | Rank #5: KPIGREEN-EQ — gain=+6.30%, score=0.709 (vol=1.1x, momentum=0.91, buy_pressure=0.40, stability=1.00, prev_trend=0.75)
+2026-09-22T04:36:42.922149+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:36:42,921 | INFO | algo_trader | Scan completed in 15.0 seconds. Found 5 raw candidates.
+2026-09-22T04:36:42.928475+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:36:42,928 | INFO | algo_trader | Checking read-only restrictions for 5 candidates...
+2026-09-22T04:36:42.935300+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:36:42,935 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 5 tradable, 0 rejected.
+2026-09-22T04:36:42.935493+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:36:42,935 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 0 filtered):
+2026-09-22T04:36:42.935493+00:00 ip-[REDACTED] python[424449]:   SUNDROP-EQ: +7.07% @ 758.00
+2026-09-22T04:36:42.935493+00:00 ip-[REDACTED] python[424449]:     Score=0.826 | Vol=2.7x | Momentum=0.97 | BuyPressure=0.59 | Stability=0.69 | PrevTrend=0.75
+2026-09-22T04:36:43.526794+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:36:43,526 | INFO | algo_trader | Validating 5 candidates in parallel...
+2026-09-22T04:36:43.549044+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:36:43,548 | INFO | algo_trader | ENTRY REJECTED SUNDROP-EQ: Range position 0.838 < 0.85 (price retreating from high)
+2026-09-22T04:36:43.555429+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:36:43,555 | INFO | algo_trader | ENTRY REJECTED PROTEAN-EQ: Range position 0.810 < 0.85 (price retreating from high)
+2026-09-22T04:36:43.559153+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:36:43,559 | INFO | algo_trader | ENTRY REJECTED TRANSRAILL-EQ: Range position 0.781 < 0.85 (price retreating from high)
+2026-09-22T04:36:43.564314+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:36:43,564 | INFO | algo_trader | ENTRY REJECTED ITDC-EQ: Range position 0.770 < 0.85 (price retreating from high)
+2026-09-22T04:36:43.569397+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:36:43,569 | INFO | algo_trader | Near-breakout skip for KPIGREEN-EQ: range=0.923, gain=6.4% — skipping breakout check
+2026-09-22T04:36:43.603491+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:36:43,603 | INFO | algo_trader | ENTRY REJECTED KPIGREEN-EQ: Volume fading: current 77613 vs avg 75553 (ratio 1.03 < 1.2)
+2026-09-22T04:36:43.611452+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:36:43,611 | INFO | algo_trader | Validation completed in 0.1 seconds: 0/5 passed.
+2026-09-22T04:36:43.612024+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:36:43,611 | INFO | algo_trader | No candidates passed real-time validation.
+2026-09-22T04:36:44.207818+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:36:44,207 | INFO | algo_trader | Scan attempt 4 — retrying in 120s (window open until 12:00)...
+2026-09-22T04:38:44.208236+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:38:44,208 | INFO | algo_trader | Scanning 2681 stocks for top 1 candidates (pool=5)...
+2026-09-22T04:38:44.209056+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:38:44,208 | INFO | algo_trader | Fetching quotes for 2681 stocks...
+2026-09-22T04:38:50.871718+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:38:50,871 | INFO | algo_trader | Received 2672 quotes.
+2026-09-22T04:38:50.874243+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:38:50,874 | INFO | algo_trader | Candidates in 5-8% gain range: 22
+2026-09-22T04:38:50.874431+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:38:50,874 | INFO | algo_trader | Fetching daily candles for 22 candidates...
+2026-09-22T04:38:51.894213+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:38:51,894 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-22T04:38:56.909612+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:38:56,909 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-09-22T04:39:06.935558+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:39:06,935 | INFO | algo_trader | Rank #1: SUNDROP-EQ — gain=+6.23%, score=0.796 (vol=2.8x, momentum=0.84, buy_pressure=0.60, stability=0.69, prev_trend=0.75)
+2026-09-22T04:39:06.936199+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:39:06,935 | INFO | algo_trader | Rank #2: TRANSRAILL-EQ — gain=+6.27%, score=0.776 (vol=3.9x, momentum=0.88, buy_pressure=0.42, stability=0.72, prev_trend=0.75)
+2026-09-22T04:39:06.936199+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:39:06,935 | INFO | algo_trader | Rank #3: JAINREC-EQ — gain=+7.61%, score=0.773 (vol=12.4x, momentum=0.75, buy_pressure=0.68, stability=0.84, prev_trend=0.50)
+2026-09-22T04:39:06.936199+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:39:06,935 | INFO | algo_trader | Rank #4: PROTEAN-EQ — gain=+6.57%, score=0.748 (vol=3.0x, momentum=0.78, buy_pressure=0.55, stability=0.55, prev_trend=0.75)
+2026-09-22T04:39:06.936199+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:39:06,935 | INFO | algo_trader | Rank #5: KPIGREEN-EQ — gain=+5.94%, score=0.702 (vol=1.2x, momentum=0.86, buy_pressure=0.39, stability=1.00, prev_trend=0.75)
+2026-09-22T04:39:07.246274+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:39:07,246 | INFO | algo_trader | Scan completed in 23.0 seconds. Found 5 raw candidates.
+2026-09-22T04:39:07.250210+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:39:07,250 | INFO | algo_trader | Checking read-only restrictions for 5 candidates...
+2026-09-22T04:39:07.255375+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:39:07,255 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 5 tradable, 0 rejected.
+2026-09-22T04:39:07.255621+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:39:07,255 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 0 filtered):
+2026-09-22T04:39:07.255621+00:00 ip-[REDACTED] python[424449]:   SUNDROP-EQ: +6.23% @ 752.05
+2026-09-22T04:39:07.255621+00:00 ip-[REDACTED] python[424449]:     Score=0.796 | Vol=2.8x | Momentum=0.84 | BuyPressure=0.60 | Stability=0.69 | PrevTrend=0.75
+2026-09-22T04:39:07.835445+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:39:07,835 | INFO | algo_trader | Validating 5 candidates in parallel...
+2026-09-22T04:39:07.859736+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:39:07,859 | INFO | algo_trader | ENTRY REJECTED JAINREC-EQ: Range position 0.737 < 0.85 (price retreating from high)
+2026-09-22T04:39:07.864752+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:39:07,864 | INFO | algo_trader | ENTRY REJECTED PROTEAN-EQ: Range position 0.807 < 0.85 (price retreating from high)
+2026-09-22T04:39:07.873996+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:39:07,873 | INFO | algo_trader | ENTRY REJECTED KPIGREEN-EQ: Range position 0.819 < 0.85 (price retreating from high)
+2026-09-22T04:39:07.879604+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:39:07,879 | INFO | algo_trader | Near-breakout skip for SUNDROP-EQ: range=0.882, gain=6.5% — skipping breakout check
+2026-09-22T04:39:07.880012+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:39:07,879 | INFO | algo_trader | Near-breakout skip for TRANSRAILL-EQ: range=0.945, gain=6.6% — skipping breakout check
+2026-09-22T04:39:07.936394+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:39:07,936 | INFO | algo_trader | ENTRY REJECTED SUNDROP-EQ: Volume fading: current 50 vs avg 2336 (ratio 0.02 < 1.2)
+2026-09-22T04:39:08.935819+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:39:08,935 | INFO | algo_trader | ENTRY REJECTED TRANSRAILL-EQ: Volume fading: current 4344 vs avg 19060 (ratio 0.23 < 1.2)
+2026-09-22T04:39:08.940705+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:39:08,940 | INFO | algo_trader | Validation completed in 1.1 seconds: 0/5 passed.
+2026-09-22T04:39:08.941255+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:39:08,940 | INFO | algo_trader | No candidates passed real-time validation.
+2026-09-22T04:39:09.523416+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:39:09,523 | INFO | algo_trader | Scan attempt 5 — retrying in 120s (window open until 12:00)...
+2026-09-22T04:41:09.523806+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:41:09,523 | INFO | algo_trader | Scanning 2681 stocks for top 1 candidates (pool=5)...
+2026-09-22T04:41:09.524429+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:41:09,523 | INFO | algo_trader | Fetching quotes for 2681 stocks...
+2026-09-22T04:41:16.230197+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:41:16,230 | INFO | algo_trader | Received 2672 quotes.
+2026-09-22T04:41:16.232849+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:41:16,232 | INFO | algo_trader | Candidates in 5-8% gain range: 26
+2026-09-22T04:41:16.233043+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:41:16,232 | INFO | algo_trader | Fetching daily candles for 26 candidates...
+2026-09-22T04:41:18.280160+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:41:18,280 | INFO | algo_trader | Rank #1: TRANSRAILL-EQ — gain=+7.15%, score=0.802 (vol=4.3x, momentum=0.95, buy_pressure=0.47, stability=0.72, prev_trend=0.75)
+2026-09-22T04:41:18.280820+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:41:18,280 | INFO | algo_trader | Rank #2: SUNDROP-EQ — gain=+6.19%, score=0.796 (vol=2.9x, momentum=0.84, buy_pressure=0.60, stability=0.69, prev_trend=0.75)
+2026-09-22T04:41:18.280820+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:41:18,280 | INFO | algo_trader | Rank #3: PROTEAN-EQ — gain=+7.36%, score=0.762 (vol=3.0x, momentum=0.84, buy_pressure=0.54, stability=0.55, prev_trend=0.75)
+2026-09-22T04:41:18.280820+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:41:18,280 | INFO | algo_trader | Rank #4: ITDC-EQ — gain=+7.54%, score=0.753 (vol=9.9x, momentum=0.74, buy_pressure=0.46, stability=1.00, prev_trend=0.50)
+2026-09-22T04:41:18.280820+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:41:18,280 | INFO | algo_trader | Rank #5: ORCHPHARMA-EQ — gain=+5.58%, score=0.716 (vol=1.1x, momentum=0.99, buy_pressure=0.47, stability=0.85, prev_trend=0.75)
+2026-09-22T04:41:18.632752+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:41:18,632 | INFO | algo_trader | Scan completed in 9.1 seconds. Found 5 raw candidates.
+2026-09-22T04:41:18.639845+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:41:18,639 | INFO | algo_trader | Skipped by ASM/GSM/circuit filter:
+2026-09-22T04:41:18.639845+00:00 ip-[REDACTED] python[424449]:   ORCHPHARMA-EQ: ASM listed (Additional Surveillance Measure)
+2026-09-22T04:41:18.640174+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:41:18,639 | INFO | algo_trader | Checking read-only restrictions for 4 candidates...
+2026-09-22T04:41:18.645040+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:41:18,644 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 4 tradable, 0 rejected.
+2026-09-22T04:41:18.645235+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:41:18,645 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 1 filtered):
+2026-09-22T04:41:18.645235+00:00 ip-[REDACTED] python[424449]:   TRANSRAILL-EQ: +7.15% @ 443.80
+2026-09-22T04:41:18.645235+00:00 ip-[REDACTED] python[424449]:     Score=0.802 | Vol=4.3x | Momentum=0.95 | BuyPressure=0.47 | Stability=0.72 | PrevTrend=0.75
+2026-09-22T04:41:20.076498+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:41:20,076 | INFO | algo_trader | Validating 4 candidates in parallel...
+2026-09-22T04:41:20.102217+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:41:20,102 | INFO | algo_trader | ENTRY REJECTED SUNDROP-EQ: Range position 0.828 < 0.85 (price retreating from high)
+2026-09-22T04:41:20.106996+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:41:20,106 | INFO | algo_trader | ENTRY REJECTED PROTEAN-EQ: Range position 0.843 < 0.85 (price retreating from high)
+2026-09-22T04:41:20.109371+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:41:20,109 | INFO | algo_trader | ENTRY REJECTED ITDC-EQ: Range position 0.741 < 0.85 (price retreating from high)
+2026-09-22T04:41:21.131425+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:41:21,131 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-22T04:41:26.156679+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:41:26,156 | INFO | algo_trader | ENTRY VALIDATED TRANSRAILL-EQ: price=446.80, gain=+7.87%, range=0.987, breakout=True, vol_ratio=1.75, spread=0.0900%
+2026-09-22T04:41:26.159056+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:41:26,158 | INFO | algo_trader | Validation completed in 6.1 seconds: 1/4 passed.
+2026-09-22T04:41:26.159173+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:41:26,159 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-09-22T04:41:26.159228+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:41:26,159 | INFO | algo_trader | Capital: 100000.00 x 5.0x leverage = 500000.00 buying power | 1 validated stocks | 475000.00 per stock
+2026-09-22T04:41:27.155502+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:41:27,155 | INFO | algo_trader | ATR computed for token 28714: 5.8455 (from 12 candles, price=446.80, ATR%=1.31%)
+2026-09-22T04:41:27.183340+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:41:27,183 | INFO | algo_trader | [PAPER] MARKET order filled: BUY TRANSRAILL-EQ 111 @ 447.02 (reference=446.80, fee=49.62) id=fbedb906
+2026-09-22T04:41:27.185001+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:41:27,184 | INFO | algo_trader | MARKET order placed: BUY TRANSRAILL-EQ 111 [INTRADAY] {'response': {'data': {'orderid': 'fbedb906'}}}
+2026-09-22T04:41:27.191527+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:41:27,191 | INFO | algo_trader | [PAPER] SL-M order placed: SELL TRANSRAILL-EQ 111 trigger=438.05 id=688b0345
+2026-09-22T04:41:27.193101+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:41:27,193 | INFO | algo_trader | SL-M order placed for TRANSRAILL-EQ: trigger=438.08, orderid=688b0345
+2026-09-22T04:41:27.195912+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:41:27,195 | INFO | algo_trader | ENTRY: TRANSRAILL-EQ [MIS] — 111 shares @ 447.02 (capital=475000.00, gain=+7.15%, score=0.802, ATR=5.8455 (1.31%), SL=438.08, hard_stop=438.08) | {'response': {'data': {'orderid': 'fbedb906'}}}
+2026-09-22T04:41:27.788042+00:00 ip-[REDACTED] python[424449]: 2026-09-22 04:41:27,787 | INFO | algo_trader | Monitoring 1 positions with trailing stop...
+2026-09-22T05:01:50.791795+00:00 ip-[REDACTED] python[424449]: 2026-09-22 05:01:50,791 | INFO | algo_trader | TRAILING STOP UPDATE TRANSRAILL-EQ: SL 438.08 -> 444.78 (ltp=452.00, bid=452.00, high=452.00, profit=1.1%, intraday=9.1%, locked=False, ATR=5.8455)
+2026-09-22T05:01:50.795548+00:00 ip-[REDACTED] python[424449]: 2026-09-22 05:01:50,791 | INFO | algo_trader | [PAPER] SL-M modified: TRANSRAILL-EQ trigger 438.05 → 444.75 id=688b0345
+2026-09-22T05:01:50.795548+00:00 ip-[REDACTED] python[424449]: 2026-09-22 05:01:50,793 | INFO | algo_trader | SL-M trigger updated for TRANSRAILL-EQ: new trigger=444.78
+2026-09-22T05:08:12.283120+00:00 ip-[REDACTED] python[424449]: 2026-09-22 05:08:12,282 | INFO | algo_trader | [position_check] TRANSRAILL-EQ: netqty=111
+2026-09-22T05:08:12.286811+00:00 ip-[REDACTED] python[424449]: 2026-09-22 05:08:12,284 | INFO | algo_trader | [position_check] TRANSRAILL-EQ: netqty=111
+2026-09-22T05:08:12.407869+00:00 ip-[REDACTED] python[424449]: 2026-09-22 05:08:12,407 | INFO | algo_trader | [PAPER] MARKET order filled: SELL TRANSRAILL-EQ 111 @ 444.38 (reference=444.60, fee=49.33) id=a044b172
+2026-09-22T05:08:12.412611+00:00 ip-[REDACTED] python[424449]: 2026-09-22 05:08:12,412 | INFO | algo_trader | [exit_attempt] Exit confirmed for TRANSRAILL-EQ: 111 shares @ 444.38
+2026-09-22T05:08:12.412830+00:00 ip-[REDACTED] python[424449]: 2026-09-22 05:08:12,412 | INFO | algo_trader | [PAPER] Order cancelled: TRANSRAILL-EQ id=688b0345
+2026-09-22T05:08:12.414013+00:00 ip-[REDACTED] python[424449]: 2026-09-22 05:08:12,413 | INFO | algo_trader | SL-M order confirmed CANCELLED for TRANSRAILL-EQ: 688b0345
+2026-09-22T05:08:12.416233+00:00 ip-[REDACTED] python[424449]: 2026-09-22 05:08:12,416 | INFO | algo_trader | TRAILING STOP (4% trail, <2% profit) EXIT: TRANSRAILL-EQ — 0 shares @ 444.38 (entry=447.02, high=455.95, SL=444.78, hard_stop=438.08, ATR=5.8455, locked=False, PnL=-391.99, daily_pnl=-391.99, consecutive_losses=1/2, round=0/0) | ExitOutcome(state=<ExitState.CLOSED: 'closed'>, execution=OrderExecution(order_id='a044b172', state=<OrderState.FILLED: 'filled'>, requested_quantity=111, filled_quantity=111, average_price=444.38, reason='', raw_order={'orderid': 'a044b172', 'tradingsymbol': 'TRANSRAILL-EQ', 'transactiontype': 'SELL', 'quantity': '111', 'price': '444.38', 'filledshares': '111', 'averageprice': '444.38', 'triggerprice': '0.0', 'orderstatus': 'COMPLETE', 'status': 'COMPLETE', 'ordertype': 'MARKET', 'producttype': 'INTRADAY', 'referenceprice': '444.6', 'fees': '49.33'}), reason='')
+2026-09-22T05:08:23.109481+00:00 ip-[REDACTED] python[424449]: 2026-09-22 05:08:23,109 | INFO | algo_trader | All positions closed by stop-loss.
+2026-09-22T05:08:23.110120+00:00 ip-[REDACTED] python[424449]: 2026-09-22 05:08:23,109 | INFO | algo_trader | Smart gate: round P&L was ₹-391.99 — skipping re-entry.
+2026-09-22T05:08:23.721104+00:00 ip-[REDACTED] python[424449]: 2026-09-22 05:08:23,720 | INFO | algo_trader | [auth_refresh] Session age 2303s >= 300s, refreshing...
+2026-09-22T05:08:23.721891+00:00 ip-[REDACTED] python[424449]: 2026-09-22 05:08:23,721 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-09-22T05:08:23.790467+00:00 ip-[REDACTED] python[424449]: 2026-09-22 05:08:23,790 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-09-22T05:08:23.791926+00:00 ip-[REDACTED] python[424449]: 2026-09-22 05:08:23,791 | INFO | algo_trader |
+2026-09-22T05:08:23.791926+00:00 ip-[REDACTED] python[424449]: ============================================================
+2026-09-22T05:08:23.791926+00:00 ip-[REDACTED] python[424449]: PAPER TRADING SUMMARY
+2026-09-22T05:08:23.791926+00:00 ip-[REDACTED] python[424449]: ============================================================
+2026-09-22T05:08:23.791926+00:00 ip-[REDACTED] python[424449]: Total trades: 2
+2026-09-22T05:08:23.791926+00:00 ip-[REDACTED] python[424449]: Buys: 1, Sells: 1
+2026-09-22T05:08:23.791926+00:00 ip-[REDACTED] python[424449]:   10:11:27 BUY  TRANSRAILL-EQ x111 @ 447.02 fees: Rs.49.62
+2026-09-22T05:08:23.791926+00:00 ip-[REDACTED] python[424449]:   10:38:12 SELL TRANSRAILL-EQ x111 @ 444.38 gross: Rs.-293.04, fees: Rs.98.95, net P&L: Rs.-391.99
+2026-09-22T05:08:23.791926+00:00 ip-[REDACTED] python[424449]: Daily net P&L: Rs.-391.99
+2026-09-22T05:08:23.791926+00:00 ip-[REDACTED] python[424449]: Capital: Rs.100,000.00 → Rs.99,608.01
+2026-09-22T05:08:23.791926+00:00 ip-[REDACTED] python[424449]: All positions closed.
+2026-09-22T05:08:23.791926+00:00 ip-[REDACTED] python[424449]: ============================================================
+2026-09-22T05:08:36.557176+00:00 ip-[REDACTED] python[424449]: 2026-09-22 05:08:36,557 | INFO | algo_trader | Replay comparison complete: 201/201 decisions matched; recommended slippage=0 bps; report=/home/ubuntu/algo-trader/data/replay_reports/2026-09-22/summary.json; universe=data/universe_snapshots.json
+2026-09-22T05:08:36.557789+00:00 ip-[REDACTED] python[424449]: 2026-09-22 05:08:36,557 | INFO | algo_trader | Trading day complete. Daily P&L: ₹-391.99. Sleeping 23.4h until tomorrow.
