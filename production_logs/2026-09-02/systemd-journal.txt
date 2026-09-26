@@ -1,0 +1,265 @@
+2026-09-02T04:30:00.342491+00:00 ip-[REDACTED] python[363706]: 2026-09-02 04:30:00,342 | INFO | algo_trader | Daily candle cache cleared.
+2026-09-02T04:30:00.350131+00:00 ip-[REDACTED] python[363706]: 2026-09-02 04:30:00,344 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-09-02T04:30:00.350131+00:00 ip-[REDACTED] python[363706]: 2026-09-02 04:30:00,344 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-09-02T04:30:00.440195+00:00 ip-[REDACTED] python[363706]: 2026-09-02 04:30:00,440 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-09-02T04:30:00.441810+00:00 ip-[REDACTED] python[363706]: 2026-09-02 04:30:00,441 | INFO | algo_trader | [auth_refresh] Angel One session refreshed.
+2026-09-02T04:30:00.627956+00:00 ip-[REDACTED] python[363706]: 2026-09-02 04:30:00,627 | INFO | algo_trader | Market Check: 1/4 — NOT BULLISH
+2026-09-02T04:30:00.627956+00:00 ip-[REDACTED] python[363706]: 1. Index Direction: FAIL ❌
+2026-09-02T04:30:00.627956+00:00 ip-[REDACTED] python[363706]:    Nifty 50: -0.85% (need > 0%)
+2026-09-02T04:30:00.627956+00:00 ip-[REDACTED] python[363706]: 2. Market Breadth: FAIL ❌
+2026-09-02T04:30:00.627956+00:00 ip-[REDACTED] python[363706]:    Advancers: 5, Decliners: 45
+2026-09-02T04:30:00.627956+00:00 ip-[REDACTED] python[363706]:    Breadth ratio: 0.11 (need > 1.2)
+2026-09-02T04:30:00.627956+00:00 ip-[REDACTED] python[363706]: 3. Intraday Strength: FAIL ❌
+2026-09-02T04:30:00.627956+00:00 ip-[REDACTED] python[363706]:    Nifty LTP vs Open: 23851.20 vs 23858.00
+2026-09-02T04:30:00.627956+00:00 ip-[REDACTED] python[363706]:    NIFTYBEES vs VWAP: 272.40 vs 272.12
+2026-09-02T04:30:00.627956+00:00 ip-[REDACTED] python[363706]: 4. Volatility Filter: PASS ✅
+2026-09-02T04:30:00.627956+00:00 ip-[REDACTED] python[363706]:    India VIX change: +3.83% (reject if > +5%)
+2026-09-02T04:30:00.627956+00:00 ip-[REDACTED] python[363706]: Decision: SKIP TRADING (score 1/4 < 2)
+2026-09-02T04:30:00.627956+00:00 ip-[REDACTED] python[363706]: Failed: Index Direction, Market Breadth, Intraday Strength
+2026-09-02T05:30:01.324594+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:30:01,321 | INFO | algo_trader | Daily candle cache cleared.
+2026-09-02T05:30:01.337313+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:30:01,326 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-09-02T05:30:01.337313+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:30:01,326 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-09-02T05:30:01.451096+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:30:01,450 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-09-02T05:30:01.453653+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:30:01,453 | INFO | algo_trader | [auth_refresh] Angel One session refreshed.
+2026-09-02T05:30:01.711169+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:30:01,711 | INFO | algo_trader | Market Check: 2/4 — BULLISH
+2026-09-02T05:30:01.711169+00:00 ip-[REDACTED] python[363706]: 1. Index Direction: FAIL ❌
+2026-09-02T05:30:01.711169+00:00 ip-[REDACTED] python[363706]:    Nifty 50: -0.82% (need > 0%)
+2026-09-02T05:30:01.711169+00:00 ip-[REDACTED] python[363706]: 2. Market Breadth: FAIL ❌
+2026-09-02T05:30:01.711169+00:00 ip-[REDACTED] python[363706]:    Advancers: 8, Decliners: 41
+2026-09-02T05:30:01.711169+00:00 ip-[REDACTED] python[363706]:    Breadth ratio: 0.20 (need > 1.2)
+2026-09-02T05:30:01.711169+00:00 ip-[REDACTED] python[363706]: 3. Intraday Strength: PASS ✅
+2026-09-02T05:30:01.711169+00:00 ip-[REDACTED] python[363706]:    Nifty LTP vs Open: 23859.30 vs 23858.00
+2026-09-02T05:30:01.711169+00:00 ip-[REDACTED] python[363706]:    NIFTYBEES vs VWAP: 272.55 vs 272.26
+2026-09-02T05:30:01.711169+00:00 ip-[REDACTED] python[363706]: 4. Volatility Filter: PASS ✅
+2026-09-02T05:30:01.711169+00:00 ip-[REDACTED] python[363706]:    India VIX change: +2.44% (reject if > +5%)
+2026-09-02T05:30:01.711169+00:00 ip-[REDACTED] python[363706]: Decision: CONTRA-MOMENTUM MODE (score 2/4)
+2026-09-02T05:30:01.711169+00:00 ip-[REDACTED] python[363706]: Rules: entry before 12:00 only, no re-entry
+2026-09-02T05:30:01.711169+00:00 ip-[REDACTED] python[363706]: ⚡ CONTRA-MOMENTUM MODE: Score=2 — entry before 12:00 only, no re-entry.
+2026-09-02T05:30:02.311117+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:30:02,310 | INFO | algo_trader | Scanning 2672 stocks for top 1 candidates (pool=5)...
+2026-09-02T05:30:02.311277+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:30:02,311 | INFO | algo_trader | Fetching quotes for 2672 stocks...
+2026-09-02T05:30:08.977883+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:30:08,977 | INFO | algo_trader | Received 2670 quotes.
+2026-09-02T05:30:08.980608+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:30:08,980 | INFO | algo_trader | Candidates in 5-8% gain range: 9
+2026-09-02T05:30:08.980807+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:30:08,980 | INFO | algo_trader | Fetching daily candles for 9 candidates...
+2026-09-02T05:30:10.601399+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:30:10,601 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 1.0s (attempt 1/3)...
+2026-09-02T05:30:11.398050+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:30:11,397 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 1.0s (attempt 1/3)...
+2026-09-02T05:30:13.022676+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:30:13,022 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 2.0s (attempt 2/3)...
+2026-09-02T05:30:15.041003+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:30:15,040 | INFO | algo_trader | Rank #1: WINDLAS-EQ — gain=+6.31%, score=0.716 (vol=10.9x, momentum=0.72, buy_pressure=0.45, stability=0.81, prev_trend=0.50)
+2026-09-02T05:30:15.041730+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:30:15,041 | INFO | algo_trader | Rank #2: AYMSYNTEX-EQ — gain=+6.32%, score=0.715 (vol=1.1x, momentum=0.81, buy_pressure=0.48, stability=1.00, prev_trend=0.83)
+2026-09-02T05:30:15.041730+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:30:15,041 | INFO | algo_trader | Rank #3: RISHABH-EQ — gain=+5.05%, score=0.672 (vol=1.6x, momentum=0.77, buy_pressure=0.40, stability=0.84, prev_trend=0.50)
+2026-09-02T05:30:15.041730+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:30:15,041 | INFO | algo_trader | Rank #4: MOLBIO-EQ — gain=+5.08%, score=0.586 (vol=0.2x, momentum=0.95, buy_pressure=0.67, stability=0.88, prev_trend=0.33)
+2026-09-02T05:30:15.041730+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:30:15,041 | INFO | algo_trader | Rank #5: ARIES-EQ — gain=+5.59%, score=0.579 (vol=1.4x, momentum=0.47, buy_pressure=0.67, stability=0.88, prev_trend=0.17)
+2026-09-02T05:30:15.445824+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:30:15,445 | INFO | algo_trader | Scan completed in 13.1 seconds. Found 5 raw candidates.
+2026-09-02T05:30:15.451986+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:30:15,451 | INFO | algo_trader | Skipped by ASM/GSM/circuit filter:
+2026-09-02T05:30:15.451986+00:00 ip-[REDACTED] python[363706]:   ARIES-EQ: ASM listed (Additional Surveillance Measure)
+2026-09-02T05:30:15.452291+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:30:15,452 | INFO | algo_trader | Probing 4 candidates for broker tradability...
+2026-09-02T05:30:15.457127+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:30:15,457 | INFO | algo_trader | Probe completed in 0.0 seconds: 4 tradable, 0 rejected.
+2026-09-02T05:30:15.457303+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:30:15,457 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 1 filtered):
+2026-09-02T05:30:15.457303+00:00 ip-[REDACTED] python[363706]:   WINDLAS-EQ: +6.31% @ 1071.95
+2026-09-02T05:30:15.457303+00:00 ip-[REDACTED] python[363706]:     Score=0.716 | Vol=10.9x | Momentum=0.72 | BuyPressure=0.45 | Stability=0.81 | PrevTrend=0.50
+2026-09-02T05:30:16.086950+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:30:16,086 | INFO | algo_trader | Validating 4 candidates in parallel...
+2026-09-02T05:30:16.108295+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:30:16,108 | INFO | algo_trader | ENTRY REJECTED WINDLAS-EQ: Range position 0.709 < 0.85 (price retreating from high)
+2026-09-02T05:30:16.111747+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:30:16,111 | INFO | algo_trader | ENTRY REJECTED AYMSYNTEX-EQ: Range position 0.804 < 0.85 (price retreating from high)
+2026-09-02T05:30:16.113194+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:30:16,113 | INFO | algo_trader | ENTRY REJECTED RISHABH-EQ: Gain +4.96% outside 5.0-10.0% range
+2026-09-02T05:30:16.114576+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:30:16,114 | INFO | algo_trader | ENTRY REJECTED MOLBIO-EQ: Gain +4.99% outside 5.0-10.0% range
+2026-09-02T05:30:16.115967+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:30:16,115 | INFO | algo_trader | Validation completed in 0.0 seconds: 0/4 passed.
+2026-09-02T05:30:16.116813+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:30:16,115 | INFO | algo_trader | No candidates passed real-time validation.
+2026-09-02T05:30:16.735396+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:30:16,735 | INFO | algo_trader | Scan attempt 2 — retrying in 120s (window open until 12:00)...
+2026-09-02T05:32:16.735753+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:32:16,735 | INFO | algo_trader | Scanning 2672 stocks for top 1 candidates (pool=5)...
+2026-09-02T05:32:16.736584+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:32:16,735 | INFO | algo_trader | Fetching quotes for 2672 stocks...
+2026-09-02T05:32:23.397736+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:32:23,397 | INFO | algo_trader | Received 2670 quotes.
+2026-09-02T05:32:23.400346+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:32:23,400 | INFO | algo_trader | Candidates in 5-8% gain range: 12
+2026-09-02T05:32:23.400528+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:32:23,400 | INFO | algo_trader | Fetching daily candles for 12 candidates...
+2026-09-02T05:32:23.418678+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:32:23,418 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 1.0s (attempt 1/3)...
+2026-09-02T05:32:23.816965+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:32:23,816 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 1.0s (attempt 1/3)...
+2026-09-02T05:32:25.817134+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:32:25,817 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 2.0s (attempt 2/3)...
+2026-09-02T05:32:27.838910+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:32:27,838 | INFO | algo_trader | Rank #1: COALINDIA-EQ — gain=+5.03%, score=0.759 (vol=1.9x, momentum=0.99, buy_pressure=0.60, stability=0.67, prev_trend=0.33)
+2026-09-02T05:32:27.839538+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:32:27,838 | INFO | algo_trader | Rank #2: MAITHANALL-EQ — gain=+5.75%, score=0.727 (vol=3.5x, momentum=0.93, buy_pressure=0.43, stability=0.89, prev_trend=0.17)
+2026-09-02T05:32:27.839538+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:32:27,839 | INFO | algo_trader | Rank #3: WINDLAS-EQ — gain=+6.01%, score=0.709 (vol=11.0x, momentum=0.69, buy_pressure=0.45, stability=0.81, prev_trend=0.50)
+2026-09-02T05:32:27.839538+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:32:27,839 | INFO | algo_trader | Rank #4: AYMSYNTEX-EQ — gain=+6.12%, score=0.708 (vol=1.1x, momentum=0.79, buy_pressure=0.47, stability=1.00, prev_trend=0.83)
+2026-09-02T05:32:27.839538+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:32:27,839 | INFO | algo_trader | Rank #5: RISHABH-EQ — gain=+5.15%, score=0.679 (vol=1.6x, momentum=0.78, buy_pressure=0.41, stability=0.84, prev_trend=0.50)
+2026-09-02T05:32:28.095828+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:32:28,095 | INFO | algo_trader | Scan completed in 11.4 seconds. Found 5 raw candidates.
+2026-09-02T05:32:28.097870+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:32:28,097 | INFO | algo_trader | Probing 5 candidates for broker tradability...
+2026-09-02T05:32:28.099749+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:32:28,099 | INFO | algo_trader | Probe completed in 0.0 seconds: 5 tradable, 0 rejected.
+2026-09-02T05:32:28.099923+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:32:28,099 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 0 filtered):
+2026-09-02T05:32:28.099923+00:00 ip-[REDACTED] python[363706]:   COALINDIA-EQ: +5.03% @ 421.80
+2026-09-02T05:32:28.099923+00:00 ip-[REDACTED] python[363706]:     Score=0.759 | Vol=1.9x | Momentum=0.99 | BuyPressure=0.60 | Stability=0.67 | PrevTrend=0.33
+2026-09-02T05:32:28.780809+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:32:28,780 | INFO | algo_trader | Validating 5 candidates in parallel...
+2026-09-02T05:32:28.805909+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:32:28,805 | INFO | algo_trader | ENTRY REJECTED WINDLAS-EQ: Range position 0.666 < 0.85 (price retreating from high)
+2026-09-02T05:32:28.808074+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:32:28,807 | INFO | algo_trader | ENTRY REJECTED AYMSYNTEX-EQ: Range position 0.786 < 0.85 (price retreating from high)
+2026-09-02T05:32:28.809848+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:32:28,809 | INFO | algo_trader | ENTRY REJECTED RISHABH-EQ: Range position 0.808 < 0.85 (price retreating from high)
+2026-09-02T05:32:28.811833+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:32:28,811 | INFO | algo_trader | Near-breakout skip for COALINDIA-EQ: range=0.994, gain=5.0% — skipping breakout check
+2026-09-02T05:32:28.812265+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:32:28,812 | INFO | algo_trader | Near-breakout skip for MAITHANALL-EQ: range=0.918, gain=5.7% — skipping breakout check
+2026-09-02T05:32:28.830763+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:32:28,830 | INFO | algo_trader | ENTRY REJECTED COALINDIA-EQ: Volume fading: current 61750 vs avg 131143 (ratio 0.47 < 1.2)
+2026-09-02T05:32:29.234983+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:32:29,234 | INFO | algo_trader | ENTRY REJECTED MAITHANALL-EQ: Volume fading: current 105 vs avg 2158 (ratio 0.05 < 1.2)
+2026-09-02T05:32:29.237293+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:32:29,237 | INFO | algo_trader | Validation completed in 0.5 seconds: 0/5 passed.
+2026-09-02T05:32:29.237470+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:32:29,237 | INFO | algo_trader | No candidates passed real-time validation.
+2026-09-02T05:32:29.838971+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:32:29,838 | INFO | algo_trader | Scan attempt 3 — retrying in 120s (window open until 12:00)...
+2026-09-02T05:34:29.839332+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:34:29,839 | INFO | algo_trader | Scanning 2672 stocks for top 1 candidates (pool=5)...
+2026-09-02T05:34:29.840048+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:34:29,839 | INFO | algo_trader | Fetching quotes for 2672 stocks...
+2026-09-02T05:34:36.497140+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:34:36,497 | INFO | algo_trader | Received 2670 quotes.
+2026-09-02T05:34:36.499779+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:34:36,499 | INFO | algo_trader | Candidates in 5-8% gain range: 13
+2026-09-02T05:34:36.499896+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:34:36,499 | INFO | algo_trader | Fetching daily candles for 13 candidates...
+2026-09-02T05:34:36.918958+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:34:36,918 | INFO | algo_trader | Rank #1: MAITHANALL-EQ — gain=+5.70%, score=0.722 (vol=3.7x, momentum=0.92, buy_pressure=0.41, stability=0.89, prev_trend=0.17)
+2026-09-02T05:34:36.919167+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:34:36,919 | INFO | algo_trader | Rank #2: WINDLAS-EQ — gain=+6.07%, score=0.711 (vol=11.1x, momentum=0.69, buy_pressure=0.45, stability=0.81, prev_trend=0.50)
+2026-09-02T05:34:36.919167+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:34:36,919 | INFO | algo_trader | Rank #3: AYMSYNTEX-EQ — gain=+5.98%, score=0.709 (vol=1.2x, momentum=0.77, buy_pressure=0.48, stability=1.00, prev_trend=0.83)
+2026-09-02T05:34:36.919329+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:34:36,919 | INFO | algo_trader | Rank #4: RISHABH-EQ — gain=+5.26%, score=0.687 (vol=1.6x, momentum=0.79, buy_pressure=0.42, stability=0.84, prev_trend=0.50)
+2026-09-02T05:34:36.919329+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:34:36,919 | INFO | algo_trader | Rank #5: EXPLEOSOL-EQ — gain=+5.45%, score=0.625 (vol=15.4x, momentum=0.53, buy_pressure=0.51, stability=0.60, prev_trend=0.33)
+2026-09-02T05:34:37.240225+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:34:37,240 | INFO | algo_trader | Scan completed in 7.4 seconds. Found 5 raw candidates.
+2026-09-02T05:34:37.241681+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:34:37,241 | INFO | algo_trader | Probing 5 candidates for broker tradability...
+2026-09-02T05:34:37.243662+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:34:37,243 | INFO | algo_trader | Probe completed in 0.0 seconds: 5 tradable, 0 rejected.
+2026-09-02T05:34:37.243804+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:34:37,243 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 0 filtered):
+2026-09-02T05:34:37.243804+00:00 ip-[REDACTED] python[363706]:   MAITHANALL-EQ: +5.70% @ 1028.20
+2026-09-02T05:34:37.243804+00:00 ip-[REDACTED] python[363706]:     Score=0.722 | Vol=3.7x | Momentum=0.92 | BuyPressure=0.41 | Stability=0.89 | PrevTrend=0.17
+2026-09-02T05:34:37.849083+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:34:37,848 | INFO | algo_trader | Validating 5 candidates in parallel...
+2026-09-02T05:34:37.873237+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:34:37,873 | INFO | algo_trader | ENTRY REJECTED WINDLAS-EQ: Range position 0.693 < 0.85 (price retreating from high)
+2026-09-02T05:34:37.875081+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:34:37,874 | INFO | algo_trader | ENTRY REJECTED AYMSYNTEX-EQ: Range position 0.750 < 0.85 (price retreating from high)
+2026-09-02T05:34:37.876902+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:34:37,876 | INFO | algo_trader | ENTRY REJECTED RISHABH-EQ: Range position 0.809 < 0.85 (price retreating from high)
+2026-09-02T05:34:37.878753+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:34:37,878 | INFO | algo_trader | ENTRY REJECTED EXPLEOSOL-EQ: Range position 0.532 < 0.85 (price retreating from high)
+2026-09-02T05:34:37.880491+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:34:37,880 | INFO | algo_trader | Near-breakout skip for MAITHANALL-EQ: range=0.921, gain=5.7% — skipping breakout check
+2026-09-02T05:34:37.894901+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:34:37,894 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 1.0s (attempt 1/3)...
+2026-09-02T05:34:38.917042+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:34:38,916 | INFO | algo_trader | ENTRY REJECTED MAITHANALL-EQ: Volume fading: current 57 vs avg 2429 (ratio 0.02 < 1.2)
+2026-09-02T05:34:38.919287+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:34:38,919 | INFO | algo_trader | Validation completed in 1.1 seconds: 0/5 passed.
+2026-09-02T05:34:38.919403+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:34:38,919 | INFO | algo_trader | No candidates passed real-time validation.
+2026-09-02T05:34:39.517105+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:34:39,516 | INFO | algo_trader | Scan attempt 4 — retrying in 120s (window open until 12:00)...
+2026-09-02T05:36:39.517470+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:36:39,517 | INFO | algo_trader | Scanning 2672 stocks for top 1 candidates (pool=5)...
+2026-09-02T05:36:39.521219+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:36:39,517 | INFO | algo_trader | Fetching quotes for 2672 stocks...
+2026-09-02T05:36:46.177262+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:36:46,177 | INFO | algo_trader | Received 2670 quotes.
+2026-09-02T05:36:46.179839+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:36:46,179 | INFO | algo_trader | Candidates in 5-8% gain range: 11
+2026-09-02T05:36:46.180079+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:36:46,179 | INFO | algo_trader | Fetching daily candles for 11 candidates...
+2026-09-02T05:36:46.180373+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:36:46,180 | INFO | algo_trader | Rank #1: MAITHANALL-EQ — gain=+6.40%, score=0.731 (vol=4.1x, momentum=0.95, buy_pressure=0.42, stability=0.89, prev_trend=0.17)
+2026-09-02T05:36:46.180494+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:36:46,180 | INFO | algo_trader | Rank #2: WINDLAS-EQ — gain=+6.16%, score=0.713 (vol=11.2x, momentum=0.70, buy_pressure=0.45, stability=0.81, prev_trend=0.50)
+2026-09-02T05:36:46.180651+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:36:46,180 | INFO | algo_trader | Rank #3: RISHABH-EQ — gain=+5.68%, score=0.706 (vol=1.6x, momentum=0.84, buy_pressure=0.44, stability=0.84, prev_trend=0.50)
+2026-09-02T05:36:46.180651+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:36:46,180 | INFO | algo_trader | Rank #4: AYMSYNTEX-EQ — gain=+5.56%, score=0.700 (vol=1.2x, momentum=0.73, buy_pressure=0.47, stability=1.00, prev_trend=0.83)
+2026-09-02T05:36:46.180807+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:36:46,180 | INFO | algo_trader | Rank #5: ARIES-EQ — gain=+7.26%, score=0.623 (vol=1.4x, momentum=0.63, buy_pressure=0.67, stability=0.88, prev_trend=0.17)
+2026-09-02T05:36:46.432281+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:36:46,432 | INFO | algo_trader | Scan completed in 6.9 seconds. Found 5 raw candidates.
+2026-09-02T05:36:46.434018+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:36:46,433 | INFO | algo_trader | Skipped by ASM/GSM/circuit filter:
+2026-09-02T05:36:46.434018+00:00 ip-[REDACTED] python[363706]:   ARIES-EQ: ASM listed (Additional Surveillance Measure)
+2026-09-02T05:36:46.434170+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:36:46,434 | INFO | algo_trader | Probing 4 candidates for broker tradability...
+2026-09-02T05:36:46.436186+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:36:46,436 | INFO | algo_trader | Probe completed in 0.0 seconds: 4 tradable, 0 rejected.
+2026-09-02T05:36:46.436369+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:36:46,436 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 1 filtered):
+2026-09-02T05:36:46.436369+00:00 ip-[REDACTED] python[363706]:   MAITHANALL-EQ: +6.40% @ 1035.00
+2026-09-02T05:36:46.436369+00:00 ip-[REDACTED] python[363706]:     Score=0.731 | Vol=4.1x | Momentum=0.95 | BuyPressure=0.42 | Stability=0.89 | PrevTrend=0.17
+2026-09-02T05:36:47.045102+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:36:47,044 | INFO | algo_trader | Validating 4 candidates in parallel...
+2026-09-02T05:36:47.064363+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:36:47,064 | INFO | algo_trader | ENTRY REJECTED WINDLAS-EQ: Range position 0.703 < 0.85 (price retreating from high)
+2026-09-02T05:36:47.066158+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:36:47,066 | INFO | algo_trader | ENTRY REJECTED RISHABH-EQ: Range position 0.836 < 0.85 (price retreating from high)
+2026-09-02T05:36:47.068143+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:36:47,068 | INFO | algo_trader | ENTRY REJECTED AYMSYNTEX-EQ: Range position 0.734 < 0.85 (price retreating from high)
+2026-09-02T05:36:47.070488+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:36:47,070 | INFO | algo_trader | Near-breakout skip for MAITHANALL-EQ: range=0.933, gain=6.3% — skipping breakout check
+2026-09-02T05:36:47.096412+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:36:47,096 | INFO | algo_trader | ENTRY REJECTED MAITHANALL-EQ: Volume fading: current 1895 vs avg 2925 (ratio 0.65 < 1.2)
+2026-09-02T05:36:47.098684+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:36:47,098 | INFO | algo_trader | Validation completed in 0.1 seconds: 0/4 passed.
+2026-09-02T05:36:47.098853+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:36:47,098 | INFO | algo_trader | No candidates passed real-time validation.
+2026-09-02T05:36:47.676098+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:36:47,675 | INFO | algo_trader | Scan attempt 5 — retrying in 120s (window open until 12:00)...
+2026-09-02T05:38:47.676531+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:38:47,676 | INFO | algo_trader | Scanning 2672 stocks for top 1 candidates (pool=5)...
+2026-09-02T05:38:47.677417+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:38:47,676 | INFO | algo_trader | Fetching quotes for 2672 stocks...
+2026-09-02T05:38:54.336050+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:38:54,335 | INFO | algo_trader | Received 2670 quotes.
+2026-09-02T05:38:54.338764+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:38:54,338 | INFO | algo_trader | Candidates in 5-8% gain range: 12
+2026-09-02T05:38:54.338968+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:38:54,338 | INFO | algo_trader | Fetching daily candles for 12 candidates...
+2026-09-02T05:38:54.352392+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:38:54,352 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 1.0s (attempt 1/3)...
+2026-09-02T05:38:55.375410+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:38:55,375 | INFO | algo_trader | Rank #1: MAITHANALL-EQ — gain=+6.43%, score=0.730 (vol=4.2x, momentum=0.95, buy_pressure=0.42, stability=0.89, prev_trend=0.17)
+2026-09-02T05:38:55.376032+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:38:55,375 | INFO | algo_trader | Rank #2: WINDLAS-EQ — gain=+6.31%, score=0.718 (vol=11.2x, momentum=0.72, buy_pressure=0.46, stability=0.81, prev_trend=0.50)
+2026-09-02T05:38:55.376032+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:38:55,375 | INFO | algo_trader | Rank #3: MILKYMIST-EQ — gain=+7.99%, score=0.711 (vol=1.8x, momentum=0.83, buy_pressure=0.40, stability=0.83, prev_trend=0.50)
+2026-09-02T05:38:55.376032+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:38:55,375 | INFO | algo_trader | Rank #4: RISHABH-EQ — gain=+5.76%, score=0.709 (vol=1.7x, momentum=0.85, buy_pressure=0.43, stability=0.84, prev_trend=0.50)
+2026-09-02T05:38:55.376032+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:38:55,375 | INFO | algo_trader | Rank #5: AYMSYNTEX-EQ — gain=+5.57%, score=0.701 (vol=1.2x, momentum=0.73, buy_pressure=0.47, stability=1.00, prev_trend=0.83)
+2026-09-02T05:38:55.628954+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:38:55,628 | INFO | algo_trader | Scan completed in 8.0 seconds. Found 5 raw candidates.
+2026-09-02T05:38:55.630439+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:38:55,630 | INFO | algo_trader | Probing 5 candidates for broker tradability...
+2026-09-02T05:38:55.632191+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:38:55,632 | INFO | algo_trader | Probe completed in 0.0 seconds: 5 tradable, 0 rejected.
+2026-09-02T05:38:55.632357+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:38:55,632 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 0 filtered):
+2026-09-02T05:38:55.632357+00:00 ip-[REDACTED] python[363706]:   MAITHANALL-EQ: +6.43% @ 1035.25
+2026-09-02T05:38:55.632357+00:00 ip-[REDACTED] python[363706]:     Score=0.730 | Vol=4.2x | Momentum=0.95 | BuyPressure=0.42 | Stability=0.89 | PrevTrend=0.17
+2026-09-02T05:38:56.289345+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:38:56,289 | INFO | algo_trader | Validating 5 candidates in parallel...
+2026-09-02T05:38:56.308534+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:38:56,308 | INFO | algo_trader | ENTRY REJECTED WINDLAS-EQ: Range position 0.719 < 0.85 (price retreating from high)
+2026-09-02T05:38:56.310624+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:38:56,310 | INFO | algo_trader | ENTRY REJECTED MILKYMIST-EQ: Range position 0.825 < 0.85 (price retreating from high)
+2026-09-02T05:38:56.312498+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:38:56,312 | INFO | algo_trader | ENTRY REJECTED AYMSYNTEX-EQ: Range position 0.714 < 0.85 (price retreating from high)
+2026-09-02T05:38:56.314878+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:38:56,314 | INFO | algo_trader | Near-breakout skip for MAITHANALL-EQ: range=0.956, gain=6.5% — skipping breakout check
+2026-09-02T05:38:56.315294+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:38:56,315 | INFO | algo_trader | Near-breakout skip for RISHABH-EQ: range=0.853, gain=5.8% — skipping breakout check
+2026-09-02T05:38:56.330019+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:38:56,329 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 1.0s (attempt 1/3)...
+2026-09-02T05:38:56.735410+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:38:56,735 | INFO | algo_trader | ENTRY REJECTED RISHABH-EQ: Volume fading: current 633 vs avg 2597 (ratio 0.24 < 1.2)
+2026-09-02T05:38:57.343291+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:38:57,343 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 2.0s (attempt 2/3)...
+2026-09-02T05:38:59.362543+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:38:59,362 | INFO | algo_trader | ENTRY REJECTED MAITHANALL-EQ: Volume fading: current 2606 vs avg 2807 (ratio 0.93 < 1.2)
+2026-09-02T05:38:59.365068+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:38:59,364 | INFO | algo_trader | Validation completed in 3.1 seconds: 0/5 passed.
+2026-09-02T05:38:59.365213+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:38:59,365 | INFO | algo_trader | No candidates passed real-time validation.
+2026-09-02T05:39:00.013978+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:39:00,013 | INFO | algo_trader | Scan attempt 6 — retrying in 120s (window open until 12:00)...
+2026-09-02T05:41:00.033039+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:41:00,030 | INFO | algo_trader | Scanning 2672 stocks for top 1 candidates (pool=5)...
+2026-09-02T05:41:00.033771+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:41:00,033 | INFO | algo_trader | Fetching quotes for 2672 stocks...
+2026-09-02T05:41:06.719811+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:41:06,719 | INFO | algo_trader | Received 2670 quotes.
+2026-09-02T05:41:06.722607+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:41:06,722 | INFO | algo_trader | Candidates in 5-8% gain range: 10
+2026-09-02T05:41:06.722821+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:41:06,722 | INFO | algo_trader | Fetching daily candles for 10 candidates...
+2026-09-02T05:41:07.142956+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:41:07,142 | INFO | algo_trader | Rank #1: MAITHANALL-EQ — gain=+6.81%, score=0.736 (vol=4.7x, momentum=0.96, buy_pressure=0.43, stability=0.89, prev_trend=0.17)
+2026-09-02T05:41:07.143165+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:41:07,143 | INFO | algo_trader | Rank #2: WINDLAS-EQ — gain=+6.89%, score=0.732 (vol=11.4x, momentum=0.78, buy_pressure=0.45, stability=0.81, prev_trend=0.50)
+2026-09-02T05:41:07.143277+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:41:07,143 | INFO | algo_trader | Rank #3: RISHABH-EQ — gain=+5.76%, score=0.712 (vol=1.7x, momentum=0.85, buy_pressure=0.41, stability=0.84, prev_trend=0.50)
+2026-09-02T05:41:07.143277+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:41:07,143 | INFO | algo_trader | Rank #4: AYMSYNTEX-EQ — gain=+5.51%, score=0.700 (vol=1.2x, momentum=0.73, buy_pressure=0.47, stability=1.00, prev_trend=0.83)
+2026-09-02T05:41:07.143412+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:41:07,143 | INFO | algo_trader | Rank #5: NIACL-EQ — gain=+5.10%, score=0.684 (vol=1.6x, momentum=0.81, buy_pressure=0.33, stability=0.97, prev_trend=0.50)
+2026-09-02T05:41:07.411010+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:41:07,410 | INFO | algo_trader | Scan completed in 7.4 seconds. Found 5 raw candidates.
+2026-09-02T05:41:07.413883+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:41:07,413 | INFO | algo_trader | Probing 5 candidates for broker tradability...
+2026-09-02T05:41:07.415867+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:41:07,415 | INFO | algo_trader | Probe completed in 0.0 seconds: 5 tradable, 0 rejected.
+2026-09-02T05:41:07.416053+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:41:07,415 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 0 filtered):
+2026-09-02T05:41:07.416053+00:00 ip-[REDACTED] python[363706]:   MAITHANALL-EQ: +6.81% @ 1039.00
+2026-09-02T05:41:07.416053+00:00 ip-[REDACTED] python[363706]:     Score=0.736 | Vol=4.7x | Momentum=0.96 | BuyPressure=0.43 | Stability=0.89 | PrevTrend=0.17
+2026-09-02T05:41:08.009335+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:41:08,009 | INFO | algo_trader | Validating 5 candidates in parallel...
+2026-09-02T05:41:08.032376+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:41:08,032 | INFO | algo_trader | ENTRY REJECTED WINDLAS-EQ: Range position 0.779 < 0.85 (price retreating from high)
+2026-09-02T05:41:08.034137+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:41:08,034 | INFO | algo_trader | ENTRY REJECTED AYMSYNTEX-EQ: Range position 0.735 < 0.85 (price retreating from high)
+2026-09-02T05:41:08.035844+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:41:08,035 | INFO | algo_trader | ENTRY REJECTED NIACL-EQ: Range position 0.799 < 0.85 (price retreating from high)
+2026-09-02T05:41:08.039161+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:41:08,039 | INFO | algo_trader | Near-breakout skip for RISHABH-EQ: range=0.854, gain=5.8% — skipping breakout check
+2026-09-02T05:41:08.059193+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:41:08,059 | INFO | algo_trader | ENTRY REJECTED MAITHANALL-EQ: No micro breakout: LTP 1040.80 < last 5min high 1042.05
+2026-09-02T05:41:08.471208+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:41:08,471 | INFO | algo_trader | ENTRY VALIDATED RISHABH-EQ: price=735.80, gain=+5.76%, range=0.854, breakout=True, vol_ratio=1.43, spread=0.1090%
+2026-09-02T05:41:08.473325+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:41:08,473 | INFO | algo_trader | Validation completed in 0.5 seconds: 1/5 passed.
+2026-09-02T05:41:08.473541+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:41:08,473 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-09-02T05:41:08.473541+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:41:08,473 | INFO | algo_trader | Capital: 100000.00 x 5.0x leverage = 500000.00 buying power | 1 validated stocks | 475000.00 per stock
+2026-09-02T05:41:08.858442+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:41:08,858 | INFO | algo_trader | ATR computed for token 18417: 7.3077 (from 14 candles, price=735.80, ATR%=0.99%)
+2026-09-02T05:41:08.878883+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:41:08,878 | INFO | algo_trader | [PAPER] MARKET order filled: BUY RISHABH-EQ 67 @ 735.80 id=8853daa4
+2026-09-02T05:41:08.880673+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:41:08,880 | INFO | algo_trader | MARKET order placed: BUY RISHABH-EQ 67 [INTRADAY] {'response': {'data': {'orderid': '8853daa4'}}}
+2026-09-02T05:41:08.885992+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:41:08,885 | INFO | algo_trader | [PAPER] SL-M order placed: SELL RISHABH-EQ 67 trigger=721.05 id=4bedf336
+2026-09-02T05:41:08.887359+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:41:08,887 | INFO | algo_trader | SL-M order placed for RISHABH-EQ: trigger=721.08, orderid=4bedf336
+2026-09-02T05:41:08.889384+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:41:08,889 | INFO | algo_trader | ENTRY: RISHABH-EQ [MIS] — 67 shares @ 735.80 (capital=475000.00, gain=+5.76%, score=0.712, ATR=7.3077 (0.99%), SL=721.08, hard_stop=721.08) | {'response': {'data': {'orderid': '8853daa4'}}}
+2026-09-02T05:41:09.516426+00:00 ip-[REDACTED] python[363706]: 2026-09-02 05:41:09,516 | INFO | algo_trader | Monitoring 1 positions with trailing stop...
+2026-09-02T07:30:05.280548+00:00 ip-[REDACTED] python[363706]: 2026-09-02 07:30:05,280 | INFO | algo_trader | [auth_refresh] Session age 7204s >= 7200s, refreshing...
+2026-09-02T07:30:05.284318+00:00 ip-[REDACTED] python[363706]: 2026-09-02 07:30:05,281 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-09-02T07:30:05.348821+00:00 ip-[REDACTED] python[363706]: 2026-09-02 07:30:05,348 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-09-02T09:05:38.774448+00:00 ip-[REDACTED] python[363706]: 2026-09-02 09:05:38,774 | INFO | algo_trader | TRAILING STOP UPDATE RISHABH-EQ: SL 721.08 -> 721.72 (ltp=747.90, bid=747.20, high=747.90, profit=1.6%, intraday=7.5%, locked=False, ATR=7.3077)
+2026-09-02T09:05:38.778365+00:00 ip-[REDACTED] python[363706]: 2026-09-02 09:05:38,774 | INFO | algo_trader | [PAPER] SL-M modified: RISHABH-EQ trigger 721.05 → 721.70 id=4bedf336
+2026-09-02T09:05:38.778365+00:00 ip-[REDACTED] python[363706]: 2026-09-02 09:05:38,776 | INFO | algo_trader | SL-M trigger updated for RISHABH-EQ: new trigger=721.72
+2026-09-02T09:07:29.025760+00:00 ip-[REDACTED] python[363706]: 2026-09-02 09:07:29,025 | INFO | algo_trader | TRAILING STOP UPDATE RISHABH-EQ: SL 721.72 -> 723.80 (ltp=750.05, bid=751.25, high=750.05, profit=1.9%, intraday=7.8%, locked=False, ATR=7.3077)
+2026-09-02T09:07:29.026578+00:00 ip-[REDACTED] python[363706]: 2026-09-02 09:07:29,025 | INFO | algo_trader | [PAPER] SL-M modified: RISHABH-EQ trigger 721.70 → 723.75 id=4bedf336
+2026-09-02T09:07:29.027414+00:00 ip-[REDACTED] python[363706]: 2026-09-02 09:07:29,027 | INFO | algo_trader | SL-M trigger updated for RISHABH-EQ: new trigger=723.80
+2026-09-02T09:07:39.051633+00:00 ip-[REDACTED] python[363706]: 2026-09-02 09:07:39,051 | INFO | algo_trader | TRAILING STOP UPDATE RISHABH-EQ: SL 723.80 -> 724.04 (ltp=750.30, bid=749.75, high=750.30, profit=2.0%, intraday=7.8%, locked=False, ATR=7.3077)
+2026-09-02T09:07:39.053017+00:00 ip-[REDACTED] python[363706]: 2026-09-02 09:07:39,051 | INFO | algo_trader | [PAPER] SL-M modified: RISHABH-EQ trigger 723.75 → 724.00 id=4bedf336
+2026-09-02T09:07:39.053444+00:00 ip-[REDACTED] python[363706]: 2026-09-02 09:07:39,053 | INFO | algo_trader | SL-M trigger updated for RISHABH-EQ: new trigger=724.04
+2026-09-02T09:08:29.164795+00:00 ip-[REDACTED] python[363706]: 2026-09-02 09:08:29,164 | INFO | algo_trader | TRAILING STOP UPDATE RISHABH-EQ: SL 724.04 -> 732.03 (ltp=750.80, bid=750.15, high=750.80, profit=2.0%, intraday=7.9%, locked=False, ATR=7.3077)
+2026-09-02T09:08:29.165628+00:00 ip-[REDACTED] python[363706]: 2026-09-02 09:08:29,164 | INFO | algo_trader | [PAPER] SL-M modified: RISHABH-EQ trigger 724.00 → 732.00 id=4bedf336
+2026-09-02T09:08:29.166468+00:00 ip-[REDACTED] python[363706]: 2026-09-02 09:08:29,166 | INFO | algo_trader | SL-M trigger updated for RISHABH-EQ: new trigger=732.03
+2026-09-02T09:08:49.208572+00:00 ip-[REDACTED] python[363706]: 2026-09-02 09:08:49,208 | INFO | algo_trader | TRAILING STOP UPDATE RISHABH-EQ: SL 732.03 -> 732.66 (ltp=751.45, bid=750.80, high=751.45, profit=2.1%, intraday=8.0%, locked=False, ATR=7.3077)
+2026-09-02T09:08:49.209212+00:00 ip-[REDACTED] python[363706]: 2026-09-02 09:08:49,208 | INFO | algo_trader | [PAPER] SL-M modified: RISHABH-EQ trigger 732.00 → 732.65 id=4bedf336
+2026-09-02T09:08:49.210447+00:00 ip-[REDACTED] python[363706]: 2026-09-02 09:08:49,210 | INFO | algo_trader | SL-M trigger updated for RISHABH-EQ: new trigger=732.66
+2026-09-02T09:09:59.361499+00:00 ip-[REDACTED] python[363706]: 2026-09-02 09:09:59,361 | INFO | algo_trader | TRAILING STOP UPDATE RISHABH-EQ: SL 732.66 -> 732.91 (ltp=751.70, bid=751.05, high=751.70, profit=2.2%, intraday=8.0%, locked=False, ATR=7.3077)
+2026-09-02T09:09:59.362346+00:00 ip-[REDACTED] python[363706]: 2026-09-02 09:09:59,361 | INFO | algo_trader | [PAPER] SL-M modified: RISHABH-EQ trigger 732.65 → 732.90 id=4bedf336
+2026-09-02T09:09:59.363249+00:00 ip-[REDACTED] python[363706]: 2026-09-02 09:09:59,363 | INFO | algo_trader | SL-M trigger updated for RISHABH-EQ: new trigger=732.91
+2026-09-02T09:12:49.756489+00:00 ip-[REDACTED] python[363706]: 2026-09-02 09:12:49,756 | INFO | algo_trader | TRAILING STOP UPDATE RISHABH-EQ: SL 732.91 -> 733.15 (ltp=751.95, bid=751.95, high=751.95, profit=2.2%, intraday=8.1%, locked=False, ATR=7.3077)
+2026-09-02T09:12:49.760114+00:00 ip-[REDACTED] python[363706]: 2026-09-02 09:12:49,756 | INFO | algo_trader | [PAPER] SL-M modified: RISHABH-EQ trigger 732.90 → 733.10 id=4bedf336
+2026-09-02T09:12:49.760114+00:00 ip-[REDACTED] python[363706]: 2026-09-02 09:12:49,759 | INFO | algo_trader | SL-M trigger updated for RISHABH-EQ: new trigger=733.15
+2026-09-02T09:12:59.778071+00:00 ip-[REDACTED] python[363706]: 2026-09-02 09:12:59,777 | INFO | algo_trader | TRAILING STOP UPDATE RISHABH-EQ: SL 733.15 -> 734.17 (ltp=753.00, bid=752.25, high=753.00, profit=2.3%, intraday=8.2%, locked=False, ATR=7.3077)
+2026-09-02T09:12:59.778723+00:00 ip-[REDACTED] python[363706]: 2026-09-02 09:12:59,778 | INFO | algo_trader | [PAPER] SL-M modified: RISHABH-EQ trigger 733.10 → 734.15 id=4bedf336
+2026-09-02T09:12:59.779659+00:00 ip-[REDACTED] python[363706]: 2026-09-02 09:12:59,779 | INFO | algo_trader | SL-M trigger updated for RISHABH-EQ: new trigger=734.17
+2026-09-02T09:30:12.309429+00:00 ip-[REDACTED] python[363706]: 2026-09-02 09:30:12,309 | INFO | algo_trader | [auth_refresh] Session age 7207s >= 7200s, refreshing...
+2026-09-02T09:30:12.313525+00:00 ip-[REDACTED] python[363706]: 2026-09-02 09:30:12,309 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-09-02T09:30:12.358401+00:00 ip-[REDACTED] python[363706]: 2026-09-02 09:30:12,358 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-09-02T09:35:03.022830+00:00 ip-[REDACTED] python[363706]: 2026-09-02 09:35:03,022 | INFO | algo_trader | Market closing — force-exiting 1 positions.
+2026-09-02T09:35:03.627542+00:00 ip-[REDACTED] python[363706]: 2026-09-02 09:35:03,627 | INFO | algo_trader | [position_check] RISHABH-EQ: netqty=67
+2026-09-02T09:35:03.655825+00:00 ip-[REDACTED] python[363706]: 2026-09-02 09:35:03,655 | INFO | algo_trader | [position_check] RISHABH-EQ: netqty=67
+2026-09-02T09:35:03.775090+00:00 ip-[REDACTED] python[363706]: 2026-09-02 09:35:03,774 | INFO | algo_trader | [PAPER] MARKET order filled: SELL RISHABH-EQ 67 @ 744.95 id=f8cb4075
+2026-09-02T09:35:03.779780+00:00 ip-[REDACTED] python[363706]: 2026-09-02 09:35:03,779 | INFO | algo_trader | [exit_attempt] Exit confirmed for RISHABH-EQ: 67 shares @ 744.95
+2026-09-02T09:35:03.780622+00:00 ip-[REDACTED] python[363706]: 2026-09-02 09:35:03,779 | INFO | algo_trader | [PAPER] Order cancelled: RISHABH-EQ id=4bedf336
+2026-09-02T09:35:03.781472+00:00 ip-[REDACTED] python[363706]: 2026-09-02 09:35:03,781 | INFO | algo_trader | SL-M order confirmed CANCELLED for RISHABH-EQ: 4bedf336
+2026-09-02T09:35:03.785066+00:00 ip-[REDACTED] python[363706]: 2026-09-02 09:35:03,784 | INFO | algo_trader | MARKET CLOSE EXIT [MIS]: RISHABH-EQ — 0 shares @ 744.95 (entry=735.80, PnL=+613.05, daily=+613.05) | ExitOutcome(state=<ExitState.CLOSED: 'closed'>, execution=OrderExecution(order_id='f8cb4075', state=<OrderState.FILLED: 'filled'>, requested_quantity=67, filled_quantity=67, average_price=744.95, reason='', raw_order={'orderid': 'f8cb4075', 'tradingsymbol': 'RISHABH-EQ', 'transactiontype': 'SELL', 'quantity': '67', 'price': '744.95', 'filledshares': '67', 'averageprice': '744.95', 'triggerprice': '0.0', 'orderstatus': 'COMPLETE', 'status': 'COMPLETE', 'ordertype': 'MARKET', 'producttype': 'INTRADAY'}), reason='')
+2026-09-02T09:35:04.388726+00:00 ip-[REDACTED] python[363706]: 2026-09-02 09:35:04,388 | INFO | algo_trader |
+2026-09-02T09:35:04.388726+00:00 ip-[REDACTED] python[363706]: ============================================================
+2026-09-02T09:35:04.388726+00:00 ip-[REDACTED] python[363706]: PAPER TRADING SUMMARY
+2026-09-02T09:35:04.388726+00:00 ip-[REDACTED] python[363706]: ============================================================
+2026-09-02T09:35:04.388726+00:00 ip-[REDACTED] python[363706]: Total trades: 2
+2026-09-02T09:35:04.388726+00:00 ip-[REDACTED] python[363706]: Buys: 1, Sells: 1
+2026-09-02T09:35:04.388726+00:00 ip-[REDACTED] python[363706]:   11:11:08 BUY  RISHABH-EQ x67 @ 735.80
+2026-09-02T09:35:04.388726+00:00 ip-[REDACTED] python[363706]:   15:05:03 SELL RISHABH-EQ x67 @ 744.95 P&L: Rs.+613.05
+2026-09-02T09:35:04.388726+00:00 ip-[REDACTED] python[363706]: Daily P&L: Rs.+613.05
+2026-09-02T09:35:04.388726+00:00 ip-[REDACTED] python[363706]: Capital: Rs.100,000.00 → Rs.100,613.05
+2026-09-02T09:35:04.388726+00:00 ip-[REDACTED] python[363706]: All positions closed.
+2026-09-02T09:35:04.388726+00:00 ip-[REDACTED] python[363706]: ============================================================
+2026-09-02T09:35:05.614046+00:00 ip-[REDACTED] python[363706]: 2026-09-02 09:35:05,613 | INFO | algo_trader | Replay comparison complete: 1449/1449 decisions matched; recommended slippage=0 bps; report=/home/ubuntu/algo-trader/data/replay_reports/2026-09-02/summary.json; universe=data/universe_snapshots.json
+2026-09-02T09:35:05.614860+00:00 ip-[REDACTED] python[363706]: 2026-09-02 09:35:05,614 | INFO | algo_trader | Trading day complete. Daily P&L: ₹+613.05. Sleeping 18.9h until tomorrow.
