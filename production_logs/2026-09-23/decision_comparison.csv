@@ -1,0 +1,188 @@
+sequence,event_type,symbol,recorded_decision,replayed_decision,matched,detail
+9585,market_gate,,trade,trade,True,four-factor market gate
+9586,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['GNA-EQ', 'MAHLOG-EQ', 'OLECTRA-EQ', 'KSL-EQ', 'ROLEXRINGS-EQ']; replayed=['GNA-EQ', 'MAHLOG-EQ', 'OLECTRA-EQ', 'KSL-EQ', 'ROLEXRINGS-EQ']"
+9587,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+9588,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+9589,candidate_validation,MAHLOG-EQ,rejected,rejected,True,Range position 0.831 < 0.85 (price retreating from high)
+9590,candidate_validation,ROLEXRINGS-EQ,rejected,rejected,True,Range position 0.663 < 0.85 (price retreating from high)
+9591,candidate_validation,KSL-EQ,rejected,rejected,True,Volume fading: current 448 vs avg 2402 (ratio 0.19 < 1.2)
+9592,candidate_validation,OLECTRA-EQ,rejected,rejected,True,Volume fading: current 5283 vs avg 10545 (ratio 0.50 < 1.2)
+9593,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['GNA-EQ', 'SUNFLAG-EQ', 'MUKANDLTD-EQ', 'KSL-EQ', 'OLECTRA-EQ']; replayed=['GNA-EQ', 'SUNFLAG-EQ', 'MUKANDLTD-EQ', 'KSL-EQ', 'OLECTRA-EQ']"
+9594,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+9595,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+9596,candidate_validation,SUNFLAG-EQ,rejected,rejected,True,Range position 0.845 < 0.85 (price retreating from high)
+9597,candidate_validation,MUKANDLTD-EQ,rejected,rejected,True,Wide spread: 0.38 (0.255% > 0.2%)
+9598,candidate_validation,KSL-EQ,rejected,rejected,True,"Volume check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=13.126.199.100, client_local_ip=172.31.33.249: Access denied because of exceeding access rate)"
+9599,candidate_validation,OLECTRA-EQ,rejected,rejected,True,"Volume check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=13.126.199.100, client_local_ip=172.31.33.249: Access denied because of exceeding access rate)"
+9600,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['SUNFLAG-EQ', 'GNA-EQ', 'SUPRIYA-EQ', 'KSL-EQ', 'ROLEXRINGS-EQ']; replayed=['SUNFLAG-EQ', 'GNA-EQ', 'SUPRIYA-EQ', 'KSL-EQ', 'ROLEXRINGS-EQ']"
+9601,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+9602,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+9603,candidate_validation,SUNFLAG-EQ,rejected,rejected,True,Range position 0.798 < 0.85 (price retreating from high)
+9604,candidate_validation,ROLEXRINGS-EQ,rejected,rejected,True,Range position 0.681 < 0.85 (price retreating from high)
+9605,candidate_validation,SUPRIYA-EQ,accepted,accepted,True,All checks passed
+9606,candidate_validation,KSL-EQ,rejected,rejected,True,Volume fading: current 534 vs avg 2196 (ratio 0.24 < 1.2)
+9607,position_sized,SUPRIYA-EQ,57,57,True,risk-based position sizing
+9615,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9616,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9617,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9618,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9619,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9620,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9621,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9622,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9623,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9624,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9625,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9626,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9627,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9628,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9629,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9630,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9631,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9632,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9633,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9634,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9635,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9636,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9637,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9638,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9639,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9640,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9641,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9642,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9643,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9644,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9645,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9646,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9647,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9648,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9649,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9650,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9651,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9652,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9653,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9654,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9655,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9656,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9657,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9658,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9659,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9660,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9661,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9662,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9663,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9664,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9665,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9666,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9667,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9668,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9669,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9670,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9671,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9672,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9673,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9674,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9675,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9676,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9677,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9678,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9679,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9680,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9681,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9682,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9683,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9684,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9685,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9686,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9687,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9688,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9689,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9690,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9691,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9692,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9693,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9694,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9695,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9696,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9697,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9698,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9699,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9700,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9701,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9702,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9703,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9704,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9705,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9706,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9707,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9708,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9709,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9710,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9711,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9712,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9713,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9714,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9715,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9716,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9717,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9718,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9719,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9720,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9721,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9722,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9723,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9724,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9725,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9726,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9727,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9728,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9729,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9730,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9731,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9732,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9733,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9734,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9735,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9736,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9737,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9738,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9739,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9740,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9741,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9742,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9743,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9744,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9745,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9746,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9747,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9748,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9749,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9750,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9751,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9752,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9753,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9754,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9755,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9756,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9757,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9758,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9759,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9760,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9761,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9762,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9763,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9764,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9765,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9766,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9767,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9768,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9769,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9770,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9771,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9772,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9773,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9774,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9775,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9776,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9777,position_evaluated,SUPRIYA-EQ,hold,hold,True,target and post-trail stop decision
+9778,position_evaluated,SUPRIYA-EQ,exit,exit,True,target and post-trail stop decision
