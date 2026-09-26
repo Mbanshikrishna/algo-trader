@@ -1,0 +1,7 @@
+sequence,event_type,symbol,recorded_decision,replayed_decision,matched,detail
+6368,market_gate,,skip,skip,True,four-factor market gate
+6369,market_gate,,skip,skip,True,four-factor market gate
+6370,market_gate,,skip,skip,True,four-factor market gate
+6371,market_gate,,skip,skip,True,four-factor market gate
+6372,market_gate,,skip,skip,True,four-factor market gate
+6373,market_gate,,skip,skip,True,four-factor market gate
