@@ -1,0 +1,468 @@
+2026-09-25T04:30:11.894481+00:00 ip-[REDACTED] python[438955]: 2026-09-25 04:30:11,894 | INFO | algo_trader | Daily candle cache cleared.
+2026-09-25T04:30:11.898576+00:00 ip-[REDACTED] python[438955]: 2026-09-25 04:30:11,895 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-09-25T04:30:11.898576+00:00 ip-[REDACTED] python[438955]: 2026-09-25 04:30:11,895 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-09-25T04:30:11.981641+00:00 ip-[REDACTED] python[438955]: 2026-09-25 04:30:11,981 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-09-25T04:30:11.982828+00:00 ip-[REDACTED] python[438955]: 2026-09-25 04:30:11,982 | INFO | algo_trader | [auth_refresh] Angel One session refreshed.
+2026-09-25T04:30:12.172102+00:00 ip-[REDACTED] python[438955]: 2026-09-25 04:30:12,171 | INFO | algo_trader | Market Check: 1/4 — NOT BULLISH
+2026-09-25T04:30:12.172102+00:00 ip-[REDACTED] python[438955]: 1. Index Direction: FAIL ❌
+2026-09-25T04:30:12.172102+00:00 ip-[REDACTED] python[438955]:    Nifty 50: -0.02% (need > 0%)
+2026-09-25T04:30:12.172102+00:00 ip-[REDACTED] python[438955]: 2. Market Breadth: FAIL ❌
+2026-09-25T04:30:12.172102+00:00 ip-[REDACTED] python[438955]:    Advancers: 23, Decliners: 27
+2026-09-25T04:30:12.172102+00:00 ip-[REDACTED] python[438955]:    Breadth ratio: 0.85 (need > 1.2)
+2026-09-25T04:30:12.172102+00:00 ip-[REDACTED] python[438955]: 3. Intraday Strength: FAIL ❌
+2026-09-25T04:30:12.172102+00:00 ip-[REDACTED] python[438955]:    Nifty LTP vs Open: 23058.35 vs 23035.00
+2026-09-25T04:30:12.172102+00:00 ip-[REDACTED] python[438955]:    NIFTYBEES vs VWAP: 263.40 vs 263.65
+2026-09-25T04:30:12.172102+00:00 ip-[REDACTED] python[438955]: 4. Volatility Filter: PASS ✅
+2026-09-25T04:30:12.172102+00:00 ip-[REDACTED] python[438955]:    India VIX change: +0.24% (reject if > +5%)
+2026-09-25T04:30:12.172102+00:00 ip-[REDACTED] python[438955]: Decision: SKIP TRADING (score 1/4 < 2)
+2026-09-25T04:30:12.172102+00:00 ip-[REDACTED] python[438955]: Failed: Index Direction, Market Breadth, Intraday Strength
+2026-09-25T05:30:12.807302+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:30:12,807 | INFO | algo_trader | Daily candle cache cleared.
+2026-09-25T05:30:12.811359+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:30:12,807 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-09-25T05:30:12.811359+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:30:12,807 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-09-25T05:30:12.908205+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:30:12,908 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-09-25T05:30:12.909390+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:30:12,909 | INFO | algo_trader | [auth_refresh] Angel One session refreshed.
+2026-09-25T05:30:13.092325+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:30:13,092 | INFO | algo_trader | Market Check: 2/4 — BULLISH
+2026-09-25T05:30:13.092325+00:00 ip-[REDACTED] python[438955]: 1. Index Direction: FAIL ❌
+2026-09-25T05:30:13.092325+00:00 ip-[REDACTED] python[438955]:    Nifty 50: -0.00% (need > 0%)
+2026-09-25T05:30:13.092325+00:00 ip-[REDACTED] python[438955]: 2. Market Breadth: PASS ✅
+2026-09-25T05:30:13.092325+00:00 ip-[REDACTED] python[438955]:    Advancers: 28, Decliners: 22
+2026-09-25T05:30:13.092325+00:00 ip-[REDACTED] python[438955]:    Breadth ratio: 1.27 (need > 1.2)
+2026-09-25T05:30:13.092325+00:00 ip-[REDACTED] python[438955]: 3. Intraday Strength: FAIL ❌
+2026-09-25T05:30:13.092325+00:00 ip-[REDACTED] python[438955]:    Nifty LTP vs Open: 23061.95 vs 23035.00
+2026-09-25T05:30:13.092325+00:00 ip-[REDACTED] python[438955]:    NIFTYBEES vs VWAP: 263.52 vs 263.64
+2026-09-25T05:30:13.092325+00:00 ip-[REDACTED] python[438955]: 4. Volatility Filter: PASS ✅
+2026-09-25T05:30:13.092325+00:00 ip-[REDACTED] python[438955]:    India VIX change: -0.39% (reject if > +5%)
+2026-09-25T05:30:13.092325+00:00 ip-[REDACTED] python[438955]: Decision: CONTRA-MOMENTUM MODE (score 2/4)
+2026-09-25T05:30:13.092325+00:00 ip-[REDACTED] python[438955]: Rules: entry before 12:00 only, no re-entry
+2026-09-25T05:30:13.092325+00:00 ip-[REDACTED] python[438955]: ⚡ CONTRA-MOMENTUM MODE: Score=2 — entry before 12:00 only, no re-entry.
+2026-09-25T05:30:13.694921+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:30:13,694 | INFO | algo_trader | Scanning 2692 stocks for top 1 candidates (pool=5)...
+2026-09-25T05:30:13.695155+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:30:13,694 | INFO | algo_trader | Fetching quotes for 2692 stocks...
+2026-09-25T05:30:20.358672+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:30:20,358 | INFO | algo_trader | Received 2689 quotes.
+2026-09-25T05:30:20.361311+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:30:20,361 | INFO | algo_trader | Candidates in 5-8% gain range: 10
+2026-09-25T05:30:20.361489+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:30:20,361 | INFO | algo_trader | Fetching daily candles for 10 candidates...
+2026-09-25T05:30:24.363763+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:30:24,362 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-25T05:30:24.364992+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:30:24,363 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-25T05:30:24.364992+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:30:24,364 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-25T05:30:24.364992+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:30:24,364 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-25T05:30:24.378389+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:30:24,378 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-25T05:30:33.379303+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:30:33,379 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-09-25T05:30:43.379681+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:30:43,379 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-09-25T05:30:55.381058+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:30:55,380 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-25T05:31:00.381387+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:31:00,381 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-25T05:31:00.383000+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:31:00,382 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-25T05:31:09.384433+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:31:09,384 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-25T05:31:14.408932+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:31:14,408 | INFO | algo_trader | Rank #1: AVADHSUGAR-EQ — gain=+7.51%, score=0.807 (vol=4.4x, momentum=0.85, buy_pressure=0.60, stability=1.00, prev_trend=0.50)
+2026-09-25T05:31:14.410853+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:31:14,408 | INFO | algo_trader | Rank #2: RESPONIND-EQ — gain=+5.08%, score=0.750 (vol=5.4x, momentum=0.66, buy_pressure=0.83, stability=0.62, prev_trend=0.50)
+2026-09-25T05:31:14.410853+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:31:14,409 | INFO | algo_trader | Rank #3: STEELCAS-EQ — gain=+6.08%, score=0.743 (vol=1.9x, momentum=0.67, buy_pressure=0.48, stability=0.94, prev_trend=0.67)
+2026-09-25T05:31:14.410853+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:31:14,409 | INFO | algo_trader | Rank #4: SBC-EQ — gain=+5.94%, score=0.728 (vol=0.8x, momentum=0.95, buy_pressure=0.88, stability=0.95, prev_trend=0.50)
+2026-09-25T05:31:14.410853+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:31:14,409 | INFO | algo_trader | Rank #5: UTTAMSUGAR-EQ — gain=+5.29%, score=0.717 (vol=3.7x, momentum=0.56, buy_pressure=0.48, stability=0.86, prev_trend=0.67)
+2026-09-25T05:31:14.748582+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:31:14,748 | INFO | algo_trader | Scan completed in 61.1 seconds. Found 5 raw candidates.
+2026-09-25T05:31:14.756366+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:31:14,756 | INFO | algo_trader | Skipped by ASM/GSM/circuit filter:
+2026-09-25T05:31:14.756366+00:00 ip-[REDACTED] python[438955]:   SBC-EQ: ASM listed (Additional Surveillance Measure)
+2026-09-25T05:31:14.756722+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:31:14,756 | INFO | algo_trader | Checking read-only restrictions for 4 candidates...
+2026-09-25T05:31:14.762668+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:31:14,762 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 4 tradable, 0 rejected.
+2026-09-25T05:31:14.762888+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:31:14,762 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 1 filtered):
+2026-09-25T05:31:14.762888+00:00 ip-[REDACTED] python[438955]:   AVADHSUGAR-EQ: +7.51% @ 778.50
+2026-09-25T05:31:14.762888+00:00 ip-[REDACTED] python[438955]:     Score=0.807 | Vol=4.4x | Momentum=0.85 | BuyPressure=0.60 | Stability=1.00 | PrevTrend=0.50
+2026-09-25T05:31:15.376362+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:31:15,376 | INFO | algo_trader | Validating 4 candidates in parallel...
+2026-09-25T05:31:15.400543+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:31:15,400 | INFO | algo_trader | ENTRY REJECTED RESPONIND-EQ: Range position 0.662 < 0.85 (price retreating from high)
+2026-09-25T05:31:15.408564+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:31:15,408 | INFO | algo_trader | ENTRY REJECTED STEELCAS-EQ: Range position 0.636 < 0.85 (price retreating from high)
+2026-09-25T05:31:15.417183+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:31:15,417 | INFO | algo_trader | ENTRY REJECTED UTTAMSUGAR-EQ: Range position 0.541 < 0.85 (price retreating from high)
+2026-09-25T05:31:15.448206+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:31:15,448 | INFO | algo_trader | ENTRY REJECTED AVADHSUGAR-EQ: No micro breakout: LTP 779.00 < last 5min high 781.95
+2026-09-25T05:31:15.454462+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:31:15,454 | INFO | algo_trader | Validation completed in 0.1 seconds: 0/4 passed.
+2026-09-25T05:31:15.454660+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:31:15,454 | INFO | algo_trader | No candidates passed real-time validation.
+2026-09-25T05:31:16.096224+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:31:16,096 | INFO | algo_trader | Scan attempt 2 — retrying in 120s (window open until 12:00)...
+2026-09-25T05:33:16.096567+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:33:16,096 | INFO | algo_trader | Scanning 2692 stocks for top 1 candidates (pool=5)...
+2026-09-25T05:33:16.097307+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:33:16,096 | INFO | algo_trader | Fetching quotes for 2692 stocks...
+2026-09-25T05:33:22.769528+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:33:22,769 | INFO | algo_trader | Received 2689 quotes.
+2026-09-25T05:33:22.771989+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:33:22,771 | INFO | algo_trader | Candidates in 5-8% gain range: 12
+2026-09-25T05:33:22.772172+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:33:22,772 | INFO | algo_trader | Fetching daily candles for 12 candidates...
+2026-09-25T05:33:24.773038+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:33:24,772 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-25T05:33:24.793102+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:33:24,792 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-25T05:33:30.817673+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:33:30,817 | INFO | algo_trader | Rank #1: AVADHSUGAR-EQ — gain=+7.63%, score=0.808 (vol=4.5x, momentum=0.86, buy_pressure=0.59, stability=1.00, prev_trend=0.50)
+2026-09-25T05:33:30.818317+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:33:30,817 | INFO | algo_trader | Rank #2: RESPONIND-EQ — gain=+5.07%, score=0.750 (vol=5.4x, momentum=0.66, buy_pressure=0.83, stability=0.62, prev_trend=0.50)
+2026-09-25T05:33:30.818317+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:33:30,817 | INFO | algo_trader | Rank #3: STEELCAS-EQ — gain=+5.80%, score=0.736 (vol=1.9x, momentum=0.64, buy_pressure=0.48, stability=0.94, prev_trend=0.67)
+2026-09-25T05:33:30.818317+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:33:30,817 | INFO | algo_trader | Rank #4: PROZONER-EQ — gain=+5.30%, score=0.726 (vol=2.1x, momentum=0.82, buy_pressure=0.43, stability=0.90, prev_trend=0.33)
+2026-09-25T05:33:30.818317+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:33:30,817 | INFO | algo_trader | Rank #5: UTTAMSUGAR-EQ — gain=+5.54%, score=0.724 (vol=3.8x, momentum=0.59, buy_pressure=0.49, stability=0.86, prev_trend=0.67)
+2026-09-25T05:33:31.217604+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:33:31,217 | INFO | algo_trader | Scan completed in 15.1 seconds. Found 5 raw candidates.
+2026-09-25T05:33:31.225738+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:33:31,225 | INFO | algo_trader | Checking read-only restrictions for 5 candidates...
+2026-09-25T05:33:31.231744+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:33:31,231 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 5 tradable, 0 rejected.
+2026-09-25T05:33:31.232078+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:33:31,231 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 0 filtered):
+2026-09-25T05:33:31.232078+00:00 ip-[REDACTED] python[438955]:   AVADHSUGAR-EQ: +7.63% @ 779.35
+2026-09-25T05:33:31.232078+00:00 ip-[REDACTED] python[438955]:     Score=0.808 | Vol=4.5x | Momentum=0.86 | BuyPressure=0.59 | Stability=1.00 | PrevTrend=0.50
+2026-09-25T05:33:31.828436+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:33:31,828 | INFO | algo_trader | Validating 5 candidates in parallel...
+2026-09-25T05:33:32.067419+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:33:32,067 | INFO | algo_trader | ENTRY REJECTED RESPONIND-EQ: Range position 0.664 < 0.85 (price retreating from high)
+2026-09-25T05:33:32.073420+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:33:32,073 | INFO | algo_trader | ENTRY REJECTED STEELCAS-EQ: Range position 0.643 < 0.85 (price retreating from high)
+2026-09-25T05:33:32.078764+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:33:32,078 | INFO | algo_trader | ENTRY REJECTED PROZONER-EQ: Range position 0.823 < 0.85 (price retreating from high)
+2026-09-25T05:33:32.085245+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:33:32,085 | INFO | algo_trader | ENTRY REJECTED UTTAMSUGAR-EQ: Range position 0.596 < 0.85 (price retreating from high)
+2026-09-25T05:33:32.111119+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:33:32,110 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-25T05:33:37.133206+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:33:37,133 | INFO | algo_trader | ENTRY REJECTED AVADHSUGAR-EQ: No micro breakout: LTP 780.35 < last 5min high 781.95
+2026-09-25T05:33:37.140016+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:33:37,139 | INFO | algo_trader | Validation completed in 5.3 seconds: 0/5 passed.
+2026-09-25T05:33:37.140165+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:33:37,140 | INFO | algo_trader | No candidates passed real-time validation.
+2026-09-25T05:33:37.734823+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:33:37,734 | INFO | algo_trader | Scan attempt 3 — retrying in 120s (window open until 12:00)...
+2026-09-25T05:35:37.735134+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:35:37,734 | INFO | algo_trader | Scanning 2692 stocks for top 1 candidates (pool=5)...
+2026-09-25T05:35:37.738801+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:35:37,735 | INFO | algo_trader | Fetching quotes for 2692 stocks...
+2026-09-25T05:35:44.401669+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:35:44,401 | INFO | algo_trader | Received 2689 quotes.
+2026-09-25T05:35:44.404164+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:35:44,404 | INFO | algo_trader | Candidates in 5-8% gain range: 10
+2026-09-25T05:35:44.404306+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:35:44,404 | INFO | algo_trader | Fetching daily candles for 10 candidates...
+2026-09-25T05:35:44.404682+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:35:44,404 | INFO | algo_trader | Rank #1: PROZONER-EQ — gain=+6.11%, score=0.754 (vol=2.1x, momentum=0.93, buy_pressure=0.44, stability=0.90, prev_trend=0.33)
+2026-09-25T05:35:44.404814+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:35:44,404 | INFO | algo_trader | Rank #2: RESPONIND-EQ — gain=+5.09%, score=0.750 (vol=5.4x, momentum=0.67, buy_pressure=0.83, stability=0.62, prev_trend=0.50)
+2026-09-25T05:35:44.404934+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:35:44,404 | INFO | algo_trader | Rank #3: UTTAMSUGAR-EQ — gain=+5.69%, score=0.732 (vol=3.8x, momentum=0.61, buy_pressure=0.51, stability=0.86, prev_trend=0.67)
+2026-09-25T05:35:44.404934+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:35:44,404 | INFO | algo_trader | Rank #4: STEELCAS-EQ — gain=+5.55%, score=0.730 (vol=1.9x, momentum=0.62, buy_pressure=0.48, stability=0.94, prev_trend=0.67)
+2026-09-25T05:35:44.405088+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:35:44,404 | INFO | algo_trader | Rank #5: AJAXENGG-EQ — gain=+6.57%, score=0.721 (vol=2.0x, momentum=0.82, buy_pressure=0.43, stability=0.42, prev_trend=0.83)
+2026-09-25T05:35:44.772326+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:35:44,772 | INFO | algo_trader | Scan completed in 7.0 seconds. Found 5 raw candidates.
+2026-09-25T05:35:44.779351+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:35:44,779 | INFO | algo_trader | Checking read-only restrictions for 5 candidates...
+2026-09-25T05:35:44.783141+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:35:44,783 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 5 tradable, 0 rejected.
+2026-09-25T05:35:44.783344+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:35:44,783 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 0 filtered):
+2026-09-25T05:35:44.783344+00:00 ip-[REDACTED] python[438955]:   PROZONER-EQ: +6.11% @ 57.47
+2026-09-25T05:35:44.783344+00:00 ip-[REDACTED] python[438955]:     Score=0.754 | Vol=2.1x | Momentum=0.93 | BuyPressure=0.44 | Stability=0.90 | PrevTrend=0.33
+2026-09-25T05:35:45.408338+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:35:45,408 | INFO | algo_trader | Validating 5 candidates in parallel...
+2026-09-25T05:35:45.428300+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:35:45,428 | INFO | algo_trader | ENTRY REJECTED PROZONER-EQ: Wide spread: 0.17 (0.296% > 0.2%)
+2026-09-25T05:35:45.433185+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:35:45,433 | INFO | algo_trader | ENTRY REJECTED RESPONIND-EQ: Range position 0.666 < 0.85 (price retreating from high)
+2026-09-25T05:35:45.437425+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:35:45,437 | INFO | algo_trader | ENTRY REJECTED UTTAMSUGAR-EQ: Range position 0.607 < 0.85 (price retreating from high)
+2026-09-25T05:35:45.442368+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:35:45,442 | INFO | algo_trader | ENTRY REJECTED STEELCAS-EQ: Range position 0.617 < 0.85 (price retreating from high)
+2026-09-25T05:35:45.447789+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:35:45,447 | INFO | algo_trader | ENTRY REJECTED AJAXENGG-EQ: Range position 0.815 < 0.85 (price retreating from high)
+2026-09-25T05:35:45.451529+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:35:45,451 | INFO | algo_trader | Validation completed in 0.0 seconds: 0/5 passed.
+2026-09-25T05:35:45.451745+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:35:45,451 | INFO | algo_trader | No candidates passed real-time validation.
+2026-09-25T05:35:46.068641+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:35:46,068 | INFO | algo_trader | Scan attempt 4 — retrying in 120s (window open until 12:00)...
+2026-09-25T05:37:46.069215+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:37:46,068 | INFO | algo_trader | Scanning 2692 stocks for top 1 candidates (pool=5)...
+2026-09-25T05:37:46.069215+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:37:46,069 | INFO | algo_trader | Fetching quotes for 2692 stocks...
+2026-09-25T05:37:52.732788+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:37:52,732 | INFO | algo_trader | Received 2689 quotes.
+2026-09-25T05:37:52.735128+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:37:52,735 | INFO | algo_trader | Candidates in 5-8% gain range: 10
+2026-09-25T05:37:52.735303+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:37:52,735 | INFO | algo_trader | Fetching daily candles for 10 candidates...
+2026-09-25T05:37:52.755828+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:37:52,755 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-25T05:37:57.780936+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:37:57,780 | INFO | algo_trader | Rank #1: PROZONER-EQ — gain=+6.54%, score=0.765 (vol=2.2x, momentum=0.97, buy_pressure=0.44, stability=0.90, prev_trend=0.33)
+2026-09-25T05:37:57.781537+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:37:57,780 | INFO | algo_trader | Rank #2: RESPONIND-EQ — gain=+5.16%, score=0.752 (vol=5.4x, momentum=0.67, buy_pressure=0.83, stability=0.62, prev_trend=0.50)
+2026-09-25T05:37:57.781537+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:37:57,781 | INFO | algo_trader | Rank #3: UTTAMSUGAR-EQ — gain=+5.75%, score=0.738 (vol=3.8x, momentum=0.61, buy_pressure=0.53, stability=0.86, prev_trend=0.67)
+2026-09-25T05:37:57.781537+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:37:57,781 | INFO | algo_trader | Rank #4: SBC-EQ — gain=+5.60%, score=0.735 (vol=1.0x, momentum=0.90, buy_pressure=0.86, stability=0.95, prev_trend=0.50)
+2026-09-25T05:37:57.781537+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:37:57,781 | INFO | algo_trader | Rank #5: AJAXENGG-EQ — gain=+6.66%, score=0.726 (vol=2.0x, momentum=0.83, buy_pressure=0.43, stability=0.42, prev_trend=0.83)
+2026-09-25T05:37:58.054300+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:37:58,054 | INFO | algo_trader | Scan completed in 12.0 seconds. Found 5 raw candidates.
+2026-09-25T05:37:58.055752+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:37:58,055 | INFO | algo_trader | Skipped by ASM/GSM/circuit filter:
+2026-09-25T05:37:58.055752+00:00 ip-[REDACTED] python[438955]:   SBC-EQ: ASM listed (Additional Surveillance Measure)
+2026-09-25T05:37:58.056072+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:37:58,055 | INFO | algo_trader | Checking read-only restrictions for 4 candidates...
+2026-09-25T05:37:58.057874+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:37:58,057 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 4 tradable, 0 rejected.
+2026-09-25T05:37:58.058040+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:37:58,057 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 1 filtered):
+2026-09-25T05:37:58.058040+00:00 ip-[REDACTED] python[438955]:   PROZONER-EQ: +6.54% @ 57.70
+2026-09-25T05:37:58.058040+00:00 ip-[REDACTED] python[438955]:     Score=0.765 | Vol=2.2x | Momentum=0.97 | BuyPressure=0.44 | Stability=0.90 | PrevTrend=0.33
+2026-09-25T05:37:58.659469+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:37:58,659 | INFO | algo_trader | Validating 4 candidates in parallel...
+2026-09-25T05:37:58.683436+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:37:58,683 | INFO | algo_trader | ENTRY REJECTED PROZONER-EQ: Wide spread: 0.18 (0.313% > 0.2%)
+2026-09-25T05:37:58.685275+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:37:58,685 | INFO | algo_trader | ENTRY REJECTED RESPONIND-EQ: Range position 0.672 < 0.85 (price retreating from high)
+2026-09-25T05:37:58.687027+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:37:58,686 | INFO | algo_trader | ENTRY REJECTED UTTAMSUGAR-EQ: Range position 0.615 < 0.85 (price retreating from high)
+2026-09-25T05:37:58.688813+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:37:58,688 | INFO | algo_trader | ENTRY REJECTED AJAXENGG-EQ: Range position 0.819 < 0.85 (price retreating from high)
+2026-09-25T05:37:58.690350+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:37:58,690 | INFO | algo_trader | Validation completed in 0.0 seconds: 0/4 passed.
+2026-09-25T05:37:58.690482+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:37:58,690 | INFO | algo_trader | No candidates passed real-time validation.
+2026-09-25T05:37:59.282424+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:37:59,282 | INFO | algo_trader | Scan attempt 5 — retrying in 120s (window open until 12:00)...
+2026-09-25T05:39:59.282837+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:39:59,282 | INFO | algo_trader | Scanning 2692 stocks for top 1 candidates (pool=5)...
+2026-09-25T05:39:59.283607+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:39:59,282 | INFO | algo_trader | Fetching quotes for 2692 stocks...
+2026-09-25T05:40:05.976227+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:40:05,976 | INFO | algo_trader | Received 2689 quotes.
+2026-09-25T05:40:05.978638+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:40:05,978 | INFO | algo_trader | Candidates in 5-8% gain range: 10
+2026-09-25T05:40:05.978818+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:40:05,978 | INFO | algo_trader | Fetching daily candles for 10 candidates...
+2026-09-25T05:40:05.979163+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:40:05,979 | INFO | algo_trader | Rank #1: RESPONIND-EQ — gain=+5.09%, score=0.751 (vol=5.4x, momentum=0.67, buy_pressure=0.83, stability=0.62, prev_trend=0.50)
+2026-09-25T05:40:05.979268+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:40:05,979 | INFO | algo_trader | Rank #2: UTTAMSUGAR-EQ — gain=+5.96%, score=0.743 (vol=3.8x, momentum=0.64, buy_pressure=0.53, stability=0.86, prev_trend=0.67)
+2026-09-25T05:40:05.979362+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:40:05,979 | INFO | algo_trader | Rank #3: SBC-EQ — gain=+5.58%, score=0.736 (vol=1.0x, momentum=0.89, buy_pressure=0.86, stability=0.95, prev_trend=0.50)
+2026-09-25T05:40:05.979362+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:40:05,979 | INFO | algo_trader | Rank #4: PROZONER-EQ — gain=+5.65%, score=0.735 (vol=2.2x, momentum=0.86, buy_pressure=0.43, stability=0.90, prev_trend=0.33)
+2026-09-25T05:40:05.979524+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:40:05,979 | INFO | algo_trader | Rank #5: AJAXENGG-EQ — gain=+6.52%, score=0.720 (vol=2.0x, momentum=0.81, buy_pressure=0.42, stability=0.42, prev_trend=0.83)
+2026-09-25T05:40:06.231775+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:40:06,231 | INFO | algo_trader | Scan completed in 6.9 seconds. Found 5 raw candidates.
+2026-09-25T05:40:06.233779+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:40:06,233 | INFO | algo_trader | Skipped by ASM/GSM/circuit filter:
+2026-09-25T05:40:06.233779+00:00 ip-[REDACTED] python[438955]:   SBC-EQ: ASM listed (Additional Surveillance Measure)
+2026-09-25T05:40:06.234041+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:40:06,233 | INFO | algo_trader | Checking read-only restrictions for 4 candidates...
+2026-09-25T05:40:06.235766+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:40:06,235 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 4 tradable, 0 rejected.
+2026-09-25T05:40:06.235961+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:40:06,235 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 1 filtered):
+2026-09-25T05:40:06.235961+00:00 ip-[REDACTED] python[438955]:   RESPONIND-EQ: +5.09% @ 166.06
+2026-09-25T05:40:06.235961+00:00 ip-[REDACTED] python[438955]:     Score=0.751 | Vol=5.4x | Momentum=0.67 | BuyPressure=0.83 | Stability=0.62 | PrevTrend=0.50
+2026-09-25T05:40:06.836078+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:40:06,835 | INFO | algo_trader | Validating 4 candidates in parallel...
+2026-09-25T05:40:06.859349+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:40:06,859 | INFO | algo_trader | ENTRY REJECTED RESPONIND-EQ: Range position 0.665 < 0.85 (price retreating from high)
+2026-09-25T05:40:06.861781+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:40:06,861 | INFO | algo_trader | ENTRY REJECTED UTTAMSUGAR-EQ: Range position 0.621 < 0.85 (price retreating from high)
+2026-09-25T05:40:06.863737+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:40:06,863 | INFO | algo_trader | ENTRY REJECTED PROZONER-EQ: Wide spread: 0.14 (0.245% > 0.2%)
+2026-09-25T05:40:06.865483+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:40:06,865 | INFO | algo_trader | ENTRY REJECTED AJAXENGG-EQ: Range position 0.807 < 0.85 (price retreating from high)
+2026-09-25T05:40:06.867081+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:40:06,866 | INFO | algo_trader | Validation completed in 0.0 seconds: 0/4 passed.
+2026-09-25T05:40:06.867199+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:40:06,867 | INFO | algo_trader | No candidates passed real-time validation.
+2026-09-25T05:40:07.467562+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:40:07,467 | INFO | algo_trader | Scan attempt 6 — retrying in 120s (window open until 12:00)...
+2026-09-25T05:42:07.468003+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:42:07,467 | INFO | algo_trader | Scanning 2692 stocks for top 1 candidates (pool=5)...
+2026-09-25T05:42:07.471682+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:42:07,468 | INFO | algo_trader | Fetching quotes for 2692 stocks...
+2026-09-25T05:42:14.179813+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:42:14,179 | INFO | algo_trader | Received 2689 quotes.
+2026-09-25T05:42:14.182228+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:42:14,182 | INFO | algo_trader | Candidates in 5-8% gain range: 11
+2026-09-25T05:42:14.182408+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:42:14,182 | INFO | algo_trader | Fetching daily candles for 11 candidates...
+2026-09-25T05:42:15.183566+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:42:15,182 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-25T05:42:20.208206+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:42:20,208 | INFO | algo_trader | Rank #1: MAWANASUG-EQ — gain=+7.98%, score=0.775 (vol=5.1x, momentum=0.74, buy_pressure=0.53, stability=0.89, prev_trend=0.67)
+2026-09-25T05:42:20.208873+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:42:20,208 | INFO | algo_trader | Rank #2: RESPONIND-EQ — gain=+5.30%, score=0.756 (vol=5.4x, momentum=0.69, buy_pressure=0.83, stability=0.62, prev_trend=0.50)
+2026-09-25T05:42:20.208873+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:42:20,208 | INFO | algo_trader | Rank #3: PROZONER-EQ — gain=+5.76%, score=0.738 (vol=2.2x, momentum=0.87, buy_pressure=0.42, stability=0.90, prev_trend=0.33)
+2026-09-25T05:42:20.208873+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:42:20,208 | INFO | algo_trader | Rank #4: SBC-EQ — gain=+5.60%, score=0.737 (vol=1.0x, momentum=0.90, buy_pressure=0.85, stability=0.95, prev_trend=0.50)
+2026-09-25T05:42:20.208873+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:42:20,208 | INFO | algo_trader | Rank #5: UTTAMSUGAR-EQ — gain=+5.56%, score=0.724 (vol=3.9x, momentum=0.59, buy_pressure=0.48, stability=0.86, prev_trend=0.67)
+2026-09-25T05:42:20.459717+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:42:20,459 | INFO | algo_trader | Scan completed in 13.0 seconds. Found 5 raw candidates.
+2026-09-25T05:42:20.461324+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:42:20,461 | INFO | algo_trader | Skipped by ASM/GSM/circuit filter:
+2026-09-25T05:42:20.461324+00:00 ip-[REDACTED] python[438955]:   SBC-EQ: ASM listed (Additional Surveillance Measure)
+2026-09-25T05:42:20.461582+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:42:20,461 | INFO | algo_trader | Checking read-only restrictions for 4 candidates...
+2026-09-25T05:42:20.463234+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:42:20,463 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 4 tradable, 0 rejected.
+2026-09-25T05:42:20.463351+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:42:20,463 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 1 filtered):
+2026-09-25T05:42:20.463351+00:00 ip-[REDACTED] python[438955]:   MAWANASUG-EQ: +7.98% @ 141.13
+2026-09-25T05:42:20.463351+00:00 ip-[REDACTED] python[438955]:     Score=0.775 | Vol=5.1x | Momentum=0.74 | BuyPressure=0.53 | Stability=0.89 | PrevTrend=0.67
+2026-09-25T05:42:21.070394+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:42:21,070 | INFO | algo_trader | Validating 4 candidates in parallel...
+2026-09-25T05:42:21.121360+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:42:21,121 | INFO | algo_trader | ENTRY REJECTED MAWANASUG-EQ: Range position 0.721 < 0.85 (price retreating from high)
+2026-09-25T05:42:21.123228+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:42:21,123 | INFO | algo_trader | ENTRY REJECTED RESPONIND-EQ: Range position 0.672 < 0.85 (price retreating from high)
+2026-09-25T05:42:21.124865+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:42:21,124 | INFO | algo_trader | ENTRY REJECTED PROZONER-EQ: Range position 0.806 < 0.85 (price retreating from high)
+2026-09-25T05:42:21.126660+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:42:21,126 | INFO | algo_trader | ENTRY REJECTED UTTAMSUGAR-EQ: Range position 0.645 < 0.85 (price retreating from high)
+2026-09-25T05:42:21.128253+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:42:21,128 | INFO | algo_trader | Validation completed in 0.1 seconds: 0/4 passed.
+2026-09-25T05:42:21.128394+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:42:21,128 | INFO | algo_trader | No candidates passed real-time validation.
+2026-09-25T05:42:21.723040+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:42:21,722 | INFO | algo_trader | Scan attempt 7 — retrying in 120s (window open until 12:00)...
+2026-09-25T05:44:21.723420+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:44:21,723 | INFO | algo_trader | Scanning 2692 stocks for top 1 candidates (pool=5)...
+2026-09-25T05:44:21.724275+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:44:21,723 | INFO | algo_trader | Fetching quotes for 2692 stocks...
+2026-09-25T05:44:29.486623+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:44:29,486 | INFO | algo_trader | Received 2689 quotes.
+2026-09-25T05:44:29.489130+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:44:29,489 | INFO | algo_trader | Candidates in 5-8% gain range: 13
+2026-09-25T05:44:29.489305+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:44:29,489 | INFO | algo_trader | Fetching daily candles for 13 candidates...
+2026-09-25T05:44:30.509776+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:44:30,509 | INFO | algo_trader | Rank #1: AVADHSUGAR-EQ — gain=+7.89%, score=0.811 (vol=4.6x, momentum=0.89, buy_pressure=0.57, stability=1.00, prev_trend=0.50)
+2026-09-25T05:44:30.510415+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:44:30,509 | INFO | algo_trader | Rank #2: LLOYDSENGG-EQ — gain=+5.26%, score=0.780 (vol=1.8x, momentum=0.99, buy_pressure=0.24, stability=0.93, prev_trend=0.83)
+2026-09-25T05:44:30.510415+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:44:30,509 | INFO | algo_trader | Rank #3: MAWANASUG-EQ — gain=+7.88%, score=0.773 (vol=5.2x, momentum=0.73, buy_pressure=0.53, stability=0.89, prev_trend=0.67)
+2026-09-25T05:44:30.510415+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:44:30,509 | INFO | algo_trader | Rank #4: RESPONIND-EQ — gain=+5.07%, score=0.751 (vol=5.4x, momentum=0.66, buy_pressure=0.84, stability=0.62, prev_trend=0.50)
+2026-09-25T05:44:30.510415+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:44:30,510 | INFO | algo_trader | Rank #5: UTTAMSUGAR-EQ — gain=+5.96%, score=0.737 (vol=3.9x, momentum=0.64, buy_pressure=0.49, stability=0.86, prev_trend=0.67)
+2026-09-25T05:44:30.760654+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:44:30,760 | INFO | algo_trader | Scan completed in 9.0 seconds. Found 5 raw candidates.
+2026-09-25T05:44:30.761996+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:44:30,761 | INFO | algo_trader | Checking read-only restrictions for 5 candidates...
+2026-09-25T05:44:30.763774+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:44:30,763 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 5 tradable, 0 rejected.
+2026-09-25T05:44:30.763956+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:44:30,763 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 0 filtered):
+2026-09-25T05:44:30.763956+00:00 ip-[REDACTED] python[438955]:   AVADHSUGAR-EQ: +7.89% @ 781.20
+2026-09-25T05:44:30.763956+00:00 ip-[REDACTED] python[438955]:     Score=0.811 | Vol=4.6x | Momentum=0.89 | BuyPressure=0.57 | Stability=1.00 | PrevTrend=0.50
+2026-09-25T05:44:31.357179+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:44:31,357 | INFO | algo_trader | Validating 5 candidates in parallel...
+2026-09-25T05:44:31.382613+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:44:31,382 | INFO | algo_trader | ENTRY REJECTED MAWANASUG-EQ: Range position 0.733 < 0.85 (price retreating from high)
+2026-09-25T05:44:31.384506+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:44:31,384 | INFO | algo_trader | ENTRY REJECTED RESPONIND-EQ: Range position 0.664 < 0.85 (price retreating from high)
+2026-09-25T05:44:31.386186+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:44:31,386 | INFO | algo_trader | ENTRY REJECTED UTTAMSUGAR-EQ: Range position 0.635 < 0.85 (price retreating from high)
+2026-09-25T05:44:31.388351+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:44:31,388 | INFO | algo_trader | Near-breakout skip for LLOYDSENGG-EQ: range=0.981, gain=5.2% — skipping breakout check
+2026-09-25T05:44:31.510056+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:44:31,509 | INFO | algo_trader | ENTRY REJECTED AVADHSUGAR-EQ: No micro breakout: LTP 781.20 < last 5min high 783.75
+2026-09-25T05:44:32.505193+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:44:32,505 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-25T05:44:37.532168+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:44:37,532 | INFO | algo_trader | ENTRY REJECTED LLOYDSENGG-EQ: Volume fading: current 63861 vs avg 253919 (ratio 0.25 < 1.2)
+2026-09-25T05:44:37.534430+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:44:37,534 | INFO | algo_trader | Validation completed in 6.2 seconds: 0/5 passed.
+2026-09-25T05:44:37.534548+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:44:37,534 | INFO | algo_trader | No candidates passed real-time validation.
+2026-09-25T05:44:38.125036+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:44:38,124 | INFO | algo_trader | Scan attempt 8 — retrying in 120s (window open until 12:00)...
+2026-09-25T05:46:38.125472+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:46:38,125 | INFO | algo_trader | Scanning 2692 stocks for top 1 candidates (pool=5)...
+2026-09-25T05:46:38.126203+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:46:38,125 | INFO | algo_trader | Fetching quotes for 2692 stocks...
+2026-09-25T05:46:44.793756+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:46:44,793 | INFO | algo_trader | Received 2689 quotes.
+2026-09-25T05:46:44.796227+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:46:44,796 | INFO | algo_trader | Candidates in 5-8% gain range: 12
+2026-09-25T05:46:44.796404+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:46:44,796 | INFO | algo_trader | Fetching daily candles for 12 candidates...
+2026-09-25T05:46:44.796789+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:46:44,796 | INFO | algo_trader | Rank #1: AVADHSUGAR-EQ — gain=+7.55%, score=0.801 (vol=4.6x, momentum=0.85, buy_pressure=0.57, stability=1.00, prev_trend=0.50)
+2026-09-25T05:46:44.796918+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:46:44,796 | INFO | algo_trader | Rank #2: LLOYDSENGG-EQ — gain=+5.50%, score=0.784 (vol=1.8x, momentum=0.99, buy_pressure=0.25, stability=0.93, prev_trend=0.83)
+2026-09-25T05:46:44.797019+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:46:44,796 | INFO | algo_trader | Rank #3: MAWANASUG-EQ — gain=+7.54%, score=0.765 (vol=5.3x, momentum=0.70, buy_pressure=0.53, stability=0.89, prev_trend=0.67)
+2026-09-25T05:46:44.797019+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:46:44,796 | INFO | algo_trader | Rank #4: UTTAMSUGAR-EQ — gain=+6.02%, score=0.736 (vol=3.9x, momentum=0.64, buy_pressure=0.48, stability=0.86, prev_trend=0.67)
+2026-09-25T05:46:44.797192+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:46:44,797 | INFO | algo_trader | Rank #5: SBC-EQ — gain=+5.46%, score=0.736 (vol=1.0x, momentum=0.87, buy_pressure=0.85, stability=0.95, prev_trend=0.50)
+2026-09-25T05:46:45.063668+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:46:45,063 | INFO | algo_trader | Scan completed in 6.9 seconds. Found 5 raw candidates.
+2026-09-25T05:46:45.066614+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:46:45,066 | INFO | algo_trader | Skipped by ASM/GSM/circuit filter:
+2026-09-25T05:46:45.066614+00:00 ip-[REDACTED] python[438955]:   SBC-EQ: ASM listed (Additional Surveillance Measure)
+2026-09-25T05:46:45.066897+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:46:45,066 | INFO | algo_trader | Checking read-only restrictions for 4 candidates...
+2026-09-25T05:46:45.068600+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:46:45,068 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 4 tradable, 0 rejected.
+2026-09-25T05:46:45.068773+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:46:45,068 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 1 filtered):
+2026-09-25T05:46:45.068773+00:00 ip-[REDACTED] python[438955]:   AVADHSUGAR-EQ: +7.55% @ 778.80
+2026-09-25T05:46:45.068773+00:00 ip-[REDACTED] python[438955]:     Score=0.801 | Vol=4.6x | Momentum=0.85 | BuyPressure=0.57 | Stability=1.00 | PrevTrend=0.50
+2026-09-25T05:46:45.664204+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:46:45,664 | INFO | algo_trader | Validating 4 candidates in parallel...
+2026-09-25T05:46:45.684047+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:46:45,683 | INFO | algo_trader | ENTRY REJECTED MAWANASUG-EQ: Range position 0.717 < 0.85 (price retreating from high)
+2026-09-25T05:46:45.685975+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:46:45,685 | INFO | algo_trader | ENTRY REJECTED UTTAMSUGAR-EQ: Range position 0.641 < 0.85 (price retreating from high)
+2026-09-25T05:46:45.689248+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:46:45,689 | INFO | algo_trader | Near-breakout skip for LLOYDSENGG-EQ: range=0.977, gain=5.4% — skipping breakout check
+2026-09-25T05:46:46.688564+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:46:46,688 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-25T05:46:46.704533+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:46:46,704 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-25T05:46:52.705013+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:46:52,704 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-09-25T05:46:52.724009+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:46:52,723 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-09-25T05:47:02.750939+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:47:02,750 | WARNING | algo_trader | Candle fetch failed for AVADHSUGAR-EQ breakout check: POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=[REDACTED_IP], client_local_ip=[REDACTED_IP]: Access denied because of exceeding access rate — rejecting
+2026-09-25T05:47:02.751506+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:47:02,751 | INFO | algo_trader | ENTRY REJECTED AVADHSUGAR-EQ: Breakout check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=[REDACTED_IP], client_local_ip=[REDACTED_IP]: Access denied because of exceeding access rate)
+2026-09-25T05:47:03.751334+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:47:03,751 | INFO | algo_trader | ENTRY REJECTED LLOYDSENGG-EQ: Volume fading: current 213922 vs avg 259850 (ratio 0.82 < 1.2)
+2026-09-25T05:47:03.753613+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:47:03,753 | INFO | algo_trader | Validation completed in 18.1 seconds: 0/4 passed.
+2026-09-25T05:47:03.753780+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:47:03,753 | INFO | algo_trader | No candidates passed real-time validation.
+2026-09-25T05:47:04.330157+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:47:04,330 | INFO | algo_trader | Scan attempt 9 — retrying in 120s (window open until 12:00)...
+2026-09-25T05:49:04.330536+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:49:04,330 | INFO | algo_trader | Scanning 2692 stocks for top 1 candidates (pool=5)...
+2026-09-25T05:49:04.334385+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:49:04,330 | INFO | algo_trader | Fetching quotes for 2692 stocks...
+2026-09-25T05:49:10.993640+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:49:10,993 | INFO | algo_trader | Received 2689 quotes.
+2026-09-25T05:49:10.996204+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:49:10,996 | INFO | algo_trader | Candidates in 5-8% gain range: 13
+2026-09-25T05:49:10.996353+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:49:10,996 | INFO | algo_trader | Fetching daily candles for 13 candidates...
+2026-09-25T05:49:11.021576+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:49:11,021 | INFO | algo_trader | Rank #1: BHAGERIA-EQ — gain=+6.30%, score=0.804 (vol=2.5x, momentum=0.62, buy_pressure=0.68, stability=0.92, prev_trend=0.83)
+2026-09-25T05:49:11.021779+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:49:11,021 | INFO | algo_trader | Rank #2: AVADHSUGAR-EQ — gain=+7.46%, score=0.797 (vol=4.7x, momentum=0.84, buy_pressure=0.56, stability=1.00, prev_trend=0.50)
+2026-09-25T05:49:11.021779+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:49:11,021 | INFO | algo_trader | Rank #3: LLOYDSENGG-EQ — gain=+5.51%, score=0.788 (vol=1.8x, momentum=0.99, buy_pressure=0.24, stability=0.93, prev_trend=0.83)
+2026-09-25T05:49:11.021998+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:49:11,021 | INFO | algo_trader | Rank #4: MAWANASUG-EQ — gain=+7.72%, score=0.769 (vol=5.3x, momentum=0.72, buy_pressure=0.53, stability=0.89, prev_trend=0.67)
+2026-09-25T05:49:11.021998+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:49:11,021 | INFO | algo_trader | Rank #5: SBC-EQ — gain=+5.39%, score=0.734 (vol=1.1x, momentum=0.86, buy_pressure=0.85, stability=0.95, prev_trend=0.50)
+2026-09-25T05:49:11.310892+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:49:11,310 | INFO | algo_trader | Scan completed in 7.0 seconds. Found 5 raw candidates.
+2026-09-25T05:49:11.312239+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:49:11,312 | INFO | algo_trader | Skipped by ASM/GSM/circuit filter:
+2026-09-25T05:49:11.312239+00:00 ip-[REDACTED] python[438955]:   BHAGERIA-EQ: ASM listed (Additional Surveillance Measure)
+2026-09-25T05:49:11.312239+00:00 ip-[REDACTED] python[438955]:   SBC-EQ: ASM listed (Additional Surveillance Measure)
+2026-09-25T05:49:11.312550+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:49:11,312 | INFO | algo_trader | Checking read-only restrictions for 3 candidates...
+2026-09-25T05:49:11.314014+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:49:11,313 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 3 tradable, 0 rejected.
+2026-09-25T05:49:11.314144+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:49:11,314 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 2 filtered):
+2026-09-25T05:49:11.314144+00:00 ip-[REDACTED] python[438955]:   AVADHSUGAR-EQ: +7.46% @ 778.10
+2026-09-25T05:49:11.314144+00:00 ip-[REDACTED] python[438955]:     Score=0.797 | Vol=4.7x | Momentum=0.84 | BuyPressure=0.56 | Stability=1.00 | PrevTrend=0.50
+2026-09-25T05:49:11.936346+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:49:11,936 | INFO | algo_trader | Validating 3 candidates in parallel...
+2026-09-25T05:49:11.957670+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:49:11,957 | INFO | algo_trader | ENTRY REJECTED AVADHSUGAR-EQ: Range position 0.841 < 0.85 (price retreating from high)
+2026-09-25T05:49:11.959387+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:49:11,959 | INFO | algo_trader | ENTRY REJECTED MAWANASUG-EQ: Range position 0.719 < 0.85 (price retreating from high)
+2026-09-25T05:49:11.961285+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:49:11,961 | INFO | algo_trader | Near-breakout skip for LLOYDSENGG-EQ: range=0.991, gain=5.5% — skipping breakout check
+2026-09-25T05:49:12.020991+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:49:12,020 | INFO | algo_trader | ENTRY REJECTED LLOYDSENGG-EQ: Volume fading: current 16174 vs avg 161358 (ratio 0.10 < 1.2)
+2026-09-25T05:49:12.023250+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:49:12,023 | INFO | algo_trader | Validation completed in 0.1 seconds: 0/3 passed.
+2026-09-25T05:49:12.023412+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:49:12,023 | INFO | algo_trader | No candidates passed real-time validation.
+2026-09-25T05:49:12.615131+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:49:12,615 | INFO | algo_trader | Scan attempt 10 — retrying in 120s (window open until 12:00)...
+2026-09-25T05:51:12.615530+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:51:12,615 | INFO | algo_trader | Scanning 2692 stocks for top 1 candidates (pool=5)...
+2026-09-25T05:51:12.616280+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:51:12,615 | INFO | algo_trader | Fetching quotes for 2692 stocks...
+2026-09-25T05:51:19.288968+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:51:19,288 | INFO | algo_trader | Received 2689 quotes.
+2026-09-25T05:51:19.291432+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:51:19,291 | INFO | algo_trader | Candidates in 5-8% gain range: 15
+2026-09-25T05:51:19.291668+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:51:19,291 | INFO | algo_trader | Fetching daily candles for 15 candidates...
+2026-09-25T05:51:19.315710+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:51:19,315 | INFO | algo_trader | Rank #1: BHAGERIA-EQ — gain=+7.26%, score=0.827 (vol=2.6x, momentum=0.72, buy_pressure=0.67, stability=0.92, prev_trend=0.83)
+2026-09-25T05:51:19.316054+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:51:19,315 | INFO | algo_trader | Rank #2: LLOYDSENGG-EQ — gain=+5.52%, score=0.798 (vol=1.9x, momentum=0.99, buy_pressure=0.26, stability=0.93, prev_trend=0.83)
+2026-09-25T05:51:19.316054+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:51:19,315 | INFO | algo_trader | Rank #3: AVADHSUGAR-EQ — gain=+7.24%, score=0.790 (vol=4.7x, momentum=0.82, buy_pressure=0.55, stability=1.00, prev_trend=0.50)
+2026-09-25T05:51:19.316054+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:51:19,316 | INFO | algo_trader | Rank #4: MAWANASUG-EQ — gain=+7.87%, score=0.773 (vol=5.3x, momentum=0.73, buy_pressure=0.53, stability=0.89, prev_trend=0.67)
+2026-09-25T05:51:19.316356+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:51:19,316 | INFO | algo_trader | Rank #5: SBC-EQ — gain=+5.73%, score=0.750 (vol=1.1x, momentum=0.92, buy_pressure=0.85, stability=0.95, prev_trend=0.50)
+2026-09-25T05:51:19.569250+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:51:19,568 | INFO | algo_trader | Scan completed in 7.0 seconds. Found 5 raw candidates.
+2026-09-25T05:51:19.571441+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:51:19,571 | INFO | algo_trader | Skipped by ASM/GSM/circuit filter:
+2026-09-25T05:51:19.571441+00:00 ip-[REDACTED] python[438955]:   BHAGERIA-EQ: ASM listed (Additional Surveillance Measure)
+2026-09-25T05:51:19.571441+00:00 ip-[REDACTED] python[438955]:   SBC-EQ: ASM listed (Additional Surveillance Measure)
+2026-09-25T05:51:19.571912+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:51:19,571 | INFO | algo_trader | Checking read-only restrictions for 3 candidates...
+2026-09-25T05:51:19.573499+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:51:19,573 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 3 tradable, 0 rejected.
+2026-09-25T05:51:19.573672+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:51:19,573 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 2 filtered):
+2026-09-25T05:51:19.573672+00:00 ip-[REDACTED] python[438955]:   LLOYDSENGG-EQ: +5.52% @ 95.93
+2026-09-25T05:51:19.573672+00:00 ip-[REDACTED] python[438955]:     Score=0.798 | Vol=1.9x | Momentum=0.99 | BuyPressure=0.26 | Stability=0.93 | PrevTrend=0.83
+2026-09-25T05:51:20.181433+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:51:20,181 | INFO | algo_trader | Validating 3 candidates in parallel...
+2026-09-25T05:51:20.208176+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:51:20,208 | INFO | algo_trader | ENTRY REJECTED AVADHSUGAR-EQ: Range position 0.818 < 0.85 (price retreating from high)
+2026-09-25T05:51:20.210076+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:51:20,209 | INFO | algo_trader | ENTRY REJECTED MAWANASUG-EQ: Range position 0.732 < 0.85 (price retreating from high)
+2026-09-25T05:51:20.211946+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:51:20,211 | INFO | algo_trader | Near-breakout skip for LLOYDSENGG-EQ: range=0.994, gain=5.5% — skipping breakout check
+2026-09-25T05:51:20.316869+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:51:20,316 | INFO | algo_trader | ENTRY REJECTED LLOYDSENGG-EQ: Volume fading: current 49349 vs avg 158327 (ratio 0.31 < 1.2)
+2026-09-25T05:51:20.319133+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:51:20,319 | INFO | algo_trader | Validation completed in 0.1 seconds: 0/3 passed.
+2026-09-25T05:51:20.319288+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:51:20,319 | INFO | algo_trader | No candidates passed real-time validation.
+2026-09-25T05:51:20.911463+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:51:20,911 | INFO | algo_trader | Scan attempt 11 — retrying in 120s (window open until 12:00)...
+2026-09-25T05:53:20.911888+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:53:20,911 | INFO | algo_trader | Scanning 2692 stocks for top 1 candidates (pool=5)...
+2026-09-25T05:53:20.915787+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:53:20,911 | INFO | algo_trader | Fetching quotes for 2692 stocks...
+2026-09-25T05:53:27.586298+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:53:27,586 | INFO | algo_trader | Received 2689 quotes.
+2026-09-25T05:53:27.588843+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:53:27,588 | INFO | algo_trader | Candidates in 5-8% gain range: 16
+2026-09-25T05:53:27.589028+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:53:27,588 | INFO | algo_trader | Fetching daily candles for 16 candidates...
+2026-09-25T05:53:28.613086+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:53:28,612 | INFO | algo_trader | Rank #1: LLOYDSENGG-EQ — gain=+5.27%, score=0.794 (vol=1.9x, momentum=0.94, buy_pressure=0.25, stability=0.93, prev_trend=0.83)
+2026-09-25T05:53:28.613774+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:53:28,613 | INFO | algo_trader | Rank #2: AVADHSUGAR-EQ — gain=+7.14%, score=0.788 (vol=4.7x, momentum=0.81, buy_pressure=0.56, stability=1.00, prev_trend=0.50)
+2026-09-25T05:53:28.613774+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:53:28,613 | INFO | algo_trader | Rank #3: MAWANASUG-EQ — gain=+7.88%, score=0.773 (vol=5.3x, momentum=0.73, buy_pressure=0.53, stability=0.89, prev_trend=0.67)
+2026-09-25T05:53:28.613774+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:53:28,613 | INFO | algo_trader | Rank #4: SBC-EQ — gain=+5.79%, score=0.754 (vol=1.1x, momentum=0.93, buy_pressure=0.85, stability=0.95, prev_trend=0.50)
+2026-09-25T05:53:28.613774+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:53:28,613 | INFO | algo_trader | Rank #5: PROZONER-EQ — gain=+6.13%, score=0.744 (vol=2.3x, momentum=0.92, buy_pressure=0.40, stability=0.90, prev_trend=0.33)
+2026-09-25T05:53:28.866123+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:53:28,865 | INFO | algo_trader | Scan completed in 8.0 seconds. Found 5 raw candidates.
+2026-09-25T05:53:28.867533+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:53:28,867 | INFO | algo_trader | Skipped by ASM/GSM/circuit filter:
+2026-09-25T05:53:28.867533+00:00 ip-[REDACTED] python[438955]:   SBC-EQ: ASM listed (Additional Surveillance Measure)
+2026-09-25T05:53:28.867773+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:53:28,867 | INFO | algo_trader | Checking read-only restrictions for 4 candidates...
+2026-09-25T05:53:28.869397+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:53:28,869 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 4 tradable, 0 rejected.
+2026-09-25T05:53:28.869546+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:53:28,869 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 1 filtered):
+2026-09-25T05:53:28.869546+00:00 ip-[REDACTED] python[438955]:   LLOYDSENGG-EQ: +5.27% @ 95.70
+2026-09-25T05:53:28.869546+00:00 ip-[REDACTED] python[438955]:     Score=0.794 | Vol=1.9x | Momentum=0.94 | BuyPressure=0.25 | Stability=0.93 | PrevTrend=0.83
+2026-09-25T05:53:29.616670+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:53:29,616 | INFO | algo_trader | Validating 4 candidates in parallel...
+2026-09-25T05:53:29.636428+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:53:29,636 | INFO | algo_trader | ENTRY REJECTED AVADHSUGAR-EQ: Range position 0.807 < 0.85 (price retreating from high)
+2026-09-25T05:53:29.638242+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:53:29,638 | INFO | algo_trader | ENTRY REJECTED MAWANASUG-EQ: Range position 0.733 < 0.85 (price retreating from high)
+2026-09-25T05:53:29.639942+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:53:29,639 | INFO | algo_trader | ENTRY REJECTED PROZONER-EQ: Wide spread: 0.14 (0.244% > 0.2%)
+2026-09-25T05:53:29.641707+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:53:29,641 | INFO | algo_trader | Near-breakout skip for LLOYDSENGG-EQ: range=0.952, gain=5.3% — skipping breakout check
+2026-09-25T05:53:29.659598+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:53:29,659 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-25T05:53:34.683201+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:53:34,683 | INFO | algo_trader | ENTRY REJECTED LLOYDSENGG-EQ: Volume fading: current 81563 vs avg 166573 (ratio 0.49 < 1.2)
+2026-09-25T05:53:34.685620+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:53:34,685 | INFO | algo_trader | Validation completed in 5.1 seconds: 0/4 passed.
+2026-09-25T05:53:34.685745+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:53:34,685 | INFO | algo_trader | No candidates passed real-time validation.
+2026-09-25T05:53:35.294379+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:53:35,294 | INFO | algo_trader | Scan attempt 12 — retrying in 120s (window open until 12:00)...
+2026-09-25T05:55:35.294821+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:55:35,294 | INFO | algo_trader | Scanning 2692 stocks for top 1 candidates (pool=5)...
+2026-09-25T05:55:35.295479+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:55:35,294 | INFO | algo_trader | Fetching quotes for 2692 stocks...
+2026-09-25T05:55:41.959796+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:55:41,959 | INFO | algo_trader | Received 2689 quotes.
+2026-09-25T05:55:41.962304+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:55:41,962 | INFO | algo_trader | Candidates in 5-8% gain range: 14
+2026-09-25T05:55:41.962488+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:55:41,962 | INFO | algo_trader | Fetching daily candles for 14 candidates...
+2026-09-25T05:55:41.962895+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:55:41,962 | INFO | algo_trader | Rank #1: AVADHSUGAR-EQ — gain=+7.17%, score=0.789 (vol=4.7x, momentum=0.81, buy_pressure=0.55, stability=1.00, prev_trend=0.50)
+2026-09-25T05:55:41.963011+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:55:41,962 | INFO | algo_trader | Rank #2: MAWANASUG-EQ — gain=+7.90%, score=0.773 (vol=5.3x, momentum=0.74, buy_pressure=0.53, stability=0.89, prev_trend=0.67)
+2026-09-25T05:55:41.963916+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:55:41,963 | INFO | algo_trader | Rank #3: SBC-EQ — gain=+5.75%, score=0.753 (vol=1.1x, momentum=0.92, buy_pressure=0.85, stability=0.95, prev_trend=0.50)
+2026-09-25T05:55:41.963916+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:55:41,963 | INFO | algo_trader | Rank #4: SANGAMIND-EQ — gain=+5.60%, score=0.740 (vol=12.2x, momentum=0.77, buy_pressure=0.47, stability=0.85, prev_trend=0.50)
+2026-09-25T05:55:41.963916+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:55:41,963 | INFO | algo_trader | Rank #5: UTTAMSUGAR-EQ — gain=+6.08%, score=0.739 (vol=4.0x, momentum=0.65, buy_pressure=0.49, stability=0.86, prev_trend=0.67)
+2026-09-25T05:55:42.222343+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:55:42,222 | INFO | algo_trader | Scan completed in 6.9 seconds. Found 5 raw candidates.
+2026-09-25T05:55:42.223953+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:55:42,223 | INFO | algo_trader | Skipped by ASM/GSM/circuit filter:
+2026-09-25T05:55:42.223953+00:00 ip-[REDACTED] python[438955]:   SBC-EQ: ASM listed (Additional Surveillance Measure)
+2026-09-25T05:55:42.224223+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:55:42,223 | INFO | algo_trader | Checking read-only restrictions for 4 candidates...
+2026-09-25T05:55:42.225987+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:55:42,225 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 4 tradable, 0 rejected.
+2026-09-25T05:55:42.226142+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:55:42,226 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 1 filtered):
+2026-09-25T05:55:42.226142+00:00 ip-[REDACTED] python[438955]:   AVADHSUGAR-EQ: +7.17% @ 776.05
+2026-09-25T05:55:42.226142+00:00 ip-[REDACTED] python[438955]:     Score=0.789 | Vol=4.7x | Momentum=0.81 | BuyPressure=0.55 | Stability=1.00 | PrevTrend=0.50
+2026-09-25T05:55:42.821612+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:55:42,821 | INFO | algo_trader | Validating 4 candidates in parallel...
+2026-09-25T05:55:42.850227+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:55:42,850 | INFO | algo_trader | ENTRY REJECTED AVADHSUGAR-EQ: Range position 0.821 < 0.85 (price retreating from high)
+2026-09-25T05:55:42.852159+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:55:42,852 | INFO | algo_trader | ENTRY REJECTED MAWANASUG-EQ: Range position 0.735 < 0.85 (price retreating from high)
+2026-09-25T05:55:42.853983+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:55:42,853 | INFO | algo_trader | ENTRY REJECTED SANGAMIND-EQ: Range position 0.770 < 0.85 (price retreating from high)
+2026-09-25T05:55:42.855630+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:55:42,855 | INFO | algo_trader | ENTRY REJECTED UTTAMSUGAR-EQ: Range position 0.631 < 0.85 (price retreating from high)
+2026-09-25T05:55:42.857382+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:55:42,857 | INFO | algo_trader | Validation completed in 0.0 seconds: 0/4 passed.
+2026-09-25T05:55:42.857533+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:55:42,857 | INFO | algo_trader | No candidates passed real-time validation.
+2026-09-25T05:55:43.477110+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:55:43,476 | INFO | algo_trader | Scan attempt 13 — retrying in 120s (window open until 12:00)...
+2026-09-25T05:57:43.477470+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:57:43,477 | INFO | algo_trader | Scanning 2692 stocks for top 1 candidates (pool=5)...
+2026-09-25T05:57:43.478253+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:57:43,477 | INFO | algo_trader | Fetching quotes for 2692 stocks...
+2026-09-25T05:57:50.154550+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:57:50,154 | INFO | algo_trader | Received 2689 quotes.
+2026-09-25T05:57:50.157148+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:57:50,157 | INFO | algo_trader | Candidates in 5-8% gain range: 14
+2026-09-25T05:57:50.157341+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:57:50,157 | INFO | algo_trader | Fetching daily candles for 14 candidates...
+2026-09-25T05:57:50.176159+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:57:50,176 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-25T05:57:55.194405+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:57:55,194 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-09-25T05:58:05.220568+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:58:05,220 | INFO | algo_trader | Rank #1: AVADHSUGAR-EQ — gain=+7.28%, score=0.792 (vol=4.7x, momentum=0.82, buy_pressure=0.56, stability=1.00, prev_trend=0.50)
+2026-09-25T05:58:05.221168+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:58:05,220 | INFO | algo_trader | Rank #2: SBC-EQ — gain=+5.94%, score=0.768 (vol=1.1x, momentum=0.95, buy_pressure=0.85, stability=0.95, prev_trend=0.50)
+2026-09-25T05:58:05.221168+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:58:05,220 | INFO | algo_trader | Rank #3: UTTAMSUGAR-EQ — gain=+6.15%, score=0.746 (vol=4.0x, momentum=0.66, buy_pressure=0.51, stability=0.86, prev_trend=0.67)
+2026-09-25T05:58:05.221168+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:58:05,220 | INFO | algo_trader | Rank #4: SANGAMIND-EQ — gain=+5.65%, score=0.740 (vol=12.3x, momentum=0.78, buy_pressure=0.47, stability=0.85, prev_trend=0.50)
+2026-09-25T05:58:05.221168+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:58:05,220 | INFO | algo_trader | Rank #5: CUBEXTUB-EQ — gain=+6.21%, score=0.739 (vol=3.0x, momentum=0.94, buy_pressure=0.52, stability=0.00, prev_trend=1.00)
+2026-09-25T05:58:05.473408+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:58:05,473 | INFO | algo_trader | Scan completed in 22.0 seconds. Found 5 raw candidates.
+2026-09-25T05:58:05.489221+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:58:05,489 | INFO | algo_trader | Skipped by ASM/GSM/circuit filter:
+2026-09-25T05:58:05.489221+00:00 ip-[REDACTED] python[438955]:   SBC-EQ: ASM listed (Additional Surveillance Measure)
+2026-09-25T05:58:05.489559+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:58:05,489 | INFO | algo_trader | Checking read-only restrictions for 4 candidates...
+2026-09-25T05:58:05.492312+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:58:05,492 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 4 tradable, 0 rejected.
+2026-09-25T05:58:05.492489+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:58:05,492 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 1 filtered):
+2026-09-25T05:58:05.492489+00:00 ip-[REDACTED] python[438955]:   AVADHSUGAR-EQ: +7.28% @ 776.80
+2026-09-25T05:58:05.492489+00:00 ip-[REDACTED] python[438955]:     Score=0.792 | Vol=4.7x | Momentum=0.82 | BuyPressure=0.56 | Stability=1.00 | PrevTrend=0.50
+2026-09-25T05:58:06.099712+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:58:06,099 | INFO | algo_trader | Validating 4 candidates in parallel...
+2026-09-25T05:58:06.122203+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:58:06,122 | INFO | algo_trader | ENTRY REJECTED AVADHSUGAR-EQ: Range position 0.807 < 0.85 (price retreating from high)
+2026-09-25T05:58:06.124133+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:58:06,124 | INFO | algo_trader | ENTRY REJECTED UTTAMSUGAR-EQ: Range position 0.682 < 0.85 (price retreating from high)
+2026-09-25T05:58:06.125776+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:58:06,125 | INFO | algo_trader | ENTRY REJECTED SANGAMIND-EQ: Range position 0.772 < 0.85 (price retreating from high)
+2026-09-25T05:58:06.127421+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:58:06,127 | INFO | algo_trader | ENTRY REJECTED CUBEXTUB-EQ: Wide spread: 0.30 (0.203% > 0.2%)
+2026-09-25T05:58:06.129112+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:58:06,129 | INFO | algo_trader | Validation completed in 0.0 seconds: 0/4 passed.
+2026-09-25T05:58:06.129249+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:58:06,129 | INFO | algo_trader | No candidates passed real-time validation.
+2026-09-25T05:58:06.707729+00:00 ip-[REDACTED] python[438955]: 2026-09-25 05:58:06,707 | INFO | algo_trader | Scan attempt 14 — retrying in 120s (window open until 12:00)...
+2026-09-25T06:00:06.708160+00:00 ip-[REDACTED] python[438955]: 2026-09-25 06:00:06,708 | INFO | algo_trader | Scanning 2692 stocks for top 1 candidates (pool=5)...
+2026-09-25T06:00:06.711909+00:00 ip-[REDACTED] python[438955]: 2026-09-25 06:00:06,708 | INFO | algo_trader | Fetching quotes for 2692 stocks...
+2026-09-25T06:00:13.372808+00:00 ip-[REDACTED] python[438955]: 2026-09-25 06:00:13,372 | INFO | algo_trader | Received 2689 quotes.
+2026-09-25T06:00:13.375195+00:00 ip-[REDACTED] python[438955]: 2026-09-25 06:00:13,375 | INFO | algo_trader | Candidates in 5-8% gain range: 14
+2026-09-25T06:00:13.375310+00:00 ip-[REDACTED] python[438955]: 2026-09-25 06:00:13,375 | INFO | algo_trader | Fetching daily candles for 14 candidates...
+2026-09-25T06:00:13.398897+00:00 ip-[REDACTED] python[438955]: 2026-09-25 06:00:13,398 | INFO | algo_trader | Rank #1: LLOYDSENGG-EQ — gain=+6.04%, score=0.813 (vol=2.1x, momentum=0.99, buy_pressure=0.26, stability=0.93, prev_trend=0.83)
+2026-09-25T06:00:13.399116+00:00 ip-[REDACTED] python[438955]: 2026-09-25 06:00:13,398 | INFO | algo_trader | Rank #2: AVADHSUGAR-EQ — gain=+7.66%, score=0.807 (vol=4.7x, momentum=0.86, buy_pressure=0.58, stability=1.00, prev_trend=0.50)
+2026-09-25T06:00:13.399116+00:00 ip-[REDACTED] python[438955]: 2026-09-25 06:00:13,399 | INFO | algo_trader | Rank #3: UTTAMSUGAR-EQ — gain=+6.75%, score=0.765 (vol=4.1x, momentum=0.72, buy_pressure=0.53, stability=0.86, prev_trend=0.67)
+2026-09-25T06:00:13.399116+00:00 ip-[REDACTED] python[438955]: 2026-09-25 06:00:13,399 | INFO | algo_trader | Rank #4: SBC-EQ — gain=+5.81%, score=0.764 (vol=1.1x, momentum=0.93, buy_pressure=0.85, stability=0.95, prev_trend=0.50)
+2026-09-25T06:00:13.399347+00:00 ip-[REDACTED] python[438955]: 2026-09-25 06:00:13,399 | INFO | algo_trader | Rank #5: CUBEXTUB-EQ — gain=+6.79%, score=0.751 (vol=3.0x, momentum=0.99, buy_pressure=0.52, stability=0.00, prev_trend=1.00)
+2026-09-25T06:00:13.652715+00:00 ip-[REDACTED] python[438955]: 2026-09-25 06:00:13,652 | INFO | algo_trader | Scan completed in 6.9 seconds. Found 5 raw candidates.
+2026-09-25T06:00:13.654317+00:00 ip-[REDACTED] python[438955]: 2026-09-25 06:00:13,654 | INFO | algo_trader | Skipped by ASM/GSM/circuit filter:
+2026-09-25T06:00:13.654317+00:00 ip-[REDACTED] python[438955]:   SBC-EQ: ASM listed (Additional Surveillance Measure)
+2026-09-25T06:00:13.654581+00:00 ip-[REDACTED] python[438955]: 2026-09-25 06:00:13,654 | INFO | algo_trader | Checking read-only restrictions for 4 candidates...
+2026-09-25T06:00:13.656318+00:00 ip-[REDACTED] python[438955]: 2026-09-25 06:00:13,656 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 4 tradable, 0 rejected.
+2026-09-25T06:00:13.656465+00:00 ip-[REDACTED] python[438955]: 2026-09-25 06:00:13,656 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 1 filtered):
+2026-09-25T06:00:13.656465+00:00 ip-[REDACTED] python[438955]:   LLOYDSENGG-EQ: +6.04% @ 96.40
+2026-09-25T06:00:13.656465+00:00 ip-[REDACTED] python[438955]:     Score=0.813 | Vol=2.1x | Momentum=0.99 | BuyPressure=0.26 | Stability=0.93 | PrevTrend=0.83
+2026-09-25T06:00:14.245162+00:00 ip-[REDACTED] python[438955]: 2026-09-25 06:00:14,245 | INFO | algo_trader | Validating 4 candidates in parallel...
+2026-09-25T06:00:14.267456+00:00 ip-[REDACTED] python[438955]: 2026-09-25 06:00:14,267 | INFO | algo_trader | ENTRY REJECTED UTTAMSUGAR-EQ: Range position 0.719 < 0.85 (price retreating from high)
+2026-09-25T06:00:14.269519+00:00 ip-[REDACTED] python[438955]: 2026-09-25 06:00:14,269 | INFO | algo_trader | ENTRY REJECTED CUBEXTUB-EQ: Wide spread: 0.41 (0.277% > 0.2%)
+2026-09-25T06:00:14.271176+00:00 ip-[REDACTED] python[438955]: 2026-09-25 06:00:14,271 | INFO | algo_trader | Near-breakout skip for LLOYDSENGG-EQ: range=0.992, gain=6.1% — skipping breakout check
+2026-09-25T06:00:15.376561+00:00 ip-[REDACTED] python[438955]: 2026-09-25 06:00:15,376 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-09-25T06:00:15.397127+00:00 ip-[REDACTED] python[438955]: 2026-09-25 06:00:15,397 | INFO | algo_trader | ENTRY REJECTED LLOYDSENGG-EQ: Volume fading: current 112248 vs avg 244310 (ratio 0.46 < 1.2)
+2026-09-25T06:00:21.399463+00:00 ip-[REDACTED] python[438955]: 2026-09-25 06:00:21,399 | INFO | algo_trader | ENTRY VALIDATED AVADHSUGAR-EQ: price=784.50, gain=+8.34%, range=0.935, breakout=True, vol_ratio=14.30, spread=0.1470%
+2026-09-25T06:00:21.401994+00:00 ip-[REDACTED] python[438955]: 2026-09-25 06:00:21,401 | INFO | algo_trader | Validation completed in 7.2 seconds: 1/4 passed.
+2026-09-25T06:00:21.402175+00:00 ip-[REDACTED] python[438955]: 2026-09-25 06:00:21,402 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-09-25T06:00:21.402175+00:00 ip-[REDACTED] python[438955]: 2026-09-25 06:00:21,402 | INFO | algo_trader | Capital: 100000.00 x 5.0x leverage = 500000.00 buying power | 1 validated stocks | 475000.00 per stock
+2026-09-25T06:00:22.405884+00:00 ip-[REDACTED] python[438955]: 2026-09-25 06:00:22,405 | INFO | algo_trader | ATR computed for token 21406: 4.5321 (from 15 candles, price=784.50, ATR%=0.58%)
+2026-09-25T06:00:22.436165+00:00 ip-[REDACTED] python[438955]: 2026-09-25 06:00:22,436 | INFO | algo_trader | [PAPER] MARKET order filled: BUY AVADHSUGAR-EQ 73 @ 784.89 (reference=784.50, fee=57.30) id=cf8f3466
+2026-09-25T06:00:22.437854+00:00 ip-[REDACTED] python[438955]: 2026-09-25 06:00:22,437 | INFO | algo_trader | MARKET order placed: BUY AVADHSUGAR-EQ 73 [INTRADAY] {'response': {'data': {'orderid': 'cf8f3466'}}}
+2026-09-25T06:00:22.442770+00:00 ip-[REDACTED] python[438955]: 2026-09-25 06:00:22,442 | INFO | algo_trader | [PAPER] SL-M order placed: SELL AVADHSUGAR-EQ 73 trigger=771.25 id=eb6cc5e2
+2026-09-25T06:00:22.444213+00:00 ip-[REDACTED] python[438955]: 2026-09-25 06:00:22,444 | INFO | algo_trader | SL-M order placed for AVADHSUGAR-EQ: trigger=771.29, orderid=eb6cc5e2
+2026-09-25T06:00:22.446360+00:00 ip-[REDACTED] python[438955]: 2026-09-25 06:00:22,446 | INFO | algo_trader | ENTRY: AVADHSUGAR-EQ [MIS] — 73 shares @ 784.89 (capital=475000.00, gain=+7.66%, score=0.807, ATR=4.5321 (0.58%), SL=771.29, hard_stop=771.29) | {'response': {'data': {'orderid': 'cf8f3466'}}}
+2026-09-25T06:00:23.036754+00:00 ip-[REDACTED] python[438955]: 2026-09-25 06:00:23,036 | INFO | algo_trader | Monitoring 1 positions with trailing stop...
+2026-09-25T06:02:53.603426+00:00 ip-[REDACTED] python[438955]: 2026-09-25 06:02:53,603 | INFO | algo_trader | TRAILING STOP UPDATE AVADHSUGAR-EQ: SL 771.29 -> 780.97 (ltp=794.00, bid=792.15, high=794.00, profit=1.2%, intraday=9.7%, locked=False, ATR=4.5321)
+2026-09-25T06:02:53.604293+00:00 ip-[REDACTED] python[438955]: 2026-09-25 06:02:53,603 | INFO | algo_trader | [PAPER] SL-M modified: AVADHSUGAR-EQ trigger 771.25 → 780.95 id=eb6cc5e2
+2026-09-25T06:02:53.605304+00:00 ip-[REDACTED] python[438955]: 2026-09-25 06:02:53,605 | INFO | algo_trader | SL-M trigger updated for AVADHSUGAR-EQ: new trigger=780.97
+2026-09-25T07:30:16.803329+00:00 ip-[REDACTED] python[438955]: 2026-09-25 07:30:16,803 | INFO | algo_trader | [auth_refresh] Session age 7204s >= 7200s, refreshing...
+2026-09-25T07:30:16.806949+00:00 ip-[REDACTED] python[438955]: 2026-09-25 07:30:16,803 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-09-25T07:30:16.887433+00:00 ip-[REDACTED] python[438955]: 2026-09-25 07:30:16,887 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-09-25T09:30:25.470808+00:00 ip-[REDACTED] python[438955]: 2026-09-25 09:30:25,470 | INFO | algo_trader | [auth_refresh] Session age 7209s >= 7200s, refreshing...
+2026-09-25T09:30:25.474448+00:00 ip-[REDACTED] python[438955]: 2026-09-25 09:30:25,471 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-09-25T09:30:25.548277+00:00 ip-[REDACTED] python[438955]: 2026-09-25 09:30:25,548 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-09-25T09:35:06.200064+00:00 ip-[REDACTED] python[438955]: 2026-09-25 09:35:06,199 | INFO | algo_trader | Market closing — force-exiting 1 positions.
+2026-09-25T09:35:06.813692+00:00 ip-[REDACTED] python[438955]: 2026-09-25 09:35:06,813 | INFO | algo_trader | [position_check] AVADHSUGAR-EQ: netqty=73
+2026-09-25T09:35:06.836322+00:00 ip-[REDACTED] python[438955]: 2026-09-25 09:35:06,836 | INFO | algo_trader | [position_check] AVADHSUGAR-EQ: netqty=73
+2026-09-25T09:35:06.962371+00:00 ip-[REDACTED] python[438955]: 2026-09-25 09:35:06,962 | INFO | algo_trader | [PAPER] MARKET order filled: SELL AVADHSUGAR-EQ 73 @ 796.10 (reference=796.50, fee=58.12) id=8e031309
+2026-09-25T09:35:06.967243+00:00 ip-[REDACTED] python[438955]: 2026-09-25 09:35:06,967 | INFO | algo_trader | [exit_attempt] Exit confirmed for AVADHSUGAR-EQ: 73 shares @ 796.10
+2026-09-25T09:35:06.967451+00:00 ip-[REDACTED] python[438955]: 2026-09-25 09:35:06,967 | INFO | algo_trader | [PAPER] Order cancelled: AVADHSUGAR-EQ id=eb6cc5e2
+2026-09-25T09:35:06.968835+00:00 ip-[REDACTED] python[438955]: 2026-09-25 09:35:06,968 | INFO | algo_trader | SL-M order confirmed CANCELLED for AVADHSUGAR-EQ: eb6cc5e2
+2026-09-25T09:35:06.970974+00:00 ip-[REDACTED] python[438955]: 2026-09-25 09:35:06,970 | INFO | algo_trader | MARKET CLOSE EXIT [MIS]: AVADHSUGAR-EQ — 0 shares @ 796.10 (entry=784.89, PnL=+702.92, daily=+702.92) | ExitOutcome(state=<ExitState.CLOSED: 'closed'>, execution=OrderExecution(order_id='8e031309', state=<OrderState.FILLED: 'filled'>, requested_quantity=73, filled_quantity=73, average_price=796.1, reason='', raw_order={'orderid': '8e031309', 'tradingsymbol': 'AVADHSUGAR-EQ', 'transactiontype': 'SELL', 'quantity': '73', 'price': '796.1', 'filledshares': '73', 'averageprice': '796.1', 'triggerprice': '0.0', 'orderstatus': 'COMPLETE', 'status': 'COMPLETE', 'ordertype': 'MARKET', 'producttype': 'INTRADAY', 'referenceprice': '796.5', 'fees': '58.12'}), reason='')
+2026-09-25T09:35:07.566314+00:00 ip-[REDACTED] python[438955]: 2026-09-25 09:35:07,566 | INFO | algo_trader |
+2026-09-25T09:35:07.566314+00:00 ip-[REDACTED] python[438955]: ============================================================
+2026-09-25T09:35:07.566314+00:00 ip-[REDACTED] python[438955]: PAPER TRADING SUMMARY
+2026-09-25T09:35:07.566314+00:00 ip-[REDACTED] python[438955]: ============================================================
+2026-09-25T09:35:07.566314+00:00 ip-[REDACTED] python[438955]: Total trades: 2
+2026-09-25T09:35:07.566314+00:00 ip-[REDACTED] python[438955]: Buys: 1, Sells: 1
+2026-09-25T09:35:07.566314+00:00 ip-[REDACTED] python[438955]:   11:30:22 BUY  AVADHSUGAR-EQ x73 @ 784.89 fees: Rs.57.30
+2026-09-25T09:35:07.566314+00:00 ip-[REDACTED] python[438955]:   15:05:06 SELL AVADHSUGAR-EQ x73 @ 796.10 gross: Rs.+818.33, fees: Rs.115.42, net P&L: Rs.+702.91
+2026-09-25T09:35:07.566314+00:00 ip-[REDACTED] python[438955]: Daily net P&L: Rs.+702.91
+2026-09-25T09:35:07.566314+00:00 ip-[REDACTED] python[438955]: Capital: Rs.100,000.00 → Rs.100,702.91
+2026-09-25T09:35:07.566314+00:00 ip-[REDACTED] python[438955]: All positions closed.
+2026-09-25T09:35:07.566314+00:00 ip-[REDACTED] python[438955]: ============================================================
+2026-09-25T09:35:23.119040+00:00 ip-[REDACTED] python[438955]: 2026-09-25 09:35:23,118 | INFO | algo_trader | Replay comparison complete: 1387/1387 decisions matched; recommended slippage=0 bps; report=/home/ubuntu/algo-trader/data/replay_reports/2026-09-25/summary.json; universe=data/universe_snapshots.json
+2026-09-25T09:35:23.121955+00:00 ip-[REDACTED] python[438955]: 2026-09-25 09:35:23,119 | INFO | algo_trader | Trading day complete. Daily P&L: ₹+702.92. Sleeping 66.9h until tomorrow.
