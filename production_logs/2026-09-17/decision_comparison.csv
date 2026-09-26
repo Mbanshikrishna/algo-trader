@@ -1,0 +1,350 @@
+sequence,event_type,symbol,recorded_decision,replayed_decision,matched,detail
+7937,market_gate,,trade,trade,True,four-factor market gate
+7938,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['KMCSHIL-EQ', 'ALGOQUANT-EQ', 'NEOGEN-EQ', 'SYRMA-EQ', 'TEGA-EQ']; replayed=['KMCSHIL-EQ', 'ALGOQUANT-EQ', 'NEOGEN-EQ', 'SYRMA-EQ', 'TEGA-EQ']"
+7939,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+7940,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+7941,candidate_validation,KMCSHIL-EQ,rejected,rejected,True,Range position 0.714 < 0.85 (price retreating from high)
+7942,candidate_validation,NEOGEN-EQ,rejected,rejected,True,Range position 0.823 < 0.85 (price retreating from high)
+7943,candidate_validation,SYRMA-EQ,rejected,rejected,True,Range position 0.770 < 0.85 (price retreating from high)
+7944,candidate_validation,TEGA-EQ,rejected,rejected,True,Volume fading: current 387 vs avg 5600 (ratio 0.07 < 1.2)
+7945,candidate_validation,ALGOQUANT-EQ,rejected,rejected,True,Volume fading: current 15 vs avg 853 (ratio 0.02 < 1.2)
+7946,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['KMCSHIL-EQ', 'ALGOQUANT-EQ', 'TEGA-EQ', 'SYRMA-EQ', 'NEOGEN-EQ']; replayed=['KMCSHIL-EQ', 'ALGOQUANT-EQ', 'TEGA-EQ', 'SYRMA-EQ', 'NEOGEN-EQ']"
+7947,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+7948,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+7949,candidate_validation,KMCSHIL-EQ,rejected,rejected,True,Range position 0.693 < 0.85 (price retreating from high)
+7950,candidate_validation,ALGOQUANT-EQ,rejected,rejected,True,Range position 0.847 < 0.85 (price retreating from high)
+7951,candidate_validation,SYRMA-EQ,rejected,rejected,True,Range position 0.790 < 0.85 (price retreating from high)
+7952,candidate_validation,NEOGEN-EQ,rejected,rejected,True,Range position 0.797 < 0.85 (price retreating from high)
+7953,candidate_validation,TEGA-EQ,rejected,rejected,True,Volume fading: current 330 vs avg 4950 (ratio 0.07 < 1.2)
+7954,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['KMCSHIL-EQ', 'YATHARTH-EQ', 'ALGOQUANT-EQ', 'NEOGEN-EQ', 'TEGA-EQ']; replayed=['KMCSHIL-EQ', 'YATHARTH-EQ', 'ALGOQUANT-EQ', 'NEOGEN-EQ', 'TEGA-EQ']"
+7955,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+7956,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+7957,candidate_validation,KMCSHIL-EQ,rejected,rejected,True,Range position 0.707 < 0.85 (price retreating from high)
+7958,candidate_validation,YATHARTH-EQ,rejected,rejected,True,Range position 0.609 < 0.85 (price retreating from high)
+7959,candidate_validation,NEOGEN-EQ,rejected,rejected,True,Range position 0.833 < 0.85 (price retreating from high)
+7960,candidate_validation,TEGA-EQ,rejected,rejected,True,No micro breakout: LTP 1837.30 < last 5min high 1843.80
+7961,candidate_validation,ALGOQUANT-EQ,rejected,rejected,True,Volume fading: current 54 vs avg 1630 (ratio 0.03 < 1.2)
+7962,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['KMCSHIL-EQ', 'ALGOQUANT-EQ', 'YATHARTH-EQ', 'TEGA-EQ', 'NEOGEN-EQ']; replayed=['KMCSHIL-EQ', 'ALGOQUANT-EQ', 'YATHARTH-EQ', 'TEGA-EQ', 'NEOGEN-EQ']"
+7963,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+7964,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+7965,candidate_validation,KMCSHIL-EQ,rejected,rejected,True,Range position 0.690 < 0.85 (price retreating from high)
+7966,candidate_validation,YATHARTH-EQ,rejected,rejected,True,Gain +4.91% outside 5.0-10.0% range
+7967,candidate_validation,NEOGEN-EQ,rejected,rejected,True,Range position 0.835 < 0.85 (price retreating from high)
+7968,candidate_validation,ALGOQUANT-EQ,rejected,rejected,True,Volume fading: current 10 vs avg 1268 (ratio 0.01 < 1.2)
+7969,candidate_validation,TEGA-EQ,rejected,rejected,True,"Breakout check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=13.126.199.100, client_local_ip=172.31.33.249: Access denied because of exceeding access rate)"
+7970,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['KMCSHIL-EQ', 'ALGOQUANT-EQ', 'YATHARTH-EQ', 'TEGA-EQ', 'NEOGEN-EQ']; replayed=['KMCSHIL-EQ', 'ALGOQUANT-EQ', 'YATHARTH-EQ', 'TEGA-EQ', 'NEOGEN-EQ']"
+7971,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+7972,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+7973,candidate_validation,KMCSHIL-EQ,rejected,rejected,True,Range position 0.698 < 0.85 (price retreating from high)
+7974,candidate_validation,YATHARTH-EQ,rejected,rejected,True,Range position 0.607 < 0.85 (price retreating from high)
+7975,candidate_validation,NEOGEN-EQ,rejected,rejected,True,Range position 0.812 < 0.85 (price retreating from high)
+7976,candidate_validation,TEGA-EQ,rejected,rejected,True,"Breakout check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=13.126.199.100, client_local_ip=172.31.33.249: Access denied because of exceeding access rate)"
+7977,candidate_validation,ALGOQUANT-EQ,rejected,rejected,True,"Volume check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=13.126.199.100, client_local_ip=172.31.33.249: Access denied because of exceeding access rate)"
+7978,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['KMCSHIL-EQ', 'YATHARTH-EQ', 'TEGA-EQ', 'ALGOQUANT-EQ', 'NEOGEN-EQ']; replayed=['KMCSHIL-EQ', 'YATHARTH-EQ', 'TEGA-EQ', 'ALGOQUANT-EQ', 'NEOGEN-EQ']"
+7979,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+7980,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+7981,candidate_validation,KMCSHIL-EQ,rejected,rejected,True,Range position 0.688 < 0.85 (price retreating from high)
+7982,candidate_validation,YATHARTH-EQ,rejected,rejected,True,Range position 0.683 < 0.85 (price retreating from high)
+7983,candidate_validation,NEOGEN-EQ,rejected,rejected,True,Range position 0.835 < 0.85 (price retreating from high)
+7984,candidate_validation,TEGA-EQ,rejected,rejected,True,No micro breakout: LTP 1842.70 < last 5min high 1843.00
+7985,candidate_validation,ALGOQUANT-EQ,rejected,rejected,True,Volume fading: current 300 vs avg 1015 (ratio 0.30 < 1.2)
+7986,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['KMCSHIL-EQ', 'YATHARTH-EQ', 'TEGA-EQ', 'NEOGEN-EQ', 'ALGOQUANT-EQ']; replayed=['KMCSHIL-EQ', 'YATHARTH-EQ', 'TEGA-EQ', 'NEOGEN-EQ', 'ALGOQUANT-EQ']"
+7987,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+7988,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+7989,candidate_validation,KMCSHIL-EQ,rejected,rejected,True,Range position 0.688 < 0.85 (price retreating from high)
+7990,candidate_validation,YATHARTH-EQ,rejected,rejected,True,Range position 0.669 < 0.85 (price retreating from high)
+7991,candidate_validation,TEGA-EQ,rejected,rejected,True,No micro breakout: LTP 1844.00 < last 5min high 1844.70
+7992,candidate_validation,NEOGEN-EQ,rejected,rejected,True,Volume fading: current 1163 vs avg 2615 (ratio 0.44 < 1.2)
+7993,candidate_validation,ALGOQUANT-EQ,rejected,rejected,True,"Volume check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=13.126.199.100, client_local_ip=172.31.33.249: Access denied because of exceeding access rate)"
+7994,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['KMCSHIL-EQ', 'YATHARTH-EQ', 'TEGA-EQ', 'ALGOQUANT-EQ', 'NEOGEN-EQ']; replayed=['KMCSHIL-EQ', 'YATHARTH-EQ', 'TEGA-EQ', 'ALGOQUANT-EQ', 'NEOGEN-EQ']"
+7995,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+7996,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+7997,candidate_validation,KMCSHIL-EQ,rejected,rejected,True,Range position 0.692 < 0.85 (price retreating from high)
+7998,candidate_validation,YATHARTH-EQ,rejected,rejected,True,Range position 0.825 < 0.85 (price retreating from high)
+7999,candidate_validation,NEOGEN-EQ,rejected,rejected,True,Volume fading: current 220 vs avg 2007 (ratio 0.11 < 1.2)
+8000,candidate_validation,TEGA-EQ,rejected,rejected,True,Volume fading: current 1589 vs avg 4027 (ratio 0.39 < 1.2)
+8001,candidate_validation,ALGOQUANT-EQ,accepted,accepted,True,All checks passed
+8002,position_sized,ALGOQUANT-EQ,1086,1086,True,risk-based position sizing
+8010,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8011,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8012,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8013,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8014,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8015,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8016,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8017,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8018,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8019,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8020,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8021,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8022,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8023,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8024,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8025,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8026,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8027,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8028,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8029,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8030,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8031,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8032,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8033,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8034,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8035,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8036,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8037,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8038,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8039,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8040,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8041,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8042,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8043,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8044,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8045,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8046,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8047,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8048,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8049,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8050,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8051,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8052,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8053,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8054,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8055,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8056,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8057,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8058,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8059,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8060,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8061,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8062,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8063,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8064,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8065,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8066,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8067,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8068,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8069,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8070,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8071,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8072,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8073,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8074,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8075,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8076,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8077,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8078,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8079,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8080,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8081,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8082,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8083,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8084,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8085,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8086,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8087,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8088,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8089,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8090,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8091,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8092,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8093,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8094,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8095,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8096,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8097,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8098,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8099,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8100,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8101,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8102,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8103,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8104,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8105,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8106,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8107,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8108,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8109,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8110,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8111,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8112,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8113,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8114,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8115,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8116,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8117,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8118,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8119,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8120,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8121,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8122,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8123,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8124,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8125,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8126,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8127,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8128,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8129,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8130,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8131,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8132,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8133,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8134,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8135,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8136,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8137,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8138,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8139,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8140,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8141,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8142,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8143,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8144,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8145,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8146,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8147,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8148,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8149,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8150,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8151,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8152,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8153,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8154,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8155,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8156,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8157,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8158,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8159,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8160,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8161,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8162,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8163,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8164,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8165,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8166,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8167,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8168,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8169,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8170,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8171,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8172,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8173,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8174,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8175,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8176,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8177,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8178,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8179,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8180,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8181,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8182,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8183,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8184,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8185,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8186,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8187,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8188,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8189,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8190,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8191,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8192,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8193,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8194,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8195,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8196,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8197,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8198,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8199,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8200,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8201,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8202,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8203,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8204,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8205,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8206,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8207,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8208,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8209,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8210,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8211,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8212,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8213,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8214,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8215,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8216,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8217,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8218,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8219,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8220,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8221,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8222,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8223,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8224,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8225,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8226,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8227,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8228,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8229,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8230,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8231,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8232,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8233,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8234,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8235,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8236,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8237,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8238,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8239,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8240,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8241,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8242,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8243,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8244,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8245,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8246,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8247,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8248,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8249,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8250,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8251,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8252,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8253,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8254,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8255,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8256,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8257,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8258,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8259,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8260,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8261,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8262,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8263,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8264,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8265,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8266,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8267,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8268,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8269,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8270,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8271,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8272,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8273,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8274,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8275,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8276,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8277,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8278,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8279,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8280,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8281,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8282,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8283,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8284,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8285,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8286,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8287,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8288,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8289,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8290,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8291,position_evaluated,ALGOQUANT-EQ,hold,hold,True,target and post-trail stop decision
+8292,position_evaluated,ALGOQUANT-EQ,exit,exit,True,target and post-trail stop decision
