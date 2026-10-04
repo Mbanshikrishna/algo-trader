@@ -1,0 +1,89 @@
+sequence,event_type,symbol,recorded_decision,replayed_decision,matched,detail
+11949,market_gate,,trade,trade,True,four-factor market gate
+11950,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['CUPID-EQ', 'SBC-EQ', 'RPTECH-EQ', 'AXISCADES-EQ', 'TEXRAIL-EQ']; replayed=['CUPID-EQ', 'SBC-EQ', 'RPTECH-EQ', 'AXISCADES-EQ', 'TEXRAIL-EQ']"
+11951,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+11952,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+11953,candidate_validation,SBC-EQ,rejected,rejected,True,Range position 0.725 < 0.85 (price retreating from high)
+11954,candidate_validation,RPTECH-EQ,rejected,rejected,True,Range position 0.682 < 0.85 (price retreating from high)
+11955,candidate_validation,AXISCADES-EQ,rejected,rejected,True,Range position 0.734 < 0.85 (price retreating from high)
+11956,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['CUPID-EQ', 'SBC-EQ', 'RPTECH-EQ', 'AXISCADES-EQ', 'TEXRAIL-EQ']; replayed=['CUPID-EQ', 'SBC-EQ', 'RPTECH-EQ', 'AXISCADES-EQ', 'TEXRAIL-EQ']"
+11957,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+11958,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+11959,candidate_validation,SBC-EQ,rejected,rejected,True,Range position 0.716 < 0.85 (price retreating from high)
+11960,candidate_validation,RPTECH-EQ,rejected,rejected,True,Range position 0.668 < 0.85 (price retreating from high)
+11961,candidate_validation,AXISCADES-EQ,rejected,rejected,True,Range position 0.712 < 0.85 (price retreating from high)
+11962,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['CUPID-EQ', 'SBC-EQ', 'RPTECH-EQ', 'AXISCADES-EQ', 'TEXRAIL-EQ']; replayed=['CUPID-EQ', 'SBC-EQ', 'RPTECH-EQ', 'AXISCADES-EQ', 'TEXRAIL-EQ']"
+11963,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+11964,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+11965,candidate_validation,SBC-EQ,rejected,rejected,True,Range position 0.723 < 0.85 (price retreating from high)
+11966,candidate_validation,RPTECH-EQ,rejected,rejected,True,Range position 0.668 < 0.85 (price retreating from high)
+11967,candidate_validation,AXISCADES-EQ,rejected,rejected,True,Range position 0.722 < 0.85 (price retreating from high)
+11968,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['CUPID-EQ', 'SBC-EQ', 'RPTECH-EQ', 'AXISCADES-EQ', 'TEXRAIL-EQ']; replayed=['CUPID-EQ', 'SBC-EQ', 'RPTECH-EQ', 'AXISCADES-EQ', 'TEXRAIL-EQ']"
+11969,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+11970,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+11971,candidate_validation,SBC-EQ,rejected,rejected,True,Range position 0.714 < 0.85 (price retreating from high)
+11972,candidate_validation,RPTECH-EQ,rejected,rejected,True,Range position 0.682 < 0.85 (price retreating from high)
+11973,candidate_validation,AXISCADES-EQ,rejected,rejected,True,Range position 0.725 < 0.85 (price retreating from high)
+11974,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['CUPID-EQ', 'SBC-EQ', 'AXISCADES-EQ', 'RPTECH-EQ', 'JWL-EQ']; replayed=['CUPID-EQ', 'SBC-EQ', 'AXISCADES-EQ', 'RPTECH-EQ', 'JWL-EQ']"
+11975,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+11976,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+11977,candidate_validation,SBC-EQ,rejected,rejected,True,Range position 0.661 < 0.85 (price retreating from high)
+11978,candidate_validation,AXISCADES-EQ,rejected,rejected,True,Range position 0.741 < 0.85 (price retreating from high)
+11979,candidate_validation,RPTECH-EQ,rejected,rejected,True,Range position 0.724 < 0.85 (price retreating from high)
+11980,candidate_validation,JWL-EQ,rejected,rejected,True,Range position 0.664 < 0.85 (price retreating from high)
+11981,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['CUPID-EQ', 'SBC-EQ', 'JWL-EQ', 'AXISCADES-EQ', 'RPTECH-EQ']; replayed=['CUPID-EQ', 'SBC-EQ', 'JWL-EQ', 'AXISCADES-EQ', 'RPTECH-EQ']"
+11982,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+11983,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+11984,candidate_validation,SBC-EQ,rejected,rejected,True,Range position 0.691 < 0.85 (price retreating from high)
+11985,candidate_validation,JWL-EQ,rejected,rejected,True,Range position 0.810 < 0.85 (price retreating from high)
+11986,candidate_validation,AXISCADES-EQ,rejected,rejected,True,Range position 0.740 < 0.85 (price retreating from high)
+11987,candidate_validation,RPTECH-EQ,rejected,rejected,True,Range position 0.749 < 0.85 (price retreating from high)
+11988,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['CUPID-EQ', 'JWL-EQ', 'SBC-EQ', 'AXISCADES-EQ', 'RPTECH-EQ']; replayed=['CUPID-EQ', 'JWL-EQ', 'SBC-EQ', 'AXISCADES-EQ', 'RPTECH-EQ']"
+11989,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+11990,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+11991,candidate_validation,JWL-EQ,rejected,rejected,True,Range position 0.840 < 0.85 (price retreating from high)
+11992,candidate_validation,SBC-EQ,rejected,rejected,True,Range position 0.687 < 0.85 (price retreating from high)
+11993,candidate_validation,AXISCADES-EQ,rejected,rejected,True,Range position 0.743 < 0.85 (price retreating from high)
+11994,candidate_validation,RPTECH-EQ,rejected,rejected,True,Range position 0.762 < 0.85 (price retreating from high)
+11995,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['CUPID-EQ', 'SHRINGARMS-EQ', 'SBC-EQ', 'RPTECH-EQ', 'AXISCADES-EQ']; replayed=['CUPID-EQ', 'SHRINGARMS-EQ', 'SBC-EQ', 'RPTECH-EQ', 'AXISCADES-EQ']"
+11996,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+11997,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+11998,candidate_validation,SBC-EQ,rejected,rejected,True,Range position 0.701 < 0.85 (price retreating from high)
+11999,candidate_validation,RPTECH-EQ,rejected,rejected,True,Range position 0.830 < 0.85 (price retreating from high)
+12000,candidate_validation,AXISCADES-EQ,rejected,rejected,True,Range position 0.740 < 0.85 (price retreating from high)
+12001,candidate_validation,SHRINGARMS-EQ,rejected,rejected,True,Volume fading: current 1057 vs avg 4809 (ratio 0.22 < 1.2)
+12002,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['CUPID-EQ', 'SHRINGARMS-EQ', 'SBC-EQ', 'AXISCADES-EQ', 'RPTECH-EQ']; replayed=['CUPID-EQ', 'SHRINGARMS-EQ', 'SBC-EQ', 'AXISCADES-EQ', 'RPTECH-EQ']"
+12003,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+12004,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+12005,candidate_validation,SBC-EQ,rejected,rejected,True,Range position 0.708 < 0.85 (price retreating from high)
+12006,candidate_validation,AXISCADES-EQ,rejected,rejected,True,Range position 0.737 < 0.85 (price retreating from high)
+12007,candidate_validation,RPTECH-EQ,accepted,accepted,True,All checks passed
+12008,candidate_validation,SHRINGARMS-EQ,accepted,accepted,True,All checks passed
+12009,position_sized,SHRINGARMS-EQ,255,255,True,risk-based position sizing
+12017,position_evaluated,SHRINGARMS-EQ,hold,hold,True,target and post-trail stop decision
+12018,position_evaluated,SHRINGARMS-EQ,hold,hold,True,target and post-trail stop decision
+12019,position_evaluated,SHRINGARMS-EQ,hold,hold,True,target and post-trail stop decision
+12020,position_evaluated,SHRINGARMS-EQ,hold,hold,True,target and post-trail stop decision
+12021,position_evaluated,SHRINGARMS-EQ,hold,hold,True,target and post-trail stop decision
+12022,position_evaluated,SHRINGARMS-EQ,hold,hold,True,target and post-trail stop decision
+12023,position_evaluated,SHRINGARMS-EQ,hold,hold,True,target and post-trail stop decision
+12024,position_evaluated,SHRINGARMS-EQ,hold,hold,True,target and post-trail stop decision
+12025,position_evaluated,SHRINGARMS-EQ,hold,hold,True,target and post-trail stop decision
+12026,position_evaluated,SHRINGARMS-EQ,hold,hold,True,target and post-trail stop decision
+12027,position_evaluated,SHRINGARMS-EQ,hold,hold,True,target and post-trail stop decision
+12028,position_evaluated,SHRINGARMS-EQ,hold,hold,True,target and post-trail stop decision
+12029,position_evaluated,SHRINGARMS-EQ,hold,hold,True,target and post-trail stop decision
+12030,position_evaluated,SHRINGARMS-EQ,hold,hold,True,target and post-trail stop decision
+12031,position_evaluated,SHRINGARMS-EQ,hold,hold,True,target and post-trail stop decision
+12032,position_evaluated,SHRINGARMS-EQ,hold,hold,True,target and post-trail stop decision
+12033,position_evaluated,SHRINGARMS-EQ,hold,hold,True,target and post-trail stop decision
+12034,position_evaluated,SHRINGARMS-EQ,hold,hold,True,target and post-trail stop decision
+12035,position_evaluated,SHRINGARMS-EQ,hold,hold,True,target and post-trail stop decision
+12036,position_evaluated,SHRINGARMS-EQ,hold,hold,True,target and post-trail stop decision
+12037,position_evaluated,SHRINGARMS-EQ,hold,hold,True,target and post-trail stop decision
+12038,position_evaluated,SHRINGARMS-EQ,hold,hold,True,target and post-trail stop decision
+12039,position_evaluated,SHRINGARMS-EQ,hold,hold,True,target and post-trail stop decision
+12040,position_evaluated,SHRINGARMS-EQ,hold,hold,True,target and post-trail stop decision
+12041,position_evaluated,SHRINGARMS-EQ,hold,hold,True,target and post-trail stop decision
+12042,position_evaluated,SHRINGARMS-EQ,hold,hold,True,target and post-trail stop decision
+12043,position_evaluated,SHRINGARMS-EQ,exit,exit,True,target and post-trail stop decision
