@@ -1,0 +1,144 @@
+2026-10-01T04:30:00.757261+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:30:00,756 | INFO | algo_trader | Daily candle cache cleared.
+2026-10-01T04:30:00.766314+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:30:00,760 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-10-01T04:30:00.766314+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:30:00,760 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-10-01T04:30:00.834735+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:30:00,834 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-10-01T04:30:00.836078+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:30:00,835 | INFO | algo_trader | [auth_refresh] Angel One session refreshed.
+2026-10-01T04:30:01.039497+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:30:01,039 | INFO | algo_trader | Market Check: 2/4 — BULLISH
+2026-10-01T04:30:01.039497+00:00 ip-[REDACTED] python[466217]: 1. Index Direction: FAIL ❌
+2026-10-01T04:30:01.039497+00:00 ip-[REDACTED] python[466217]:    Nifty 50: -0.22% (need > 0%)
+2026-10-01T04:30:01.039497+00:00 ip-[REDACTED] python[466217]: 2. Market Breadth: FAIL ❌
+2026-10-01T04:30:01.039497+00:00 ip-[REDACTED] python[466217]:    Advancers: 17, Decliners: 32
+2026-10-01T04:30:01.039497+00:00 ip-[REDACTED] python[466217]:    Breadth ratio: 0.53 (need > 1.2)
+2026-10-01T04:30:01.039497+00:00 ip-[REDACTED] python[466217]: 3. Intraday Strength: PASS ✅
+2026-10-01T04:30:01.039497+00:00 ip-[REDACTED] python[466217]:    Nifty LTP vs Open: 22569.90 vs 22543.70
+2026-10-01T04:30:01.039497+00:00 ip-[REDACTED] python[466217]:    NIFTYBEES vs VWAP: 257.86 vs 257.63
+2026-10-01T04:30:01.039497+00:00 ip-[REDACTED] python[466217]: 4. Volatility Filter: PASS ✅
+2026-10-01T04:30:01.039497+00:00 ip-[REDACTED] python[466217]:    India VIX change: +0.52% (reject if > +5%)
+2026-10-01T04:30:01.039497+00:00 ip-[REDACTED] python[466217]: Decision: CONTRA-MOMENTUM MODE (score 2/4)
+2026-10-01T04:30:01.039497+00:00 ip-[REDACTED] python[466217]: Rules: entry before 12:00 only, no re-entry
+2026-10-01T04:30:01.039497+00:00 ip-[REDACTED] python[466217]: ⚡ CONTRA-MOMENTUM MODE: Score=2 — entry before 12:00 only, no re-entry.
+2026-10-01T04:30:01.647995+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:30:01,647 | INFO | algo_trader | Scanning 2701 stocks for top 1 candidates (pool=5)...
+2026-10-01T04:30:01.648244+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:30:01,648 | INFO | algo_trader | Fetching quotes for 2701 stocks...
+2026-10-01T04:30:12.444036+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:30:12,443 | WARNING | algo_trader | [retry] POST /quote network error: HTTPSConnectionPool(host='apiconnect.angelone.in', port=443): Read timed out. (read timeout=10), retrying in 1.0s (attempt 1/3)...
+2026-10-01T04:30:26.422906+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:30:26,422 | WARNING | algo_trader | [retry] POST /quote network error: HTTPSConnectionPool(host='apiconnect.angelone.in', port=443): Read timed out. (read timeout=10), retrying in 1.0s (attempt 1/3)...
+2026-10-01T04:30:29.882684+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:30:29,882 | INFO | algo_trader | Received 2690 quotes.
+2026-10-01T04:30:29.885326+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:30:29,885 | INFO | algo_trader | Candidates in 5-8% gain range: 3
+2026-10-01T04:30:29.885490+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:30:29,885 | INFO | algo_trader | Fetching daily candles for 3 candidates...
+2026-10-01T04:30:31.886464+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:30:31,886 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-01T04:30:36.907983+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:30:36,907 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-10-01T04:30:47.150396+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:30:47,150 | INFO | algo_trader | Rank #1: LOKESHMACH-EQ — gain=+5.86%, score=0.702 (vol=5.4x, momentum=0.68, buy_pressure=0.30, stability=0.98, prev_trend=0.50)
+2026-10-01T04:30:47.150990+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:30:47,150 | INFO | algo_trader | Rank #2: ATLANTAELE-EQ — gain=+6.57%, score=0.653 (vol=1.3x, momentum=0.82, buy_pressure=0.43, stability=1.00, prev_trend=0.33)
+2026-10-01T04:30:47.150990+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:30:47,150 | INFO | algo_trader | Rank #3: ELEVATE-EQ — gain=+6.10%, score=0.469 (vol=1.0x, momentum=0.86, buy_pressure=0.27, stability=0.51, prev_trend=0.00)
+2026-10-01T04:30:47.499055+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:30:47,498 | INFO | algo_trader | Scan completed in 45.9 seconds. Found 3 raw candidates.
+2026-10-01T04:30:47.507491+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:30:47,507 | INFO | algo_trader | Checking read-only restrictions for 3 candidates...
+2026-10-01T04:30:47.516346+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:30:47,516 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 3 tradable, 0 rejected.
+2026-10-01T04:30:47.516595+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:30:47,516 | INFO | algo_trader | Top 1 tradable stocks selected (from 3 scanned, 0 filtered):
+2026-10-01T04:30:47.516595+00:00 ip-[REDACTED] python[466217]:   LOKESHMACH-EQ: +5.86% @ 387.35
+2026-10-01T04:30:47.516595+00:00 ip-[REDACTED] python[466217]:     Score=0.702 | Vol=5.4x | Momentum=0.68 | BuyPressure=0.30 | Stability=0.98 | PrevTrend=0.50
+2026-10-01T04:30:48.118022+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:30:48,117 | INFO | algo_trader | Validating 3 candidates in parallel...
+2026-10-01T04:30:48.142099+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:30:48,141 | INFO | algo_trader | ENTRY REJECTED LOKESHMACH-EQ: Range position 0.644 < 0.85 (price retreating from high)
+2026-10-01T04:30:48.151048+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:30:48,150 | INFO | algo_trader | Near-breakout skip for ELEVATE-EQ: range=0.853, gain=6.0% — skipping breakout check
+2026-10-01T04:30:50.150263+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:30:50,150 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-01T04:30:50.203034+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:30:50,202 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-01T04:30:56.203481+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:30:56,203 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-10-01T04:30:56.238435+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:30:56,238 | INFO | algo_trader | ENTRY REJECTED ATLANTAELE-EQ: Volume fading: current 2032 vs avg 3074 (ratio 0.66 < 1.2)
+2026-10-01T04:31:06.230804+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:31:06,230 | WARNING | algo_trader | 1-min candle fetch failed for ELEVATE-EQ volume check: POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=[REDACTED_IP], client_local_ip=[REDACTED_IP]: Access denied because of exceeding access rate — rejecting
+2026-10-01T04:31:06.231617+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:31:06,230 | INFO | algo_trader | ENTRY REJECTED ELEVATE-EQ: Volume check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=[REDACTED_IP], client_local_ip=[REDACTED_IP]: Access denied because of exceeding access rate)
+2026-10-01T04:31:06.238712+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:31:06,238 | INFO | algo_trader | Validation completed in 18.1 seconds: 0/3 passed.
+2026-10-01T04:31:06.238849+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:31:06,238 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-01T04:31:06.823455+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:31:06,823 | INFO | algo_trader | Scan attempt 2 — retrying in 120s (window open until 12:00)...
+2026-10-01T04:33:06.823808+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:33:06,823 | INFO | algo_trader | Scanning 2701 stocks for top 1 candidates (pool=5)...
+2026-10-01T04:33:06.824466+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:33:06,823 | INFO | algo_trader | Fetching quotes for 2701 stocks...
+2026-10-01T04:33:21.657406+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:33:21,657 | INFO | algo_trader | Received 2690 quotes.
+2026-10-01T04:33:21.660089+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:33:21,659 | INFO | algo_trader | Candidates in 5-8% gain range: 5
+2026-10-01T04:33:21.660279+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:33:21,660 | INFO | algo_trader | Fetching daily candles for 5 candidates...
+2026-10-01T04:33:24.661364+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:33:24,661 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-01T04:33:24.663105+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:33:24,662 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-01T04:33:30.695067+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:33:30,694 | INFO | algo_trader | Rank #1: TARIL-EQ — gain=+8.00%, score=0.801 (vol=15.1x, momentum=0.84, buy_pressure=0.76, stability=0.93, prev_trend=0.33)
+2026-10-01T04:33:30.695698+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:33:30,695 | INFO | algo_trader | Rank #2: ATLANTAELE-EQ — gain=+6.96%, score=0.671 (vol=1.3x, momentum=0.87, buy_pressure=0.44, stability=1.00, prev_trend=0.33)
+2026-10-01T04:33:30.695698+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:33:30,695 | INFO | algo_trader | Rank #3: DPABHUSHAN-EQ — gain=+5.12%, score=0.641 (vol=0.7x, momentum=0.97, buy_pressure=0.52, stability=0.84, prev_trend=0.50)
+2026-10-01T04:33:30.695698+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:33:30,695 | INFO | algo_trader | Rank #4: PACEDIGITK-EQ — gain=+6.58%, score=0.506 (vol=2.9x, momentum=0.42, buy_pressure=0.32, stability=0.25, prev_trend=0.33)
+2026-10-01T04:33:30.695698+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:33:30,695 | INFO | algo_trader | Rank #5: HEROMOTORS-EQ — gain=+7.99%, score=0.474 (vol=0.4x, momentum=0.67, buy_pressure=0.66, stability=0.02, prev_trend=0.80)
+2026-10-01T04:33:31.036570+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:33:31,036 | INFO | algo_trader | Scan completed in 24.2 seconds. Found 5 raw candidates.
+2026-10-01T04:33:31.043016+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:33:31,042 | INFO | algo_trader | Skipped by ASM/GSM/circuit filter:
+2026-10-01T04:33:31.043016+00:00 ip-[REDACTED] python[466217]:   DPABHUSHAN-EQ: ASM listed (Additional Surveillance Measure)
+2026-10-01T04:33:31.043312+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:33:31,043 | INFO | algo_trader | Checking read-only restrictions for 4 candidates...
+2026-10-01T04:33:31.049977+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:33:31,049 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 4 tradable, 0 rejected.
+2026-10-01T04:33:31.050179+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:33:31,050 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 1 filtered):
+2026-10-01T04:33:31.050179+00:00 ip-[REDACTED] python[466217]:   TARIL-EQ: +8.00% @ 291.70
+2026-10-01T04:33:31.050179+00:00 ip-[REDACTED] python[466217]:     Score=0.801 | Vol=15.1x | Momentum=0.84 | BuyPressure=0.76 | Stability=0.93 | PrevTrend=0.33
+2026-10-01T04:33:31.630967+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:33:31,630 | INFO | algo_trader | Validating 4 candidates in parallel...
+2026-10-01T04:33:31.655799+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:33:31,655 | INFO | algo_trader | ENTRY REJECTED TARIL-EQ: Range position 0.848 < 0.85 (price retreating from high)
+2026-10-01T04:33:31.666038+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:33:31,665 | INFO | algo_trader | ENTRY REJECTED ATLANTAELE-EQ: Range position 0.847 < 0.85 (price retreating from high)
+2026-10-01T04:33:31.671302+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:33:31,671 | INFO | algo_trader | ENTRY REJECTED PACEDIGITK-EQ: Range position 0.422 < 0.85 (price retreating from high)
+2026-10-01T04:33:31.677597+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:33:31,677 | INFO | algo_trader | ENTRY REJECTED HEROMOTORS-EQ: Range position 0.646 < 0.85 (price retreating from high)
+2026-10-01T04:33:31.682841+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:33:31,682 | INFO | algo_trader | Validation completed in 0.1 seconds: 0/4 passed.
+2026-10-01T04:33:31.682979+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:33:31,682 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-01T04:33:32.278249+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:33:32,278 | INFO | algo_trader | Scan attempt 3 — retrying in 120s (window open until 12:00)...
+2026-10-01T04:35:32.278654+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:35:32,278 | INFO | algo_trader | Scanning 2701 stocks for top 1 candidates (pool=5)...
+2026-10-01T04:35:32.282536+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:35:32,278 | INFO | algo_trader | Fetching quotes for 2701 stocks...
+2026-10-01T04:35:39.322856+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:35:39,322 | INFO | algo_trader | Received 2690 quotes.
+2026-10-01T04:35:39.325538+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:35:39,325 | INFO | algo_trader | Candidates in 5-8% gain range: 6
+2026-10-01T04:35:39.325728+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:35:39,325 | INFO | algo_trader | Fetching daily candles for 6 candidates...
+2026-10-01T04:35:40.358434+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:35:40,358 | INFO | algo_trader | Rank #1: WELSPUNLIV-EQ — gain=+5.90%, score=0.703 (vol=0.7x, momentum=1.00, buy_pressure=0.63, stability=0.94, prev_trend=0.67)
+2026-10-01T04:35:40.359162+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:35:40,358 | INFO | algo_trader | Rank #2: TARIL-EQ — gain=+7.57%, score=0.686 (vol=15.6x, momentum=0.80, buy_pressure=0.24, stability=0.93, prev_trend=0.33)
+2026-10-01T04:35:40.359162+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:35:40,358 | INFO | algo_trader | Rank #3: ATLANTAELE-EQ — gain=+6.65%, score=0.664 (vol=1.4x, momentum=0.83, buy_pressure=0.43, stability=1.00, prev_trend=0.33)
+2026-10-01T04:35:40.359162+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:35:40,358 | INFO | algo_trader | Rank #4: PACEDIGITK-EQ — gain=+6.29%, score=0.495 (vol=3.0x, momentum=0.38, buy_pressure=0.31, stability=0.25, prev_trend=0.33)
+2026-10-01T04:35:40.359162+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:35:40,358 | INFO | algo_trader | Rank #5: PAISALO-EQ — gain=+5.06%, score=0.471 (vol=0.3x, momentum=0.84, buy_pressure=0.46, stability=0.85, prev_trend=0.00)
+2026-10-01T04:35:40.768262+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:35:40,768 | INFO | algo_trader | Scan completed in 8.5 seconds. Found 5 raw candidates.
+2026-10-01T04:35:40.781484+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:35:40,781 | INFO | algo_trader | Skipped by ASM/GSM/circuit filter:
+2026-10-01T04:35:40.781484+00:00 ip-[REDACTED] python[466217]:   PAISALO-EQ: ASM listed (Additional Surveillance Measure)
+2026-10-01T04:35:40.781863+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:35:40,781 | INFO | algo_trader | Checking read-only restrictions for 4 candidates...
+2026-10-01T04:35:40.785331+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:35:40,785 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 4 tradable, 0 rejected.
+2026-10-01T04:35:40.785525+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:35:40,785 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 1 filtered):
+2026-10-01T04:35:40.785525+00:00 ip-[REDACTED] python[466217]:   WELSPUNLIV-EQ: +5.90% @ 240.74
+2026-10-01T04:35:40.785525+00:00 ip-[REDACTED] python[466217]:     Score=0.703 | Vol=0.7x | Momentum=1.00 | BuyPressure=0.63 | Stability=0.94 | PrevTrend=0.67
+2026-10-01T04:35:41.388316+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:35:41,388 | INFO | algo_trader | Validating 4 candidates in parallel...
+2026-10-01T04:35:41.410886+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:35:41,410 | INFO | algo_trader | ENTRY REJECTED TARIL-EQ: Range position 0.809 < 0.85 (price retreating from high)
+2026-10-01T04:35:41.414407+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:35:41,414 | INFO | algo_trader | ENTRY REJECTED ATLANTAELE-EQ: Range position 0.833 < 0.85 (price retreating from high)
+2026-10-01T04:35:41.417879+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:35:41,417 | INFO | algo_trader | ENTRY REJECTED PACEDIGITK-EQ: Range position 0.398 < 0.85 (price retreating from high)
+2026-10-01T04:35:41.423449+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:35:41,423 | INFO | algo_trader | Near-breakout skip for WELSPUNLIV-EQ: range=0.969, gain=5.8% — skipping breakout check
+2026-10-01T04:35:41.442055+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:35:41,441 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-01T04:35:46.470137+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:35:46,470 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-10-01T04:35:56.495023+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:35:56,494 | INFO | algo_trader | ENTRY VALIDATED WELSPUNLIV-EQ: price=240.51, gain=+5.80%, range=0.969, breakout=True, vol_ratio=2.77, spread=0.0370%
+2026-10-01T04:35:56.500206+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:35:56,500 | INFO | algo_trader | Validation completed in 15.1 seconds: 1/4 passed.
+2026-10-01T04:35:56.500333+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:35:56,500 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-10-01T04:35:56.500385+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:35:56,500 | INFO | algo_trader | Capital: 100000.00 x 5.0x leverage = 500000.00 buying power | 1 validated stocks | 475000.00 per stock
+2026-10-01T04:35:57.491426+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:35:57,491 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-01T04:36:02.519890+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:36:02,519 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-10-01T04:36:12.578798+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:36:12,578 | INFO | algo_trader | ATR computed for token 11253: 2.0980 (from 11 candles, price=240.51, ATR%=0.87%)
+2026-10-01T04:36:12.606166+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:36:12,606 | INFO | algo_trader | [PAPER] MARKET order filled: BUY WELSPUNLIV-EQ 207 @ 241.45 (reference=241.33, fee=49.98) id=bc6a54a3
+2026-10-01T04:36:12.612210+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:36:12,612 | INFO | algo_trader | MARKET order placed: BUY WELSPUNLIV-EQ 207 [INTRADAY] {'response': {'data': {'orderid': 'bc6a54a3'}}}
+2026-10-01T04:36:12.623860+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:36:12,623 | INFO | algo_trader | [PAPER] SL-M order placed: SELL WELSPUNLIV-EQ 207 trigger=236.60 id=1c482096
+2026-10-01T04:36:12.627284+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:36:12,627 | INFO | algo_trader | SL-M order placed for WELSPUNLIV-EQ: trigger=236.62, orderid=1c482096
+2026-10-01T04:36:12.632787+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:36:12,632 | INFO | algo_trader | ENTRY: WELSPUNLIV-EQ [MIS] — 207 shares @ 241.45 (capital=475000.00, gain=+5.90%, score=0.703, ATR=2.0980 (0.87%), SL=236.62, hard_stop=236.62) | {'response': {'data': {'orderid': 'bc6a54a3'}}}
+2026-10-01T04:36:13.237158+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:36:13,237 | INFO | algo_trader | Monitoring 1 positions with trailing stop...
+2026-10-01T04:44:37.620682+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:44:37,620 | INFO | algo_trader | TRAILING STOP UPDATE WELSPUNLIV-EQ: SL 236.62 -> 240.24 (ltp=243.97, bid=243.92, high=243.97, profit=1.0%, intraday=7.3%, locked=False, ATR=2.0980)
+2026-10-01T04:44:37.624374+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:44:37,620 | INFO | algo_trader | [PAPER] SL-M modified: WELSPUNLIV-EQ trigger 236.60 → 240.20 id=1c482096
+2026-10-01T04:44:37.624374+00:00 ip-[REDACTED] python[466217]: 2026-10-01 04:44:37,622 | INFO | algo_trader | SL-M trigger updated for WELSPUNLIV-EQ: new trigger=240.24
+2026-10-01T05:05:24.674054+00:00 ip-[REDACTED] python[466217]: 2026-10-01 05:05:24,673 | INFO | algo_trader | [position_check] WELSPUNLIV-EQ: netqty=207
+2026-10-01T05:05:24.677618+00:00 ip-[REDACTED] python[466217]: 2026-10-01 05:05:24,676 | INFO | algo_trader | [position_check] WELSPUNLIV-EQ: netqty=207
+2026-10-01T05:05:24.797534+00:00 ip-[REDACTED] python[466217]: 2026-10-01 05:05:24,797 | INFO | algo_trader | [PAPER] MARKET order filled: SELL WELSPUNLIV-EQ 207 @ 239.68 (reference=239.80, fee=49.61) id=1003c78a
+2026-10-01T05:05:24.802088+00:00 ip-[REDACTED] python[466217]: 2026-10-01 05:05:24,801 | INFO | algo_trader | [exit_attempt] Exit confirmed for WELSPUNLIV-EQ: 207 shares @ 239.68
+2026-10-01T05:05:24.802280+00:00 ip-[REDACTED] python[466217]: 2026-10-01 05:05:24,802 | INFO | algo_trader | [PAPER] Order cancelled: WELSPUNLIV-EQ id=1c482096
+2026-10-01T05:05:24.803681+00:00 ip-[REDACTED] python[466217]: 2026-10-01 05:05:24,803 | INFO | algo_trader | SL-M order confirmed CANCELLED for WELSPUNLIV-EQ: 1c482096
+2026-10-01T05:05:24.805730+00:00 ip-[REDACTED] python[466217]: 2026-10-01 05:05:24,805 | INFO | algo_trader | TRAILING STOP (4% trail, <2% profit) EXIT: WELSPUNLIV-EQ — 0 shares @ 239.68 (entry=241.45, high=244.76, SL=240.24, hard_stop=236.62, ATR=2.0980, locked=False, PnL=-465.98, daily_pnl=-465.98, consecutive_losses=1/2, round=0/0) | ExitOutcome(state=<ExitState.CLOSED: 'closed'>, execution=OrderExecution(order_id='1003c78a', state=<OrderState.FILLED: 'filled'>, requested_quantity=207, filled_quantity=207, average_price=239.68, reason='', raw_order={'orderid': '1003c78a', 'tradingsymbol': 'WELSPUNLIV-EQ', 'transactiontype': 'SELL', 'quantity': '207', 'price': '239.68', 'filledshares': '207', 'averageprice': '239.68', 'triggerprice': '0.0', 'orderstatus': 'COMPLETE', 'status': 'COMPLETE', 'ordertype': 'MARKET', 'producttype': 'INTRADAY', 'referenceprice': '239.8', 'fees': '49.61'}), reason='')
+2026-10-01T05:05:35.420667+00:00 ip-[REDACTED] python[466217]: 2026-10-01 05:05:35,420 | INFO | algo_trader | All positions closed by stop-loss.
+2026-10-01T05:05:35.421315+00:00 ip-[REDACTED] python[466217]: 2026-10-01 05:05:35,420 | INFO | algo_trader | Smart gate: round P&L was ₹-465.98 — skipping re-entry.
+2026-10-01T05:05:36.032195+00:00 ip-[REDACTED] python[466217]: 2026-10-01 05:05:36,032 | INFO | algo_trader | [auth_refresh] Session age 2135s >= 300s, refreshing...
+2026-10-01T05:05:36.032348+00:00 ip-[REDACTED] python[466217]: 2026-10-01 05:05:36,032 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-10-01T05:05:37.139288+00:00 ip-[REDACTED] python[466217]: 2026-10-01 05:05:37,139 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-10-01T05:05:37.140720+00:00 ip-[REDACTED] python[466217]: 2026-10-01 05:05:37,140 | INFO | algo_trader |
+2026-10-01T05:05:37.140720+00:00 ip-[REDACTED] python[466217]: ============================================================
+2026-10-01T05:05:37.140720+00:00 ip-[REDACTED] python[466217]: PAPER TRADING SUMMARY
+2026-10-01T05:05:37.140720+00:00 ip-[REDACTED] python[466217]: ============================================================
+2026-10-01T05:05:37.140720+00:00 ip-[REDACTED] python[466217]: Total trades: 2
+2026-10-01T05:05:37.140720+00:00 ip-[REDACTED] python[466217]: Buys: 1, Sells: 1
+2026-10-01T05:05:37.140720+00:00 ip-[REDACTED] python[466217]:   10:06:12 BUY  WELSPUNLIV-EQ x207 @ 241.45 fees: Rs.49.98
+2026-10-01T05:05:37.140720+00:00 ip-[REDACTED] python[466217]:   10:35:24 SELL WELSPUNLIV-EQ x207 @ 239.68 gross: Rs.-366.39, fees: Rs.99.59, net P&L: Rs.-465.98
+2026-10-01T05:05:37.140720+00:00 ip-[REDACTED] python[466217]: Daily net P&L: Rs.-465.98
+2026-10-01T05:05:37.140720+00:00 ip-[REDACTED] python[466217]: Capital: Rs.100,000.00 → Rs.99,534.02
+2026-10-01T05:05:37.140720+00:00 ip-[REDACTED] python[466217]: All positions closed.
+2026-10-01T05:05:37.140720+00:00 ip-[REDACTED] python[466217]: ============================================================
+2026-10-01T05:05:52.288652+00:00 ip-[REDACTED] python[466217]: 2026-10-01 05:05:52,288 | INFO | algo_trader | Replay comparison complete: 197/197 decisions matched; recommended slippage=0 bps; report=/home/ubuntu/algo-trader/data/replay_reports/2026-10-01/summary.json; universe=data/universe_snapshots.json
+2026-10-01T05:05:52.289332+00:00 ip-[REDACTED] python[466217]: 2026-10-01 05:05:52,288 | INFO | algo_trader | Trading day complete. Daily P&L: ₹-465.98. Sleeping 23.4h until tomorrow.
