@@ -1,0 +1,250 @@
+sequence,event_type,symbol,recorded_decision,replayed_decision,matched,detail
+28815,market_gate,,trade,trade,True,four-factor market gate
+28816,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['ARE&M-EQ', 'WELSPUNLIV-EQ', 'PARAGMILK-EQ', 'FACT-EQ', 'NORTHARC-EQ']; replayed=['ARE&M-EQ', 'WELSPUNLIV-EQ', 'PARAGMILK-EQ', 'FACT-EQ', 'NORTHARC-EQ']"
+28817,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+28818,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+28819,candidate_validation,ARE&M-EQ,rejected,rejected,True,Range position 0.779 < 0.85 (price retreating from high)
+28820,candidate_validation,WELSPUNLIV-EQ,rejected,rejected,True,Gain +4.97% outside 5.0-10.0% range
+28821,candidate_validation,FACT-EQ,rejected,rejected,True,Range position 0.480 < 0.85 (price retreating from high)
+28822,candidate_validation,PARAGMILK-EQ,rejected,rejected,True,Volume fading: current 586 vs avg 15570 (ratio 0.04 < 1.2)
+28823,candidate_validation,NORTHARC-EQ,rejected,rejected,True,"Volume check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=13.126.199.100, client_local_ip=172.31.33.249: Access denied because of exceeding access rate)"
+28824,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['PARAGMILK-EQ', 'MEDANTA-EQ', 'FACT-EQ', 'ARE&M-EQ', 'KFINTECH-EQ']; replayed=['PARAGMILK-EQ', 'MEDANTA-EQ', 'FACT-EQ', 'ARE&M-EQ', 'KFINTECH-EQ']"
+28825,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+28826,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+28827,candidate_validation,FACT-EQ,rejected,rejected,True,Range position 0.477 < 0.85 (price retreating from high)
+28828,candidate_validation,ARE&M-EQ,rejected,rejected,True,Gain +4.93% outside 5.0-10.0% range
+28829,candidate_validation,MEDANTA-EQ,rejected,rejected,True,Volume fading: current 2660 vs avg 12376 (ratio 0.21 < 1.2)
+28830,candidate_validation,PARAGMILK-EQ,rejected,rejected,True,Volume fading: current 1728 vs avg 12841 (ratio 0.13 < 1.2)
+28831,candidate_validation,KFINTECH-EQ,rejected,rejected,True,Volume fading: current 10071 vs avg 18994 (ratio 0.53 < 1.2)
+28832,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['MEDANTA-EQ', 'PARAGMILK-EQ', 'WELSPUNLIV-EQ', 'ARE&M-EQ', 'DAMCAPITAL-EQ']; replayed=['MEDANTA-EQ', 'PARAGMILK-EQ', 'WELSPUNLIV-EQ', 'ARE&M-EQ', 'DAMCAPITAL-EQ']"
+28833,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+28834,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+28835,candidate_validation,ARE&M-EQ,rejected,rejected,True,Range position 0.732 < 0.85 (price retreating from high)
+28836,candidate_validation,MEDANTA-EQ,rejected,rejected,True,Volume fading: current 491 vs avg 9983 (ratio 0.05 < 1.2)
+28837,candidate_validation,WELSPUNLIV-EQ,rejected,rejected,True,Volume fading: current 86218 vs avg 244392 (ratio 0.35 < 1.2)
+28838,candidate_validation,DAMCAPITAL-EQ,rejected,rejected,True,Volume fading: current 9 vs avg 3426 (ratio 0.00 < 1.2)
+28839,candidate_validation,PARAGMILK-EQ,rejected,rejected,True,Volume fading: current 627 vs avg 9414 (ratio 0.07 < 1.2)
+28840,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['MEDANTA-EQ', 'PARAGMILK-EQ', 'KFINTECH-EQ', 'PRINCEPIPE-EQ', 'ARE&M-EQ']; replayed=['MEDANTA-EQ', 'PARAGMILK-EQ', 'KFINTECH-EQ', 'PRINCEPIPE-EQ', 'ARE&M-EQ']"
+28841,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+28842,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+28843,candidate_validation,ARE&M-EQ,rejected,rejected,True,Range position 0.685 < 0.85 (price retreating from high)
+28844,candidate_validation,PARAGMILK-EQ,rejected,rejected,True,Volume fading: current 6942 vs avg 5868 (ratio 1.18 < 1.2)
+28845,candidate_validation,KFINTECH-EQ,accepted,accepted,True,All checks passed
+28846,candidate_validation,MEDANTA-EQ,rejected,rejected,True,Volume fading: current 7699 vs avg 8938 (ratio 0.86 < 1.2)
+28847,candidate_validation,PRINCEPIPE-EQ,rejected,rejected,True,"Breakout check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=13.126.199.100, client_local_ip=172.31.33.249: Access denied because of exceeding access rate)"
+28848,position_sized,KFINTECH-EQ,73,73,True,risk-based position sizing
+28856,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28857,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28858,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28859,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28860,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28861,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28862,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28863,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28864,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28865,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28866,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28867,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28868,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28869,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28870,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28871,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28872,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28873,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28874,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28875,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28876,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28877,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28878,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28879,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28880,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28881,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28882,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28883,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28884,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28885,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28886,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28887,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28888,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28889,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28890,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28891,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28892,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28893,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28894,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28895,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28896,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28897,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28898,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28899,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28900,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28901,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28902,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28903,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28904,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28905,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28906,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28907,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28908,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28909,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28910,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28911,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28912,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28913,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28914,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28915,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28916,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28917,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28918,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28919,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28920,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28921,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28922,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28923,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28924,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28925,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28926,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28927,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28928,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28929,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28930,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28931,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28932,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28933,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28934,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28935,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28936,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28937,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28938,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28939,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28940,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28941,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28942,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28943,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28944,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28945,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28946,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28947,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28948,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28949,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28950,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28951,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28952,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28953,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28954,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28955,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28956,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28957,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28958,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28959,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28960,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28961,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28962,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28963,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28964,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28965,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28966,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28967,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28968,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28969,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28970,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28971,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28972,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28973,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28974,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28975,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28976,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28977,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28978,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28979,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28980,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28981,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28982,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28983,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28984,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28985,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28986,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28987,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28988,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28989,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28990,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28991,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28992,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28993,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28994,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28995,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28996,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28997,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28998,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+28999,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29000,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29001,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29002,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29003,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29004,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29005,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29006,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29007,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29008,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29009,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29010,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29011,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29012,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29013,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29014,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29015,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29016,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29017,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29018,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29019,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29020,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29021,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29022,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29023,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29024,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29025,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29026,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29027,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29028,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29029,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29030,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29031,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29032,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29033,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29034,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29035,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29036,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29037,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29038,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29039,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29040,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29041,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29042,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29043,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29044,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29045,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29046,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29047,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29048,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29049,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29050,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29051,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29052,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29053,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29054,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29055,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29056,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29057,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29058,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29059,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29060,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29061,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29062,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29063,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29064,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29065,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29066,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29067,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29068,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29069,position_evaluated,KFINTECH-EQ,hold,hold,True,target and post-trail stop decision
+29070,position_evaluated,KFINTECH-EQ,exit,exit,True,target and post-trail stop decision
