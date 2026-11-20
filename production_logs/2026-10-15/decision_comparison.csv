@@ -1,0 +1,94 @@
+sequence,event_type,symbol,recorded_decision,replayed_decision,matched,detail
+21379,market_gate,,trade,trade,True,four-factor market gate
+21380,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['GUJRAFFIA-EQ', 'RITES-EQ', 'POKARNA-EQ', 'CEMPRO-EQ', 'PASHUPATI-EQ']; replayed=['GUJRAFFIA-EQ', 'RITES-EQ', 'POKARNA-EQ', 'CEMPRO-EQ', 'PASHUPATI-EQ']"
+21381,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+21382,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+21383,candidate_validation,GUJRAFFIA-EQ,rejected,rejected,True,Range position 0.600 < 0.85 (price retreating from high)
+21384,candidate_validation,RITES-EQ,rejected,rejected,True,Range position 0.705 < 0.85 (price retreating from high)
+21385,candidate_validation,CEMPRO-EQ,rejected,rejected,True,Gain +4.68% outside 5.0-10.0% range
+21386,candidate_validation,POKARNA-EQ,rejected,rejected,True,Volume fading: current 1031 vs avg 5839 (ratio 0.18 < 1.2)
+21387,candidate_validation,PASHUPATI-EQ,rejected,rejected,True,"Volume check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=13.126.199.100, client_local_ip=172.31.33.249: Access denied because of exceeding access rate)"
+21388,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['RITES-EQ', 'GUJRAFFIA-EQ', 'BLS-EQ', 'PASHUPATI-EQ', 'VIVIANA-EQ']; replayed=['RITES-EQ', 'GUJRAFFIA-EQ', 'BLS-EQ', 'PASHUPATI-EQ', 'VIVIANA-EQ']"
+21389,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+21390,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+21391,candidate_validation,RITES-EQ,rejected,rejected,True,Range position 0.715 < 0.85 (price retreating from high)
+21392,candidate_validation,GUJRAFFIA-EQ,rejected,rejected,True,Range position 0.606 < 0.85 (price retreating from high)
+21393,candidate_validation,BLS-EQ,rejected,rejected,True,Range position 0.565 < 0.85 (price retreating from high)
+21394,candidate_validation,VIVIANA-EQ,rejected,rejected,True,Range position 0.561 < 0.85 (price retreating from high)
+21395,candidate_validation,PASHUPATI-EQ,rejected,rejected,True,Volume fading: current 3083 vs avg 5266 (ratio 0.59 < 1.2)
+21396,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['RITES-EQ', 'HALDYNGL-EQ', 'POKARNA-EQ', 'GUJRAFFIA-EQ', 'SDBL-EQ']; replayed=['RITES-EQ', 'HALDYNGL-EQ', 'POKARNA-EQ', 'GUJRAFFIA-EQ', 'SDBL-EQ']"
+21397,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+21398,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+21399,candidate_validation,RITES-EQ,rejected,rejected,True,Range position 0.768 < 0.85 (price retreating from high)
+21400,candidate_validation,GUJRAFFIA-EQ,rejected,rejected,True,Range position 0.612 < 0.85 (price retreating from high)
+21401,candidate_validation,SDBL-EQ,rejected,rejected,True,Range position 0.568 < 0.85 (price retreating from high)
+21402,candidate_validation,HALDYNGL-EQ,rejected,rejected,True,Volume fading: current 3988 vs avg 14713 (ratio 0.27 < 1.2)
+21403,candidate_validation,POKARNA-EQ,rejected,rejected,True,"Volume check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=13.126.199.100, client_local_ip=172.31.33.249: Access denied because of exceeding access rate)"
+21404,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['HALDYNGL-EQ', 'RITES-EQ', 'BLS-EQ', 'POKARNA-EQ', 'CEMPRO-EQ']; replayed=['HALDYNGL-EQ', 'RITES-EQ', 'BLS-EQ', 'POKARNA-EQ', 'CEMPRO-EQ']"
+21405,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+21406,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+21407,candidate_validation,RITES-EQ,rejected,rejected,True,Range position 0.787 < 0.85 (price retreating from high)
+21408,candidate_validation,BLS-EQ,rejected,rejected,True,Range position 0.570 < 0.85 (price retreating from high)
+21409,candidate_validation,HALDYNGL-EQ,rejected,rejected,True,Volume fading: current 12057 vs avg 14011 (ratio 0.86 < 1.2)
+21410,candidate_validation,POKARNA-EQ,rejected,rejected,True,Volume fading: current 1828 vs avg 3216 (ratio 0.57 < 1.2)
+21411,candidate_validation,CEMPRO-EQ,rejected,rejected,True,Volume fading: current 4909 vs avg 12569 (ratio 0.39 < 1.2)
+21412,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['RITES-EQ', 'POKARNA-EQ', 'HALDYNGL-EQ', 'BLS-EQ', 'CEMPRO-EQ']; replayed=['RITES-EQ', 'POKARNA-EQ', 'HALDYNGL-EQ', 'BLS-EQ', 'CEMPRO-EQ']"
+21413,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+21414,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+21415,candidate_validation,BLS-EQ,rejected,rejected,True,Range position 0.543 < 0.85 (price retreating from high)
+21416,candidate_validation,CEMPRO-EQ,rejected,rejected,True,Volume fading: current 342 vs avg 14686 (ratio 0.02 < 1.2)
+21417,candidate_validation,POKARNA-EQ,accepted,accepted,True,All checks passed
+21418,candidate_validation,HALDYNGL-EQ,rejected,rejected,True,Volume fading: current 4339 vs avg 10521 (ratio 0.41 < 1.2)
+21419,candidate_validation,RITES-EQ,rejected,rejected,True,"Volume check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=13.126.199.100, client_local_ip=172.31.33.249: Access denied because of exceeding access rate)"
+21420,position_sized,POKARNA-EQ,66,66,True,risk-based position sizing
+21428,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21429,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21430,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21431,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21432,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21433,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21434,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21435,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21436,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21437,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21438,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21439,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21440,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21441,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21442,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21443,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21444,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21445,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21446,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21447,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21448,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21449,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21450,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21451,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21452,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21453,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21454,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21455,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21456,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21457,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21458,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21459,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21460,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21461,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21462,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21463,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21464,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21465,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21466,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21467,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21468,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21469,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21470,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21471,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21472,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21473,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21474,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21475,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21476,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21477,position_evaluated,POKARNA-EQ,hold,hold,True,target and post-trail stop decision
+21478,position_evaluated,POKARNA-EQ,exit,exit,True,target and post-trail stop decision
