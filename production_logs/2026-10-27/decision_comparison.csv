@@ -1,0 +1,207 @@
+sequence,event_type,symbol,recorded_decision,replayed_decision,matched,detail
+25224,market_gate,,trade,trade,True,four-factor market gate
+25225,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['ARIHANTCAP-EQ', 'TATACONSUM-EQ', 'SONACOMS-EQ', 'ATHERENERG-EQ', 'IDEAFORGE-EQ']; replayed=['ARIHANTCAP-EQ', 'TATACONSUM-EQ', 'SONACOMS-EQ', 'ATHERENERG-EQ', 'IDEAFORGE-EQ']"
+25226,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+25227,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+25228,candidate_validation,SONACOMS-EQ,rejected,rejected,True,Range position 0.846 < 0.85 (price retreating from high)
+25229,candidate_validation,IDEAFORGE-EQ,rejected,rejected,True,Range position 0.687 < 0.85 (price retreating from high)
+25230,candidate_validation,ARIHANTCAP-EQ,rejected,rejected,True,Volume fading: current 3769 vs avg 27585 (ratio 0.14 < 1.2)
+25231,candidate_validation,ATHERENERG-EQ,rejected,rejected,True,Volume fading: current 16110 vs avg 73160 (ratio 0.22 < 1.2)
+25232,candidate_validation,TATACONSUM-EQ,rejected,rejected,True,Volume fading: current 29545 vs avg 36446 (ratio 0.81 < 1.2)
+25233,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['ARIHANTCAP-EQ', 'MANKIND-EQ', 'TATACONSUM-EQ', 'SONACOMS-EQ', 'QUADFUTURE-EQ']; replayed=['ARIHANTCAP-EQ', 'MANKIND-EQ', 'TATACONSUM-EQ', 'SONACOMS-EQ', 'QUADFUTURE-EQ']"
+25234,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+25235,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+25236,candidate_validation,ARIHANTCAP-EQ,rejected,rejected,True,Gain +4.80% outside 5.0-10.0% range
+25237,candidate_validation,TATACONSUM-EQ,rejected,rejected,True,Volume fading: current 8139 vs avg 40938 (ratio 0.20 < 1.2)
+25238,candidate_validation,MANKIND-EQ,rejected,rejected,True,"Breakout check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=13.126.199.100, client_local_ip=172.31.33.249: Access denied because of exceeding access rate)"
+25239,candidate_validation,SONACOMS-EQ,rejected,rejected,True,"Breakout check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=13.126.199.100, client_local_ip=172.31.33.249: Access denied because of exceeding access rate)"
+25240,candidate_validation,QUADFUTURE-EQ,rejected,rejected,True,"Volume check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=13.126.199.100, client_local_ip=172.31.33.249: Access denied because of exceeding access rate)"
+25241,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['MANKIND-EQ', 'TATACONSUM-EQ', 'SONACOMS-EQ', 'ATHERENERG-EQ', 'SBCL-EQ']; replayed=['MANKIND-EQ', 'TATACONSUM-EQ', 'SONACOMS-EQ', 'ATHERENERG-EQ', 'SBCL-EQ']"
+25242,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+25243,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+25244,candidate_validation,ATHERENERG-EQ,rejected,rejected,True,Range position 0.846 < 0.85 (price retreating from high)
+25245,candidate_validation,SONACOMS-EQ,rejected,rejected,True,Volume fading: current 5149 vs avg 50852 (ratio 0.10 < 1.2)
+25246,candidate_validation,MANKIND-EQ,rejected,rejected,True,No micro breakout: LTP 2497.90 < last 5min high 2499.90
+25247,candidate_validation,TATACONSUM-EQ,rejected,rejected,True,Volume fading: current 20694 vs avg 34510 (ratio 0.60 < 1.2)
+25248,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['EMKAY-EQ', 'TATACONSUM-EQ', 'SONACOMS-EQ', 'ONESOURCE-EQ', 'BALUFORGE-EQ']; replayed=['EMKAY-EQ', 'TATACONSUM-EQ', 'SONACOMS-EQ', 'ONESOURCE-EQ', 'BALUFORGE-EQ']"
+25249,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+25250,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+25251,candidate_validation,EMKAY-EQ,rejected,rejected,True,Wide spread: 0.60 (0.209% > 0.2%)
+25252,candidate_validation,TATACONSUM-EQ,rejected,rejected,True,Range position 0.788 < 0.85 (price retreating from high)
+25253,candidate_validation,ONESOURCE-EQ,accepted,accepted,True,All checks passed
+25254,candidate_validation,BALUFORGE-EQ,rejected,rejected,True,Volume fading: current 4102 vs avg 4032 (ratio 1.02 < 1.2)
+25255,candidate_validation,SONACOMS-EQ,rejected,rejected,True,"Volume check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=13.126.199.100, client_local_ip=172.31.33.249: Access denied because of exceeding access rate)"
+25256,position_sized,ONESOURCE-EQ,33,33,True,risk-based position sizing
+25264,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25265,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25266,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25267,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25268,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25269,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25270,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25271,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25272,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25273,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25274,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25275,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25276,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25277,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25278,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25279,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25280,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25281,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25282,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25283,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25284,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25285,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25286,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25287,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25288,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25289,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25290,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25291,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25292,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25293,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25294,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25295,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25296,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25297,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25298,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25299,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25300,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25301,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25302,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25303,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25304,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25305,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25306,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25307,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25308,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25309,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25310,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25311,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25312,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25313,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25314,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25315,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25316,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25317,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25318,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25319,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25320,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25321,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25322,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25323,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25324,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25325,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25326,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25327,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25328,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25329,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25330,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25331,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25332,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25333,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25334,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25335,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25336,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25337,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25338,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25339,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25340,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25341,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25342,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25343,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25344,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25345,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25346,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25347,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25348,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25349,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25350,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25351,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25352,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25353,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25354,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25355,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25356,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25357,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25358,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25359,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25360,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25361,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25362,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25363,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25364,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25365,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25366,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25367,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25368,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25369,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25370,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25371,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25372,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25373,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25374,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25375,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25376,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25377,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25378,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25379,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25380,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25381,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25382,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25383,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25384,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25385,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25386,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25387,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25388,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25389,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25390,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25391,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25392,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25393,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25394,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25395,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25396,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25397,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25398,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25399,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25400,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25401,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25402,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25403,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25405,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25406,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25407,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25408,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25409,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25410,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25411,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25412,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25413,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25414,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25415,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25416,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25417,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25418,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25419,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25420,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25421,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25422,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25423,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25424,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25425,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25426,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25427,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25428,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25429,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25430,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25431,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25432,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25433,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25434,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25435,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25436,position_evaluated,ONESOURCE-EQ,hold,hold,True,target and post-trail stop decision
+25437,position_evaluated,ONESOURCE-EQ,exit,exit,True,target and post-trail stop decision
