@@ -1,0 +1,67 @@
+sequence,event_type,symbol,recorded_decision,replayed_decision,matched,detail
+29848,market_gate,,trade,trade,True,four-factor market gate
+29849,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['IVALUE-EQ', 'HPL-EQ', 'TONBO-EQ', 'V2RETAIL-EQ', 'APLLTD-EQ']; replayed=['IVALUE-EQ', 'HPL-EQ', 'TONBO-EQ', 'V2RETAIL-EQ', 'APLLTD-EQ']"
+29850,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+29851,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+29852,candidate_validation,HPL-EQ,rejected,rejected,True,Range position 0.645 < 0.85 (price retreating from high)
+29853,candidate_validation,V2RETAIL-EQ,rejected,rejected,True,Range position 0.662 < 0.85 (price retreating from high)
+29854,candidate_validation,TONBO-EQ,accepted,accepted,True,All checks passed
+29855,candidate_validation,APLLTD-EQ,rejected,rejected,True,Volume fading: current 12621 vs avg 10866 (ratio 1.16 < 1.2)
+29856,candidate_validation,IVALUE-EQ,rejected,rejected,True,Volume fading: current 2247 vs avg 8253 (ratio 0.27 < 1.2)
+29857,position_sized,TONBO-EQ,30,30,True,risk-based position sizing
+29865,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29866,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29867,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29868,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29869,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29870,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29871,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29872,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29873,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29874,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29875,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29876,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29877,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29878,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29879,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29880,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29881,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29882,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29883,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29884,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29885,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29886,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29887,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29888,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29889,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29890,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29891,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29892,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29893,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29894,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29895,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29896,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29897,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29898,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29899,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29900,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29901,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29902,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29903,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29904,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29905,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29906,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29907,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29908,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29909,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29910,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29911,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29912,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29913,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29914,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29915,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29916,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29917,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29918,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29919,position_evaluated,TONBO-EQ,hold,hold,True,target and post-trail stop decision
+29920,position_evaluated,TONBO-EQ,exit,exit,True,target and post-trail stop decision
