@@ -1,0 +1,71 @@
+sequence,event_type,symbol,recorded_decision,replayed_decision,matched,detail
+25138,market_gate,,trade,trade,True,four-factor market gate
+25139,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['CHENNPETRO-EQ', 'TATACHEM-EQ', 'INDOSTAR-EQ', 'SHRINGARMS-EQ', 'ANTELOPUS-EQ']; replayed=['CHENNPETRO-EQ', 'TATACHEM-EQ', 'INDOSTAR-EQ', 'SHRINGARMS-EQ', 'ANTELOPUS-EQ']"
+25140,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+25141,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+25142,candidate_validation,TATACHEM-EQ,rejected,rejected,True,Range position 0.811 < 0.85 (price retreating from high)
+25143,candidate_validation,INDOSTAR-EQ,rejected,rejected,True,Range position 0.835 < 0.85 (price retreating from high)
+25144,candidate_validation,CHENNPETRO-EQ,accepted,accepted,True,All checks passed
+25145,position_sized,CHENNPETRO-EQ,31,31,True,risk-based position sizing
+25153,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25154,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25155,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25156,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25157,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25158,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25159,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25160,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25161,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25162,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25163,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25164,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25165,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25166,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25167,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25168,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25169,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25170,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25171,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25172,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25173,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25174,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25175,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25176,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25177,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25178,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25179,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25180,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25181,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25182,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25183,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25184,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25185,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25186,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25187,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25188,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25189,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25190,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25191,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25192,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25193,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25194,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25195,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25196,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25197,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25198,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25199,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25200,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25201,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25202,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25203,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25204,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25205,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25206,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25207,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25208,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25209,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25210,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25211,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25212,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25213,position_evaluated,CHENNPETRO-EQ,hold,hold,True,target and post-trail stop decision
+25214,position_evaluated,CHENNPETRO-EQ,exit,exit,True,target and post-trail stop decision
