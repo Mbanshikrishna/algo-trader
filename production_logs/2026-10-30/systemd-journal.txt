@@ -1,0 +1,883 @@
+2026-10-30T04:30:00.773200+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:30:00,773 | INFO | algo_trader | Daily candle cache cleared.
+2026-10-30T04:30:00.778670+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:30:00,776 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-10-30T04:30:00.778670+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:30:00,776 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-10-30T04:30:00.837339+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:30:00,837 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-10-30T04:30:00.838827+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:30:00,838 | INFO | algo_trader | [auth_refresh] Angel One session refreshed.
+2026-10-30T04:30:01.009810+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:30:01,009 | INFO | algo_trader | Market Check: 3/4 — BULLISH
+2026-10-30T04:30:01.009810+00:00 ip-172-31-33-249 python[545938]: 1. Index Direction: PASS ✅
+2026-10-30T04:30:01.009810+00:00 ip-172-31-33-249 python[545938]:    Nifty 50: +0.19% (need > 0%)
+2026-10-30T04:30:01.009810+00:00 ip-172-31-33-249 python[545938]: 2. Market Breadth: FAIL ❌
+2026-10-30T04:30:01.009810+00:00 ip-172-31-33-249 python[545938]:    Advancers: 27, Decliners: 23
+2026-10-30T04:30:01.009810+00:00 ip-172-31-33-249 python[545938]:    Breadth ratio: 1.17 (need > 1.2)
+2026-10-30T04:30:01.009810+00:00 ip-172-31-33-249 python[545938]: 3. Intraday Strength: PASS ✅
+2026-10-30T04:30:01.009810+00:00 ip-172-31-33-249 python[545938]:    Nifty LTP vs Open: 22980.00 vs 22964.50
+2026-10-30T04:30:01.009810+00:00 ip-172-31-33-249 python[545938]:    NIFTYBEES vs VWAP: 261.92 vs 261.87
+2026-10-30T04:30:01.009810+00:00 ip-172-31-33-249 python[545938]: 4. Volatility Filter: PASS ✅
+2026-10-30T04:30:01.009810+00:00 ip-172-31-33-249 python[545938]:    India VIX change: +3.44% (reject if > +5%)
+2026-10-30T04:30:01.009810+00:00 ip-172-31-33-249 python[545938]: Decision: TRADE (score 3/4 >= 3)
+2026-10-30T04:30:01.605263+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:30:01,605 | INFO | algo_trader | Scanning 2736 stocks for top 1 candidates (pool=5)...
+2026-10-30T04:30:01.605984+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:30:01,605 | INFO | algo_trader | Fetching quotes for 2736 stocks...
+2026-10-30T04:30:08.413687+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:30:08,413 | INFO | algo_trader | Received 2721 quotes.
+2026-10-30T04:30:08.416425+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:30:08,416 | INFO | algo_trader | Candidates in 5-8% gain range: 3
+2026-10-30T04:30:08.416622+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:30:08,416 | INFO | algo_trader | Fetching daily candles for 3 candidates...
+2026-10-30T04:30:10.417477+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:30:10,417 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-30T04:30:10.418920+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:30:10,418 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-30T04:30:16.440678+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:30:16,440 | INFO | algo_trader | Rank #1: SMSPHARMA-EQ — gain=+5.52%, score=0.759 (vol=2.8x, momentum=1.00, buy_pressure=0.48, stability=0.43, prev_trend=0.67)
+2026-10-30T04:30:16.441301+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:30:16,440 | INFO | algo_trader | Rank #2: KRISHNADEF-EQ — gain=+7.85%, score=0.604 (vol=5.0x, momentum=0.55, buy_pressure=0.61, stability=0.31, prev_trend=0.33)
+2026-10-30T04:30:16.441301+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:30:16,440 | INFO | algo_trader | Rank #3: TRENT-EQ — gain=+5.90%, score=0.558 (vol=2.2x, momentum=0.63, buy_pressure=0.37, stability=0.00, prev_trend=0.50)
+2026-10-30T04:30:16.741154+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:30:16,740 | INFO | algo_trader | Scan completed in 15.1 seconds. Found 3 raw candidates.
+2026-10-30T04:30:16.743046+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:30:16,742 | INFO | algo_trader | Checking read-only restrictions for 3 candidates...
+2026-10-30T04:30:16.746125+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:30:16,746 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 3 tradable, 0 rejected.
+2026-10-30T04:30:16.746283+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:30:16,746 | INFO | algo_trader | Top 1 tradable stocks selected (from 3 scanned, 0 filtered):
+2026-10-30T04:30:16.746283+00:00 ip-172-31-33-249 python[545938]:   SMSPHARMA-EQ: +5.52% @ 512.60
+2026-10-30T04:30:16.746283+00:00 ip-172-31-33-249 python[545938]:     Score=0.759 | Vol=2.8x | Momentum=1.00 | BuyPressure=0.48 | Stability=0.43 | PrevTrend=0.67
+2026-10-30T04:30:17.374109+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:30:17,373 | INFO | algo_trader | Validating 3 candidates in parallel...
+2026-10-30T04:30:17.396282+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:30:17,396 | INFO | algo_trader | ENTRY REJECTED KRISHNADEF-EQ: Range position 0.500 < 0.85 (price retreating from high)
+2026-10-30T04:30:17.398854+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:30:17,398 | INFO | algo_trader | ENTRY REJECTED TRENT-EQ: Range position 0.627 < 0.85 (price retreating from high)
+2026-10-30T04:30:17.402072+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:30:17,401 | INFO | algo_trader | Near-breakout skip for SMSPHARMA-EQ: range=0.998, gain=5.6% — skipping breakout check
+2026-10-30T04:30:17.448384+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:30:17,448 | INFO | algo_trader | ENTRY REJECTED SMSPHARMA-EQ: Volume fading: current 9616 vs avg 27084 (ratio 0.36 < 1.2)
+2026-10-30T04:30:17.450580+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:30:17,450 | INFO | algo_trader | Validation completed in 0.1 seconds: 0/3 passed.
+2026-10-30T04:30:17.450727+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:30:17,450 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-30T04:30:18.046950+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:30:18,046 | INFO | algo_trader | Scan attempt 2 — retrying in 120s (window open until 14:00)...
+2026-10-30T04:32:18.047275+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:32:18,047 | INFO | algo_trader | Scanning 2736 stocks for top 1 candidates (pool=5)...
+2026-10-30T04:32:18.050875+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:32:18,047 | INFO | algo_trader | Fetching quotes for 2736 stocks...
+2026-10-30T04:32:24.835299+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:32:24,835 | INFO | algo_trader | Received 2721 quotes.
+2026-10-30T04:32:24.837971+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:32:24,837 | INFO | algo_trader | Candidates in 5-8% gain range: 4
+2026-10-30T04:32:24.838086+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:32:24,838 | INFO | algo_trader | Fetching daily candles for 4 candidates...
+2026-10-30T04:32:25.864918+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:32:25,864 | INFO | algo_trader | Rank #1: QUICKHEAL-EQ — gain=+7.32%, score=0.658 (vol=11.6x, momentum=0.56, buy_pressure=0.59, stability=0.82, prev_trend=0.17)
+2026-10-30T04:32:25.865598+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:32:25,864 | INFO | algo_trader | Rank #2: TRENT-EQ — gain=+6.10%, score=0.582 (vol=2.3x, momentum=0.70, buy_pressure=0.40, stability=0.00, prev_trend=0.50)
+2026-10-30T04:32:25.865598+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:32:25,865 | INFO | algo_trader | Rank #3: KRISHNADEF-EQ — gain=+7.13%, score=0.574 (vol=5.1x, momentum=0.46, buy_pressure=0.57, stability=0.31, prev_trend=0.33)
+2026-10-30T04:32:25.865598+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:32:25,865 | INFO | algo_trader | Rank #4: AYMSYNTEX-EQ — gain=+6.21%, score=0.499 (vol=11.0x, momentum=0.05, buy_pressure=0.69, stability=0.00, prev_trend=0.67)
+2026-10-30T04:32:26.156930+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:32:26,156 | INFO | algo_trader | Scan completed in 8.1 seconds. Found 4 raw candidates.
+2026-10-30T04:32:26.161140+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:32:26,161 | INFO | algo_trader | Checking read-only restrictions for 4 candidates...
+2026-10-30T04:32:26.164654+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:32:26,164 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 4 tradable, 0 rejected.
+2026-10-30T04:32:26.164849+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:32:26,164 | INFO | algo_trader | Top 1 tradable stocks selected (from 4 scanned, 0 filtered):
+2026-10-30T04:32:26.164849+00:00 ip-172-31-33-249 python[545938]:   QUICKHEAL-EQ: +7.32% @ 146.80
+2026-10-30T04:32:26.164849+00:00 ip-172-31-33-249 python[545938]:     Score=0.658 | Vol=11.6x | Momentum=0.56 | BuyPressure=0.59 | Stability=0.82 | PrevTrend=0.17
+2026-10-30T04:32:26.760504+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:32:26,760 | INFO | algo_trader | Validating 4 candidates in parallel...
+2026-10-30T04:32:26.780057+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:32:26,779 | INFO | algo_trader | ENTRY REJECTED QUICKHEAL-EQ: Range position 0.544 < 0.85 (price retreating from high)
+2026-10-30T04:32:26.785602+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:32:26,785 | INFO | algo_trader | ENTRY REJECTED TRENT-EQ: Range position 0.701 < 0.85 (price retreating from high)
+2026-10-30T04:32:26.790235+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:32:26,790 | INFO | algo_trader | ENTRY REJECTED KRISHNADEF-EQ: Range position 0.499 < 0.85 (price retreating from high)
+2026-10-30T04:32:26.795255+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:32:26,795 | INFO | algo_trader | ENTRY REJECTED AYMSYNTEX-EQ: Range position 0.077 < 0.85 (price retreating from high)
+2026-10-30T04:32:26.798746+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:32:26,798 | INFO | algo_trader | Validation completed in 0.0 seconds: 0/4 passed.
+2026-10-30T04:32:26.798910+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:32:26,798 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-30T04:32:27.380145+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:32:27,380 | INFO | algo_trader | Scan attempt 3 — retrying in 120s (window open until 14:00)...
+2026-10-30T04:34:27.380537+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:34:27,380 | INFO | algo_trader | Scanning 2736 stocks for top 1 candidates (pool=5)...
+2026-10-30T04:34:27.381301+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:34:27,380 | INFO | algo_trader | Fetching quotes for 2736 stocks...
+2026-10-30T04:34:34.172151+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:34:34,171 | INFO | algo_trader | Received 2721 quotes.
+2026-10-30T04:34:34.174924+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:34:34,174 | INFO | algo_trader | Candidates in 5-8% gain range: 6
+2026-10-30T04:34:34.175097+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:34:34,174 | INFO | algo_trader | Fetching daily candles for 6 candidates...
+2026-10-30T04:34:34.193990+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:34:34,193 | INFO | algo_trader | Rank #1: SMSPHARMA-EQ — gain=+5.37%, score=0.747 (vol=3.0x, momentum=0.95, buy_pressure=0.48, stability=0.43, prev_trend=0.67)
+2026-10-30T04:34:34.194141+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:34:34,194 | INFO | algo_trader | Rank #2: QUICKHEAL-EQ — gain=+7.01%, score=0.640 (vol=12.0x, momentum=0.54, buy_pressure=0.54, stability=0.82, prev_trend=0.17)
+2026-10-30T04:34:34.194141+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:34:34,194 | INFO | algo_trader | Rank #3: TRENT-EQ — gain=+6.31%, score=0.612 (vol=2.4x, momentum=0.78, buy_pressure=0.46, stability=0.00, prev_trend=0.50)
+2026-10-30T04:34:34.194230+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:34:34,194 | INFO | algo_trader | Rank #4: KRISHNADEF-EQ — gain=+7.25%, score=0.578 (vol=5.1x, momentum=0.47, buy_pressure=0.57, stability=0.31, prev_trend=0.33)
+2026-10-30T04:34:34.194379+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:34:34,194 | INFO | algo_trader | Rank #5: AYMSYNTEX-EQ — gain=+6.62%, score=0.514 (vol=11.4x, momentum=0.10, buy_pressure=0.69, stability=0.00, prev_trend=0.67)
+2026-10-30T04:34:34.499803+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:34:34,499 | INFO | algo_trader | Scan completed in 7.1 seconds. Found 5 raw candidates.
+2026-10-30T04:34:34.504085+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:34:34,503 | INFO | algo_trader | Checking read-only restrictions for 5 candidates...
+2026-10-30T04:34:34.511675+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:34:34,511 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 5 tradable, 0 rejected.
+2026-10-30T04:34:34.511897+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:34:34,511 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 0 filtered):
+2026-10-30T04:34:34.511897+00:00 ip-172-31-33-249 python[545938]:   SMSPHARMA-EQ: +5.37% @ 511.90
+2026-10-30T04:34:34.511897+00:00 ip-172-31-33-249 python[545938]:     Score=0.747 | Vol=3.0x | Momentum=0.95 | BuyPressure=0.48 | Stability=0.43 | PrevTrend=0.67
+2026-10-30T04:34:35.106733+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:34:35,106 | INFO | algo_trader | Validating 5 candidates in parallel...
+2026-10-30T04:34:35.133333+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:34:35,133 | INFO | algo_trader | ENTRY REJECTED QUICKHEAL-EQ: Range position 0.525 < 0.85 (price retreating from high)
+2026-10-30T04:34:35.140377+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:34:35,140 | INFO | algo_trader | ENTRY REJECTED TRENT-EQ: Range position 0.775 < 0.85 (price retreating from high)
+2026-10-30T04:34:35.147105+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:34:35,146 | INFO | algo_trader | ENTRY REJECTED KRISHNADEF-EQ: Range position 0.471 < 0.85 (price retreating from high)
+2026-10-30T04:34:35.151443+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:34:35,151 | INFO | algo_trader | ENTRY REJECTED AYMSYNTEX-EQ: Range position 0.094 < 0.85 (price retreating from high)
+2026-10-30T04:34:35.154724+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:34:35,154 | INFO | algo_trader | Near-breakout skip for SMSPHARMA-EQ: range=0.958, gain=5.4% — skipping breakout check
+2026-10-30T04:34:35.196506+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:34:35,196 | INFO | algo_trader | ENTRY REJECTED SMSPHARMA-EQ: Volume fading: current 5878 vs avg 26907 (ratio 0.22 < 1.2)
+2026-10-30T04:34:35.200090+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:34:35,199 | INFO | algo_trader | Validation completed in 0.1 seconds: 0/5 passed.
+2026-10-30T04:34:35.200209+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:34:35,200 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-30T04:34:35.794088+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:34:35,793 | INFO | algo_trader | Scan attempt 4 — retrying in 120s (window open until 14:00)...
+2026-10-30T04:36:35.794457+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:36:35,794 | INFO | algo_trader | Scanning 2736 stocks for top 1 candidates (pool=5)...
+2026-10-30T04:36:35.795331+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:36:35,794 | INFO | algo_trader | Fetching quotes for 2736 stocks...
+2026-10-30T04:36:44.134381+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:36:44,134 | INFO | algo_trader | Received 2721 quotes.
+2026-10-30T04:36:44.137144+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:36:44,137 | INFO | algo_trader | Candidates in 5-8% gain range: 6
+2026-10-30T04:36:44.137325+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:36:44,137 | INFO | algo_trader | Fetching daily candles for 6 candidates...
+2026-10-30T04:36:44.137601+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:36:44,137 | INFO | algo_trader | Rank #1: SMSPHARMA-EQ — gain=+5.07%, score=0.730 (vol=3.1x, momentum=0.90, buy_pressure=0.45, stability=0.43, prev_trend=0.67)
+2026-10-30T04:36:44.137725+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:36:44,137 | INFO | algo_trader | Rank #2: QUICKHEAL-EQ — gain=+6.73%, score=0.630 (vol=12.3x, momentum=0.51, buy_pressure=0.52, stability=0.82, prev_trend=0.17)
+2026-10-30T04:36:44.137812+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:36:44,137 | INFO | algo_trader | Rank #3: TRENT-EQ — gain=+6.38%, score=0.619 (vol=2.5x, momentum=0.81, buy_pressure=0.46, stability=0.00, prev_trend=0.50)
+2026-10-30T04:36:44.137890+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:36:44,137 | INFO | algo_trader | Rank #4: KRISHNADEF-EQ — gain=+7.10%, score=0.572 (vol=5.2x, momentum=0.45, buy_pressure=0.56, stability=0.31, prev_trend=0.33)
+2026-10-30T04:36:44.137890+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:36:44,137 | INFO | algo_trader | Rank #5: AYMSYNTEX-EQ — gain=+5.62%, score=0.500 (vol=11.8x, momentum=0.06, buy_pressure=0.68, stability=0.00, prev_trend=0.67)
+2026-10-30T04:36:44.425770+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:36:44,425 | INFO | algo_trader | Scan completed in 8.6 seconds. Found 5 raw candidates.
+2026-10-30T04:36:44.428809+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:36:44,428 | INFO | algo_trader | Checking read-only restrictions for 5 candidates...
+2026-10-30T04:36:44.432466+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:36:44,432 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 5 tradable, 0 rejected.
+2026-10-30T04:36:44.432672+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:36:44,432 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 0 filtered):
+2026-10-30T04:36:44.432672+00:00 ip-172-31-33-249 python[545938]:   SMSPHARMA-EQ: +5.07% @ 510.45
+2026-10-30T04:36:44.432672+00:00 ip-172-31-33-249 python[545938]:     Score=0.730 | Vol=3.1x | Momentum=0.90 | BuyPressure=0.45 | Stability=0.43 | PrevTrend=0.67
+2026-10-30T04:36:45.022543+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:36:45,022 | INFO | algo_trader | Validating 5 candidates in parallel...
+2026-10-30T04:36:45.051471+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:36:45,051 | INFO | algo_trader | ENTRY REJECTED QUICKHEAL-EQ: Range position 0.487 < 0.85 (price retreating from high)
+2026-10-30T04:36:45.054869+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:36:45,054 | INFO | algo_trader | ENTRY REJECTED TRENT-EQ: Range position 0.811 < 0.85 (price retreating from high)
+2026-10-30T04:36:45.057732+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:36:45,057 | INFO | algo_trader | ENTRY REJECTED KRISHNADEF-EQ: Range position 0.466 < 0.85 (price retreating from high)
+2026-10-30T04:36:45.062789+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:36:45,062 | INFO | algo_trader | ENTRY REJECTED AYMSYNTEX-EQ: Range position 0.035 < 0.85 (price retreating from high)
+2026-10-30T04:36:45.065118+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:36:45,065 | INFO | algo_trader | Near-breakout skip for SMSPHARMA-EQ: range=0.903, gain=5.1% — skipping breakout check
+2026-10-30T04:36:45.081539+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:36:45,081 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-30T04:36:50.098989+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:36:50,098 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-10-30T04:37:00.139997+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:37:00,139 | WARNING | algo_trader | 1-min candle fetch failed for SMSPHARMA-EQ volume check: POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=[REDACTED_IP], client_local_ip=[REDACTED_IP]: Access denied because of exceeding access rate — rejecting
+2026-10-30T04:37:00.140688+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:37:00,140 | INFO | algo_trader | ENTRY REJECTED SMSPHARMA-EQ: Volume check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=[REDACTED_IP], client_local_ip=[REDACTED_IP]: Access denied because of exceeding access rate)
+2026-10-30T04:37:00.143625+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:37:00,143 | INFO | algo_trader | Validation completed in 15.1 seconds: 0/5 passed.
+2026-10-30T04:37:00.143742+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:37:00,143 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-30T04:37:00.740692+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:37:00,740 | INFO | algo_trader | Scan attempt 5 — retrying in 120s (window open until 14:00)...
+2026-10-30T04:39:00.741066+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:39:00,740 | INFO | algo_trader | Scanning 2736 stocks for top 1 candidates (pool=5)...
+2026-10-30T04:39:00.744826+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:39:00,741 | INFO | algo_trader | Fetching quotes for 2736 stocks...
+2026-10-30T04:39:08.484082+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:39:08,483 | INFO | algo_trader | Received 2721 quotes.
+2026-10-30T04:39:08.486771+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:39:08,486 | INFO | algo_trader | Candidates in 5-8% gain range: 6
+2026-10-30T04:39:08.486919+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:39:08,486 | INFO | algo_trader | Fetching daily candles for 6 candidates...
+2026-10-30T04:39:08.515208+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:39:08,515 | INFO | algo_trader | Rank #1: HIKAL-EQ — gain=+7.14%, score=0.780 (vol=5.1x, momentum=0.75, buy_pressure=0.57, stability=0.86, prev_trend=0.67)
+2026-10-30T04:39:08.515351+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:39:08,515 | INFO | algo_trader | Rank #2: QUICKHEAL-EQ — gain=+7.19%, score=0.672 (vol=12.6x, momentum=0.55, buy_pressure=0.68, stability=0.82, prev_trend=0.17)
+2026-10-30T04:39:08.515409+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:39:08,515 | INFO | algo_trader | Rank #3: TRENT-EQ — gain=+6.30%, score=0.609 (vol=2.6x, momentum=0.78, buy_pressure=0.45, stability=0.00, prev_trend=0.50)
+2026-10-30T04:39:08.515450+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:39:08,515 | INFO | algo_trader | Rank #4: KRISHNADEF-EQ — gain=+6.93%, score=0.567 (vol=5.2x, momentum=0.43, buy_pressure=0.56, stability=0.31, prev_trend=0.33)
+2026-10-30T04:39:08.515490+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:39:08,515 | INFO | algo_trader | Rank #5: AYMSYNTEX-EQ — gain=+5.33%, score=0.494 (vol=12.0x, momentum=0.03, buy_pressure=0.69, stability=0.00, prev_trend=0.67)
+2026-10-30T04:39:08.844361+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:39:08,844 | INFO | algo_trader | Scan completed in 8.1 seconds. Found 5 raw candidates.
+2026-10-30T04:39:08.847214+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:39:08,847 | INFO | algo_trader | Checking read-only restrictions for 5 candidates...
+2026-10-30T04:39:08.851132+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:39:08,851 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 5 tradable, 0 rejected.
+2026-10-30T04:39:08.851327+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:39:08,851 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 0 filtered):
+2026-10-30T04:39:08.851327+00:00 ip-172-31-33-249 python[545938]:   HIKAL-EQ: +7.14% @ 219.00
+2026-10-30T04:39:08.851327+00:00 ip-172-31-33-249 python[545938]:     Score=0.780 | Vol=5.1x | Momentum=0.75 | BuyPressure=0.57 | Stability=0.86 | PrevTrend=0.67
+2026-10-30T04:39:09.457178+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:39:09,457 | INFO | algo_trader | Validating 5 candidates in parallel...
+2026-10-30T04:39:09.484585+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:39:09,484 | INFO | algo_trader | ENTRY REJECTED HIKAL-EQ: Range position 0.752 < 0.85 (price retreating from high)
+2026-10-30T04:39:09.487075+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:39:09,486 | INFO | algo_trader | ENTRY REJECTED QUICKHEAL-EQ: Range position 0.537 < 0.85 (price retreating from high)
+2026-10-30T04:39:09.489278+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:39:09,489 | INFO | algo_trader | ENTRY REJECTED TRENT-EQ: Range position 0.775 < 0.85 (price retreating from high)
+2026-10-30T04:39:09.492424+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:39:09,492 | INFO | algo_trader | ENTRY REJECTED KRISHNADEF-EQ: Range position 0.431 < 0.85 (price retreating from high)
+2026-10-30T04:39:09.494454+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:39:09,494 | INFO | algo_trader | ENTRY REJECTED AYMSYNTEX-EQ: Range position 0.095 < 0.85 (price retreating from high)
+2026-10-30T04:39:09.496755+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:39:09,496 | INFO | algo_trader | Validation completed in 0.0 seconds: 0/5 passed.
+2026-10-30T04:39:09.496905+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:39:09,496 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-30T04:39:10.106533+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:39:10,106 | INFO | algo_trader | Scan attempt 6 — retrying in 120s (window open until 14:00)...
+2026-10-30T04:41:10.106930+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:41:10,106 | INFO | algo_trader | Scanning 2736 stocks for top 1 candidates (pool=5)...
+2026-10-30T04:41:10.107719+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:41:10,106 | INFO | algo_trader | Fetching quotes for 2736 stocks...
+2026-10-30T04:41:18.679166+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:41:18,679 | INFO | algo_trader | Received 2721 quotes.
+2026-10-30T04:41:18.681935+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:41:18,681 | INFO | algo_trader | Candidates in 5-8% gain range: 6
+2026-10-30T04:41:18.682123+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:41:18,681 | INFO | algo_trader | Fetching daily candles for 6 candidates...
+2026-10-30T04:41:18.682368+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:41:18,682 | INFO | algo_trader | Rank #1: HIKAL-EQ — gain=+7.14%, score=0.793 (vol=5.5x, momentum=0.75, buy_pressure=0.63, stability=0.86, prev_trend=0.67)
+2026-10-30T04:41:18.682484+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:41:18,682 | INFO | algo_trader | Rank #2: QUICKHEAL-EQ — gain=+6.75%, score=0.666 (vol=12.8x, momentum=0.51, buy_pressure=0.70, stability=0.82, prev_trend=0.17)
+2026-10-30T04:41:18.682595+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:41:18,682 | INFO | algo_trader | Rank #3: TRENT-EQ — gain=+6.08%, score=0.588 (vol=2.6x, momentum=0.70, buy_pressure=0.44, stability=0.00, prev_trend=0.50)
+2026-10-30T04:41:18.682678+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:41:18,682 | INFO | algo_trader | Rank #4: KRISHNADEF-EQ — gain=+6.45%, score=0.553 (vol=5.3x, momentum=0.37, buy_pressure=0.57, stability=0.31, prev_trend=0.33)
+2026-10-30T04:41:18.682678+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:41:18,682 | INFO | algo_trader | Rank #5: AYMSYNTEX-EQ — gain=+5.86%, score=0.516 (vol=12.2x, momentum=0.09, buy_pressure=0.72, stability=0.00, prev_trend=0.67)
+2026-10-30T04:41:18.939027+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:41:18,938 | INFO | algo_trader | Scan completed in 8.8 seconds. Found 5 raw candidates.
+2026-10-30T04:41:18.941109+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:41:18,940 | INFO | algo_trader | Checking read-only restrictions for 5 candidates...
+2026-10-30T04:41:18.943976+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:41:18,943 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 5 tradable, 0 rejected.
+2026-10-30T04:41:18.944197+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:41:18,944 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 0 filtered):
+2026-10-30T04:41:18.944197+00:00 ip-172-31-33-249 python[545938]:   HIKAL-EQ: +7.14% @ 218.99
+2026-10-30T04:41:18.944197+00:00 ip-172-31-33-249 python[545938]:     Score=0.793 | Vol=5.5x | Momentum=0.75 | BuyPressure=0.63 | Stability=0.86 | PrevTrend=0.67
+2026-10-30T04:41:19.540641+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:41:19,540 | INFO | algo_trader | Validating 5 candidates in parallel...
+2026-10-30T04:41:19.570490+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:41:19,570 | INFO | algo_trader | ENTRY REJECTED HIKAL-EQ: Range position 0.755 < 0.85 (price retreating from high)
+2026-10-30T04:41:19.573094+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:41:19,572 | INFO | algo_trader | ENTRY REJECTED QUICKHEAL-EQ: Range position 0.511 < 0.85 (price retreating from high)
+2026-10-30T04:41:19.576731+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:41:19,576 | INFO | algo_trader | ENTRY REJECTED TRENT-EQ: Range position 0.707 < 0.85 (price retreating from high)
+2026-10-30T04:41:19.579049+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:41:19,578 | INFO | algo_trader | ENTRY REJECTED KRISHNADEF-EQ: Range position 0.372 < 0.85 (price retreating from high)
+2026-10-30T04:41:19.581245+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:41:19,581 | INFO | algo_trader | ENTRY REJECTED AYMSYNTEX-EQ: Range position 0.095 < 0.85 (price retreating from high)
+2026-10-30T04:41:19.583715+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:41:19,583 | INFO | algo_trader | Validation completed in 0.0 seconds: 0/5 passed.
+2026-10-30T04:41:19.583875+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:41:19,583 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-30T04:41:20.186668+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:41:20,186 | INFO | algo_trader | Scan attempt 7 — retrying in 120s (window open until 14:00)...
+2026-10-30T04:43:20.187044+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:43:20,186 | INFO | algo_trader | Scanning 2736 stocks for top 1 candidates (pool=5)...
+2026-10-30T04:43:20.187919+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:43:20,187 | INFO | algo_trader | Fetching quotes for 2736 stocks...
+2026-10-30T04:43:26.979368+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:43:26,979 | INFO | algo_trader | Received 2721 quotes.
+2026-10-30T04:43:26.982257+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:43:26,982 | INFO | algo_trader | Candidates in 5-8% gain range: 6
+2026-10-30T04:43:26.982451+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:43:26,982 | INFO | algo_trader | Fetching daily candles for 6 candidates...
+2026-10-30T04:43:26.982715+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:43:26,982 | INFO | algo_trader | Rank #1: HIKAL-EQ — gain=+7.26%, score=0.741 (vol=5.7x, momentum=0.76, buy_pressure=0.36, stability=0.86, prev_trend=0.67)
+2026-10-30T04:43:26.982832+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:43:26,982 | INFO | algo_trader | Rank #2: QUICKHEAL-EQ — gain=+6.83%, score=0.667 (vol=12.9x, momentum=0.52, buy_pressure=0.70, stability=0.82, prev_trend=0.17)
+2026-10-30T04:43:26.982914+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:43:26,982 | INFO | algo_trader | Rank #3: TRENT-EQ — gain=+6.09%, score=0.589 (vol=2.6x, momentum=0.70, buy_pressure=0.44, stability=0.00, prev_trend=0.50)
+2026-10-30T04:43:26.982994+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:43:26,982 | INFO | algo_trader | Rank #4: AYMSYNTEX-EQ — gain=+6.00%, score=0.531 (vol=12.3x, momentum=0.11, buy_pressure=0.77, stability=0.00, prev_trend=0.67)
+2026-10-30T04:43:26.982994+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:43:26,982 | INFO | algo_trader | Rank #5: KRISHNADEF-EQ — gain=+5.76%, score=0.526 (vol=5.6x, momentum=0.29, buy_pressure=0.54, stability=0.31, prev_trend=0.33)
+2026-10-30T04:43:27.238882+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:43:27,238 | INFO | algo_trader | Scan completed in 7.1 seconds. Found 5 raw candidates.
+2026-10-30T04:43:27.240881+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:43:27,240 | INFO | algo_trader | Checking read-only restrictions for 5 candidates...
+2026-10-30T04:43:27.243332+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:43:27,243 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 5 tradable, 0 rejected.
+2026-10-30T04:43:27.243584+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:43:27,243 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 0 filtered):
+2026-10-30T04:43:27.243584+00:00 ip-172-31-33-249 python[545938]:   HIKAL-EQ: +7.26% @ 219.23
+2026-10-30T04:43:27.243584+00:00 ip-172-31-33-249 python[545938]:     Score=0.741 | Vol=5.7x | Momentum=0.76 | BuyPressure=0.36 | Stability=0.86 | PrevTrend=0.67
+2026-10-30T04:43:27.831974+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:43:27,831 | INFO | algo_trader | Validating 5 candidates in parallel...
+2026-10-30T04:43:27.853672+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:43:27,853 | INFO | algo_trader | ENTRY REJECTED HIKAL-EQ: Range position 0.764 < 0.85 (price retreating from high)
+2026-10-30T04:43:27.856469+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:43:27,856 | INFO | algo_trader | ENTRY REJECTED QUICKHEAL-EQ: Range position 0.608 < 0.85 (price retreating from high)
+2026-10-30T04:43:27.858063+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:43:27,857 | INFO | algo_trader | ENTRY REJECTED TRENT-EQ: Range position 0.691 < 0.85 (price retreating from high)
+2026-10-30T04:43:27.859766+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:43:27,859 | INFO | algo_trader | ENTRY REJECTED AYMSYNTEX-EQ: Range position 0.105 < 0.85 (price retreating from high)
+2026-10-30T04:43:27.861889+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:43:27,861 | INFO | algo_trader | ENTRY REJECTED KRISHNADEF-EQ: Range position 0.290 < 0.85 (price retreating from high)
+2026-10-30T04:43:27.864135+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:43:27,864 | INFO | algo_trader | Validation completed in 0.0 seconds: 0/5 passed.
+2026-10-30T04:43:27.864265+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:43:27,864 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-30T04:43:28.470271+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:43:28,470 | INFO | algo_trader | Scan attempt 8 — retrying in 120s (window open until 14:00)...
+2026-10-30T04:45:28.470674+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:45:28,470 | INFO | algo_trader | Scanning 2736 stocks for top 1 candidates (pool=5)...
+2026-10-30T04:45:28.474740+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:45:28,470 | INFO | algo_trader | Fetching quotes for 2736 stocks...
+2026-10-30T04:45:35.260067+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:45:35,259 | INFO | algo_trader | Received 2721 quotes.
+2026-10-30T04:45:35.262784+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:45:35,262 | INFO | algo_trader | Candidates in 5-8% gain range: 6
+2026-10-30T04:45:35.262955+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:45:35,262 | INFO | algo_trader | Fetching daily candles for 6 candidates...
+2026-10-30T04:45:35.263196+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:45:35,263 | INFO | algo_trader | Rank #1: HIKAL-EQ — gain=+7.43%, score=0.723 (vol=6.1x, momentum=0.78, buy_pressure=0.24, stability=0.86, prev_trend=0.67)
+2026-10-30T04:45:35.263314+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:45:35,263 | INFO | algo_trader | Rank #2: QUICKHEAL-EQ — gain=+7.81%, score=0.692 (vol=13.3x, momentum=0.61, buy_pressure=0.71, stability=0.82, prev_trend=0.17)
+2026-10-30T04:45:35.263400+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:45:35,263 | INFO | algo_trader | Rank #3: TRENT-EQ — gain=+6.23%, score=0.601 (vol=2.7x, momentum=0.75, buy_pressure=0.45, stability=0.00, prev_trend=0.50)
+2026-10-30T04:45:35.263479+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:45:35,263 | INFO | algo_trader | Rank #4: KRISHNADEF-EQ — gain=+6.32%, score=0.545 (vol=5.6x, momentum=0.36, buy_pressure=0.55, stability=0.31, prev_trend=0.33)
+2026-10-30T04:45:35.263479+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:45:35,263 | INFO | algo_trader | Rank #5: AYMSYNTEX-EQ — gain=+5.98%, score=0.531 (vol=12.4x, momentum=0.11, buy_pressure=0.77, stability=0.00, prev_trend=0.67)
+2026-10-30T04:45:35.516948+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:45:35,516 | INFO | algo_trader | Scan completed in 7.0 seconds. Found 5 raw candidates.
+2026-10-30T04:45:35.519056+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:45:35,518 | INFO | algo_trader | Checking read-only restrictions for 5 candidates...
+2026-10-30T04:45:35.520941+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:45:35,520 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 5 tradable, 0 rejected.
+2026-10-30T04:45:35.521100+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:45:35,520 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 0 filtered):
+2026-10-30T04:45:35.521100+00:00 ip-172-31-33-249 python[545938]:   HIKAL-EQ: +7.43% @ 219.58
+2026-10-30T04:45:35.521100+00:00 ip-172-31-33-249 python[545938]:     Score=0.723 | Vol=6.1x | Momentum=0.78 | BuyPressure=0.24 | Stability=0.86 | PrevTrend=0.67
+2026-10-30T04:45:36.119895+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:45:36,119 | INFO | algo_trader | Validating 5 candidates in parallel...
+2026-10-30T04:45:36.164114+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:45:36,164 | INFO | algo_trader | ENTRY REJECTED HIKAL-EQ: Range position 0.786 < 0.85 (price retreating from high)
+2026-10-30T04:45:36.166468+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:45:36,166 | INFO | algo_trader | ENTRY REJECTED QUICKHEAL-EQ: Range position 0.607 < 0.85 (price retreating from high)
+2026-10-30T04:45:36.169008+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:45:36,168 | INFO | algo_trader | ENTRY REJECTED TRENT-EQ: Range position 0.731 < 0.85 (price retreating from high)
+2026-10-30T04:45:36.170779+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:45:36,170 | INFO | algo_trader | ENTRY REJECTED KRISHNADEF-EQ: Range position 0.323 < 0.85 (price retreating from high)
+2026-10-30T04:45:36.172308+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:45:36,172 | INFO | algo_trader | ENTRY REJECTED AYMSYNTEX-EQ: Range position 0.108 < 0.85 (price retreating from high)
+2026-10-30T04:45:36.174661+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:45:36,174 | INFO | algo_trader | Validation completed in 0.1 seconds: 0/5 passed.
+2026-10-30T04:45:36.174807+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:45:36,174 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-30T04:45:36.785825+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:45:36,785 | INFO | algo_trader | Scan attempt 9 — retrying in 120s (window open until 14:00)...
+2026-10-30T04:47:36.786203+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:47:36,786 | INFO | algo_trader | Scanning 2736 stocks for top 1 candidates (pool=5)...
+2026-10-30T04:47:36.787022+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:47:36,786 | INFO | algo_trader | Fetching quotes for 2736 stocks...
+2026-10-30T04:47:43.581617+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:47:43,581 | INFO | algo_trader | Received 2721 quotes.
+2026-10-30T04:47:43.584470+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:47:43,584 | INFO | algo_trader | Candidates in 5-8% gain range: 6
+2026-10-30T04:47:43.584678+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:47:43,584 | INFO | algo_trader | Fetching daily candles for 6 candidates...
+2026-10-30T04:47:43.604037+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:47:43,603 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-30T04:47:48.626425+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:47:48,626 | INFO | algo_trader | Rank #1: HIKAL-EQ — gain=+7.34%, score=0.717 (vol=6.3x, momentum=0.77, buy_pressure=0.23, stability=0.86, prev_trend=0.67)
+2026-10-30T04:47:48.627019+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:47:48,626 | INFO | algo_trader | Rank #2: QUICKHEAL-EQ — gain=+7.30%, score=0.679 (vol=13.5x, momentum=0.56, buy_pressure=0.70, stability=0.82, prev_trend=0.17)
+2026-10-30T04:47:48.627019+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:47:48,626 | INFO | algo_trader | Rank #3: TRENT-EQ — gain=+6.07%, score=0.585 (vol=2.7x, momentum=0.69, buy_pressure=0.44, stability=0.00, prev_trend=0.50)
+2026-10-30T04:47:48.627019+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:47:48,626 | INFO | algo_trader | Rank #4: FABTECH-EQ — gain=+6.60%, score=0.553 (vol=0.6x, momentum=0.80, buy_pressure=0.59, stability=0.73, prev_trend=0.33)
+2026-10-30T04:47:48.627019+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:47:48,626 | INFO | algo_trader | Rank #5: KRISHNADEF-EQ — gain=+5.62%, score=0.523 (vol=5.7x, momentum=0.27, buy_pressure=0.55, stability=0.31, prev_trend=0.33)
+2026-10-30T04:47:48.884284+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:47:48,884 | INFO | algo_trader | Scan completed in 12.1 seconds. Found 5 raw candidates.
+2026-10-30T04:47:48.886473+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:47:48,886 | INFO | algo_trader | Checking read-only restrictions for 5 candidates...
+2026-10-30T04:47:48.889075+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:47:48,888 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 5 tradable, 0 rejected.
+2026-10-30T04:47:48.889241+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:47:48,889 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 0 filtered):
+2026-10-30T04:47:48.889241+00:00 ip-172-31-33-249 python[545938]:   HIKAL-EQ: +7.34% @ 219.41
+2026-10-30T04:47:48.889241+00:00 ip-172-31-33-249 python[545938]:     Score=0.717 | Vol=6.3x | Momentum=0.77 | BuyPressure=0.23 | Stability=0.86 | PrevTrend=0.67
+2026-10-30T04:47:49.493399+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:47:49,493 | INFO | algo_trader | Validating 5 candidates in parallel...
+2026-10-30T04:47:49.514850+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:47:49,514 | INFO | algo_trader | ENTRY REJECTED HIKAL-EQ: Range position 0.763 < 0.85 (price retreating from high)
+2026-10-30T04:47:49.517240+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:47:49,517 | INFO | algo_trader | ENTRY REJECTED QUICKHEAL-EQ: Range position 0.562 < 0.85 (price retreating from high)
+2026-10-30T04:47:49.519484+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:47:49,519 | INFO | algo_trader | ENTRY REJECTED TRENT-EQ: Range position 0.681 < 0.85 (price retreating from high)
+2026-10-30T04:47:49.521783+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:47:49,521 | INFO | algo_trader | ENTRY REJECTED FABTECH-EQ: Range position 0.765 < 0.85 (price retreating from high)
+2026-10-30T04:47:49.523482+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:47:49,523 | INFO | algo_trader | ENTRY REJECTED KRISHNADEF-EQ: Range position 0.292 < 0.85 (price retreating from high)
+2026-10-30T04:47:49.525691+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:47:49,525 | INFO | algo_trader | Validation completed in 0.0 seconds: 0/5 passed.
+2026-10-30T04:47:49.525841+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:47:49,525 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-30T04:47:50.134541+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:47:50,134 | INFO | algo_trader | Scan attempt 10 — retrying in 120s (window open until 14:00)...
+2026-10-30T04:49:50.135001+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:49:50,134 | INFO | algo_trader | Scanning 2736 stocks for top 1 candidates (pool=5)...
+2026-10-30T04:49:50.135885+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:49:50,134 | INFO | algo_trader | Fetching quotes for 2736 stocks...
+2026-10-30T04:49:56.924088+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:49:56,923 | INFO | algo_trader | Received 2721 quotes.
+2026-10-30T04:49:56.926833+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:49:56,926 | INFO | algo_trader | Candidates in 5-8% gain range: 5
+2026-10-30T04:49:56.927019+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:49:56,926 | INFO | algo_trader | Fetching daily candles for 5 candidates...
+2026-10-30T04:49:56.927242+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:49:56,927 | INFO | algo_trader | Rank #1: HIKAL-EQ — gain=+6.82%, score=0.700 (vol=6.6x, momentum=0.72, buy_pressure=0.21, stability=0.86, prev_trend=0.67)
+2026-10-30T04:49:56.927361+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:49:56,927 | INFO | algo_trader | Rank #2: QUICKHEAL-EQ — gain=+7.00%, score=0.670 (vol=13.6x, momentum=0.53, buy_pressure=0.69, stability=0.82, prev_trend=0.17)
+2026-10-30T04:49:56.927445+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:49:56,927 | INFO | algo_trader | Rank #3: TRENT-EQ — gain=+5.92%, score=0.570 (vol=2.8x, momentum=0.64, buy_pressure=0.43, stability=0.00, prev_trend=0.50)
+2026-10-30T04:49:56.927445+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:49:56,927 | INFO | algo_trader | Rank #4: FABTECH-EQ — gain=+5.56%, score=0.553 (vol=0.7x, momentum=0.70, buy_pressure=0.64, stability=0.73, prev_trend=0.33)
+2026-10-30T04:49:56.927732+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:49:56,927 | INFO | algo_trader | Rank #5: KRISHNADEF-EQ — gain=+5.36%, score=0.515 (vol=5.7x, momentum=0.24, buy_pressure=0.55, stability=0.31, prev_trend=0.33)
+2026-10-30T04:49:57.208480+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:49:57,208 | INFO | algo_trader | Scan completed in 7.1 seconds. Found 5 raw candidates.
+2026-10-30T04:49:57.211285+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:49:57,211 | INFO | algo_trader | Checking read-only restrictions for 5 candidates...
+2026-10-30T04:49:57.213804+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:49:57,213 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 5 tradable, 0 rejected.
+2026-10-30T04:49:57.213985+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:49:57,213 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 0 filtered):
+2026-10-30T04:49:57.213985+00:00 ip-172-31-33-249 python[545938]:   HIKAL-EQ: +6.82% @ 218.33
+2026-10-30T04:49:57.213985+00:00 ip-172-31-33-249 python[545938]:     Score=0.700 | Vol=6.6x | Momentum=0.72 | BuyPressure=0.21 | Stability=0.86 | PrevTrend=0.67
+2026-10-30T04:49:57.815112+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:49:57,814 | INFO | algo_trader | Validating 5 candidates in parallel...
+2026-10-30T04:49:57.836341+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:49:57,836 | INFO | algo_trader | ENTRY REJECTED HIKAL-EQ: Range position 0.705 < 0.85 (price retreating from high)
+2026-10-30T04:49:57.838850+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:49:57,838 | INFO | algo_trader | ENTRY REJECTED QUICKHEAL-EQ: Range position 0.535 < 0.85 (price retreating from high)
+2026-10-30T04:49:57.841221+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:49:57,841 | INFO | algo_trader | ENTRY REJECTED TRENT-EQ: Range position 0.637 < 0.85 (price retreating from high)
+2026-10-30T04:49:57.843606+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:49:57,843 | INFO | algo_trader | ENTRY REJECTED FABTECH-EQ: Range position 0.681 < 0.85 (price retreating from high)
+2026-10-30T04:49:57.845210+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:49:57,845 | INFO | algo_trader | ENTRY REJECTED KRISHNADEF-EQ: Range position 0.220 < 0.85 (price retreating from high)
+2026-10-30T04:49:57.847675+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:49:57,847 | INFO | algo_trader | Validation completed in 0.0 seconds: 0/5 passed.
+2026-10-30T04:49:57.847821+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:49:57,847 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-30T04:49:58.453841+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:49:58,453 | INFO | algo_trader | Scan attempt 11 — retrying in 120s (window open until 14:00)...
+2026-10-30T04:51:58.454263+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:51:58,454 | INFO | algo_trader | Scanning 2736 stocks for top 1 candidates (pool=5)...
+2026-10-30T04:51:58.458290+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:51:58,454 | INFO | algo_trader | Fetching quotes for 2736 stocks...
+2026-10-30T04:52:05.270279+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:52:05,270 | INFO | algo_trader | Received 2721 quotes.
+2026-10-30T04:52:05.273083+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:52:05,272 | INFO | algo_trader | Candidates in 5-8% gain range: 8
+2026-10-30T04:52:05.273237+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:52:05,273 | INFO | algo_trader | Fetching daily candles for 8 candidates...
+2026-10-30T04:52:05.299084+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:52:05,298 | INFO | algo_trader | Rank #1: SMSPHARMA-EQ — gain=+5.19%, score=0.734 (vol=3.5x, momentum=0.92, buy_pressure=0.45, stability=0.43, prev_trend=0.67)
+2026-10-30T04:52:05.299268+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:52:05,299 | INFO | algo_trader | Rank #2: HIKAL-EQ — gain=+6.84%, score=0.702 (vol=6.7x, momentum=0.72, buy_pressure=0.22, stability=0.86, prev_trend=0.67)
+2026-10-30T04:52:05.299268+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:52:05,299 | INFO | algo_trader | Rank #3: QUICKHEAL-EQ — gain=+6.99%, score=0.671 (vol=13.8x, momentum=0.53, buy_pressure=0.69, stability=0.82, prev_trend=0.17)
+2026-10-30T04:52:05.299499+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:52:05,299 | INFO | algo_trader | Rank #4: SHANKARA-EQ — gain=+6.64%, score=0.593 (vol=4.2x, momentum=0.48, buy_pressure=0.32, stability=0.57, prev_trend=0.50)
+2026-10-30T04:52:05.299499+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:52:05,299 | INFO | algo_trader | Rank #5: TRENT-EQ — gain=+6.04%, score=0.581 (vol=2.8x, momentum=0.68, buy_pressure=0.43, stability=0.00, prev_trend=0.50)
+2026-10-30T04:52:05.555808+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:52:05,555 | INFO | algo_trader | Scan completed in 7.1 seconds. Found 5 raw candidates.
+2026-10-30T04:52:05.558641+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:52:05,558 | INFO | algo_trader | Checking read-only restrictions for 5 candidates...
+2026-10-30T04:52:05.560323+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:52:05,560 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 5 tradable, 0 rejected.
+2026-10-30T04:52:05.560495+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:52:05,560 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 0 filtered):
+2026-10-30T04:52:05.560495+00:00 ip-172-31-33-249 python[545938]:   SMSPHARMA-EQ: +5.19% @ 511.00
+2026-10-30T04:52:05.560495+00:00 ip-172-31-33-249 python[545938]:     Score=0.734 | Vol=3.5x | Momentum=0.92 | BuyPressure=0.45 | Stability=0.43 | PrevTrend=0.67
+2026-10-30T04:52:06.171966+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:52:06,171 | INFO | algo_trader | Validating 5 candidates in parallel...
+2026-10-30T04:52:06.191468+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:52:06,191 | INFO | algo_trader | ENTRY REJECTED HIKAL-EQ: Range position 0.727 < 0.85 (price retreating from high)
+2026-10-30T04:52:06.193365+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:52:06,193 | INFO | algo_trader | ENTRY REJECTED QUICKHEAL-EQ: Range position 0.535 < 0.85 (price retreating from high)
+2026-10-30T04:52:06.195799+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:52:06,195 | INFO | algo_trader | ENTRY REJECTED SHANKARA-EQ: Range position 0.479 < 0.85 (price retreating from high)
+2026-10-30T04:52:06.198115+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:52:06,197 | INFO | algo_trader | ENTRY REJECTED TRENT-EQ: Range position 0.693 < 0.85 (price retreating from high)
+2026-10-30T04:52:06.199978+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:52:06,199 | INFO | algo_trader | Near-breakout skip for SMSPHARMA-EQ: range=0.911, gain=5.1% — skipping breakout check
+2026-10-30T04:52:06.291712+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:52:06,291 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-30T04:52:11.312196+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:52:11,312 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-10-30T04:52:21.337823+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:52:21,337 | INFO | algo_trader | ENTRY REJECTED SMSPHARMA-EQ: Volume fading: current 1116 vs avg 13819 (ratio 0.08 < 1.2)
+2026-10-30T04:52:21.340619+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:52:21,340 | INFO | algo_trader | Validation completed in 15.2 seconds: 0/5 passed.
+2026-10-30T04:52:21.340742+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:52:21,340 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-30T04:52:21.943310+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:52:21,943 | INFO | algo_trader | Scan attempt 12 — retrying in 120s (window open until 14:00)...
+2026-10-30T04:54:21.943747+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:54:21,943 | INFO | algo_trader | Scanning 2736 stocks for top 1 candidates (pool=5)...
+2026-10-30T04:54:21.944433+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:54:21,943 | INFO | algo_trader | Fetching quotes for 2736 stocks...
+2026-10-30T04:54:29.147079+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:54:29,146 | INFO | algo_trader | Received 2721 quotes.
+2026-10-30T04:54:29.149795+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:54:29,149 | INFO | algo_trader | Candidates in 5-8% gain range: 8
+2026-10-30T04:54:29.149959+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:54:29,149 | INFO | algo_trader | Fetching daily candles for 8 candidates...
+2026-10-30T04:54:29.150238+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:54:29,150 | INFO | algo_trader | Rank #1: SMSPHARMA-EQ — gain=+5.21%, score=0.737 (vol=3.5x, momentum=0.92, buy_pressure=0.46, stability=0.43, prev_trend=0.67)
+2026-10-30T04:54:29.150330+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:54:29,150 | INFO | algo_trader | Rank #2: HIKAL-EQ — gain=+6.75%, score=0.699 (vol=6.9x, momentum=0.71, buy_pressure=0.22, stability=0.86, prev_trend=0.67)
+2026-10-30T04:54:29.150426+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:54:29,150 | INFO | algo_trader | Rank #3: QUICKHEAL-EQ — gain=+7.17%, score=0.676 (vol=13.8x, momentum=0.55, buy_pressure=0.70, stability=0.82, prev_trend=0.17)
+2026-10-30T04:54:29.150505+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:54:29,150 | INFO | algo_trader | Rank #4: SHANKARA-EQ — gain=+6.86%, score=0.596 (vol=4.2x, momentum=0.49, buy_pressure=0.31, stability=0.57, prev_trend=0.50)
+2026-10-30T04:54:29.150612+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:54:29,150 | INFO | algo_trader | Rank #5: FABTECH-EQ — gain=+5.80%, score=0.571 (vol=0.8x, momentum=0.72, buy_pressure=0.63, stability=0.73, prev_trend=0.33)
+2026-10-30T04:54:29.407591+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:54:29,407 | INFO | algo_trader | Scan completed in 7.5 seconds. Found 5 raw candidates.
+2026-10-30T04:54:29.411053+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:54:29,410 | INFO | algo_trader | Checking read-only restrictions for 5 candidates...
+2026-10-30T04:54:29.412885+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:54:29,412 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 5 tradable, 0 rejected.
+2026-10-30T04:54:29.413051+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:54:29,412 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 0 filtered):
+2026-10-30T04:54:29.413051+00:00 ip-172-31-33-249 python[545938]:   SMSPHARMA-EQ: +5.21% @ 511.10
+2026-10-30T04:54:29.413051+00:00 ip-172-31-33-249 python[545938]:     Score=0.737 | Vol=3.5x | Momentum=0.92 | BuyPressure=0.46 | Stability=0.43 | PrevTrend=0.67
+2026-10-30T04:54:29.999449+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:54:29,999 | INFO | algo_trader | Validating 5 candidates in parallel...
+2026-10-30T04:54:30.020899+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:54:30,020 | INFO | algo_trader | ENTRY REJECTED HIKAL-EQ: Range position 0.710 < 0.85 (price retreating from high)
+2026-10-30T04:54:30.023601+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:54:30,023 | INFO | algo_trader | ENTRY REJECTED QUICKHEAL-EQ: Range position 0.545 < 0.85 (price retreating from high)
+2026-10-30T04:54:30.026102+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:54:30,025 | INFO | algo_trader | ENTRY REJECTED SHANKARA-EQ: Range position 0.495 < 0.85 (price retreating from high)
+2026-10-30T04:54:30.028393+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:54:30,028 | INFO | algo_trader | ENTRY REJECTED FABTECH-EQ: Range position 0.726 < 0.85 (price retreating from high)
+2026-10-30T04:54:30.031085+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:54:30,030 | INFO | algo_trader | Near-breakout skip for SMSPHARMA-EQ: range=0.947, gain=5.4% — skipping breakout check
+2026-10-30T04:54:30.046111+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:54:30,045 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-30T04:54:35.062155+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:54:35,062 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-10-30T04:54:45.086230+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:54:45,086 | INFO | algo_trader | ENTRY REJECTED SMSPHARMA-EQ: Volume fading: current 5177 vs avg 11570 (ratio 0.45 < 1.2)
+2026-10-30T04:54:45.089453+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:54:45,089 | INFO | algo_trader | Validation completed in 15.1 seconds: 0/5 passed.
+2026-10-30T04:54:45.089596+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:54:45,089 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-30T04:54:45.698186+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:54:45,698 | INFO | algo_trader | Scan attempt 13 — retrying in 120s (window open until 14:00)...
+2026-10-30T04:56:45.698650+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:56:45,698 | INFO | algo_trader | Scanning 2736 stocks for top 1 candidates (pool=5)...
+2026-10-30T04:56:45.699389+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:56:45,698 | INFO | algo_trader | Fetching quotes for 2736 stocks...
+2026-10-30T04:56:52.485914+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:56:52,485 | INFO | algo_trader | Received 2721 quotes.
+2026-10-30T04:56:52.488773+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:56:52,488 | INFO | algo_trader | Candidates in 5-8% gain range: 8
+2026-10-30T04:56:52.488935+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:56:52,488 | INFO | algo_trader | Fetching daily candles for 8 candidates...
+2026-10-30T04:56:52.489248+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:56:52,489 | INFO | algo_trader | Rank #1: SMSPHARMA-EQ — gain=+5.39%, score=0.745 (vol=3.6x, momentum=0.95, buy_pressure=0.47, stability=0.43, prev_trend=0.67)
+2026-10-30T04:56:52.489351+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:56:52,489 | INFO | algo_trader | Rank #2: HIKAL-EQ — gain=+5.88%, score=0.707 (vol=7.3x, momentum=0.62, buy_pressure=0.37, stability=0.86, prev_trend=0.67)
+2026-10-30T04:56:52.489451+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:56:52,489 | INFO | algo_trader | Rank #3: QUICKHEAL-EQ — gain=+6.57%, score=0.662 (vol=13.9x, momentum=0.50, buy_pressure=0.70, stability=0.82, prev_trend=0.17)
+2026-10-30T04:56:52.489575+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:56:52,489 | INFO | algo_trader | Rank #4: FABTECH-EQ — gain=+6.60%, score=0.613 (vol=1.1x, momentum=0.80, buy_pressure=0.59, stability=0.73, prev_trend=0.33)
+2026-10-30T04:56:52.489575+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:56:52,489 | INFO | algo_trader | Rank #5: SHANKARA-EQ — gain=+6.64%, score=0.592 (vol=4.2x, momentum=0.48, buy_pressure=0.31, stability=0.57, prev_trend=0.50)
+2026-10-30T04:56:52.752742+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:56:52,752 | INFO | algo_trader | Scan completed in 7.1 seconds. Found 5 raw candidates.
+2026-10-30T04:56:52.754360+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:56:52,754 | INFO | algo_trader | Checking read-only restrictions for 5 candidates...
+2026-10-30T04:56:52.756991+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:56:52,756 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 5 tradable, 0 rejected.
+2026-10-30T04:56:52.757140+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:56:52,757 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 0 filtered):
+2026-10-30T04:56:52.757140+00:00 ip-172-31-33-249 python[545938]:   SMSPHARMA-EQ: +5.39% @ 512.00
+2026-10-30T04:56:52.757140+00:00 ip-172-31-33-249 python[545938]:     Score=0.745 | Vol=3.6x | Momentum=0.95 | BuyPressure=0.47 | Stability=0.43 | PrevTrend=0.67
+2026-10-30T04:56:53.354570+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:56:53,353 | INFO | algo_trader | Validating 5 candidates in parallel...
+2026-10-30T04:56:53.372602+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:56:53,372 | INFO | algo_trader | ENTRY REJECTED HIKAL-EQ: Range position 0.613 < 0.85 (price retreating from high)
+2026-10-30T04:56:53.375000+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:56:53,374 | INFO | algo_trader | ENTRY REJECTED QUICKHEAL-EQ: Range position 0.512 < 0.85 (price retreating from high)
+2026-10-30T04:56:53.377593+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:56:53,377 | INFO | algo_trader | ENTRY REJECTED FABTECH-EQ: Range position 0.700 < 0.85 (price retreating from high)
+2026-10-30T04:56:53.379238+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:56:53,379 | INFO | algo_trader | ENTRY REJECTED SHANKARA-EQ: Range position 0.479 < 0.85 (price retreating from high)
+2026-10-30T04:56:53.381040+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:56:53,380 | INFO | algo_trader | Near-breakout skip for SMSPHARMA-EQ: range=0.950, gain=5.4% — skipping breakout check
+2026-10-30T04:56:53.402862+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:56:53,402 | INFO | algo_trader | ENTRY REJECTED SMSPHARMA-EQ: Volume fading: current 9089 vs avg 7717 (ratio 1.18 < 1.2)
+2026-10-30T04:56:53.405208+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:56:53,405 | INFO | algo_trader | Validation completed in 0.1 seconds: 0/5 passed.
+2026-10-30T04:56:53.405367+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:56:53,405 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-30T04:56:53.996108+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:56:53,995 | INFO | algo_trader | Scan attempt 14 — retrying in 120s (window open until 14:00)...
+2026-10-30T04:58:53.996545+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:58:53,996 | INFO | algo_trader | Scanning 2736 stocks for top 1 candidates (pool=5)...
+2026-10-30T04:58:54.000670+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:58:53,996 | INFO | algo_trader | Fetching quotes for 2736 stocks...
+2026-10-30T04:59:00.785386+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:59:00,785 | INFO | algo_trader | Received 2721 quotes.
+2026-10-30T04:59:00.788116+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:59:00,788 | INFO | algo_trader | Candidates in 5-8% gain range: 8
+2026-10-30T04:59:00.788293+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:59:00,788 | INFO | algo_trader | Fetching daily candles for 8 candidates...
+2026-10-30T04:59:00.788608+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:59:00,788 | INFO | algo_trader | Rank #1: SMSPHARMA-EQ — gain=+5.93%, score=0.763 (vol=3.7x, momentum=0.99, buy_pressure=0.51, stability=0.43, prev_trend=0.67)
+2026-10-30T04:59:00.788753+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:59:00,788 | INFO | algo_trader | Rank #2: HIKAL-EQ — gain=+5.97%, score=0.758 (vol=7.4x, momentum=0.63, buy_pressure=0.62, stability=0.86, prev_trend=0.67)
+2026-10-30T04:59:00.788753+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:59:00,788 | INFO | algo_trader | Rank #3: QUICKHEAL-EQ — gain=+7.22%, score=0.678 (vol=14.0x, momentum=0.55, buy_pressure=0.71, stability=0.82, prev_trend=0.17)
+2026-10-30T04:59:00.788922+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:59:00,788 | INFO | algo_trader | Rank #4: SHANKARA-EQ — gain=+6.80%, score=0.595 (vol=4.2x, momentum=0.49, buy_pressure=0.31, stability=0.57, prev_trend=0.50)
+2026-10-30T04:59:00.788922+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:59:00,788 | INFO | algo_trader | Rank #5: AYMSYNTEX-EQ — gain=+6.59%, score=0.593 (vol=14.3x, momentum=0.32, buy_pressure=0.82, stability=0.00, prev_trend=0.67)
+2026-10-30T04:59:01.044506+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:59:01,044 | INFO | algo_trader | Scan completed in 7.0 seconds. Found 5 raw candidates.
+2026-10-30T04:59:01.046634+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:59:01,046 | INFO | algo_trader | Checking read-only restrictions for 5 candidates...
+2026-10-30T04:59:01.049263+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:59:01,049 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 5 tradable, 0 rejected.
+2026-10-30T04:59:01.049451+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:59:01,049 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 0 filtered):
+2026-10-30T04:59:01.049451+00:00 ip-172-31-33-249 python[545938]:   SMSPHARMA-EQ: +5.93% @ 514.60
+2026-10-30T04:59:01.049451+00:00 ip-172-31-33-249 python[545938]:     Score=0.763 | Vol=3.7x | Momentum=0.99 | BuyPressure=0.51 | Stability=0.43 | PrevTrend=0.67
+2026-10-30T04:59:01.641325+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:59:01,641 | INFO | algo_trader | Validating 5 candidates in parallel...
+2026-10-30T04:59:01.667603+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:59:01,667 | INFO | algo_trader | ENTRY REJECTED HIKAL-EQ: Range position 0.611 < 0.85 (price retreating from high)
+2026-10-30T04:59:01.675726+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:59:01,675 | INFO | algo_trader | ENTRY REJECTED QUICKHEAL-EQ: Range position 0.587 < 0.85 (price retreating from high)
+2026-10-30T04:59:01.679542+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:59:01,679 | INFO | algo_trader | ENTRY REJECTED SHANKARA-EQ: Range position 0.490 < 0.85 (price retreating from high)
+2026-10-30T04:59:01.683132+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:59:01,682 | INFO | algo_trader | ENTRY REJECTED AYMSYNTEX-EQ: Range position 0.283 < 0.85 (price retreating from high)
+2026-10-30T04:59:01.689284+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:59:01,688 | INFO | algo_trader | Near-breakout skip for SMSPHARMA-EQ: range=0.989, gain=5.9% — skipping breakout check
+2026-10-30T04:59:01.715641+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:59:01,715 | INFO | algo_trader | ENTRY REJECTED SMSPHARMA-EQ: Volume fading: current 6232 vs avg 9624 (ratio 0.65 < 1.2)
+2026-10-30T04:59:01.725850+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:59:01,725 | INFO | algo_trader | Validation completed in 0.1 seconds: 0/5 passed.
+2026-10-30T04:59:01.726196+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:59:01,726 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-30T04:59:02.339197+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 04:59:02,339 | INFO | algo_trader | Scan attempt 15 — retrying in 120s (window open until 14:00)...
+2026-10-30T05:01:02.339706+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:01:02,339 | INFO | algo_trader | Scanning 2736 stocks for top 1 candidates (pool=5)...
+2026-10-30T05:01:02.340475+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:01:02,339 | INFO | algo_trader | Fetching quotes for 2736 stocks...
+2026-10-30T05:01:09.129214+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:01:09,129 | INFO | algo_trader | Received 2721 quotes.
+2026-10-30T05:01:09.131933+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:01:09,131 | INFO | algo_trader | Candidates in 5-8% gain range: 6
+2026-10-30T05:01:09.133061+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:01:09,131 | INFO | algo_trader | Fetching daily candles for 6 candidates...
+2026-10-30T05:01:09.133061+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:01:09,132 | INFO | algo_trader | Rank #1: HIKAL-EQ — gain=+5.58%, score=0.748 (vol=7.7x, momentum=0.58, buy_pressure=0.62, stability=0.86, prev_trend=0.67)
+2026-10-30T05:01:09.133061+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:01:09,132 | INFO | algo_trader | Rank #2: SMSPHARMA-EQ — gain=+5.65%, score=0.744 (vol=3.8x, momentum=0.92, buy_pressure=0.50, stability=0.43, prev_trend=0.67)
+2026-10-30T05:01:09.133061+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:01:09,132 | INFO | algo_trader | Rank #3: QUICKHEAL-EQ — gain=+7.17%, score=0.676 (vol=14.1x, momentum=0.55, buy_pressure=0.70, stability=0.82, prev_trend=0.17)
+2026-10-30T05:01:09.133061+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:01:09,132 | INFO | algo_trader | Rank #4: AYMSYNTEX-EQ — gain=+6.66%, score=0.598 (vol=14.6x, momentum=0.33, buy_pressure=0.83, stability=0.00, prev_trend=0.67)
+2026-10-30T05:01:09.133061+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:01:09,132 | INFO | algo_trader | Rank #5: SHANKARA-EQ — gain=+6.80%, score=0.595 (vol=4.2x, momentum=0.49, buy_pressure=0.31, stability=0.57, prev_trend=0.50)
+2026-10-30T05:01:09.405777+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:01:09,405 | INFO | algo_trader | Scan completed in 7.1 seconds. Found 5 raw candidates.
+2026-10-30T05:01:09.408210+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:01:09,408 | INFO | algo_trader | Checking read-only restrictions for 5 candidates...
+2026-10-30T05:01:09.410078+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:01:09,409 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 5 tradable, 0 rejected.
+2026-10-30T05:01:09.410232+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:01:09,410 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 0 filtered):
+2026-10-30T05:01:09.410232+00:00 ip-172-31-33-249 python[545938]:   HIKAL-EQ: +5.58% @ 215.80
+2026-10-30T05:01:09.410232+00:00 ip-172-31-33-249 python[545938]:     Score=0.748 | Vol=7.7x | Momentum=0.58 | BuyPressure=0.62 | Stability=0.86 | PrevTrend=0.67
+2026-10-30T05:01:10.036960+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:01:10,036 | INFO | algo_trader | Validating 5 candidates in parallel...
+2026-10-30T05:01:10.061680+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:01:10,061 | INFO | algo_trader | ENTRY REJECTED HIKAL-EQ: Range position 0.584 < 0.85 (price retreating from high)
+2026-10-30T05:01:10.064164+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:01:10,064 | INFO | algo_trader | ENTRY REJECTED QUICKHEAL-EQ: Range position 0.550 < 0.85 (price retreating from high)
+2026-10-30T05:01:10.066326+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:01:10,066 | INFO | algo_trader | ENTRY REJECTED AYMSYNTEX-EQ: Range position 0.300 < 0.85 (price retreating from high)
+2026-10-30T05:01:10.068478+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:01:10,068 | INFO | algo_trader | ENTRY REJECTED SHANKARA-EQ: Range position 0.497 < 0.85 (price retreating from high)
+2026-10-30T05:01:10.070254+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:01:10,070 | INFO | algo_trader | Near-breakout skip for SMSPHARMA-EQ: range=0.936, gain=5.8% — skipping breakout check
+2026-10-30T05:01:10.089482+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:01:10,089 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-30T05:01:15.104657+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:01:15,104 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-10-30T05:01:25.121854+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:01:25,121 | WARNING | algo_trader | 1-min candle fetch failed for SMSPHARMA-EQ volume check: POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=[REDACTED_IP], client_local_ip=[REDACTED_IP]: Access denied because of exceeding access rate — rejecting
+2026-10-30T05:01:25.122473+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:01:25,121 | INFO | algo_trader | ENTRY REJECTED SMSPHARMA-EQ: Volume check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=[REDACTED_IP], client_local_ip=[REDACTED_IP]: Access denied because of exceeding access rate)
+2026-10-30T05:01:25.124031+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:01:25,123 | INFO | algo_trader | Validation completed in 15.1 seconds: 0/5 passed.
+2026-10-30T05:01:25.124120+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:01:25,124 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-30T05:01:25.720385+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:01:25,720 | INFO | algo_trader | Scan attempt 16 — retrying in 120s (window open until 14:00)...
+2026-10-30T05:03:25.720773+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:03:25,720 | INFO | algo_trader | Scanning 2736 stocks for top 1 candidates (pool=5)...
+2026-10-30T05:03:25.724526+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:03:25,720 | INFO | algo_trader | Fetching quotes for 2736 stocks...
+2026-10-30T05:03:32.509650+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:03:32,509 | INFO | algo_trader | Received 2721 quotes.
+2026-10-30T05:03:32.512322+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:03:32,512 | INFO | algo_trader | Candidates in 5-8% gain range: 7
+2026-10-30T05:03:32.512529+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:03:32,512 | INFO | algo_trader | Fetching daily candles for 7 candidates...
+2026-10-30T05:03:32.529266+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:03:32,529 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-30T05:03:37.545967+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:03:37,545 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-10-30T05:03:47.562341+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:03:47,562 | INFO | algo_trader | Rank #1: HIKAL-EQ — gain=+5.33%, score=0.741 (vol=7.9x, momentum=0.56, buy_pressure=0.62, stability=0.86, prev_trend=0.67)
+2026-10-30T05:03:47.562932+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:03:47,562 | INFO | algo_trader | Rank #2: QUICKHEAL-EQ — gain=+7.23%, score=0.678 (vol=14.1x, momentum=0.56, buy_pressure=0.70, stability=0.82, prev_trend=0.17)
+2026-10-30T05:03:47.562932+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:03:47,562 | INFO | algo_trader | Rank #3: SHANKARA-EQ — gain=+6.64%, score=0.595 (vol=4.2x, momentum=0.48, buy_pressure=0.33, stability=0.57, prev_trend=0.50)
+2026-10-30T05:03:47.562932+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:03:47,562 | INFO | algo_trader | Rank #4: AYMSYNTEX-EQ — gain=+6.33%, score=0.587 (vol=14.7x, momentum=0.29, buy_pressure=0.82, stability=0.00, prev_trend=0.67)
+2026-10-30T05:03:47.562932+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:03:47,562 | INFO | algo_trader | Rank #5: TRENT-EQ — gain=+6.06%, score=0.582 (vol=2.8x, momentum=0.69, buy_pressure=0.43, stability=0.00, prev_trend=0.50)
+2026-10-30T05:03:47.827073+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:03:47,826 | INFO | algo_trader | Scan completed in 22.1 seconds. Found 5 raw candidates.
+2026-10-30T05:03:47.828379+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:03:47,828 | INFO | algo_trader | Checking read-only restrictions for 5 candidates...
+2026-10-30T05:03:47.830179+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:03:47,830 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 5 tradable, 0 rejected.
+2026-10-30T05:03:47.830344+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:03:47,830 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 0 filtered):
+2026-10-30T05:03:47.830344+00:00 ip-172-31-33-249 python[545938]:   HIKAL-EQ: +5.33% @ 215.30
+2026-10-30T05:03:47.830344+00:00 ip-172-31-33-249 python[545938]:     Score=0.741 | Vol=7.9x | Momentum=0.56 | BuyPressure=0.62 | Stability=0.86 | PrevTrend=0.67
+2026-10-30T05:03:48.428272+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:03:48,428 | INFO | algo_trader | Validating 5 candidates in parallel...
+2026-10-30T05:03:48.454411+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:03:48,454 | INFO | algo_trader | ENTRY REJECTED HIKAL-EQ: Range position 0.584 < 0.85 (price retreating from high)
+2026-10-30T05:03:48.457704+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:03:48,457 | INFO | algo_trader | ENTRY REJECTED QUICKHEAL-EQ: Range position 0.557 < 0.85 (price retreating from high)
+2026-10-30T05:03:48.459339+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:03:48,459 | INFO | algo_trader | ENTRY REJECTED SHANKARA-EQ: Range position 0.497 < 0.85 (price retreating from high)
+2026-10-30T05:03:48.461127+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:03:48,461 | INFO | algo_trader | ENTRY REJECTED AYMSYNTEX-EQ: Range position 0.312 < 0.85 (price retreating from high)
+2026-10-30T05:03:48.463290+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:03:48,463 | INFO | algo_trader | ENTRY REJECTED TRENT-EQ: Range position 0.702 < 0.85 (price retreating from high)
+2026-10-30T05:03:48.465251+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:03:48,465 | INFO | algo_trader | Validation completed in 0.0 seconds: 0/5 passed.
+2026-10-30T05:03:48.465396+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:03:48,465 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-30T05:03:49.050086+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:03:49,049 | INFO | algo_trader | Scan attempt 17 — retrying in 120s (window open until 14:00)...
+2026-10-30T05:05:49.050452+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:05:49,050 | INFO | algo_trader | Scanning 2736 stocks for top 1 candidates (pool=5)...
+2026-10-30T05:05:49.051156+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:05:49,050 | INFO | algo_trader | Fetching quotes for 2736 stocks...
+2026-10-30T05:05:55.840639+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:05:55,840 | INFO | algo_trader | Received 2721 quotes.
+2026-10-30T05:05:55.843379+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:05:55,843 | INFO | algo_trader | Candidates in 5-8% gain range: 7
+2026-10-30T05:05:55.843631+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:05:55,843 | INFO | algo_trader | Fetching daily candles for 7 candidates...
+2026-10-30T05:05:55.864943+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:05:55,864 | INFO | algo_trader | Rank #1: HIKAL-EQ — gain=+6.16%, score=0.773 (vol=8.1x, momentum=0.65, buy_pressure=0.67, stability=0.86, prev_trend=0.67)
+2026-10-30T05:05:55.865145+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:05:55,864 | INFO | algo_trader | Rank #2: QUICKHEAL-EQ — gain=+7.73%, score=0.694 (vol=14.2x, momentum=0.60, buy_pressure=0.73, stability=0.82, prev_trend=0.17)
+2026-10-30T05:05:55.865228+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:05:55,865 | INFO | algo_trader | Rank #3: SHANKARA-EQ — gain=+7.11%, score=0.605 (vol=4.2x, momentum=0.51, buy_pressure=0.33, stability=0.57, prev_trend=0.50)
+2026-10-30T05:05:55.865306+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:05:55,865 | INFO | algo_trader | Rank #4: AYMSYNTEX-EQ — gain=+6.55%, score=0.594 (vol=14.8x, momentum=0.31, buy_pressure=0.82, stability=0.00, prev_trend=0.67)
+2026-10-30T05:05:55.865447+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:05:55,865 | INFO | algo_trader | Rank #5: TRENT-EQ — gain=+6.10%, score=0.587 (vol=2.9x, momentum=0.71, buy_pressure=0.43, stability=0.00, prev_trend=0.50)
+2026-10-30T05:05:56.124163+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:05:56,123 | INFO | algo_trader | Scan completed in 7.1 seconds. Found 5 raw candidates.
+2026-10-30T05:05:56.126313+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:05:56,126 | INFO | algo_trader | Checking read-only restrictions for 5 candidates...
+2026-10-30T05:05:56.128993+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:05:56,128 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 5 tradable, 0 rejected.
+2026-10-30T05:05:56.129178+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:05:56,129 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 0 filtered):
+2026-10-30T05:05:56.129178+00:00 ip-172-31-33-249 python[545938]:   HIKAL-EQ: +6.16% @ 216.99
+2026-10-30T05:05:56.129178+00:00 ip-172-31-33-249 python[545938]:     Score=0.773 | Vol=8.1x | Momentum=0.65 | BuyPressure=0.67 | Stability=0.86 | PrevTrend=0.67
+2026-10-30T05:05:56.718016+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:05:56,717 | INFO | algo_trader | Validating 5 candidates in parallel...
+2026-10-30T05:05:56.739948+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:05:56,739 | INFO | algo_trader | ENTRY REJECTED HIKAL-EQ: Range position 0.670 < 0.85 (price retreating from high)
+2026-10-30T05:05:56.741877+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:05:56,741 | INFO | algo_trader | ENTRY REJECTED QUICKHEAL-EQ: Range position 0.596 < 0.85 (price retreating from high)
+2026-10-30T05:05:56.743497+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:05:56,743 | INFO | algo_trader | ENTRY REJECTED SHANKARA-EQ: Range position 0.513 < 0.85 (price retreating from high)
+2026-10-30T05:05:56.745325+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:05:56,745 | INFO | algo_trader | ENTRY REJECTED AYMSYNTEX-EQ: Range position 0.315 < 0.85 (price retreating from high)
+2026-10-30T05:05:56.747502+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:05:56,747 | INFO | algo_trader | ENTRY REJECTED TRENT-EQ: Range position 0.711 < 0.85 (price retreating from high)
+2026-10-30T05:05:56.749203+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:05:56,749 | INFO | algo_trader | Validation completed in 0.0 seconds: 0/5 passed.
+2026-10-30T05:05:56.749350+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:05:56,749 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-30T05:05:57.330537+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:05:57,330 | INFO | algo_trader | Scan attempt 18 — retrying in 120s (window open until 14:00)...
+2026-10-30T05:07:57.330989+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:07:57,330 | INFO | algo_trader | Scanning 2736 stocks for top 1 candidates (pool=5)...
+2026-10-30T05:07:57.331748+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:07:57,330 | INFO | algo_trader | Fetching quotes for 2736 stocks...
+2026-10-30T05:08:04.122640+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:08:04,122 | INFO | algo_trader | Received 2721 quotes.
+2026-10-30T05:08:04.125525+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:08:04,125 | INFO | algo_trader | Candidates in 5-8% gain range: 9
+2026-10-30T05:08:04.125722+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:08:04,125 | INFO | algo_trader | Fetching daily candles for 9 candidates...
+2026-10-30T05:08:04.150156+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:08:04,150 | INFO | algo_trader | Rank #1: HIKAL-EQ — gain=+6.49%, score=0.789 (vol=8.7x, momentum=0.68, buy_pressure=0.70, stability=0.86, prev_trend=0.67)
+2026-10-30T05:08:04.150343+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:08:04,150 | INFO | algo_trader | Rank #2: SMSPHARMA-EQ — gain=+5.72%, score=0.748 (vol=4.0x, momentum=0.93, buy_pressure=0.51, stability=0.43, prev_trend=0.67)
+2026-10-30T05:08:04.150425+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:08:04,150 | INFO | algo_trader | Rank #3: QUICKHEAL-EQ — gain=+7.81%, score=0.694 (vol=14.3x, momentum=0.61, buy_pressure=0.72, stability=0.82, prev_trend=0.17)
+2026-10-30T05:08:04.150492+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:08:04,150 | INFO | algo_trader | Rank #4: SHANKARA-EQ — gain=+7.48%, score=0.615 (vol=4.2x, momentum=0.54, buy_pressure=0.35, stability=0.57, prev_trend=0.50)
+2026-10-30T05:08:04.150618+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:08:04,150 | INFO | algo_trader | Rank #5: TRENT-EQ — gain=+6.16%, score=0.593 (vol=2.9x, momentum=0.72, buy_pressure=0.43, stability=0.00, prev_trend=0.50)
+2026-10-30T05:08:04.407257+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:08:04,407 | INFO | algo_trader | Scan completed in 7.1 seconds. Found 5 raw candidates.
+2026-10-30T05:08:04.409287+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:08:04,409 | INFO | algo_trader | Checking read-only restrictions for 5 candidates...
+2026-10-30T05:08:04.411306+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:08:04,411 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 5 tradable, 0 rejected.
+2026-10-30T05:08:04.411462+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:08:04,411 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 0 filtered):
+2026-10-30T05:08:04.411462+00:00 ip-172-31-33-249 python[545938]:   HIKAL-EQ: +6.49% @ 217.66
+2026-10-30T05:08:04.411462+00:00 ip-172-31-33-249 python[545938]:     Score=0.789 | Vol=8.7x | Momentum=0.68 | BuyPressure=0.70 | Stability=0.86 | PrevTrend=0.67
+2026-10-30T05:08:05.013540+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:08:05,013 | INFO | algo_trader | Validating 5 candidates in parallel...
+2026-10-30T05:08:05.036106+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:08:05,035 | INFO | algo_trader | ENTRY REJECTED HIKAL-EQ: Range position 0.693 < 0.85 (price retreating from high)
+2026-10-30T05:08:05.037853+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:08:05,037 | INFO | algo_trader | ENTRY REJECTED QUICKHEAL-EQ: Range position 0.598 < 0.85 (price retreating from high)
+2026-10-30T05:08:05.040046+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:08:05,039 | INFO | algo_trader | ENTRY REJECTED SHANKARA-EQ: Range position 0.540 < 0.85 (price retreating from high)
+2026-10-30T05:08:05.042285+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:08:05,042 | INFO | algo_trader | ENTRY REJECTED TRENT-EQ: Range position 0.725 < 0.85 (price retreating from high)
+2026-10-30T05:08:05.044129+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:08:05,044 | INFO | algo_trader | Near-breakout skip for SMSPHARMA-EQ: range=0.928, gain=5.7% — skipping breakout check
+2026-10-30T05:08:05.152635+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:08:05,152 | INFO | algo_trader | ENTRY REJECTED SMSPHARMA-EQ: Volume fading: current 335 vs avg 15407 (ratio 0.02 < 1.2)
+2026-10-30T05:08:05.154997+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:08:05,154 | INFO | algo_trader | Validation completed in 0.1 seconds: 0/5 passed.
+2026-10-30T05:08:05.155148+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:08:05,155 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-30T05:08:05.762603+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:08:05,762 | INFO | algo_trader | Scan attempt 19 — retrying in 120s (window open until 14:00)...
+2026-10-30T05:10:05.762983+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:10:05,762 | INFO | algo_trader | Scanning 2736 stocks for top 1 candidates (pool=5)...
+2026-10-30T05:10:05.766655+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:10:05,763 | INFO | algo_trader | Fetching quotes for 2736 stocks...
+2026-10-30T05:10:12.551652+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:10:12,551 | INFO | algo_trader | Received 2721 quotes.
+2026-10-30T05:10:12.554328+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:10:12,554 | INFO | algo_trader | Candidates in 5-8% gain range: 9
+2026-10-30T05:10:12.554483+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:10:12,554 | INFO | algo_trader | Fetching daily candles for 9 candidates...
+2026-10-30T05:10:12.554836+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:10:12,554 | INFO | algo_trader | Rank #1: HIKAL-EQ — gain=+6.12%, score=0.780 (vol=8.8x, momentum=0.64, buy_pressure=0.71, stability=0.86, prev_trend=0.67)
+2026-10-30T05:10:12.554956+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:10:12,554 | INFO | algo_trader | Rank #2: SMSPHARMA-EQ — gain=+5.25%, score=0.728 (vol=4.0x, momentum=0.86, buy_pressure=0.49, stability=0.43, prev_trend=0.67)
+2026-10-30T05:10:12.555037+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:10:12,554 | INFO | algo_trader | Rank #3: QUICKHEAL-EQ — gain=+7.64%, score=0.691 (vol=14.3x, momentum=0.59, buy_pressure=0.72, stability=0.82, prev_trend=0.17)
+2026-10-30T05:10:12.555114+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:10:12,555 | INFO | algo_trader | Rank #4: SHANKARA-EQ — gain=+7.69%, score=0.620 (vol=4.3x, momentum=0.55, buy_pressure=0.35, stability=0.57, prev_trend=0.50)
+2026-10-30T05:10:12.555185+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:10:12,555 | INFO | algo_trader | Rank #5: TRENT-EQ — gain=+6.16%, score=0.594 (vol=2.9x, momentum=0.72, buy_pressure=0.44, stability=0.00, prev_trend=0.50)
+2026-10-30T05:10:12.812074+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:10:12,811 | INFO | algo_trader | Scan completed in 7.0 seconds. Found 5 raw candidates.
+2026-10-30T05:10:12.813582+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:10:12,813 | INFO | algo_trader | Checking read-only restrictions for 5 candidates...
+2026-10-30T05:10:12.816035+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:10:12,815 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 5 tradable, 0 rejected.
+2026-10-30T05:10:12.816191+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:10:12,816 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 0 filtered):
+2026-10-30T05:10:12.816191+00:00 ip-172-31-33-249 python[545938]:   HIKAL-EQ: +6.12% @ 216.91
+2026-10-30T05:10:12.816191+00:00 ip-172-31-33-249 python[545938]:     Score=0.780 | Vol=8.8x | Momentum=0.64 | BuyPressure=0.71 | Stability=0.86 | PrevTrend=0.67
+2026-10-30T05:10:13.411315+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:10:13,411 | INFO | algo_trader | Validating 5 candidates in parallel...
+2026-10-30T05:10:13.431922+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:10:13,431 | INFO | algo_trader | ENTRY REJECTED HIKAL-EQ: Range position 0.652 < 0.85 (price retreating from high)
+2026-10-30T05:10:13.434326+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:10:13,434 | INFO | algo_trader | ENTRY REJECTED QUICKHEAL-EQ: Range position 0.591 < 0.85 (price retreating from high)
+2026-10-30T05:10:13.436603+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:10:13,436 | INFO | algo_trader | ENTRY REJECTED SHANKARA-EQ: Range position 0.552 < 0.85 (price retreating from high)
+2026-10-30T05:10:13.438893+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:10:13,438 | INFO | algo_trader | ENTRY REJECTED TRENT-EQ: Range position 0.714 < 0.85 (price retreating from high)
+2026-10-30T05:10:13.440719+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:10:13,440 | INFO | algo_trader | Near-breakout skip for SMSPHARMA-EQ: range=0.854, gain=5.2% — skipping breakout check
+2026-10-30T05:10:13.454749+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:10:13,454 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-30T05:10:18.470188+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:10:18,470 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-10-30T05:10:28.492660+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:10:28,492 | INFO | algo_trader | ENTRY REJECTED SMSPHARMA-EQ: Volume fading: current 3101 vs avg 11094 (ratio 0.28 < 1.2)
+2026-10-30T05:10:28.495069+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:10:28,494 | INFO | algo_trader | Validation completed in 15.1 seconds: 0/5 passed.
+2026-10-30T05:10:28.495188+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:10:28,495 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-30T05:10:29.086109+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:10:29,085 | INFO | algo_trader | Scan attempt 20 — retrying in 120s (window open until 14:00)...
+2026-10-30T05:12:29.086480+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:12:29,086 | INFO | algo_trader | Scanning 2736 stocks for top 1 candidates (pool=5)...
+2026-10-30T05:12:29.087232+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:12:29,086 | INFO | algo_trader | Fetching quotes for 2736 stocks...
+2026-10-30T05:12:35.875477+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:12:35,875 | INFO | algo_trader | Received 2721 quotes.
+2026-10-30T05:12:35.878206+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:12:35,878 | INFO | algo_trader | Candidates in 5-8% gain range: 9
+2026-10-30T05:12:35.878377+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:12:35,878 | INFO | algo_trader | Fetching daily candles for 9 candidates...
+2026-10-30T05:12:35.878703+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:12:35,878 | INFO | algo_trader | Rank #1: HIKAL-EQ — gain=+6.16%, score=0.782 (vol=9.0x, momentum=0.65, buy_pressure=0.71, stability=0.86, prev_trend=0.67)
+2026-10-30T05:12:35.878828+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:12:35,878 | INFO | algo_trader | Rank #2: SMSPHARMA-EQ — gain=+5.70%, score=0.745 (vol=4.1x, momentum=0.93, buy_pressure=0.50, stability=0.43, prev_trend=0.67)
+2026-10-30T05:12:35.878914+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:12:35,878 | INFO | algo_trader | Rank #3: QUICKHEAL-EQ — gain=+6.95%, score=0.674 (vol=14.5x, momentum=0.53, buy_pressure=0.71, stability=0.82, prev_trend=0.17)
+2026-10-30T05:12:35.879087+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:12:35,878 | INFO | algo_trader | Rank #4: SHANKARA-EQ — gain=+7.49%, score=0.616 (vol=4.3x, momentum=0.54, buy_pressure=0.35, stability=0.57, prev_trend=0.50)
+2026-10-30T05:12:35.879087+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:12:35,878 | INFO | algo_trader | Rank #5: TRENT-EQ — gain=+6.14%, score=0.590 (vol=2.9x, momentum=0.72, buy_pressure=0.43, stability=0.00, prev_trend=0.50)
+2026-10-30T05:12:36.153389+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:12:36,153 | INFO | algo_trader | Scan completed in 7.1 seconds. Found 5 raw candidates.
+2026-10-30T05:12:36.156881+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:12:36,156 | INFO | algo_trader | Checking read-only restrictions for 5 candidates...
+2026-10-30T05:12:36.158630+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:12:36,158 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 5 tradable, 0 rejected.
+2026-10-30T05:12:36.158807+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:12:36,158 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 0 filtered):
+2026-10-30T05:12:36.158807+00:00 ip-172-31-33-249 python[545938]:   HIKAL-EQ: +6.16% @ 217.00
+2026-10-30T05:12:36.158807+00:00 ip-172-31-33-249 python[545938]:     Score=0.782 | Vol=9.0x | Momentum=0.65 | BuyPressure=0.71 | Stability=0.86 | PrevTrend=0.67
+2026-10-30T05:12:36.783943+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:12:36,783 | INFO | algo_trader | Validating 5 candidates in parallel...
+2026-10-30T05:12:36.809713+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:12:36,809 | INFO | algo_trader | ENTRY REJECTED HIKAL-EQ: Range position 0.651 < 0.85 (price retreating from high)
+2026-10-30T05:12:36.812164+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:12:36,812 | INFO | algo_trader | ENTRY REJECTED QUICKHEAL-EQ: Range position 0.531 < 0.85 (price retreating from high)
+2026-10-30T05:12:36.814465+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:12:36,814 | INFO | algo_trader | ENTRY REJECTED SHANKARA-EQ: Range position 0.541 < 0.85 (price retreating from high)
+2026-10-30T05:12:36.817860+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:12:36,817 | INFO | algo_trader | ENTRY REJECTED TRENT-EQ: Range position 0.702 < 0.85 (price retreating from high)
+2026-10-30T05:12:36.819769+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:12:36,819 | INFO | algo_trader | Near-breakout skip for SMSPHARMA-EQ: range=0.932, gain=5.7% — skipping breakout check
+2026-10-30T05:12:36.844394+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:12:36,844 | INFO | algo_trader | ENTRY REJECTED SMSPHARMA-EQ: Volume fading: current 5109 vs avg 9517 (ratio 0.54 < 1.2)
+2026-10-30T05:12:36.847283+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:12:36,847 | INFO | algo_trader | Validation completed in 0.1 seconds: 0/5 passed.
+2026-10-30T05:12:36.847451+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:12:36,847 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-30T05:12:37.502119+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:12:37,502 | INFO | algo_trader | Scan attempt 21 — retrying in 120s (window open until 14:00)...
+2026-10-30T05:14:37.502492+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:14:37,502 | INFO | algo_trader | Scanning 2736 stocks for top 1 candidates (pool=5)...
+2026-10-30T05:14:37.503252+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:14:37,502 | INFO | algo_trader | Fetching quotes for 2736 stocks...
+2026-10-30T05:14:44.293962+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:14:44,293 | INFO | algo_trader | Received 2721 quotes.
+2026-10-30T05:14:44.296758+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:14:44,296 | INFO | algo_trader | Candidates in 5-8% gain range: 9
+2026-10-30T05:14:44.296955+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:14:44,296 | INFO | algo_trader | Fetching daily candles for 9 candidates...
+2026-10-30T05:14:44.320837+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:14:44,320 | INFO | algo_trader | Rank #1: HIKAL-EQ — gain=+5.74%, score=0.770 (vol=9.1x, momentum=0.60, buy_pressure=0.71, stability=0.86, prev_trend=0.67)
+2026-10-30T05:14:44.320985+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:14:44,320 | INFO | algo_trader | Rank #2: SMSPHARMA-EQ — gain=+5.84%, score=0.748 (vol=4.1x, momentum=0.95, buy_pressure=0.49, stability=0.43, prev_trend=0.67)
+2026-10-30T05:14:44.321037+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:14:44,320 | INFO | algo_trader | Rank #3: QUICKHEAL-EQ — gain=+6.77%, score=0.670 (vol=14.6x, momentum=0.52, buy_pressure=0.71, stability=0.82, prev_trend=0.17)
+2026-10-30T05:14:44.321078+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:14:44,321 | INFO | algo_trader | Rank #4: SHANKARA-EQ — gain=+6.65%, score=0.601 (vol=4.3x, momentum=0.48, buy_pressure=0.36, stability=0.57, prev_trend=0.50)
+2026-10-30T05:14:44.322547+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:14:44,321 | INFO | algo_trader | Rank #5: SANGHVIMOV-EQ — gain=+6.16%, score=0.597 (vol=1.7x, momentum=0.62, buy_pressure=0.64, stability=0.37, prev_trend=0.33)
+2026-10-30T05:14:44.576249+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:14:44,576 | INFO | algo_trader | Scan completed in 7.1 seconds. Found 5 raw candidates.
+2026-10-30T05:14:44.577582+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:14:44,577 | INFO | algo_trader | Checking read-only restrictions for 5 candidates...
+2026-10-30T05:14:44.579313+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:14:44,579 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 5 tradable, 0 rejected.
+2026-10-30T05:14:44.579438+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:14:44,579 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 0 filtered):
+2026-10-30T05:14:44.579438+00:00 ip-172-31-33-249 python[545938]:   HIKAL-EQ: +5.74% @ 216.13
+2026-10-30T05:14:44.579438+00:00 ip-172-31-33-249 python[545938]:     Score=0.770 | Vol=9.1x | Momentum=0.60 | BuyPressure=0.71 | Stability=0.86 | PrevTrend=0.67
+2026-10-30T05:14:45.167856+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:14:45,167 | INFO | algo_trader | Validating 5 candidates in parallel...
+2026-10-30T05:14:45.189356+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:14:45,189 | INFO | algo_trader | ENTRY REJECTED HIKAL-EQ: Range position 0.632 < 0.85 (price retreating from high)
+2026-10-30T05:14:45.191158+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:14:45,191 | INFO | algo_trader | ENTRY REJECTED QUICKHEAL-EQ: Range position 0.515 < 0.85 (price retreating from high)
+2026-10-30T05:14:45.192863+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:14:45,192 | INFO | algo_trader | ENTRY REJECTED SHANKARA-EQ: Range position 0.479 < 0.85 (price retreating from high)
+2026-10-30T05:14:45.195025+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:14:45,194 | INFO | algo_trader | ENTRY REJECTED SANGHVIMOV-EQ: Range position 0.642 < 0.85 (price retreating from high)
+2026-10-30T05:14:45.196839+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:14:45,196 | INFO | algo_trader | Near-breakout skip for SMSPHARMA-EQ: range=0.944, gain=5.8% — skipping breakout check
+2026-10-30T05:14:45.322837+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:14:45,322 | INFO | algo_trader | ENTRY REJECTED SMSPHARMA-EQ: Volume fading: current 8007 vs avg 8341 (ratio 0.96 < 1.2)
+2026-10-30T05:14:45.325322+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:14:45,325 | INFO | algo_trader | Validation completed in 0.2 seconds: 0/5 passed.
+2026-10-30T05:14:45.325526+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:14:45,325 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-30T05:14:45.910744+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:14:45,910 | INFO | algo_trader | Scan attempt 22 — retrying in 120s (window open until 14:00)...
+2026-10-30T05:16:45.911177+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:16:45,910 | INFO | algo_trader | Scanning 2736 stocks for top 1 candidates (pool=5)...
+2026-10-30T05:16:45.915057+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:16:45,911 | INFO | algo_trader | Fetching quotes for 2736 stocks...
+2026-10-30T05:16:52.696593+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:16:52,696 | INFO | algo_trader | Received 2721 quotes.
+2026-10-30T05:16:52.699275+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:16:52,699 | INFO | algo_trader | Candidates in 5-8% gain range: 8
+2026-10-30T05:16:52.699458+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:16:52,699 | INFO | algo_trader | Fetching daily candles for 8 candidates...
+2026-10-30T05:16:52.717268+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:16:52,717 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-30T05:16:57.731697+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:16:57,731 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-10-30T05:17:07.755286+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:17:07,755 | INFO | algo_trader | Rank #1: HIKAL-EQ — gain=+6.11%, score=0.782 (vol=9.2x, momentum=0.64, buy_pressure=0.72, stability=0.86, prev_trend=0.67)
+2026-10-30T05:17:07.755980+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:17:07,755 | INFO | algo_trader | Rank #2: SMSPHARMA-EQ — gain=+6.25%, score=0.764 (vol=4.2x, momentum=0.95, buy_pressure=0.56, stability=0.43, prev_trend=0.67)
+2026-10-30T05:17:07.755980+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:17:07,755 | INFO | algo_trader | Rank #3: QUICKHEAL-EQ — gain=+6.74%, score=0.669 (vol=14.6x, momentum=0.51, buy_pressure=0.71, stability=0.82, prev_trend=0.17)
+2026-10-30T05:17:07.755980+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:17:07,755 | INFO | algo_trader | Rank #4: SANGHVIMOV-EQ — gain=+7.13%, score=0.636 (vol=1.7x, momentum=0.79, buy_pressure=0.59, stability=0.37, prev_trend=0.33)
+2026-10-30T05:17:07.755980+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:17:07,755 | INFO | algo_trader | Rank #5: SHANKARA-EQ — gain=+6.65%, score=0.602 (vol=4.3x, momentum=0.48, buy_pressure=0.36, stability=0.57, prev_trend=0.50)
+2026-10-30T05:17:08.019654+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:17:08,019 | INFO | algo_trader | Scan completed in 22.1 seconds. Found 5 raw candidates.
+2026-10-30T05:17:08.021770+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:17:08,021 | INFO | algo_trader | Checking read-only restrictions for 5 candidates...
+2026-10-30T05:17:08.023644+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:17:08,023 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 5 tradable, 0 rejected.
+2026-10-30T05:17:08.023819+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:17:08,023 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 0 filtered):
+2026-10-30T05:17:08.023819+00:00 ip-172-31-33-249 python[545938]:   HIKAL-EQ: +6.11% @ 216.88
+2026-10-30T05:17:08.023819+00:00 ip-172-31-33-249 python[545938]:     Score=0.782 | Vol=9.2x | Momentum=0.64 | BuyPressure=0.72 | Stability=0.86 | PrevTrend=0.67
+2026-10-30T05:17:08.628609+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:17:08,628 | INFO | algo_trader | Validating 5 candidates in parallel...
+2026-10-30T05:17:08.650337+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:17:08,650 | INFO | algo_trader | ENTRY REJECTED HIKAL-EQ: Range position 0.638 < 0.85 (price retreating from high)
+2026-10-30T05:17:08.652764+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:17:08,652 | INFO | algo_trader | ENTRY REJECTED QUICKHEAL-EQ: Range position 0.512 < 0.85 (price retreating from high)
+2026-10-30T05:17:08.655113+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:17:08,654 | INFO | algo_trader | ENTRY REJECTED SANGHVIMOV-EQ: Range position 0.662 < 0.85 (price retreating from high)
+2026-10-30T05:17:08.656663+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:17:08,656 | INFO | algo_trader | ENTRY REJECTED SHANKARA-EQ: Range position 0.479 < 0.85 (price retreating from high)
+2026-10-30T05:17:08.659007+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:17:08,658 | INFO | algo_trader | Near-breakout skip for SMSPHARMA-EQ: range=0.989, gain=6.5% — skipping breakout check
+2026-10-30T05:17:08.751185+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:17:08,751 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-30T05:17:13.768310+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:17:13,768 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-10-30T05:17:23.787033+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:17:23,786 | WARNING | algo_trader | 1-min candle fetch failed for SMSPHARMA-EQ volume check: POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=[REDACTED_IP], client_local_ip=[REDACTED_IP]: Access denied because of exceeding access rate — rejecting
+2026-10-30T05:17:23.787874+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:17:23,787 | INFO | algo_trader | ENTRY REJECTED SMSPHARMA-EQ: Volume check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=[REDACTED_IP], client_local_ip=[REDACTED_IP]: Access denied because of exceeding access rate)
+2026-10-30T05:17:23.789923+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:17:23,789 | INFO | algo_trader | Validation completed in 15.2 seconds: 0/5 passed.
+2026-10-30T05:17:23.790023+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:17:23,789 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-30T05:17:24.379813+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:17:24,379 | INFO | algo_trader | Scan attempt 23 — retrying in 120s (window open until 14:00)...
+2026-10-30T05:19:24.380208+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:19:24,380 | INFO | algo_trader | Scanning 2736 stocks for top 1 candidates (pool=5)...
+2026-10-30T05:19:24.380939+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:19:24,380 | INFO | algo_trader | Fetching quotes for 2736 stocks...
+2026-10-30T05:19:31.165949+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:19:31,165 | INFO | algo_trader | Received 2721 quotes.
+2026-10-30T05:19:31.168748+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:19:31,168 | INFO | algo_trader | Candidates in 5-8% gain range: 8
+2026-10-30T05:19:31.168884+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:19:31,168 | INFO | algo_trader | Fetching daily candles for 8 candidates...
+2026-10-30T05:19:31.196305+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:19:31,196 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-30T05:19:36.216635+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:19:36,216 | INFO | algo_trader | Rank #1: SMSPHARMA-EQ — gain=+7.00%, score=0.776 (vol=4.4x, momentum=1.00, buy_pressure=0.56, stability=0.43, prev_trend=0.67)
+2026-10-30T05:19:36.217211+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:19:36,216 | INFO | algo_trader | Rank #2: HIKAL-EQ — gain=+5.85%, score=0.774 (vol=9.4x, momentum=0.61, buy_pressure=0.71, stability=0.86, prev_trend=0.67)
+2026-10-30T05:19:36.217211+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:19:36,216 | INFO | algo_trader | Rank #3: SMARTWORKS-EQ — gain=+5.21%, score=0.774 (vol=3.7x, momentum=0.83, buy_pressure=0.47, stability=0.82, prev_trend=0.67)
+2026-10-30T05:19:36.217211+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:19:36,216 | INFO | algo_trader | Rank #4: QUICKHEAL-EQ — gain=+6.73%, score=0.669 (vol=14.7x, momentum=0.51, buy_pressure=0.72, stability=0.82, prev_trend=0.17)
+2026-10-30T05:19:36.217211+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:19:36,216 | INFO | algo_trader | Rank #5: SANGHVIMOV-EQ — gain=+7.17%, score=0.653 (vol=1.9x, momentum=0.80, buy_pressure=0.59, stability=0.37, prev_trend=0.33)
+2026-10-30T05:19:36.509697+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:19:36,509 | INFO | algo_trader | Scan completed in 12.1 seconds. Found 5 raw candidates.
+2026-10-30T05:19:36.511588+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:19:36,511 | INFO | algo_trader | Checking read-only restrictions for 5 candidates...
+2026-10-30T05:19:36.513931+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:19:36,513 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 5 tradable, 0 rejected.
+2026-10-30T05:19:36.514088+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:19:36,513 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 0 filtered):
+2026-10-30T05:19:36.514088+00:00 ip-172-31-33-249 python[545938]:   SMSPHARMA-EQ: +7.00% @ 519.80
+2026-10-30T05:19:36.514088+00:00 ip-172-31-33-249 python[545938]:     Score=0.776 | Vol=4.4x | Momentum=1.00 | BuyPressure=0.56 | Stability=0.43 | PrevTrend=0.67
+2026-10-30T05:19:37.122538+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:19:37,122 | INFO | algo_trader | Validating 5 candidates in parallel...
+2026-10-30T05:19:37.144453+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:19:37,144 | INFO | algo_trader | ENTRY REJECTED HIKAL-EQ: Range position 0.623 < 0.85 (price retreating from high)
+2026-10-30T05:19:37.146370+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:19:37,146 | INFO | algo_trader | ENTRY REJECTED SMARTWORKS-EQ: Range position 0.808 < 0.85 (price retreating from high)
+2026-10-30T05:19:37.147910+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:19:37,147 | INFO | algo_trader | ENTRY REJECTED QUICKHEAL-EQ: Range position 0.529 < 0.85 (price retreating from high)
+2026-10-30T05:19:37.149799+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:19:37,149 | INFO | algo_trader | ENTRY REJECTED SANGHVIMOV-EQ: Range position 0.764 < 0.85 (price retreating from high)
+2026-10-30T05:19:37.151411+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:19:37,151 | INFO | algo_trader | Near-breakout skip for SMSPHARMA-EQ: range=0.979, gain=6.8% — skipping breakout check
+2026-10-30T05:19:37.214704+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:19:37,214 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-30T05:19:42.229125+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:19:42,228 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-10-30T05:19:52.246537+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:19:52,246 | WARNING | algo_trader | 1-min candle fetch failed for SMSPHARMA-EQ volume check: POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=[REDACTED_IP], client_local_ip=[REDACTED_IP]: Access denied because of exceeding access rate — rejecting
+2026-10-30T05:19:52.247106+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:19:52,246 | INFO | algo_trader | ENTRY REJECTED SMSPHARMA-EQ: Volume check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=[REDACTED_IP], client_local_ip=[REDACTED_IP]: Access denied because of exceeding access rate)
+2026-10-30T05:19:52.249422+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:19:52,249 | INFO | algo_trader | Validation completed in 15.1 seconds: 0/5 passed.
+2026-10-30T05:19:52.249539+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:19:52,249 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-30T05:19:52.849235+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:19:52,849 | INFO | algo_trader | Scan attempt 24 — retrying in 120s (window open until 14:00)...
+2026-10-30T05:21:52.849651+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:21:52,849 | INFO | algo_trader | Scanning 2736 stocks for top 1 candidates (pool=5)...
+2026-10-30T05:21:52.853197+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:21:52,849 | INFO | algo_trader | Fetching quotes for 2736 stocks...
+2026-10-30T05:21:59.638029+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:21:59,637 | INFO | algo_trader | Received 2721 quotes.
+2026-10-30T05:21:59.640779+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:21:59,640 | INFO | algo_trader | Candidates in 5-8% gain range: 7
+2026-10-30T05:21:59.640927+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:21:59,640 | INFO | algo_trader | Fetching daily candles for 7 candidates...
+2026-10-30T05:21:59.641214+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:21:59,641 | INFO | algo_trader | Rank #1: SMSPHARMA-EQ — gain=+6.83%, score=0.793 (vol=4.6x, momentum=0.97, buy_pressure=0.68, stability=0.43, prev_trend=0.67)
+2026-10-30T05:21:59.641337+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:21:59,641 | INFO | algo_trader | Rank #2: HIKAL-EQ — gain=+6.35%, score=0.788 (vol=9.5x, momentum=0.67, buy_pressure=0.72, stability=0.86, prev_trend=0.67)
+2026-10-30T05:21:59.641430+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:21:59,641 | INFO | algo_trader | Rank #3: SANGHVIMOV-EQ — gain=+7.56%, score=0.680 (vol=1.9x, momentum=0.86, buy_pressure=0.59, stability=0.37, prev_trend=0.33)
+2026-10-30T05:21:59.641430+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:21:59,641 | INFO | algo_trader | Rank #4: QUICKHEAL-EQ — gain=+6.73%, score=0.669 (vol=14.7x, momentum=0.51, buy_pressure=0.72, stability=0.82, prev_trend=0.17)
+2026-10-30T05:21:59.641607+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:21:59,641 | INFO | algo_trader | Rank #5: SHANKARA-EQ — gain=+7.63%, score=0.619 (vol=4.3x, momentum=0.55, buy_pressure=0.35, stability=0.57, prev_trend=0.50)
+2026-10-30T05:21:59.898022+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:21:59,897 | INFO | algo_trader | Scan completed in 7.0 seconds. Found 5 raw candidates.
+2026-10-30T05:21:59.900160+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:21:59,900 | INFO | algo_trader | Checking read-only restrictions for 5 candidates...
+2026-10-30T05:21:59.903279+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:21:59,903 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 5 tradable, 0 rejected.
+2026-10-30T05:21:59.903449+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:21:59,903 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 0 filtered):
+2026-10-30T05:21:59.903449+00:00 ip-172-31-33-249 python[545938]:   SMSPHARMA-EQ: +6.83% @ 519.00
+2026-10-30T05:21:59.903449+00:00 ip-172-31-33-249 python[545938]:     Score=0.793 | Vol=4.6x | Momentum=0.97 | BuyPressure=0.68 | Stability=0.43 | PrevTrend=0.67
+2026-10-30T05:22:00.495925+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:22:00,495 | INFO | algo_trader | Validating 5 candidates in parallel...
+2026-10-30T05:22:00.519080+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:22:00,518 | INFO | algo_trader | ENTRY REJECTED HIKAL-EQ: Range position 0.673 < 0.85 (price retreating from high)
+2026-10-30T05:22:00.520863+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:22:00,520 | INFO | algo_trader | ENTRY REJECTED QUICKHEAL-EQ: Range position 0.511 < 0.85 (price retreating from high)
+2026-10-30T05:22:00.522601+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:22:00,522 | INFO | algo_trader | ENTRY REJECTED SHANKARA-EQ: Range position 0.551 < 0.85 (price retreating from high)
+2026-10-30T05:22:00.524446+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:22:00,524 | INFO | algo_trader | Near-breakout skip for SMSPHARMA-EQ: range=0.987, gain=6.9% — skipping breakout check
+2026-10-30T05:22:01.558239+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:22:01,558 | INFO | algo_trader | ENTRY REJECTED SMSPHARMA-EQ: Volume fading: current 95 vs avg 22806 (ratio 0.00 < 1.2)
+2026-10-30T05:22:02.541168+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:22:02,541 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-30T05:22:07.555739+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:22:07,555 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-10-30T05:22:17.569960+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:22:17,569 | WARNING | algo_trader | 1-min candle fetch failed for SANGHVIMOV-EQ volume check: POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=[REDACTED_IP], client_local_ip=[REDACTED_IP]: Access denied because of exceeding access rate — rejecting
+2026-10-30T05:22:17.570718+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:22:17,570 | INFO | algo_trader | ENTRY REJECTED SANGHVIMOV-EQ: Volume check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=[REDACTED_IP], client_local_ip=[REDACTED_IP]: Access denied because of exceeding access rate)
+2026-10-30T05:22:17.572354+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:22:17,572 | INFO | algo_trader | Validation completed in 17.1 seconds: 0/5 passed.
+2026-10-30T05:22:17.572457+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:22:17,572 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-30T05:22:18.182916+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:22:18,182 | INFO | algo_trader | Scan attempt 25 — retrying in 120s (window open until 14:00)...
+2026-10-30T05:24:18.183274+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:24:18,183 | INFO | algo_trader | Scanning 2736 stocks for top 1 candidates (pool=5)...
+2026-10-30T05:24:18.184095+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:24:18,183 | INFO | algo_trader | Fetching quotes for 2736 stocks...
+2026-10-30T05:24:24.973423+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:24:24,973 | INFO | algo_trader | Received 2721 quotes.
+2026-10-30T05:24:24.976142+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:24:24,976 | INFO | algo_trader | Candidates in 5-8% gain range: 7
+2026-10-30T05:24:24.976281+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:24:24,976 | INFO | algo_trader | Fetching daily candles for 7 candidates...
+2026-10-30T05:24:24.976600+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:24:24,976 | INFO | algo_trader | Rank #1: SMSPHARMA-EQ — gain=+7.14%, score=0.791 (vol=4.8x, momentum=0.93, buy_pressure=0.73, stability=0.43, prev_trend=0.67)
+2026-10-30T05:24:24.976701+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:24:24,976 | INFO | algo_trader | Rank #2: HIKAL-EQ — gain=+5.69%, score=0.766 (vol=9.8x, momentum=0.60, buy_pressure=0.69, stability=0.86, prev_trend=0.67)
+2026-10-30T05:24:24.976819+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:24:24,976 | INFO | algo_trader | Rank #3: SANGHVIMOV-EQ — gain=+7.51%, score=0.679 (vol=2.0x, momentum=0.85, buy_pressure=0.57, stability=0.37, prev_trend=0.33)
+2026-10-30T05:24:24.976819+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:24:24,976 | INFO | algo_trader | Rank #4: QUICKHEAL-EQ — gain=+6.67%, score=0.667 (vol=14.8x, momentum=0.51, buy_pressure=0.71, stability=0.82, prev_trend=0.17)
+2026-10-30T05:24:24.976960+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:24:24,976 | INFO | algo_trader | Rank #5: SHANKARA-EQ — gain=+7.58%, score=0.617 (vol=4.4x, momentum=0.55, buy_pressure=0.35, stability=0.57, prev_trend=0.50)
+2026-10-30T05:24:25.251169+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:24:25,250 | INFO | algo_trader | Scan completed in 7.1 seconds. Found 5 raw candidates.
+2026-10-30T05:24:25.254219+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:24:25,254 | INFO | algo_trader | Checking read-only restrictions for 5 candidates...
+2026-10-30T05:24:25.256633+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:24:25,256 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 5 tradable, 0 rejected.
+2026-10-30T05:24:25.256812+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:24:25,256 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 0 filtered):
+2026-10-30T05:24:25.256812+00:00 ip-172-31-33-249 python[545938]:   SMSPHARMA-EQ: +7.14% @ 520.50
+2026-10-30T05:24:25.256812+00:00 ip-172-31-33-249 python[545938]:     Score=0.791 | Vol=4.8x | Momentum=0.93 | BuyPressure=0.73 | Stability=0.43 | PrevTrend=0.67
+2026-10-30T05:24:25.859179+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:24:25,859 | INFO | algo_trader | Validating 5 candidates in parallel...
+2026-10-30T05:24:25.880142+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:24:25,880 | INFO | algo_trader | ENTRY REJECTED HIKAL-EQ: Range position 0.609 < 0.85 (price retreating from high)
+2026-10-30T05:24:25.882081+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:24:25,881 | INFO | algo_trader | ENTRY REJECTED QUICKHEAL-EQ: Range position 0.506 < 0.85 (price retreating from high)
+2026-10-30T05:24:25.884003+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:24:25,883 | INFO | algo_trader | ENTRY REJECTED SHANKARA-EQ: Range position 0.547 < 0.85 (price retreating from high)
+2026-10-30T05:24:26.908155+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:24:26,908 | INFO | algo_trader | ENTRY REJECTED SANGHVIMOV-EQ: No micro breakout: LTP 370.95 < last 5min high 371.35
+2026-10-30T05:24:27.909406+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:24:27,909 | INFO | algo_trader | ENTRY REJECTED SMSPHARMA-EQ: Volume fading: current 18587 vs avg 30569 (ratio 0.61 < 1.2)
+2026-10-30T05:24:27.911983+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:24:27,911 | INFO | algo_trader | Validation completed in 2.1 seconds: 0/5 passed.
+2026-10-30T05:24:27.912149+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:24:27,912 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-30T05:24:28.520820+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:24:28,520 | INFO | algo_trader | Scan attempt 26 — retrying in 120s (window open until 14:00)...
+2026-10-30T05:26:28.521178+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:26:28,521 | INFO | algo_trader | Scanning 2736 stocks for top 1 candidates (pool=5)...
+2026-10-30T05:26:28.521973+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:26:28,521 | INFO | algo_trader | Fetching quotes for 2736 stocks...
+2026-10-30T05:26:35.308784+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:26:35,308 | INFO | algo_trader | Received 2721 quotes.
+2026-10-30T05:26:35.311495+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:26:35,311 | INFO | algo_trader | Candidates in 5-8% gain range: 9
+2026-10-30T05:26:35.311678+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:26:35,311 | INFO | algo_trader | Fetching daily candles for 9 candidates...
+2026-10-30T05:26:35.328661+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:26:35,328 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-30T05:26:40.349561+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:26:40,349 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-10-30T05:26:50.368947+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:26:50,368 | INFO | algo_trader | Rank #1: SMSPHARMA-EQ — gain=+7.37%, score=0.802 (vol=4.9x, momentum=0.95, buy_pressure=0.75, stability=0.43, prev_trend=0.67)
+2026-10-30T05:26:50.369534+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:26:50,369 | INFO | algo_trader | Rank #2: HIKAL-EQ — gain=+5.87%, score=0.771 (vol=10.0x, momentum=0.61, buy_pressure=0.69, stability=0.86, prev_trend=0.67)
+2026-10-30T05:26:50.369534+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:26:50,369 | INFO | algo_trader | Rank #3: SANGHVIMOV-EQ — gain=+7.52%, score=0.680 (vol=2.0x, momentum=0.86, buy_pressure=0.55, stability=0.37, prev_trend=0.33)
+2026-10-30T05:26:50.369534+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:26:50,369 | INFO | algo_trader | Rank #4: QUICKHEAL-EQ — gain=+6.66%, score=0.667 (vol=14.8x, momentum=0.51, buy_pressure=0.71, stability=0.82, prev_trend=0.17)
+2026-10-30T05:26:50.369534+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:26:50,369 | INFO | algo_trader | Rank #5: SHANKARA-EQ — gain=+7.91%, score=0.624 (vol=4.5x, momentum=0.57, buy_pressure=0.36, stability=0.57, prev_trend=0.50)
+2026-10-30T05:26:50.669446+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:26:50,669 | INFO | algo_trader | Scan completed in 22.1 seconds. Found 5 raw candidates.
+2026-10-30T05:26:50.671616+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:26:50,671 | INFO | algo_trader | Checking read-only restrictions for 5 candidates...
+2026-10-30T05:26:50.673858+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:26:50,673 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 5 tradable, 0 rejected.
+2026-10-30T05:26:50.673986+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:26:50,673 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 0 filtered):
+2026-10-30T05:26:50.673986+00:00 ip-172-31-33-249 python[545938]:   SMSPHARMA-EQ: +7.37% @ 521.60
+2026-10-30T05:26:50.673986+00:00 ip-172-31-33-249 python[545938]:     Score=0.802 | Vol=4.9x | Momentum=0.95 | BuyPressure=0.75 | Stability=0.43 | PrevTrend=0.67
+2026-10-30T05:26:51.283412+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:26:51,283 | INFO | algo_trader | Validating 5 candidates in parallel...
+2026-10-30T05:26:51.314391+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:26:51,314 | INFO | algo_trader | ENTRY REJECTED HIKAL-EQ: Range position 0.607 < 0.85 (price retreating from high)
+2026-10-30T05:26:51.316116+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:26:51,316 | INFO | algo_trader | ENTRY REJECTED QUICKHEAL-EQ: Range position 0.516 < 0.85 (price retreating from high)
+2026-10-30T05:26:51.317722+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:26:51,317 | INFO | algo_trader | ENTRY REJECTED SHANKARA-EQ: Range position 0.572 < 0.85 (price retreating from high)
+2026-10-30T05:26:52.350328+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:26:52,350 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-30T05:26:52.369632+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:26:52,369 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-30T05:26:58.370069+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:26:58,369 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-10-30T05:26:58.397916+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:26:58,397 | INFO | algo_trader | ENTRY REJECTED SANGHVIMOV-EQ: No micro breakout: LTP 371.25 < last 5min high 372.00
+2026-10-30T05:27:08.394613+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:27:08,394 | INFO | algo_trader | ENTRY REJECTED SMSPHARMA-EQ: No micro breakout: LTP 521.85 < last 5min high 523.55
+2026-10-30T05:27:08.397702+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:27:08,397 | INFO | algo_trader | Validation completed in 17.1 seconds: 0/5 passed.
+2026-10-30T05:27:08.397858+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:27:08,397 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-30T05:27:08.992717+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:27:08,992 | INFO | algo_trader | Scan attempt 27 — retrying in 120s (window open until 14:00)...
+2026-10-30T05:29:08.993082+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:29:08,992 | INFO | algo_trader | Scanning 2736 stocks for top 1 candidates (pool=5)...
+2026-10-30T05:29:08.994559+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:29:08,993 | INFO | algo_trader | Fetching quotes for 2736 stocks...
+2026-10-30T05:29:15.782092+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:29:15,781 | INFO | algo_trader | Received 2721 quotes.
+2026-10-30T05:29:15.784747+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:29:15,784 | INFO | algo_trader | Candidates in 5-8% gain range: 7
+2026-10-30T05:29:15.784910+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:29:15,784 | INFO | algo_trader | Fetching daily candles for 7 candidates...
+2026-10-30T05:29:15.785169+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:29:15,785 | INFO | algo_trader | Rank #1: SMSPHARMA-EQ — gain=+7.56%, score=0.804 (vol=5.1x, momentum=0.98, buy_pressure=0.73, stability=0.43, prev_trend=0.67)
+2026-10-30T05:29:15.785279+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:29:15,785 | INFO | algo_trader | Rank #2: HIKAL-EQ — gain=+5.67%, score=0.766 (vol=10.2x, momentum=0.59, buy_pressure=0.70, stability=0.86, prev_trend=0.67)
+2026-10-30T05:29:15.785360+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:29:15,785 | INFO | algo_trader | Rank #3: QUICKHEAL-EQ — gain=+7.54%, score=0.686 (vol=15.0x, momentum=0.58, buy_pressure=0.71, stability=0.82, prev_trend=0.17)
+2026-10-30T05:29:15.785436+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:29:15,785 | INFO | algo_trader | Rank #4: SANGHVIMOV-EQ — gain=+7.11%, score=0.661 (vol=2.1x, momentum=0.79, buy_pressure=0.55, stability=0.37, prev_trend=0.33)
+2026-10-30T05:29:15.785535+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:29:15,785 | INFO | algo_trader | Rank #5: MENONBE-EQ — gain=+6.20%, score=0.649 (vol=0.8x, momentum=0.79, buy_pressure=0.85, stability=0.72, prev_trend=0.50)
+2026-10-30T05:29:16.044654+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:29:16,044 | INFO | algo_trader | Scan completed in 7.1 seconds. Found 5 raw candidates.
+2026-10-30T05:29:16.046133+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:29:16,046 | INFO | algo_trader | Skipped by ASM/GSM/circuit filter:
+2026-10-30T05:29:16.046133+00:00 ip-172-31-33-249 python[545938]:   MENONBE-EQ: ASM listed (Additional Surveillance Measure)
+2026-10-30T05:29:16.047176+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:29:16,046 | INFO | algo_trader | Checking read-only restrictions for 4 candidates...
+2026-10-30T05:29:16.048772+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:29:16,048 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 4 tradable, 0 rejected.
+2026-10-30T05:29:16.048918+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:29:16,048 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 1 filtered):
+2026-10-30T05:29:16.048918+00:00 ip-172-31-33-249 python[545938]:   SMSPHARMA-EQ: +7.56% @ 522.55
+2026-10-30T05:29:16.048918+00:00 ip-172-31-33-249 python[545938]:     Score=0.804 | Vol=5.1x | Momentum=0.98 | BuyPressure=0.73 | Stability=0.43 | PrevTrend=0.67
+2026-10-30T05:29:16.647073+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:29:16,646 | INFO | algo_trader | Validating 4 candidates in parallel...
+2026-10-30T05:29:16.669066+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:29:16,668 | INFO | algo_trader | ENTRY REJECTED HIKAL-EQ: Range position 0.582 < 0.85 (price retreating from high)
+2026-10-30T05:29:16.671396+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:29:16,671 | INFO | algo_trader | ENTRY REJECTED QUICKHEAL-EQ: Range position 0.588 < 0.85 (price retreating from high)
+2026-10-30T05:29:16.673806+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:29:16,673 | INFO | algo_trader | ENTRY REJECTED SANGHVIMOV-EQ: Range position 0.794 < 0.85 (price retreating from high)
+2026-10-30T05:29:16.694987+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:29:16,694 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-30T05:29:21.716723+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:29:21,716 | INFO | algo_trader | ENTRY REJECTED SMSPHARMA-EQ: No micro breakout: LTP 522.45 < last 5min high 523.55
+2026-10-30T05:29:21.719763+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:29:21,719 | INFO | algo_trader | Validation completed in 5.1 seconds: 0/4 passed.
+2026-10-30T05:29:21.719879+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:29:21,719 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-30T05:29:22.311581+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:29:22,311 | INFO | algo_trader | Scan attempt 28 — retrying in 120s (window open until 14:00)...
+2026-10-30T05:31:22.312008+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:31:22,311 | INFO | algo_trader | Scanning 2736 stocks for top 1 candidates (pool=5)...
+2026-10-30T05:31:22.312699+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:31:22,312 | INFO | algo_trader | Fetching quotes for 2736 stocks...
+2026-10-30T05:31:29.104771+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:31:29,104 | INFO | algo_trader | Received 2721 quotes.
+2026-10-30T05:31:29.107421+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:31:29,107 | INFO | algo_trader | Candidates in 5-8% gain range: 7
+2026-10-30T05:31:29.107591+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:31:29,107 | INFO | algo_trader | Fetching daily candles for 7 candidates...
+2026-10-30T05:31:29.107952+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:31:29,107 | INFO | algo_trader | Rank #1: SMSPHARMA-EQ — gain=+7.39%, score=0.799 (vol=5.2x, momentum=0.96, buy_pressure=0.73, stability=0.43, prev_trend=0.67)
+2026-10-30T05:31:29.108077+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:31:29,107 | INFO | algo_trader | Rank #2: HIKAL-EQ — gain=+5.10%, score=0.750 (vol=10.4x, momentum=0.53, buy_pressure=0.69, stability=0.86, prev_trend=0.67)
+2026-10-30T05:31:29.108176+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:31:29,108 | INFO | algo_trader | Rank #3: QUICKHEAL-EQ — gain=+7.46%, score=0.683 (vol=15.1x, momentum=0.58, buy_pressure=0.71, stability=0.82, prev_trend=0.17)
+2026-10-30T05:31:29.108259+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:31:29,108 | INFO | algo_trader | Rank #4: SANGHVIMOV-EQ — gain=+7.43%, score=0.676 (vol=2.1x, momentum=0.84, buy_pressure=0.56, stability=0.37, prev_trend=0.33)
+2026-10-30T05:31:29.108334+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:31:29,108 | INFO | algo_trader | Rank #5: MENONBE-EQ — gain=+7.81%, score=0.672 (vol=0.9x, momentum=0.91, buy_pressure=0.72, stability=0.72, prev_trend=0.50)
+2026-10-30T05:31:29.364470+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:31:29,364 | INFO | algo_trader | Scan completed in 7.1 seconds. Found 5 raw candidates.
+2026-10-30T05:31:29.366343+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:31:29,366 | INFO | algo_trader | Skipped by ASM/GSM/circuit filter:
+2026-10-30T05:31:29.366343+00:00 ip-172-31-33-249 python[545938]:   MENONBE-EQ: ASM listed (Additional Surveillance Measure)
+2026-10-30T05:31:29.366647+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:31:29,366 | INFO | algo_trader | Checking read-only restrictions for 4 candidates...
+2026-10-30T05:31:29.369114+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:31:29,368 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 4 tradable, 0 rejected.
+2026-10-30T05:31:29.369265+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:31:29,369 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 1 filtered):
+2026-10-30T05:31:29.369265+00:00 ip-172-31-33-249 python[545938]:   SMSPHARMA-EQ: +7.39% @ 521.70
+2026-10-30T05:31:29.369265+00:00 ip-172-31-33-249 python[545938]:     Score=0.799 | Vol=5.2x | Momentum=0.96 | BuyPressure=0.73 | Stability=0.43 | PrevTrend=0.67
+2026-10-30T05:31:29.967136+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:31:29,966 | INFO | algo_trader | Validating 4 candidates in parallel...
+2026-10-30T05:31:29.990653+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:31:29,990 | INFO | algo_trader | ENTRY REJECTED HIKAL-EQ: Range position 0.533 < 0.85 (price retreating from high)
+2026-10-30T05:31:29.992964+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:31:29,992 | INFO | algo_trader | ENTRY REJECTED QUICKHEAL-EQ: Range position 0.575 < 0.85 (price retreating from high)
+2026-10-30T05:31:29.995302+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:31:29,995 | INFO | algo_trader | ENTRY REJECTED SANGHVIMOV-EQ: Range position 0.841 < 0.85 (price retreating from high)
+2026-10-30T05:31:30.014988+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:31:30,014 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-30T05:31:35.035311+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:31:35,035 | INFO | algo_trader | ENTRY REJECTED SMSPHARMA-EQ: No micro breakout: LTP 521.90 < last 5min high 523.50
+2026-10-30T05:31:35.037660+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:31:35,037 | INFO | algo_trader | Validation completed in 5.1 seconds: 0/4 passed.
+2026-10-30T05:31:35.037874+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:31:35,037 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-30T05:31:35.653121+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:31:35,652 | INFO | algo_trader | Scan attempt 29 — retrying in 120s (window open until 14:00)...
+2026-10-30T05:33:35.653480+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:33:35,653 | INFO | algo_trader | Scanning 2736 stocks for top 1 candidates (pool=5)...
+2026-10-30T05:33:35.657562+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:33:35,653 | INFO | algo_trader | Fetching quotes for 2736 stocks...
+2026-10-30T05:33:42.450320+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:33:42,450 | INFO | algo_trader | Received 2721 quotes.
+2026-10-30T05:33:42.453007+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:33:42,452 | INFO | algo_trader | Candidates in 5-8% gain range: 7
+2026-10-30T05:33:42.453179+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:33:42,453 | INFO | algo_trader | Fetching daily candles for 7 candidates...
+2026-10-30T05:33:42.453442+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:33:42,453 | INFO | algo_trader | Rank #1: SMSPHARMA-EQ — gain=+7.45%, score=0.780 (vol=5.2x, momentum=0.96, buy_pressure=0.63, stability=0.43, prev_trend=0.67)
+2026-10-30T05:33:42.453582+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:33:42,453 | INFO | algo_trader | Rank #2: HIKAL-EQ — gain=+5.12%, score=0.750 (vol=10.5x, momentum=0.53, buy_pressure=0.69, stability=0.86, prev_trend=0.67)
+2026-10-30T05:33:42.453681+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:33:42,453 | INFO | algo_trader | Rank #3: QUICKHEAL-EQ — gain=+7.83%, score=0.693 (vol=15.2x, momentum=0.61, buy_pressure=0.72, stability=0.82, prev_trend=0.17)
+2026-10-30T05:33:42.453681+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:33:42,453 | INFO | algo_trader | Rank #4: SANGHVIMOV-EQ — gain=+7.23%, score=0.668 (vol=2.1x, momentum=0.81, buy_pressure=0.56, stability=0.37, prev_trend=0.33)
+2026-10-30T05:33:42.453823+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:33:42,453 | INFO | algo_trader | Rank #5: MENONBE-EQ — gain=+5.73%, score=0.631 (vol=1.1x, momentum=0.75, buy_pressure=0.62, stability=0.72, prev_trend=0.50)
+2026-10-30T05:33:42.721246+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:33:42,721 | INFO | algo_trader | Scan completed in 7.1 seconds. Found 5 raw candidates.
+2026-10-30T05:33:42.722785+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:33:42,722 | INFO | algo_trader | Skipped by ASM/GSM/circuit filter:
+2026-10-30T05:33:42.722785+00:00 ip-172-31-33-249 python[545938]:   MENONBE-EQ: ASM listed (Additional Surveillance Measure)
+2026-10-30T05:33:42.723012+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:33:42,722 | INFO | algo_trader | Checking read-only restrictions for 4 candidates...
+2026-10-30T05:33:42.725188+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:33:42,725 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 4 tradable, 0 rejected.
+2026-10-30T05:33:42.725321+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:33:42,725 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 1 filtered):
+2026-10-30T05:33:42.725321+00:00 ip-172-31-33-249 python[545938]:   SMSPHARMA-EQ: +7.45% @ 522.00
+2026-10-30T05:33:42.725321+00:00 ip-172-31-33-249 python[545938]:     Score=0.780 | Vol=5.2x | Momentum=0.96 | BuyPressure=0.63 | Stability=0.43 | PrevTrend=0.67
+2026-10-30T05:33:43.331057+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:33:43,330 | INFO | algo_trader | Validating 4 candidates in parallel...
+2026-10-30T05:33:43.355014+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:33:43,354 | INFO | algo_trader | ENTRY REJECTED HIKAL-EQ: Gain +4.99% outside 5.0-10.0% range
+2026-10-30T05:33:43.356769+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:33:43,356 | INFO | algo_trader | ENTRY REJECTED QUICKHEAL-EQ: Range position 0.607 < 0.85 (price retreating from high)
+2026-10-30T05:33:43.359169+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:33:43,359 | INFO | algo_trader | ENTRY REJECTED SANGHVIMOV-EQ: Range position 0.806 < 0.85 (price retreating from high)
+2026-10-30T05:33:43.385494+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:33:43,385 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-30T05:33:48.408759+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:33:48,408 | INFO | algo_trader | ENTRY REJECTED SMSPHARMA-EQ: No micro breakout: LTP 521.80 < last 5min high 523.50
+2026-10-30T05:33:48.411856+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:33:48,411 | INFO | algo_trader | Validation completed in 5.1 seconds: 0/4 passed.
+2026-10-30T05:33:48.411969+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:33:48,411 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-30T05:33:49.001341+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:33:49,001 | INFO | algo_trader | Scan attempt 30 — retrying in 120s (window open until 14:00)...
+2026-10-30T05:35:49.001739+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:35:49,001 | INFO | algo_trader | Scanning 2736 stocks for top 1 candidates (pool=5)...
+2026-10-30T05:35:49.002494+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:35:49,001 | INFO | algo_trader | Fetching quotes for 2736 stocks...
+2026-10-30T05:35:55.792853+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:35:55,792 | INFO | algo_trader | Received 2721 quotes.
+2026-10-30T05:35:55.795567+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:35:55,795 | INFO | algo_trader | Candidates in 5-8% gain range: 7
+2026-10-30T05:35:55.795763+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:35:55,795 | INFO | algo_trader | Fetching daily candles for 7 candidates...
+2026-10-30T05:35:55.796030+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:35:55,795 | INFO | algo_trader | Rank #1: SMSPHARMA-EQ — gain=+7.66%, score=0.780 (vol=5.4x, momentum=0.95, buy_pressure=0.64, stability=0.43, prev_trend=0.67)
+2026-10-30T05:35:55.796138+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:35:55,796 | INFO | algo_trader | Rank #2: SANGHVIMOV-EQ — gain=+7.96%, score=0.699 (vol=2.2x, momentum=0.93, buy_pressure=0.56, stability=0.37, prev_trend=0.33)
+2026-10-30T05:35:55.796220+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:35:55,796 | INFO | algo_trader | Rank #3: QUICKHEAL-EQ — gain=+7.39%, score=0.683 (vol=15.2x, momentum=0.57, buy_pressure=0.71, stability=0.82, prev_trend=0.17)
+2026-10-30T05:35:55.796303+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:35:55,796 | INFO | algo_trader | Rank #4: MENONBE-EQ — gain=+6.00%, score=0.670 (vol=1.1x, momentum=0.78, buy_pressure=0.76, stability=0.72, prev_trend=0.50)
+2026-10-30T05:35:55.796303+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:35:55,796 | INFO | algo_trader | Rank #5: TRENT-EQ — gain=+6.15%, score=0.611 (vol=3.1x, momentum=0.72, buy_pressure=0.53, stability=0.00, prev_trend=0.50)
+2026-10-30T05:35:56.115067+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:35:56,114 | INFO | algo_trader | Scan completed in 7.1 seconds. Found 5 raw candidates.
+2026-10-30T05:35:56.118055+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:35:56,117 | INFO | algo_trader | Skipped by ASM/GSM/circuit filter:
+2026-10-30T05:35:56.118055+00:00 ip-172-31-33-249 python[545938]:   MENONBE-EQ: ASM listed (Additional Surveillance Measure)
+2026-10-30T05:35:56.118326+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:35:56,118 | INFO | algo_trader | Checking read-only restrictions for 4 candidates...
+2026-10-30T05:35:56.120087+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:35:56,119 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 4 tradable, 0 rejected.
+2026-10-30T05:35:56.120236+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:35:56,120 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 1 filtered):
+2026-10-30T05:35:56.120236+00:00 ip-172-31-33-249 python[545938]:   SMSPHARMA-EQ: +7.66% @ 523.00
+2026-10-30T05:35:56.120236+00:00 ip-172-31-33-249 python[545938]:     Score=0.780 | Vol=5.4x | Momentum=0.95 | BuyPressure=0.64 | Stability=0.43 | PrevTrend=0.67
+2026-10-30T05:35:56.973177+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:35:56,973 | INFO | algo_trader | Validating 4 candidates in parallel...
+2026-10-30T05:35:56.994718+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:35:56,994 | INFO | algo_trader | ENTRY REJECTED QUICKHEAL-EQ: Range position 0.565 < 0.85 (price retreating from high)
+2026-10-30T05:35:56.996716+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:35:56,996 | INFO | algo_trader | ENTRY REJECTED TRENT-EQ: Range position 0.721 < 0.85 (price retreating from high)
+2026-10-30T05:35:57.999809+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:35:57,999 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-30T05:35:58.016490+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:35:58,016 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-30T05:36:04.017032+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:36:04,016 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-10-30T05:36:04.041265+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:36:04,041 | INFO | algo_trader | ENTRY REJECTED SANGHVIMOV-EQ: No micro breakout: LTP 372.35 < last 5min high 372.95
+2026-10-30T05:36:14.037248+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:36:14,037 | WARNING | algo_trader | Candle fetch failed for SMSPHARMA-EQ breakout check: POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=[REDACTED_IP], client_local_ip=[REDACTED_IP]: Access denied because of exceeding access rate — rejecting
+2026-10-30T05:36:14.037873+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:36:14,037 | INFO | algo_trader | ENTRY REJECTED SMSPHARMA-EQ: Breakout check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=[REDACTED_IP], client_local_ip=[REDACTED_IP]: Access denied because of exceeding access rate)
+2026-10-30T05:36:14.039707+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:36:14,039 | INFO | algo_trader | Validation completed in 17.1 seconds: 0/4 passed.
+2026-10-30T05:36:14.039857+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:36:14,039 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-30T05:36:14.700241+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:36:14,700 | INFO | algo_trader | Scan attempt 31 — retrying in 120s (window open until 14:00)...
+2026-10-30T05:38:14.700640+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:38:14,700 | INFO | algo_trader | Scanning 2736 stocks for top 1 candidates (pool=5)...
+2026-10-30T05:38:14.701260+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:38:14,700 | INFO | algo_trader | Fetching quotes for 2736 stocks...
+2026-10-30T05:38:21.500699+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:38:21,500 | INFO | algo_trader | Received 2721 quotes.
+2026-10-30T05:38:21.503414+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:38:21,503 | INFO | algo_trader | Candidates in 5-8% gain range: 7
+2026-10-30T05:38:21.503709+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:38:21,503 | INFO | algo_trader | Fetching daily candles for 7 candidates...
+2026-10-30T05:38:21.524744+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:38:21,524 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-30T05:38:26.543651+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:38:26,543 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-10-30T05:38:36.569546+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:38:36,569 | INFO | algo_trader | Rank #1: SMSPHARMA-EQ — gain=+6.90%, score=0.751 (vol=5.7x, momentum=0.87, buy_pressure=0.60, stability=0.43, prev_trend=0.67)
+2026-10-30T05:38:36.572993+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:38:36,569 | INFO | algo_trader | Rank #2: HOMEFIRST-EQ — gain=+5.60%, score=0.720 (vol=1.3x, momentum=0.97, buy_pressure=0.62, stability=0.80, prev_trend=0.50)
+2026-10-30T05:38:36.572993+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:38:36,569 | INFO | algo_trader | Rank #3: QUICKHEAL-EQ — gain=+7.18%, score=0.679 (vol=15.2x, momentum=0.55, buy_pressure=0.72, stability=0.82, prev_trend=0.17)
+2026-10-30T05:38:36.572993+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:38:36,569 | INFO | algo_trader | Rank #4: MENONBE-EQ — gain=+5.55%, score=0.632 (vol=1.2x, momentum=0.74, buy_pressure=0.59, stability=0.72, prev_trend=0.50)
+2026-10-30T05:38:36.572993+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:38:36,569 | INFO | algo_trader | Rank #5: TRENT-EQ — gain=+6.02%, score=0.599 (vol=3.1x, momentum=0.68, buy_pressure=0.52, stability=0.00, prev_trend=0.50)
+2026-10-30T05:38:36.827251+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:38:36,827 | INFO | algo_trader | Scan completed in 22.1 seconds. Found 5 raw candidates.
+2026-10-30T05:38:36.828607+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:38:36,828 | INFO | algo_trader | Skipped by ASM/GSM/circuit filter:
+2026-10-30T05:38:36.828607+00:00 ip-172-31-33-249 python[545938]:   MENONBE-EQ: ASM listed (Additional Surveillance Measure)
+2026-10-30T05:38:36.828842+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:38:36,828 | INFO | algo_trader | Checking read-only restrictions for 4 candidates...
+2026-10-30T05:38:36.831107+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:38:36,831 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 4 tradable, 0 rejected.
+2026-10-30T05:38:36.831251+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:38:36,831 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 1 filtered):
+2026-10-30T05:38:36.831251+00:00 ip-172-31-33-249 python[545938]:   SMSPHARMA-EQ: +6.90% @ 519.30
+2026-10-30T05:38:36.831251+00:00 ip-172-31-33-249 python[545938]:     Score=0.751 | Vol=5.7x | Momentum=0.87 | BuyPressure=0.60 | Stability=0.43 | PrevTrend=0.67
+2026-10-30T05:38:37.434087+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:38:37,433 | INFO | algo_trader | Validating 4 candidates in parallel...
+2026-10-30T05:38:37.457437+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:38:37,457 | INFO | algo_trader | ENTRY REJECTED QUICKHEAL-EQ: Range position 0.557 < 0.85 (price retreating from high)
+2026-10-30T05:38:37.460111+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:38:37,459 | INFO | algo_trader | ENTRY REJECTED TRENT-EQ: Range position 0.705 < 0.85 (price retreating from high)
+2026-10-30T05:38:37.462815+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:38:37,462 | INFO | algo_trader | Near-breakout skip for HOMEFIRST-EQ: range=0.997, gain=5.8% — skipping breakout check
+2026-10-30T05:38:37.568133+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:38:37,568 | INFO | algo_trader | ENTRY REJECTED SMSPHARMA-EQ: No micro breakout: LTP 520.20 < last 5min high 525.00
+2026-10-30T05:38:38.568890+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:38:38,568 | INFO | algo_trader | ENTRY VALIDATED HOMEFIRST-EQ: price=1124.80, gain=+5.82%, range=0.997, breakout=True, vol_ratio=4.22, spread=0.0180%
+2026-10-30T05:38:38.571149+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:38:38,571 | INFO | algo_trader | Validation completed in 1.1 seconds: 1/4 passed.
+2026-10-30T05:38:38.571292+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:38:38,571 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-10-30T05:38:38.571404+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:38:38,571 | INFO | algo_trader | Capital: 100000.00 x 5.0x leverage = 500000.00 buying power | 1 validated stocks | 475000.00 per stock
+2026-10-30T05:38:39.567237+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:38:39,567 | INFO | algo_trader | ATR computed for token 2056: 6.9615 (from 14 candles, price=1124.80, ATR%=0.62%)
+2026-10-30T05:38:39.595473+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:38:39,595 | INFO | algo_trader | [PAPER] MARKET order filled: BUY HOMEFIRST-EQ 47 @ 1127.96 (reference=1127.40, fee=53.01) id=0007f7ed
+2026-10-30T05:38:39.597824+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:38:39,597 | INFO | algo_trader | MARKET order placed: BUY HOMEFIRST-EQ 47 [INTRADAY] {'response': {'data': {'orderid': '0007f7ed'}}}
+2026-10-30T05:38:39.605360+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:38:39,605 | INFO | algo_trader | [PAPER] SL-M order placed: SELL HOMEFIRST-EQ 47 trigger=1107.05 id=a314112f
+2026-10-30T05:38:39.607262+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:38:39,607 | INFO | algo_trader | SL-M order placed for HOMEFIRST-EQ: trigger=1107.08, orderid=a314112f
+2026-10-30T05:38:39.610626+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:38:39,610 | INFO | algo_trader | ENTRY: HOMEFIRST-EQ [MIS] — 47 shares @ 1127.96 (capital=475000.00, gain=+5.60%, score=0.720, ATR=6.9615 (0.62%), SL=1107.08, hard_stop=1107.08) | {'response': {'data': {'orderid': '0007f7ed'}}}
+2026-10-30T05:38:40.275139+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:38:40,275 | INFO | algo_trader | Monitoring 1 positions with trailing stop...
+2026-10-30T05:42:51.151451+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:42:51,151 | INFO | algo_trader | [position_check] HOMEFIRST-EQ: netqty=47
+2026-10-30T05:42:51.153713+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:42:51,153 | INFO | algo_trader | [position_check] HOMEFIRST-EQ: netqty=47
+2026-10-30T05:42:51.275825+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:42:51,275 | INFO | algo_trader | [PAPER] MARKET order filled: SELL HOMEFIRST-EQ 47 @ 1098.45 (reference=1099.00, fee=51.63) id=79af7dc9
+2026-10-30T05:42:51.282546+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:42:51,282 | INFO | algo_trader | [exit_attempt] Exit confirmed for HOMEFIRST-EQ: 47 shares @ 1098.45
+2026-10-30T05:42:51.282727+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:42:51,282 | INFO | algo_trader | [PAPER] Order cancelled: HOMEFIRST-EQ id=a314112f
+2026-10-30T05:42:51.284761+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:42:51,284 | INFO | algo_trader | SL-M order confirmed CANCELLED for HOMEFIRST-EQ: a314112f
+2026-10-30T05:42:51.287487+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:42:51,287 | INFO | algo_trader | HARD STOP (max loss) EXIT: HOMEFIRST-EQ — 0 shares @ 1098.45 (entry=1127.96, high=1127.96, SL=1107.08, hard_stop=1107.08, ATR=6.9615, locked=False, PnL=-1491.61, daily_pnl=-1491.61, consecutive_losses=1/2, round=0/2) | ExitOutcome(state=<ExitState.CLOSED: 'closed'>, execution=OrderExecution(order_id='79af7dc9', state=<OrderState.FILLED: 'filled'>, requested_quantity=47, filled_quantity=47, average_price=1098.45, reason='', raw_order={'orderid': '79af7dc9', 'tradingsymbol': 'HOMEFIRST-EQ', 'transactiontype': 'SELL', 'quantity': '47', 'price': '1098.45', 'filledshares': '47', 'averageprice': '1098.45', 'triggerprice': '0.0', 'orderstatus': 'COMPLETE', 'status': 'COMPLETE', 'ordertype': 'MARKET', 'producttype': 'INTRADAY', 'referenceprice': '1099.0', 'fees': '51.63'}), reason='')
+2026-10-30T05:43:01.887146+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:43:01,886 | INFO | algo_trader | All positions closed by stop-loss.
+2026-10-30T05:43:01.887938+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:43:01,887 | INFO | algo_trader | Smart gate: last exit was HARD STOP — skipping re-entry.
+2026-10-30T05:43:02.535243+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:43:02,535 | INFO | algo_trader | [auth_refresh] Session age 4382s >= 300s, refreshing...
+2026-10-30T05:43:02.535471+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:43:02,535 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-10-30T05:43:02.582893+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:43:02,582 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-10-30T05:43:02.584311+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:43:02,584 | INFO | algo_trader |
+2026-10-30T05:43:02.584311+00:00 ip-172-31-33-249 python[545938]: ============================================================
+2026-10-30T05:43:02.584311+00:00 ip-172-31-33-249 python[545938]: PAPER TRADING SUMMARY
+2026-10-30T05:43:02.584311+00:00 ip-172-31-33-249 python[545938]: ============================================================
+2026-10-30T05:43:02.584311+00:00 ip-172-31-33-249 python[545938]: Total trades: 2
+2026-10-30T05:43:02.584311+00:00 ip-172-31-33-249 python[545938]: Buys: 1, Sells: 1
+2026-10-30T05:43:02.584311+00:00 ip-172-31-33-249 python[545938]:   11:08:39 BUY  HOMEFIRST-EQ x47 @ 1127.96 fees: Rs.53.01
+2026-10-30T05:43:02.584311+00:00 ip-172-31-33-249 python[545938]:   11:12:51 SELL HOMEFIRST-EQ x47 @ 1098.45 gross: Rs.-1,386.97, fees: Rs.104.64, net P&L: Rs.-1,491.61
+2026-10-30T05:43:02.584311+00:00 ip-172-31-33-249 python[545938]: Daily net P&L: Rs.-1,491.61
+2026-10-30T05:43:02.584311+00:00 ip-172-31-33-249 python[545938]: Capital: Rs.100,000.00 → Rs.98,508.39
+2026-10-30T05:43:02.584311+00:00 ip-172-31-33-249 python[545938]: All positions closed.
+2026-10-30T05:43:02.584311+00:00 ip-172-31-33-249 python[545938]: ============================================================
+2026-10-30T05:43:29.068864+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:43:29,068 | INFO | algo_trader | Replay comparison complete: 268/268 decisions matched; recommended slippage=0 bps; report=/home/ubuntu/algo-trader/data/replay_reports/2026-10-30/summary.json; universe=data/universe_snapshots.json
+2026-10-30T05:43:29.069840+00:00 ip-172-31-33-249 python[545938]: 2026-10-30 05:43:29,069 | INFO | algo_trader | Trading day complete. Daily P&L: ₹-1,491.61. Sleeping 70.8h until tomorrow.

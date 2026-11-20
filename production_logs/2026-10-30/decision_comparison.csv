@@ -1,0 +1,269 @@
+sequence,event_type,symbol,recorded_decision,replayed_decision,matched,detail
+26876,market_gate,,trade,trade,True,four-factor market gate
+26877,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['SMSPHARMA-EQ', 'KRISHNADEF-EQ', 'TRENT-EQ']; replayed=['SMSPHARMA-EQ', 'KRISHNADEF-EQ', 'TRENT-EQ']"
+26878,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+26879,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+26880,candidate_validation,KRISHNADEF-EQ,rejected,rejected,True,Range position 0.500 < 0.85 (price retreating from high)
+26881,candidate_validation,TRENT-EQ,rejected,rejected,True,Range position 0.627 < 0.85 (price retreating from high)
+26882,candidate_validation,SMSPHARMA-EQ,rejected,rejected,True,Volume fading: current 9616 vs avg 27084 (ratio 0.36 < 1.2)
+26883,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['QUICKHEAL-EQ', 'TRENT-EQ', 'KRISHNADEF-EQ', 'AYMSYNTEX-EQ']; replayed=['QUICKHEAL-EQ', 'TRENT-EQ', 'KRISHNADEF-EQ', 'AYMSYNTEX-EQ']"
+26884,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+26885,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+26886,candidate_validation,QUICKHEAL-EQ,rejected,rejected,True,Range position 0.544 < 0.85 (price retreating from high)
+26887,candidate_validation,TRENT-EQ,rejected,rejected,True,Range position 0.701 < 0.85 (price retreating from high)
+26888,candidate_validation,KRISHNADEF-EQ,rejected,rejected,True,Range position 0.499 < 0.85 (price retreating from high)
+26889,candidate_validation,AYMSYNTEX-EQ,rejected,rejected,True,Range position 0.077 < 0.85 (price retreating from high)
+26890,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['SMSPHARMA-EQ', 'QUICKHEAL-EQ', 'TRENT-EQ', 'KRISHNADEF-EQ', 'AYMSYNTEX-EQ']; replayed=['SMSPHARMA-EQ', 'QUICKHEAL-EQ', 'TRENT-EQ', 'KRISHNADEF-EQ', 'AYMSYNTEX-EQ']"
+26891,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+26892,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+26893,candidate_validation,QUICKHEAL-EQ,rejected,rejected,True,Range position 0.525 < 0.85 (price retreating from high)
+26894,candidate_validation,TRENT-EQ,rejected,rejected,True,Range position 0.775 < 0.85 (price retreating from high)
+26895,candidate_validation,KRISHNADEF-EQ,rejected,rejected,True,Range position 0.471 < 0.85 (price retreating from high)
+26896,candidate_validation,AYMSYNTEX-EQ,rejected,rejected,True,Range position 0.094 < 0.85 (price retreating from high)
+26897,candidate_validation,SMSPHARMA-EQ,rejected,rejected,True,Volume fading: current 5878 vs avg 26907 (ratio 0.22 < 1.2)
+26898,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['SMSPHARMA-EQ', 'QUICKHEAL-EQ', 'TRENT-EQ', 'KRISHNADEF-EQ', 'AYMSYNTEX-EQ']; replayed=['SMSPHARMA-EQ', 'QUICKHEAL-EQ', 'TRENT-EQ', 'KRISHNADEF-EQ', 'AYMSYNTEX-EQ']"
+26899,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+26900,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+26901,candidate_validation,QUICKHEAL-EQ,rejected,rejected,True,Range position 0.487 < 0.85 (price retreating from high)
+26902,candidate_validation,TRENT-EQ,rejected,rejected,True,Range position 0.811 < 0.85 (price retreating from high)
+26903,candidate_validation,KRISHNADEF-EQ,rejected,rejected,True,Range position 0.466 < 0.85 (price retreating from high)
+26904,candidate_validation,AYMSYNTEX-EQ,rejected,rejected,True,Range position 0.035 < 0.85 (price retreating from high)
+26905,candidate_validation,SMSPHARMA-EQ,rejected,rejected,True,"Volume check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=13.126.199.100, client_local_ip=172.31.33.249: Access denied because of exceeding access rate)"
+26906,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['HIKAL-EQ', 'QUICKHEAL-EQ', 'TRENT-EQ', 'KRISHNADEF-EQ', 'AYMSYNTEX-EQ']; replayed=['HIKAL-EQ', 'QUICKHEAL-EQ', 'TRENT-EQ', 'KRISHNADEF-EQ', 'AYMSYNTEX-EQ']"
+26907,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+26908,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+26909,candidate_validation,HIKAL-EQ,rejected,rejected,True,Range position 0.752 < 0.85 (price retreating from high)
+26910,candidate_validation,QUICKHEAL-EQ,rejected,rejected,True,Range position 0.537 < 0.85 (price retreating from high)
+26911,candidate_validation,TRENT-EQ,rejected,rejected,True,Range position 0.775 < 0.85 (price retreating from high)
+26912,candidate_validation,KRISHNADEF-EQ,rejected,rejected,True,Range position 0.431 < 0.85 (price retreating from high)
+26913,candidate_validation,AYMSYNTEX-EQ,rejected,rejected,True,Range position 0.095 < 0.85 (price retreating from high)
+26914,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['HIKAL-EQ', 'QUICKHEAL-EQ', 'TRENT-EQ', 'KRISHNADEF-EQ', 'AYMSYNTEX-EQ']; replayed=['HIKAL-EQ', 'QUICKHEAL-EQ', 'TRENT-EQ', 'KRISHNADEF-EQ', 'AYMSYNTEX-EQ']"
+26915,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+26916,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+26917,candidate_validation,HIKAL-EQ,rejected,rejected,True,Range position 0.755 < 0.85 (price retreating from high)
+26918,candidate_validation,QUICKHEAL-EQ,rejected,rejected,True,Range position 0.511 < 0.85 (price retreating from high)
+26919,candidate_validation,TRENT-EQ,rejected,rejected,True,Range position 0.707 < 0.85 (price retreating from high)
+26920,candidate_validation,KRISHNADEF-EQ,rejected,rejected,True,Range position 0.372 < 0.85 (price retreating from high)
+26921,candidate_validation,AYMSYNTEX-EQ,rejected,rejected,True,Range position 0.095 < 0.85 (price retreating from high)
+26922,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['HIKAL-EQ', 'QUICKHEAL-EQ', 'TRENT-EQ', 'AYMSYNTEX-EQ', 'KRISHNADEF-EQ']; replayed=['HIKAL-EQ', 'QUICKHEAL-EQ', 'TRENT-EQ', 'AYMSYNTEX-EQ', 'KRISHNADEF-EQ']"
+26923,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+26924,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+26925,candidate_validation,HIKAL-EQ,rejected,rejected,True,Range position 0.764 < 0.85 (price retreating from high)
+26926,candidate_validation,QUICKHEAL-EQ,rejected,rejected,True,Range position 0.608 < 0.85 (price retreating from high)
+26927,candidate_validation,TRENT-EQ,rejected,rejected,True,Range position 0.691 < 0.85 (price retreating from high)
+26928,candidate_validation,AYMSYNTEX-EQ,rejected,rejected,True,Range position 0.105 < 0.85 (price retreating from high)
+26929,candidate_validation,KRISHNADEF-EQ,rejected,rejected,True,Range position 0.290 < 0.85 (price retreating from high)
+26930,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['HIKAL-EQ', 'QUICKHEAL-EQ', 'TRENT-EQ', 'KRISHNADEF-EQ', 'AYMSYNTEX-EQ']; replayed=['HIKAL-EQ', 'QUICKHEAL-EQ', 'TRENT-EQ', 'KRISHNADEF-EQ', 'AYMSYNTEX-EQ']"
+26931,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+26932,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+26933,candidate_validation,HIKAL-EQ,rejected,rejected,True,Range position 0.786 < 0.85 (price retreating from high)
+26934,candidate_validation,QUICKHEAL-EQ,rejected,rejected,True,Range position 0.607 < 0.85 (price retreating from high)
+26935,candidate_validation,TRENT-EQ,rejected,rejected,True,Range position 0.731 < 0.85 (price retreating from high)
+26936,candidate_validation,KRISHNADEF-EQ,rejected,rejected,True,Range position 0.323 < 0.85 (price retreating from high)
+26937,candidate_validation,AYMSYNTEX-EQ,rejected,rejected,True,Range position 0.108 < 0.85 (price retreating from high)
+26938,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['HIKAL-EQ', 'QUICKHEAL-EQ', 'TRENT-EQ', 'FABTECH-EQ', 'KRISHNADEF-EQ']; replayed=['HIKAL-EQ', 'QUICKHEAL-EQ', 'TRENT-EQ', 'FABTECH-EQ', 'KRISHNADEF-EQ']"
+26939,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+26940,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+26941,candidate_validation,HIKAL-EQ,rejected,rejected,True,Range position 0.763 < 0.85 (price retreating from high)
+26942,candidate_validation,QUICKHEAL-EQ,rejected,rejected,True,Range position 0.562 < 0.85 (price retreating from high)
+26943,candidate_validation,TRENT-EQ,rejected,rejected,True,Range position 0.681 < 0.85 (price retreating from high)
+26944,candidate_validation,FABTECH-EQ,rejected,rejected,True,Range position 0.765 < 0.85 (price retreating from high)
+26945,candidate_validation,KRISHNADEF-EQ,rejected,rejected,True,Range position 0.292 < 0.85 (price retreating from high)
+26946,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['HIKAL-EQ', 'QUICKHEAL-EQ', 'TRENT-EQ', 'FABTECH-EQ', 'KRISHNADEF-EQ']; replayed=['HIKAL-EQ', 'QUICKHEAL-EQ', 'TRENT-EQ', 'FABTECH-EQ', 'KRISHNADEF-EQ']"
+26947,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+26948,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+26949,candidate_validation,HIKAL-EQ,rejected,rejected,True,Range position 0.705 < 0.85 (price retreating from high)
+26950,candidate_validation,QUICKHEAL-EQ,rejected,rejected,True,Range position 0.535 < 0.85 (price retreating from high)
+26951,candidate_validation,TRENT-EQ,rejected,rejected,True,Range position 0.637 < 0.85 (price retreating from high)
+26952,candidate_validation,FABTECH-EQ,rejected,rejected,True,Range position 0.681 < 0.85 (price retreating from high)
+26953,candidate_validation,KRISHNADEF-EQ,rejected,rejected,True,Range position 0.220 < 0.85 (price retreating from high)
+26954,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['SMSPHARMA-EQ', 'HIKAL-EQ', 'QUICKHEAL-EQ', 'SHANKARA-EQ', 'TRENT-EQ']; replayed=['SMSPHARMA-EQ', 'HIKAL-EQ', 'QUICKHEAL-EQ', 'SHANKARA-EQ', 'TRENT-EQ']"
+26955,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+26956,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+26957,candidate_validation,HIKAL-EQ,rejected,rejected,True,Range position 0.727 < 0.85 (price retreating from high)
+26958,candidate_validation,QUICKHEAL-EQ,rejected,rejected,True,Range position 0.535 < 0.85 (price retreating from high)
+26959,candidate_validation,SHANKARA-EQ,rejected,rejected,True,Range position 0.479 < 0.85 (price retreating from high)
+26960,candidate_validation,TRENT-EQ,rejected,rejected,True,Range position 0.693 < 0.85 (price retreating from high)
+26961,candidate_validation,SMSPHARMA-EQ,rejected,rejected,True,Volume fading: current 1116 vs avg 13819 (ratio 0.08 < 1.2)
+26962,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['SMSPHARMA-EQ', 'HIKAL-EQ', 'QUICKHEAL-EQ', 'SHANKARA-EQ', 'FABTECH-EQ']; replayed=['SMSPHARMA-EQ', 'HIKAL-EQ', 'QUICKHEAL-EQ', 'SHANKARA-EQ', 'FABTECH-EQ']"
+26963,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+26964,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+26965,candidate_validation,HIKAL-EQ,rejected,rejected,True,Range position 0.710 < 0.85 (price retreating from high)
+26966,candidate_validation,QUICKHEAL-EQ,rejected,rejected,True,Range position 0.545 < 0.85 (price retreating from high)
+26967,candidate_validation,SHANKARA-EQ,rejected,rejected,True,Range position 0.495 < 0.85 (price retreating from high)
+26968,candidate_validation,FABTECH-EQ,rejected,rejected,True,Range position 0.726 < 0.85 (price retreating from high)
+26969,candidate_validation,SMSPHARMA-EQ,rejected,rejected,True,Volume fading: current 5177 vs avg 11570 (ratio 0.45 < 1.2)
+26970,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['SMSPHARMA-EQ', 'HIKAL-EQ', 'QUICKHEAL-EQ', 'FABTECH-EQ', 'SHANKARA-EQ']; replayed=['SMSPHARMA-EQ', 'HIKAL-EQ', 'QUICKHEAL-EQ', 'FABTECH-EQ', 'SHANKARA-EQ']"
+26971,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+26972,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+26973,candidate_validation,HIKAL-EQ,rejected,rejected,True,Range position 0.613 < 0.85 (price retreating from high)
+26974,candidate_validation,QUICKHEAL-EQ,rejected,rejected,True,Range position 0.512 < 0.85 (price retreating from high)
+26975,candidate_validation,FABTECH-EQ,rejected,rejected,True,Range position 0.700 < 0.85 (price retreating from high)
+26976,candidate_validation,SHANKARA-EQ,rejected,rejected,True,Range position 0.479 < 0.85 (price retreating from high)
+26977,candidate_validation,SMSPHARMA-EQ,rejected,rejected,True,Volume fading: current 9089 vs avg 7717 (ratio 1.18 < 1.2)
+26978,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['SMSPHARMA-EQ', 'HIKAL-EQ', 'QUICKHEAL-EQ', 'SHANKARA-EQ', 'AYMSYNTEX-EQ']; replayed=['SMSPHARMA-EQ', 'HIKAL-EQ', 'QUICKHEAL-EQ', 'SHANKARA-EQ', 'AYMSYNTEX-EQ']"
+26979,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+26980,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+26981,candidate_validation,HIKAL-EQ,rejected,rejected,True,Range position 0.611 < 0.85 (price retreating from high)
+26982,candidate_validation,QUICKHEAL-EQ,rejected,rejected,True,Range position 0.587 < 0.85 (price retreating from high)
+26983,candidate_validation,SHANKARA-EQ,rejected,rejected,True,Range position 0.490 < 0.85 (price retreating from high)
+26984,candidate_validation,AYMSYNTEX-EQ,rejected,rejected,True,Range position 0.283 < 0.85 (price retreating from high)
+26985,candidate_validation,SMSPHARMA-EQ,rejected,rejected,True,Volume fading: current 6232 vs avg 9624 (ratio 0.65 < 1.2)
+26986,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['HIKAL-EQ', 'SMSPHARMA-EQ', 'QUICKHEAL-EQ', 'AYMSYNTEX-EQ', 'SHANKARA-EQ']; replayed=['HIKAL-EQ', 'SMSPHARMA-EQ', 'QUICKHEAL-EQ', 'AYMSYNTEX-EQ', 'SHANKARA-EQ']"
+26987,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+26988,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+26989,candidate_validation,HIKAL-EQ,rejected,rejected,True,Range position 0.584 < 0.85 (price retreating from high)
+26990,candidate_validation,QUICKHEAL-EQ,rejected,rejected,True,Range position 0.550 < 0.85 (price retreating from high)
+26991,candidate_validation,AYMSYNTEX-EQ,rejected,rejected,True,Range position 0.300 < 0.85 (price retreating from high)
+26992,candidate_validation,SHANKARA-EQ,rejected,rejected,True,Range position 0.497 < 0.85 (price retreating from high)
+26993,candidate_validation,SMSPHARMA-EQ,rejected,rejected,True,"Volume check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=13.126.199.100, client_local_ip=172.31.33.249: Access denied because of exceeding access rate)"
+26994,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['HIKAL-EQ', 'QUICKHEAL-EQ', 'SHANKARA-EQ', 'AYMSYNTEX-EQ', 'TRENT-EQ']; replayed=['HIKAL-EQ', 'QUICKHEAL-EQ', 'SHANKARA-EQ', 'AYMSYNTEX-EQ', 'TRENT-EQ']"
+26995,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+26996,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+26997,candidate_validation,HIKAL-EQ,rejected,rejected,True,Range position 0.584 < 0.85 (price retreating from high)
+26998,candidate_validation,QUICKHEAL-EQ,rejected,rejected,True,Range position 0.557 < 0.85 (price retreating from high)
+26999,candidate_validation,SHANKARA-EQ,rejected,rejected,True,Range position 0.497 < 0.85 (price retreating from high)
+27000,candidate_validation,AYMSYNTEX-EQ,rejected,rejected,True,Range position 0.312 < 0.85 (price retreating from high)
+27001,candidate_validation,TRENT-EQ,rejected,rejected,True,Range position 0.702 < 0.85 (price retreating from high)
+27002,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['HIKAL-EQ', 'QUICKHEAL-EQ', 'SHANKARA-EQ', 'AYMSYNTEX-EQ', 'TRENT-EQ']; replayed=['HIKAL-EQ', 'QUICKHEAL-EQ', 'SHANKARA-EQ', 'AYMSYNTEX-EQ', 'TRENT-EQ']"
+27003,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+27004,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+27005,candidate_validation,HIKAL-EQ,rejected,rejected,True,Range position 0.670 < 0.85 (price retreating from high)
+27006,candidate_validation,QUICKHEAL-EQ,rejected,rejected,True,Range position 0.596 < 0.85 (price retreating from high)
+27007,candidate_validation,SHANKARA-EQ,rejected,rejected,True,Range position 0.513 < 0.85 (price retreating from high)
+27008,candidate_validation,AYMSYNTEX-EQ,rejected,rejected,True,Range position 0.315 < 0.85 (price retreating from high)
+27009,candidate_validation,TRENT-EQ,rejected,rejected,True,Range position 0.711 < 0.85 (price retreating from high)
+27010,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['HIKAL-EQ', 'SMSPHARMA-EQ', 'QUICKHEAL-EQ', 'SHANKARA-EQ', 'TRENT-EQ']; replayed=['HIKAL-EQ', 'SMSPHARMA-EQ', 'QUICKHEAL-EQ', 'SHANKARA-EQ', 'TRENT-EQ']"
+27011,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+27012,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+27013,candidate_validation,HIKAL-EQ,rejected,rejected,True,Range position 0.693 < 0.85 (price retreating from high)
+27014,candidate_validation,QUICKHEAL-EQ,rejected,rejected,True,Range position 0.598 < 0.85 (price retreating from high)
+27015,candidate_validation,SHANKARA-EQ,rejected,rejected,True,Range position 0.540 < 0.85 (price retreating from high)
+27016,candidate_validation,TRENT-EQ,rejected,rejected,True,Range position 0.725 < 0.85 (price retreating from high)
+27017,candidate_validation,SMSPHARMA-EQ,rejected,rejected,True,Volume fading: current 335 vs avg 15407 (ratio 0.02 < 1.2)
+27018,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['HIKAL-EQ', 'SMSPHARMA-EQ', 'QUICKHEAL-EQ', 'SHANKARA-EQ', 'TRENT-EQ']; replayed=['HIKAL-EQ', 'SMSPHARMA-EQ', 'QUICKHEAL-EQ', 'SHANKARA-EQ', 'TRENT-EQ']"
+27019,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+27020,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+27021,candidate_validation,HIKAL-EQ,rejected,rejected,True,Range position 0.652 < 0.85 (price retreating from high)
+27022,candidate_validation,QUICKHEAL-EQ,rejected,rejected,True,Range position 0.591 < 0.85 (price retreating from high)
+27023,candidate_validation,SHANKARA-EQ,rejected,rejected,True,Range position 0.552 < 0.85 (price retreating from high)
+27024,candidate_validation,TRENT-EQ,rejected,rejected,True,Range position 0.714 < 0.85 (price retreating from high)
+27025,candidate_validation,SMSPHARMA-EQ,rejected,rejected,True,Volume fading: current 3101 vs avg 11094 (ratio 0.28 < 1.2)
+27026,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['HIKAL-EQ', 'SMSPHARMA-EQ', 'QUICKHEAL-EQ', 'SHANKARA-EQ', 'TRENT-EQ']; replayed=['HIKAL-EQ', 'SMSPHARMA-EQ', 'QUICKHEAL-EQ', 'SHANKARA-EQ', 'TRENT-EQ']"
+27027,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+27028,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+27029,candidate_validation,HIKAL-EQ,rejected,rejected,True,Range position 0.651 < 0.85 (price retreating from high)
+27030,candidate_validation,QUICKHEAL-EQ,rejected,rejected,True,Range position 0.531 < 0.85 (price retreating from high)
+27031,candidate_validation,SHANKARA-EQ,rejected,rejected,True,Range position 0.541 < 0.85 (price retreating from high)
+27032,candidate_validation,TRENT-EQ,rejected,rejected,True,Range position 0.702 < 0.85 (price retreating from high)
+27033,candidate_validation,SMSPHARMA-EQ,rejected,rejected,True,Volume fading: current 5109 vs avg 9517 (ratio 0.54 < 1.2)
+27034,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['HIKAL-EQ', 'SMSPHARMA-EQ', 'QUICKHEAL-EQ', 'SHANKARA-EQ', 'SANGHVIMOV-EQ']; replayed=['HIKAL-EQ', 'SMSPHARMA-EQ', 'QUICKHEAL-EQ', 'SHANKARA-EQ', 'SANGHVIMOV-EQ']"
+27035,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+27036,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+27037,candidate_validation,HIKAL-EQ,rejected,rejected,True,Range position 0.632 < 0.85 (price retreating from high)
+27038,candidate_validation,QUICKHEAL-EQ,rejected,rejected,True,Range position 0.515 < 0.85 (price retreating from high)
+27039,candidate_validation,SHANKARA-EQ,rejected,rejected,True,Range position 0.479 < 0.85 (price retreating from high)
+27040,candidate_validation,SANGHVIMOV-EQ,rejected,rejected,True,Range position 0.642 < 0.85 (price retreating from high)
+27041,candidate_validation,SMSPHARMA-EQ,rejected,rejected,True,Volume fading: current 8007 vs avg 8341 (ratio 0.96 < 1.2)
+27042,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['HIKAL-EQ', 'SMSPHARMA-EQ', 'QUICKHEAL-EQ', 'SANGHVIMOV-EQ', 'SHANKARA-EQ']; replayed=['HIKAL-EQ', 'SMSPHARMA-EQ', 'QUICKHEAL-EQ', 'SANGHVIMOV-EQ', 'SHANKARA-EQ']"
+27043,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+27044,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+27045,candidate_validation,HIKAL-EQ,rejected,rejected,True,Range position 0.638 < 0.85 (price retreating from high)
+27046,candidate_validation,QUICKHEAL-EQ,rejected,rejected,True,Range position 0.512 < 0.85 (price retreating from high)
+27047,candidate_validation,SANGHVIMOV-EQ,rejected,rejected,True,Range position 0.662 < 0.85 (price retreating from high)
+27048,candidate_validation,SHANKARA-EQ,rejected,rejected,True,Range position 0.479 < 0.85 (price retreating from high)
+27049,candidate_validation,SMSPHARMA-EQ,rejected,rejected,True,"Volume check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=13.126.199.100, client_local_ip=172.31.33.249: Access denied because of exceeding access rate)"
+27050,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['SMSPHARMA-EQ', 'HIKAL-EQ', 'SMARTWORKS-EQ', 'QUICKHEAL-EQ', 'SANGHVIMOV-EQ']; replayed=['SMSPHARMA-EQ', 'HIKAL-EQ', 'SMARTWORKS-EQ', 'QUICKHEAL-EQ', 'SANGHVIMOV-EQ']"
+27051,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+27052,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+27053,candidate_validation,HIKAL-EQ,rejected,rejected,True,Range position 0.623 < 0.85 (price retreating from high)
+27054,candidate_validation,SMARTWORKS-EQ,rejected,rejected,True,Range position 0.808 < 0.85 (price retreating from high)
+27055,candidate_validation,QUICKHEAL-EQ,rejected,rejected,True,Range position 0.529 < 0.85 (price retreating from high)
+27056,candidate_validation,SANGHVIMOV-EQ,rejected,rejected,True,Range position 0.764 < 0.85 (price retreating from high)
+27057,candidate_validation,SMSPHARMA-EQ,rejected,rejected,True,"Volume check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=13.126.199.100, client_local_ip=172.31.33.249: Access denied because of exceeding access rate)"
+27058,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['SMSPHARMA-EQ', 'HIKAL-EQ', 'SANGHVIMOV-EQ', 'QUICKHEAL-EQ', 'SHANKARA-EQ']; replayed=['SMSPHARMA-EQ', 'HIKAL-EQ', 'SANGHVIMOV-EQ', 'QUICKHEAL-EQ', 'SHANKARA-EQ']"
+27059,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+27060,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+27061,candidate_validation,HIKAL-EQ,rejected,rejected,True,Range position 0.673 < 0.85 (price retreating from high)
+27062,candidate_validation,QUICKHEAL-EQ,rejected,rejected,True,Range position 0.511 < 0.85 (price retreating from high)
+27063,candidate_validation,SHANKARA-EQ,rejected,rejected,True,Range position 0.551 < 0.85 (price retreating from high)
+27064,candidate_validation,SMSPHARMA-EQ,rejected,rejected,True,Volume fading: current 95 vs avg 22806 (ratio 0.00 < 1.2)
+27065,candidate_validation,SANGHVIMOV-EQ,rejected,rejected,True,"Volume check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=13.126.199.100, client_local_ip=172.31.33.249: Access denied because of exceeding access rate)"
+27066,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['SMSPHARMA-EQ', 'HIKAL-EQ', 'SANGHVIMOV-EQ', 'QUICKHEAL-EQ', 'SHANKARA-EQ']; replayed=['SMSPHARMA-EQ', 'HIKAL-EQ', 'SANGHVIMOV-EQ', 'QUICKHEAL-EQ', 'SHANKARA-EQ']"
+27067,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+27068,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+27069,candidate_validation,HIKAL-EQ,rejected,rejected,True,Range position 0.609 < 0.85 (price retreating from high)
+27070,candidate_validation,QUICKHEAL-EQ,rejected,rejected,True,Range position 0.506 < 0.85 (price retreating from high)
+27071,candidate_validation,SHANKARA-EQ,rejected,rejected,True,Range position 0.547 < 0.85 (price retreating from high)
+27072,candidate_validation,SANGHVIMOV-EQ,rejected,rejected,True,No micro breakout: LTP 370.95 < last 5min high 371.35
+27073,candidate_validation,SMSPHARMA-EQ,rejected,rejected,True,Volume fading: current 18587 vs avg 30569 (ratio 0.61 < 1.2)
+27074,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['SMSPHARMA-EQ', 'HIKAL-EQ', 'SANGHVIMOV-EQ', 'QUICKHEAL-EQ', 'SHANKARA-EQ']; replayed=['SMSPHARMA-EQ', 'HIKAL-EQ', 'SANGHVIMOV-EQ', 'QUICKHEAL-EQ', 'SHANKARA-EQ']"
+27075,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+27076,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+27077,candidate_validation,HIKAL-EQ,rejected,rejected,True,Range position 0.607 < 0.85 (price retreating from high)
+27078,candidate_validation,QUICKHEAL-EQ,rejected,rejected,True,Range position 0.516 < 0.85 (price retreating from high)
+27079,candidate_validation,SHANKARA-EQ,rejected,rejected,True,Range position 0.572 < 0.85 (price retreating from high)
+27080,candidate_validation,SANGHVIMOV-EQ,rejected,rejected,True,No micro breakout: LTP 371.25 < last 5min high 372.00
+27081,candidate_validation,SMSPHARMA-EQ,rejected,rejected,True,No micro breakout: LTP 521.85 < last 5min high 523.55
+27082,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['SMSPHARMA-EQ', 'HIKAL-EQ', 'QUICKHEAL-EQ', 'SANGHVIMOV-EQ', 'MENONBE-EQ']; replayed=['SMSPHARMA-EQ', 'HIKAL-EQ', 'QUICKHEAL-EQ', 'SANGHVIMOV-EQ', 'MENONBE-EQ']"
+27083,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+27084,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+27085,candidate_validation,HIKAL-EQ,rejected,rejected,True,Range position 0.582 < 0.85 (price retreating from high)
+27086,candidate_validation,QUICKHEAL-EQ,rejected,rejected,True,Range position 0.588 < 0.85 (price retreating from high)
+27087,candidate_validation,SANGHVIMOV-EQ,rejected,rejected,True,Range position 0.794 < 0.85 (price retreating from high)
+27088,candidate_validation,SMSPHARMA-EQ,rejected,rejected,True,No micro breakout: LTP 522.45 < last 5min high 523.55
+27089,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['SMSPHARMA-EQ', 'HIKAL-EQ', 'QUICKHEAL-EQ', 'SANGHVIMOV-EQ', 'MENONBE-EQ']; replayed=['SMSPHARMA-EQ', 'HIKAL-EQ', 'QUICKHEAL-EQ', 'SANGHVIMOV-EQ', 'MENONBE-EQ']"
+27090,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+27091,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+27092,candidate_validation,HIKAL-EQ,rejected,rejected,True,Range position 0.533 < 0.85 (price retreating from high)
+27093,candidate_validation,QUICKHEAL-EQ,rejected,rejected,True,Range position 0.575 < 0.85 (price retreating from high)
+27094,candidate_validation,SANGHVIMOV-EQ,rejected,rejected,True,Range position 0.841 < 0.85 (price retreating from high)
+27095,candidate_validation,SMSPHARMA-EQ,rejected,rejected,True,No micro breakout: LTP 521.90 < last 5min high 523.50
+27096,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['SMSPHARMA-EQ', 'HIKAL-EQ', 'QUICKHEAL-EQ', 'SANGHVIMOV-EQ', 'MENONBE-EQ']; replayed=['SMSPHARMA-EQ', 'HIKAL-EQ', 'QUICKHEAL-EQ', 'SANGHVIMOV-EQ', 'MENONBE-EQ']"
+27097,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+27098,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+27099,candidate_validation,HIKAL-EQ,rejected,rejected,True,Gain +4.99% outside 5.0-10.0% range
+27100,candidate_validation,QUICKHEAL-EQ,rejected,rejected,True,Range position 0.607 < 0.85 (price retreating from high)
+27101,candidate_validation,SANGHVIMOV-EQ,rejected,rejected,True,Range position 0.806 < 0.85 (price retreating from high)
+27102,candidate_validation,SMSPHARMA-EQ,rejected,rejected,True,No micro breakout: LTP 521.80 < last 5min high 523.50
+27103,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['SMSPHARMA-EQ', 'SANGHVIMOV-EQ', 'QUICKHEAL-EQ', 'MENONBE-EQ', 'TRENT-EQ']; replayed=['SMSPHARMA-EQ', 'SANGHVIMOV-EQ', 'QUICKHEAL-EQ', 'MENONBE-EQ', 'TRENT-EQ']"
+27104,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+27105,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+27106,candidate_validation,QUICKHEAL-EQ,rejected,rejected,True,Range position 0.565 < 0.85 (price retreating from high)
+27107,candidate_validation,TRENT-EQ,rejected,rejected,True,Range position 0.721 < 0.85 (price retreating from high)
+27108,candidate_validation,SANGHVIMOV-EQ,rejected,rejected,True,No micro breakout: LTP 372.35 < last 5min high 372.95
+27109,candidate_validation,SMSPHARMA-EQ,rejected,rejected,True,"Breakout check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=13.126.199.100, client_local_ip=172.31.33.249: Access denied because of exceeding access rate)"
+27110,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['SMSPHARMA-EQ', 'HOMEFIRST-EQ', 'QUICKHEAL-EQ', 'MENONBE-EQ', 'TRENT-EQ']; replayed=['SMSPHARMA-EQ', 'HOMEFIRST-EQ', 'QUICKHEAL-EQ', 'MENONBE-EQ', 'TRENT-EQ']"
+27111,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+27112,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+27113,candidate_validation,QUICKHEAL-EQ,rejected,rejected,True,Range position 0.557 < 0.85 (price retreating from high)
+27114,candidate_validation,TRENT-EQ,rejected,rejected,True,Range position 0.705 < 0.85 (price retreating from high)
+27115,candidate_validation,SMSPHARMA-EQ,rejected,rejected,True,No micro breakout: LTP 520.20 < last 5min high 525.00
+27116,candidate_validation,HOMEFIRST-EQ,accepted,accepted,True,All checks passed
+27117,position_sized,HOMEFIRST-EQ,47,47,True,risk-based position sizing
+27125,position_evaluated,HOMEFIRST-EQ,hold,hold,True,target and post-trail stop decision
+27126,position_evaluated,HOMEFIRST-EQ,hold,hold,True,target and post-trail stop decision
+27127,position_evaluated,HOMEFIRST-EQ,hold,hold,True,target and post-trail stop decision
+27128,position_evaluated,HOMEFIRST-EQ,hold,hold,True,target and post-trail stop decision
+27129,position_evaluated,HOMEFIRST-EQ,hold,hold,True,target and post-trail stop decision
+27130,position_evaluated,HOMEFIRST-EQ,hold,hold,True,target and post-trail stop decision
+27131,position_evaluated,HOMEFIRST-EQ,hold,hold,True,target and post-trail stop decision
+27132,position_evaluated,HOMEFIRST-EQ,hold,hold,True,target and post-trail stop decision
+27133,position_evaluated,HOMEFIRST-EQ,hold,hold,True,target and post-trail stop decision
+27134,position_evaluated,HOMEFIRST-EQ,hold,hold,True,target and post-trail stop decision
+27135,position_evaluated,HOMEFIRST-EQ,hold,hold,True,target and post-trail stop decision
+27136,position_evaluated,HOMEFIRST-EQ,hold,hold,True,target and post-trail stop decision
+27137,position_evaluated,HOMEFIRST-EQ,hold,hold,True,target and post-trail stop decision
+27138,position_evaluated,HOMEFIRST-EQ,hold,hold,True,target and post-trail stop decision
+27139,position_evaluated,HOMEFIRST-EQ,hold,hold,True,target and post-trail stop decision
+27140,position_evaluated,HOMEFIRST-EQ,hold,hold,True,target and post-trail stop decision
+27141,position_evaluated,HOMEFIRST-EQ,hold,hold,True,target and post-trail stop decision
+27142,position_evaluated,HOMEFIRST-EQ,hold,hold,True,target and post-trail stop decision
+27143,position_evaluated,HOMEFIRST-EQ,hold,hold,True,target and post-trail stop decision
+27144,position_evaluated,HOMEFIRST-EQ,hold,hold,True,target and post-trail stop decision
+27145,position_evaluated,HOMEFIRST-EQ,hold,hold,True,target and post-trail stop decision
+27146,position_evaluated,HOMEFIRST-EQ,hold,hold,True,target and post-trail stop decision
+27147,position_evaluated,HOMEFIRST-EQ,hold,hold,True,target and post-trail stop decision
+27148,position_evaluated,HOMEFIRST-EQ,hold,hold,True,target and post-trail stop decision
+27149,position_evaluated,HOMEFIRST-EQ,hold,hold,True,target and post-trail stop decision
+27150,position_evaluated,HOMEFIRST-EQ,exit,exit,True,target and post-trail stop decision
