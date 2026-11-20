@@ -1,0 +1,87 @@
+2026-11-19T04:30:24.922917+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 04:30:24,922 | INFO | algo_trader | Daily candle cache cleared.
+2026-11-19T04:30:24.926913+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 04:30:24,923 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-11-19T04:30:24.926913+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 04:30:24,923 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-11-19T04:30:24.974011+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 04:30:24,973 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-11-19T04:30:24.975201+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 04:30:24,975 | INFO | algo_trader | [auth_refresh] Angel One session refreshed.
+2026-11-19T04:30:26.158002+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 04:30:26,157 | INFO | algo_trader | Market Check: 4/4 — BULLISH
+2026-11-19T04:30:26.158002+00:00 ip-172-31-33-249 python[620704]: 1. Index Direction: PASS ✅
+2026-11-19T04:30:26.158002+00:00 ip-172-31-33-249 python[620704]:    Nifty 50: +0.23% (need > 0%)
+2026-11-19T04:30:26.158002+00:00 ip-172-31-33-249 python[620704]: 2. Market Breadth: PASS ✅
+2026-11-19T04:30:26.158002+00:00 ip-172-31-33-249 python[620704]:    Advancers: 34, Decliners: 16
+2026-11-19T04:30:26.158002+00:00 ip-172-31-33-249 python[620704]:    Breadth ratio: 2.12 (need > 1.2)
+2026-11-19T04:30:26.158002+00:00 ip-172-31-33-249 python[620704]: 3. Intraday Strength: PASS ✅
+2026-11-19T04:30:26.158002+00:00 ip-172-31-33-249 python[620704]:    Nifty LTP vs Open: 25287.05 vs 25186.80
+2026-11-19T04:30:26.158002+00:00 ip-172-31-33-249 python[620704]:    NIFTYBEES vs VWAP: 288.19 vs 287.17
+2026-11-19T04:30:26.158002+00:00 ip-172-31-33-249 python[620704]: 4. Volatility Filter: PASS ✅
+2026-11-19T04:30:26.158002+00:00 ip-172-31-33-249 python[620704]:    India VIX change: +4.24% (reject if > +5%)
+2026-11-19T04:30:26.158002+00:00 ip-172-31-33-249 python[620704]: Decision: TRADE (score 4/4 >= 3)
+2026-11-19T04:30:26.730361+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 04:30:26,730 | INFO | algo_trader | Scanning 2773 stocks for top 1 candidates (pool=5)...
+2026-11-19T04:30:26.730617+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 04:30:26,730 | INFO | algo_trader | Fetching quotes for 2773 stocks...
+2026-11-19T04:30:33.657890+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 04:30:33,657 | INFO | algo_trader | Received 2767 quotes.
+2026-11-19T04:30:33.660542+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 04:30:33,660 | INFO | algo_trader | Candidates in 5-8% gain range: 4
+2026-11-19T04:30:33.660709+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 04:30:33,660 | INFO | algo_trader | Fetching daily candles for 4 candidates...
+2026-11-19T04:30:36.662550+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 04:30:36,661 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-11-19T04:30:36.663335+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 04:30:36,663 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-11-19T04:30:42.699104+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 04:30:42,698 | INFO | algo_trader | Rank #1: PGEL-EQ — gain=+5.40%, score=0.830 (vol=2.7x, momentum=0.91, buy_pressure=0.56, stability=1.00, prev_trend=0.60)
+2026-11-19T04:30:42.699693+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 04:30:42,699 | INFO | algo_trader | Rank #2: IREDA-EQ — gain=+5.05%, score=0.705 (vol=1.4x, momentum=0.95, buy_pressure=0.41, stability=0.97, prev_trend=0.40)
+2026-11-19T04:30:42.699693+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 04:30:42,699 | INFO | algo_trader | Rank #3: VEEFIN-EQ — gain=+5.47%, score=0.661 (vol=0.9x, momentum=0.71, buy_pressure=0.86, stability=0.92, prev_trend=0.40)
+2026-11-19T04:30:42.699693+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 04:30:42,699 | INFO | algo_trader | Rank #4: BLSPOLY-EQ — gain=+5.51%, score=0.428 (vol=1.0x, momentum=0.28, buy_pressure=0.63, stability=0.13, prev_trend=0.60)
+2026-11-19T04:30:43.039742+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 04:30:43,039 | INFO | algo_trader | Scan completed in 16.3 seconds. Found 4 raw candidates.
+2026-11-19T04:30:43.042967+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 04:30:43,042 | INFO | algo_trader | Checking read-only restrictions for 4 candidates...
+2026-11-19T04:30:43.110261+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 04:30:43,110 | INFO | algo_trader | Restriction check completed in 0.1 seconds: 4 tradable, 0 rejected.
+2026-11-19T04:30:43.110465+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 04:30:43,110 | INFO | algo_trader | Top 1 tradable stocks selected (from 4 scanned, 0 filtered):
+2026-11-19T04:30:43.110465+00:00 ip-172-31-33-249 python[620704]:   PGEL-EQ: +5.40% @ 568.30
+2026-11-19T04:30:43.110465+00:00 ip-172-31-33-249 python[620704]:     Score=0.830 | Vol=2.7x | Momentum=0.91 | BuyPressure=0.56 | Stability=1.00 | PrevTrend=0.60
+2026-11-19T04:30:43.681158+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 04:30:43,681 | INFO | algo_trader | Validating 4 candidates in parallel...
+2026-11-19T04:30:43.707499+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 04:30:43,707 | INFO | algo_trader | ENTRY REJECTED VEEFIN-EQ: Range position 0.707 < 0.85 (price retreating from high)
+2026-11-19T04:30:43.712752+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 04:30:43,712 | INFO | algo_trader | ENTRY REJECTED BLSPOLY-EQ: Range position 0.277 < 0.85 (price retreating from high)
+2026-11-19T04:30:43.718170+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 04:30:43,718 | INFO | algo_trader | Near-breakout skip for PGEL-EQ: range=0.910, gain=5.4% — skipping breakout check
+2026-11-19T04:30:43.718993+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 04:30:43,718 | INFO | algo_trader | Near-breakout skip for IREDA-EQ: range=0.969, gain=5.1% — skipping breakout check
+2026-11-19T04:30:43.743310+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 04:30:43,743 | INFO | algo_trader | ENTRY VALIDATED PGEL-EQ: price=568.15, gain=+5.37%, range=0.910, breakout=True, vol_ratio=1.71, spread=0.0620%
+2026-11-19T04:30:44.735670+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 04:30:44,735 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-11-19T04:30:49.756606+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 04:30:49,756 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-11-19T04:30:59.786338+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 04:30:59,786 | INFO | algo_trader | ENTRY REJECTED IREDA-EQ: Volume fading: current 243444 vs avg 275202 (ratio 0.88 < 1.2)
+2026-11-19T04:30:59.792306+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 04:30:59,792 | INFO | algo_trader | Validation completed in 16.1 seconds: 1/4 passed.
+2026-11-19T04:30:59.792594+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 04:30:59,792 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-11-19T04:30:59.792716+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 04:30:59,792 | INFO | algo_trader | Capital: 100000.00 x 5.0x leverage = 500000.00 buying power | 1 validated stocks | 475000.00 per stock
+2026-11-19T04:31:00.794218+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 04:31:00,794 | INFO | algo_trader | ATR computed for token 25358: 5.6389 (from 10 candles, price=568.15, ATR%=0.99%)
+2026-11-19T04:31:00.827012+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 04:31:00,826 | INFO | algo_trader | [PAPER] MARKET order filled: BUY PGEL-EQ 88 @ 568.63 (reference=568.35, fee=50.04) id=375f0194
+2026-11-19T04:31:00.831527+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 04:31:00,831 | INFO | algo_trader | MARKET order placed: BUY PGEL-EQ 88 [INTRADAY] {'response': {'data': {'orderid': '375f0194'}}}
+2026-11-19T04:31:00.846370+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 04:31:00,846 | INFO | algo_trader | [PAPER] SL-M order placed: SELL PGEL-EQ 88 trigger=557.25 id=8abf0ddf
+2026-11-19T04:31:00.849064+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 04:31:00,848 | INFO | algo_trader | SL-M order placed for PGEL-EQ: trigger=557.26, orderid=8abf0ddf
+2026-11-19T04:31:00.851932+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 04:31:00,851 | INFO | algo_trader | ENTRY: PGEL-EQ [MIS] — 88 shares @ 568.63 (capital=475000.00, gain=+5.40%, score=0.830, ATR=5.6389 (0.99%), SL=557.26, hard_stop=557.26) | {'response': {'data': {'orderid': '375f0194'}}}
+2026-11-19T04:31:01.415000+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 04:31:01,414 | INFO | algo_trader | Monitoring 1 positions with trailing stop...
+2026-11-19T06:16:03.544463+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 06:16:03,544 | INFO | algo_trader | TRAILING STOP UPDATE PGEL-EQ: SL 557.26 -> 565.79 (ltp=575.65, bid=575.35, high=575.65, profit=1.2%, intraday=6.8%, locked=False, ATR=5.6389)
+2026-11-19T06:16:03.548947+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 06:16:03,545 | INFO | algo_trader | [PAPER] SL-M modified: PGEL-EQ trigger 557.25 → 565.75 id=8abf0ddf
+2026-11-19T06:16:03.550392+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 06:16:03,550 | INFO | algo_trader | SL-M trigger updated for PGEL-EQ: new trigger=565.79
+2026-11-19T06:30:26.594601+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 06:30:26,594 | INFO | algo_trader | [auth_refresh] Session age 7202s >= 7200s, refreshing...
+2026-11-19T06:30:26.598536+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 06:30:26,594 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-11-19T06:30:26.646141+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 06:30:26,646 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-11-19T08:30:29.052261+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 08:30:29,052 | INFO | algo_trader | [auth_refresh] Session age 7202s >= 7200s, refreshing...
+2026-11-19T08:30:29.056204+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 08:30:29,052 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-11-19T08:30:29.101355+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 08:30:29,101 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-11-19T09:35:01.570476+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 09:35:01,570 | INFO | algo_trader | [auth_refresh] Session age 3872s >= 300s, refreshing...
+2026-11-19T09:35:01.574966+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 09:35:01,570 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-11-19T09:35:01.630622+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 09:35:01,630 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-11-19T09:35:01.631965+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 09:35:01,631 | INFO | algo_trader | Market closing — force-exiting 1 positions.
+2026-11-19T09:35:02.222753+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 09:35:02,222 | INFO | algo_trader | [position_check] PGEL-EQ: netqty=88
+2026-11-19T09:35:02.257260+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 09:35:02,257 | INFO | algo_trader | [position_check] PGEL-EQ: netqty=88
+2026-11-19T09:35:02.373454+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 09:35:02,373 | INFO | algo_trader | [PAPER] MARKET order filled: SELL PGEL-EQ 88 @ 577.16 (reference=577.45, fee=50.79) id=e530adf6
+2026-11-19T09:35:02.379645+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 09:35:02,379 | INFO | algo_trader | [exit_attempt] Exit confirmed for PGEL-EQ: 88 shares @ 577.16
+2026-11-19T09:35:02.380702+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 09:35:02,379 | INFO | algo_trader | [PAPER] Order cancelled: PGEL-EQ id=8abf0ddf
+2026-11-19T09:35:02.381730+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 09:35:02,381 | INFO | algo_trader | SL-M order confirmed CANCELLED for PGEL-EQ: 8abf0ddf
+2026-11-19T09:35:02.383660+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 09:35:02,383 | INFO | algo_trader | MARKET CLOSE EXIT [MIS]: PGEL-EQ — 0 shares @ 577.16 (entry=568.63, PnL=+649.81, daily=+649.81) | ExitOutcome(state=<ExitState.CLOSED: 'closed'>, execution=OrderExecution(order_id='e530adf6', state=<OrderState.FILLED: 'filled'>, requested_quantity=88, filled_quantity=88, average_price=577.16, reason='', raw_order={'orderid': 'e530adf6', 'tradingsymbol': 'PGEL-EQ', 'transactiontype': 'SELL', 'quantity': '88', 'price': '577.16', 'filledshares': '88', 'averageprice': '577.16', 'triggerprice': '0.0', 'orderstatus': 'COMPLETE', 'status': 'COMPLETE', 'ordertype': 'MARKET', 'producttype': 'INTRADAY', 'referenceprice': '577.45', 'fees': '50.79'}), reason='')
+2026-11-19T09:35:02.971606+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 09:35:02,971 | INFO | algo_trader |
+2026-11-19T09:35:02.971606+00:00 ip-172-31-33-249 python[620704]: ============================================================
+2026-11-19T09:35:02.971606+00:00 ip-172-31-33-249 python[620704]: PAPER TRADING SUMMARY
+2026-11-19T09:35:02.971606+00:00 ip-172-31-33-249 python[620704]: ============================================================
+2026-11-19T09:35:02.971606+00:00 ip-172-31-33-249 python[620704]: Total trades: 2
+2026-11-19T09:35:02.971606+00:00 ip-172-31-33-249 python[620704]: Buys: 1, Sells: 1
+2026-11-19T09:35:02.971606+00:00 ip-172-31-33-249 python[620704]:   10:01:00 BUY  PGEL-EQ x88 @ 568.63 fees: Rs.50.04
+2026-11-19T09:35:02.971606+00:00 ip-172-31-33-249 python[620704]:   15:05:02 SELL PGEL-EQ x88 @ 577.16 gross: Rs.+750.64, fees: Rs.100.83, net P&L: Rs.+649.81
+2026-11-19T09:35:02.971606+00:00 ip-172-31-33-249 python[620704]: Daily net P&L: Rs.+649.81
+2026-11-19T09:35:02.971606+00:00 ip-172-31-33-249 python[620704]: Capital: Rs.100,000.00 → Rs.100,649.81
+2026-11-19T09:35:02.971606+00:00 ip-172-31-33-249 python[620704]: All positions closed.
+2026-11-19T09:35:02.971606+00:00 ip-172-31-33-249 python[620704]: ============================================================
+2026-11-19T09:35:28.550977+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 09:35:28,550 | INFO | algo_trader | Replay comparison complete: 1827/1827 decisions matched; recommended slippage=0 bps; report=/home/ubuntu/algo-trader/data/replay_reports/2026-11-19/summary.json; universe=data/universe_snapshots.json
+2026-11-19T09:35:28.556818+00:00 ip-172-31-33-249 python[620704]: 2026-11-19 09:35:28,551 | INFO | algo_trader | Trading day complete. Daily P&L: ₹+649.81. Sleeping 18.9h until tomorrow.
