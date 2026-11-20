@@ -1,0 +1,683 @@
+sequence,event_type,symbol,recorded_decision,replayed_decision,matched,detail
+25447,market_gate,,skip,skip,True,four-factor market gate
+25448,market_gate,,skip,skip,True,four-factor market gate
+25449,market_gate,,skip,skip,True,four-factor market gate
+25450,market_gate,,trade,trade,True,four-factor market gate
+25451,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['ORICONENT-EQ', 'BLUESTARCO-EQ', 'SBFC-EQ', 'SPANDANA-EQ', 'ZEEL-EQ']; replayed=['ORICONENT-EQ', 'BLUESTARCO-EQ', 'SBFC-EQ', 'SPANDANA-EQ', 'ZEEL-EQ']"
+25452,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+25453,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+25454,candidate_validation,ORICONENT-EQ,rejected,rejected,True,Range position 0.822 < 0.85 (price retreating from high)
+25455,candidate_validation,SPANDANA-EQ,rejected,rejected,True,Range position 0.833 < 0.85 (price retreating from high)
+25456,candidate_validation,ZEEL-EQ,rejected,rejected,True,Volume fading: current 16193 vs avg 49332 (ratio 0.33 < 1.2)
+25457,candidate_validation,BLUESTARCO-EQ,rejected,rejected,True,"Volume check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=13.126.199.100, client_local_ip=172.31.33.249: Access denied because of exceeding access rate)"
+25458,candidate_validation,SBFC-EQ,rejected,rejected,True,"Volume check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=13.126.199.100, client_local_ip=172.31.33.249: Access denied because of exceeding access rate)"
+25459,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['ORICONENT-EQ', 'BLUESTARCO-EQ', 'EXIDEIND-EQ', 'ARVIND-EQ', 'VOLTAS-EQ']; replayed=['ORICONENT-EQ', 'BLUESTARCO-EQ', 'EXIDEIND-EQ', 'ARVIND-EQ', 'VOLTAS-EQ']"
+25460,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+25461,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+25462,candidate_validation,ORICONENT-EQ,rejected,rejected,True,Wide spread: 0.14 (0.244% > 0.2%)
+25463,candidate_validation,ARVIND-EQ,rejected,rejected,True,Range position 0.801 < 0.85 (price retreating from high)
+25464,candidate_validation,EXIDEIND-EQ,rejected,rejected,True,Volume fading: current 2652 vs avg 26125 (ratio 0.10 < 1.2)
+25465,candidate_validation,BLUESTARCO-EQ,rejected,rejected,True,Volume fading: current 359 vs avg 4345 (ratio 0.08 < 1.2)
+25466,candidate_validation,VOLTAS-EQ,rejected,rejected,True,Volume fading: current 892 vs avg 16973 (ratio 0.05 < 1.2)
+25467,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['BLUESTARCO-EQ', 'ORICONENT-EQ', 'EXIDEIND-EQ', 'ARVIND-EQ', 'SUDEEPPHRM-EQ']; replayed=['BLUESTARCO-EQ', 'ORICONENT-EQ', 'EXIDEIND-EQ', 'ARVIND-EQ', 'SUDEEPPHRM-EQ']"
+25468,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+25469,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+25470,candidate_validation,ORICONENT-EQ,rejected,rejected,True,Range position 0.841 < 0.85 (price retreating from high)
+25471,candidate_validation,ARVIND-EQ,rejected,rejected,True,Range position 0.762 < 0.85 (price retreating from high)
+25472,candidate_validation,SUDEEPPHRM-EQ,rejected,rejected,True,Range position 0.698 < 0.85 (price retreating from high)
+25473,candidate_validation,BLUESTARCO-EQ,rejected,rejected,True,Volume fading: current 1771 vs avg 5296 (ratio 0.33 < 1.2)
+25474,candidate_validation,EXIDEIND-EQ,rejected,rejected,True,Volume fading: current 337 vs avg 24685 (ratio 0.01 < 1.2)
+25475,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['ORICONENT-EQ', 'BLUESTARCO-EQ', 'ARVIND-EQ', 'SUDEEPPHRM-EQ', 'LUMAXTECH-EQ']; replayed=['ORICONENT-EQ', 'BLUESTARCO-EQ', 'ARVIND-EQ', 'SUDEEPPHRM-EQ', 'LUMAXTECH-EQ']"
+25476,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+25477,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+25478,candidate_validation,ORICONENT-EQ,rejected,rejected,True,Range position 0.847 < 0.85 (price retreating from high)
+25479,candidate_validation,ARVIND-EQ,rejected,rejected,True,Range position 0.814 < 0.85 (price retreating from high)
+25480,candidate_validation,SUDEEPPHRM-EQ,rejected,rejected,True,Range position 0.714 < 0.85 (price retreating from high)
+25481,candidate_validation,LUMAXTECH-EQ,rejected,rejected,True,No micro breakout: LTP 2062.00 < last 5min high 2072.00
+25482,candidate_validation,BLUESTARCO-EQ,rejected,rejected,True,Volume fading: current 604 vs avg 3986 (ratio 0.15 < 1.2)
+25483,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['BLUESTARCO-EQ', 'ORICONENT-EQ', 'ARVIND-EQ', 'SBFC-EQ', 'SPANDANA-EQ']; replayed=['BLUESTARCO-EQ', 'ORICONENT-EQ', 'ARVIND-EQ', 'SBFC-EQ', 'SPANDANA-EQ']"
+25484,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+25485,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+25486,candidate_validation,ORICONENT-EQ,rejected,rejected,True,Range position 0.777 < 0.85 (price retreating from high)
+25487,candidate_validation,ARVIND-EQ,rejected,rejected,True,Range position 0.798 < 0.85 (price retreating from high)
+25488,candidate_validation,SBFC-EQ,rejected,rejected,True,Volume fading: current 386 vs avg 11224 (ratio 0.03 < 1.2)
+25489,candidate_validation,SPANDANA-EQ,rejected,rejected,True,Volume fading: current 62 vs avg 374 (ratio 0.17 < 1.2)
+25490,candidate_validation,BLUESTARCO-EQ,rejected,rejected,True,Volume fading: current 544 vs avg 3690 (ratio 0.15 < 1.2)
+25491,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['BLUESTARCO-EQ', 'ORICONENT-EQ', 'TANLA-EQ', 'SUDEEPPHRM-EQ', 'ARVIND-EQ']; replayed=['BLUESTARCO-EQ', 'ORICONENT-EQ', 'TANLA-EQ', 'SUDEEPPHRM-EQ', 'ARVIND-EQ']"
+25492,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+25493,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+25494,candidate_validation,ORICONENT-EQ,rejected,rejected,True,Range position 0.820 < 0.85 (price retreating from high)
+25495,candidate_validation,SUDEEPPHRM-EQ,rejected,rejected,True,Range position 0.745 < 0.85 (price retreating from high)
+25496,candidate_validation,ARVIND-EQ,rejected,rejected,True,Range position 0.805 < 0.85 (price retreating from high)
+25497,candidate_validation,BLUESTARCO-EQ,rejected,rejected,True,Volume fading: current 746 vs avg 3157 (ratio 0.24 < 1.2)
+25498,candidate_validation,TANLA-EQ,rejected,rejected,True,Volume fading: current 12077 vs avg 14484 (ratio 0.83 < 1.2)
+25499,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['BLUESTARCO-EQ', 'ORICONENT-EQ', 'SUDEEPPHRM-EQ', 'ARVIND-EQ', 'SBFC-EQ']; replayed=['BLUESTARCO-EQ', 'ORICONENT-EQ', 'SUDEEPPHRM-EQ', 'ARVIND-EQ', 'SBFC-EQ']"
+25500,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+25501,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+25502,candidate_validation,ORICONENT-EQ,rejected,rejected,True,Range position 0.828 < 0.85 (price retreating from high)
+25503,candidate_validation,SUDEEPPHRM-EQ,rejected,rejected,True,Range position 0.692 < 0.85 (price retreating from high)
+25504,candidate_validation,ARVIND-EQ,rejected,rejected,True,Range position 0.787 < 0.85 (price retreating from high)
+25505,candidate_validation,SBFC-EQ,rejected,rejected,True,Volume fading: current 8187 vs avg 9048 (ratio 0.90 < 1.2)
+25506,candidate_validation,BLUESTARCO-EQ,rejected,rejected,True,Volume fading: current 2169 vs avg 2592 (ratio 0.84 < 1.2)
+25507,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['ORICONENT-EQ', 'BLUESTARCO-EQ', 'ARVIND-EQ', 'TANLA-EQ', 'SUDEEPPHRM-EQ']; replayed=['ORICONENT-EQ', 'BLUESTARCO-EQ', 'ARVIND-EQ', 'TANLA-EQ', 'SUDEEPPHRM-EQ']"
+25508,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+25509,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+25510,candidate_validation,ORICONENT-EQ,rejected,rejected,True,Range position 0.802 < 0.85 (price retreating from high)
+25511,candidate_validation,SUDEEPPHRM-EQ,rejected,rejected,True,Range position 0.704 < 0.85 (price retreating from high)
+25512,candidate_validation,ARVIND-EQ,accepted,accepted,True,All checks passed
+25513,candidate_validation,BLUESTARCO-EQ,accepted,accepted,True,All checks passed
+25514,candidate_validation,TANLA-EQ,rejected,rejected,True,Volume fading: current 8897 vs avg 23777 (ratio 0.37 < 1.2)
+25515,position_sized,BLUESTARCO-EQ,41,41,True,risk-based position sizing
+25523,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25524,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25525,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25526,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25527,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25528,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25529,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25530,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25531,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25532,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25533,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25534,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25535,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25536,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25537,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25538,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25539,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25540,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25541,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25542,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25543,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25544,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25545,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25546,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25547,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25548,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25549,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25550,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25551,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25552,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25553,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25554,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25555,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25556,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25557,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25558,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25559,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25560,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25561,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25562,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25563,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25564,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25565,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25566,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25567,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25568,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25569,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25570,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25571,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25572,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25573,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25574,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25575,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25576,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25577,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25578,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25579,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25580,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25581,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25582,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25583,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25584,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25585,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25586,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25587,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25588,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25589,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25590,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25591,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25592,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25593,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25594,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25595,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25596,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25597,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25598,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25599,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25600,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25601,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25602,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25603,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25604,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25605,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25606,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25607,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25608,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25609,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25610,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25611,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25612,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25613,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25614,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25615,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25616,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25617,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25618,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25619,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25620,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25621,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25622,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25623,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25624,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25625,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25626,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25627,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25628,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25629,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25630,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25631,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25632,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25633,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25634,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25635,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25636,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25637,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25638,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25639,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25640,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25641,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25642,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25643,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25644,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25645,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25646,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25647,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25648,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25649,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25650,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25651,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25652,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25653,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25654,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25655,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25656,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25657,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25658,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25659,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25660,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25661,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25662,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25663,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25664,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25665,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25666,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25667,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25668,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25669,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25670,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25671,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25672,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25673,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25674,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25675,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25676,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25677,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25678,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25679,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25680,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25681,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25682,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25683,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25684,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25685,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25686,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25687,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25688,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25689,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25690,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25691,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25692,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25693,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25694,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25695,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25696,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25697,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25698,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25699,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25700,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25701,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25702,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25703,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25704,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25705,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25706,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25707,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25708,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25709,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25710,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25711,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25712,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25713,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25714,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25715,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25716,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25717,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25718,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25719,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25720,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25721,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25722,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25723,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25724,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25725,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25726,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25727,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25728,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25729,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25730,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25731,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25732,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25733,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25734,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25735,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25736,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25737,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25738,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25739,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25740,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25741,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25742,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25743,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25744,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25745,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25746,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25747,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25748,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25749,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25750,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25751,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25752,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25753,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25754,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25755,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25756,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25757,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25758,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25759,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25760,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25761,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25762,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25763,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25764,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25765,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25766,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25767,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25768,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25769,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25770,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25771,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25772,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25773,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25774,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25775,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25776,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25777,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25778,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25779,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25780,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25781,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25782,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25783,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25784,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25785,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25786,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25787,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25788,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25789,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25790,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25791,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25792,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25793,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25794,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25795,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25796,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25797,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25798,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25799,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25800,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25801,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25802,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25803,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25804,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25805,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25806,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25807,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25808,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25809,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25810,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25811,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25812,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25813,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25814,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25815,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25816,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25817,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25818,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25819,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25820,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25821,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25822,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25823,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25824,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25825,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25826,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25827,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25828,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25829,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25830,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25831,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25832,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25833,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25834,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25835,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25836,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25837,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25838,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25839,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25840,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25841,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25842,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25843,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25844,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25845,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25846,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25847,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25848,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25849,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25850,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25851,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25852,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25853,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25854,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25855,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25856,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25857,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25858,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25859,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25860,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25861,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25862,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25863,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25864,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25865,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25866,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25867,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25868,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25869,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25870,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25871,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25872,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25873,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25874,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25875,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25876,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25877,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25878,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25879,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25880,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25881,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25882,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25883,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25884,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25885,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25886,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25887,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25888,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25889,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25890,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25891,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25892,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25893,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25894,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25895,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25896,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25897,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25898,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25899,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25900,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25901,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25902,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25903,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25904,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25905,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25906,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25907,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25908,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25909,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25910,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25911,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25912,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25913,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25914,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25915,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25916,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25917,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25918,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25919,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25920,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25921,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25922,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25923,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25924,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25925,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25926,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25927,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25928,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25929,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25930,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25931,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25932,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25933,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25934,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25935,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25936,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25937,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25938,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25939,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25940,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25941,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25942,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25943,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25944,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25945,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25946,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25947,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25948,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25949,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25950,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25951,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25952,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25953,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25954,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25955,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25956,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25957,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25958,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25959,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25960,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25961,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25962,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25963,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25964,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25965,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25966,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25967,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25968,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25969,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25970,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25971,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25972,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25973,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25974,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25975,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25976,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25977,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25978,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25979,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25980,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25981,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25982,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25983,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25984,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25985,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25986,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25987,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25988,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25989,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25990,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25991,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25992,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25993,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25994,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25995,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25996,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25997,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25998,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+25999,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26000,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26001,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26002,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26003,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26004,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26005,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26006,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26007,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26008,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26009,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26010,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26011,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26012,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26013,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26014,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26015,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26016,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26017,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26018,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26019,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26020,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26021,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26022,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26023,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26024,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26025,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26026,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26027,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26028,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26029,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26030,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26031,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26032,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26033,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26034,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26035,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26036,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26037,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26038,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26039,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26040,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26041,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26042,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26043,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26044,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26045,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26046,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26047,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26048,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26049,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26050,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26051,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26052,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26053,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26054,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26055,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26056,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26057,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26058,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26059,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26060,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26061,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26062,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26063,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26064,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26065,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26066,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26067,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26068,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26069,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26070,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26071,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26072,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26073,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26074,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26075,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26076,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26077,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26078,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26079,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26080,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26081,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26082,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26083,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26084,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26085,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26086,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26087,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26088,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26089,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26090,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26091,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26092,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26093,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26094,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26095,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26096,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26097,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26098,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26099,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26100,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26101,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26102,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26103,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26104,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26105,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26106,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26107,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26108,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26109,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26110,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26111,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26112,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26113,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26114,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26115,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26116,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26117,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26118,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26119,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26120,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26121,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26122,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26123,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26124,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26125,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26126,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26127,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26128,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26129,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26130,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26131,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26132,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26133,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26134,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
+26135,position_evaluated,BLUESTARCO-EQ,hold,hold,True,target and post-trail stop decision
