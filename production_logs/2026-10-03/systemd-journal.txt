@@ -1,0 +1,25 @@
+2026-10-03T06:53:02.563048+00:00 ip-172-31-33-249 systemd[1]: Stopping algo-trader.service - Algo Trader Bot...
+2026-10-03T06:53:03.660767+00:00 ip-172-31-33-249 python[474058]: 2026-10-03 06:53:03,659 | INFO | algo_trader | Decision snapshots enabled: run_id=824801631b244ee9a8e08dc86888eecf
+2026-10-03T06:53:03.666288+00:00 ip-172-31-33-249 python[474058]: 2026-10-03 06:53:03,661 | INFO | algo_trader | Logging in to Angel One...
+2026-10-03T06:53:04.368943+00:00 ip-172-31-33-249 python[474058]: 2026-10-03 06:53:04,368 | INFO | algo_trader | Angel One login successful.
+2026-10-03T06:53:04.370008+00:00 ip-172-31-33-249 python[474058]: 2026-10-03 06:53:04,369 | INFO | algo_trader | [PAPER] Paper trading mode active. Capital: 100000.00, slippage=5.0 bps/side, fees=10.0 bps/side
+2026-10-03T06:53:04.370008+00:00 ip-172-31-33-249 python[474058]: 2026-10-03 06:53:04,369 | INFO | algo_trader | Broker mode: PAPER TRADING (simulated orders) + Angel One (market data)
+2026-10-03T06:53:04.370008+00:00 ip-172-31-33-249 python[474058]: 2026-10-03 06:53:04,369 | INFO | algo_trader | Loading ASM/GSM/F&O restricted lists from NSE...
+2026-10-03T06:53:04.691717+00:00 ip-172-31-33-249 python[474058]: 2026-10-03 06:53:04,691 | INFO | algo_trader | Loaded 194 ASM stocks from NSE.
+2026-10-03T06:53:04.757431+00:00 ip-172-31-33-249 python[474058]: 2026-10-03 06:53:04,757 | INFO | algo_trader | Loaded 77 GSM stocks from NSE.
+2026-10-03T06:53:04.800017+00:00 ip-172-31-33-249 python[474058]: 2026-10-03 06:53:04,799 | WARNING | algo_trader | Failed to fetch F&O list: HTTP 404
+2026-10-03T06:53:04.804042+00:00 ip-172-31-33-249 python[474058]: 2026-10-03 06:53:04,803 | INFO | algo_trader | Loading NSE equity scrip master...
+2026-10-03T06:53:06.291899+00:00 ip-172-31-33-249 python[474058]: 2026-10-03 06:53:06,291 | INFO | algo_trader | Scrip master cached to disk (144453 entries).
+2026-10-03T06:53:06.333608+00:00 ip-172-31-33-249 python[474058]: 2026-10-03 06:53:06,333 | INFO | algo_trader | Loaded 2710 NSE equity stocks.
+2026-10-03T06:53:06.372266+00:00 ip-172-31-33-249 python[474058]: 2026-10-03 06:53:06,372 | INFO | algo_trader | Weekend — sleeping until Monday.
+2026-10-03T07:53:06.372658+00:00 ip-172-31-33-249 python[474058]: 2026-10-03 07:53:06,372 | INFO | algo_trader | Weekend — sleeping until Monday.
+2026-10-03T08:53:06.373040+00:00 ip-172-31-33-249 python[474058]: 2026-10-03 08:53:06,372 | INFO | algo_trader | Weekend — sleeping until Monday.
+2026-10-03T09:53:06.373415+00:00 ip-172-31-33-249 python[474058]: 2026-10-03 09:53:06,373 | INFO | algo_trader | Weekend — sleeping until Monday.
+2026-10-03T10:53:06.373774+00:00 ip-172-31-33-249 python[474058]: 2026-10-03 10:53:06,373 | INFO | algo_trader | Weekend — sleeping until Monday.
+2026-10-03T11:53:06.374243+00:00 ip-172-31-33-249 python[474058]: 2026-10-03 11:53:06,374 | INFO | algo_trader | Weekend — sleeping until Monday.
+2026-10-03T12:53:06.374621+00:00 ip-172-31-33-249 python[474058]: 2026-10-03 12:53:06,374 | INFO | algo_trader | Weekend — sleeping until Monday.
+2026-10-03T13:53:06.374999+00:00 ip-172-31-33-249 python[474058]: 2026-10-03 13:53:06,374 | INFO | algo_trader | Weekend — sleeping until Monday.
+2026-10-03T14:53:06.375384+00:00 ip-172-31-33-249 python[474058]: 2026-10-03 14:53:06,375 | INFO | algo_trader | Weekend — sleeping until Monday.
+2026-10-03T15:53:06.375757+00:00 ip-172-31-33-249 python[474058]: 2026-10-03 15:53:06,375 | INFO | algo_trader | Weekend — sleeping until Monday.
+2026-10-03T16:53:06.376205+00:00 ip-172-31-33-249 python[474058]: 2026-10-03 16:53:06,376 | INFO | algo_trader | Weekend — sleeping until Monday.
+2026-10-03T17:53:06.377987+00:00 ip-172-31-33-249 python[474058]: 2026-10-03 17:53:06,377 | INFO | algo_trader | Weekend — sleeping until Monday.
