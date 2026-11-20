@@ -1,0 +1,4 @@
+sequence,event_type,symbol,recorded_decision,replayed_decision,matched,detail
+33520,market_gate,,skip,skip,True,four-factor market gate
+33521,market_gate,,skip,skip,True,four-factor market gate
+33522,market_gate,,skip,skip,True,four-factor market gate
