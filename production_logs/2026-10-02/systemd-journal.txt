@@ -1,0 +1,46 @@
+2026-10-02T04:30:00.735718+00:00 ip-172-31-33-249 python[466217]: 2026-10-02 04:30:00,735 | INFO | algo_trader | Daily candle cache cleared.
+2026-10-02T04:30:00.739465+00:00 ip-172-31-33-249 python[466217]: 2026-10-02 04:30:00,736 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-10-02T04:30:00.739465+00:00 ip-172-31-33-249 python[466217]: 2026-10-02 04:30:00,736 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-10-02T04:30:00.785129+00:00 ip-172-31-33-249 python[466217]: 2026-10-02 04:30:00,785 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-10-02T04:30:00.786794+00:00 ip-172-31-33-249 python[466217]: 2026-10-02 04:30:00,786 | INFO | algo_trader | [auth_refresh] Angel One session refreshed.
+2026-10-02T04:30:00.829664+00:00 ip-172-31-33-249 python[466217]: 2026-10-02 04:30:00,829 | INFO | algo_trader | Market appears closed (holiday). tradeVolume=0, exchFeedTime=01-Oct-2026 16:08:11
+2026-10-02T04:30:00.836451+00:00 ip-172-31-33-249 python[466217]: 2026-10-02 04:30:00,836 | INFO | algo_trader | Market closed (holiday). Skipping.
+2026-10-02T05:30:01.486411+00:00 ip-172-31-33-249 python[466217]: 2026-10-02 05:30:01,486 | INFO | algo_trader | Daily candle cache cleared.
+2026-10-02T05:30:01.494917+00:00 ip-172-31-33-249 python[466217]: 2026-10-02 05:30:01,486 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-10-02T05:30:01.494917+00:00 ip-172-31-33-249 python[466217]: 2026-10-02 05:30:01,486 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-10-02T05:30:01.579229+00:00 ip-172-31-33-249 python[466217]: 2026-10-02 05:30:01,579 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-10-02T05:30:01.591055+00:00 ip-172-31-33-249 python[466217]: 2026-10-02 05:30:01,590 | INFO | algo_trader | [auth_refresh] Angel One session refreshed.
+2026-10-02T05:30:01.675164+00:00 ip-172-31-33-249 python[466217]: 2026-10-02 05:30:01,675 | INFO | algo_trader | Market appears closed (holiday). tradeVolume=0, exchFeedTime=01-Oct-2026 16:08:11
+2026-10-02T05:30:01.700893+00:00 ip-172-31-33-249 python[466217]: 2026-10-02 05:30:01,700 | INFO | algo_trader | Market closed (holiday). Skipping.
+2026-10-02T06:30:02.298193+00:00 ip-172-31-33-249 python[466217]: 2026-10-02 06:30:02,298 | INFO | algo_trader | Daily candle cache cleared.
+2026-10-02T06:30:02.305612+00:00 ip-172-31-33-249 python[466217]: 2026-10-02 06:30:02,298 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-10-02T06:30:02.305612+00:00 ip-172-31-33-249 python[466217]: 2026-10-02 06:30:02,298 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-10-02T06:30:02.430185+00:00 ip-172-31-33-249 python[466217]: 2026-10-02 06:30:02,430 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-10-02T06:30:02.440660+00:00 ip-172-31-33-249 python[466217]: 2026-10-02 06:30:02,439 | INFO | algo_trader | [auth_refresh] Angel One session refreshed.
+2026-10-02T06:30:02.591858+00:00 ip-172-31-33-249 python[466217]: 2026-10-02 06:30:02,591 | INFO | algo_trader | Market appears closed (holiday). tradeVolume=0, exchFeedTime=01-Oct-2026 16:08:11
+2026-10-02T06:30:02.600448+00:00 ip-172-31-33-249 python[466217]: 2026-10-02 06:30:02,600 | INFO | algo_trader | Market closed (holiday). Skipping.
+2026-10-02T07:30:03.202090+00:00 ip-172-31-33-249 python[466217]: 2026-10-02 07:30:03,201 | INFO | algo_trader | Daily candle cache cleared.
+2026-10-02T07:30:03.206230+00:00 ip-172-31-33-249 python[466217]: 2026-10-02 07:30:03,202 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-10-02T07:30:03.206230+00:00 ip-172-31-33-249 python[466217]: 2026-10-02 07:30:03,202 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-10-02T07:30:03.255618+00:00 ip-172-31-33-249 python[466217]: 2026-10-02 07:30:03,255 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-10-02T07:30:03.256949+00:00 ip-172-31-33-249 python[466217]: 2026-10-02 07:30:03,256 | INFO | algo_trader | [auth_refresh] Angel One session refreshed.
+2026-10-02T07:30:03.298612+00:00 ip-172-31-33-249 python[466217]: 2026-10-02 07:30:03,298 | INFO | algo_trader | Market appears closed (holiday). tradeVolume=0, exchFeedTime=01-Oct-2026 16:08:11
+2026-10-02T07:30:03.304397+00:00 ip-172-31-33-249 python[466217]: 2026-10-02 07:30:03,304 | INFO | algo_trader | Market closed (holiday). Skipping.
+2026-10-02T08:30:03.901386+00:00 ip-172-31-33-249 python[466217]: 2026-10-02 08:30:03,901 | INFO | algo_trader | Daily candle cache cleared.
+2026-10-02T08:30:03.906014+00:00 ip-172-31-33-249 python[466217]: 2026-10-02 08:30:03,902 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-10-02T08:30:03.906014+00:00 ip-172-31-33-249 python[466217]: 2026-10-02 08:30:03,902 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-10-02T08:30:03.950116+00:00 ip-172-31-33-249 python[466217]: 2026-10-02 08:30:03,950 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-10-02T08:30:03.951390+00:00 ip-172-31-33-249 python[466217]: 2026-10-02 08:30:03,951 | INFO | algo_trader | [auth_refresh] Angel One session refreshed.
+2026-10-02T08:30:03.998615+00:00 ip-172-31-33-249 python[466217]: 2026-10-02 08:30:03,998 | INFO | algo_trader | Market appears closed (holiday). tradeVolume=0, exchFeedTime=01-Oct-2026 16:08:11
+2026-10-02T08:30:04.011097+00:00 ip-172-31-33-249 python[466217]: 2026-10-02 08:30:04,010 | INFO | algo_trader | Market closed (holiday). Skipping.
+2026-10-02T09:30:04.611330+00:00 ip-172-31-33-249 python[466217]: 2026-10-02 09:30:04,611 | INFO | algo_trader | Daily candle cache cleared.
+2026-10-02T09:30:04.615096+00:00 ip-172-31-33-249 python[466217]: 2026-10-02 09:30:04,611 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-10-02T09:30:04.615096+00:00 ip-172-31-33-249 python[466217]: 2026-10-02 09:30:04,611 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-10-02T09:30:04.655270+00:00 ip-172-31-33-249 python[466217]: 2026-10-02 09:30:04,655 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-10-02T09:30:04.656535+00:00 ip-172-31-33-249 python[466217]: 2026-10-02 09:30:04,656 | INFO | algo_trader | [auth_refresh] Angel One session refreshed.
+2026-10-02T09:30:04.706544+00:00 ip-172-31-33-249 python[466217]: 2026-10-02 09:30:04,706 | INFO | algo_trader | Market appears closed (holiday). tradeVolume=0, exchFeedTime=01-Oct-2026 16:08:11
+2026-10-02T09:30:04.712982+00:00 ip-172-31-33-249 python[466217]: 2026-10-02 09:30:04,712 | INFO | algo_trader | Market closed (holiday). Skipping.
+2026-10-02T10:30:05.367023+00:00 ip-172-31-33-249 python[466217]: 2026-10-02 10:30:05,366 | INFO | algo_trader | Daily candle cache cleared.
+2026-10-02T10:30:05.370660+00:00 ip-172-31-33-249 python[466217]: 2026-10-02 10:30:05,367 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-10-02T10:30:19.809345+00:00 ip-172-31-33-249 python[466217]: 2026-10-02 10:30:19,809 | INFO | algo_trader | Replay comparison complete: 6/6 decisions matched; recommended slippage=0 bps; report=/home/ubuntu/algo-trader/data/replay_reports/2026-10-02/summary.json; universe=data/universe_snapshots.json
+2026-10-02T10:30:19.810225+00:00 ip-172-31-33-249 python[466217]: 2026-10-02 10:30:19,810 | INFO | algo_trader | Market closed for today. Sleeping 66.0h until the next scan window.
