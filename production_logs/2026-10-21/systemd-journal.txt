@@ -1,0 +1,459 @@
+2026-10-21T04:30:17.703611+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:30:17,703 | INFO | algo_trader | Daily candle cache cleared.
+2026-10-21T04:30:17.708864+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:30:17,704 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-10-21T04:30:17.708864+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:30:17,704 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-10-21T04:30:17.769488+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:30:17,769 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-10-21T04:30:17.770913+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:30:17,770 | INFO | algo_trader | [auth_refresh] Angel One session refreshed.
+2026-10-21T04:30:17.941956+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:30:17,941 | INFO | algo_trader | Market Check: 3/4 — BULLISH
+2026-10-21T04:30:17.941956+00:00 ip-172-31-33-249 python[474058]: 1. Index Direction: PASS ✅
+2026-10-21T04:30:17.941956+00:00 ip-172-31-33-249 python[474058]:    Nifty 50: +0.57% (need > 0%)
+2026-10-21T04:30:17.941956+00:00 ip-172-31-33-249 python[474058]: 2. Market Breadth: PASS ✅
+2026-10-21T04:30:17.941956+00:00 ip-172-31-33-249 python[474058]:    Advancers: 31, Decliners: 18
+2026-10-21T04:30:17.941956+00:00 ip-172-31-33-249 python[474058]:    Breadth ratio: 1.72 (need > 1.2)
+2026-10-21T04:30:17.941956+00:00 ip-172-31-33-249 python[474058]: 3. Intraday Strength: FAIL ❌
+2026-10-21T04:30:17.941956+00:00 ip-172-31-33-249 python[474058]:    Nifty LTP vs Open: 23019.65 vs 23016.00
+2026-10-21T04:30:17.941956+00:00 ip-172-31-33-249 python[474058]:    NIFTYBEES vs VWAP: 262.53 vs 262.98
+2026-10-21T04:30:17.941956+00:00 ip-172-31-33-249 python[474058]: 4. Volatility Filter: PASS ✅
+2026-10-21T04:30:17.941956+00:00 ip-172-31-33-249 python[474058]:    India VIX change: +0.47% (reject if > +5%)
+2026-10-21T04:30:17.941956+00:00 ip-172-31-33-249 python[474058]: Decision: TRADE (score 3/4 >= 3)
+2026-10-21T04:30:18.885039+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:30:18,884 | INFO | algo_trader | Scanning 2710 stocks for top 1 candidates (pool=5)...
+2026-10-21T04:30:18.885722+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:30:18,885 | INFO | algo_trader | Fetching quotes for 2710 stocks...
+2026-10-21T04:30:25.702998+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:30:25,702 | INFO | algo_trader | Received 2691 quotes.
+2026-10-21T04:30:25.705801+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:30:25,705 | INFO | algo_trader | Candidates in 5-8% gain range: 1
+2026-10-21T04:30:25.705971+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:30:25,705 | INFO | algo_trader | Fetching daily candles for 1 candidates...
+2026-10-21T04:30:25.732770+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:30:25,732 | INFO | algo_trader | Rank #1: PASHUPATI-EQ — gain=+5.00%, score=0.512 (vol=0.6x, momentum=0.45, buy_pressure=0.87, stability=0.00, prev_trend=1.00)
+2026-10-21T04:30:25.989751+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:30:25,989 | INFO | algo_trader | Scan completed in 7.1 seconds. Found 1 raw candidates.
+2026-10-21T04:30:25.991583+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:30:25,991 | INFO | algo_trader | Checking read-only restrictions for 1 candidates...
+2026-10-21T04:30:25.994591+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:30:25,994 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 1 tradable, 0 rejected.
+2026-10-21T04:30:25.995398+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:30:25,994 | INFO | algo_trader | Top 1 tradable stocks selected (from 1 scanned, 0 filtered):
+2026-10-21T04:30:25.995398+00:00 ip-172-31-33-249 python[474058]:   PASHUPATI-EQ: +5.00% @ 94.00
+2026-10-21T04:30:25.995398+00:00 ip-172-31-33-249 python[474058]:     Score=0.512 | Vol=0.6x | Momentum=0.45 | BuyPressure=0.87 | Stability=0.00 | PrevTrend=1.00
+2026-10-21T04:30:26.714386+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:30:26,714 | INFO | algo_trader | Validating 1 candidates in parallel...
+2026-10-21T04:30:26.737506+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:30:26,737 | INFO | algo_trader | ENTRY REJECTED PASHUPATI-EQ: Gain +4.95% outside 5.0-10.0% range
+2026-10-21T04:30:26.741478+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:30:26,741 | INFO | algo_trader | Validation completed in 0.0 seconds: 0/1 passed.
+2026-10-21T04:30:26.742445+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:30:26,741 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-21T04:30:27.450737+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:30:27,450 | INFO | algo_trader | Scan attempt 2 — retrying in 120s (window open until 14:00)...
+2026-10-21T04:32:27.451125+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:32:27,450 | INFO | algo_trader | Scanning 2710 stocks for top 1 candidates (pool=5)...
+2026-10-21T04:32:27.455771+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:32:27,451 | INFO | algo_trader | Fetching quotes for 2710 stocks...
+2026-10-21T04:32:34.239078+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:32:34,238 | INFO | algo_trader | Received 2691 quotes.
+2026-10-21T04:32:34.241853+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:32:34,241 | INFO | algo_trader | Candidates in 5-8% gain range: 1
+2026-10-21T04:32:34.242989+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:32:34,241 | INFO | algo_trader | Fetching daily candles for 1 candidates...
+2026-10-21T04:32:34.242989+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:32:34,242 | INFO | algo_trader | Rank #1: PASHUPATI-EQ — gain=+5.00%, score=0.510 (vol=0.6x, momentum=0.45, buy_pressure=0.86, stability=0.00, prev_trend=1.00)
+2026-10-21T04:32:34.531908+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:32:34,531 | INFO | algo_trader | Scan completed in 7.1 seconds. Found 1 raw candidates.
+2026-10-21T04:32:34.533959+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:32:34,533 | INFO | algo_trader | Checking read-only restrictions for 1 candidates...
+2026-10-21T04:32:34.535991+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:32:34,535 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 1 tradable, 0 rejected.
+2026-10-21T04:32:34.536173+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:32:34,536 | INFO | algo_trader | Top 1 tradable stocks selected (from 1 scanned, 0 filtered):
+2026-10-21T04:32:34.536173+00:00 ip-172-31-33-249 python[474058]:   PASHUPATI-EQ: +5.00% @ 94.00
+2026-10-21T04:32:34.536173+00:00 ip-172-31-33-249 python[474058]:     Score=0.510 | Vol=0.6x | Momentum=0.45 | BuyPressure=0.86 | Stability=0.00 | PrevTrend=1.00
+2026-10-21T04:32:35.249245+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:32:35,249 | INFO | algo_trader | Validating 1 candidates in parallel...
+2026-10-21T04:32:35.275049+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:32:35,274 | INFO | algo_trader | ENTRY REJECTED PASHUPATI-EQ: Range position 0.453 < 0.85 (price retreating from high)
+2026-10-21T04:32:35.277337+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:32:35,277 | INFO | algo_trader | Validation completed in 0.0 seconds: 0/1 passed.
+2026-10-21T04:32:35.277534+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:32:35,277 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-21T04:32:35.984969+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:32:35,984 | INFO | algo_trader | Scan attempt 3 — retrying in 120s (window open until 14:00)...
+2026-10-21T04:34:35.985374+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:34:35,985 | INFO | algo_trader | Scanning 2710 stocks for top 1 candidates (pool=5)...
+2026-10-21T04:34:35.986178+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:34:35,985 | INFO | algo_trader | Fetching quotes for 2710 stocks...
+2026-10-21T04:34:42.986851+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:34:42,986 | INFO | algo_trader | Received 2691 quotes.
+2026-10-21T04:34:42.989656+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:34:42,989 | INFO | algo_trader | Candidates in 5-8% gain range: 3
+2026-10-21T04:34:42.990540+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:34:42,989 | INFO | algo_trader | Fetching daily candles for 3 candidates...
+2026-10-21T04:34:44.014350+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:34:44,014 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-21T04:34:49.030164+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:34:49,030 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-10-21T04:34:59.051918+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:34:59,051 | INFO | algo_trader | Rank #1: SSRETAIL-EQ — gain=+5.18%, score=0.535 (vol=0.3x, momentum=0.95, buy_pressure=0.56, stability=0.79, prev_trend=0.20)
+2026-10-21T04:34:59.052537+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:34:59,051 | INFO | algo_trader | Rank #2: PASHUPATI-EQ — gain=+5.00%, score=0.510 (vol=0.6x, momentum=0.45, buy_pressure=0.85, stability=0.00, prev_trend=1.00)
+2026-10-21T04:34:59.052537+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:34:59,052 | INFO | algo_trader | Rank #3: DEEDEV-EQ — gain=+5.48%, score=0.306 (vol=1.0x, momentum=0.37, buy_pressure=0.44, stability=0.00, prev_trend=0.00)
+2026-10-21T04:34:59.300727+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:34:59,300 | INFO | algo_trader | Scan completed in 23.3 seconds. Found 3 raw candidates.
+2026-10-21T04:34:59.302787+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:34:59,302 | INFO | algo_trader | Checking read-only restrictions for 3 candidates...
+2026-10-21T04:34:59.306095+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:34:59,305 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 3 tradable, 0 rejected.
+2026-10-21T04:34:59.306287+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:34:59,306 | INFO | algo_trader | Top 1 tradable stocks selected (from 3 scanned, 0 filtered):
+2026-10-21T04:34:59.306287+00:00 ip-172-31-33-249 python[474058]:   SSRETAIL-EQ: +5.18% @ 722.25
+2026-10-21T04:34:59.306287+00:00 ip-172-31-33-249 python[474058]:     Score=0.535 | Vol=0.3x | Momentum=0.95 | BuyPressure=0.56 | Stability=0.79 | PrevTrend=0.20
+2026-10-21T04:35:00.035566+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:35:00,033 | INFO | algo_trader | Validating 3 candidates in parallel...
+2026-10-21T04:35:00.066375+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:35:00,066 | INFO | algo_trader | ENTRY REJECTED SSRETAIL-EQ: Gain +4.97% outside 5.0-10.0% range
+2026-10-21T04:35:00.085425+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:35:00,085 | INFO | algo_trader | ENTRY REJECTED PASHUPATI-EQ: Gain +4.95% outside 5.0-10.0% range
+2026-10-21T04:35:00.088171+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:35:00,088 | INFO | algo_trader | ENTRY REJECTED DEEDEV-EQ: Range position 0.331 < 0.85 (price retreating from high)
+2026-10-21T04:35:00.097445+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:35:00,097 | INFO | algo_trader | Validation completed in 0.1 seconds: 0/3 passed.
+2026-10-21T04:35:00.097692+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:35:00,097 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-21T04:35:00.887288+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:35:00,887 | INFO | algo_trader | Scan attempt 4 — retrying in 120s (window open until 14:00)...
+2026-10-21T04:37:00.887778+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:37:00,887 | INFO | algo_trader | Scanning 2710 stocks for top 1 candidates (pool=5)...
+2026-10-21T04:37:00.888438+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:37:00,887 | INFO | algo_trader | Fetching quotes for 2710 stocks...
+2026-10-21T04:37:08.019640+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:37:08,019 | INFO | algo_trader | Received 2691 quotes.
+2026-10-21T04:37:08.022248+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:37:08,022 | INFO | algo_trader | Candidates in 5-8% gain range: 1
+2026-10-21T04:37:08.022449+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:37:08,022 | INFO | algo_trader | Fetching daily candles for 1 candidates...
+2026-10-21T04:37:08.049641+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:37:08,049 | INFO | algo_trader | Rank #1: DEEDEV-EQ — gain=+5.32%, score=0.272 (vol=0.5x, momentum=0.35, buy_pressure=0.44, stability=0.00, prev_trend=0.20)
+2026-10-21T04:37:08.307991+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:37:08,307 | INFO | algo_trader | Scan completed in 7.4 seconds. Found 1 raw candidates.
+2026-10-21T04:37:08.309826+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:37:08,309 | INFO | algo_trader | Checking read-only restrictions for 1 candidates...
+2026-10-21T04:37:08.312066+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:37:08,311 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 1 tradable, 0 rejected.
+2026-10-21T04:37:08.312243+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:37:08,312 | INFO | algo_trader | Top 1 tradable stocks selected (from 1 scanned, 0 filtered):
+2026-10-21T04:37:08.312243+00:00 ip-172-31-33-249 python[474058]:   DEEDEV-EQ: +5.32% @ 554.10
+2026-10-21T04:37:08.312243+00:00 ip-172-31-33-249 python[474058]:     Score=0.272 | Vol=0.5x | Momentum=0.35 | BuyPressure=0.44 | Stability=0.00 | PrevTrend=0.20
+2026-10-21T04:37:09.022995+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:37:09,022 | INFO | algo_trader | Validating 1 candidates in parallel...
+2026-10-21T04:37:09.059548+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:37:09,059 | INFO | algo_trader | ENTRY REJECTED DEEDEV-EQ: Range position 0.352 < 0.85 (price retreating from high)
+2026-10-21T04:37:09.062880+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:37:09,062 | INFO | algo_trader | Validation completed in 0.0 seconds: 0/1 passed.
+2026-10-21T04:37:09.063136+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:37:09,062 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-21T04:37:09.787493+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:37:09,787 | INFO | algo_trader | Scan attempt 5 — retrying in 120s (window open until 14:00)...
+2026-10-21T04:39:09.787886+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:39:09,787 | INFO | algo_trader | Scanning 2710 stocks for top 1 candidates (pool=5)...
+2026-10-21T04:39:09.791636+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:39:09,787 | INFO | algo_trader | Fetching quotes for 2710 stocks...
+2026-10-21T04:39:16.575550+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:39:16,575 | INFO | algo_trader | Received 2691 quotes.
+2026-10-21T04:39:16.578272+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:39:16,578 | INFO | algo_trader | Candidates in 5-8% gain range: 2
+2026-10-21T04:39:16.578466+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:39:16,578 | INFO | algo_trader | Fetching daily candles for 2 candidates...
+2026-10-21T04:39:16.578614+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:39:16,578 | INFO | algo_trader | Rank #1: PASHUPATI-EQ — gain=+5.00%, score=0.510 (vol=0.6x, momentum=0.45, buy_pressure=0.85, stability=0.00, prev_trend=1.00)
+2026-10-21T04:39:16.578713+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:39:16,578 | INFO | algo_trader | Rank #2: DEEDEV-EQ — gain=+5.16%, score=0.265 (vol=0.5x, momentum=0.33, buy_pressure=0.43, stability=0.00, prev_trend=0.20)
+2026-10-21T04:39:16.894979+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:39:16,894 | INFO | algo_trader | Scan completed in 7.1 seconds. Found 2 raw candidates.
+2026-10-21T04:39:16.900994+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:39:16,900 | INFO | algo_trader | Checking read-only restrictions for 2 candidates...
+2026-10-21T04:39:16.905300+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:39:16,905 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 2 tradable, 0 rejected.
+2026-10-21T04:39:16.905537+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:39:16,905 | INFO | algo_trader | Top 1 tradable stocks selected (from 2 scanned, 0 filtered):
+2026-10-21T04:39:16.905537+00:00 ip-172-31-33-249 python[474058]:   PASHUPATI-EQ: +5.00% @ 94.00
+2026-10-21T04:39:16.905537+00:00 ip-172-31-33-249 python[474058]:     Score=0.510 | Vol=0.6x | Momentum=0.45 | BuyPressure=0.85 | Stability=0.00 | PrevTrend=1.00
+2026-10-21T04:39:17.619644+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:39:17,619 | INFO | algo_trader | Validating 2 candidates in parallel...
+2026-10-21T04:39:17.646718+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:39:17,646 | INFO | algo_trader | ENTRY REJECTED PASHUPATI-EQ: Range position 0.453 < 0.85 (price retreating from high)
+2026-10-21T04:39:17.652189+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:39:17,652 | INFO | algo_trader | ENTRY REJECTED DEEDEV-EQ: Range position 0.349 < 0.85 (price retreating from high)
+2026-10-21T04:39:17.654579+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:39:17,654 | INFO | algo_trader | Validation completed in 0.0 seconds: 0/2 passed.
+2026-10-21T04:39:17.654787+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:39:17,654 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-21T04:39:18.399548+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:39:18,399 | INFO | algo_trader | Scan attempt 6 — retrying in 120s (window open until 14:00)...
+2026-10-21T04:41:18.399954+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:41:18,399 | INFO | algo_trader | Scanning 2710 stocks for top 1 candidates (pool=5)...
+2026-10-21T04:41:18.400771+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:41:18,400 | INFO | algo_trader | Fetching quotes for 2710 stocks...
+2026-10-21T04:41:25.194873+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:41:25,194 | INFO | algo_trader | Received 2691 quotes.
+2026-10-21T04:41:25.197621+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:41:25,197 | INFO | algo_trader | Candidates in 5-8% gain range: 1
+2026-10-21T04:41:25.197816+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:41:25,197 | INFO | algo_trader | Fetching daily candles for 1 candidates...
+2026-10-21T04:41:25.197909+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:41:25,197 | INFO | algo_trader | Rank #1: DEEDEV-EQ — gain=+5.27%, score=0.267 (vol=0.5x, momentum=0.34, buy_pressure=0.42, stability=0.00, prev_trend=0.20)
+2026-10-21T04:41:25.460666+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:41:25,460 | INFO | algo_trader | Scan completed in 7.1 seconds. Found 1 raw candidates.
+2026-10-21T04:41:25.462489+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:41:25,462 | INFO | algo_trader | Checking read-only restrictions for 1 candidates...
+2026-10-21T04:41:25.466915+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:41:25,466 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 1 tradable, 0 rejected.
+2026-10-21T04:41:25.467971+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:41:25,466 | INFO | algo_trader | Top 1 tradable stocks selected (from 1 scanned, 0 filtered):
+2026-10-21T04:41:25.467971+00:00 ip-172-31-33-249 python[474058]:   DEEDEV-EQ: +5.27% @ 553.80
+2026-10-21T04:41:25.467971+00:00 ip-172-31-33-249 python[474058]:     Score=0.267 | Vol=0.5x | Momentum=0.34 | BuyPressure=0.42 | Stability=0.00 | PrevTrend=0.20
+2026-10-21T04:41:26.251883+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:41:26,251 | INFO | algo_trader | Validating 1 candidates in parallel...
+2026-10-21T04:41:26.279992+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:41:26,279 | INFO | algo_trader | ENTRY REJECTED DEEDEV-EQ: Range position 0.328 < 0.85 (price retreating from high)
+2026-10-21T04:41:26.282460+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:41:26,282 | INFO | algo_trader | Validation completed in 0.0 seconds: 0/1 passed.
+2026-10-21T04:41:26.282677+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:41:26,282 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-21T04:41:26.886370+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:41:26,886 | INFO | algo_trader | Scan attempt 7 — retrying in 120s (window open until 14:00)...
+2026-10-21T04:43:26.886779+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:43:26,886 | INFO | algo_trader | Scanning 2710 stocks for top 1 candidates (pool=5)...
+2026-10-21T04:43:26.887640+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:43:26,886 | INFO | algo_trader | Fetching quotes for 2710 stocks...
+2026-10-21T04:43:33.676078+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:43:33,675 | INFO | algo_trader | Received 2691 quotes.
+2026-10-21T04:43:33.678886+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:43:33,678 | INFO | algo_trader | Candidates in 5-8% gain range: 2
+2026-10-21T04:43:33.679061+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:43:33,678 | INFO | algo_trader | Fetching daily candles for 2 candidates...
+2026-10-21T04:43:33.679184+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:43:33,679 | INFO | algo_trader | Rank #1: PASHUPATI-EQ — gain=+5.00%, score=0.513 (vol=0.7x, momentum=0.45, buy_pressure=0.84, stability=0.00, prev_trend=1.00)
+2026-10-21T04:43:33.679273+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:43:33,679 | INFO | algo_trader | Rank #2: DEEDEV-EQ — gain=+5.32%, score=0.270 (vol=0.6x, momentum=0.35, buy_pressure=0.42, stability=0.00, prev_trend=0.20)
+2026-10-21T04:43:33.952242+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:43:33,952 | INFO | algo_trader | Scan completed in 7.1 seconds. Found 2 raw candidates.
+2026-10-21T04:43:33.953421+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:43:33,953 | INFO | algo_trader | Checking read-only restrictions for 2 candidates...
+2026-10-21T04:43:33.956133+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:43:33,955 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 2 tradable, 0 rejected.
+2026-10-21T04:43:33.956376+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:43:33,956 | INFO | algo_trader | Top 1 tradable stocks selected (from 2 scanned, 0 filtered):
+2026-10-21T04:43:33.956376+00:00 ip-172-31-33-249 python[474058]:   PASHUPATI-EQ: +5.00% @ 94.00
+2026-10-21T04:43:33.956376+00:00 ip-172-31-33-249 python[474058]:     Score=0.513 | Vol=0.7x | Momentum=0.45 | BuyPressure=0.84 | Stability=0.00 | PrevTrend=1.00
+2026-10-21T04:43:34.601293+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:43:34,601 | INFO | algo_trader | Validating 2 candidates in parallel...
+2026-10-21T04:43:34.838329+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:43:34,838 | INFO | algo_trader | ENTRY REJECTED PASHUPATI-EQ: Gain +4.99% outside 5.0-10.0% range
+2026-10-21T04:43:34.840277+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:43:34,840 | INFO | algo_trader | ENTRY REJECTED DEEDEV-EQ: Range position 0.352 < 0.85 (price retreating from high)
+2026-10-21T04:43:34.843209+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:43:34,843 | INFO | algo_trader | Validation completed in 0.2 seconds: 0/2 passed.
+2026-10-21T04:43:34.844224+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:43:34,843 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-21T04:43:35.436808+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:43:35,436 | INFO | algo_trader | Scan attempt 8 — retrying in 120s (window open until 14:00)...
+2026-10-21T04:45:35.437338+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:45:35,437 | INFO | algo_trader | Scanning 2710 stocks for top 1 candidates (pool=5)...
+2026-10-21T04:45:35.441120+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:45:35,437 | INFO | algo_trader | Fetching quotes for 2710 stocks...
+2026-10-21T04:45:42.747479+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:45:42,747 | INFO | algo_trader | Received 2691 quotes.
+2026-10-21T04:45:42.750235+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:45:42,750 | INFO | algo_trader | Candidates in 5-8% gain range: 2
+2026-10-21T04:45:42.750398+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:45:42,750 | INFO | algo_trader | Fetching daily candles for 2 candidates...
+2026-10-21T04:45:42.750627+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:45:42,750 | INFO | algo_trader | Rank #1: SSRETAIL-EQ — gain=+5.01%, score=0.575 (vol=0.5x, momentum=0.93, buy_pressure=0.70, stability=0.79, prev_trend=0.20)
+2026-10-21T04:45:42.750744+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:45:42,750 | INFO | algo_trader | Rank #2: DEEDEV-EQ — gain=+5.29%, score=0.270 (vol=0.6x, momentum=0.35, buy_pressure=0.42, stability=0.00, prev_trend=0.20)
+2026-10-21T04:45:43.008226+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:45:43,007 | INFO | algo_trader | Scan completed in 7.6 seconds. Found 2 raw candidates.
+2026-10-21T04:45:43.011343+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:45:43,011 | INFO | algo_trader | Checking read-only restrictions for 2 candidates...
+2026-10-21T04:45:43.013604+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:45:43,013 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 2 tradable, 0 rejected.
+2026-10-21T04:45:43.013803+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:45:43,013 | INFO | algo_trader | Top 1 tradable stocks selected (from 2 scanned, 0 filtered):
+2026-10-21T04:45:43.013803+00:00 ip-172-31-33-249 python[474058]:   SSRETAIL-EQ: +5.01% @ 721.10
+2026-10-21T04:45:43.013803+00:00 ip-172-31-33-249 python[474058]:     Score=0.575 | Vol=0.5x | Momentum=0.93 | BuyPressure=0.70 | Stability=0.79 | PrevTrend=0.20
+2026-10-21T04:45:43.618077+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:45:43,617 | INFO | algo_trader | Validating 2 candidates in parallel...
+2026-10-21T04:45:43.643085+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:45:43,642 | INFO | algo_trader | ENTRY REJECTED DEEDEV-EQ: Range position 0.365 < 0.85 (price retreating from high)
+2026-10-21T04:45:43.645987+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:45:43,645 | INFO | algo_trader | Near-breakout skip for SSRETAIL-EQ: range=0.926, gain=5.0% — skipping breakout check
+2026-10-21T04:45:43.672764+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:45:43,672 | INFO | algo_trader | ENTRY REJECTED SSRETAIL-EQ: Volume fading: current 56377 vs avg 94551 (ratio 0.60 < 1.2)
+2026-10-21T04:45:43.674964+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:45:43,674 | INFO | algo_trader | Validation completed in 0.1 seconds: 0/2 passed.
+2026-10-21T04:45:43.675161+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:45:43,675 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-21T04:45:44.257219+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:45:44,257 | INFO | algo_trader | Scan attempt 9 — retrying in 120s (window open until 14:00)...
+2026-10-21T04:47:44.257610+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:47:44,257 | INFO | algo_trader | Scanning 2710 stocks for top 1 candidates (pool=5)...
+2026-10-21T04:47:44.258336+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:47:44,257 | INFO | algo_trader | Fetching quotes for 2710 stocks...
+2026-10-21T04:47:51.044831+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:47:51,044 | INFO | algo_trader | Received 2691 quotes.
+2026-10-21T04:47:51.047463+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:47:51,047 | INFO | algo_trader | Candidates in 5-8% gain range: 3
+2026-10-21T04:47:51.048469+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:47:51,047 | INFO | algo_trader | Fetching daily candles for 3 candidates...
+2026-10-21T04:47:51.065388+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:47:51,065 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-21T04:47:56.085238+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:47:56,085 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-10-21T04:48:06.106477+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:48:06,106 | INFO | algo_trader | Rank #1: PASHUPATI-EQ — gain=+5.00%, score=0.515 (vol=0.7x, momentum=0.45, buy_pressure=0.85, stability=0.00, prev_trend=1.00)
+2026-10-21T04:48:06.107072+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:48:06,106 | INFO | algo_trader | Rank #2: DCMSRIND-EQ — gain=+5.43%, score=0.470 (vol=3.6x, momentum=0.37, buy_pressure=0.34, stability=0.00, prev_trend=0.40)
+2026-10-21T04:48:06.107072+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:48:06,106 | INFO | algo_trader | Rank #3: DEEDEV-EQ — gain=+5.33%, score=0.274 (vol=0.6x, momentum=0.35, buy_pressure=0.43, stability=0.00, prev_trend=0.20)
+2026-10-21T04:48:06.362683+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:48:06,362 | INFO | algo_trader | Scan completed in 22.1 seconds. Found 3 raw candidates.
+2026-10-21T04:48:06.364665+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:48:06,364 | INFO | algo_trader | Checking read-only restrictions for 3 candidates...
+2026-10-21T04:48:06.366658+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:48:06,366 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 3 tradable, 0 rejected.
+2026-10-21T04:48:06.366850+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:48:06,366 | INFO | algo_trader | Top 1 tradable stocks selected (from 3 scanned, 0 filtered):
+2026-10-21T04:48:06.366850+00:00 ip-172-31-33-249 python[474058]:   PASHUPATI-EQ: +5.00% @ 94.00
+2026-10-21T04:48:06.366850+00:00 ip-172-31-33-249 python[474058]:     Score=0.515 | Vol=0.7x | Momentum=0.45 | BuyPressure=0.85 | Stability=0.00 | PrevTrend=1.00
+2026-10-21T04:48:06.967647+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:48:06,967 | INFO | algo_trader | Validating 3 candidates in parallel...
+2026-10-21T04:48:06.989934+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:48:06,989 | INFO | algo_trader | ENTRY REJECTED PASHUPATI-EQ: Gain +4.97% outside 5.0-10.0% range
+2026-10-21T04:48:06.992363+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:48:06,992 | INFO | algo_trader | ENTRY REJECTED DCMSRIND-EQ: Range position 0.367 < 0.85 (price retreating from high)
+2026-10-21T04:48:06.994765+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:48:06,994 | INFO | algo_trader | ENTRY REJECTED DEEDEV-EQ: Range position 0.349 < 0.85 (price retreating from high)
+2026-10-21T04:48:06.997243+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:48:06,997 | INFO | algo_trader | Validation completed in 0.0 seconds: 0/3 passed.
+2026-10-21T04:48:06.997419+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:48:06,997 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-21T04:48:07.600252+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:48:07,600 | INFO | algo_trader | Scan attempt 10 — retrying in 120s (window open until 14:00)...
+2026-10-21T04:50:07.600663+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:50:07,600 | INFO | algo_trader | Scanning 2710 stocks for top 1 candidates (pool=5)...
+2026-10-21T04:50:07.601459+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:50:07,600 | INFO | algo_trader | Fetching quotes for 2710 stocks...
+2026-10-21T04:50:14.396772+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:50:14,396 | INFO | algo_trader | Received 2691 quotes.
+2026-10-21T04:50:14.399546+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:50:14,399 | INFO | algo_trader | Candidates in 5-8% gain range: 3
+2026-10-21T04:50:14.399718+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:50:14,399 | INFO | algo_trader | Fetching daily candles for 3 candidates...
+2026-10-21T04:50:14.399901+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:50:14,399 | INFO | algo_trader | Rank #1: PASHUPATI-EQ — gain=+5.00%, score=0.515 (vol=0.7x, momentum=0.45, buy_pressure=0.85, stability=0.00, prev_trend=1.00)
+2026-10-21T04:50:14.399996+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:50:14,399 | INFO | algo_trader | Rank #2: DCMSRIND-EQ — gain=+5.62%, score=0.476 (vol=3.6x, momentum=0.39, buy_pressure=0.34, stability=0.00, prev_trend=0.40)
+2026-10-21T04:50:14.400092+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:50:14,400 | INFO | algo_trader | Rank #3: DEEDEV-EQ — gain=+5.37%, score=0.275 (vol=0.6x, momentum=0.36, buy_pressure=0.42, stability=0.00, prev_trend=0.20)
+2026-10-21T04:50:14.672139+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:50:14,671 | INFO | algo_trader | Scan completed in 7.1 seconds. Found 3 raw candidates.
+2026-10-21T04:50:14.674841+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:50:14,674 | INFO | algo_trader | Checking read-only restrictions for 3 candidates...
+2026-10-21T04:50:14.677331+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:50:14,677 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 3 tradable, 0 rejected.
+2026-10-21T04:50:14.677565+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:50:14,677 | INFO | algo_trader | Top 1 tradable stocks selected (from 3 scanned, 0 filtered):
+2026-10-21T04:50:14.677565+00:00 ip-172-31-33-249 python[474058]:   PASHUPATI-EQ: +5.00% @ 94.00
+2026-10-21T04:50:14.677565+00:00 ip-172-31-33-249 python[474058]:     Score=0.515 | Vol=0.7x | Momentum=0.45 | BuyPressure=0.85 | Stability=0.00 | PrevTrend=1.00
+2026-10-21T04:50:15.294200+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:50:15,294 | INFO | algo_trader | Validating 3 candidates in parallel...
+2026-10-21T04:50:15.317205+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:50:15,317 | INFO | algo_trader | ENTRY REJECTED PASHUPATI-EQ: Gain +4.98% outside 5.0-10.0% range
+2026-10-21T04:50:15.320484+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:50:15,320 | INFO | algo_trader | ENTRY REJECTED DCMSRIND-EQ: Range position 0.386 < 0.85 (price retreating from high)
+2026-10-21T04:50:15.322774+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:50:15,322 | INFO | algo_trader | ENTRY REJECTED DEEDEV-EQ: Range position 0.358 < 0.85 (price retreating from high)
+2026-10-21T04:50:15.326101+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:50:15,325 | INFO | algo_trader | Validation completed in 0.0 seconds: 0/3 passed.
+2026-10-21T04:50:15.326327+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:50:15,326 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-21T04:50:15.931217+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:50:15,931 | INFO | algo_trader | Scan attempt 11 — retrying in 120s (window open until 14:00)...
+2026-10-21T04:52:15.931603+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:52:15,931 | INFO | algo_trader | Scanning 2710 stocks for top 1 candidates (pool=5)...
+2026-10-21T04:52:15.935259+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:52:15,931 | INFO | algo_trader | Fetching quotes for 2710 stocks...
+2026-10-21T04:52:22.714123+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:52:22,714 | INFO | algo_trader | Received 2691 quotes.
+2026-10-21T04:52:22.716848+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:52:22,716 | INFO | algo_trader | Candidates in 5-8% gain range: 3
+2026-10-21T04:52:22.717062+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:52:22,716 | INFO | algo_trader | Fetching daily candles for 3 candidates...
+2026-10-21T04:52:22.717228+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:52:22,717 | INFO | algo_trader | Rank #1: PASHUPATI-EQ — gain=+5.00%, score=0.515 (vol=0.7x, momentum=0.45, buy_pressure=0.85, stability=0.00, prev_trend=1.00)
+2026-10-21T04:52:22.717313+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:52:22,717 | INFO | algo_trader | Rank #2: DCMSRIND-EQ — gain=+6.18%, score=0.493 (vol=3.7x, momentum=0.47, buy_pressure=0.33, stability=0.00, prev_trend=0.40)
+2026-10-21T04:52:22.717411+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:52:22,717 | INFO | algo_trader | Rank #3: DEEDEV-EQ — gain=+5.42%, score=0.277 (vol=0.6x, momentum=0.36, buy_pressure=0.42, stability=0.00, prev_trend=0.20)
+2026-10-21T04:52:23.044937+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:52:23,044 | INFO | algo_trader | Scan completed in 7.1 seconds. Found 3 raw candidates.
+2026-10-21T04:52:23.048256+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:52:23,048 | INFO | algo_trader | Checking read-only restrictions for 3 candidates...
+2026-10-21T04:52:23.050724+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:52:23,050 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 3 tradable, 0 rejected.
+2026-10-21T04:52:23.050916+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:52:23,050 | INFO | algo_trader | Top 1 tradable stocks selected (from 3 scanned, 0 filtered):
+2026-10-21T04:52:23.050916+00:00 ip-172-31-33-249 python[474058]:   PASHUPATI-EQ: +5.00% @ 94.00
+2026-10-21T04:52:23.050916+00:00 ip-172-31-33-249 python[474058]:     Score=0.515 | Vol=0.7x | Momentum=0.45 | BuyPressure=0.85 | Stability=0.00 | PrevTrend=1.00
+2026-10-21T04:52:23.656838+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:52:23,656 | INFO | algo_trader | Validating 3 candidates in parallel...
+2026-10-21T04:52:23.678428+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:52:23,678 | INFO | algo_trader | ENTRY REJECTED PASHUPATI-EQ: Range position 0.453 < 0.85 (price retreating from high)
+2026-10-21T04:52:23.680845+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:52:23,680 | INFO | algo_trader | ENTRY REJECTED DCMSRIND-EQ: Range position 0.453 < 0.85 (price retreating from high)
+2026-10-21T04:52:23.683216+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:52:23,683 | INFO | algo_trader | ENTRY REJECTED DEEDEV-EQ: Range position 0.350 < 0.85 (price retreating from high)
+2026-10-21T04:52:23.686136+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:52:23,686 | INFO | algo_trader | Validation completed in 0.0 seconds: 0/3 passed.
+2026-10-21T04:52:23.686307+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:52:23,686 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-21T04:52:24.301535+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:52:24,301 | INFO | algo_trader | Scan attempt 12 — retrying in 120s (window open until 14:00)...
+2026-10-21T04:54:24.301932+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:54:24,301 | INFO | algo_trader | Scanning 2710 stocks for top 1 candidates (pool=5)...
+2026-10-21T04:54:24.302630+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:54:24,301 | INFO | algo_trader | Fetching quotes for 2710 stocks...
+2026-10-21T04:54:31.085834+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:54:31,085 | INFO | algo_trader | Received 2691 quotes.
+2026-10-21T04:54:31.088538+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:54:31,088 | INFO | algo_trader | Candidates in 5-8% gain range: 2
+2026-10-21T04:54:31.088748+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:54:31,088 | INFO | algo_trader | Fetching daily candles for 2 candidates...
+2026-10-21T04:54:31.088866+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:54:31,088 | INFO | algo_trader | Rank #1: DCMSRIND-EQ — gain=+7.33%, score=0.534 (vol=3.9x, momentum=0.61, buy_pressure=0.35, stability=0.00, prev_trend=0.40)
+2026-10-21T04:54:31.088956+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:54:31,088 | INFO | algo_trader | Rank #2: PASHUPATI-EQ — gain=+5.04%, score=0.518 (vol=0.7x, momentum=0.46, buy_pressure=0.85, stability=0.00, prev_trend=1.00)
+2026-10-21T04:54:31.343285+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:54:31,343 | INFO | algo_trader | Scan completed in 7.0 seconds. Found 2 raw candidates.
+2026-10-21T04:54:31.345251+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:54:31,345 | INFO | algo_trader | Checking read-only restrictions for 2 candidates...
+2026-10-21T04:54:31.347038+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:54:31,346 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 2 tradable, 0 rejected.
+2026-10-21T04:54:31.347276+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:54:31,347 | INFO | algo_trader | Top 1 tradable stocks selected (from 2 scanned, 0 filtered):
+2026-10-21T04:54:31.347276+00:00 ip-172-31-33-249 python[474058]:   DCMSRIND-EQ: +7.33% @ 51.41
+2026-10-21T04:54:31.347276+00:00 ip-172-31-33-249 python[474058]:     Score=0.534 | Vol=3.9x | Momentum=0.61 | BuyPressure=0.35 | Stability=0.00 | PrevTrend=0.40
+2026-10-21T04:54:31.992809+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:54:31,992 | INFO | algo_trader | Validating 2 candidates in parallel...
+2026-10-21T04:54:32.012013+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:54:32,011 | INFO | algo_trader | ENTRY REJECTED DCMSRIND-EQ: Range position 0.625 < 0.85 (price retreating from high)
+2026-10-21T04:54:32.015925+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:54:32,015 | INFO | algo_trader | ENTRY REJECTED PASHUPATI-EQ: Range position 0.463 < 0.85 (price retreating from high)
+2026-10-21T04:54:32.018285+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:54:32,018 | INFO | algo_trader | Validation completed in 0.0 seconds: 0/2 passed.
+2026-10-21T04:54:32.018522+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:54:32,018 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-21T04:54:32.621009+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:54:32,620 | INFO | algo_trader | Scan attempt 13 — retrying in 120s (window open until 14:00)...
+2026-10-21T04:56:32.621427+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:56:32,621 | INFO | algo_trader | Scanning 2710 stocks for top 1 candidates (pool=5)...
+2026-10-21T04:56:32.622213+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:56:32,621 | INFO | algo_trader | Fetching quotes for 2710 stocks...
+2026-10-21T04:56:39.471627+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:56:39,471 | INFO | algo_trader | Received 2691 quotes.
+2026-10-21T04:56:39.474339+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:56:39,474 | INFO | algo_trader | Candidates in 5-8% gain range: 3
+2026-10-21T04:56:39.474578+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:56:39,474 | INFO | algo_trader | Fetching daily candles for 3 candidates...
+2026-10-21T04:56:39.475544+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:56:39,474 | INFO | algo_trader | Rank #1: DCMSRIND-EQ — gain=+7.29%, score=0.536 (vol=4.1x, momentum=0.61, buy_pressure=0.37, stability=0.00, prev_trend=0.40)
+2026-10-21T04:56:39.475544+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:56:39,474 | INFO | algo_trader | Rank #2: PASHUPATI-EQ — gain=+5.02%, score=0.518 (vol=0.7x, momentum=0.46, buy_pressure=0.85, stability=0.00, prev_trend=1.00)
+2026-10-21T04:56:39.475544+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:56:39,474 | INFO | algo_trader | Rank #3: DEEDEV-EQ — gain=+5.57%, score=0.287 (vol=0.6x, momentum=0.39, buy_pressure=0.44, stability=0.00, prev_trend=0.20)
+2026-10-21T04:56:39.728698+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:56:39,728 | INFO | algo_trader | Scan completed in 7.1 seconds. Found 3 raw candidates.
+2026-10-21T04:56:39.731229+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:56:39,731 | INFO | algo_trader | Checking read-only restrictions for 3 candidates...
+2026-10-21T04:56:39.733733+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:56:39,733 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 3 tradable, 0 rejected.
+2026-10-21T04:56:39.733907+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:56:39,733 | INFO | algo_trader | Top 1 tradable stocks selected (from 3 scanned, 0 filtered):
+2026-10-21T04:56:39.733907+00:00 ip-172-31-33-249 python[474058]:   DCMSRIND-EQ: +7.29% @ 51.39
+2026-10-21T04:56:39.733907+00:00 ip-172-31-33-249 python[474058]:     Score=0.536 | Vol=4.1x | Momentum=0.61 | BuyPressure=0.37 | Stability=0.00 | PrevTrend=0.40
+2026-10-21T04:56:40.329836+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:56:40,329 | INFO | algo_trader | Validating 3 candidates in parallel...
+2026-10-21T04:56:40.352550+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:56:40,352 | INFO | algo_trader | ENTRY REJECTED DCMSRIND-EQ: Range position 0.587 < 0.85 (price retreating from high)
+2026-10-21T04:56:40.354392+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:56:40,354 | INFO | algo_trader | ENTRY REJECTED PASHUPATI-EQ: Range position 0.456 < 0.85 (price retreating from high)
+2026-10-21T04:56:40.356680+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:56:40,356 | INFO | algo_trader | ENTRY REJECTED DEEDEV-EQ: Range position 0.378 < 0.85 (price retreating from high)
+2026-10-21T04:56:40.359243+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:56:40,359 | INFO | algo_trader | Validation completed in 0.0 seconds: 0/3 passed.
+2026-10-21T04:56:40.359384+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:56:40,359 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-21T04:56:40.934192+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:56:40,934 | INFO | algo_trader | Scan attempt 14 — retrying in 120s (window open until 14:00)...
+2026-10-21T04:58:40.934564+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:58:40,934 | INFO | algo_trader | Scanning 2710 stocks for top 1 candidates (pool=5)...
+2026-10-21T04:58:40.938346+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:58:40,934 | INFO | algo_trader | Fetching quotes for 2710 stocks...
+2026-10-21T04:58:47.726158+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:58:47,726 | INFO | algo_trader | Received 2691 quotes.
+2026-10-21T04:58:47.728884+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:58:47,728 | INFO | algo_trader | Candidates in 5-8% gain range: 4
+2026-10-21T04:58:47.729007+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:58:47,728 | INFO | algo_trader | Fetching daily candles for 4 candidates...
+2026-10-21T04:58:47.749682+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:58:47,749 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-21T04:58:52.764948+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:58:52,764 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-10-21T04:59:02.789889+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:59:02,789 | INFO | algo_trader | Rank #1: FRACTAL-EQ — gain=+5.32%, score=0.603 (vol=1.0x, momentum=0.95, buy_pressure=0.46, stability=1.00, prev_trend=0.00)
+2026-10-21T04:59:02.790488+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:59:02,789 | INFO | algo_trader | Rank #2: PASHUPATI-EQ — gain=+5.02%, score=0.518 (vol=0.7x, momentum=0.46, buy_pressure=0.85, stability=0.00, prev_trend=1.00)
+2026-10-21T04:59:02.790488+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:59:02,790 | INFO | algo_trader | Rank #3: DCMSRIND-EQ — gain=+6.35%, score=0.501 (vol=4.2x, momentum=0.49, buy_pressure=0.34, stability=0.00, prev_trend=0.40)
+2026-10-21T04:59:02.790488+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:59:02,790 | INFO | algo_trader | Rank #4: DEEDEV-EQ — gain=+5.68%, score=0.294 (vol=0.6x, momentum=0.40, buy_pressure=0.45, stability=0.00, prev_trend=0.20)
+2026-10-21T04:59:03.067090+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:59:03,066 | INFO | algo_trader | Scan completed in 22.1 seconds. Found 4 raw candidates.
+2026-10-21T04:59:03.069398+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:59:03,069 | INFO | algo_trader | Checking read-only restrictions for 4 candidates...
+2026-10-21T04:59:03.071256+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:59:03,071 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 4 tradable, 0 rejected.
+2026-10-21T04:59:03.071485+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:59:03,071 | INFO | algo_trader | Top 1 tradable stocks selected (from 4 scanned, 0 filtered):
+2026-10-21T04:59:03.071485+00:00 ip-172-31-33-249 python[474058]:   FRACTAL-EQ: +5.32% @ 751.40
+2026-10-21T04:59:03.071485+00:00 ip-172-31-33-249 python[474058]:     Score=0.603 | Vol=1.0x | Momentum=0.95 | BuyPressure=0.46 | Stability=1.00 | PrevTrend=0.00
+2026-10-21T04:59:03.670319+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:59:03,670 | INFO | algo_trader | Validating 4 candidates in parallel...
+2026-10-21T04:59:03.698021+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:59:03,697 | INFO | algo_trader | ENTRY REJECTED PASHUPATI-EQ: Range position 0.456 < 0.85 (price retreating from high)
+2026-10-21T04:59:03.700385+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:59:03,700 | INFO | algo_trader | ENTRY REJECTED DCMSRIND-EQ: Range position 0.477 < 0.85 (price retreating from high)
+2026-10-21T04:59:03.703212+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:59:03,703 | INFO | algo_trader | ENTRY REJECTED DEEDEV-EQ: Range position 0.375 < 0.85 (price retreating from high)
+2026-10-21T04:59:03.705972+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:59:03,705 | INFO | algo_trader | Near-breakout skip for FRACTAL-EQ: range=0.911, gain=5.1% — skipping breakout check
+2026-10-21T04:59:03.799822+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:59:03,799 | INFO | algo_trader | ENTRY REJECTED FRACTAL-EQ: Volume fading: current 702 vs avg 22768 (ratio 0.03 < 1.2)
+2026-10-21T04:59:03.806568+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:59:03,806 | INFO | algo_trader | Validation completed in 0.1 seconds: 0/4 passed.
+2026-10-21T04:59:03.806759+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:59:03,806 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-21T04:59:04.401327+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 04:59:04,401 | INFO | algo_trader | Scan attempt 15 — retrying in 120s (window open until 14:00)...
+2026-10-21T05:01:04.401729+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:01:04,401 | INFO | algo_trader | Scanning 2710 stocks for top 1 candidates (pool=5)...
+2026-10-21T05:01:04.402430+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:01:04,401 | INFO | algo_trader | Fetching quotes for 2710 stocks...
+2026-10-21T05:01:11.185215+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:01:11,185 | INFO | algo_trader | Received 2691 quotes.
+2026-10-21T05:01:11.188073+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:01:11,187 | INFO | algo_trader | Candidates in 5-8% gain range: 5
+2026-10-21T05:01:11.188283+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:01:11,188 | INFO | algo_trader | Fetching daily candles for 5 candidates...
+2026-10-21T05:01:12.189122+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:01:12,188 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-21T05:01:17.206791+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:01:17,206 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-10-21T05:01:27.222745+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:01:27,222 | INFO | algo_trader | Rank #1: FRACTAL-EQ — gain=+5.63%, score=0.794 (vol=1.5x, momentum=0.97, buy_pressure=0.46, stability=1.00, prev_trend=0.80)
+2026-10-21T05:01:27.223377+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:01:27,222 | INFO | algo_trader | Rank #2: INDIACEM-EQ — gain=+6.69%, score=0.580 (vol=1.0x, momentum=0.96, buy_pressure=0.52, stability=0.72, prev_trend=0.00)
+2026-10-21T05:01:27.223377+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:01:27,222 | INFO | algo_trader | Rank #3: DCMSRIND-EQ — gain=+7.04%, score=0.525 (vol=4.3x, momentum=0.58, buy_pressure=0.35, stability=0.00, prev_trend=0.40)
+2026-10-21T05:01:27.223377+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:01:27,222 | INFO | algo_trader | Rank #4: PASHUPATI-EQ — gain=+5.03%, score=0.519 (vol=0.7x, momentum=0.46, buy_pressure=0.85, stability=0.00, prev_trend=1.00)
+2026-10-21T05:01:27.223377+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:01:27,223 | INFO | algo_trader | Rank #5: DEEDEV-EQ — gain=+5.49%, score=0.285 (vol=0.6x, momentum=0.38, buy_pressure=0.43, stability=0.00, prev_trend=0.20)
+2026-10-21T05:01:27.526759+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:01:27,526 | INFO | algo_trader | Scan completed in 23.1 seconds. Found 5 raw candidates.
+2026-10-21T05:01:27.529594+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:01:27,529 | INFO | algo_trader | Checking read-only restrictions for 5 candidates...
+2026-10-21T05:01:27.531438+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:01:27,531 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 5 tradable, 0 rejected.
+2026-10-21T05:01:27.531664+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:01:27,531 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 0 filtered):
+2026-10-21T05:01:27.531664+00:00 ip-172-31-33-249 python[474058]:   FRACTAL-EQ: +5.63% @ 753.60
+2026-10-21T05:01:27.531664+00:00 ip-172-31-33-249 python[474058]:     Score=0.794 | Vol=1.5x | Momentum=0.97 | BuyPressure=0.46 | Stability=1.00 | PrevTrend=0.80
+2026-10-21T05:01:28.169259+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:01:28,169 | INFO | algo_trader | Validating 5 candidates in parallel...
+2026-10-21T05:01:28.195413+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:01:28,195 | INFO | algo_trader | ENTRY REJECTED DCMSRIND-EQ: Range position 0.633 < 0.85 (price retreating from high)
+2026-10-21T05:01:28.198065+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:01:28,197 | INFO | algo_trader | ENTRY REJECTED PASHUPATI-EQ: Range position 0.460 < 0.85 (price retreating from high)
+2026-10-21T05:01:28.201411+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:01:28,201 | INFO | algo_trader | ENTRY REJECTED DEEDEV-EQ: Range position 0.375 < 0.85 (price retreating from high)
+2026-10-21T05:01:28.203297+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:01:28,203 | INFO | algo_trader | Near-breakout skip for FRACTAL-EQ: range=0.997, gain=5.9% — skipping breakout check
+2026-10-21T05:01:28.203697+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:01:28,203 | INFO | algo_trader | Near-breakout skip for INDIACEM-EQ: range=0.961, gain=6.7% — skipping breakout check
+2026-10-21T05:01:28.229802+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:01:28,229 | INFO | algo_trader | ENTRY REJECTED FRACTAL-EQ: Volume fading: current 20677 vs avg 25542 (ratio 0.81 < 1.2)
+2026-10-21T05:01:29.224061+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:01:29,223 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-21T05:01:34.244755+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:01:34,244 | INFO | algo_trader | ENTRY VALIDATED INDIACEM-EQ: price=314.00, gain=+6.68%, range=0.961, breakout=True, vol_ratio=1.65, spread=0.0640%
+2026-10-21T05:01:34.247147+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:01:34,247 | INFO | algo_trader | Validation completed in 6.1 seconds: 1/5 passed.
+2026-10-21T05:01:34.247270+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:01:34,247 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-10-21T05:01:34.247406+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:01:34,247 | INFO | algo_trader | Capital: 100000.00 x 5.0x leverage = 500000.00 buying power | 1 validated stocks | 475000.00 per stock
+2026-10-21T05:01:35.242841+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:01:35,242 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-21T05:01:40.262469+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:01:40,262 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-10-21T05:01:50.277869+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:01:50,277 | WARNING | algo_trader | ATR candle fetch failed for token 1515: POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=[REDACTED_IP], client_local_ip=[REDACTED_IP]: Access denied because of exceeding access rate
+2026-10-21T05:01:50.278485+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:01:50,277 | WARNING | algo_trader | Using fallback ATR for token 1515: 1.5700 (0.50% of 314.00)
+2026-10-21T05:01:50.304487+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:01:50,304 | INFO | algo_trader | [PAPER] MARKET order filled: BUY INDIACEM-EQ 212 @ 313.46 (reference=313.30, fee=66.45) id=616b0732
+2026-10-21T05:01:50.306116+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:01:50,306 | INFO | algo_trader | MARKET order placed: BUY INDIACEM-EQ 212 [INTRADAY] {'response': {'data': {'orderid': '616b0732'}}}
+2026-10-21T05:01:50.312311+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:01:50,312 | INFO | algo_trader | [PAPER] SL-M order placed: SELL INDIACEM-EQ 212 trigger=308.75 id=42241c5e
+2026-10-21T05:01:50.314314+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:01:50,314 | INFO | algo_trader | SL-M order placed for INDIACEM-EQ: trigger=308.75, orderid=42241c5e
+2026-10-21T05:01:50.317239+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:01:50,317 | INFO | algo_trader | ENTRY: INDIACEM-EQ [MIS] — 212 shares @ 313.46 (capital=475000.00, gain=+6.69%, score=0.580, ATR=1.5700 (0.50%), SL=308.75, hard_stop=308.75) | {'response': {'data': {'orderid': '616b0732'}}}
+2026-10-21T05:01:51.004287+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:01:51,004 | INFO | algo_trader | Monitoring 1 positions with trailing stop...
+2026-10-21T05:41:49.740422+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:41:49,740 | INFO | algo_trader | TRAILING STOP UPDATE INDIACEM-EQ: SL 308.75 -> 311.89 (ltp=317.15, bid=317.00, high=317.15, profit=1.2%, intraday=7.7%, locked=False, ATR=1.5700)
+2026-10-21T05:41:49.744370+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:41:49,740 | INFO | algo_trader | [PAPER] SL-M modified: INDIACEM-EQ trigger 308.75 → 311.85 id=42241c5e
+2026-10-21T05:41:49.744370+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:41:49,742 | INFO | algo_trader | SL-M trigger updated for INDIACEM-EQ: new trigger=311.89
+2026-10-21T05:46:10.723643+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:46:10,723 | INFO | algo_trader | [position_check] INDIACEM-EQ: netqty=212
+2026-10-21T05:46:10.727480+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:46:10,725 | INFO | algo_trader | [position_check] INDIACEM-EQ: netqty=212
+2026-10-21T05:46:10.843276+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:46:10,843 | INFO | algo_trader | [PAPER] MARKET order filled: SELL INDIACEM-EQ 212 @ 311.49 (reference=311.65, fee=66.04) id=a4f1df5f
+2026-10-21T05:46:10.847986+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:46:10,847 | INFO | algo_trader | [exit_attempt] Exit confirmed for INDIACEM-EQ: 212 shares @ 311.49
+2026-10-21T05:46:10.848179+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:46:10,848 | INFO | algo_trader | [PAPER] Order cancelled: INDIACEM-EQ id=42241c5e
+2026-10-21T05:46:10.849527+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:46:10,849 | INFO | algo_trader | SL-M order confirmed CANCELLED for INDIACEM-EQ: 42241c5e
+2026-10-21T05:46:10.851792+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:46:10,851 | INFO | algo_trader | TRAILING STOP (4% trail, <2% profit) EXIT: INDIACEM-EQ — 0 shares @ 311.49 (entry=313.46, high=317.15, SL=311.89, hard_stop=308.75, ATR=1.5700, locked=False, PnL=-550.13, daily_pnl=-550.13, consecutive_losses=1/2, round=0/2) | ExitOutcome(state=<ExitState.CLOSED: 'closed'>, execution=OrderExecution(order_id='a4f1df5f', state=<OrderState.FILLED: 'filled'>, requested_quantity=212, filled_quantity=212, average_price=311.49, reason='', raw_order={'orderid': 'a4f1df5f', 'tradingsymbol': 'INDIACEM-EQ', 'transactiontype': 'SELL', 'quantity': '212', 'price': '311.49', 'filledshares': '212', 'averageprice': '311.49', 'triggerprice': '0.0', 'orderstatus': 'COMPLETE', 'status': 'COMPLETE', 'ordertype': 'MARKET', 'producttype': 'INTRADAY', 'referenceprice': '311.65', 'fees': '66.04'}), reason='')
+2026-10-21T05:46:21.536254+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:46:21,536 | INFO | algo_trader | All positions closed by stop-loss.
+2026-10-21T05:46:21.536904+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:46:21,536 | INFO | algo_trader | Smart gate: round P&L was ₹-550.13 — skipping re-entry.
+2026-10-21T05:46:22.258109+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:46:22,257 | INFO | algo_trader | [auth_refresh] Session age 4564s >= 300s, refreshing...
+2026-10-21T05:46:22.258264+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:46:22,258 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-10-21T05:46:22.304260+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:46:22,304 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-10-21T05:46:22.305960+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:46:22,305 | INFO | algo_trader |
+2026-10-21T05:46:22.305960+00:00 ip-172-31-33-249 python[474058]: ============================================================
+2026-10-21T05:46:22.305960+00:00 ip-172-31-33-249 python[474058]: PAPER TRADING SUMMARY
+2026-10-21T05:46:22.305960+00:00 ip-172-31-33-249 python[474058]: ============================================================
+2026-10-21T05:46:22.305960+00:00 ip-172-31-33-249 python[474058]: Total trades: 2
+2026-10-21T05:46:22.305960+00:00 ip-172-31-33-249 python[474058]: Buys: 1, Sells: 1
+2026-10-21T05:46:22.305960+00:00 ip-172-31-33-249 python[474058]:   10:31:50 BUY  INDIACEM-EQ x212 @ 313.46 fees: Rs.66.45
+2026-10-21T05:46:22.305960+00:00 ip-172-31-33-249 python[474058]:   11:16:10 SELL INDIACEM-EQ x212 @ 311.49 gross: Rs.-417.64, fees: Rs.132.49, net P&L: Rs.-550.13
+2026-10-21T05:46:22.305960+00:00 ip-172-31-33-249 python[474058]: Daily net P&L: Rs.-550.13
+2026-10-21T05:46:22.305960+00:00 ip-172-31-33-249 python[474058]: Capital: Rs.100,000.00 → Rs.99,449.87
+2026-10-21T05:46:22.305960+00:00 ip-172-31-33-249 python[474058]: All positions closed.
+2026-10-21T05:46:22.305960+00:00 ip-172-31-33-249 python[474058]: ============================================================
+2026-10-21T05:46:43.863673+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:46:43,863 | INFO | algo_trader | Replay comparison complete: 349/349 decisions matched; recommended slippage=0 bps; report=/home/ubuntu/algo-trader/data/replay_reports/2026-10-21/summary.json; universe=data/universe_snapshots.json
+2026-10-21T05:46:43.864621+00:00 ip-172-31-33-249 python[474058]: 2026-10-21 05:46:43,864 | INFO | algo_trader | Trading day complete. Daily P&L: ₹-550.13. Sleeping 22.7h until tomorrow.
+2026-10-21T06:09:01.583900+00:00 ip-172-31-33-249 systemd[1]: Stopping algo-trader.service - Algo Trader Bot...
+2026-10-21T06:09:01.625264+00:00 ip-172-31-33-249 systemd[1]: algo-trader.service: Deactivated successfully.
+2026-10-21T06:09:01.625691+00:00 ip-172-31-33-249 systemd[1]: Stopped algo-trader.service - Algo Trader Bot.
+2026-10-21T06:09:01.625792+00:00 ip-172-31-33-249 systemd[1]: algo-trader.service: Consumed 4min 19.706s CPU time over 2w 3d 23h 15min 58.851s wall clock time, 561.5M memory peak.
+2026-10-21T06:09:01.631009+00:00 ip-172-31-33-249 systemd[1]: Started algo-trader.service - Algo Trader Bot.
+2026-10-21T06:09:02.697323+00:00 ip-172-31-33-249 python[534455]: 2026-10-21 06:09:02,696 | INFO | algo_trader | Decision snapshots enabled: run_id=fab085c2aa674edcb100feb80d712a9e
+2026-10-21T06:09:02.699988+00:00 ip-172-31-33-249 python[534455]: 2026-10-21 06:09:02,697 | INFO | algo_trader | Logging in to Angel One...
+2026-10-21T06:09:03.321388+00:00 ip-172-31-33-249 python[534455]: 2026-10-21 06:09:03,321 | INFO | algo_trader | Angel One login successful.
+2026-10-21T06:09:03.321673+00:00 ip-172-31-33-249 python[534455]: 2026-10-21 06:09:03,321 | INFO | algo_trader | [PAPER] Paper trading mode active. Capital: 100000.00, slippage=5.0 bps/side, fees=10.0 bps/side
+2026-10-21T06:09:03.321673+00:00 ip-172-31-33-249 python[534455]: 2026-10-21 06:09:03,321 | INFO | algo_trader | Broker mode: PAPER TRADING (simulated orders) + Angel One (market data)
+2026-10-21T06:09:03.321673+00:00 ip-172-31-33-249 python[534455]: 2026-10-21 06:09:03,321 | INFO | algo_trader | Loading ASM/GSM/F&O restricted lists from NSE...
+2026-10-21T06:09:03.467542+00:00 ip-172-31-33-249 python[534455]: 2026-10-21 06:09:03,466 | INFO | algo_trader | Loaded 203 ASM stocks from NSE.
+2026-10-21T06:09:03.571596+00:00 ip-172-31-33-249 python[534455]: 2026-10-21 06:09:03,570 | INFO | algo_trader | Loaded 77 GSM stocks from NSE.
+2026-10-21T06:09:03.646427+00:00 ip-172-31-33-249 python[534455]: 2026-10-21 06:09:03,645 | WARNING | algo_trader | Failed to fetch F&O list: HTTP 404
+2026-10-21T06:09:03.650538+00:00 ip-172-31-33-249 python[534455]: 2026-10-21 06:09:03,649 | INFO | algo_trader | Loading NSE equity scrip master...
+2026-10-21T06:09:05.200168+00:00 ip-172-31-33-249 python[534455]: 2026-10-21 06:09:05,193 | INFO | algo_trader | Scrip master cached to disk (154769 entries).
+2026-10-21T06:09:05.250293+00:00 ip-172-31-33-249 python[534455]: 2026-10-21 06:09:05,250 | INFO | algo_trader | Loaded 2730 NSE equity stocks.
+2026-10-21T06:09:05.548595+00:00 ip-172-31-33-249 python[534455]: 2026-10-21 06:09:05,547 | INFO | algo_trader | Daily candle cache cleared.
+2026-10-21T06:09:05.548595+00:00 ip-172-31-33-249 python[534455]: 2026-10-21 06:09:05,547 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-10-21T06:09:05.548595+00:00 ip-172-31-33-249 python[534455]: 2026-10-21 06:09:05,548 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-10-21T06:09:05.637216+00:00 ip-172-31-33-249 python[534455]: 2026-10-21 06:09:05,637 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-10-21T06:09:05.638904+00:00 ip-172-31-33-249 python[534455]: 2026-10-21 06:09:05,638 | INFO | algo_trader | [auth_refresh] Angel One session refreshed.
+2026-10-21T06:09:05.821668+00:00 ip-172-31-33-249 python[534455]: 2026-10-21 06:09:05,821 | INFO | algo_trader | Market Check: 1/4 — NOT BULLISH
+2026-10-21T06:09:05.821668+00:00 ip-172-31-33-249 python[534455]: 1. Index Direction: FAIL ❌
+2026-10-21T06:09:05.821668+00:00 ip-172-31-33-249 python[534455]:    Nifty 50: -0.18% (need > 0%)
+2026-10-21T06:09:05.821668+00:00 ip-172-31-33-249 python[534455]: 2. Market Breadth: FAIL ❌
+2026-10-21T06:09:05.821668+00:00 ip-172-31-33-249 python[534455]:    Advancers: 13, Decliners: 36
+2026-10-21T06:09:05.821668+00:00 ip-172-31-33-249 python[534455]:    Breadth ratio: 0.36 (need > 1.2)
+2026-10-21T06:09:05.821668+00:00 ip-172-31-33-249 python[534455]: 3. Intraday Strength: FAIL ❌
+2026-10-21T06:09:05.821668+00:00 ip-172-31-33-249 python[534455]:    Nifty LTP vs Open: 22848.50 vs 23016.00
+2026-10-21T06:09:05.821668+00:00 ip-172-31-33-249 python[534455]:    NIFTYBEES vs VWAP: 260.80 vs 262.12
+2026-10-21T06:09:05.821668+00:00 ip-172-31-33-249 python[534455]: 4. Volatility Filter: PASS ✅
+2026-10-21T06:09:05.821668+00:00 ip-172-31-33-249 python[534455]:    India VIX change: +3.99% (reject if > +5%)
+2026-10-21T06:09:05.821668+00:00 ip-172-31-33-249 python[534455]: Decision: SKIP TRADING (score 1/4 < 2)
+2026-10-21T06:09:05.821668+00:00 ip-172-31-33-249 python[534455]: Failed: Index Direction, Market Breadth, Intraday Strength
+2026-10-21T07:09:06.450356+00:00 ip-172-31-33-249 python[534455]: 2026-10-21 07:09:06,450 | INFO | algo_trader | Daily candle cache cleared.
+2026-10-21T07:09:06.455044+00:00 ip-172-31-33-249 python[534455]: 2026-10-21 07:09:06,451 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-10-21T07:09:06.455044+00:00 ip-172-31-33-249 python[534455]: 2026-10-21 07:09:06,452 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-10-21T07:09:06.506451+00:00 ip-172-31-33-249 python[534455]: 2026-10-21 07:09:06,506 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-10-21T07:09:06.507614+00:00 ip-172-31-33-249 python[534455]: 2026-10-21 07:09:06,507 | INFO | algo_trader | [auth_refresh] Angel One session refreshed.
+2026-10-21T07:09:06.689684+00:00 ip-172-31-33-249 python[534455]: 2026-10-21 07:09:06,689 | INFO | algo_trader | Market Check: 0/4 — NOT BULLISH
+2026-10-21T07:09:06.689684+00:00 ip-172-31-33-249 python[534455]: 1. Index Direction: FAIL ❌
+2026-10-21T07:09:06.689684+00:00 ip-172-31-33-249 python[534455]:    Nifty 50: -0.62% (need > 0%)
+2026-10-21T07:09:06.689684+00:00 ip-172-31-33-249 python[534455]: 2. Market Breadth: FAIL ❌
+2026-10-21T07:09:06.689684+00:00 ip-172-31-33-249 python[534455]:    Advancers: 11, Decliners: 39
+2026-10-21T07:09:06.689684+00:00 ip-172-31-33-249 python[534455]:    Breadth ratio: 0.28 (need > 1.2)
+2026-10-21T07:09:06.689684+00:00 ip-172-31-33-249 python[534455]: 3. Intraday Strength: FAIL ❌
+2026-10-21T07:09:06.689684+00:00 ip-172-31-33-249 python[534455]:    Nifty LTP vs Open: 22745.95 vs 23016.00
+2026-10-21T07:09:06.689684+00:00 ip-172-31-33-249 python[534455]:    NIFTYBEES vs VWAP: 259.90 vs 261.56
+2026-10-21T07:09:06.689684+00:00 ip-172-31-33-249 python[534455]: 4. Volatility Filter: FAIL ❌
+2026-10-21T07:09:06.689684+00:00 ip-172-31-33-249 python[534455]:    India VIX change: +8.60% (reject if > +5%)
+2026-10-21T07:09:06.689684+00:00 ip-172-31-33-249 python[534455]: Decision: SKIP TRADING (score 0/4 < 2)
+2026-10-21T07:09:06.689684+00:00 ip-172-31-33-249 python[534455]: Failed: Index Direction, Market Breadth, Intraday Strength, Volatility Filter
+2026-10-21T08:09:07.320378+00:00 ip-172-31-33-249 python[534455]: 2026-10-21 08:09:07,320 | INFO | algo_trader | Daily candle cache cleared.
+2026-10-21T08:09:07.324361+00:00 ip-172-31-33-249 python[534455]: 2026-10-21 08:09:07,320 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-10-21T08:09:07.324361+00:00 ip-172-31-33-249 python[534455]: 2026-10-21 08:09:07,320 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-10-21T08:09:07.376153+00:00 ip-172-31-33-249 python[534455]: 2026-10-21 08:09:07,376 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-10-21T08:09:07.377425+00:00 ip-172-31-33-249 python[534455]: 2026-10-21 08:09:07,377 | INFO | algo_trader | [auth_refresh] Angel One session refreshed.
+2026-10-21T08:09:07.564865+00:00 ip-172-31-33-249 python[534455]: 2026-10-21 08:09:07,564 | INFO | algo_trader | Market Check: 0/4 — NOT BULLISH
+2026-10-21T08:09:07.564865+00:00 ip-172-31-33-249 python[534455]: 1. Index Direction: FAIL ❌
+2026-10-21T08:09:07.564865+00:00 ip-172-31-33-249 python[534455]:    Nifty 50: -0.77% (need > 0%)
+2026-10-21T08:09:07.564865+00:00 ip-172-31-33-249 python[534455]: 2. Market Breadth: FAIL ❌
+2026-10-21T08:09:07.564865+00:00 ip-172-31-33-249 python[534455]:    Advancers: 11, Decliners: 39
+2026-10-21T08:09:07.564865+00:00 ip-172-31-33-249 python[534455]:    Breadth ratio: 0.28 (need > 1.2)
+2026-10-21T08:09:07.564865+00:00 ip-172-31-33-249 python[534455]: 3. Intraday Strength: FAIL ❌
+2026-10-21T08:09:07.564865+00:00 ip-172-31-33-249 python[534455]:    Nifty LTP vs Open: 22712.10 vs 23016.00
+2026-10-21T08:09:07.564865+00:00 ip-172-31-33-249 python[534455]:    NIFTYBEES vs VWAP: 259.52 vs 261.28
+2026-10-21T08:09:07.564865+00:00 ip-172-31-33-249 python[534455]: 4. Volatility Filter: FAIL ❌
+2026-10-21T08:09:07.564865+00:00 ip-172-31-33-249 python[534455]:    India VIX change: +7.99% (reject if > +5%)
+2026-10-21T08:09:07.564865+00:00 ip-172-31-33-249 python[534455]: Decision: SKIP TRADING (score 0/4 < 2)
+2026-10-21T08:09:07.564865+00:00 ip-172-31-33-249 python[534455]: Failed: Index Direction, Market Breadth, Intraday Strength, Volatility Filter
+2026-10-21T09:09:08.165102+00:00 ip-172-31-33-249 python[534455]: 2026-10-21 09:09:08,164 | INFO | algo_trader | Daily candle cache cleared.
+2026-10-21T09:09:08.168895+00:00 ip-172-31-33-249 python[534455]: 2026-10-21 09:09:08,165 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-10-21T09:09:08.168895+00:00 ip-172-31-33-249 python[534455]: 2026-10-21 09:09:08,165 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-10-21T09:09:08.209676+00:00 ip-172-31-33-249 python[534455]: 2026-10-21 09:09:08,209 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-10-21T09:09:08.210817+00:00 ip-172-31-33-249 python[534455]: 2026-10-21 09:09:08,210 | INFO | algo_trader | [auth_refresh] Angel One session refreshed.
+2026-10-21T09:09:08.398112+00:00 ip-172-31-33-249 python[534455]: 2026-10-21 09:09:08,397 | INFO | algo_trader | Market Check: 0/4 — NOT BULLISH
+2026-10-21T09:09:08.398112+00:00 ip-172-31-33-249 python[534455]: 1. Index Direction: FAIL ❌
+2026-10-21T09:09:08.398112+00:00 ip-172-31-33-249 python[534455]:    Nifty 50: -0.92% (need > 0%)
+2026-10-21T09:09:08.398112+00:00 ip-172-31-33-249 python[534455]: 2. Market Breadth: FAIL ❌
+2026-10-21T09:09:08.398112+00:00 ip-172-31-33-249 python[534455]:    Advancers: 10, Decliners: 40
+2026-10-21T09:09:08.398112+00:00 ip-172-31-33-249 python[534455]:    Breadth ratio: 0.25 (need > 1.2)
+2026-10-21T09:09:08.398112+00:00 ip-172-31-33-249 python[534455]: 3. Intraday Strength: FAIL ❌
+2026-10-21T09:09:08.398112+00:00 ip-172-31-33-249 python[534455]:    Nifty LTP vs Open: 22679.05 vs 23016.00
+2026-10-21T09:09:08.398112+00:00 ip-172-31-33-249 python[534455]:    NIFTYBEES vs VWAP: 259.17 vs 260.97
+2026-10-21T09:09:08.398112+00:00 ip-172-31-33-249 python[534455]: 4. Volatility Filter: FAIL ❌
+2026-10-21T09:09:08.398112+00:00 ip-172-31-33-249 python[534455]:    India VIX change: +7.65% (reject if > +5%)
+2026-10-21T09:09:08.398112+00:00 ip-172-31-33-249 python[534455]: Decision: SKIP TRADING (score 0/4 < 2)
+2026-10-21T09:09:08.398112+00:00 ip-172-31-33-249 python[534455]: Failed: Index Direction, Market Breadth, Intraday Strength, Volatility Filter
+2026-10-21T10:09:09.174066+00:00 ip-172-31-33-249 python[534455]: 2026-10-21 10:09:09,173 | INFO | algo_trader | Daily candle cache cleared.
+2026-10-21T10:09:09.178316+00:00 ip-172-31-33-249 python[534455]: 2026-10-21 10:09:09,174 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-10-21T10:09:28.689228+00:00 ip-172-31-33-249 python[534455]: 2026-10-21 10:09:28,687 | INFO | algo_trader | Replay comparison complete: 4/4 decisions matched; recommended slippage=0 bps; report=/home/ubuntu/algo-trader/data/replay_reports/2026-10-21/summary.json; universe=data/universe_snapshots.json
+2026-10-21T10:09:28.691930+00:00 ip-172-31-33-249 python[534455]: 2026-10-21 10:09:28,689 | INFO | algo_trader | Market closed for today. Sleeping 18.3h until the next scan window.
