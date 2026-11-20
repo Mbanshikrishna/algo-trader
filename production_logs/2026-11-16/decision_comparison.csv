@@ -1,0 +1,108 @@
+sequence,event_type,symbol,recorded_decision,replayed_decision,matched,detail
+33524,market_gate,,trade,trade,True,four-factor market gate
+33525,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['MANCREDIT-EQ', 'UFLEX-EQ', 'IVALUE-EQ', 'GOKEX-EQ', 'GALLANTT-EQ']; replayed=['MANCREDIT-EQ', 'UFLEX-EQ', 'IVALUE-EQ', 'GOKEX-EQ', 'GALLANTT-EQ']"
+33526,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+33527,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+33528,candidate_validation,MANCREDIT-EQ,rejected,rejected,True,Range position 0.647 < 0.85 (price retreating from high)
+33529,candidate_validation,IVALUE-EQ,rejected,rejected,True,Range position 0.726 < 0.85 (price retreating from high)
+33530,candidate_validation,GOKEX-EQ,rejected,rejected,True,Gain +4.71% outside 5.0-10.0% range
+33531,candidate_validation,UFLEX-EQ,rejected,rejected,True,Volume fading: current 590 vs avg 11238 (ratio 0.05 < 1.2)
+33532,candidate_validation,GALLANTT-EQ,rejected,rejected,True,"Volume check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=13.126.199.100, client_local_ip=172.31.33.249: Access denied because of exceeding access rate)"
+33533,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['MANCREDIT-EQ', 'BOROLTD-EQ', 'SGMART-EQ', 'UFLEX-EQ', 'IVALUE-EQ']; replayed=['MANCREDIT-EQ', 'BOROLTD-EQ', 'SGMART-EQ', 'UFLEX-EQ', 'IVALUE-EQ']"
+33534,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+33535,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+33536,candidate_validation,MANCREDIT-EQ,rejected,rejected,True,Range position 0.679 < 0.85 (price retreating from high)
+33537,candidate_validation,SGMART-EQ,rejected,rejected,True,Range position 0.803 < 0.85 (price retreating from high)
+33538,candidate_validation,UFLEX-EQ,rejected,rejected,True,Range position 0.815 < 0.85 (price retreating from high)
+33539,candidate_validation,IVALUE-EQ,rejected,rejected,True,Range position 0.683 < 0.85 (price retreating from high)
+33540,candidate_validation,BOROLTD-EQ,accepted,accepted,True,All checks passed
+33541,position_sized,BOROLTD-EQ,151,151,True,risk-based position sizing
+33549,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33550,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33551,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33552,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33553,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33554,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33555,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33556,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33557,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33558,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33559,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33560,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33561,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33562,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33563,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33564,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33565,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33566,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33567,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33568,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33569,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33570,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33571,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33572,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33573,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33574,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33575,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33576,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33577,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33578,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33579,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33580,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33581,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33582,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33583,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33584,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33585,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33586,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33587,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33588,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33589,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33590,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33591,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33592,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33593,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33594,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33595,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33596,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33598,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33599,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33600,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33601,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33602,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33603,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33604,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33605,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33606,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33607,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33608,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33609,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33610,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33611,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33612,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33613,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33614,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33615,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33616,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33617,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33618,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33619,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33620,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33621,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33622,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33623,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33624,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33625,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33626,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33627,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33628,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33629,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33630,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33631,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33632,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33633,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33634,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33635,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33636,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33637,position_evaluated,BOROLTD-EQ,hold,hold,True,target and post-trail stop decision
+33638,position_evaluated,BOROLTD-EQ,exit,exit,True,target and post-trail stop decision
