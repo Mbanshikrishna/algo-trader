@@ -1,0 +1,310 @@
+sequence,event_type,symbol,recorded_decision,replayed_decision,matched,detail
+17308,market_gate,,trade,trade,True,four-factor market gate
+17309,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['COLPAL-EQ', 'CYIENT-EQ', 'BROOKS-EQ', 'THERMAX-EQ', 'INDORAMA-EQ']; replayed=['COLPAL-EQ', 'CYIENT-EQ', 'BROOKS-EQ', 'THERMAX-EQ', 'INDORAMA-EQ']"
+17310,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+17311,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+17312,candidate_validation,CYIENT-EQ,rejected,rejected,True,Range position 0.754 < 0.85 (price retreating from high)
+17313,candidate_validation,BROOKS-EQ,rejected,rejected,True,Wide spread: 0.28 (0.373% > 0.2%)
+17314,candidate_validation,THERMAX-EQ,rejected,rejected,True,Gain +4.95% outside 5.0-10.0% range
+17315,candidate_validation,COLPAL-EQ,rejected,rejected,True,No micro breakout: LTP 1860.50 < last 5min high 1865.50
+17316,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['STUDDS-EQ', 'COLPAL-EQ', 'SAKSOFT-EQ', 'SWELECTES-EQ', 'BROOKS-EQ']; replayed=['STUDDS-EQ', 'COLPAL-EQ', 'SAKSOFT-EQ', 'SWELECTES-EQ', 'BROOKS-EQ']"
+17317,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+17318,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+17319,candidate_validation,STUDDS-EQ,rejected,rejected,True,Range position 0.662 < 0.85 (price retreating from high)
+17320,candidate_validation,SWELECTES-EQ,rejected,rejected,True,Range position 0.621 < 0.85 (price retreating from high)
+17321,candidate_validation,COLPAL-EQ,rejected,rejected,True,No micro breakout: LTP 1858.30 < last 5min high 1865.50
+17322,candidate_validation,BROOKS-EQ,rejected,rejected,True,No micro breakout: LTP 74.99 < last 5min high 75.60
+17323,candidate_validation,SAKSOFT-EQ,rejected,rejected,True,"Volume check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=13.126.199.100, client_local_ip=172.31.33.249: Access denied because of exceeding access rate)"
+17324,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['COLPAL-EQ', 'STUDDS-EQ', 'SWELECTES-EQ', 'MOBIKWIK-EQ', 'BROOKS-EQ']; replayed=['COLPAL-EQ', 'STUDDS-EQ', 'SWELECTES-EQ', 'MOBIKWIK-EQ', 'BROOKS-EQ']"
+17325,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+17326,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+17327,candidate_validation,STUDDS-EQ,rejected,rejected,True,Range position 0.626 < 0.85 (price retreating from high)
+17328,candidate_validation,SWELECTES-EQ,rejected,rejected,True,Range position 0.602 < 0.85 (price retreating from high)
+17329,candidate_validation,BROOKS-EQ,rejected,rejected,True,Range position 0.835 < 0.85 (price retreating from high)
+17330,candidate_validation,MOBIKWIK-EQ,rejected,rejected,True,Volume fading: current 89135 vs avg 191197 (ratio 0.47 < 1.2)
+17331,candidate_validation,COLPAL-EQ,rejected,rejected,True,No micro breakout: LTP 1857.70 < last 5min high 1865.00
+17332,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['COLPAL-EQ', 'STUDDS-EQ', 'SAKSOFT-EQ', 'SWELECTES-EQ', 'CYIENT-EQ']; replayed=['COLPAL-EQ', 'STUDDS-EQ', 'SAKSOFT-EQ', 'SWELECTES-EQ', 'CYIENT-EQ']"
+17333,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+17334,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+17335,candidate_validation,STUDDS-EQ,rejected,rejected,True,Range position 0.635 < 0.85 (price retreating from high)
+17336,candidate_validation,SAKSOFT-EQ,rejected,rejected,True,Range position 0.690 < 0.85 (price retreating from high)
+17337,candidate_validation,SWELECTES-EQ,rejected,rejected,True,Range position 0.596 < 0.85 (price retreating from high)
+17338,candidate_validation,CYIENT-EQ,accepted,accepted,True,All checks passed
+17339,candidate_validation,COLPAL-EQ,rejected,rejected,True,"Breakout check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=13.126.199.100, client_local_ip=172.31.33.249: Access denied because of exceeding access rate)"
+17340,position_sized,CYIENT-EQ,43,43,True,risk-based position sizing
+17348,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17349,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17350,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17351,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17352,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17353,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17354,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17355,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17356,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17357,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17358,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17359,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17360,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17361,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17362,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17363,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17364,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17365,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17366,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17367,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17368,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17370,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17371,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17372,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17373,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17374,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17375,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17376,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17377,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17378,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17379,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17380,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17381,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17382,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17383,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17384,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17385,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17386,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17387,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17388,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17389,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17390,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17391,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17392,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17393,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17394,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17395,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17396,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17397,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17398,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17399,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17400,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17401,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17402,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17403,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17404,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17405,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17406,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17407,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17408,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17409,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17410,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17411,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17412,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17413,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17414,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17415,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17416,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17417,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17418,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17419,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17420,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17421,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17422,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17423,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17424,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17425,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17426,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17427,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17428,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17429,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17430,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17431,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17432,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17433,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17434,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17435,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17436,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17437,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17438,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17439,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17440,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17441,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17442,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17443,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17444,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17445,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17446,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17447,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17448,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17449,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17450,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17451,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17452,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17453,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17454,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17455,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17456,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17457,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17458,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17459,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17460,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17461,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17462,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17463,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17464,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17465,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17466,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17467,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17468,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17469,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17470,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17471,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17472,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17473,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17474,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17475,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17476,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17477,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17478,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17479,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17480,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17481,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17482,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17483,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17484,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17485,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17486,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17487,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17488,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17489,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17490,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17491,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17492,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17493,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17494,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17495,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17496,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17497,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17498,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17499,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17501,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17502,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17503,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17504,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17505,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17506,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17507,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17508,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17509,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17510,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17511,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17512,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17513,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17514,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17515,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17516,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17517,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17518,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17519,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17520,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17521,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17522,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17523,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17524,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17525,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17526,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17527,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17528,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17529,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17530,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17531,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17532,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17533,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17534,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17535,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17536,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17537,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17538,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17539,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17540,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17541,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17542,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17543,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17544,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17545,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17546,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17547,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17548,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17549,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17550,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17551,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17552,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17553,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17554,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17555,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17556,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17557,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17558,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17559,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17560,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17561,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17562,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17563,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17564,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17565,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17566,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17567,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17568,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17569,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17570,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17571,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17572,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17573,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17574,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17575,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17576,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17577,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17578,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17579,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17580,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17581,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17582,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17583,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17584,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17585,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17586,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17587,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17588,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17589,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17590,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17591,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17592,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17593,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17594,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17595,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17596,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17597,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17598,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17599,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17600,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17601,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17602,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17603,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17604,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17605,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17606,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17607,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17608,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17609,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17610,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17611,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17612,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17613,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17614,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17615,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17616,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17617,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17618,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17619,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17620,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17621,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17622,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17623,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17624,position_evaluated,CYIENT-EQ,hold,hold,True,target and post-trail stop decision
+17625,position_evaluated,CYIENT-EQ,exit,exit,True,target and post-trail stop decision
