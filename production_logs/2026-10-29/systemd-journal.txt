@@ -1,0 +1,190 @@
+2026-10-29T04:30:00.723250+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:30:00,723 | INFO | algo_trader | Daily candle cache cleared.
+2026-10-29T04:30:00.730065+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:30:00,727 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-10-29T04:30:00.730065+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:30:00,727 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-10-29T04:30:00.783987+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:30:00,783 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-10-29T04:30:00.785463+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:30:00,785 | INFO | algo_trader | [auth_refresh] Angel One session refreshed.
+2026-10-29T04:30:00.969743+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:30:00,969 | INFO | algo_trader | Market Check: 4/4 — BULLISH
+2026-10-29T04:30:00.969743+00:00 ip-172-31-33-249 python[545938]: 1. Index Direction: PASS ✅
+2026-10-29T04:30:00.969743+00:00 ip-172-31-33-249 python[545938]:    Nifty 50: +0.21% (need > 0%)
+2026-10-29T04:30:00.969743+00:00 ip-172-31-33-249 python[545938]: 2. Market Breadth: PASS ✅
+2026-10-29T04:30:00.969743+00:00 ip-172-31-33-249 python[545938]:    Advancers: 28, Decliners: 22
+2026-10-29T04:30:00.969743+00:00 ip-172-31-33-249 python[545938]:    Breadth ratio: 1.27 (need > 1.2)
+2026-10-29T04:30:00.969743+00:00 ip-172-31-33-249 python[545938]: 3. Intraday Strength: PASS ✅
+2026-10-29T04:30:00.969743+00:00 ip-172-31-33-249 python[545938]:    Nifty LTP vs Open: 22747.15 vs 22690.65
+2026-10-29T04:30:00.969743+00:00 ip-172-31-33-249 python[545938]:    NIFTYBEES vs VWAP: 259.88 vs 259.61
+2026-10-29T04:30:00.969743+00:00 ip-172-31-33-249 python[545938]: 4. Volatility Filter: PASS ✅
+2026-10-29T04:30:00.969743+00:00 ip-172-31-33-249 python[545938]:    India VIX change: -1.78% (reject if > +5%)
+2026-10-29T04:30:00.969743+00:00 ip-172-31-33-249 python[545938]: Decision: TRADE (score 4/4 >= 3)
+2026-10-29T04:30:01.575064+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:30:01,574 | INFO | algo_trader | Scanning 2736 stocks for top 1 candidates (pool=5)...
+2026-10-29T04:30:01.575923+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:30:01,575 | INFO | algo_trader | Fetching quotes for 2736 stocks...
+2026-10-29T04:30:08.372831+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:30:08,372 | INFO | algo_trader | Received 2730 quotes.
+2026-10-29T04:30:08.375528+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:30:08,375 | INFO | algo_trader | Candidates in 5-8% gain range: 13
+2026-10-29T04:30:08.376427+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:30:08,375 | INFO | algo_trader | Fetching daily candles for 13 candidates...
+2026-10-29T04:30:12.377455+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:30:12,377 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-29T04:30:18.377901+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:30:18,377 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-29T04:30:24.378333+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:30:24,378 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-29T04:30:24.379659+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:30:24,379 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-29T04:30:30.380272+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:30:30,380 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-10-29T04:30:44.381089+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:30:44,380 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-10-29T04:30:44.382628+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:30:44,382 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-29T04:30:44.382628+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:30:44,382 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-29T04:30:44.383585+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:30:44,382 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-10-29T04:30:58.383559+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:30:58,383 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-29T04:30:58.384898+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:30:58,384 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-10-29T04:30:58.385665+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:30:58,384 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-10-29T04:31:11.409566+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:31:11,409 | INFO | algo_trader | Rank #1: SGMART-EQ — gain=+7.96%, score=0.697 (vol=1.0x, momentum=0.95, buy_pressure=0.46, stability=0.82, prev_trend=0.80)
+2026-10-29T04:31:11.413073+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:31:11,409 | INFO | algo_trader | Rank #2: AARTIPHARM-EQ — gain=+6.41%, score=0.693 (vol=2.1x, momentum=0.88, buy_pressure=0.37, stability=0.59, prev_trend=0.40)
+2026-10-29T04:31:11.413073+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:31:11,409 | INFO | algo_trader | Rank #3: SHREEPUSHK-EQ — gain=+5.27%, score=0.644 (vol=1.2x, momentum=0.76, buy_pressure=0.45, stability=0.65, prev_trend=0.80)
+2026-10-29T04:31:11.413073+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:31:11,409 | INFO | algo_trader | Rank #4: OPTIEMUS-EQ — gain=+6.55%, score=0.638 (vol=0.6x, momentum=0.98, buy_pressure=0.41, stability=1.00, prev_trend=0.60)
+2026-10-29T04:31:11.413073+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:31:11,409 | INFO | algo_trader | Rank #5: ACUTAAS-EQ — gain=+6.68%, score=0.633 (vol=0.6x, momentum=0.95, buy_pressure=0.44, stability=0.95, prev_trend=0.60)
+2026-10-29T04:31:11.759557+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:31:11,759 | INFO | algo_trader | Scan completed in 70.2 seconds. Found 5 raw candidates.
+2026-10-29T04:31:11.764328+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:31:11,764 | INFO | algo_trader | Skipped by ASM/GSM/circuit filter:
+2026-10-29T04:31:11.764328+00:00 ip-172-31-33-249 python[545938]:   OPTIEMUS-EQ: ASM listed (Additional Surveillance Measure)
+2026-10-29T04:31:11.765446+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:31:11,764 | INFO | algo_trader | Checking read-only restrictions for 4 candidates...
+2026-10-29T04:31:11.771493+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:31:11,771 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 4 tradable, 0 rejected.
+2026-10-29T04:31:11.771633+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:31:11,771 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 1 filtered):
+2026-10-29T04:31:11.771633+00:00 ip-172-31-33-249 python[545938]:   SGMART-EQ: +7.96% @ 866.85
+2026-10-29T04:31:11.771633+00:00 ip-172-31-33-249 python[545938]:     Score=0.697 | Vol=1.0x | Momentum=0.95 | BuyPressure=0.46 | Stability=0.82 | PrevTrend=0.80
+2026-10-29T04:31:12.370877+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:31:12,370 | INFO | algo_trader | Validating 4 candidates in parallel...
+2026-10-29T04:31:12.396228+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:31:12,396 | INFO | algo_trader | ENTRY REJECTED SHREEPUSHK-EQ: Range position 0.769 < 0.85 (price retreating from high)
+2026-10-29T04:31:12.405779+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:31:12,405 | INFO | algo_trader | Near-breakout skip for AARTIPHARM-EQ: range=0.876, gain=6.4% — skipping breakout check
+2026-10-29T04:31:12.406238+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:31:12,405 | INFO | algo_trader | Near-breakout skip for ACUTAAS-EQ: range=0.974, gain=6.8% — skipping breakout check
+2026-10-29T04:31:14.405744+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:31:14,405 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-29T04:31:14.406661+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:31:14,406 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-29T04:31:14.431767+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:31:14,431 | INFO | algo_trader | ENTRY REJECTED ACUTAAS-EQ: Volume fading: current 2396 vs avg 18364 (ratio 0.13 < 1.2)
+2026-10-29T04:31:20.406782+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:31:20,406 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-10-29T04:31:20.423464+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:31:20,423 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-10-29T04:31:30.440170+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:31:30,439 | WARNING | algo_trader | Candle fetch failed for SGMART-EQ breakout check: POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=[REDACTED_IP], client_local_ip=[REDACTED_IP]: Access denied because of exceeding access rate — rejecting
+2026-10-29T04:31:30.441448+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:31:30,440 | INFO | algo_trader | ENTRY REJECTED SGMART-EQ: Breakout check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=[REDACTED_IP], client_local_ip=[REDACTED_IP]: Access denied because of exceeding access rate)
+2026-10-29T04:31:31.446374+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:31:31,446 | INFO | algo_trader | ENTRY REJECTED AARTIPHARM-EQ: Volume fading: current 315 vs avg 20391 (ratio 0.02 < 1.2)
+2026-10-29T04:31:31.453443+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:31:31,453 | INFO | algo_trader | Validation completed in 19.1 seconds: 0/4 passed.
+2026-10-29T04:31:31.453584+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:31:31,453 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-29T04:31:32.035345+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:31:32,035 | INFO | algo_trader | Scan attempt 2 — retrying in 120s (window open until 14:00)...
+2026-10-29T04:33:32.035686+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:33:32,035 | INFO | algo_trader | Scanning 2736 stocks for top 1 candidates (pool=5)...
+2026-10-29T04:33:32.036416+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:33:32,035 | INFO | algo_trader | Fetching quotes for 2736 stocks...
+2026-10-29T04:33:38.824283+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:33:38,824 | INFO | algo_trader | Received 2730 quotes.
+2026-10-29T04:33:38.826886+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:33:38,826 | INFO | algo_trader | Candidates in 5-8% gain range: 12
+2026-10-29T04:33:38.828094+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:33:38,826 | INFO | algo_trader | Fetching daily candles for 12 candidates...
+2026-10-29T04:33:42.829336+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:33:42,828 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-29T04:33:42.830574+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:33:42,829 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-29T04:33:49.830566+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:33:49,829 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-29T04:33:49.831459+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:33:49,831 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-10-29T04:34:00.855277+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:34:00,855 | INFO | algo_trader | Rank #1: HUBTOWN-EQ — gain=+7.73%, score=0.841 (vol=2.5x, momentum=0.70, buy_pressure=0.87, stability=0.81, prev_trend=0.80)
+2026-10-29T04:34:00.855850+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:34:00,855 | INFO | algo_trader | Rank #2: MANBA-EQ — gain=+5.07%, score=0.741 (vol=2.3x, momentum=0.58, buy_pressure=0.53, stability=0.99, prev_trend=0.60)
+2026-10-29T04:34:00.855850+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:34:00,855 | INFO | algo_trader | Rank #3: JWL-EQ — gain=+7.99%, score=0.736 (vol=8.6x, momentum=0.79, buy_pressure=0.68, stability=0.43, prev_trend=0.60)
+2026-10-29T04:34:00.855850+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:34:00,855 | INFO | algo_trader | Rank #4: ADSL-EQ — gain=+6.40%, score=0.702 (vol=1.4x, momentum=0.81, buy_pressure=0.50, stability=0.93, prev_trend=0.60)
+2026-10-29T04:34:00.855850+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:34:00,855 | INFO | algo_trader | Rank #5: MANAKCOAT-EQ — gain=+6.63%, score=0.690 (vol=2.8x, momentum=0.58, buy_pressure=0.47, stability=0.94, prev_trend=0.40)
+2026-10-29T04:34:01.173552+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:34:01,173 | INFO | algo_trader | Scan completed in 29.1 seconds. Found 5 raw candidates.
+2026-10-29T04:34:01.182141+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:34:01,181 | INFO | algo_trader | Checking read-only restrictions for 5 candidates...
+2026-10-29T04:34:01.187580+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:34:01,187 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 5 tradable, 0 rejected.
+2026-10-29T04:34:01.187751+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:34:01,187 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 0 filtered):
+2026-10-29T04:34:01.187751+00:00 ip-172-31-33-249 python[545938]:   HUBTOWN-EQ: +7.73% @ 185.67
+2026-10-29T04:34:01.187751+00:00 ip-172-31-33-249 python[545938]:     Score=0.841 | Vol=2.5x | Momentum=0.70 | BuyPressure=0.87 | Stability=0.81 | PrevTrend=0.80
+2026-10-29T04:34:01.818126+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:34:01,818 | INFO | algo_trader | Validating 5 candidates in parallel...
+2026-10-29T04:34:01.842213+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:34:01,842 | INFO | algo_trader | ENTRY REJECTED HUBTOWN-EQ: Range position 0.759 < 0.85 (price retreating from high)
+2026-10-29T04:34:01.846467+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:34:01,846 | INFO | algo_trader | ENTRY REJECTED MANBA-EQ: Range position 0.603 < 0.85 (price retreating from high)
+2026-10-29T04:34:01.851750+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:34:01,851 | INFO | algo_trader | ENTRY REJECTED JWL-EQ: Range position 0.772 < 0.85 (price retreating from high)
+2026-10-29T04:34:01.855860+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:34:01,855 | INFO | algo_trader | ENTRY REJECTED ADSL-EQ: Range position 0.830 < 0.85 (price retreating from high)
+2026-10-29T04:34:01.860477+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:34:01,860 | INFO | algo_trader | ENTRY REJECTED MANAKCOAT-EQ: Range position 0.641 < 0.85 (price retreating from high)
+2026-10-29T04:34:01.863841+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:34:01,863 | INFO | algo_trader | Validation completed in 0.0 seconds: 0/5 passed.
+2026-10-29T04:34:01.863954+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:34:01,863 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-29T04:34:02.452249+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:34:02,452 | INFO | algo_trader | Scan attempt 3 — retrying in 120s (window open until 14:00)...
+2026-10-29T04:36:02.452714+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:36:02,452 | INFO | algo_trader | Scanning 2736 stocks for top 1 candidates (pool=5)...
+2026-10-29T04:36:02.453346+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:36:02,452 | INFO | algo_trader | Fetching quotes for 2736 stocks...
+2026-10-29T04:36:09.246562+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:36:09,244 | INFO | algo_trader | Received 2730 quotes.
+2026-10-29T04:36:09.247103+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:36:09,246 | INFO | algo_trader | Candidates in 5-8% gain range: 10
+2026-10-29T04:36:09.247103+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:36:09,246 | INFO | algo_trader | Fetching daily candles for 10 candidates...
+2026-10-29T04:36:09.247421+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:36:09,247 | INFO | algo_trader | Rank #1: ADSL-EQ — gain=+6.95%, score=0.723 (vol=1.4x, momentum=0.88, buy_pressure=0.51, stability=0.93, prev_trend=0.60)
+2026-10-29T04:36:09.247592+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:36:09,247 | INFO | algo_trader | Rank #2: JWL-EQ — gain=+7.57%, score=0.717 (vol=9.0x, momentum=0.72, buy_pressure=0.66, stability=0.43, prev_trend=0.60)
+2026-10-29T04:36:09.247592+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:36:09,247 | INFO | algo_trader | Rank #3: MANAKCOAT-EQ — gain=+7.02%, score=0.702 (vol=2.8x, momentum=0.62, buy_pressure=0.49, stability=0.94, prev_trend=0.40)
+2026-10-29T04:36:09.249228+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:36:09,247 | INFO | algo_trader | Rank #4: AARTIPHARM-EQ — gain=+5.33%, score=0.662 (vol=2.2x, momentum=0.78, buy_pressure=0.34, stability=0.59, prev_trend=0.40)
+2026-10-29T04:36:09.249228+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:36:09,247 | INFO | algo_trader | Rank #5: SHREEPUSHK-EQ — gain=+5.11%, score=0.635 (vol=1.2x, momentum=0.74, buy_pressure=0.41, stability=0.65, prev_trend=0.80)
+2026-10-29T04:36:09.537041+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:36:09,536 | INFO | algo_trader | Scan completed in 7.1 seconds. Found 5 raw candidates.
+2026-10-29T04:36:09.540597+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:36:09,540 | INFO | algo_trader | Checking read-only restrictions for 5 candidates...
+2026-10-29T04:36:09.546443+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:36:09,546 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 5 tradable, 0 rejected.
+2026-10-29T04:36:09.546619+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:36:09,546 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 0 filtered):
+2026-10-29T04:36:09.546619+00:00 ip-172-31-33-249 python[545938]:   ADSL-EQ: +6.95% @ 106.54
+2026-10-29T04:36:09.546619+00:00 ip-172-31-33-249 python[545938]:     Score=0.723 | Vol=1.4x | Momentum=0.88 | BuyPressure=0.51 | Stability=0.93 | PrevTrend=0.60
+2026-10-29T04:36:10.127925+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:36:10,127 | INFO | algo_trader | Validating 5 candidates in parallel...
+2026-10-29T04:36:10.156637+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:36:10,156 | INFO | algo_trader | ENTRY REJECTED ADSL-EQ: Wide spread: 0.28 (0.262% > 0.2%)
+2026-10-29T04:36:10.161341+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:36:10,161 | INFO | algo_trader | ENTRY REJECTED JWL-EQ: Range position 0.724 < 0.85 (price retreating from high)
+2026-10-29T04:36:10.166426+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:36:10,166 | INFO | algo_trader | ENTRY REJECTED MANAKCOAT-EQ: Range position 0.605 < 0.85 (price retreating from high)
+2026-10-29T04:36:10.169786+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:36:10,169 | INFO | algo_trader | ENTRY REJECTED AARTIPHARM-EQ: Range position 0.788 < 0.85 (price retreating from high)
+2026-10-29T04:36:10.173237+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:36:10,173 | INFO | algo_trader | ENTRY REJECTED SHREEPUSHK-EQ: Range position 0.736 < 0.85 (price retreating from high)
+2026-10-29T04:36:10.215761+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:36:10,215 | INFO | algo_trader | Validation completed in 0.1 seconds: 0/5 passed.
+2026-10-29T04:36:10.215974+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:36:10,215 | INFO | algo_trader | No candidates passed real-time validation.
+2026-10-29T04:36:10.795482+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:36:10,795 | INFO | algo_trader | Scan attempt 4 — retrying in 120s (window open until 14:00)...
+2026-10-29T04:38:10.796042+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:38:10,795 | INFO | algo_trader | Scanning 2736 stocks for top 1 candidates (pool=5)...
+2026-10-29T04:38:10.799851+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:38:10,796 | INFO | algo_trader | Fetching quotes for 2736 stocks...
+2026-10-29T04:38:18.490305+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:38:18,490 | INFO | algo_trader | Received 2730 quotes.
+2026-10-29T04:38:18.492971+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:38:18,492 | INFO | algo_trader | Candidates in 5-8% gain range: 13
+2026-10-29T04:38:18.493148+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:38:18,493 | INFO | algo_trader | Fetching daily candles for 13 candidates...
+2026-10-29T04:38:20.495156+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:38:20,495 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-29T04:38:20.495844+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:38:20,495 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-29T04:38:26.495886+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:38:26,495 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-10-29T04:38:26.519997+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:38:26,519 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-10-29T04:38:37.537807+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:38:37,537 | INFO | algo_trader | Rank #1: MANBA-EQ — gain=+5.56%, score=0.757 (vol=2.3x, momentum=0.64, buy_pressure=0.54, stability=0.99, prev_trend=0.60)
+2026-10-29T04:38:37.538354+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:38:37,537 | INFO | algo_trader | Rank #2: ADSL-EQ — gain=+7.05%, score=0.727 (vol=1.4x, momentum=0.89, buy_pressure=0.50, stability=0.93, prev_trend=0.60)
+2026-10-29T04:38:37.538354+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:38:37,537 | INFO | algo_trader | Rank #3: JWL-EQ — gain=+7.74%, score=0.726 (vol=9.1x, momentum=0.75, buy_pressure=0.67, stability=0.43, prev_trend=0.60)
+2026-10-29T04:38:37.538354+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:38:37,537 | INFO | algo_trader | Rank #4: MANAKCOAT-EQ — gain=+7.58%, score=0.718 (vol=2.9x, momentum=0.67, buy_pressure=0.50, stability=0.94, prev_trend=0.40)
+2026-10-29T04:38:37.538354+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:38:37,538 | INFO | algo_trader | Rank #5: POONAWALLA-EQ — gain=+5.99%, score=0.716 (vol=1.9x, momentum=0.99, buy_pressure=0.36, stability=0.84, prev_trend=0.20)
+2026-10-29T04:38:37.838489+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:38:37,838 | INFO | algo_trader | Scan completed in 27.0 seconds. Found 5 raw candidates.
+2026-10-29T04:38:37.842346+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:38:37,842 | INFO | algo_trader | Checking read-only restrictions for 5 candidates...
+2026-10-29T04:38:37.847163+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:38:37,847 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 5 tradable, 0 rejected.
+2026-10-29T04:38:37.847322+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:38:37,847 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 0 filtered):
+2026-10-29T04:38:37.847322+00:00 ip-172-31-33-249 python[545938]:   MANBA-EQ: +5.56% @ 151.46
+2026-10-29T04:38:37.847322+00:00 ip-172-31-33-249 python[545938]:     Score=0.757 | Vol=2.3x | Momentum=0.64 | BuyPressure=0.54 | Stability=0.99 | PrevTrend=0.60
+2026-10-29T04:38:38.441113+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:38:38,440 | INFO | algo_trader | Validating 5 candidates in parallel...
+2026-10-29T04:38:38.470507+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:38:38,470 | INFO | algo_trader | ENTRY REJECTED MANBA-EQ: Range position 0.643 < 0.85 (price retreating from high)
+2026-10-29T04:38:38.476348+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:38:38,476 | INFO | algo_trader | ENTRY REJECTED ADSL-EQ: Wide spread: 0.26 (0.243% > 0.2%)
+2026-10-29T04:38:38.479283+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:38:38,479 | INFO | algo_trader | ENTRY REJECTED JWL-EQ: Range position 0.731 < 0.85 (price retreating from high)
+2026-10-29T04:38:38.481688+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:38:38,481 | INFO | algo_trader | ENTRY REJECTED MANAKCOAT-EQ: Range position 0.654 < 0.85 (price retreating from high)
+2026-10-29T04:38:38.484655+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:38:38,484 | INFO | algo_trader | Near-breakout skip for POONAWALLA-EQ: range=0.966, gain=5.8% — skipping breakout check
+2026-10-29T04:38:38.536196+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:38:38,536 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-10-29T04:38:43.567541+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:38:43,567 | INFO | algo_trader | ENTRY VALIDATED POONAWALLA-EQ: price=426.80, gain=+5.84%, range=0.966, breakout=True, vol_ratio=2.11, spread=0.0230%
+2026-10-29T04:38:43.571771+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:38:43,571 | INFO | algo_trader | Validation completed in 5.1 seconds: 1/5 passed.
+2026-10-29T04:38:43.571771+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:38:43,571 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-10-29T04:38:43.571771+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:38:43,571 | INFO | algo_trader | Capital: 100000.00 x 5.0x leverage = 500000.00 buying power | 1 validated stocks | 475000.00 per stock
+2026-10-29T04:38:44.570117+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:38:44,570 | INFO | algo_trader | ATR computed for token 11403: 5.8800 (from 11 candles, price=426.80, ATR%=1.38%)
+2026-10-29T04:38:44.598256+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:38:44,598 | INFO | algo_trader | [PAPER] MARKET order filled: BUY POONAWALLA-EQ 117 @ 426.76 (reference=426.55, fee=49.93) id=fbbeca35
+2026-10-29T04:38:44.601785+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:38:44,601 | INFO | algo_trader | MARKET order placed: BUY POONAWALLA-EQ 117 [INTRADAY] {'response': {'data': {'orderid': 'fbbeca35'}}}
+2026-10-29T04:38:44.612082+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:38:44,611 | INFO | algo_trader | [PAPER] SL-M order placed: SELL POONAWALLA-EQ 117 trigger=418.20 id=75dd938f
+2026-10-29T04:38:44.614076+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:38:44,613 | INFO | algo_trader | SL-M order placed for POONAWALLA-EQ: trigger=418.22, orderid=75dd938f
+2026-10-29T04:38:44.616823+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:38:44,616 | INFO | algo_trader | ENTRY: POONAWALLA-EQ [MIS] — 117 shares @ 426.76 (capital=475000.00, gain=+5.99%, score=0.716, ATR=5.8800 (1.38%), SL=418.22, hard_stop=418.22) | {'response': {'data': {'orderid': 'fbbeca35'}}}
+2026-10-29T04:38:45.215589+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:38:45,215 | INFO | algo_trader | Monitoring 1 positions with trailing stop...
+2026-10-29T04:46:16.523454+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:46:16,523 | INFO | algo_trader | TRAILING STOP UPDATE POONAWALLA-EQ: SL 418.22 -> 424.63 (ltp=431.10, bid=431.15, high=431.10, profit=1.0%, intraday=6.9%, locked=False, ATR=5.8800)
+2026-10-29T04:46:16.527156+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:46:16,523 | INFO | algo_trader | [PAPER] SL-M modified: POONAWALLA-EQ trigger 418.20 → 424.60 id=75dd938f
+2026-10-29T04:46:16.527156+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:46:16,525 | INFO | algo_trader | SL-M trigger updated for POONAWALLA-EQ: new trigger=424.63
+2026-10-29T04:47:56.760808+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:47:56,760 | WARNING | algo_trader | [rate_limit_hit] POST /quote returned 502, retrying in 1.0s (attempt 1/3)...
+2026-10-29T04:54:58.890088+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:54:58,889 | INFO | algo_trader | TRAILING STOP UPDATE POONAWALLA-EQ: SL 424.63 -> 427.83 (ltp=436.40, bid=436.65, high=436.40, profit=2.3%, intraday=8.2%, locked=False, ATR=5.8800)
+2026-10-29T04:54:58.893883+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:54:58,890 | INFO | algo_trader | [PAPER] SL-M modified: POONAWALLA-EQ trigger 424.60 → 427.80 id=75dd938f
+2026-10-29T04:54:58.893883+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 04:54:58,892 | INFO | algo_trader | SL-M trigger updated for POONAWALLA-EQ: new trigger=427.83
+2026-10-29T05:57:09.563851+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 05:57:09,563 | INFO | algo_trader | TRAILING STOP UPDATE POONAWALLA-EQ: SL 427.83 -> 431.03 (ltp=441.65, bid=441.35, high=441.65, profit=3.5%, intraday=9.5%, locked=False, ATR=5.8800)
+2026-10-29T05:57:09.567681+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 05:57:09,563 | INFO | algo_trader | [PAPER] SL-M modified: POONAWALLA-EQ trigger 427.80 → 431.00 id=75dd938f
+2026-10-29T05:57:09.567681+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 05:57:09,565 | INFO | algo_trader | SL-M trigger updated for POONAWALLA-EQ: new trigger=431.03
+2026-10-29T06:30:04.685485+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 06:30:04,685 | INFO | algo_trader | [auth_refresh] Session age 7204s >= 7200s, refreshing...
+2026-10-29T06:30:04.689166+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 06:30:04,685 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-10-29T06:30:04.729208+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 06:30:04,729 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-10-29T06:32:05.047063+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 06:32:05,046 | INFO | algo_trader | [position_check] POONAWALLA-EQ: netqty=117
+2026-10-29T06:32:05.048397+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 06:32:05,048 | INFO | algo_trader | [position_check] POONAWALLA-EQ: netqty=117
+2026-10-29T06:32:05.162780+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 06:32:05,162 | INFO | algo_trader | [PAPER] MARKET order filled: SELL POONAWALLA-EQ 117 @ 430.68 (reference=430.90, fee=50.39) id=02858256
+2026-10-29T06:32:05.167116+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 06:32:05,167 | INFO | algo_trader | [exit_attempt] Exit confirmed for POONAWALLA-EQ: 117 shares @ 430.68
+2026-10-29T06:32:05.167298+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 06:32:05,167 | INFO | algo_trader | [PAPER] Order cancelled: POONAWALLA-EQ id=75dd938f
+2026-10-29T06:32:05.168676+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 06:32:05,168 | INFO | algo_trader | SL-M order confirmed CANCELLED for POONAWALLA-EQ: 75dd938f
+2026-10-29T06:32:05.183122+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 06:32:05,183 | INFO | algo_trader | TRAILING STOP (3% trail, 3-6% profit) EXIT: POONAWALLA-EQ — 0 shares @ 430.68 (entry=426.76, high=441.65, SL=431.03, hard_stop=418.22, ATR=5.8800, locked=False, PnL=+358.32, daily_pnl=+358.32, consecutive_losses=0/2, round=0/2) | ExitOutcome(state=<ExitState.CLOSED: 'closed'>, execution=OrderExecution(order_id='02858256', state=<OrderState.FILLED: 'filled'>, requested_quantity=117, filled_quantity=117, average_price=430.68, reason='', raw_order={'orderid': '02858256', 'tradingsymbol': 'POONAWALLA-EQ', 'transactiontype': 'SELL', 'quantity': '117', 'price': '430.68', 'filledshares': '117', 'averageprice': '430.68', 'triggerprice': '0.0', 'orderstatus': 'COMPLETE', 'status': 'COMPLETE', 'ordertype': 'MARKET', 'producttype': 'INTRADAY', 'referenceprice': '430.9', 'fees': '50.39'}), reason='')
+2026-10-29T06:32:15.778392+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 06:32:15,778 | INFO | algo_trader | All positions closed by stop-loss.
+2026-10-29T06:32:15.779119+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 06:32:15,778 | INFO | algo_trader | Smart gate: last exit was TRAILING STOP (3% trail, 3-6% profit), not PROFIT LOCK — skipping re-entry.
+2026-10-29T06:32:16.404466+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 06:32:16,404 | INFO | algo_trader |
+2026-10-29T06:32:16.404466+00:00 ip-172-31-33-249 python[545938]: ============================================================
+2026-10-29T06:32:16.404466+00:00 ip-172-31-33-249 python[545938]: PAPER TRADING SUMMARY
+2026-10-29T06:32:16.404466+00:00 ip-172-31-33-249 python[545938]: ============================================================
+2026-10-29T06:32:16.404466+00:00 ip-172-31-33-249 python[545938]: Total trades: 2
+2026-10-29T06:32:16.404466+00:00 ip-172-31-33-249 python[545938]: Buys: 1, Sells: 1
+2026-10-29T06:32:16.404466+00:00 ip-172-31-33-249 python[545938]:   10:08:44 BUY  POONAWALLA-EQ x117 @ 426.76 fees: Rs.49.93
+2026-10-29T06:32:16.404466+00:00 ip-172-31-33-249 python[545938]:   12:02:05 SELL POONAWALLA-EQ x117 @ 430.68 gross: Rs.+458.64, fees: Rs.100.32, net P&L: Rs.+358.32
+2026-10-29T06:32:16.404466+00:00 ip-172-31-33-249 python[545938]: Daily net P&L: Rs.+358.32
+2026-10-29T06:32:16.404466+00:00 ip-172-31-33-249 python[545938]: Capital: Rs.100,000.00 → Rs.100,358.32
+2026-10-29T06:32:16.404466+00:00 ip-172-31-33-249 python[545938]: All positions closed.
+2026-10-29T06:32:16.404466+00:00 ip-172-31-33-249 python[545938]: ============================================================
+2026-10-29T06:32:36.779537+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 06:32:36,779 | INFO | algo_trader | Replay comparison complete: 712/712 decisions matched; recommended slippage=0 bps; report=/home/ubuntu/algo-trader/data/replay_reports/2026-10-29/summary.json; universe=data/universe_snapshots.json
+2026-10-29T06:32:36.780998+00:00 ip-172-31-33-249 python[545938]: 2026-10-29 06:32:36,779 | INFO | algo_trader | Trading day complete. Daily P&L: ₹+358.32. Sleeping 22.0h until tomorrow.
