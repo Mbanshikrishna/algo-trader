@@ -1,0 +1,14 @@
+sequence,event_type,symbol,recorded_decision,replayed_decision,matched,detail
+29930,market_gate,,skip,skip,True,four-factor market gate
+29931,market_gate,,skip,skip,True,four-factor market gate
+29932,market_gate,,skip,skip,True,four-factor market gate
+29933,market_gate,,skip,skip,True,four-factor market gate
+29934,market_gate,,skip,skip,True,four-factor market gate
+29935,market_gate,,trade,trade,True,four-factor market gate
+29936,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['IREDA-EQ', 'GHCL-EQ', 'SUNSHINE-EQ', 'PNB-EQ', 'RPEL-EQ']; replayed=['IREDA-EQ', 'GHCL-EQ', 'SUNSHINE-EQ', 'PNB-EQ', 'RPEL-EQ']"
+29937,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+29938,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+29939,candidate_validation,IREDA-EQ,rejected,rejected,True,No micro breakout: LTP 119.78 < last 5min high 120.05
+29940,candidate_validation,PNB-EQ,rejected,rejected,True,Volume fading: current 199351 vs avg 372508 (ratio 0.54 < 1.2)
+29941,candidate_validation,GHCL-EQ,rejected,rejected,True,Volume fading: current 1658 vs avg 2442 (ratio 0.68 < 1.2)
+29942,candidate_validation,SUNSHINE-EQ,rejected,rejected,True,"Volume check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=13.126.199.100, client_local_ip=172.31.33.249: Access denied because of exceeding access rate)"
