@@ -1,0 +1,42 @@
+{
+  "decision_event_count": 9,
+  "files": {
+    "decision-events.jsonl.gz": {
+      "bytes": 57231,
+      "sha256": "dc8f93b1af0ab84feb8317489396b098826016f90f1585e6464e97e2cb02049f"
+    },
+    "decision_comparison.csv": {
+      "bytes": 256,
+      "sha256": "cf5099e7d618e1751b7f6e0aa321e7f27691740cd6077923c4a5fd6e5f721c6f"
+    },
+    "runs.json": {
+      "bytes": 2817,
+      "sha256": "0d261ee791964ac9ecfa14d17611a83930fbd216e3348372aae18a2e301e3a87"
+    },
+    "slippage_calibration.json": {
+      "bytes": 275,
+      "sha256": "397b46a3c73cfb07b01cee7cfa6c012ca3751b34dc709b8556dc325f38a1e4ce"
+    },
+    "summary.json": {
+      "bytes": 419,
+      "sha256": "96f667e699bf24f5f8af2a74cff0d4acb84c055ab3072e7aa5183e007d59fc64"
+    },
+    "systemd-journal.txt": {
+      "bytes": 15856,
+      "sha256": "007dabc1390c964af8f43ba34474f55a418e14c03fc6f617f756c5ac83fc67f8"
+    },
+    "universe-snapshots.json": {
+      "bytes": 1114681,
+      "sha256": "47a53e3274a58417033da71b27c991fa81011d4b5145db3a6e438d440a6feada"
+    }
+  },
+  "generated_at_utc": "2026-11-20T19:19:21.737116+00:00",
+  "git_revision": "5170465d96055a21d7805f982a614314048e97be",
+  "interval_end_utc": "2026-10-23T18:30:00.000+00:00",
+  "interval_start_utc": "2026-10-22T18:30:00.000+00:00",
+  "journal_line_count": 125,
+  "run_count": 2,
+  "security_scan": "passed",
+  "trading_date_ist": "2026-10-23",
+  "universe_snapshot_count": 2
+}

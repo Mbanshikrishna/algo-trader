@@ -1,0 +1,125 @@
+2026-10-23T04:30:00.797080+00:00 ip-172-31-33-249 python[534455]: 2026-10-23 04:30:00,796 | INFO | algo_trader | Daily candle cache cleared.
+2026-10-23T04:30:00.801707+00:00 ip-172-31-33-249 python[534455]: 2026-10-23 04:30:00,798 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-10-23T04:30:00.801707+00:00 ip-172-31-33-249 python[534455]: 2026-10-23 04:30:00,798 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-10-23T04:30:00.849141+00:00 ip-172-31-33-249 python[534455]: 2026-10-23 04:30:00,848 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-10-23T04:30:00.850446+00:00 ip-172-31-33-249 python[534455]: 2026-10-23 04:30:00,850 | INFO | algo_trader | [auth_refresh] Angel One session refreshed.
+2026-10-23T04:30:01.069372+00:00 ip-172-31-33-249 python[534455]: 2026-10-23 04:30:01,069 | INFO | algo_trader | Market Check: 1/4 — NOT BULLISH
+2026-10-23T04:30:01.069372+00:00 ip-172-31-33-249 python[534455]: 1. Index Direction: FAIL ❌
+2026-10-23T04:30:01.069372+00:00 ip-172-31-33-249 python[534455]:    Nifty 50: -0.35% (need > 0%)
+2026-10-23T04:30:01.069372+00:00 ip-172-31-33-249 python[534455]: 2. Market Breadth: FAIL ❌
+2026-10-23T04:30:01.069372+00:00 ip-172-31-33-249 python[534455]:    Advancers: 12, Decliners: 37
+2026-10-23T04:30:01.069372+00:00 ip-172-31-33-249 python[534455]:    Breadth ratio: 0.32 (need > 1.2)
+2026-10-23T04:30:01.069372+00:00 ip-172-31-33-249 python[534455]: 3. Intraday Strength: FAIL ❌
+2026-10-23T04:30:01.069372+00:00 ip-172-31-33-249 python[534455]:    Nifty LTP vs Open: 22607.65 vs 22742.20
+2026-10-23T04:30:01.069372+00:00 ip-172-31-33-249 python[534455]:    NIFTYBEES vs VWAP: 258.32 vs 259.21
+2026-10-23T04:30:01.069372+00:00 ip-172-31-33-249 python[534455]: 4. Volatility Filter: PASS ✅
+2026-10-23T04:30:01.069372+00:00 ip-172-31-33-249 python[534455]:    India VIX change: +4.95% (reject if > +5%)
+2026-10-23T04:30:01.069372+00:00 ip-172-31-33-249 python[534455]: Decision: SKIP TRADING (score 1/4 < 2)
+2026-10-23T04:30:01.069372+00:00 ip-172-31-33-249 python[534455]: Failed: Index Direction, Market Breadth, Intraday Strength
+2026-10-23T05:30:01.733557+00:00 ip-172-31-33-249 python[534455]: 2026-10-23 05:30:01,731 | INFO | algo_trader | Daily candle cache cleared.
+2026-10-23T05:30:01.739884+00:00 ip-172-31-33-249 python[534455]: 2026-10-23 05:30:01,733 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-10-23T05:30:01.739884+00:00 ip-172-31-33-249 python[534455]: 2026-10-23 05:30:01,733 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-10-23T05:30:01.957139+00:00 ip-172-31-33-249 python[534455]: 2026-10-23 05:30:01,952 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-10-23T05:30:01.961954+00:00 ip-172-31-33-249 python[534455]: 2026-10-23 05:30:01,960 | INFO | algo_trader | [auth_refresh] Angel One session refreshed.
+2026-10-23T05:30:02.217783+00:00 ip-172-31-33-249 python[534455]: 2026-10-23 05:30:02,217 | INFO | algo_trader | Market Check: 0/4 — NOT BULLISH
+2026-10-23T05:30:02.217783+00:00 ip-172-31-33-249 python[534455]: 1. Index Direction: FAIL ❌
+2026-10-23T05:30:02.217783+00:00 ip-172-31-33-249 python[534455]:    Nifty 50: -1.15% (need > 0%)
+2026-10-23T05:30:02.217783+00:00 ip-172-31-33-249 python[534455]: 2. Market Breadth: FAIL ❌
+2026-10-23T05:30:02.217783+00:00 ip-172-31-33-249 python[534455]:    Advancers: 5, Decliners: 45
+2026-10-23T05:30:02.217783+00:00 ip-172-31-33-249 python[534455]:    Breadth ratio: 0.11 (need > 1.2)
+2026-10-23T05:30:02.217783+00:00 ip-172-31-33-249 python[534455]: 3. Intraday Strength: FAIL ❌
+2026-10-23T05:30:02.217783+00:00 ip-172-31-33-249 python[534455]:    Nifty LTP vs Open: 22427.15 vs 22742.20
+2026-10-23T05:30:02.217783+00:00 ip-172-31-33-249 python[534455]:    NIFTYBEES vs VWAP: 256.35 vs 257.94
+2026-10-23T05:30:02.217783+00:00 ip-172-31-33-249 python[534455]: 4. Volatility Filter: FAIL ❌
+2026-10-23T05:30:02.217783+00:00 ip-172-31-33-249 python[534455]:    India VIX change: +8.31% (reject if > +5%)
+2026-10-23T05:30:02.217783+00:00 ip-172-31-33-249 python[534455]: Decision: SKIP TRADING (score 0/4 < 2)
+2026-10-23T05:30:02.217783+00:00 ip-172-31-33-249 python[534455]: Failed: Index Direction, Market Breadth, Intraday Strength, Volatility Filter
+2026-10-23T06:30:02.832282+00:00 ip-172-31-33-249 python[534455]: 2026-10-23 06:30:02,832 | INFO | algo_trader | Daily candle cache cleared.
+2026-10-23T06:30:02.835892+00:00 ip-172-31-33-249 python[534455]: 2026-10-23 06:30:02,833 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-10-23T06:30:02.835892+00:00 ip-172-31-33-249 python[534455]: 2026-10-23 06:30:02,833 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-10-23T06:30:02.905699+00:00 ip-172-31-33-249 python[534455]: 2026-10-23 06:30:02,905 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-10-23T06:30:02.907018+00:00 ip-172-31-33-249 python[534455]: 2026-10-23 06:30:02,906 | INFO | algo_trader | [auth_refresh] Angel One session refreshed.
+2026-10-23T06:30:03.085273+00:00 ip-172-31-33-249 python[534455]: 2026-10-23 06:30:03,085 | INFO | algo_trader | Market Check: 0/4 — NOT BULLISH
+2026-10-23T06:30:03.085273+00:00 ip-172-31-33-249 python[534455]: 1. Index Direction: FAIL ❌
+2026-10-23T06:30:03.085273+00:00 ip-172-31-33-249 python[534455]:    Nifty 50: -1.14% (need > 0%)
+2026-10-23T06:30:03.085273+00:00 ip-172-31-33-249 python[534455]: 2. Market Breadth: FAIL ❌
+2026-10-23T06:30:03.085273+00:00 ip-172-31-33-249 python[534455]:    Advancers: 4, Decliners: 46
+2026-10-23T06:30:03.085273+00:00 ip-172-31-33-249 python[534455]:    Breadth ratio: 0.09 (need > 1.2)
+2026-10-23T06:30:03.085273+00:00 ip-172-31-33-249 python[534455]: 3. Intraday Strength: FAIL ❌
+2026-10-23T06:30:03.085273+00:00 ip-172-31-33-249 python[534455]:    Nifty LTP vs Open: 22429.10 vs 22742.20
+2026-10-23T06:30:03.085273+00:00 ip-172-31-33-249 python[534455]:    NIFTYBEES vs VWAP: 256.34 vs 257.62
+2026-10-23T06:30:03.085273+00:00 ip-172-31-33-249 python[534455]: 4. Volatility Filter: FAIL ❌
+2026-10-23T06:30:03.085273+00:00 ip-172-31-33-249 python[534455]:    India VIX change: +7.11% (reject if > +5%)
+2026-10-23T06:30:03.085273+00:00 ip-172-31-33-249 python[534455]: Decision: SKIP TRADING (score 0/4 < 2)
+2026-10-23T06:30:03.085273+00:00 ip-172-31-33-249 python[534455]: Failed: Index Direction, Market Breadth, Intraday Strength, Volatility Filter
+2026-10-23T06:53:59.193420+00:00 ip-172-31-33-249 systemd[1]: Stopping algo-trader.service - Algo Trader Bot...
+2026-10-23T06:54:00.655898+00:00 ip-172-31-33-249 python[545938]: 2026-10-23 06:54:00,655 | INFO | algo_trader | Decision snapshots enabled: run_id=dd017db2469a4c809325b0303e412af2
+2026-10-23T06:54:00.655898+00:00 ip-172-31-33-249 python[545938]: 2026-10-23 06:54:00,655 | INFO | algo_trader | Logging in to Angel One...
+2026-10-23T06:54:01.265542+00:00 ip-172-31-33-249 python[545938]: 2026-10-23 06:54:01,264 | INFO | algo_trader | Angel One login successful.
+2026-10-23T06:54:01.265542+00:00 ip-172-31-33-249 python[545938]: 2026-10-23 06:54:01,264 | INFO | algo_trader | [PAPER] Paper trading mode active. Capital: 100000.00, slippage=5.0 bps/side, fees=10.0 bps/side
+2026-10-23T06:54:01.265542+00:00 ip-172-31-33-249 python[545938]: 2026-10-23 06:54:01,264 | INFO | algo_trader | Broker mode: PAPER TRADING (simulated orders) + Angel One (market data)
+2026-10-23T06:54:01.265542+00:00 ip-172-31-33-249 python[545938]: 2026-10-23 06:54:01,264 | INFO | algo_trader | Loading ASM/GSM/F&O restricted lists from NSE...
+2026-10-23T06:54:01.365219+00:00 ip-172-31-33-249 python[545938]: 2026-10-23 06:54:01,364 | INFO | algo_trader | Loaded 194 ASM stocks from NSE.
+2026-10-23T06:54:01.434662+00:00 ip-172-31-33-249 python[545938]: 2026-10-23 06:54:01,434 | INFO | algo_trader | Loaded 77 GSM stocks from NSE.
+2026-10-23T06:54:01.501636+00:00 ip-172-31-33-249 python[545938]: 2026-10-23 06:54:01,501 | WARNING | algo_trader | Failed to fetch F&O list: HTTP 404
+2026-10-23T06:54:01.506335+00:00 ip-172-31-33-249 python[545938]: 2026-10-23 06:54:01,506 | INFO | algo_trader | Loading NSE equity scrip master...
+2026-10-23T06:54:03.159804+00:00 ip-172-31-33-249 python[545938]: 2026-10-23 06:54:03,153 | INFO | algo_trader | Scrip master cached to disk (158801 entries).
+2026-10-23T06:54:03.235625+00:00 ip-172-31-33-249 python[545938]: 2026-10-23 06:54:03,235 | INFO | algo_trader | Loaded 2736 NSE equity stocks.
+2026-10-23T06:54:03.436604+00:00 ip-172-31-33-249 python[545938]: 2026-10-23 06:54:03,436 | INFO | algo_trader | Daily candle cache cleared.
+2026-10-23T06:54:03.437612+00:00 ip-172-31-33-249 python[545938]: 2026-10-23 06:54:03,436 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-10-23T06:54:03.437612+00:00 ip-172-31-33-249 python[545938]: 2026-10-23 06:54:03,436 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-10-23T06:54:03.520251+00:00 ip-172-31-33-249 python[545938]: 2026-10-23 06:54:03,519 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-10-23T06:54:03.522039+00:00 ip-172-31-33-249 python[545938]: 2026-10-23 06:54:03,521 | INFO | algo_trader | [auth_refresh] Angel One session refreshed.
+2026-10-23T06:54:03.706132+00:00 ip-172-31-33-249 python[545938]: 2026-10-23 06:54:03,705 | INFO | algo_trader | Market Check: 0/4 — NOT BULLISH
+2026-10-23T06:54:03.706132+00:00 ip-172-31-33-249 python[545938]: 1. Index Direction: FAIL ❌
+2026-10-23T06:54:03.706132+00:00 ip-172-31-33-249 python[545938]:    Nifty 50: -1.15% (need > 0%)
+2026-10-23T06:54:03.706132+00:00 ip-172-31-33-249 python[545938]: 2. Market Breadth: FAIL ❌
+2026-10-23T06:54:03.706132+00:00 ip-172-31-33-249 python[545938]:    Advancers: 5, Decliners: 45
+2026-10-23T06:54:03.706132+00:00 ip-172-31-33-249 python[545938]:    Breadth ratio: 0.11 (need > 1.2)
+2026-10-23T06:54:03.706132+00:00 ip-172-31-33-249 python[545938]: 3. Intraday Strength: FAIL ❌
+2026-10-23T06:54:03.706132+00:00 ip-172-31-33-249 python[545938]:    Nifty LTP vs Open: 22427.30 vs 22742.20
+2026-10-23T06:54:03.706132+00:00 ip-172-31-33-249 python[545938]:    NIFTYBEES vs VWAP: 256.35 vs 257.54
+2026-10-23T06:54:03.706132+00:00 ip-172-31-33-249 python[545938]: 4. Volatility Filter: FAIL ❌
+2026-10-23T06:54:03.706132+00:00 ip-172-31-33-249 python[545938]:    India VIX change: +6.15% (reject if > +5%)
+2026-10-23T06:54:03.706132+00:00 ip-172-31-33-249 python[545938]: Decision: SKIP TRADING (score 0/4 < 2)
+2026-10-23T06:54:03.706132+00:00 ip-172-31-33-249 python[545938]: Failed: Index Direction, Market Breadth, Intraday Strength, Volatility Filter
+2026-10-23T07:54:04.311139+00:00 ip-172-31-33-249 python[545938]: 2026-10-23 07:54:04,310 | INFO | algo_trader | Daily candle cache cleared.
+2026-10-23T07:54:04.317320+00:00 ip-172-31-33-249 python[545938]: 2026-10-23 07:54:04,312 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-10-23T07:54:04.317320+00:00 ip-172-31-33-249 python[545938]: 2026-10-23 07:54:04,312 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-10-23T07:54:04.362208+00:00 ip-172-31-33-249 python[545938]: 2026-10-23 07:54:04,362 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-10-23T07:54:04.363333+00:00 ip-172-31-33-249 python[545938]: 2026-10-23 07:54:04,363 | INFO | algo_trader | [auth_refresh] Angel One session refreshed.
+2026-10-23T07:54:04.548475+00:00 ip-172-31-33-249 python[545938]: 2026-10-23 07:54:04,548 | INFO | algo_trader | Market Check: 0/4 — NOT BULLISH
+2026-10-23T07:54:04.548475+00:00 ip-172-31-33-249 python[545938]: 1. Index Direction: FAIL ❌
+2026-10-23T07:54:04.548475+00:00 ip-172-31-33-249 python[545938]:    Nifty 50: -1.25% (need > 0%)
+2026-10-23T07:54:04.548475+00:00 ip-172-31-33-249 python[545938]: 2. Market Breadth: FAIL ❌
+2026-10-23T07:54:04.548475+00:00 ip-172-31-33-249 python[545938]:    Advancers: 4, Decliners: 46
+2026-10-23T07:54:04.548475+00:00 ip-172-31-33-249 python[545938]:    Breadth ratio: 0.09 (need > 1.2)
+2026-10-23T07:54:04.548475+00:00 ip-172-31-33-249 python[545938]: 3. Intraday Strength: FAIL ❌
+2026-10-23T07:54:04.548475+00:00 ip-172-31-33-249 python[545938]:    Nifty LTP vs Open: 22403.75 vs 22742.20
+2026-10-23T07:54:04.548475+00:00 ip-172-31-33-249 python[545938]:    NIFTYBEES vs VWAP: 256.10 vs 257.21
+2026-10-23T07:54:04.548475+00:00 ip-172-31-33-249 python[545938]: 4. Volatility Filter: FAIL ❌
+2026-10-23T07:54:04.548475+00:00 ip-172-31-33-249 python[545938]:    India VIX change: +6.92% (reject if > +5%)
+2026-10-23T07:54:04.548475+00:00 ip-172-31-33-249 python[545938]: Decision: SKIP TRADING (score 0/4 < 2)
+2026-10-23T07:54:04.548475+00:00 ip-172-31-33-249 python[545938]: Failed: Index Direction, Market Breadth, Intraday Strength, Volatility Filter
+2026-10-23T08:54:05.171099+00:00 ip-172-31-33-249 python[545938]: 2026-10-23 08:54:05,170 | INFO | algo_trader | Daily candle cache cleared.
+2026-10-23T08:54:05.176737+00:00 ip-172-31-33-249 python[545938]: 2026-10-23 08:54:05,171 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-10-23T08:54:05.176737+00:00 ip-172-31-33-249 python[545938]: 2026-10-23 08:54:05,171 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-10-23T08:54:05.220606+00:00 ip-172-31-33-249 python[545938]: 2026-10-23 08:54:05,220 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-10-23T08:54:05.221804+00:00 ip-172-31-33-249 python[545938]: 2026-10-23 08:54:05,221 | INFO | algo_trader | [auth_refresh] Angel One session refreshed.
+2026-10-23T08:54:05.405564+00:00 ip-172-31-33-249 python[545938]: 2026-10-23 08:54:05,405 | INFO | algo_trader | Market Check: 0/4 — NOT BULLISH
+2026-10-23T08:54:05.405564+00:00 ip-172-31-33-249 python[545938]: 1. Index Direction: FAIL ❌
+2026-10-23T08:54:05.405564+00:00 ip-172-31-33-249 python[545938]:    Nifty 50: -0.63% (need > 0%)
+2026-10-23T08:54:05.405564+00:00 ip-172-31-33-249 python[545938]: 2. Market Breadth: FAIL ❌
+2026-10-23T08:54:05.405564+00:00 ip-172-31-33-249 python[545938]:    Advancers: 10, Decliners: 40
+2026-10-23T08:54:05.405564+00:00 ip-172-31-33-249 python[545938]:    Breadth ratio: 0.25 (need > 1.2)
+2026-10-23T08:54:05.405564+00:00 ip-172-31-33-249 python[545938]: 3. Intraday Strength: FAIL ❌
+2026-10-23T08:54:05.405564+00:00 ip-172-31-33-249 python[545938]:    Nifty LTP vs Open: 22543.95 vs 22742.20
+2026-10-23T08:54:05.405564+00:00 ip-172-31-33-249 python[545938]:    NIFTYBEES vs VWAP: 257.65 vs 257.25
+2026-10-23T08:54:05.405564+00:00 ip-172-31-33-249 python[545938]: 4. Volatility Filter: FAIL ❌
+2026-10-23T08:54:05.405564+00:00 ip-172-31-33-249 python[545938]:    India VIX change: +6.22% (reject if > +5%)
+2026-10-23T08:54:05.405564+00:00 ip-172-31-33-249 python[545938]: Decision: SKIP TRADING (score 0/4 < 2)
+2026-10-23T08:54:05.405564+00:00 ip-172-31-33-249 python[545938]: Failed: Index Direction, Market Breadth, Intraday Strength, Volatility Filter
+2026-10-23T09:54:06.055319+00:00 ip-172-31-33-249 python[545938]: 2026-10-23 09:54:06,055 | INFO | algo_trader | Daily candle cache cleared.
+2026-10-23T09:54:06.058933+00:00 ip-172-31-33-249 python[545938]: 2026-10-23 09:54:06,055 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-10-23T09:54:24.103261+00:00 ip-172-31-33-249 python[545938]: 2026-10-23 09:54:24,103 | INFO | algo_trader | Replay comparison complete: 3/3 decisions matched; recommended slippage=0 bps; report=/home/ubuntu/algo-trader/data/replay_reports/2026-10-23/summary.json; universe=data/universe_snapshots.json
+2026-10-23T09:54:24.105254+00:00 ip-172-31-33-249 python[545938]: 2026-10-23 09:54:24,103 | INFO | algo_trader | Market closed for today. Sleeping 66.6h until the next scan window.
