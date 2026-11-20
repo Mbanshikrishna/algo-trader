@@ -1,0 +1,103 @@
+2026-11-03T04:30:00.767588+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:30:00,767 | INFO | algo_trader | Daily candle cache cleared.
+2026-11-03T04:30:00.780167+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:30:00,769 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-11-03T04:30:00.780167+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:30:00,769 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-11-03T04:30:00.840429+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:30:00,840 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-11-03T04:30:00.841874+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:30:00,841 | INFO | algo_trader | [auth_refresh] Angel One session refreshed.
+2026-11-03T04:30:01.014162+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:30:01,014 | INFO | algo_trader | Market Check: 4/4 — BULLISH
+2026-11-03T04:30:01.014162+00:00 ip-172-31-33-249 python[545938]: 1. Index Direction: PASS ✅
+2026-11-03T04:30:01.014162+00:00 ip-172-31-33-249 python[545938]:    Nifty 50: +0.82% (need > 0%)
+2026-11-03T04:30:01.014162+00:00 ip-172-31-33-249 python[545938]: 2. Market Breadth: PASS ✅
+2026-11-03T04:30:01.014162+00:00 ip-172-31-33-249 python[545938]:    Advancers: 35, Decliners: 15
+2026-11-03T04:30:01.014162+00:00 ip-172-31-33-249 python[545938]:    Breadth ratio: 2.33 (need > 1.2)
+2026-11-03T04:30:01.014162+00:00 ip-172-31-33-249 python[545938]: 3. Intraday Strength: PASS ✅
+2026-11-03T04:30:01.014162+00:00 ip-172-31-33-249 python[545938]:    Nifty LTP vs Open: 23632.45 vs 23582.25
+2026-11-03T04:30:01.014162+00:00 ip-172-31-33-249 python[545938]:    NIFTYBEES vs VWAP: 269.20 vs 268.76
+2026-11-03T04:30:01.014162+00:00 ip-172-31-33-249 python[545938]: 4. Volatility Filter: PASS ✅
+2026-11-03T04:30:01.014162+00:00 ip-172-31-33-249 python[545938]:    India VIX change: +2.58% (reject if > +5%)
+2026-11-03T04:30:01.014162+00:00 ip-172-31-33-249 python[545938]: Decision: TRADE (score 4/4 >= 3)
+2026-11-03T04:30:01.670972+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:30:01,670 | INFO | algo_trader | Scanning 2736 stocks for top 1 candidates (pool=5)...
+2026-11-03T04:30:01.671130+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:30:01,671 | INFO | algo_trader | Fetching quotes for 2736 stocks...
+2026-11-03T04:30:08.717668+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:30:08,717 | INFO | algo_trader | Received 2709 quotes.
+2026-11-03T04:30:08.720404+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:30:08,720 | INFO | algo_trader | Candidates in 5-8% gain range: 12
+2026-11-03T04:30:08.721529+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:30:08,720 | INFO | algo_trader | Fetching daily candles for 12 candidates...
+2026-11-03T04:30:12.722847+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:30:12,722 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-11-03T04:30:17.723189+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:30:17,723 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-11-03T04:30:17.724613+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:30:17,724 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-11-03T04:30:23.725071+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:30:23,724 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-11-03T04:30:29.725575+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:30:29,725 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-11-03T04:30:36.726163+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:30:36,726 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-11-03T04:30:46.726481+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:30:46,726 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-11-03T04:30:46.727986+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:30:46,727 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-11-03T04:30:57.728473+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:30:57,728 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-11-03T04:31:08.728994+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:31:08,728 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-11-03T04:31:14.729542+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:31:14,729 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-11-03T04:31:26.730052+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:31:26,729 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-11-03T04:31:36.759719+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:31:36,759 | INFO | algo_trader | Rank #1: GODFRYPHLP-EQ — gain=+6.03%, score=0.776 (vol=1.4x, momentum=1.00, buy_pressure=0.67, stability=0.86, prev_trend=0.60)
+2026-11-03T04:31:36.760288+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:31:36,759 | INFO | algo_trader | Rank #2: MOTILALOFS-EQ — gain=+6.45%, score=0.717 (vol=0.9x, momentum=0.92, buy_pressure=0.67, stability=1.00, prev_trend=0.60)
+2026-11-03T04:31:36.760288+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:31:36,759 | INFO | algo_trader | Rank #3: MARICO-EQ — gain=+6.72%, score=0.707 (vol=2.9x, momentum=0.94, buy_pressure=0.69, stability=0.15, prev_trend=0.40)
+2026-11-03T04:31:36.760288+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:31:36,759 | INFO | algo_trader | Rank #4: 360ONE-EQ — gain=+5.11%, score=0.653 (vol=0.5x, momentum=0.98, buy_pressure=0.65, stability=0.80, prev_trend=0.60)
+2026-11-03T04:31:36.760288+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:31:36,759 | INFO | algo_trader | Rank #5: MAZDOCK-EQ — gain=+5.31%, score=0.607 (vol=0.4x, momentum=0.97, buy_pressure=0.70, stability=0.75, prev_trend=0.40)
+2026-11-03T04:31:37.024153+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:31:37,023 | INFO | algo_trader | Scan completed in 95.4 seconds. Found 5 raw candidates.
+2026-11-03T04:31:37.026994+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:31:37,026 | INFO | algo_trader | Checking read-only restrictions for 5 candidates...
+2026-11-03T04:31:37.030814+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:31:37,030 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 5 tradable, 0 rejected.
+2026-11-03T04:31:37.031791+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:31:37,030 | INFO | algo_trader | Top 1 tradable stocks selected (from 5 scanned, 0 filtered):
+2026-11-03T04:31:37.031791+00:00 ip-172-31-33-249 python[545938]:   GODFRYPHLP-EQ: +6.03% @ 1802.60
+2026-11-03T04:31:37.031791+00:00 ip-172-31-33-249 python[545938]:     Score=0.776 | Vol=1.4x | Momentum=1.00 | BuyPressure=0.67 | Stability=0.86 | PrevTrend=0.60
+2026-11-03T04:31:37.645054+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:31:37,644 | INFO | algo_trader | Validating 5 candidates in parallel...
+2026-11-03T04:31:37.670417+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:31:37,670 | INFO | algo_trader | ENTRY REJECTED MAZDOCK-EQ: Gain +4.55% outside 5.0-10.0% range
+2026-11-03T04:31:37.673759+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:31:37,673 | INFO | algo_trader | Near-breakout skip for GODFRYPHLP-EQ: range=0.892, gain=5.6% — skipping breakout check
+2026-11-03T04:31:37.674291+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:31:37,674 | INFO | algo_trader | Near-breakout skip for MARICO-EQ: range=0.989, gain=7.0% — skipping breakout check
+2026-11-03T04:31:37.674759+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:31:37,673 | INFO | algo_trader | Near-breakout skip for MOTILALOFS-EQ: range=0.917, gain=6.4% — skipping breakout check
+2026-11-03T04:31:37.675050+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:31:37,674 | INFO | algo_trader | Near-breakout skip for 360ONE-EQ: range=0.950, gain=5.0% — skipping breakout check
+2026-11-03T04:31:40.732340+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:31:40,732 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-11-03T04:31:40.733999+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:31:40,733 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-11-03T04:31:40.734370+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:31:40,734 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-11-03T04:31:40.753943+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:31:40,753 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-11-03T04:31:46.776232+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:31:46,776 | INFO | algo_trader | ENTRY REJECTED MARICO-EQ: Volume fading: current 71674 vs avg 73306 (ratio 0.98 < 1.2)
+2026-11-03T04:31:48.754687+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:31:48,754 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-11-03T04:31:48.756049+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:31:48,755 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-11-03T04:31:48.776909+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:31:48,776 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-11-03T04:31:58.807931+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:31:58,807 | INFO | algo_trader | ENTRY VALIDATED GODFRYPHLP-EQ: price=1795.20, gain=+5.59%, range=0.892, breakout=True, vol_ratio=1.22, spread=0.0220%
+2026-11-03T04:31:59.799450+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:31:59,799 | WARNING | algo_trader | 1-min candle fetch failed for MOTILALOFS-EQ volume check: POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=[REDACTED_IP], client_local_ip=[REDACTED_IP]: Access denied because of exceeding access rate — rejecting
+2026-11-03T04:31:59.799699+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:31:59,799 | INFO | algo_trader | ENTRY REJECTED MOTILALOFS-EQ: Volume check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=[REDACTED_IP], client_local_ip=[REDACTED_IP]: Access denied because of exceeding access rate)
+2026-11-03T04:32:00.799615+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:32:00,799 | WARNING | algo_trader | 1-min candle fetch failed for 360ONE-EQ volume check: POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=[REDACTED_IP], client_local_ip=[REDACTED_IP]: Access denied because of exceeding access rate — rejecting
+2026-11-03T04:32:00.800205+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:32:00,799 | INFO | algo_trader | ENTRY REJECTED 360ONE-EQ: Volume check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=[REDACTED_IP], client_local_ip=[REDACTED_IP]: Access denied because of exceeding access rate)
+2026-11-03T04:32:00.804183+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:32:00,804 | INFO | algo_trader | Validation completed in 23.2 seconds: 1/5 passed.
+2026-11-03T04:32:00.804411+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:32:00,804 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-11-03T04:32:00.804411+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:32:00,804 | INFO | algo_trader | Capital: 100000.00 x 5.0x leverage = 500000.00 buying power | 1 validated stocks | 475000.00 per stock
+2026-11-03T04:32:01.846252+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:32:01,845 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-11-03T04:32:06.872324+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:32:06,872 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-11-03T04:32:16.894557+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:32:16,894 | WARNING | algo_trader | ATR candle fetch failed for token 1181: POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=[REDACTED_IP], client_local_ip=[REDACTED_IP]: Access denied because of exceeding access rate
+2026-11-03T04:32:16.895976+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:32:16,894 | WARNING | algo_trader | Using fallback ATR for token 1181: 8.9760 (0.50% of 1795.20)
+2026-11-03T04:32:16.936039+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:32:16,935 | INFO | algo_trader | [PAPER] MARKET order filled: BUY GODFRYPHLP-EQ 37 @ 1795.00 (reference=1794.10, fee=66.42) id=e1639260
+2026-11-03T04:32:16.940992+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:32:16,940 | INFO | algo_trader | MARKET order placed: BUY GODFRYPHLP-EQ 37 [INTRADAY] {'response': {'data': {'orderid': 'e1639260'}}}
+2026-11-03T04:32:16.948646+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:32:16,948 | INFO | algo_trader | [PAPER] SL-M order placed: SELL GODFRYPHLP-EQ 37 trigger=1768.05 id=3c24c7fb
+2026-11-03T04:32:16.950152+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:32:16,950 | INFO | algo_trader | SL-M order placed for GODFRYPHLP-EQ: trigger=1768.07, orderid=3c24c7fb
+2026-11-03T04:32:16.952927+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:32:16,952 | INFO | algo_trader | ENTRY: GODFRYPHLP-EQ [MIS] — 37 shares @ 1795.00 (capital=475000.00, gain=+6.03%, score=0.776, ATR=8.9760 (0.50%), SL=1768.07, hard_stop=1768.07) | {'response': {'data': {'orderid': 'e1639260'}}}
+2026-11-03T04:32:17.537494+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 04:32:17,537 | INFO | algo_trader | Monitoring 1 positions with trailing stop...
+2026-11-03T05:49:52.511491+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 05:49:52,511 | INFO | algo_trader | [position_check] GODFRYPHLP-EQ: netqty=37
+2026-11-03T05:49:52.515358+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 05:49:52,512 | INFO | algo_trader | [position_check] GODFRYPHLP-EQ: netqty=37
+2026-11-03T05:49:52.636170+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 05:49:52,636 | INFO | algo_trader | [PAPER] MARKET order filled: SELL GODFRYPHLP-EQ 37 @ 1766.52 (reference=1767.40, fee=65.36) id=a2dc1ca5
+2026-11-03T05:49:52.640602+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 05:49:52,640 | INFO | algo_trader | [exit_attempt] Exit confirmed for GODFRYPHLP-EQ: 37 shares @ 1766.52
+2026-11-03T05:49:52.640782+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 05:49:52,640 | INFO | algo_trader | [PAPER] Order cancelled: GODFRYPHLP-EQ id=3c24c7fb
+2026-11-03T05:49:52.642080+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 05:49:52,641 | INFO | algo_trader | SL-M order confirmed CANCELLED for GODFRYPHLP-EQ: 3c24c7fb
+2026-11-03T05:49:52.644142+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 05:49:52,644 | INFO | algo_trader | HARD STOP (max loss) EXIT: GODFRYPHLP-EQ — 0 shares @ 1766.52 (entry=1795.00, high=1812.30, SL=1768.07, hard_stop=1768.07, ATR=8.9760, locked=False, PnL=-1185.54, daily_pnl=-1185.54, consecutive_losses=1/2, round=0/2) | ExitOutcome(state=<ExitState.CLOSED: 'closed'>, execution=OrderExecution(order_id='a2dc1ca5', state=<OrderState.FILLED: 'filled'>, requested_quantity=37, filled_quantity=37, average_price=1766.52, reason='', raw_order={'orderid': 'a2dc1ca5', 'tradingsymbol': 'GODFRYPHLP-EQ', 'transactiontype': 'SELL', 'quantity': '37', 'price': '1766.52', 'filledshares': '37', 'averageprice': '1766.52', 'triggerprice': '0.0', 'orderstatus': 'COMPLETE', 'status': 'COMPLETE', 'ordertype': 'MARKET', 'producttype': 'INTRADAY', 'referenceprice': '1767.4', 'fees': '65.36'}), reason='')
+2026-11-03T05:50:03.257678+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 05:50:03,257 | INFO | algo_trader | All positions closed by stop-loss.
+2026-11-03T05:50:03.258551+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 05:50:03,257 | INFO | algo_trader | Smart gate: last exit was HARD STOP — skipping re-entry.
+2026-11-03T05:50:03.838807+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 05:50:03,838 | INFO | algo_trader | [auth_refresh] Session age 4803s >= 300s, refreshing...
+2026-11-03T05:50:03.839061+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 05:50:03,838 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-11-03T05:50:03.888311+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 05:50:03,888 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-11-03T05:50:03.889868+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 05:50:03,889 | INFO | algo_trader |
+2026-11-03T05:50:03.889868+00:00 ip-172-31-33-249 python[545938]: ============================================================
+2026-11-03T05:50:03.889868+00:00 ip-172-31-33-249 python[545938]: PAPER TRADING SUMMARY
+2026-11-03T05:50:03.889868+00:00 ip-172-31-33-249 python[545938]: ============================================================
+2026-11-03T05:50:03.889868+00:00 ip-172-31-33-249 python[545938]: Total trades: 2
+2026-11-03T05:50:03.889868+00:00 ip-172-31-33-249 python[545938]: Buys: 1, Sells: 1
+2026-11-03T05:50:03.889868+00:00 ip-172-31-33-249 python[545938]:   10:02:16 BUY  GODFRYPHLP-EQ x37 @ 1795.00 fees: Rs.66.42
+2026-11-03T05:50:03.889868+00:00 ip-172-31-33-249 python[545938]:   11:19:52 SELL GODFRYPHLP-EQ x37 @ 1766.52 gross: Rs.-1,053.76, fees: Rs.131.78, net P&L: Rs.-1,185.54
+2026-11-03T05:50:03.889868+00:00 ip-172-31-33-249 python[545938]: Daily net P&L: Rs.-1,185.54
+2026-11-03T05:50:03.889868+00:00 ip-172-31-33-249 python[545938]: Capital: Rs.100,000.00 → Rs.98,814.46
+2026-11-03T05:50:03.889868+00:00 ip-172-31-33-249 python[545938]: All positions closed.
+2026-11-03T05:50:03.889868+00:00 ip-172-31-33-249 python[545938]: ============================================================
+2026-11-03T05:50:27.695271+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 05:50:27,695 | INFO | algo_trader | Replay comparison complete: 475/475 decisions matched; recommended slippage=0 bps; report=/home/ubuntu/algo-trader/data/replay_reports/2026-11-03/summary.json; universe=data/universe_snapshots.json
+2026-11-03T05:50:27.696147+00:00 ip-172-31-33-249 python[545938]: 2026-11-03 05:50:27,696 | INFO | algo_trader | Trading day complete. Daily P&L: ₹-1,185.54. Sleeping 22.7h until tomorrow.
