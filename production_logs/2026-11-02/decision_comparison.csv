@@ -1,0 +1,1148 @@
+sequence,event_type,symbol,recorded_decision,replayed_decision,matched,detail
+27160,market_gate,,trade,trade,True,four-factor market gate
+27161,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['NH-EQ', 'RATNAVEER-EQ', 'ITDC-EQ', 'ADVENZYMES-EQ', 'JKTYRE-EQ']; replayed=['NH-EQ', 'RATNAVEER-EQ', 'ITDC-EQ', 'ADVENZYMES-EQ', 'JKTYRE-EQ']"
+27162,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+27163,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+27164,candidate_validation,NH-EQ,rejected,rejected,True,Gain +4.92% outside 5.0-10.0% range
+27165,candidate_validation,RATNAVEER-EQ,rejected,rejected,True,Range position 0.810 < 0.85 (price retreating from high)
+27166,candidate_validation,ITDC-EQ,rejected,rejected,True,Range position 0.649 < 0.85 (price retreating from high)
+27167,candidate_validation,ADVENZYMES-EQ,rejected,rejected,True,Volume fading: current 58 vs avg 3852 (ratio 0.02 < 1.2)
+27168,candidate_validation,JKTYRE-EQ,rejected,rejected,True,Volume fading: current 1020 vs avg 14382 (ratio 0.07 < 1.2)
+27169,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['SJVN-EQ', 'RATNAVEER-EQ', 'ITDC-EQ', 'INOXWIND-EQ', 'ADVENZYMES-EQ']; replayed=['SJVN-EQ', 'RATNAVEER-EQ', 'ITDC-EQ', 'INOXWIND-EQ', 'ADVENZYMES-EQ']"
+27170,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+27171,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+27172,candidate_validation,SJVN-EQ,rejected,rejected,True,Range position 0.691 < 0.85 (price retreating from high)
+27173,candidate_validation,RATNAVEER-EQ,rejected,rejected,True,Range position 0.837 < 0.85 (price retreating from high)
+27174,candidate_validation,ITDC-EQ,rejected,rejected,True,Range position 0.652 < 0.85 (price retreating from high)
+27175,candidate_validation,INOXWIND-EQ,rejected,rejected,True,No micro breakout: LTP 59.61 < last 5min high 59.68
+27176,candidate_validation,ADVENZYMES-EQ,rejected,rejected,True,Volume fading: current 52 vs avg 3149 (ratio 0.02 < 1.2)
+27177,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['SJVN-EQ', 'WELSPUNLIV-EQ', 'RATNAVEER-EQ', 'ITDC-EQ', 'ADVENZYMES-EQ']; replayed=['SJVN-EQ', 'WELSPUNLIV-EQ', 'RATNAVEER-EQ', 'ITDC-EQ', 'ADVENZYMES-EQ']"
+27178,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+27179,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+27180,candidate_validation,SJVN-EQ,rejected,rejected,True,Range position 0.719 < 0.85 (price retreating from high)
+27181,candidate_validation,WELSPUNLIV-EQ,rejected,rejected,True,Range position 0.661 < 0.85 (price retreating from high)
+27182,candidate_validation,RATNAVEER-EQ,rejected,rejected,True,Range position 0.832 < 0.85 (price retreating from high)
+27183,candidate_validation,ITDC-EQ,rejected,rejected,True,Range position 0.701 < 0.85 (price retreating from high)
+27184,candidate_validation,ADVENZYMES-EQ,rejected,rejected,True,Volume fading: current 180 vs avg 3169 (ratio 0.06 < 1.2)
+27185,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['SJVN-EQ', 'RATNAVEER-EQ', 'WELSPUNLIV-EQ', 'ITDC-EQ', 'JKTYRE-EQ']; replayed=['SJVN-EQ', 'RATNAVEER-EQ', 'WELSPUNLIV-EQ', 'ITDC-EQ', 'JKTYRE-EQ']"
+27186,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+27187,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+27188,candidate_validation,SJVN-EQ,rejected,rejected,True,Range position 0.712 < 0.85 (price retreating from high)
+27189,candidate_validation,WELSPUNLIV-EQ,rejected,rejected,True,Range position 0.628 < 0.85 (price retreating from high)
+27190,candidate_validation,ITDC-EQ,rejected,rejected,True,Range position 0.612 < 0.85 (price retreating from high)
+27191,candidate_validation,JKTYRE-EQ,rejected,rejected,True,Volume fading: current 635 vs avg 5823 (ratio 0.11 < 1.2)
+27192,candidate_validation,RATNAVEER-EQ,rejected,rejected,True,"Volume check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=13.126.199.100, client_local_ip=172.31.33.249: Access denied because of exceeding access rate)"
+27193,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['SJVN-EQ', 'RATNAVEER-EQ', 'INOXWIND-EQ', 'ITDC-EQ', 'WELSPUNLIV-EQ']; replayed=['SJVN-EQ', 'RATNAVEER-EQ', 'INOXWIND-EQ', 'ITDC-EQ', 'WELSPUNLIV-EQ']"
+27194,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+27195,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+27196,candidate_validation,SJVN-EQ,rejected,rejected,True,Range position 0.670 < 0.85 (price retreating from high)
+27197,candidate_validation,ITDC-EQ,rejected,rejected,True,Range position 0.595 < 0.85 (price retreating from high)
+27198,candidate_validation,WELSPUNLIV-EQ,rejected,rejected,True,Range position 0.575 < 0.85 (price retreating from high)
+27199,candidate_validation,INOXWIND-EQ,rejected,rejected,True,No micro breakout: LTP 59.47 < last 5min high 59.85
+27200,candidate_validation,RATNAVEER-EQ,rejected,rejected,True,"Volume check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=13.126.199.100, client_local_ip=172.31.33.249: Access denied because of exceeding access rate)"
+27201,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['SJVN-EQ', 'RATNAVEER-EQ', 'INOXWIND-EQ', 'ITDC-EQ', 'WELSPUNLIV-EQ']; replayed=['SJVN-EQ', 'RATNAVEER-EQ', 'INOXWIND-EQ', 'ITDC-EQ', 'WELSPUNLIV-EQ']"
+27202,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+27203,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+27204,candidate_validation,SJVN-EQ,rejected,rejected,True,Range position 0.724 < 0.85 (price retreating from high)
+27205,candidate_validation,ITDC-EQ,rejected,rejected,True,Range position 0.585 < 0.85 (price retreating from high)
+27206,candidate_validation,WELSPUNLIV-EQ,rejected,rejected,True,Range position 0.614 < 0.85 (price retreating from high)
+27207,candidate_validation,INOXWIND-EQ,rejected,rejected,True,No micro breakout: LTP 59.57 < last 5min high 59.85
+27208,candidate_validation,RATNAVEER-EQ,rejected,rejected,True,Volume fading: current 7334 vs avg 14360 (ratio 0.51 < 1.2)
+27209,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['SJVN-EQ', 'NH-EQ', 'RATNAVEER-EQ', 'INOXWIND-EQ', 'ITDC-EQ']; replayed=['SJVN-EQ', 'NH-EQ', 'RATNAVEER-EQ', 'INOXWIND-EQ', 'ITDC-EQ']"
+27210,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+27211,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+27212,candidate_validation,SJVN-EQ,rejected,rejected,True,Range position 0.754 < 0.85 (price retreating from high)
+27213,candidate_validation,NH-EQ,rejected,rejected,True,Range position 0.839 < 0.85 (price retreating from high)
+27214,candidate_validation,RATNAVEER-EQ,rejected,rejected,True,Range position 0.830 < 0.85 (price retreating from high)
+27215,candidate_validation,ITDC-EQ,rejected,rejected,True,Range position 0.561 < 0.85 (price retreating from high)
+27216,candidate_validation,INOXWIND-EQ,rejected,rejected,True,"Breakout check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=13.126.199.100, client_local_ip=172.31.33.249: Access denied because of exceeding access rate)"
+27217,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['SJVN-EQ', 'INTELLECT-EQ', 'NH-EQ', 'RATNAVEER-EQ', 'ITDC-EQ']; replayed=['SJVN-EQ', 'INTELLECT-EQ', 'NH-EQ', 'RATNAVEER-EQ', 'ITDC-EQ']"
+27218,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+27219,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+27220,candidate_validation,SJVN-EQ,rejected,rejected,True,Range position 0.807 < 0.85 (price retreating from high)
+27221,candidate_validation,NH-EQ,rejected,rejected,True,Range position 0.820 < 0.85 (price retreating from high)
+27222,candidate_validation,RATNAVEER-EQ,rejected,rejected,True,Range position 0.842 < 0.85 (price retreating from high)
+27223,candidate_validation,ITDC-EQ,rejected,rejected,True,Range position 0.573 < 0.85 (price retreating from high)
+27224,candidate_validation,INTELLECT-EQ,rejected,rejected,True,"Breakout check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=13.126.199.100, client_local_ip=172.31.33.249: Access denied because of exceeding access rate)"
+27225,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['NH-EQ', 'RATNAVEER-EQ', 'INOXWIND-EQ', 'ITDC-EQ', 'VRLLOG-EQ']; replayed=['NH-EQ', 'RATNAVEER-EQ', 'INOXWIND-EQ', 'ITDC-EQ', 'VRLLOG-EQ']"
+27226,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+27227,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+27228,candidate_validation,ITDC-EQ,rejected,rejected,True,Range position 0.576 < 0.85 (price retreating from high)
+27229,candidate_validation,VRLLOG-EQ,rejected,rejected,True,Wide spread: 0.70 (0.254% > 0.2%)
+27230,candidate_validation,INOXWIND-EQ,rejected,rejected,True,No micro breakout: LTP 59.59 < last 5min high 59.60
+27231,candidate_validation,NH-EQ,rejected,rejected,True,Volume fading: current 136 vs avg 2272 (ratio 0.06 < 1.2)
+27232,candidate_validation,RATNAVEER-EQ,rejected,rejected,True,"Volume check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=13.126.199.100, client_local_ip=172.31.33.249: Access denied because of exceeding access rate)"
+27233,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['NH-EQ', 'MARKOLINES-EQ', 'RATNAVEER-EQ', 'INOXWIND-EQ', 'VRLLOG-EQ']; replayed=['NH-EQ', 'MARKOLINES-EQ', 'RATNAVEER-EQ', 'INOXWIND-EQ', 'VRLLOG-EQ']"
+27234,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+27235,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+27236,candidate_validation,RATNAVEER-EQ,rejected,rejected,True,Range position 0.817 < 0.85 (price retreating from high)
+27237,candidate_validation,NH-EQ,rejected,rejected,True,Volume fading: current 1404 vs avg 2552 (ratio 0.55 < 1.2)
+27238,candidate_validation,MARKOLINES-EQ,rejected,rejected,True,Volume fading: current 6623 vs avg 14454 (ratio 0.46 < 1.2)
+27239,candidate_validation,VRLLOG-EQ,rejected,rejected,True,Volume fading: current 16 vs avg 466 (ratio 0.03 < 1.2)
+27240,candidate_validation,INOXWIND-EQ,rejected,rejected,True,Volume fading: current 47447 vs avg 74517 (ratio 0.64 < 1.2)
+27241,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['NH-EQ', 'GANESHCP-EQ', 'INTELLECT-EQ', 'RATNAVEER-EQ', 'MARKOLINES-EQ']; replayed=['NH-EQ', 'GANESHCP-EQ', 'INTELLECT-EQ', 'RATNAVEER-EQ', 'MARKOLINES-EQ']"
+27242,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+27243,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+27244,candidate_validation,GANESHCP-EQ,rejected,rejected,True,Gain +4.98% outside 5.0-10.0% range
+27245,candidate_validation,RATNAVEER-EQ,rejected,rejected,True,Range position 0.832 < 0.85 (price retreating from high)
+27246,candidate_validation,MARKOLINES-EQ,rejected,rejected,True,Volume fading: current 2331 vs avg 9428 (ratio 0.25 < 1.2)
+27247,candidate_validation,INTELLECT-EQ,rejected,rejected,True,"Breakout check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=13.126.199.100, client_local_ip=172.31.33.249: Access denied because of exceeding access rate)"
+27248,candidate_validation,NH-EQ,rejected,rejected,True,"Volume check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=13.126.199.100, client_local_ip=172.31.33.249: Access denied because of exceeding access rate)"
+27249,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['NH-EQ', 'RSL-EQ', 'GANESHCP-EQ', 'RATNAVEER-EQ', 'MARKOLINES-EQ']; replayed=['NH-EQ', 'RSL-EQ', 'GANESHCP-EQ', 'RATNAVEER-EQ', 'MARKOLINES-EQ']"
+27250,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+27251,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+27252,candidate_validation,GANESHCP-EQ,rejected,rejected,True,Wide spread: 1.06 (0.601% > 0.2%)
+27253,candidate_validation,RATNAVEER-EQ,rejected,rejected,True,Volume fading: current 8089 vs avg 49111 (ratio 0.16 < 1.2)
+27254,candidate_validation,NH-EQ,rejected,rejected,True,Volume fading: current 3424 vs avg 5394 (ratio 0.63 < 1.2)
+27255,candidate_validation,RSL-EQ,rejected,rejected,True,"Volume check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=13.126.199.100, client_local_ip=172.31.33.249: Access denied because of exceeding access rate)"
+27256,candidate_validation,MARKOLINES-EQ,rejected,rejected,True,"Volume check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=13.126.199.100, client_local_ip=172.31.33.249: Access denied because of exceeding access rate)"
+27257,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['RSL-EQ', 'NH-EQ', 'INTELLECT-EQ', 'RATNAVEER-EQ', 'MARKOLINES-EQ']; replayed=['RSL-EQ', 'NH-EQ', 'INTELLECT-EQ', 'RATNAVEER-EQ', 'MARKOLINES-EQ']"
+27258,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+27259,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+27260,candidate_validation,RATNAVEER-EQ,rejected,rejected,True,Range position 0.825 < 0.85 (price retreating from high)
+27261,candidate_validation,INTELLECT-EQ,rejected,rejected,True,No micro breakout: LTP 544.40 < last 5min high 547.40
+27262,candidate_validation,RSL-EQ,rejected,rejected,True,Volume fading: current 288 vs avg 9225 (ratio 0.03 < 1.2)
+27263,candidate_validation,NH-EQ,rejected,rejected,True,Volume fading: current 929 vs avg 5992 (ratio 0.16 < 1.2)
+27264,candidate_validation,MARKOLINES-EQ,rejected,rejected,True,Volume fading: current 2448 vs avg 5957 (ratio 0.41 < 1.2)
+27265,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['BHARATGEAR-EQ', 'RSL-EQ', 'NH-EQ', 'INTELLECT-EQ', 'MARKOLINES-EQ']; replayed=['BHARATGEAR-EQ', 'RSL-EQ', 'NH-EQ', 'INTELLECT-EQ', 'MARKOLINES-EQ']"
+27266,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+27267,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+27268,candidate_validation,BHARATGEAR-EQ,rejected,rejected,True,Range position 0.657 < 0.85 (price retreating from high)
+27269,candidate_validation,NH-EQ,rejected,rejected,True,Range position 0.816 < 0.85 (price retreating from high)
+27270,candidate_validation,INTELLECT-EQ,rejected,rejected,True,No micro breakout: LTP 543.00 < last 5min high 547.40
+27271,candidate_validation,RSL-EQ,rejected,rejected,True,Volume fading: current 551 vs avg 7585 (ratio 0.07 < 1.2)
+27272,candidate_validation,MARKOLINES-EQ,rejected,rejected,True,"Volume check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=13.126.199.100, client_local_ip=172.31.33.249: Access denied because of exceeding access rate)"
+27273,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['BHARATGEAR-EQ', 'RSL-EQ', 'INTELLECT-EQ', 'NH-EQ', 'MARKOLINES-EQ']; replayed=['BHARATGEAR-EQ', 'RSL-EQ', 'INTELLECT-EQ', 'NH-EQ', 'MARKOLINES-EQ']"
+27274,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+27275,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+27276,candidate_validation,BHARATGEAR-EQ,rejected,rejected,True,Range position 0.660 < 0.85 (price retreating from high)
+27277,candidate_validation,NH-EQ,rejected,rejected,True,Range position 0.773 < 0.85 (price retreating from high)
+27278,candidate_validation,MARKOLINES-EQ,rejected,rejected,True,Volume fading: current 1 vs avg 4741 (ratio 0.00 < 1.2)
+27279,candidate_validation,INTELLECT-EQ,rejected,rejected,True,No micro breakout: LTP 543.15 < last 5min high 546.15
+27280,candidate_validation,RSL-EQ,rejected,rejected,True,Volume fading: current 1 vs avg 6656 (ratio 0.00 < 1.2)
+27281,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['SJVN-EQ', 'BHARATGEAR-EQ', 'RSL-EQ', 'INTELLECT-EQ', 'RATNAVEER-EQ']; replayed=['SJVN-EQ', 'BHARATGEAR-EQ', 'RSL-EQ', 'INTELLECT-EQ', 'RATNAVEER-EQ']"
+27282,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+27283,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+27284,candidate_validation,BHARATGEAR-EQ,rejected,rejected,True,Range position 0.657 < 0.85 (price retreating from high)
+27285,candidate_validation,RATNAVEER-EQ,rejected,rejected,True,Range position 0.793 < 0.85 (price retreating from high)
+27286,candidate_validation,INTELLECT-EQ,rejected,rejected,True,No micro breakout: LTP 543.25 < last 5min high 546.15
+27287,candidate_validation,RSL-EQ,rejected,rejected,True,Volume fading: current 250 vs avg 1621 (ratio 0.15 < 1.2)
+27288,candidate_validation,SJVN-EQ,rejected,rejected,True,"Breakout check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=13.126.199.100, client_local_ip=172.31.33.249: Access denied because of exceeding access rate)"
+27289,scan_completed,,candidates_ranked,candidates_ranked,True,"recorded=['BHARATGEAR-EQ', 'RSL-EQ', 'NH-EQ', 'RATNAVEER-EQ', 'MARKOLINES-EQ']; replayed=['BHARATGEAR-EQ', 'RSL-EQ', 'NH-EQ', 'RATNAVEER-EQ', 'MARKOLINES-EQ']"
+27290,tradability_filter,,candidates_available,candidates_available,True,captured filter outcome
+27291,broker_tradability_result,,candidates_available,candidates_available,True,captured filter outcome
+27292,candidate_validation,BHARATGEAR-EQ,rejected,rejected,True,Range position 0.619 < 0.85 (price retreating from high)
+27293,candidate_validation,RSL-EQ,rejected,rejected,True,Range position 0.844 < 0.85 (price retreating from high)
+27294,candidate_validation,RATNAVEER-EQ,rejected,rejected,True,Range position 0.774 < 0.85 (price retreating from high)
+27295,candidate_validation,NH-EQ,accepted,accepted,True,All checks passed
+27296,candidate_validation,MARKOLINES-EQ,rejected,rejected,True,Volume fading: current 4265 vs avg 4899 (ratio 0.87 < 1.2)
+27297,position_sized,NH-EQ,36,36,True,risk-based position sizing
+27305,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27306,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27307,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27308,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27309,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27310,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27311,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27312,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27313,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27314,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27315,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27316,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27317,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27318,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27319,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27320,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27321,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27322,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27323,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27324,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27325,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27326,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27327,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27328,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27329,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27330,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27331,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27332,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27333,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27334,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27335,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27336,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27337,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27338,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27339,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27340,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27341,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27342,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27343,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27344,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27345,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27346,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27347,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27348,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27349,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27350,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27351,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27352,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27353,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27354,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27355,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27356,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27357,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27358,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27359,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27360,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27361,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27362,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27363,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27364,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27365,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27366,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27367,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27368,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27369,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27370,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27371,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27372,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27373,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27374,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27375,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27376,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27377,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27378,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27379,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27380,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27381,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27382,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27383,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27384,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27385,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27386,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27387,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27388,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27389,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27390,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27391,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27392,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27393,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27394,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27395,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27396,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27397,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27398,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27399,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27400,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27401,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27402,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27403,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27404,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27405,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27406,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27407,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27408,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27409,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27410,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27411,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27412,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27413,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27414,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27415,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27416,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27417,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27418,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27419,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27420,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27421,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27422,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27423,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27424,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27425,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27426,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27427,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27428,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27429,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27430,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27431,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27432,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27433,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27434,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27435,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27436,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27437,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27438,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27439,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27440,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27441,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27442,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27443,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27444,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27445,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27446,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27447,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27448,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27449,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27450,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27451,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27452,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27453,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27454,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27455,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27456,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27457,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27458,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27459,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27460,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27461,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27462,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27463,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27464,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27465,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27466,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27467,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27468,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27469,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27470,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27471,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27472,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27473,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27474,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27475,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27476,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27477,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27478,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27479,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27480,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27481,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27482,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27483,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27484,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27485,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27486,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27487,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27488,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27489,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27490,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27491,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27492,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27493,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27494,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27495,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27496,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27497,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27498,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27499,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27500,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27501,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27502,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27503,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27504,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27505,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27506,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27507,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27508,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27509,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27510,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27511,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27512,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27513,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27514,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27515,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27516,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27517,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27518,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27519,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27520,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27521,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27522,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27523,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27524,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27525,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27526,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27527,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27528,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27529,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27530,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27531,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27532,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27533,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27534,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27535,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27536,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27537,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27538,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27539,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27540,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27541,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27542,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27543,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27544,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27545,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27546,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27547,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27548,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27549,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27550,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27551,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27552,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27553,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27554,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27555,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27556,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27557,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27558,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27559,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27560,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27561,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27562,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27563,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27564,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27565,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27566,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27567,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27568,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27569,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27570,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27571,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27572,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27573,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27574,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27575,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27576,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27577,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27578,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27579,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27580,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27581,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27582,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27583,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27584,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27585,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27586,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27587,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27588,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27589,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27590,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27591,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27592,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27593,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27594,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27595,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27596,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27597,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27598,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27599,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27600,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27601,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27602,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27603,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27604,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27605,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27606,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27607,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27608,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27609,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27610,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27611,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27612,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27613,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27614,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27615,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27616,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27617,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27618,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27619,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27620,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27621,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27622,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27623,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27624,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27625,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27626,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27627,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27628,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27629,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27630,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27631,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27632,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27633,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27634,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27635,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27636,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27637,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27638,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27639,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27640,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27641,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27642,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27643,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27644,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27645,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27646,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27647,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27648,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27649,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27650,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27651,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27652,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27653,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27654,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27655,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27656,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27657,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27658,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27659,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27660,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27661,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27662,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27663,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27664,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27665,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27666,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27667,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27668,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27669,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27670,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27671,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27672,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27673,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27674,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27675,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27676,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27677,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27678,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27679,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27680,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27681,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27682,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27683,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27684,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27685,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27686,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27687,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27688,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27689,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27690,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27691,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27692,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27693,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27694,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27695,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27696,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27697,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27698,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27699,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27700,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27701,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27702,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27703,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27704,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27705,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27706,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27707,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27708,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27709,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27711,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27712,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27713,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27714,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27715,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27716,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27717,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27718,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27719,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27720,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27721,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27722,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27723,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27724,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27725,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27726,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27727,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27728,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27729,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27730,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27731,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27732,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27733,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27734,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27735,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27736,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27737,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27738,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27739,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27740,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27741,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27742,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27743,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27744,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27745,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27746,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27747,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27748,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27749,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27750,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27751,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27752,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27753,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27754,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27755,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27756,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27757,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27758,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27759,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27760,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27761,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27762,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27763,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27764,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27765,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27766,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27767,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27768,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27769,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27770,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27771,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27772,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27773,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27774,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27775,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27776,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27777,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27778,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27779,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27780,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27781,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27782,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27783,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27784,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27785,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27786,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27787,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27788,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27789,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27790,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27791,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27792,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27793,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27794,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27795,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27796,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27797,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27798,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27799,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27800,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27801,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27802,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27803,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27804,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27805,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27806,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27807,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27808,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27809,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27810,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27811,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27812,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27813,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27814,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27815,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27816,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27817,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27818,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27819,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27820,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27821,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27822,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27823,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27824,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27825,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27826,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27827,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27828,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27829,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27830,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27831,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27832,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27833,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27834,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27835,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27836,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27837,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27838,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27839,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27840,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27841,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27842,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27843,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27844,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27845,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27846,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27847,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27848,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27849,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27850,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27851,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27852,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27853,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27854,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27855,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27856,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27857,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27858,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27859,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27860,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27861,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27862,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27863,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27864,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27865,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27866,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27867,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27868,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27869,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27870,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27871,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27872,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27873,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27874,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27875,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27876,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27877,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27878,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27879,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27880,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27881,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27882,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27883,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27884,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27885,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27886,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27887,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27888,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27889,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27890,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27891,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27892,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27893,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27894,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27895,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27896,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27897,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27898,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27899,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27900,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27901,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27902,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27903,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27904,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27905,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27906,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27907,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27908,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27909,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27910,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27911,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27912,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27913,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27914,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27915,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27916,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27917,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27918,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27919,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27920,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27921,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27922,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27923,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27924,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27925,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27926,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27927,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27928,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27929,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27930,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27931,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27932,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27933,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27934,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27935,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27936,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27937,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27938,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27939,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27940,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27941,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27942,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27943,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27944,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27945,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27946,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27947,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27948,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27949,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27950,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27951,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27952,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27953,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27954,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27955,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27956,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27957,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27958,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27959,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27960,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27961,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27962,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27963,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27964,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27965,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27966,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27967,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27968,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27969,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27970,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27971,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27972,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27973,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27974,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27975,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27976,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27977,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27978,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27979,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27980,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27981,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27982,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27983,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27984,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27985,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27986,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27987,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27988,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27989,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27990,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27991,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27992,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27993,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27994,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27995,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27996,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27997,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27998,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+27999,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28000,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28001,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28002,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28003,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28004,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28005,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28006,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28007,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28008,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28009,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28010,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28011,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28012,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28013,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28014,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28015,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28016,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28017,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28018,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28019,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28020,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28021,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28022,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28023,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28024,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28025,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28026,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28027,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28028,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28029,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28030,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28031,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28032,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28033,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28034,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28035,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28036,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28037,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28038,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28039,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28040,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28041,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28042,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28043,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28044,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28045,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28046,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28047,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28048,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28049,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28050,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28051,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28052,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28053,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28054,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28055,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28056,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28057,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28058,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28059,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28060,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28061,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28062,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28063,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28064,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28065,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28066,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28067,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28068,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28069,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28070,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28071,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28072,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28073,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28074,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28075,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28076,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28077,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28078,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28079,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28080,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28081,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28082,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28083,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28084,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28085,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28086,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28087,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28088,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28089,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28090,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28091,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28092,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28093,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28094,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28095,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28096,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28097,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28098,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28099,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28100,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28101,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28102,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28103,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28104,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28105,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28106,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28107,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28108,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28109,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28110,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28111,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28112,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28113,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28114,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28115,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28116,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28117,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28118,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28119,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28120,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28121,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28122,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28123,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28124,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28125,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28126,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28127,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28128,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28129,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28130,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28131,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28132,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28133,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28134,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28135,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28136,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28137,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28138,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28139,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28140,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28141,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28142,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28143,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28144,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28145,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28146,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28147,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28148,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28149,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28150,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28151,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28152,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28153,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28154,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28155,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28156,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28157,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28158,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28159,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28160,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28161,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28162,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28163,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28164,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28165,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28166,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28167,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28168,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28169,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28170,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28171,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28172,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28173,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28174,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28175,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28176,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28177,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28178,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28179,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28180,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28181,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28182,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28183,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28184,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28185,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28186,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28187,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28188,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28189,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28190,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28191,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28192,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28193,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28194,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28195,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28196,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28197,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28198,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28199,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28200,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28201,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28202,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28203,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28204,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28205,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28206,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28207,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28208,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28209,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28210,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28211,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28212,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28213,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28214,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28215,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28216,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28217,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28218,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28219,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28220,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28221,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28222,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28223,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28224,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28225,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28226,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28227,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28228,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28229,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28230,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28231,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28232,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28233,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28234,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28235,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28236,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28237,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28238,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28239,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28240,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28241,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28242,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28243,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28244,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28245,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28246,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28247,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28248,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28249,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28250,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28251,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28252,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28253,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28254,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28255,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28256,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28257,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28258,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28259,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28260,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28261,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28262,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28263,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28264,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28265,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28266,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28267,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28268,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28269,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28270,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28271,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28272,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28273,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28274,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28275,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28276,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28277,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28278,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28279,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28280,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28281,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28282,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28283,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28284,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28285,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28286,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28287,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28288,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28289,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28290,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28291,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28292,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28293,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28294,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28295,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28296,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28297,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28298,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28299,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28300,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28301,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28302,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28303,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28304,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28305,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28306,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28307,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28308,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28309,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28310,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28311,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28312,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28313,position_evaluated,NH-EQ,hold,hold,True,target and post-trail stop decision
+28314,position_evaluated,NH-EQ,exit,exit,True,target and post-trail stop decision
