@@ -1,0 +1,112 @@
+2026-11-20T04:30:00.700438+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:30:00,698 | INFO | algo_trader | Daily candle cache cleared.
+2026-11-20T04:30:00.700438+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:30:00,699 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-11-20T04:30:00.700438+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:30:00,699 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-11-20T04:30:00.765430+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:30:00,765 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-11-20T04:30:00.766837+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:30:00,766 | INFO | algo_trader | [auth_refresh] Angel One session refreshed.
+2026-11-20T04:30:01.858824+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:30:01,858 | INFO | algo_trader | Market Check: 3/4 — BULLISH
+2026-11-20T04:30:01.858824+00:00 ip-172-31-33-249 python[620704]: 1. Index Direction: PASS ✅
+2026-11-20T04:30:01.858824+00:00 ip-172-31-33-249 python[620704]:    Nifty 50: +0.05% (need > 0%)
+2026-11-20T04:30:01.858824+00:00 ip-172-31-33-249 python[620704]: 2. Market Breadth: FAIL ❌
+2026-11-20T04:30:01.858824+00:00 ip-172-31-33-249 python[620704]:    Advancers: 23, Decliners: 27
+2026-11-20T04:30:01.858824+00:00 ip-172-31-33-249 python[620704]:    Breadth ratio: 0.85 (need > 1.2)
+2026-11-20T04:30:01.858824+00:00 ip-172-31-33-249 python[620704]: 3. Intraday Strength: PASS ✅
+2026-11-20T04:30:01.858824+00:00 ip-172-31-33-249 python[620704]:    Nifty LTP vs Open: 25526.05 vs 25368.00
+2026-11-20T04:30:01.858824+00:00 ip-172-31-33-249 python[620704]:    NIFTYBEES vs VWAP: 291.20 vs 290.28
+2026-11-20T04:30:01.858824+00:00 ip-172-31-33-249 python[620704]: 4. Volatility Filter: PASS ✅
+2026-11-20T04:30:01.858824+00:00 ip-172-31-33-249 python[620704]:    India VIX change: +4.78% (reject if > +5%)
+2026-11-20T04:30:01.858824+00:00 ip-172-31-33-249 python[620704]: Decision: TRADE (score 3/4 >= 3)
+2026-11-20T04:30:02.965432+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:30:02,965 | INFO | algo_trader | Scanning 2773 stocks for top 1 candidates (pool=5)...
+2026-11-20T04:30:02.965994+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:30:02,965 | INFO | algo_trader | Fetching quotes for 2773 stocks...
+2026-11-20T04:30:10.439495+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:30:10,439 | INFO | algo_trader | Received 2767 quotes.
+2026-11-20T04:30:10.442324+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:30:10,442 | INFO | algo_trader | Candidates in 5-8% gain range: 2
+2026-11-20T04:30:10.442448+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:30:10,442 | INFO | algo_trader | Fetching daily candles for 2 candidates...
+2026-11-20T04:30:11.460833+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:30:11,460 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-11-20T04:30:16.539925+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:30:16,539 | INFO | algo_trader | Rank #1: NUVOCO-EQ — gain=+5.37%, score=0.797 (vol=5.0x, momentum=0.93, buy_pressure=0.40, stability=0.90, prev_trend=0.67)
+2026-11-20T04:30:16.540472+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:30:16,539 | INFO | algo_trader | Rank #2: KALPATARU-EQ — gain=+5.92%, score=0.697 (vol=37.6x, momentum=0.64, buy_pressure=0.43, stability=1.00, prev_trend=0.33)
+2026-11-20T04:30:16.835008+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:30:16,834 | INFO | algo_trader | Scan completed in 13.9 seconds. Found 2 raw candidates.
+2026-11-20T04:30:16.839299+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:30:16,839 | INFO | algo_trader | Checking read-only restrictions for 2 candidates...
+2026-11-20T04:30:16.843308+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:30:16,843 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 2 tradable, 0 rejected.
+2026-11-20T04:30:16.843532+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:30:16,843 | INFO | algo_trader | Top 1 tradable stocks selected (from 2 scanned, 0 filtered):
+2026-11-20T04:30:16.843532+00:00 ip-172-31-33-249 python[620704]:   NUVOCO-EQ: +5.37% @ 366.90
+2026-11-20T04:30:16.843532+00:00 ip-172-31-33-249 python[620704]:     Score=0.797 | Vol=5.0x | Momentum=0.93 | BuyPressure=0.40 | Stability=0.90 | PrevTrend=0.67
+2026-11-20T04:30:17.406277+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:30:17,406 | INFO | algo_trader | Validating 2 candidates in parallel...
+2026-11-20T04:30:17.428658+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:30:17,428 | INFO | algo_trader | ENTRY REJECTED KALPATARU-EQ: Range position 0.639 < 0.85 (price retreating from high)
+2026-11-20T04:30:17.433986+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:30:17,433 | INFO | algo_trader | Near-breakout skip for NUVOCO-EQ: range=0.986, gain=5.7% — skipping breakout check
+2026-11-20T04:30:17.480138+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:30:17,480 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-11-20T04:30:22.508378+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:30:22,508 | INFO | algo_trader | ENTRY REJECTED NUVOCO-EQ: Volume fading: current 48550 vs avg 52015 (ratio 0.93 < 1.2)
+2026-11-20T04:30:22.512689+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:30:22,512 | INFO | algo_trader | Validation completed in 5.1 seconds: 0/2 passed.
+2026-11-20T04:30:22.512818+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:30:22,512 | INFO | algo_trader | No candidates passed real-time validation.
+2026-11-20T04:30:23.079953+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:30:23,079 | INFO | algo_trader | Scan attempt 2 — retrying in 120s (window open until 14:00)...
+2026-11-20T04:32:23.080328+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:32:23,080 | INFO | algo_trader | Scanning 2773 stocks for top 1 candidates (pool=5)...
+2026-11-20T04:32:23.081095+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:32:23,080 | INFO | algo_trader | Fetching quotes for 2773 stocks...
+2026-11-20T04:32:29.995810+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:32:29,995 | INFO | algo_trader | Received 2767 quotes.
+2026-11-20T04:32:29.998350+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:32:29,998 | INFO | algo_trader | Candidates in 5-8% gain range: 4
+2026-11-20T04:32:29.998553+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:32:29,998 | INFO | algo_trader | Fetching daily candles for 4 candidates...
+2026-11-20T04:32:31.999345+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:32:31,999 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-11-20T04:32:32.000856+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:32:32,000 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-11-20T04:32:38.001298+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:32:38,001 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-11-20T04:32:38.019543+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:32:38,019 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-11-20T04:32:49.041721+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:32:49,041 | INFO | algo_trader | Rank #1: NUVOCO-EQ — gain=+5.86%, score=0.831 (vol=6.9x, momentum=0.95, buy_pressure=0.55, stability=0.90, prev_trend=0.67)
+2026-11-20T04:32:49.042287+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:32:49,041 | INFO | algo_trader | Rank #2: SGMART-EQ — gain=+5.06%, score=0.659 (vol=0.5x, momentum=0.94, buy_pressure=0.44, stability=0.99, prev_trend=0.83)
+2026-11-20T04:32:49.042287+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:32:49,041 | INFO | algo_trader | Rank #3: OAL-EQ — gain=+7.32%, score=0.648 (vol=1.0x, momentum=0.97, buy_pressure=0.74, stability=0.89, prev_trend=0.00)
+2026-11-20T04:32:49.042287+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:32:49,041 | INFO | algo_trader | Rank #4: ADSL-EQ — gain=+5.24%, score=0.592 (vol=1.0x, momentum=0.80, buy_pressure=0.58, stability=1.00, prev_trend=0.00)
+2026-11-20T04:32:49.396871+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:32:49,396 | INFO | algo_trader | Scan completed in 26.3 seconds. Found 4 raw candidates.
+2026-11-20T04:32:49.401534+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:32:49,401 | INFO | algo_trader | Checking read-only restrictions for 4 candidates...
+2026-11-20T04:32:49.405033+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:32:49,404 | INFO | algo_trader | Restriction check completed in 0.0 seconds: 4 tradable, 0 rejected.
+2026-11-20T04:32:49.405210+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:32:49,405 | INFO | algo_trader | Top 1 tradable stocks selected (from 4 scanned, 0 filtered):
+2026-11-20T04:32:49.405210+00:00 ip-172-31-33-249 python[620704]:   NUVOCO-EQ: +5.86% @ 368.60
+2026-11-20T04:32:49.405210+00:00 ip-172-31-33-249 python[620704]:     Score=0.831 | Vol=6.9x | Momentum=0.95 | BuyPressure=0.55 | Stability=0.90 | PrevTrend=0.67
+2026-11-20T04:32:49.968342+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:32:49,968 | INFO | algo_trader | Validating 4 candidates in parallel...
+2026-11-20T04:32:49.993122+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:32:49,993 | INFO | algo_trader | Near-breakout skip for NUVOCO-EQ: range=0.991, gain=6.2% — skipping breakout check
+2026-11-20T04:32:49.993653+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:32:49,993 | INFO | algo_trader | Near-breakout skip for SGMART-EQ: range=0.966, gain=5.2% — skipping breakout check
+2026-11-20T04:32:49.993985+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:32:49,993 | INFO | algo_trader | Near-breakout skip for OAL-EQ: range=0.868, gain=6.4% — skipping breakout check
+2026-11-20T04:32:49.994379+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:32:49,994 | INFO | algo_trader | Near-breakout skip for ADSL-EQ: range=0.855, gain=5.6% — skipping breakout check
+2026-11-20T04:32:51.048595+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:32:51,048 | INFO | algo_trader | ENTRY VALIDATED SGMART-EQ: price=1063.00, gain=+5.20%, range=0.966, breakout=True, vol_ratio=1.93, spread=0.0890%
+2026-11-20T04:32:53.020625+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:32:53,020 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-11-20T04:32:53.021957+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:32:53,021 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-11-20T04:32:53.042554+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:32:53,042 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 5.0s (attempt 1/3)...
+2026-11-20T04:32:59.068710+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:32:59,068 | INFO | algo_trader | ENTRY VALIDATED OAL-EQ: price=458.00, gain=+6.36%, range=0.868, breakout=True, vol_ratio=2.15, spread=0.1970%
+2026-11-20T04:33:00.088524+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:33:00,064 | WARNING | algo_trader | [broker_forbidden] POST /getCandleData returned 403, retrying in 10.0s (attempt 2/3)...
+2026-11-20T04:33:00.129486+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:33:00,129 | INFO | algo_trader | ENTRY VALIDATED ADSL-EQ: price=106.20, gain=+5.64%, range=0.855, breakout=True, vol_ratio=1.84, spread=0.1980%
+2026-11-20T04:33:10.106688+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:33:10,106 | WARNING | algo_trader | 1-min candle fetch failed for NUVOCO-EQ volume check: POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=[REDACTED_IP], client_local_ip=[REDACTED_IP]: Access denied because of exceeding access rate — rejecting
+2026-11-20T04:33:10.107252+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:33:10,106 | INFO | algo_trader | ENTRY REJECTED NUVOCO-EQ: Volume check failed: candle fetch error (POST https://apiconnect.angelone.in/rest/secure/angelbroking/historical/v1/getCandleData failed with status=403, content_type=unknown, client_public_ip=[REDACTED_IP], client_local_ip=[REDACTED_IP]: Access denied because of exceeding access rate)
+2026-11-20T04:33:10.111642+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:33:10,111 | INFO | algo_trader | Validation completed in 20.1 seconds: 1/4 passed.
+2026-11-20T04:33:10.111790+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:33:10,111 | INFO | algo_trader | Available capital from broker: 100000.00
+2026-11-20T04:33:10.111841+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:33:10,111 | INFO | algo_trader | Capital: 100000.00 x 5.0x leverage = 500000.00 buying power | 1 validated stocks | 475000.00 per stock
+2026-11-20T04:33:11.120311+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:33:11,120 | WARNING | algo_trader | ATR candle fetch failed for token 758889: Too many requests
+2026-11-20T04:33:11.120909+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:33:11,120 | WARNING | algo_trader | Using fallback ATR for token 758889: 5.3150 (0.50% of 1063.00)
+2026-11-20T04:33:11.156851+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:33:11,156 | INFO | algo_trader | [PAPER] MARKET order filled: BUY SGMART-EQ 62 @ 1064.53 (reference=1064.00, fee=66.00) id=ced8df07
+2026-11-20T04:33:11.162247+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:33:11,162 | INFO | algo_trader | MARKET order placed: BUY SGMART-EQ 62 [INTRADAY] {'response': {'data': {'orderid': 'ced8df07'}}}
+2026-11-20T04:33:11.172826+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:33:11,172 | INFO | algo_trader | [PAPER] SL-M order placed: SELL SGMART-EQ 62 trigger=1048.55 id=cef31a1d
+2026-11-20T04:33:11.175319+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:33:11,175 | INFO | algo_trader | SL-M order placed for SGMART-EQ: trigger=1048.59, orderid=cef31a1d
+2026-11-20T04:33:11.177419+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:33:11,177 | INFO | algo_trader | ENTRY: SGMART-EQ [MIS] — 62 shares @ 1064.53 (capital=475000.00, gain=+5.06%, score=0.659, ATR=5.3150 (0.50%), SL=1048.59, hard_stop=1048.59) | {'response': {'data': {'orderid': 'ced8df07'}}}
+2026-11-20T04:33:11.751422+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:33:11,751 | INFO | algo_trader | Monitoring 1 positions with trailing stop...
+2026-11-20T04:39:33.095953+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:39:33,095 | INFO | algo_trader | TRAILING STOP UPDATE SGMART-EQ: SL 1048.59 -> 1059.21 (ltp=1075.95, bid=1072.15, high=1075.95, profit=1.1%, intraday=6.5%, locked=False, ATR=5.3150)
+2026-11-20T04:39:33.095953+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:39:33,095 | INFO | algo_trader | [PAPER] SL-M modified: SGMART-EQ trigger 1048.55 → 1059.20 id=cef31a1d
+2026-11-20T04:39:33.100620+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 04:39:33,098 | INFO | algo_trader | SL-M trigger updated for SGMART-EQ: new trigger=1059.21
+2026-11-20T05:06:38.807643+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 05:06:38,807 | INFO | algo_trader | [position_check] SGMART-EQ: netqty=62
+2026-11-20T05:06:38.812102+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 05:06:38,809 | INFO | algo_trader | [position_check] SGMART-EQ: netqty=62
+2026-11-20T05:06:38.928324+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 05:06:38,928 | INFO | algo_trader | [PAPER] MARKET order filled: SELL SGMART-EQ 62 @ 1056.32 (reference=1056.85, fee=65.49) id=f58741bf
+2026-11-20T05:06:38.933972+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 05:06:38,933 | INFO | algo_trader | [exit_attempt] Exit confirmed for SGMART-EQ: 62 shares @ 1056.32
+2026-11-20T05:06:38.934202+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 05:06:38,934 | INFO | algo_trader | [PAPER] Order cancelled: SGMART-EQ id=cef31a1d
+2026-11-20T05:06:38.935482+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 05:06:38,935 | INFO | algo_trader | SL-M order confirmed CANCELLED for SGMART-EQ: cef31a1d
+2026-11-20T05:06:38.937639+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 05:06:38,937 | INFO | algo_trader | TRAILING STOP (4% trail, <2% profit) EXIT: SGMART-EQ — 0 shares @ 1056.32 (entry=1064.53, high=1082.80, SL=1059.21, hard_stop=1048.59, ATR=5.3150, locked=False, PnL=-640.51, daily_pnl=-640.51, consecutive_losses=1/2, round=0/2) | ExitOutcome(state=<ExitState.CLOSED: 'closed'>, execution=OrderExecution(order_id='f58741bf', state=<OrderState.FILLED: 'filled'>, requested_quantity=62, filled_quantity=62, average_price=1056.32, reason='', raw_order={'orderid': 'f58741bf', 'tradingsymbol': 'SGMART-EQ', 'transactiontype': 'SELL', 'quantity': '62', 'price': '1056.32', 'filledshares': '62', 'averageprice': '1056.32', 'triggerprice': '0.0', 'orderstatus': 'COMPLETE', 'status': 'COMPLETE', 'ordertype': 'MARKET', 'producttype': 'INTRADAY', 'referenceprice': '1056.85', 'fees': '65.49'}), reason='')
+2026-11-20T05:06:49.499322+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 05:06:49,499 | INFO | algo_trader | All positions closed by stop-loss.
+2026-11-20T05:06:49.500150+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 05:06:49,499 | INFO | algo_trader | Smart gate: round P&L was ₹-640.51 — skipping re-entry.
+2026-11-20T05:06:50.071412+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 05:06:50,071 | INFO | algo_trader | [auth_refresh] Session age 2209s >= 300s, refreshing...
+2026-11-20T05:06:50.071660+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 05:06:50,071 | INFO | algo_trader | [auth_refresh] Re-authenticating with Angel One...
+2026-11-20T05:06:50.117293+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 05:06:50,117 | INFO | algo_trader | [auth_refresh] Session refreshed successfully.
+2026-11-20T05:06:50.118809+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 05:06:50,118 | INFO | algo_trader |
+2026-11-20T05:06:50.118809+00:00 ip-172-31-33-249 python[620704]: ============================================================
+2026-11-20T05:06:50.118809+00:00 ip-172-31-33-249 python[620704]: PAPER TRADING SUMMARY
+2026-11-20T05:06:50.118809+00:00 ip-172-31-33-249 python[620704]: ============================================================
+2026-11-20T05:06:50.118809+00:00 ip-172-31-33-249 python[620704]: Total trades: 2
+2026-11-20T05:06:50.118809+00:00 ip-172-31-33-249 python[620704]: Buys: 1, Sells: 1
+2026-11-20T05:06:50.118809+00:00 ip-172-31-33-249 python[620704]:   10:03:11 BUY  SGMART-EQ x62 @ 1064.53 fees: Rs.66.00
+2026-11-20T05:06:50.118809+00:00 ip-172-31-33-249 python[620704]:   10:36:38 SELL SGMART-EQ x62 @ 1056.32 gross: Rs.-509.02, fees: Rs.131.49, net P&L: Rs.-640.51
+2026-11-20T05:06:50.118809+00:00 ip-172-31-33-249 python[620704]: Daily net P&L: Rs.-640.51
+2026-11-20T05:06:50.118809+00:00 ip-172-31-33-249 python[620704]: Capital: Rs.100,000.00 → Rs.99,359.49
+2026-11-20T05:06:50.118809+00:00 ip-172-31-33-249 python[620704]: All positions closed.
+2026-11-20T05:06:50.118809+00:00 ip-172-31-33-249 python[620704]: ============================================================
+2026-11-20T05:07:16.789698+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 05:07:16,789 | INFO | algo_trader | Replay comparison complete: 215/215 decisions matched; recommended slippage=0 bps; report=/home/ubuntu/algo-trader/data/replay_reports/2026-11-20/summary.json; universe=data/universe_snapshots.json
+2026-11-20T05:07:16.790639+00:00 ip-172-31-33-249 python[620704]: 2026-11-20 05:07:16,790 | INFO | algo_trader | Trading day complete. Daily P&L: ₹-640.51. Sleeping 71.4h until tomorrow.
